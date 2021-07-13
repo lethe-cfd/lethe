@@ -972,6 +972,11 @@ namespace Parameters
                           Patterns::Double(),
                           "End time to finish Lagrangian post-processing.");
 
+        prm.declare_entry("sampling frequency",
+                          "100000",
+                          Patterns::Integer(),
+                          "Post-processing sampling frequency.");
+
         prm.declare_entry("particles velocity name",
                           "particles_velocity",
                           Patterns::FileName(),
@@ -997,6 +1002,7 @@ namespace Parameters
           prm.get_bool("calculate granular temperature");
         initial_time              = prm.get_double("initial time");
         end_time                  = prm.get_double("end time");
+        sampling_frequency        = prm.get_integer("sampling frequency");
         particles_velocity_name   = prm.get("particles velocity name");
         granular_temperature_name = prm.get("granular temperature name");
       }
