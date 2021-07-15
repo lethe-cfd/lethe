@@ -61,7 +61,7 @@ end
 #---------------------------------------------------
 subsection multiphysics
 	set heat transfer = true
-
+	set viscous dissipation = true
 end
 
 # --------------------------------------------------
