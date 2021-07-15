@@ -36,7 +36,7 @@ class CopyData
 {
 public:
   /**
-   * @brief Constructor of the CopyData class
+   * @brief Constructor. Allocates the memory for the cell_matrix and cell_rhs
    *
    * @param n_dofs Number of degrees of freedom per cell in the problem
    */
@@ -44,6 +44,9 @@ public:
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs){};
 
+  /**
+   * @brief Resets the cell_matrix and the cell_rhs to zero
+   */
   void
   zero()
   {
@@ -72,6 +75,15 @@ public:
 class StabilizedMethodsCopyData
 {
 public:
+  /**
+   * @brief Constructor. Allocates the memory for the cell_matrix and cell_rhs
+   * using the number of dofs and the strong_residual using the number of
+   * quadrature points and, the strong_jacobian using both
+   *
+   * @param n_dofs Number of degrees of freedom per cell in the problem
+   *
+   * @param n_q_points Number of quadrature points
+   */
   StabilizedMethodsCopyData(unsigned int n_dofs, unsigned int n_q_points)
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs)
@@ -79,6 +91,10 @@ public:
     , strong_jacobian(n_q_points, Vector<double>(n_dofs)){};
 
 
+  /**
+   * @brief Resets the cell_matrix, cell_rhs, strong_residual
+   * and strong_jacobian to zero
+   */
   void
   zero()
   {
@@ -116,6 +132,15 @@ template <int dim>
 class StabilizedMethodsTensorCopyData
 {
 public:
+  /**
+   * @brief Constructor. Allocates the memory for the cell_matrix and cell_rhs
+   * using the number of dofs and the strong_residual using the number of
+   * quadrature points and, the strong_jacobian using both
+   *
+   * @param n_dofs Number of degrees of freedom per cell in the problem
+   *
+   * @param n_q_points Number of quadrature points
+   */
   StabilizedMethodsTensorCopyData<dim>(unsigned int n_dofs,
                                        unsigned int n_q_points)
     : cell_matrix(n_dofs, n_dofs)
@@ -123,7 +148,10 @@ public:
     , strong_residual(n_q_points)
     , strong_jacobian(n_q_points, std::vector<Tensor<1, dim>>(n_dofs)){};
 
-
+  /**
+   * @brief Resets the cell_matrix, cell_rhs, strong_residual
+   * and strong_jacobian to zero
+   */
   void
   zero()
   {
