@@ -855,6 +855,8 @@ GLSNitscheNavierStokesSolver<dim, spacedim>::write_checkpoint()
           solid_tria->save(prefix + "_sol.triangulation_" +
                            Utilities::int_to_string(i_solid, 2));
         }
+      solid[i_solid]->write_solid_vertices_positions(prefix + "_sol.vertices_positions_" +
+                           Utilities::int_to_string(i_solid, 2));
     }
 
   // Save Navier-Stokes past and present solution
