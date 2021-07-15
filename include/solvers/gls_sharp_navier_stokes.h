@@ -194,44 +194,6 @@ private:
                 std::map<types::global_dof_index, Point<dim>> &support_points,
                 unsigned int                                   p);
 
-  /**
-   * @brief
-   * Return the cell around a point based on a initial guess of a closed cell
-   * (look in the neighbors of this cell)
-   *
-   * @param cell , The initial cell. We suspect the point of being in one of the neighbours of this cell.
-   *
-   * @param point, The point that we want to find the cell that contains it
-   */
-  typename DoFHandler<dim>::active_cell_iterator
-  find_cell_around_point_with_neighbors(
-    const typename DoFHandler<dim>::active_cell_iterator &cell,
-    Point<dim>                                            point);
-
-
-
-  /**
-* @brief
-Return a bool that describes  if a cell contains a specific point
-*
-* @param cell , The initial cell for which we want to check if the point is inside.
-*
-* @param point, The point that we wish to check
-*/
-  bool
-  point_inside_cell(const typename DoFHandler<dim>::active_cell_iterator &cell,
-                    Point<dim> point);
-
-  /**
-   * @brief
-   *Return a vector of cells around a cell including vertex neighbors
-   *
-   * @param cell , The initial cell. we want to know all the cells that share a vertex with this cell.
-   */
-  std::vector<typename DoFHandler<dim>::active_cell_iterator>
-  find_cells_around_cell(
-    const typename DoFHandler<dim>::active_cell_iterator &cell);
-
   /*
    Modified version of assemble_matrix_and_rhs to include the presence of
    extra steps. For more detail see the same function in the
