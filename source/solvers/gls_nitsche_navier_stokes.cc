@@ -924,6 +924,9 @@ GLSNitscheNavierStokesSolver<dim, spacedim>::read_checkpoint()
       // so it must be set prior to loading
       solid[i_solid]->setup_triangulation(true);
 
+      solid[i_solid]->read_solid_vertices_positions(prefix + "_sol.vertices_positions_" +
+                           Utilities::int_to_string(i_solid, 2));
+
       // Load triangulation and particles : commented for now to avoid
       // misinterpretation. Should be uncommented when loading bug is fixed.
       //      solid[i_solid]->load_triangulation(prefix + "_sol.triangulation_"

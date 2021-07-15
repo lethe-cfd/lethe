@@ -143,6 +143,9 @@ public:
   void
   write_solid_vertices_positions(std::string output_filename);
 
+  void
+  read_solid_vertices_positions(std::string input_filename);
+
   /**
    * @brief prints the positions of the particles
    */

@@ -461,6 +461,49 @@ SolidBase<dim, spacedim>::write_solid_vertices_positions(std::string output_file
 
 template <int dim, int spacedim>
 void
+SolidBase<dim, spacedim>::read_solid_vertices_positions(std::string input_filename)
+{
+  std::ifstream input (input_filename);
+  if (input.is_open())
+  {
+    std::string line;
+    std::string data;
+    int i;
+    Point<spacedim> position;
+    std::unordered_map<int, Point<spacedim>> positions;
+
+    const unsigned int n_dofs = solid_dh.n_dofs();
+    std::vector<bool>  written_position(n_dofs, false);
+
+    while (std::getline(input, line))
+    {
+        std::stringstream linestream(line);
+        std::getline(linestream, data, '\t');
+        linestream >> i >> position;
+        positions.insert({{i, position}});
+    }
+
+    for (const auto &cell : solid_dh.active_cell_iterators())
+        {
+          if (cell->is_locally_owned())
+            {
+              for (unsigned int i = 0;
+                  i < GeometryInfo<spacedim>::vertices_per_cell;
+                  ++i)
+                {
+                  if (!written_position[cell->vertex_index(i)])
+                    {
+                      cell->vertex(i) = positions.find(i)->second;
+                      written_position[cell->vertex_index(i)] = true;
+                    }
+                }
+            }
+        }
+      }
+}
+
+template <int dim, int spacedim>
+void
 SolidBase<dim, spacedim>::print_particle_positions()
 {
   for (auto particle = solid_particle_handler->begin();
