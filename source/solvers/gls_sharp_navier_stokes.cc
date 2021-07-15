@@ -158,6 +158,8 @@ GLSSharpNavierStokesSolver<dim>::refine_ib()
     }
 }
 
+
+
 template <int dim>
 void
 GLSSharpNavierStokesSolver<dim>::force_on_ib()
@@ -2515,6 +2517,7 @@ GLSSharpNavierStokesSolver<dim>::solve()
 
   define_particles();
   this->setup_dofs();
+  this->box_refine_mesh();
 
   // To change once refinement is split into two function
   double temp_refine =

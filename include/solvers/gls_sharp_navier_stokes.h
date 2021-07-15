@@ -208,6 +208,9 @@ private:
   assemble_rhs(const Parameters::SimulationControl::TimeSteppingMethod
                  time_stepping_method) override;
 
+  void
+  box_refine();
+
   /**
    * Members
    */
