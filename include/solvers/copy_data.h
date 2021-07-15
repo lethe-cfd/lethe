@@ -40,7 +40,7 @@ public:
    *
    * @param n_dofs Number of degrees of freedom per cell in the problem
    */
-  CopyData(unsigned int n_dofs)
+  CopyData(const unsigned int n_dofs)
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs){};
 
@@ -84,7 +84,7 @@ public:
    *
    * @param n_q_points Number of quadrature points
    */
-  StabilizedMethodsCopyData(unsigned int n_dofs, unsigned int n_q_points)
+  StabilizedMethodsCopyData(const unsigned int n_dofs, const unsigned int n_q_points)
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs)
     , strong_residual(n_q_points)
@@ -141,8 +141,8 @@ public:
    *
    * @param n_q_points Number of quadrature points
    */
-  StabilizedMethodsTensorCopyData<dim>(unsigned int n_dofs,
-                                       unsigned int n_q_points)
+  StabilizedMethodsTensorCopyData<dim>(const unsigned int n_dofs,
+                                       const unsigned int n_q_points)
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs)
     , strong_residual(n_q_points)
@@ -161,7 +161,8 @@ public:
     strong_residual = 0;
     for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
       {
-        strong_jacobian[q] = 0;
+        for (unsigned int i = 0; i < strong_jacobian[q].size(); ++i)
+            strong_jacobian[q][i] = 0;
       }
   }
 

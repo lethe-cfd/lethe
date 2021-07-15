@@ -15,7 +15,7 @@ SET(TARGET "lethe-core")
 
 FILE(GLOB_RECURSE TARGET_SRC *.cc)
 FILE(GLOB_RECURSE TARGET_INC ${CMAKE_SOURCE_DIR}/include/core/*.h)
-SET(TARGET_SRC ${TARGET_SRC}  ${TARGET_INC}) 
+SET(TARGET_SRC ${TARGET_SRC}  ${TARGET_INC} ../../include/solvers/scratch_data.h)
 
 # Usually, you will not need to modify anything beyond this point...
 
