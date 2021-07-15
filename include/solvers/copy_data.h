@@ -1,0 +1,148 @@
+/* ---------------------------------------------------------------------
+ *
+ * Copyright (C) 2019 - 2019 by the Lethe authors
+ *
+ * This file is part of the Lethe library
+ *
+ * The Lethe library is free software; you can use it, redistribute
+ * it, and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * The full text of the license can be found in the file LICENSE at
+ * the top level of the Lethe distribution.
+ *
+ * ---------------------------------------------------------------------
+ */
+
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/vector.h>
+
+#include <vector>
+
+#ifndef copy_data_navier_stokes_h
+#  define copy_data_navier_stokes_h
+
+using namespace dealii;
+
+/**
+ * @brief CopyData class is responsible for
+ * storing the information calculated using the assembly of regular (meaning
+ * non-stablized) equations. This class is used to
+ * initialize, zero (reset) and store the cell_matrix, the cell_rhs and the
+ * dof indices associated with the dofs of the cell.
+ **/
+
+class CopyData
+{
+public:
+  /**
+   * @brief Constructor of the CopyData class
+   *
+   * @param n_dofs Number of degrees of freedom per cell in the problem
+   */
+  CopyData(unsigned int n_dofs)
+    : cell_matrix(n_dofs, n_dofs)
+    , cell_rhs(n_dofs){};
+
+  void
+  zero()
+  {
+    cell_matrix = 0;
+    cell_rhs    = 0;
+  }
+
+  FullMatrix<double>                   cell_matrix;
+  Vector<double>                       cell_rhs;
+  std::vector<types::global_dof_index> local_dof_indices;
+};
+
+
+/**
+ * @brief The StabilizedMethodsCopyData class is responsible for
+ * storing the information calculated using the assembly of stabilized
+ * scalar equations. Like the CopyData class, this class is used to initialize,
+ * zero (reset) and store the cell_matrix and the cell_rhs.
+ * Contrary to the regular CopyData class, this class
+ * also stores the strong_residual and the strong_jacobian of the equation being
+ * assembled. This is useful for equations that implement residual-based
+ * stabilization such as SUPG. This class is specialized for single component
+ * equations because the strong jacobian is stored using a Vector<double>
+ **/
+
+class StabilizedMethodsCopyData
+{
+public:
+  StabilizedMethodsCopyData(unsigned int n_dofs, unsigned int n_q_points)
+    : cell_matrix(n_dofs, n_dofs)
+    , cell_rhs(n_dofs)
+    , strong_residual(n_q_points)
+    , strong_jacobian(n_q_points, Vector<double>(n_dofs)){};
+
+
+  void
+  zero()
+  {
+    cell_matrix = 0;
+    cell_rhs    = 0;
+
+    strong_residual = 0;
+    for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
+      {
+        strong_jacobian[q] = 0;
+      }
+  }
+
+  FullMatrix<double>                   cell_matrix;
+  Vector<double>                       cell_rhs;
+  Vector<double>                       strong_residual;
+  std::vector<Vector<double>>          strong_jacobian;
+  std::vector<types::global_dof_index> local_dof_indices;
+};
+
+/**
+ * @brief The StabilizedMethodsCopyData class is responsible for
+ * storing the information calculated using the assembly of stabilized
+ * Tensor<1,dim> equations. Like the CopyData class, this class is used to
+ * initialize, zero (reset) and store the cell_matrix and the cell_rhs. Contrary
+ * to the regular CopyData class, this class also stores the strong_residual and
+ * the strong_jacobian of the equation being assembled. This is useful for
+ * equations that implement residual-based stabilization such as SUPG. This
+ * class is specialized for Tensor<1,dim> equations because the strong
+ * jacobian is stored using a Tensor<1,dim>
+ **/
+
+
+template <int dim>
+class StabilizedMethodsTensorCopyData
+{
+public:
+  StabilizedMethodsTensorCopyData<dim>(unsigned int n_dofs,
+                                       unsigned int n_q_points)
+    : cell_matrix(n_dofs, n_dofs)
+    , cell_rhs(n_dofs)
+    , strong_residual(n_q_points)
+    , strong_jacobian(n_q_points, std::vector<Tensor<1, dim>>(n_dofs)){};
+
+
+  void
+  zero()
+  {
+    cell_matrix = 0;
+    cell_rhs    = 0;
+
+    strong_residual = 0;
+    for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
+      {
+        strong_jacobian[q] = 0;
+      }
+  }
+
+  FullMatrix<double>                       cell_matrix;
+  Vector<double>                           cell_rhs;
+  Vector<double>                           strong_residual;
+  std::vector<std::vector<Tensor<1, dim>>> strong_jacobian;
+  std::vector<types::global_dof_index>     local_dof_indices;
+};
+
+
+#endif
