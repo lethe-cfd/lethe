@@ -32,8 +32,8 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
       const Tensor<1, dim> velocity_laplacian =
         scratch_data.velocity_laplacians[q];
 
-      const double         velocity_divergence = trace(velocity_gradient);
-      const double         pressure = scratch_data.pressure_values[q];
+      const double velocity_divergence = scratch_data.velocity_divergences[q];
+      const double pressure            = scratch_data.pressure_values[q];
       const Tensor<1, dim> pressure_gradient =
         scratch_data.pressure_gradients[q];
 

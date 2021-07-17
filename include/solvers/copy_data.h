@@ -14,6 +14,9 @@
  * ---------------------------------------------------------------------
  */
 
+
+#include <deal.II/dofs/dof_handler.h>
+
 #include <deal.II/lac/full_matrix.h>
 #include <deal.II/lac/vector.h>
 
@@ -32,6 +35,7 @@ using namespace dealii;
  * dof indices associated with the dofs of the cell.
  **/
 
+template <int dim>
 class CopyData
 {
 public:
@@ -41,8 +45,8 @@ public:
    * @param n_dofs Number of degrees of freedom per cell in the problem
    */
   CopyData(const unsigned int n_dofs)
-    : cell_matrix(n_dofs, n_dofs)
-    , cell_rhs(n_dofs)
+    : local_matrix(n_dofs, n_dofs)
+    , local_rhs(n_dofs)
     , local_dof_indices(n_dofs){};
 
   /**
@@ -51,12 +55,13 @@ public:
   void
   zero()
   {
-    cell_matrix = 0;
-    cell_rhs    = 0;
+    local_dof_indices.resize(local_rhs.size());
+    local_matrix = 0;
+    local_rhs    = 0;
   }
 
-  FullMatrix<double>                   cell_matrix;
-  Vector<double>                       cell_rhs;
+  FullMatrix<double>                   local_matrix;
+  Vector<double>                       local_rhs;
   std::vector<types::global_dof_index> local_dof_indices;
 };
 
@@ -72,7 +77,7 @@ public:
  * stabilization such as SUPG. This class is specialized for single component
  * equations because the strong jacobian is stored using a Vector<double>
  **/
-
+template <int dim>
 class StabilizedMethodsCopyData
 {
 public:
@@ -101,6 +106,7 @@ public:
   void
   zero()
   {
+    local_dof_indices.resize(local_rhs.size());
     local_matrix = 0;
     local_rhs    = 0;
 
@@ -159,6 +165,7 @@ public:
   void
   zero()
   {
+    local_dof_indices.resize(local_rhs.size());
     local_matrix = 0;
     local_rhs    = 0;
 
