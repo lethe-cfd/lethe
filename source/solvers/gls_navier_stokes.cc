@@ -326,11 +326,9 @@ GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
   NavierStokesScratchData<dim> &                        scratch_data,
   StabilizedMethodsTensorCopyData<dim> &                copy_data)
 {
+  copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
-    {
-      copy_data.local_dof_indices.clear();
-      return;
-    }
+    return;
 
   scratch_data.reinit(cell,
                       this->evaluation_point,
@@ -353,7 +351,7 @@ void
 GLSNavierStokesSolver<dim>::copy_local_matrix_to_global_matrix(
   const StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  if (copy_data.local_dof_indices.size() == 0)
+  if (!copy_data.cell_is_local)
     return;
 
   const AffineConstraints<double> &constraints_used = this->zero_constraints;
@@ -398,11 +396,9 @@ GLSNavierStokesSolver<dim>::assemble_local_system_rhs(
   NavierStokesScratchData<dim> &                        scratch_data,
   StabilizedMethodsTensorCopyData<dim> &                copy_data)
 {
+  copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
-    {
-      copy_data.local_dof_indices.clear();
-      return;
-    }
+    return;
 
   scratch_data.reinit(cell,
                       this->evaluation_point,
@@ -428,7 +424,7 @@ void
 GLSNavierStokesSolver<dim>::copy_local_rhs_to_global_rhs(
   const StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  if (copy_data.local_dof_indices.size() == 0)
+  if (!copy_data.cell_is_local)
     return;
 
   const AffineConstraints<double> &constraints_used = this->zero_constraints;

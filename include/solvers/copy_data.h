@@ -54,7 +54,6 @@ public:
   void
   zero()
   {
-    local_dof_indices.resize(local_rhs.size());
     local_matrix = 0;
     local_rhs    = 0;
   }
@@ -62,6 +61,7 @@ public:
   FullMatrix<double>                   local_matrix;
   Vector<double>                       local_rhs;
   std::vector<types::global_dof_index> local_dof_indices;
+  bool                                 cell_is_local;
 };
 
 
@@ -104,7 +104,6 @@ public:
   void
   zero()
   {
-    local_dof_indices.resize(local_rhs.size());
     local_matrix = 0;
     local_rhs    = 0;
 
@@ -120,6 +119,7 @@ public:
   std::vector<types::global_dof_index> local_dof_indices;
   Vector<double>                       strong_residual;
   std::vector<Vector<double>>          strong_jacobian;
+  bool                                 cell_is_local;
 };
 
 /**
@@ -163,7 +163,6 @@ public:
   void
   zero()
   {
-    local_dof_indices.resize(local_rhs.size());
     local_matrix = 0;
     local_rhs    = 0;
 
@@ -180,6 +179,7 @@ public:
   std::vector<types::global_dof_index>     local_dof_indices;
   Vector<double>                           strong_residual;
   std::vector<std::vector<Tensor<1, dim>>> strong_jacobian;
+  bool                                     cell_is_local;
 };
 
 
