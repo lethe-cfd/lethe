@@ -14,7 +14,7 @@
  * ---------------------------------------------------------------------
  */
 
-#include <core/grids.h>
+#include <core/parameters.h>
 
 #include <deal.II/dofs/dof_renumbering.h>
 #include <deal.II/dofs/dof_tools.h>
@@ -31,12 +31,14 @@ template <int dim>
 class NavierStokesScratchData
 {
 public:
-  NavierStokesScratchData(FEValues<dim> &fe_values)
+  NavierStokesScratchData(FEValues<dim> &                fe_values,
+                          Parameters::PhysicalProperties physical_properties)
     : fe_values(fe_values.get_mapping(),
                 fe_values.get_fe(),
                 fe_values.get_quadrature(),
                 update_values | update_quadrature_points | update_JxW_values |
                   update_gradients | update_hessians)
+    , physical_properties(physical_properties)
   {
     allocate();
   };
@@ -47,6 +49,7 @@ public:
                 sd.fe_values.get_quadrature(),
                 update_values | update_quadrature_points | update_JxW_values |
                   update_gradients | update_hessians)
+    , physical_properties(sd.physical_properties)
   {
     allocate();
   };
@@ -90,33 +93,39 @@ public:
       n_q_points, std::vector<Tensor<1, dim>>(n_dofs));
   }
 
+
+
   void
   reinit(const DoFHandler<dim>::active_cell_iterator &cell,
          const Vector<double> &                       current_solution,
-         Function<dim> *                              forcing_function)
+         Function<dim> *                              forcing_function,
+         Tensor<1, dim>                               beta_force)
   {
     std::vector<Point<dim>> quadrature_points =
       this->fe_values.get_quadrature_points();
-    FESystem<dim> fe = this->fe_values.get_fe();
+    auto &fe = this->fe_values.get_fe();
 
     forcing_function->vector_value_list(quadrature_points, this->rhs_force);
+
     // Establish the force vector
-    for (int d = 0; d < dim; ++d)
-    {
-      const unsigned int component_i =
-        fe->system_to_component_index(d).first;
-      this->force[d] = this->rhs_force[q](component_i);
-    }
+    for (unsigned int q = 0; q < n_q_points; ++q)
+      {
+        for (int d = 0; d < dim; ++d)
+          {
+            const unsigned int component_i =
+              fe->system_to_component_index(d).first;
+            this->force[d] = this->rhs_force[q](component_i);
+          }
+      }
+
     // Correct force to include the dynamic forcing term for flow
     // control
     force = force + beta_force;
 
     if (dim == 2)
-      this->cell_size =
-        std::sqrt(4. * cell->measure() / M_PI) / fe.degree;
+      this->cell_size = std::sqrt(4. * cell->measure() / M_PI) / fe.degree;
     else if (dim == 3)
-      this->cell_size =
-        pow(6 * cell->measure() / M_PI, 1. / 3.) / fe.degree;
+      this->cell_size = pow(6 * cell->measure() / M_PI, 1. / 3.) / fe.degree;
 
     // Gather velocity (values, gradient and laplacian)
     this->fe_values[velocities].get_function_values(current_solution,
@@ -161,8 +170,8 @@ public:
   const FEValuesExtractors::Scalar pressure;
 
   std::vector<Vector<double>> rhs_force;
-  Tensor<1, dim> force;
-  Tensor<1, dim> beta_force;
+  Tensor<1, dim>              force;
+  Tensor<1, dim>              beta_force;
 
   // Velocity and pressure values
   std::vector<Tensor<1, dim>> velocity_values;
@@ -181,10 +190,14 @@ public:
   std::vector<std::vector<Tensor<1, dim>>> grad_phi_p;
 
   // Values at previous time step for transient schemes
-  std::vector<std::vector<Tensor<1, dim>>> velocity_values = {
-    std::vector<Tensor<1, dim>>(n_q_points),
-    std::vector<Tensor<1, dim>>(n_q_points),
-    std::vector<Tensor<1, dim>>(n_q_points)};
+  // std::vector<std::vector<Tensor<1, dim>>> velocity_values = {
+  //  std::vector<Tensor<1, dim>>(n_q_points),
+  //  std::vector<Tensor<1, dim>>(n_q_points),
+  //  std::vector<Tensor<1, dim>>(n_q_points)};
+
+  // Physical and other auxiliary properties
+  Parameters::PhysicalProperties physical_properties;
+
 
   //  std::vector<double> time_steps_vector =
   //    this->simulation_control->get_time_steps_vector();
