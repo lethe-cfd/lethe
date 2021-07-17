@@ -42,7 +42,8 @@ public:
    */
   CopyData(const unsigned int n_dofs)
     : cell_matrix(n_dofs, n_dofs)
-    , cell_rhs(n_dofs){};
+    , cell_rhs(n_dofs)
+    , local_dof_indices(n_dofs){};
 
   /**
    * @brief Resets the cell_matrix and the cell_rhs to zero
@@ -86,8 +87,9 @@ public:
    */
   StabilizedMethodsCopyData(const unsigned int n_dofs,
                             const unsigned int n_q_points)
-    : cell_matrix(n_dofs, n_dofs)
-    , cell_rhs(n_dofs)
+    : local_matrix(n_dofs, n_dofs)
+    , local_rhs(n_dofs)
+    , local_dof_indices(n_dofs)
     , strong_residual(n_q_points)
     , strong_jacobian(n_q_points, Vector<double>(n_dofs)){};
 
@@ -99,8 +101,8 @@ public:
   void
   zero()
   {
-    cell_matrix = 0;
-    cell_rhs    = 0;
+    local_matrix = 0;
+    local_rhs    = 0;
 
     strong_residual = 0;
     for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
@@ -109,11 +111,11 @@ public:
       }
   }
 
-  FullMatrix<double>                   cell_matrix;
-  Vector<double>                       cell_rhs;
+  FullMatrix<double>                   local_matrix;
+  Vector<double>                       local_rhs;
+  std::vector<types::global_dof_index> local_dof_indices;
   Vector<double>                       strong_residual;
   std::vector<Vector<double>>          strong_jacobian;
-  std::vector<types::global_dof_index> local_dof_indices;
 };
 
 /**
@@ -145,7 +147,8 @@ public:
   StabilizedMethodsTensorCopyData<dim>(const unsigned int n_dofs,
                                        const unsigned int n_q_points)
     : local_matrix(n_dofs, n_dofs)
-    , cell_rhs(n_dofs)
+    , local_rhs(n_dofs)
+    , local_dof_indices(n_dofs)
     , strong_residual(n_q_points)
     , strong_jacobian(n_q_points, std::vector<Tensor<1, dim>>(n_dofs)){};
 
@@ -157,7 +160,7 @@ public:
   zero()
   {
     local_matrix = 0;
-    cell_rhs     = 0;
+    local_rhs    = 0;
 
     strong_residual = 0;
     for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
@@ -168,10 +171,10 @@ public:
   }
 
   FullMatrix<double>                       local_matrix;
-  Vector<double>                           cell_rhs;
+  Vector<double>                           local_rhs;
+  std::vector<types::global_dof_index>     local_dof_indices;
   Vector<double>                           strong_residual;
   std::vector<std::vector<Tensor<1, dim>>> strong_jacobian;
-  std::vector<types::global_dof_index>     local_dof_indices;
 };
 
 

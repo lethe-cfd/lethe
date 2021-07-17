@@ -72,13 +72,19 @@ public:
     // Initialize arrays related to quadrature
     this->JxW = std::vector<double>(n_q_points);
 
+    // Forcing term array
+    this->rhs_force =
+      std::vector<Vector<double>>(n_q_points, Vector<double>(dim + 1));
+    this->force = std::vector<Tensor<1, dim>>(n_q_points);
+
     // Initialize arrays related to velocity and pressure
     this->velocities.first_vector_component = 0;
     this->pressure.component                = dim;
     // Velocity
-    this->velocity_values     = std::vector<Tensor<1, dim>>(n_q_points);
-    this->velocity_gradients  = std::vector<Tensor<2, dim>>(n_q_points);
-    this->velocity_laplacians = std::vector<Tensor<1, dim>>(n_q_points);
+    this->velocity_values      = std::vector<Tensor<1, dim>>(n_q_points);
+    this->velocity_divergences = std::vector<double>(n_q_points);
+    this->velocity_gradients   = std::vector<Tensor<2, dim>>(n_q_points);
+    this->velocity_laplacians  = std::vector<Tensor<1, dim>>(n_q_points);
     // Pressure
     this->pressure_values    = std::vector<double>(n_q_points);
     this->pressure_gradients = std::vector<Tensor<1, dim>>(n_q_points);
@@ -111,6 +117,8 @@ public:
          Function<dim> *                                       forcing_function,
          Tensor<1, dim>                                        beta_force)
   {
+    this->fe_values.reinit(cell);
+
     std::vector<Point<dim>> quadrature_points =
       this->fe_values.get_quadrature_points();
     auto &fe = this->fe_values.get_fe();
@@ -124,13 +132,12 @@ public:
           {
             const unsigned int component_i =
               fe.system_to_component_index(d).first;
-            this->force[d] = this->rhs_force[q](component_i);
+            this->force[q][d] = this->rhs_force[q](component_i);
           }
+        // Correct force to include the dynamic forcing term for flow
+        // control
+        force[q] = force[q] + beta_force;
       }
-
-    // Correct force to include the dynamic forcing term for flow
-    // control
-    force = force + beta_force;
 
     if (dim == 2)
       this->cell_size = std::sqrt(4. * cell->measure() / M_PI) / fe.degree;
@@ -144,6 +151,10 @@ public:
       current_solution, this->velocity_gradients);
     this->fe_values[velocities].get_function_laplacians(
       current_solution, this->velocity_laplacians);
+    for (unsigned int q = 0; q < this->n_q_points; ++q)
+      {
+        this->velocity_divergences[q] = trace(this->velocity_gradients[q]);
+      }
 
     // Gather pressure (values, gradient)
     fe_values[pressure].get_function_values(current_solution,
@@ -181,13 +192,14 @@ public:
   FEValuesExtractors::Scalar pressure;
 
   std::vector<Vector<double>> rhs_force;
-  Tensor<1, dim>              force;
   Tensor<1, dim>              beta_force;
+  std::vector<Tensor<1, dim>> force;
 
   std::vector<double> JxW;
 
   // Velocity and pressure values
   std::vector<Tensor<1, dim>> velocity_values;
+  std::vector<double>         velocity_divergences;
   std::vector<Tensor<2, dim>> velocity_gradients;
   std::vector<Tensor<1, dim>> velocity_laplacians;
   std::vector<double>         pressure_values;

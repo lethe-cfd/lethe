@@ -425,7 +425,7 @@ protected:
   std::shared_ptr<Quadrature<dim - 1>> face_quadrature;
 
   // Assemblers for the matrix
-  std::vector<NavierStokesAssemblerBase<dim>> assemblers;
+  std::vector<std::shared_ptr<NavierStokesAssemblerBase<dim>>> assemblers;
 
   // Multiphysics interface
   std::shared_ptr<MultiphysicsInterface<dim>> multiphysics;

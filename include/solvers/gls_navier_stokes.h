@@ -73,6 +73,13 @@ protected:
   assemble_system_matrix();
 
   /*
+   *  Assemble the rhs associated with the solver
+   */
+  void
+  assemble_system_rhs();
+
+
+  /*
    * Assemble the local matrix for a given cell
    */
   void
@@ -82,11 +89,29 @@ protected:
     StabilizedMethodsTensorCopyData<dim> &                copy_data);
 
   /*
+   * Assemble the local rhs for a given cell
+   */
+  void
+  assemble_local_system_rhs(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    NavierStokesScratchData<dim> &                        scratch_data,
+    StabilizedMethodsTensorCopyData<dim> &                copy_data);
+
+
+  /*
    * Copy local cell information to global matrix
    */
 
   void
   copy_local_matrix_to_global_matrix(
+    const StabilizedMethodsTensorCopyData<dim> &copy_data);
+
+  /*
+   * Copy local cell rhs information to global rhs
+   */
+
+  void
+  copy_local_rhs_to_global_rhs(
     const StabilizedMethodsTensorCopyData<dim> &copy_data);
 
   template <bool                                              assemble_matrix,

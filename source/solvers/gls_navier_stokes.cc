@@ -296,6 +296,10 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix()
 {
   TimerOutput::Scope t(this->computing_timer, "Assemble Matrix");
 
+  this->assemblers.clear();
+  this->assemblers.push_back(
+    std::make_shared<NavierStokesAssemblerCore<dim>>());
+
 
   WorkStream::run(
     this->dof_handler.begin_active(),
@@ -312,6 +316,8 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix()
                                          this->cell_quadrature->size()));
 }
 
+
+
 template <int dim>
 void
 GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
@@ -323,7 +329,62 @@ GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
                       this->evaluation_point,
                       this->forcing_function,
                       this->beta);
+  copy_data.zero();
 
+
+  for (auto &assembler : this->assemblers)
+    {
+      assembler->assemble_matrix(scratch_data, copy_data);
+    }
+
+
+  cell->get_dof_indices(copy_data.local_dof_indices);
+}
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::assemble_system_rhs()
+{
+  TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
+
+  this->assemblers.clear();
+  this->assemblers.push_back(
+    std::make_shared<NavierStokesAssemblerCore<dim>>());
+
+  WorkStream::run(
+    this->dof_handler.begin_active(),
+    this->dof_handler.end(),
+    *this,
+    &GLSNavierStokesSolver::assemble_local_system_rhs,
+    &GLSNavierStokesSolver::copy_local_rhs_to_global_rhs,
+    NavierStokesScratchData<dim>(
+      *this->fe,
+      *this->cell_quadrature,
+      *this->mapping,
+      this->simulation_parameters.physical_properties),
+    StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
+                                         this->cell_quadrature->size()));
+}
+
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::assemble_local_system_rhs(
+  const typename DoFHandler<dim>::active_cell_iterator &cell,
+  NavierStokesScratchData<dim> &                        scratch_data,
+  StabilizedMethodsTensorCopyData<dim> &                copy_data)
+{
+  scratch_data.reinit(cell,
+                      this->evaluation_point,
+                      this->forcing_function,
+                      this->beta);
+  copy_data.zero();
+
+
+  for (auto &assembler : this->assemblers)
+    {
+      assembler->assemble_rhs(scratch_data, copy_data);
+    }
 
 
   cell->get_dof_indices(copy_data.local_dof_indices);
@@ -337,9 +398,21 @@ GLSNavierStokesSolver<dim>::copy_local_matrix_to_global_matrix(
 {
   const AffineConstraints<double> &constraints_used = this->zero_constraints;
   constraints_used.distribute_local_to_global(copy_data.local_matrix,
-                                              copy_data.cell_rhs,
+                                              copy_data.local_rhs,
                                               copy_data.local_dof_indices,
                                               system_matrix,
+                                              this->system_rhs);
+  system_matrix.compress(VectorOperation::add);
+}
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::copy_local_rhs_to_global_rhs(
+  const StabilizedMethodsTensorCopyData<dim> &copy_data)
+{
+  const AffineConstraints<double> &constraints_used = this->zero_constraints;
+  constraints_used.distribute_local_to_global(copy_data.local_rhs,
+                                              copy_data.local_dof_indices,
                                               this->system_rhs);
   system_matrix.compress(VectorOperation::add);
 }
@@ -1593,143 +1666,8 @@ GLSNavierStokesSolver<dim>::assemble_matrix_and_rhs(
 {
   TimerOutput::Scope t(this->computing_timer, "assemble_system");
 
-  if (this->simulation_parameters.velocitySource.type ==
-      Parameters::VelocitySource::VelocitySourceType::none)
-    {
-      if (time_stepping_method ==
-          Parameters::SimulationControl::TimeSteppingMethod::bdf1)
-        {
-          if (this->simulation_parameters.multiphysics.free_surface)
-            assembleGLSFreeSurface<
-              true,
-              Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-              Parameters::VelocitySource::VelocitySourceType::none>();
-          else
-            assembleGLS<true,
-                        Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-                        Parameters::VelocitySource::VelocitySourceType::none>();
-        }
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf2,
-                    Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf3,
-                    Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady)
-        {
-          assembleGLS<true,
-                      Parameters::SimulationControl::TimeSteppingMethod::steady,
-                      Parameters::VelocitySource::VelocitySourceType::none>();
-        }
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady_bdf)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::steady_bdf,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else
-        throw std::runtime_error(
-          "The time stepping method provided is not supported by this solver");
-    }
-
-  else if (this->simulation_parameters.velocitySource.type ==
-           Parameters::VelocitySource::VelocitySourceType::srf)
-    {
-      if (time_stepping_method ==
-          Parameters::SimulationControl::TimeSteppingMethod::bdf1)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf2,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf3,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady)
-        assembleGLS<true,
-                    Parameters::SimulationControl::TimeSteppingMethod::steady,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady_bdf)
-        assembleGLS<
-          true,
-          Parameters::SimulationControl::TimeSteppingMethod::steady_bdf,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else
-        throw std::runtime_error(
-          "The time stepping method provided is not supported by this solver");
-    }
+  assemble_system_matrix();
+  assemble_system_rhs();
 
 
   if (this->simulation_control->is_first_assembly())
@@ -1743,141 +1681,7 @@ GLSNavierStokesSolver<dim>::assemble_rhs(
   const Parameters::SimulationControl::TimeSteppingMethod time_stepping_method)
 {
   TimerOutput::Scope t(this->computing_timer, "assemble_rhs");
-
-  if (this->simulation_parameters.velocitySource.type ==
-      Parameters::VelocitySource::VelocitySourceType::none)
-    {
-      if (time_stepping_method ==
-          Parameters::SimulationControl::TimeSteppingMethod::bdf1)
-        {
-          if (this->simulation_parameters.multiphysics.free_surface)
-            assembleGLSFreeSurface<
-              false,
-              Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-              Parameters::VelocitySource::VelocitySourceType::none>();
-          else
-            assembleGLS<false,
-                        Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-                        Parameters::VelocitySource::VelocitySourceType::none>();
-        }
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf2,
-                    Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf3,
-                    Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::steady,
-                    Parameters::VelocitySource::VelocitySourceType::none>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady_bdf)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::steady_bdf,
-          Parameters::VelocitySource::VelocitySourceType::none>();
-      else
-        throw std::runtime_error(
-          "The time stepping method provided is not supported by this solver");
-    }
-  if (this->simulation_parameters.velocitySource.type ==
-      Parameters::VelocitySource::VelocitySourceType::srf)
-    {
-      if (time_stepping_method ==
-          Parameters::SimulationControl::TimeSteppingMethod::bdf1)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf1,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf2,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::bdf3,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady)
-        assembleGLS<false,
-                    Parameters::SimulationControl::TimeSteppingMethod::steady,
-                    Parameters::VelocitySource::VelocitySourceType::srf>();
-      else if (time_stepping_method ==
-               Parameters::SimulationControl::TimeSteppingMethod::steady_bdf)
-        assembleGLS<
-          false,
-          Parameters::SimulationControl::TimeSteppingMethod::steady_bdf,
-          Parameters::VelocitySource::VelocitySourceType::srf>();
-      else
-        throw std::runtime_error(
-          "The time stepping method provided is not supported by this solver");
-    }
+  assemble_system_rhs();
 }
 
 template <int dim>
