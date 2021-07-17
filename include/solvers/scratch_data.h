@@ -64,7 +64,7 @@ public:
 
     // Initialize arrays related to velocity and pressure
     this->velocities.first_vector_component = 0;
-    this->pressure.first_vector_component   = dim;
+    this->pressure.component                = dim;
     // Velocity
     this->velocity_values     = std::vector<Tensor<1, dim>>(n_q_points);
     this->velocity_gradients  = std::vector<Tensor<2, dim>>(n_q_points);
@@ -96,10 +96,10 @@ public:
 
 
   void
-  reinit(const DoFHandler<dim>::active_cell_iterator &cell,
-         const Vector<double> &                       current_solution,
-         Function<dim> *                              forcing_function,
-         Tensor<1, dim>                               beta_force)
+  reinit(const typename DoFHandler<dim>::active_cell_iterator &cell,
+         const Vector<double> &                                current_solution,
+         Function<dim> *                                       forcing_function,
+         Tensor<1, dim>                                        beta_force)
   {
     std::vector<Point<dim>> quadrature_points =
       this->fe_values.get_quadrature_points();
@@ -130,34 +130,35 @@ public:
     // Gather velocity (values, gradient and laplacian)
     this->fe_values[velocities].get_function_values(current_solution,
                                                     this->velocity_values);
-    this->fe_values[velocities].get_function_gradients(current_solution,
-                                           this->velocity_gradients;
-    this->fe_values[velocities].get_function_laplacians(current_solution,
-                                            this->velocity_laplacians;
+    this->fe_values[velocities].get_function_gradients(
+      current_solution, this->velocity_gradients);
+    this->fe_values[velocities].get_function_laplacians(
+      current_solution, this->velocity_laplacians);
 
     // Gather pressure (values, gradient)
     fe_values[pressure].get_function_values(current_solution,
                                             this->pressure_values);
-    fe_values[pressure].get_function_gradients(
-      current_solution, this->pressure_gradients);
+    fe_values[pressure].get_function_gradients(current_solution,
+                                               this->pressure_gradients);
 
 
     for (unsigned int q = 0; q < n_q_points; ++q)
       {
-      this->JxW[q] = this->fe_values.JxW(q);
-      for (unsigned int k = 0; k < dofs_per_cell; ++k)
-        {
-          // Velocity
-          this->phi_u[q][k]      = this->fe_values[velocities].value(k, q);
-          this->div_phi_u[q][k]  = this->fe_values[velocities].divergence(k, q);
-          this->grad_phi_u[q][k] = this->fe_values[velocities].gradient(k, q);
-          this->hess_phi_u[q][k] = this->fe_values[velocities].hessian(k, q);
-          for (int d = 0; d < dim; ++d)
-            this->laplacian_phi_u[q][k][d] = trace(this->hess_phi_u[q][k][d]);
-          // Pressure
-          this->phi_p[q][k]      = this->fe_values[pressure].value(k, q);
-          this->grad_phi_p[q][k] = this->fe_values[pressure].gradient(k, q);
-        }
+        this->JxW[q] = this->fe_values.JxW(q);
+        for (unsigned int k = 0; k < n_dofs; ++k)
+          {
+            // Velocity
+            this->phi_u[q][k] = this->fe_values[velocities].value(k, q);
+            this->div_phi_u[q][k] =
+              this->fe_values[velocities].divergence(k, q);
+            this->grad_phi_u[q][k] = this->fe_values[velocities].gradient(k, q);
+            this->hess_phi_u[q][k] = this->fe_values[velocities].hessian(k, q);
+            for (int d = 0; d < dim; ++d)
+              this->laplacian_phi_u[q][k][d] = trace(this->hess_phi_u[q][k][d]);
+            // Pressure
+            this->phi_p[q][k]      = this->fe_values[pressure].value(k, q);
+            this->grad_phi_p[q][k] = this->fe_values[pressure].gradient(k, q);
+          }
       }
   }
 

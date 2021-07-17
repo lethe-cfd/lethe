@@ -27,6 +27,7 @@
 
 #include <solvers/copy_data.h>
 #include <solvers/gls_navier_stokes.h>
+#include <solvers/scratch_data.h>
 
 #include <deal.II/dofs/dof_renumbering.h>
 #include <deal.II/dofs/dof_tools.h>
@@ -287,6 +288,13 @@ GLSNavierStokesSolver<dim>::setup_dofs_fd()
                                       &this->dof_handler);
   this->multiphysics->set_solution(PhysicsID::fluid_dynamics,
                                    &this->present_solution);
+}
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::assembleGLSMatrix()
+{
+  ;
 }
 
 template <int dim>

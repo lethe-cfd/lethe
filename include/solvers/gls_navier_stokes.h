@@ -68,6 +68,9 @@ protected:
   set_solution_vector(double value);
 
 protected:
+  void
+  assembleGLSMatrix();
+
   template <bool                                              assemble_matrix,
             Parameters::SimulationControl::TimeSteppingMethod scheme,
             Parameters::VelocitySource::VelocitySourceType    velocity_source>
