@@ -20,7 +20,9 @@
 #ifndef lethe_gls_navier_stokes_h
 #define lethe_gls_navier_stokes_h
 
+#include <solvers/copy_data.h>
 #include <solvers/navier_stokes_base.h>
+#include <solvers/scratch_data.h>
 
 #include <deal.II/lac/sparse_matrix.h>
 #include <deal.II/lac/trilinos_precondition.h>
@@ -68,8 +70,27 @@ protected:
   set_solution_vector(double value);
 
 protected:
+  /*
+   *  Assemble the matrix associated with the solver
+   */
   void
-  assembleGLSMatrix();
+  assemble_system_matrix();
+
+  /*
+   * Assemble the local matrix for a given cell
+   */
+  void
+  assemble_local_system_matrix(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    NavierStokesScratchData<dim> &                        scratch_data,
+    StabilizedMethodsTensorCopyData<dim> &                copy_data);
+
+  /*
+   * Copy local cell information to global matrix
+   */
+
+  void
+  copy_local_to_global(const StabilizedMethodsTensorCopyData<dim> &copy_data);
 
   template <bool                                              assemble_matrix,
             Parameters::SimulationControl::TimeSteppingMethod scheme,

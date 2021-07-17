@@ -29,6 +29,8 @@
 #include <solvers/gls_navier_stokes.h>
 #include <solvers/scratch_data.h>
 
+#include <deal.II/base/work_stream.h>
+
 #include <deal.II/dofs/dof_renumbering.h>
 #include <deal.II/dofs/dof_tools.h>
 
@@ -292,10 +294,40 @@ GLSNavierStokesSolver<dim>::setup_dofs_fd()
 
 template <int dim>
 void
-GLSNavierStokesSolver<dim>::assembleGLSMatrix()
+GLSNavierStokesSolver<dim>::assemble_system_matrix()
 {
-  ;
+  TimerOutput::Scope t(this->computing_timer, "Assemble Matrix");
+
+
+  WorkStream::run(
+    this->dof_handler.begin_active(),
+    this->dof_handler.end(),
+    *this,
+    &GLSNavierStokesSolver::assemble_local_system_matrix,
+    &GLSNavierStokesSolver::copy_local_to_global,
+    NavierStokesScratchData<dim>(
+      *this->fe,
+      *this->cell_quadrature,
+      *this->mapping,
+      this->simulation_parameters.physical_properties),
+    StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
+                                         this->cell_quadrature->size()));
 }
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
+  const typename DoFHandler<dim>::active_cell_iterator &cell,
+  NavierStokesScratchData<dim> &                        scratch_data,
+  StabilizedMethodsTensorCopyData<dim> &                copy_data)
+{}
+
+
+template <int dim>
+void
+GLSNavierStokesSolver<dim>::copy_local_to_global(
+  const StabilizedMethodsTensorCopyData<dim> &copy_data)
+{}
 
 template <int dim>
 template <bool                                              assemble_matrix,

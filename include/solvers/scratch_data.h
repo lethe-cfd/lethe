@@ -16,8 +16,13 @@
 
 #include <core/parameters.h>
 
+#include <deal.II/base/quadrature.h>
+
 #include <deal.II/dofs/dof_renumbering.h>
 #include <deal.II/dofs/dof_tools.h>
+
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/mapping.h>
 
 #include <deal.II/numerics/vector_tools.h>
 
@@ -31,11 +36,13 @@ template <int dim>
 class NavierStokesScratchData
 {
 public:
-  NavierStokesScratchData(FEValues<dim> &                fe_values,
+  NavierStokesScratchData(FESystem<dim> &                fe,
+                          Quadrature<dim> &              quadrature,
+                          Mapping<dim> &                 mapping,
                           Parameters::PhysicalProperties physical_properties)
-    : fe_values(fe_values.get_mapping(),
-                fe_values.get_fe(),
-                fe_values.get_quadrature(),
+    : fe_values(mapping,
+                fe,
+                quadrature,
                 update_values | update_quadrature_points | update_JxW_values |
                   update_gradients | update_hessians)
     , physical_properties(physical_properties)
@@ -43,7 +50,7 @@ public:
     allocate();
   };
 
-  NavierStokesScratchData(NavierStokesScratchData<dim> &sd)
+  NavierStokesScratchData(const NavierStokesScratchData<dim> &sd)
     : fe_values(sd.fe_values.get_mapping(),
                 sd.fe_values.get_fe(),
                 sd.fe_values.get_quadrature(),
@@ -68,7 +75,7 @@ public:
     // Velocity
     this->velocity_values     = std::vector<Tensor<1, dim>>(n_q_points);
     this->velocity_gradients  = std::vector<Tensor<2, dim>>(n_q_points);
-    this->velocity_laplacians = std::vector<double>(n_q_points);
+    this->velocity_laplacians = std::vector<Tensor<1, dim>>(n_q_points);
     // Pressure
     this->pressure_values    = std::vector<double>(n_q_points);
     this->pressure_gradients = std::vector<Tensor<1, dim>>(n_q_points);
@@ -77,11 +84,11 @@ public:
     // Velocity shape functions
     this->phi_u = std::vector<std::vector<Tensor<1, dim>>>(
       n_q_points, std::vector<Tensor<1, dim>>(n_dofs));
-    this->grad_phi_p = std::vector<std::vector<Tensor<2, dim>>>(
+    this->grad_phi_u = std::vector<std::vector<Tensor<2, dim>>>(
       n_q_points, std::vector<Tensor<2, dim>>(n_dofs));
     this->div_phi_u =
       std::vector<std::vector<double>>(n_q_points, std::vector<double>(n_dofs));
-    this->hess_phi_u.resize = std::vector<std::vector<Tensor<3, dim>>>(
+    this->hess_phi_u = std::vector<std::vector<Tensor<3, dim>>>(
       n_q_points, std::vector<Tensor<3, dim>>(n_dofs));
     this->laplacian_phi_u = std::vector<std::vector<Tensor<1, dim>>>(
       n_q_points, std::vector<Tensor<1, dim>>(n_dofs));
@@ -163,12 +170,12 @@ public:
   }
 
 
-  FEValues<dim>                    fe_values;
-  const unsigned int               n_dofs;
-  const unsigned int               n_q_points;
-  double                           cell_size;
-  const FEValuesExtractors::Vector velocities;
-  const FEValuesExtractors::Scalar pressure;
+  FEValues<dim>              fe_values;
+  unsigned int               n_dofs;
+  unsigned int               n_q_points;
+  double                     cell_size;
+  FEValuesExtractors::Vector velocities;
+  FEValuesExtractors::Scalar pressure;
 
   std::vector<Vector<double>> rhs_force;
   Tensor<1, dim>              force;
