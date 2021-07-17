@@ -69,6 +69,9 @@ public:
     this->n_q_points = fe_values.get_quadrature().size();
     this->n_dofs     = fe_values.get_fe().n_dofs_per_cell();
 
+    // Initialize arrays related to quadrature
+    this->JxW = std::vector<double>(n_q_points);
+
     // Initialize arrays related to velocity and pressure
     this->velocities.first_vector_component = 0;
     this->pressure.component                = dim;
@@ -101,10 +104,10 @@ public:
   }
 
 
-
+  template <typename VectorType>
   void
   reinit(const typename DoFHandler<dim>::active_cell_iterator &cell,
-         const Vector<double> &                                current_solution,
+         const VectorType &                                    current_solution,
          Function<dim> *                                       forcing_function,
          Tensor<1, dim>                                        beta_force)
   {
@@ -120,7 +123,7 @@ public:
         for (int d = 0; d < dim; ++d)
           {
             const unsigned int component_i =
-              fe->system_to_component_index(d).first;
+              fe.system_to_component_index(d).first;
             this->force[d] = this->rhs_force[q](component_i);
           }
       }
@@ -180,6 +183,8 @@ public:
   std::vector<Vector<double>> rhs_force;
   Tensor<1, dim>              force;
   Tensor<1, dim>              beta_force;
+
+  std::vector<double> JxW;
 
   // Velocity and pressure values
   std::vector<Tensor<1, dim>> velocity_values;

@@ -320,7 +320,12 @@ GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
   NavierStokesScratchData<dim> &                        scratch_data,
   StabilizedMethodsTensorCopyData<dim> &                copy_data)
-{}
+{
+  scratch_data.reinit(cell,
+                      this->evaluation_point,
+                      this->forcing_function,
+                      this->beta);
+}
 
 
 template <int dim>
