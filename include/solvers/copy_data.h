@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------
  *
- * Copyright (C) 2019 - 2019 by the Lethe authors
+ * Copyright (C) 2019 - 2021 by the Lethe authors
  *
  * This file is part of the Lethe library
  *
@@ -84,7 +84,8 @@ public:
    *
    * @param n_q_points Number of quadrature points
    */
-  StabilizedMethodsCopyData(const unsigned int n_dofs, const unsigned int n_q_points)
+  StabilizedMethodsCopyData(const unsigned int n_dofs,
+                            const unsigned int n_q_points)
     : cell_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs)
     , strong_residual(n_q_points)
@@ -143,7 +144,7 @@ public:
    */
   StabilizedMethodsTensorCopyData<dim>(const unsigned int n_dofs,
                                        const unsigned int n_q_points)
-    : cell_matrix(n_dofs, n_dofs)
+    : local_matrix(n_dofs, n_dofs)
     , cell_rhs(n_dofs)
     , strong_residual(n_q_points)
     , strong_jacobian(n_q_points, std::vector<Tensor<1, dim>>(n_dofs)){};
@@ -155,18 +156,18 @@ public:
   void
   zero()
   {
-    cell_matrix = 0;
-    cell_rhs    = 0;
+    local_matrix = 0;
+    cell_rhs     = 0;
 
     strong_residual = 0;
     for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
       {
         for (unsigned int i = 0; i < strong_jacobian[q].size(); ++i)
-            strong_jacobian[q][i] = 0;
+          strong_jacobian[q][i] = 0;
       }
   }
 
-  FullMatrix<double>                       cell_matrix;
+  FullMatrix<double>                       local_matrix;
   Vector<double>                           cell_rhs;
   Vector<double>                           strong_residual;
   std::vector<std::vector<Tensor<1, dim>>> strong_jacobian;

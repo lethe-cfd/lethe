@@ -25,9 +25,7 @@
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
 
-#include <solvers/copy_data.h>
 #include <solvers/gls_navier_stokes.h>
-#include <solvers/scratch_data.h>
 
 #include <deal.II/base/work_stream.h>
 
@@ -304,7 +302,7 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix()
     this->dof_handler.end(),
     *this,
     &GLSNavierStokesSolver::assemble_local_system_matrix,
-    &GLSNavierStokesSolver::copy_local_to_global,
+    &GLSNavierStokesSolver::copy_local_matrix_to_global_matrix,
     NavierStokesScratchData<dim>(
       *this->fe,
       *this->cell_quadrature,
@@ -325,14 +323,26 @@ GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
                       this->evaluation_point,
                       this->forcing_function,
                       this->beta);
+
+
+
+  cell->get_dof_indices(copy_data.local_dof_indices);
 }
 
 
 template <int dim>
 void
-GLSNavierStokesSolver<dim>::copy_local_to_global(
+GLSNavierStokesSolver<dim>::copy_local_matrix_to_global_matrix(
   const StabilizedMethodsTensorCopyData<dim> &copy_data)
-{}
+{
+  const AffineConstraints<double> &constraints_used = this->zero_constraints;
+  constraints_used.distribute_local_to_global(copy_data.local_matrix,
+                                              copy_data.cell_rhs,
+                                              copy_data.local_dof_indices,
+                                              system_matrix,
+                                              this->system_rhs);
+  system_matrix.compress(VectorOperation::add);
+}
 
 template <int dim>
 template <bool                                              assemble_matrix,

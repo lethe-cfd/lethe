@@ -11,18 +11,14 @@
  * The full text of the license can be found in the file LICENSE at
  * the top level of the Lethe distribution.
  *
- * ---------------------------------------------------------------------
-
- *
- * Author: Bruno Blais, Polytechnique Montreal, 2019-
- */
+ * ---------------------------------------------------------------------*/
 
 #ifndef lethe_gls_navier_stokes_h
 #define lethe_gls_navier_stokes_h
 
 #include <solvers/copy_data.h>
 #include <solvers/navier_stokes_base.h>
-#include <solvers/scratch_data.h>
+#include <solvers/navier_stokes_scratch_data.h>
 
 #include <deal.II/lac/sparse_matrix.h>
 #include <deal.II/lac/trilinos_precondition.h>
@@ -90,7 +86,8 @@ protected:
    */
 
   void
-  copy_local_to_global(const StabilizedMethodsTensorCopyData<dim> &copy_data);
+  copy_local_matrix_to_global_matrix(
+    const StabilizedMethodsTensorCopyData<dim> &copy_data);
 
   template <bool                                              assemble_matrix,
             Parameters::SimulationControl::TimeSteppingMethod scheme,
