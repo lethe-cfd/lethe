@@ -70,23 +70,34 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
         {
           const auto phi_u_j           = scratch_data.phi_u[q][j];
           const auto grad_phi_u_j      = scratch_data.grad_phi_u[q][j];
-          const auto div_phi_u_j       = scratch_data.div_phi_u[q][j];
           const auto laplacian_phi_u_j = scratch_data.laplacian_phi_u[q][j];
 
-          const auto phi_p_j      = scratch_data.phi_p[q][j];
           const auto grad_phi_p_j = scratch_data.grad_phi_p[q][j];
 
-          auto strong_jac =
+          strong_jacobian[q][j] +=
             (velocity_gradient * phi_u_j + grad_phi_u_j * velocity[0] +
              grad_phi_p_j - viscosity * laplacian_phi_u_j);
+        }
 
-          for (unsigned int i = 0; i < n_dofs; ++i)
+
+
+      for (unsigned int i = 0; i < n_dofs; ++i)
+        {
+          const auto phi_u_i      = scratch_data.phi_u[q][i];
+          const auto grad_phi_u_i = scratch_data.grad_phi_u[q][i];
+          const auto div_phi_u_i  = scratch_data.div_phi_u[q][i];
+          const auto phi_p_i      = scratch_data.phi_p[q][i];
+          const auto grad_phi_p_i = scratch_data.grad_phi_p[q][i];
+
+          for (unsigned int j = 0; j < n_dofs; ++j)
             {
-              const auto phi_u_i      = scratch_data.phi_u[q][i];
-              const auto grad_phi_u_i = scratch_data.grad_phi_u[q][i];
-              const auto div_phi_u_i  = scratch_data.div_phi_u[q][i];
-              const auto phi_p_i      = scratch_data.phi_p[q][i];
-              const auto grad_phi_p_i = scratch_data.grad_phi_p[q][i];
+              const auto phi_u_j      = scratch_data.phi_u[q][j];
+              const auto grad_phi_u_j = scratch_data.grad_phi_u[q][j];
+              const auto div_phi_u_j  = scratch_data.div_phi_u[q][j];
+
+              const auto phi_p_j = scratch_data.phi_p[q][j];
+
+              auto strong_jac = strong_jacobian[q][j];
 
 
               local_matrix(i, j) +=

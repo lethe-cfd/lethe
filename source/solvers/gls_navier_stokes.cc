@@ -2206,7 +2206,7 @@ template <int dim>
 void
 GLSNavierStokesSolver<dim>::solve()
 {
-  // MultithreadInfo::set_thread_limit(1);
+  MultithreadInfo::set_thread_limit(1);
 
   read_mesh_and_manifolds(
     this->triangulation,
