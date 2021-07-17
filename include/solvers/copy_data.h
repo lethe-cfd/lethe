@@ -35,7 +35,6 @@ using namespace dealii;
  * dof indices associated with the dofs of the cell.
  **/
 
-template <int dim>
 class CopyData
 {
 public:
@@ -77,7 +76,6 @@ public:
  * stabilization such as SUPG. This class is specialized for single component
  * equations because the strong jacobian is stored using a Vector<double>
  **/
-template <int dim>
 class StabilizedMethodsCopyData
 {
 public:

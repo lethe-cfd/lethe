@@ -314,6 +314,7 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix()
       this->simulation_parameters.physical_properties),
     StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
                                          this->cell_quadrature->size()));
+  system_matrix.compress(VectorOperation::add);
 }
 
 
@@ -349,6 +350,21 @@ GLSNavierStokesSolver<dim>::assemble_local_system_matrix(
 
 template <int dim>
 void
+GLSNavierStokesSolver<dim>::copy_local_matrix_to_global_matrix(
+  const StabilizedMethodsTensorCopyData<dim> &copy_data)
+{
+  if (copy_data.local_dof_indices.size() == 0)
+    return;
+
+  const AffineConstraints<double> &constraints_used = this->zero_constraints;
+  constraints_used.distribute_local_to_global(copy_data.local_matrix,
+                                              copy_data.local_dof_indices,
+                                              system_matrix);
+}
+
+
+template <int dim>
+void
 GLSNavierStokesSolver<dim>::assemble_system_rhs()
 {
   // TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
@@ -370,6 +386,8 @@ GLSNavierStokesSolver<dim>::assemble_system_rhs()
       this->simulation_parameters.physical_properties),
     StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
                                          this->cell_quadrature->size()));
+
+  this->system_rhs.compress(VectorOperation::add);
 }
 
 
@@ -404,20 +422,6 @@ GLSNavierStokesSolver<dim>::assemble_local_system_rhs(
 }
 
 
-template <int dim>
-void
-GLSNavierStokesSolver<dim>::copy_local_matrix_to_global_matrix(
-  const StabilizedMethodsTensorCopyData<dim> &copy_data)
-{
-  if (copy_data.local_dof_indices.size() == 0)
-    return;
-
-  const AffineConstraints<double> &constraints_used = this->zero_constraints;
-  constraints_used.distribute_local_to_global(copy_data.local_matrix,
-                                              copy_data.local_dof_indices,
-                                              system_matrix);
-  system_matrix.compress(VectorOperation::add);
-}
 
 template <int dim>
 void
@@ -431,7 +435,6 @@ GLSNavierStokesSolver<dim>::copy_local_rhs_to_global_rhs(
   constraints_used.distribute_local_to_global(copy_data.local_rhs,
                                               copy_data.local_dof_indices,
                                               this->system_rhs);
-  this->system_rhs.compress(VectorOperation::add);
 }
 
 template <int dim>
@@ -2207,7 +2210,7 @@ template <int dim>
 void
 GLSNavierStokesSolver<dim>::solve()
 {
-  MultithreadInfo::set_thread_limit(1);
+  // MultithreadInfo::set_thread_limit(1);
 
   read_mesh_and_manifolds(
     this->triangulation,
