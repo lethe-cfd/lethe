@@ -100,6 +100,13 @@ private:
       time_stepping_method) override;
 
   /**
+   * @brief Same has in gls_navier_stokes, it assembles only matrix
+   */
+  virtual void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) override;
+
+  /**
    * @brief Same has in gls_navier_stokes, but calls assemble_nitsche_restriction() when rhs is assembled
    */
   virtual void

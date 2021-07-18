@@ -64,6 +64,15 @@ public:
       time_stepping_method) = 0;
 
   /**
+   * @brief Call for the assembly of the matrix and the right-hand side
+   *
+   * @param time_stepping_method Time-Stepping method with which the assembly is called
+   */
+  virtual void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) = 0;
+
+  /**
    * @brief Call for the assembly of right-hand side
    *
    * @param time_stepping_method Time-Stepping method with which the assembly is called

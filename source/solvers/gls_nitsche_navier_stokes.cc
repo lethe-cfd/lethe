@@ -797,6 +797,15 @@ GLSNitscheNavierStokesSolver<dim, spacedim>::assemble_matrix_and_rhs(
 
 template <int dim, int spacedim>
 void
+GLSNitscheNavierStokesSolver<dim, spacedim>::assemble_matrix(
+  const Parameters::SimulationControl::
+    TimeSteppingMethod /* time_stepping_method */)
+{
+  // TODO: not implemented yet
+}
+
+template <int dim, int spacedim>
+void
 GLSNitscheNavierStokesSolver<dim, spacedim>::assemble_rhs(
   const Parameters::SimulationControl::TimeSteppingMethod time_stepping_method)
 {

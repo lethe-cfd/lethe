@@ -94,6 +94,10 @@ private:
       time_stepping_method) override;
 
   void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) override;
+
+  void
   assemble_rhs(const Parameters::SimulationControl::TimeSteppingMethod
                  time_stepping_method) override;
 

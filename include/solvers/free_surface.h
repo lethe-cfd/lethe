@@ -272,6 +272,10 @@ private:
   assemble_system(const Parameters::SimulationControl::TimeSteppingMethod
                     time_stepping_method);
 
+  virtual void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) override;
+
   MultiphysicsInterface<dim> *     multiphysics;
   const SimulationParameters<dim> &simulation_parameters;
 

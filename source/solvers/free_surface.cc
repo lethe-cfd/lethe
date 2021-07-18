@@ -29,6 +29,15 @@ FreeSurface<dim>::assemble_matrix_and_rhs(
   assemble_system<true>(time_stepping_method);
 }
 
+template <int dim>
+void
+FreeSurface<dim>::assemble_matrix(
+  const Parameters::SimulationControl::
+    TimeSteppingMethod /* time_stepping_method */)
+{
+  // TODO: not implemented yet
+}
+
 
 template <int dim>
 void

@@ -68,6 +68,15 @@ protected:
   set_solution_vector(double value);
 
 protected:
+  template <Parameters::SimulationControl::TimeSteppingMethod scheme,
+            Parameters::VelocitySource::VelocitySourceType    velocity_source>
+  void
+  assemble_system_matrix();
+
+  template <Parameters::SimulationControl::TimeSteppingMethod scheme,
+            Parameters::VelocitySource::VelocitySourceType    velocity_source>
+  void
+  assemble_system_rhs();
   template <bool                                              assemble_matrix,
             Parameters::SimulationControl::TimeSteppingMethod scheme,
             Parameters::VelocitySource::VelocitySourceType    velocity_source>
@@ -86,6 +95,10 @@ protected:
   assemble_matrix_and_rhs(
     const Parameters::SimulationControl::TimeSteppingMethod
       time_stepping_method) override;
+
+  virtual void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) override;
 
   virtual void
   assemble_rhs(const Parameters::SimulationControl::TimeSteppingMethod

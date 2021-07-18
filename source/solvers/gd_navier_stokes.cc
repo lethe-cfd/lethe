@@ -74,6 +74,15 @@ GDNavierStokesSolver<dim>::assemble_matrix_and_rhs(
 
 template <int dim>
 void
+GDNavierStokesSolver<dim>::assemble_matrix(
+  const Parameters::SimulationControl::
+    TimeSteppingMethod /* time_stepping_method */)
+{
+  // TODO: not implemented yet
+}
+
+template <int dim>
+void
 GDNavierStokesSolver<dim>::assemble_rhs(
   const Parameters::SimulationControl::TimeSteppingMethod time_stepping_method)
 {
@@ -163,10 +172,11 @@ GDNavierStokesSolver<dim>::assembleGD()
     alpha_bdf = bdf_coefficients(3, time_steps);
 
   // Values at previous time step for backward Euler scheme
-  std::vector<std::vector<Tensor<1, dim>>> velocity_values = { std::vector<Tensor<1, dim>>(n_q_points),
-                                                                std::vector<Tensor<1, dim>>(n_q_points),
-                                                                std::vector<Tensor<1, dim>>(n_q_points),
-                                                                std::vector<Tensor<1, dim>>(n_q_points) };
+  std::vector<std::vector<Tensor<1, dim>>> velocity_values = {
+    std::vector<Tensor<1, dim>>(n_q_points),
+    std::vector<Tensor<1, dim>>(n_q_points),
+    std::vector<Tensor<1, dim>>(n_q_points),
+    std::vector<Tensor<1, dim>>(n_q_points)};
 
   for (const auto &cell : this->dof_handler.active_cell_iterators())
     {

@@ -112,6 +112,16 @@ public:
       time_stepping_method) override;
 
   /**
+   * @brief Call for the assembly of the matrix.
+   *
+   * @param time_stepping_method Time-Stepping method with which the assembly is called
+   */
+  void
+  assemble_matrix(const Parameters::SimulationControl::TimeSteppingMethod
+                    time_stepping_method) override;
+
+
+  /**
    * @brief Call for the assembly of the right-hand side
    *
    * @param time_stepping_method Time-Stepping method with which the assembly is called

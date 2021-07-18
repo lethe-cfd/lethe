@@ -81,9 +81,9 @@ KinsolNewtonNonLinearSolver<VectorType>::solve(
   VectorType &present_solution = solver->get_present_solution();
 
   typename SUNDIALS::KINSOL<VectorType>::AdditionalData additional_data;
-  additional_data.function_tolerance = this->params.tolerance;
+  additional_data.function_tolerance            = this->params.tolerance;
   additional_data.maximum_non_linear_iterations = this->params.max_iterations;
-  additional_data.step_tolerance = this->params.tolerance;
+  additional_data.step_tolerance                = this->params.tolerance;
   SUNDIALS::KINSOL<VectorType> nonlinear_solver(additional_data);
 
   nonlinear_solver.reinit_vector = [&](VectorType &x) {
@@ -108,12 +108,12 @@ KinsolNewtonNonLinearSolver<VectorType>::solve(
       // TODO Replace the function by assemble matrix only
       std::cout << "Computing jacobian matrix..." << std::endl;
       evaluation_point = present_solution_for_kinsol;
-      solver->assemble_matrix_and_rhs(time_stepping_method);
+      solver->assemble_matrix(time_stepping_method);
       return 0;
     };
 
-  nonlinear_solver.solve_with_jacobian = [&](const VectorType &residual,
-                                             VectorType &      dst,
+  nonlinear_solver.solve_with_jacobian = [&](const VectorType & /* residual */,
+                                             VectorType &dst,
                                              const double /* tolerance */) {
     std::cout << "Solving linear system..." << std::endl;
     solver->solve_linear_system(first_step);

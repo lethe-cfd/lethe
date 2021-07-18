@@ -2878,6 +2878,16 @@ GLSSharpNavierStokesSolver<dim>::assemble_matrix_and_rhs(
       this->simulation_control->provide_residual(this->system_rhs.l2_norm());
     }
 }
+
+template <int dim>
+void
+GLSSharpNavierStokesSolver<dim>::assemble_matrix(
+  const Parameters::SimulationControl::
+    TimeSteppingMethod /* time_stepping_method */)
+{
+  // TODO: not implemented yet
+}
+
 template <int dim>
 void
 GLSSharpNavierStokesSolver<dim>::assemble_rhs(
