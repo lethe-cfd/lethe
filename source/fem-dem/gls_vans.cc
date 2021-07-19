@@ -652,11 +652,11 @@ GLSVANSSolver<dim>::assembleGLS()
   // in 2D.
   Tensor<1, dim> omega_vector;
 
-  double omega_z  = this->simulation_parameters.velocitySource.omega_z;
-  omega_vector[0] = this->simulation_parameters.velocitySource.omega_x;
-  omega_vector[1] = this->simulation_parameters.velocitySource.omega_y;
+  double omega_z  = this->simulation_parameters.velocity_sources.omega_z;
+  omega_vector[0] = this->simulation_parameters.velocity_sources.omega_x;
+  omega_vector[1] = this->simulation_parameters.velocity_sources.omega_y;
   if (dim == 3)
-    omega_vector[2] = this->simulation_parameters.velocitySource.omega_z;
+    omega_vector[2] = this->simulation_parameters.velocity_sources.omega_z;
 
   std::vector<double>         div_phi_u(dofs_per_cell);
   std::vector<Tensor<1, dim>> phi_u(dofs_per_cell);
@@ -1446,7 +1446,7 @@ GLSVANSSolver<dim>::assemble_matrix_and_rhs(
 {
   TimerOutput::Scope t(this->computing_timer, "assemble_system");
 
-  if (this->simulation_parameters.velocitySource.type ==
+  if (this->simulation_parameters.velocity_sources.type ==
       Parameters::VelocitySource::VelocitySourceType::none)
     {
       if (time_stepping_method ==
@@ -1471,7 +1471,7 @@ GLSVANSSolver<dim>::assemble_matrix_and_rhs(
                     Parameters::VelocitySource::VelocitySourceType::none>();
     }
 
-  else if (this->simulation_parameters.velocitySource.type ==
+  else if (this->simulation_parameters.velocity_sources.type ==
            Parameters::VelocitySource::VelocitySourceType::srf)
     {
       if (time_stepping_method ==
@@ -1503,7 +1503,7 @@ GLSVANSSolver<dim>::assemble_rhs(
 {
   TimerOutput::Scope t(this->computing_timer, "assemble_rhs");
 
-  if (this->simulation_parameters.velocitySource.type ==
+  if (this->simulation_parameters.velocity_sources.type ==
       Parameters::VelocitySource::VelocitySourceType::none)
     {
       if (time_stepping_method ==
@@ -1527,7 +1527,7 @@ GLSVANSSolver<dim>::assemble_rhs(
                     Parameters::SimulationControl::TimeSteppingMethod::steady,
                     Parameters::VelocitySource::VelocitySourceType::none>();
     }
-  if (this->simulation_parameters.velocitySource.type ==
+  if (this->simulation_parameters.velocity_sources.type ==
       Parameters::VelocitySource::VelocitySourceType::srf)
     {
       if (time_stepping_method ==

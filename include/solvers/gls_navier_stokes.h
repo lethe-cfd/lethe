@@ -97,6 +97,12 @@ protected:
     NavierStokesScratchData<dim> &                        scratch_data,
     StabilizedMethodsTensorCopyData<dim> &                copy_data);
 
+  /*
+   * Sets up the vector of assembler functions
+   */
+  void
+  setup_assemblers();
+
 
   /*
    * Copy local cell information to global matrix

@@ -2,7 +2,7 @@
 
 template <int dim>
 void
-NavierStokesAssemblerCore<dim>::assemble_matrix(
+GLSNavierStokesAssemblerCore<dim>::assemble_matrix(
   NavierStokesScratchData<dim> &        scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
@@ -137,7 +137,7 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
 
 template <int dim>
 void
-NavierStokesAssemblerCore<dim>::assemble_rhs(
+GLSNavierStokesAssemblerCore<dim>::assemble_rhs(
   NavierStokesScratchData<dim> &        scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
@@ -151,9 +151,8 @@ NavierStokesAssemblerCore<dim>::assemble_rhs(
   const double       h          = scratch_data.cell_size;
 
   // Copy data elements
-  auto &strong_residual = copy_data.strong_residual;
-  auto &strong_jacobian = copy_data.strong_jacobian;
-  auto &local_rhs       = copy_data.local_rhs;
+  auto &strong_residual_vec = copy_data.strong_residual;
+  auto &local_rhs           = copy_data.local_rhs;
 
 
   // Loop over the quadrature points
@@ -197,9 +196,9 @@ NavierStokesAssemblerCore<dim>::assemble_rhs(
 
 
       // Calculate the strong residual for GLS stabilization
-      auto strong_residual = velocity_gradient * velocity[0] +
-                             pressure_gradient -
-                             viscosity * velocity_laplacian - force;
+      auto strong_residual =
+        velocity_gradient * velocity[0] + pressure_gradient -
+        viscosity * velocity_laplacian - force + strong_residual_vec[q];
 
       // Assembly of the right-hand side
       for (unsigned int i = 0; i < n_dofs; ++i)
@@ -237,5 +236,182 @@ NavierStokesAssemblerCore<dim>::assemble_rhs(
 
 
 
-template class NavierStokesAssemblerCore<2>;
-template class NavierStokesAssemblerCore<3>;
+template class GLSNavierStokesAssemblerCore<2>;
+template class GLSNavierStokesAssemblerCore<3>;
+
+
+template <int dim>
+void
+GLSNavierStokesAssemblerSRF<dim>::assemble_matrix(
+  NavierStokesScratchData<dim> &        scratch_data,
+  StabilizedMethodsTensorCopyData<dim> &copy_data)
+{
+  // Loop and quadrature informations
+  const auto &       JxW        = scratch_data.JxW;
+  const unsigned int n_q_points = scratch_data.n_q_points;
+  const unsigned int n_dofs     = scratch_data.n_dofs;
+
+  // Copy data elements
+  auto &strong_residual = copy_data.strong_residual;
+  auto &strong_jacobian = copy_data.strong_jacobian;
+  auto &local_matrix    = copy_data.local_matrix;
+
+  // SRF Source term
+  //----------------------------------
+  // Angular velocity of the rotating frame. This is always a 3D vector even
+  // in 2D.
+  Tensor<1, dim> omega_vector;
+
+  double omega_z  = velocity_sources.omega_z;
+  omega_vector[0] = velocity_sources.omega_x;
+  omega_vector[1] = velocity_sources.omega_y;
+  if (dim == 3)
+    omega_vector[2] = velocity_sources.omega_z;
+
+
+  // Loop over the quadrature points
+  for (unsigned int q = 0; q < n_q_points; ++q)
+    {
+      // Velocity
+      const std::vector<Tensor<1, dim>> velocity = {
+        scratch_data.velocity_values[q]};
+
+      if (dim == 2)
+        {
+          strong_residual[q] +=
+            2 * omega_z * (-1.) * cross_product_2d(velocity[0]);
+          auto centrifugal =
+            omega_z * (-1.) *
+            cross_product_2d(
+              omega_z * (-1.) *
+              cross_product_2d(scratch_data.quadrature_points[q]));
+          strong_residual[q] += centrifugal;
+        }
+      else // dim == 3
+        {
+          strong_residual[q] += 2 * cross_product_3d(omega_vector, velocity[0]);
+          strong_residual[q] += cross_product_3d(
+            omega_vector,
+            cross_product_3d(omega_vector, scratch_data.quadrature_points[q]));
+        }
+
+      for (unsigned int j = 0; j < n_dofs; ++j)
+        {
+          const auto &phi_u_j = scratch_data.phi_u[q][j];
+          if (dim == 2)
+            strong_jacobian[q][j] +=
+              2 * omega_z * (-1.) * cross_product_2d(phi_u_j);
+          else if (dim == 3)
+            strong_jacobian[q][j] +=
+              2 * cross_product_3d(omega_vector, phi_u_j);
+        }
+
+
+      for (unsigned int i = 0; i < n_dofs; ++i)
+        {
+          const auto phi_u_i = scratch_data.phi_u[q][i];
+          for (unsigned int j = 0; j < n_dofs; ++j)
+            {
+              const auto &phi_u_j = scratch_data.phi_u[q][j];
+
+              if (dim == 2)
+                local_matrix(i, j) += 2 * omega_z * (-1.) *
+                                      cross_product_2d(phi_u_j) * phi_u_i *
+                                      JxW[q];
+
+              else if (dim == 3)
+                local_matrix(i, j) += 2 *
+                                      cross_product_3d(omega_vector, phi_u_j) *
+                                      phi_u_i * JxW[q];
+            }
+        }
+    }
+}
+
+template <int dim>
+void
+GLSNavierStokesAssemblerSRF<dim>::assemble_rhs(
+  NavierStokesScratchData<dim> &        scratch_data,
+  StabilizedMethodsTensorCopyData<dim> &copy_data)
+{
+  // Loop and quadrature informations
+  const auto &       JxW               = scratch_data.JxW;
+  const auto &       quadrature_points = scratch_data.quadrature_points;
+  const unsigned int n_q_points        = scratch_data.n_q_points;
+  const unsigned int n_dofs            = scratch_data.n_dofs;
+
+  // Copy data elements
+  auto &strong_residual = copy_data.strong_residual;
+  auto &local_rhs       = copy_data.local_rhs;
+
+  // SRF Source term
+  //----------------------------------
+  // Angular velocity of the rotating frame. This is always a 3D vector even
+  // in 2D.
+  Tensor<1, dim> omega_vector;
+
+  double omega_z  = velocity_sources.omega_z;
+  omega_vector[0] = velocity_sources.omega_x;
+  omega_vector[1] = velocity_sources.omega_y;
+  if (dim == 3)
+    omega_vector[2] = velocity_sources.omega_z;
+
+
+  // Loop over the quadrature points
+  for (unsigned int q = 0; q < n_q_points; ++q)
+    {
+      // Velocity
+      const std::vector<Tensor<1, dim>> velocity = {
+        scratch_data.velocity_values[q]};
+
+      if (dim == 2)
+        {
+          strong_residual[q] +=
+            2 * omega_z * (-1.) * cross_product_2d(velocity[0]);
+          auto centrifugal =
+            omega_z * (-1.) *
+            cross_product_2d(
+              omega_z * (-1.) *
+              cross_product_2d(scratch_data.quadrature_points[q]));
+          strong_residual[q] += centrifugal;
+        }
+      else // dim == 3
+        {
+          strong_residual[q] += 2 * cross_product_3d(omega_vector, velocity[0]);
+          strong_residual[q] += cross_product_3d(
+            omega_vector,
+            cross_product_3d(omega_vector, scratch_data.quadrature_points[q]));
+        }
+
+      for (unsigned int i = 0; i < n_dofs; ++i)
+        {
+          const auto phi_u_i = scratch_data.phi_u[q][i];
+
+          if (dim == 2)
+            {
+              local_rhs(i) += -2 * omega_z * (-1.) *
+                              cross_product_2d(velocity[0]) * phi_u_i * JxW[q];
+              auto centrifugal =
+                omega_z * (-1.) *
+                cross_product_2d(omega_z * (-1.) *
+                                 cross_product_2d(quadrature_points[q]));
+              local_rhs(i) += -centrifugal * phi_u_i * JxW[q];
+            }
+          else if (dim == 3)
+            {
+              local_rhs(i) += -2 * cross_product_3d(omega_vector, velocity[0]) *
+                              phi_u_i * JxW[q];
+              local_rhs(i) +=
+                -cross_product_3d(omega_vector,
+                                  cross_product_3d(omega_vector,
+                                                   quadrature_points[q])) *
+                phi_u_i * JxW[q];
+            }
+        }
+    }
+}
+
+
+
+template class GLSNavierStokesAssemblerSRF<2>;
+template class GLSNavierStokesAssemblerSRF<3>;

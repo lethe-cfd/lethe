@@ -33,7 +33,7 @@ public:
 
 
 template <int dim>
-class NavierStokesAssemblerCore : public NavierStokesAssemblerBase<dim>
+class GLSNavierStokesAssemblerCore : public NavierStokesAssemblerBase<dim>
 {
 public:
   virtual void
@@ -45,4 +45,22 @@ public:
 
   const bool SUPG = true;
   const bool PSPG = true;
+};
+
+template <int dim>
+class GLSNavierStokesAssemblerSRF : public NavierStokesAssemblerBase<dim>
+{
+public:
+  GLSNavierStokesAssemblerSRF(Parameters::VelocitySource velocity_sources)
+    : velocity_sources(velocity_sources)
+  {}
+
+  virtual void
+  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+                  StabilizedMethodsTensorCopyData<dim> &copy_data) override;
+  virtual void
+  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+               StabilizedMethodsTensorCopyData<dim> &copy_data) override;
+
+  Parameters::VelocitySource velocity_sources;
 };

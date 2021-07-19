@@ -166,9 +166,10 @@ public:
     local_matrix = 0;
     local_rhs    = 0;
 
-    strong_residual = 0;
     for (unsigned int q = 0; q < strong_jacobian.size(); ++q)
       {
+        strong_residual[q] = 0;
+
         for (unsigned int i = 0; i < strong_jacobian[q].size(); ++i)
           strong_jacobian[q][i] = 0;
       }
@@ -177,7 +178,7 @@ public:
   FullMatrix<double>                       local_matrix;
   Vector<double>                           local_rhs;
   std::vector<types::global_dof_index>     local_dof_indices;
-  Vector<double>                           strong_residual;
+  std::vector<Tensor<1, dim>>              strong_residual;
   std::vector<std::vector<Tensor<1, dim>>> strong_jacobian;
   bool                                     cell_is_local;
 };

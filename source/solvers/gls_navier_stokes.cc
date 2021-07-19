@@ -292,13 +292,27 @@ GLSNavierStokesSolver<dim>::setup_dofs_fd()
 
 template <int dim>
 void
+GLSNavierStokesSolver<dim>::setup_assemblers()
+{
+  this->assemblers.clear();
+  if (this->simulation_parameters.velocity_sources.type ==
+      Parameters::VelocitySource::VelocitySourceType::srf)
+    {
+      this->assemblers.push_back(
+        std::make_shared<GLSNavierStokesAssemblerSRF<dim>>(
+          this->simulation_parameters.velocity_sources));
+    }
+  this->assemblers.push_back(
+    std::make_shared<GLSNavierStokesAssemblerCore<dim>>());
+}
+
+template <int dim>
+void
 GLSNavierStokesSolver<dim>::assemble_system_matrix()
 {
   // TimerOutput::Scope t(this->computing_timer, "Assemble Matrix");
   this->system_matrix = 0;
-  this->assemblers.clear();
-  this->assemblers.push_back(
-    std::make_shared<NavierStokesAssemblerCore<dim>>());
+  setup_assemblers();
 
 
   WorkStream::run(
@@ -367,9 +381,8 @@ GLSNavierStokesSolver<dim>::assemble_system_rhs()
 {
   // TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
   this->system_rhs = 0;
-  this->assemblers.clear();
-  this->assemblers.push_back(
-    std::make_shared<NavierStokesAssemblerCore<dim>>());
+  setup_assemblers();
+
 
   WorkStream::run(
     this->dof_handler.begin_active(),
@@ -477,11 +490,11 @@ GLSNavierStokesSolver<dim>::assembleGLS()
   // in 2D.
   Tensor<1, dim> omega_vector;
 
-  double omega_z  = this->simulation_parameters.velocitySource.omega_z;
-  omega_vector[0] = this->simulation_parameters.velocitySource.omega_x;
-  omega_vector[1] = this->simulation_parameters.velocitySource.omega_y;
+  double omega_z  = this->simulation_parameters.velocity_sources.omega_z;
+  omega_vector[0] = this->simulation_parameters.velocity_sources.omega_x;
+  omega_vector[1] = this->simulation_parameters.velocity_sources.omega_y;
   if (dim == 3)
-    omega_vector[2] = this->simulation_parameters.velocitySource.omega_z;
+    omega_vector[2] = this->simulation_parameters.velocity_sources.omega_z;
 
   std::vector<double>         div_phi_u(dofs_per_cell);
   std::vector<Tensor<1, dim>> phi_u(dofs_per_cell);
@@ -1052,11 +1065,11 @@ GLSNavierStokesSolver<dim>::assembleGLSFreeSurface()
   // 2D.
   Tensor<1, dim> omega_vector;
 
-  double omega_z  = this->simulation_parameters.velocitySource.omega_z;
-  omega_vector[0] = this->simulation_parameters.velocitySource.omega_x;
-  omega_vector[1] = this->simulation_parameters.velocitySource.omega_y;
+  double omega_z  = this->simulation_parameters.velocity_sources.omega_z;
+  omega_vector[0] = this->simulation_parameters.velocity_sources.omega_x;
+  omega_vector[1] = this->simulation_parameters.velocity_sources.omega_y;
   if (dim == 3)
-    omega_vector[2] = this->simulation_parameters.velocitySource.omega_z;
+    omega_vector[2] = this->simulation_parameters.velocity_sources.omega_z;
 
   std::vector<double>         div_phi_u(dofs_per_cell);
   std::vector<Tensor<1, dim>> phi_u(dofs_per_cell);
