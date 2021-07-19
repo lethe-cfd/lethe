@@ -16,9 +16,9 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
   const double       h          = scratch_data.cell_size;
 
   // Copy data elements
-  auto &strong_residual = copy_data.strong_residual;
-  auto &strong_jacobian = copy_data.strong_jacobian;
-  auto &local_matrix    = copy_data.local_matrix;
+  auto &strong_residual_vec = copy_data.strong_residual;
+  auto &strong_jacobian_vec = copy_data.strong_jacobian;
+  auto &local_matrix        = copy_data.local_matrix;
 
 
   // Loop over the quadrature points
@@ -58,9 +58,9 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
                          9 * std::pow(4 * viscosity / (h * h), 2));
 
       // Calculate the strong residual for GLS stabilization
-      auto strong_residual = velocity_gradient * velocity[0] +
-                             pressure_gradient -
-                             viscosity * velocity_laplacian - force;
+      auto strong_residual =
+        velocity_gradient * velocity[0] + pressure_gradient -
+        viscosity * velocity_laplacian - force + strong_residual_vec[q];
 
       std::vector<Tensor<1, dim>> grad_phi_u_j_x_velocity(n_dofs);
       std::vector<Tensor<1, dim>> velocity_gradient_x_phi_u_j(n_dofs);
@@ -76,9 +76,11 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
 
           const auto &grad_phi_p_j = scratch_data.grad_phi_p[q][j];
 
-          strong_jacobian[q][j] +=
+          strong_jacobian_vec[q][j] +=
             (velocity_gradient * phi_u_j + grad_phi_u_j * velocity[0] +
              grad_phi_p_j - viscosity * laplacian_phi_u_j);
+
+          // Store these temporary products in auxiliary variables for speed
           grad_phi_u_j_x_velocity[j]     = grad_phi_u_j * velocity[0];
           velocity_gradient_x_phi_u_j[j] = velocity_gradient * phi_u_j;
         }
@@ -93,8 +95,7 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
           const auto &phi_p_i      = scratch_data.phi_p[q][i];
           const auto &grad_phi_p_i = scratch_data.grad_phi_p[q][i];
 
-
-          // temporary_terms
+          // Store these temporary products in auxiliary variables for speed
           const auto grad_phi_u_i_x_velocity = grad_phi_u_i * velocity[0];
           const auto strong_residual_x_grad_phi_u_i =
             strong_residual * grad_phi_u_i;
@@ -107,31 +108,28 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
 
               const auto &phi_p_j = scratch_data.phi_p[q][j];
 
-              const auto &strong_jac = strong_jacobian[q][j];
+              const auto &strong_jac = strong_jacobian_vec[q][j];
 
-
-              local_matrix(i, j) +=
-                (
-                  // Momentum terms
-                  viscosity * scalar_product(grad_phi_u_j, grad_phi_u_i) +
-                  velocity_gradient_x_phi_u_j[j] * phi_u_i +
-                  grad_phi_u_j_x_velocity[j] * phi_u_i - div_phi_u_i * phi_p_j +
-                  // Continuity
-                  phi_p_i * div_phi_u_j) *
-                JxW;
+              double local_matrix_ij =
+                viscosity * scalar_product(grad_phi_u_j, grad_phi_u_i) +
+                velocity_gradient_x_phi_u_j[j] * phi_u_i +
+                grad_phi_u_j_x_velocity[j] * phi_u_i - div_phi_u_i * phi_p_j +
+                // Continuity
+                phi_p_i * div_phi_u_j;
 
               // PSPG GLS term
-              local_matrix(i, j) += tau * (strong_jac * grad_phi_p_i) * JxW;
+              local_matrix_ij += tau * (strong_jac * grad_phi_p_i);
+
 
               // Jacobian is currently incomplete
               if (SUPG)
                 {
-                  local_matrix(i, j) +=
-                    tau *
-                    (strong_jac * grad_phi_u_i_x_velocity +
-                     strong_residual_x_grad_phi_u_i * phi_u_j) *
-                    JxW;
+                  local_matrix_ij +=
+                    tau * (strong_jac * grad_phi_u_i_x_velocity +
+                           strong_residual_x_grad_phi_u_i * phi_u_j);
                 }
+              local_matrix_ij *= JxW;
+              local_matrix(i, j) += local_matrix_ij;
             }
         }
     }
