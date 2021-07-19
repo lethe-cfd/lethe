@@ -32,8 +32,6 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
       const Tensor<1, dim> velocity_laplacian =
         scratch_data.velocity_laplacians[q];
 
-      const double velocity_divergence = scratch_data.velocity_divergences[q];
-      const double pressure            = scratch_data.pressure_values[q];
       const Tensor<1, dim> pressure_gradient =
         scratch_data.pressure_gradients[q];
 
@@ -64,19 +62,25 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
                              pressure_gradient -
                              viscosity * velocity_laplacian - force;
 
+      std::vector<Tensor<1, dim>> grad_phi_u_j_x_velocity(n_dofs);
+      std::vector<Tensor<1, dim>> velocity_gradient_x_phi_u_j(n_dofs);
+
+
       // We loop over the column first to prevent recalculation
       // of the strong jacobian in the inner loop
       for (unsigned int j = 0; j < n_dofs; ++j)
         {
-          const auto phi_u_j           = scratch_data.phi_u[q][j];
-          const auto grad_phi_u_j      = scratch_data.grad_phi_u[q][j];
-          const auto laplacian_phi_u_j = scratch_data.laplacian_phi_u[q][j];
+          const auto &phi_u_j           = scratch_data.phi_u[q][j];
+          const auto &grad_phi_u_j      = scratch_data.grad_phi_u[q][j];
+          const auto &laplacian_phi_u_j = scratch_data.laplacian_phi_u[q][j];
 
-          const auto grad_phi_p_j = scratch_data.grad_phi_p[q][j];
+          const auto &grad_phi_p_j = scratch_data.grad_phi_p[q][j];
 
           strong_jacobian[q][j] +=
             (velocity_gradient * phi_u_j + grad_phi_u_j * velocity[0] +
              grad_phi_p_j - viscosity * laplacian_phi_u_j);
+          grad_phi_u_j_x_velocity[j]     = grad_phi_u_j * velocity[0];
+          velocity_gradient_x_phi_u_j[j] = velocity_gradient * phi_u_j;
         }
 
 
@@ -88,6 +92,12 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
           const auto &div_phi_u_i  = scratch_data.div_phi_u[q][i];
           const auto &phi_p_i      = scratch_data.phi_p[q][i];
           const auto &grad_phi_p_i = scratch_data.grad_phi_p[q][i];
+
+
+          // temporary_terms
+          const auto grad_phi_u_i_x_velocity = grad_phi_u_i * velocity[0];
+          const auto strong_residual_x_grad_phi_u_i =
+            strong_residual * grad_phi_u_i;
 
           for (unsigned int j = 0; j < n_dofs; ++j)
             {
@@ -104,8 +114,8 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
                 (
                   // Momentum terms
                   viscosity * scalar_product(grad_phi_u_j, grad_phi_u_i) +
-                  velocity_gradient * phi_u_j * phi_u_i +
-                  grad_phi_u_j * velocity[0] * phi_u_i - div_phi_u_i * phi_p_j +
+                  velocity_gradient_x_phi_u_j[j] * phi_u_i +
+                  grad_phi_u_j_x_velocity[j] * phi_u_i - div_phi_u_i * phi_p_j +
                   // Continuity
                   phi_p_i * div_phi_u_j) *
                 JxW;
@@ -118,8 +128,8 @@ NavierStokesAssemblerCore<dim>::assemble_matrix(
                 {
                   local_matrix(i, j) +=
                     tau *
-                    (strong_jac * (grad_phi_u_i * velocity[0]) +
-                     strong_residual * (grad_phi_u_i * phi_u_j)) *
+                    (strong_jac * grad_phi_u_i_x_velocity +
+                     strong_residual_x_grad_phi_u_i * phi_u_j) *
                     JxW;
                 }
             }
