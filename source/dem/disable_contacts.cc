@@ -294,7 +294,7 @@ DisableContacts<dim>::identify_mobility_status(
       for (auto node_id : local_dof_indices)
         {
           // Check if node is mobile and assign mobile status to the cell
-          if (mobility_at_nodes[node_id] == mobility_status::mobile)
+          if (mobility_at_nodes(node_id) == mobility_status::mobile)
             {
               // Assign mobile status to cell in map
               const unsigned int cell_id = (*cell)->active_cell_index();
