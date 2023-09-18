@@ -1,7 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# --------------------------------------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -120,7 +123,7 @@ subsection initial conditions
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -152,7 +155,7 @@ subsection boundary conditions
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Source term
 #---------------------------------------------------
 
@@ -163,7 +166,7 @@ subsection source term
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Mesh Adaptation Control
 #---------------------------------------------------
 
@@ -179,14 +182,14 @@ subsection timer
   set type = none
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Model parameters
 #---------------------------------------------------
 
 subsection model parameters
   subsection contact detection
     set contact detection method = dynamic
-    set neighborhood threshold   = 1.8
+    set neighborhood threshold   = 1.3
   end
   set particle particle contact force method = hertz_mindlin_limit_force
   set particle wall contact force method     = nonlinear
@@ -220,7 +223,7 @@ subsection lagrangian physical properties
   set rolling friction wall        = 0.1
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Testing
 #---------------------------------------------------
 
@@ -228,30 +231,35 @@ subsection test
   set enable = false
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set solver           = inexact_newton
-  set tolerance        = 1e-8
-  set max iterations   = 10
-  set verbosity        = verbose
-  set matrix tolerance = 0.75
+  subsection fluid dynamics
+    set solver           = inexact_newton
+    set tolerance        = 1e-8
+    set max iterations   = 10
+    set verbosity        = verbose
+    set matrix tolerance = 0.75
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set method                                = gmres
-  set max iters                             = 5000
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-10
-  set ilu preconditioner fill               = 0
-  set ilu preconditioner absolute tolerance = 1e-12
-  set ilu preconditioner relative tolerance = 1
-  set verbosity                             = verbose
-  set max krylov vectors                    = 200
+  subsection fluid dynamics
+    set method                                = gmres
+    set max iters                             = 5000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-10
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 0
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1
+    set verbosity                             = verbose
+    set max krylov vectors                    = 200
+  end
 end

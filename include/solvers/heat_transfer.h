@@ -35,6 +35,7 @@
 
 #include <deal.II/base/convergence_table.h>
 #include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/timer.h>
 
 #include <deal.II/distributed/solution_transfer.h>
 #include <deal.II/distributed/tria_base.h>
@@ -48,18 +49,23 @@
 #include <deal.II/lac/trilinos_vector.h>
 
 
+
 template <int dim>
 class HeatTransfer : public AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>
 {
 public:
-  HeatTransfer<dim>(MultiphysicsInterface<dim> *     multiphysics_interface,
+  HeatTransfer<dim>(MultiphysicsInterface<dim>      *multiphysics_interface,
                     const SimulationParameters<dim> &p_simulation_parameters,
                     std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
                                                        p_triangulation,
                     std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
-        p_simulation_parameters.non_linear_solver)
+        p_simulation_parameters.non_linear_solver.at(PhysicsID::heat_transfer))
     , multiphysics(multiphysics_interface)
+    , computing_timer(p_triangulation->get_communicator(),
+                      this->pcout,
+                      TimerOutput::summary,
+                      TimerOutput::wall_times)
     , simulation_parameters(p_simulation_parameters)
     , triangulation(p_triangulation)
     , simulation_control(p_simulation_control)
@@ -105,6 +111,11 @@ public:
             SolutionTransfer<dim, TrilinosWrappers::MPI::Vector>(
               this->dof_handler));
       }
+
+    // Change the behavior of the timer for situations when you don't want
+    // outputs
+    if (simulation_parameters.timer.type == Parameters::Timer::Type::none)
+      this->computing_timer.disable_output();
   }
 
   /**
@@ -310,8 +321,8 @@ private:
   virtual void
   assemble_local_system_matrix(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    HeatTransferScratchData<dim> &                        scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    HeatTransferScratchData<dim>                         &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief Assemble the local rhs for a given cell
@@ -329,8 +340,8 @@ private:
   virtual void
   assemble_local_system_rhs(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    HeatTransferScratchData<dim> &                        scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    HeatTransferScratchData<dim>                         &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief sets up the vector of assembler functions
@@ -429,7 +440,7 @@ private:
     const bool                       gather_vof,
     const Parameters::FluidIndicator monitored_fluid,
     const std::string                domain_name,
-    const VectorType &               current_solution_fd);
+    const VectorType                &current_solution_fd);
 
   /**
    * @brief Post-processing. Write the heat transfer values to an output file.
@@ -466,7 +477,10 @@ private:
                         const double                     phase_value_q);
 
 
-  MultiphysicsInterface<dim> *     multiphysics;
+  MultiphysicsInterface<dim> *multiphysics;
+
+  TimerOutput computing_timer;
+
   const SimulationParameters<dim> &simulation_parameters;
 
 
@@ -500,7 +514,6 @@ private:
 
   // Previous solutions vectors
   std::vector<TrilinosWrappers::MPI::Vector> previous_solutions;
-  std::vector<TrilinosWrappers::MPI::Vector> solution_stages;
 
   // Solution transfer classes
   std::shared_ptr<

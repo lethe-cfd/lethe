@@ -85,9 +85,9 @@ public:
    *
    */
   NavierStokesScratchData(PhysicalPropertiesManager &properties_manager,
-                          const FESystem<dim> &      fe,
-                          const Quadrature<dim> &    quadrature,
-                          const Mapping<dim> &       mapping,
+                          const FESystem<dim>       &fe,
+                          const Quadrature<dim>     &quadrature,
+                          const Mapping<dim>        &mapping,
                           const Quadrature<dim - 1> &face_quadrature)
     : properties_manager(properties_manager)
     , fe_values(mapping,
@@ -112,6 +112,7 @@ public:
     gather_void_fraction                     = false;
     gather_particles_information             = false;
     gather_temperature                       = false;
+    gather_cahn_hilliard                     = false;
     gather_hessian = properties_manager.is_non_newtonian();
   }
 
@@ -152,7 +153,9 @@ public:
     gather_void_fraction                     = false;
     gather_particles_information             = false;
     gather_temperature                       = false;
+    gather_cahn_hilliard                     = false;
     gather_hessian = properties_manager.is_non_newtonian();
+
 
     if (sd.gather_vof)
       enable_vof(sd.fe_values_vof->get_fe(),
@@ -180,6 +183,11 @@ public:
       enable_heat_transfer(sd.fe_values_temperature->get_fe(),
                            sd.fe_values_temperature->get_quadrature(),
                            sd.fe_values_temperature->get_mapping());
+    if (sd.gather_cahn_hilliard)
+      enable_cahn_hilliard(sd.fe_values_cahn_hilliard->get_fe(),
+                           sd.fe_values_cahn_hilliard->get_quadrature(),
+                           sd.fe_values_cahn_hilliard->get_mapping());
+
     gather_hessian = sd.gather_hessian;
   }
 
@@ -194,8 +202,8 @@ public:
 
   /** @brief Reinitialize the content of the scratch
    *
-   * Using the FeValues and the content of the solutions, previous solutions and
-   * solutions stages, fills all of the class member of the scratch
+   * Using the FeValues and the content of the solutions and previous solutions,
+   * fills all of the class member of the scratch
    *
    * @param cell The cell over which the assembly is being carried.
    * This cell must be compatible with the fe which is used to fill the FeValues
@@ -204,7 +212,6 @@ public:
    *
    * @param previous_solutions The solutions at the previous time steps
    *
-   * @param solution_stages The solution at the intermediary stages (for SDIRK methods)
    *
    * @param forcing_function The function describing the momentum/mass source term
    *
@@ -216,10 +223,9 @@ public:
   template <typename VectorType>
   void
   reinit(const typename DoFHandler<dim>::active_cell_iterator &cell,
-         const VectorType &                                    current_solution,
+         const VectorType                                     &current_solution,
          const std::vector<VectorType> &previous_solutions,
-         const std::vector<VectorType> &solution_stages,
-         Function<dim> *                forcing_function,
+         Function<dim>                 *forcing_function,
          Tensor<1, dim>                 beta_force,
          const double                   pressure_scaling_factor)
   {
@@ -296,13 +302,6 @@ public:
           this->fe_values[pressure].get_function_values(
             previous_solutions[p], previous_pressure_values[p]);
         }
-
-    // Gather velocity stages
-    for (unsigned int s = 0; s < solution_stages.size(); ++s)
-      {
-        this->fe_values[velocities].get_function_values(
-          solution_stages[s], stages_velocity_values[s]);
-      }
 
     for (unsigned int q = 0; q < n_q_points; ++q)
       {
@@ -476,9 +475,9 @@ public:
    */
 
   void
-  enable_vof(const FiniteElement<dim> &         fe,
-             const Quadrature<dim> &            quadrature,
-             const Mapping<dim> &               mapping,
+  enable_vof(const FiniteElement<dim>          &fe,
+             const Quadrature<dim>             &quadrature,
+             const Mapping<dim>                &mapping,
              const Parameters::VOF_PhaseFilter &phase_filter_parameters);
 
   /**
@@ -494,21 +493,21 @@ public:
    */
 
   void
-  enable_vof(const FiniteElement<dim> &                      fe,
-             const Quadrature<dim> &                         quadrature,
-             const Mapping<dim> &                            mapping,
+  enable_vof(const FiniteElement<dim>                       &fe,
+             const Quadrature<dim>                          &quadrature,
+             const Mapping<dim>                             &mapping,
              const std::shared_ptr<VolumeOfFluidFilterBase> &filter);
 
   void
   enable_projected_phase_fraction_gradient(
     const FiniteElement<dim> &fe_projected_phase_fraction_gradient,
-    const Quadrature<dim> &   quadrature,
-    const Mapping<dim> &      mapping);
+    const Quadrature<dim>    &quadrature,
+    const Mapping<dim>       &mapping);
 
   void
   enable_curvature(const FiniteElement<dim> &fe_curvature,
-                   const Quadrature<dim> &   quadrature,
-                   const Mapping<dim> &      mapping);
+                   const Quadrature<dim>    &quadrature,
+                   const Mapping<dim>       &mapping);
 
   /** @brief Reinitialize the content of the scratch for the vof
    *
@@ -522,17 +521,15 @@ public:
    *
    * @param previous_solutions The solutions at the previous time steps for [alpha]
    *
-   * @param solution_stages The solution at the intermediary stages (for SDIRK methods) for [alpha]
    *
    */
 
   template <typename VectorType>
   void
   reinit_vof(const typename DoFHandler<dim>::active_cell_iterator &cell,
-             const VectorType &             current_solution,
-             const VectorType &             current_filtered_solution,
-             const std::vector<VectorType> &previous_solutions,
-             const std::vector<VectorType> & /*solution_stages*/)
+             const VectorType              &current_solution,
+             const VectorType              &current_filtered_solution,
+             const std::vector<VectorType> &previous_solutions)
   {
     this->fe_values_vof->reinit(cell);
     // Gather phase fraction (values, gradient)
@@ -555,7 +552,7 @@ public:
   void
   reinit_projected_phase_fraction_gradient(
     const typename DoFHandler<dim>::active_cell_iterator
-      &               projected_phase_fraction_gradient_cell,
+                     &projected_phase_fraction_gradient_cell,
     const VectorType &current_projected_phase_fraction_gradient_solution)
   {
     this->fe_values_projected_phase_fraction_gradient->reinit(
@@ -593,8 +590,8 @@ public:
 
   void
   enable_void_fraction(const FiniteElement<dim> &fe,
-                       const Quadrature<dim> &   quadrature,
-                       const Mapping<dim> &      mapping);
+                       const Quadrature<dim>    &quadrature,
+                       const Mapping<dim>       &mapping);
 
   /** @brief Reinitialize the content of the scratch for the void fraction
    *
@@ -606,17 +603,14 @@ public:
    *
    * @param previous_solutions The solutions at the previous time steps for [epsilon]
    *
-   * @param solution_stages The solution at the intermediary stages (for SDIRK methods) for [epsilon]
-   *
    */
 
   template <typename VectorType>
   void
   reinit_void_fraction(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    const VectorType &                                    current_solution,
-    const std::vector<VectorType> &                       previous_solutions,
-    const std::vector<VectorType> & /*solution_stages*/)
+    const VectorType                                     &current_solution,
+    const std::vector<VectorType>                        &previous_solutions)
   {
     this->fe_values_void_fraction->reinit(cell);
 
@@ -659,8 +653,6 @@ public:
    *
    * @param previous_solutions The solutions at the previous time steps for [epsilon]
    *
-   * @param solution_stages The solution at the intermediary stages (for SDIRK methods) for [epsilon]
-   *
    */
 
   template <typename VectorType>
@@ -671,8 +663,8 @@ public:
     const VectorType                       previous_solution,
     const VectorType                       void_fraction_solution,
     const Particles::ParticleHandler<dim> &particle_handler,
-    DoFHandler<dim> &                      dof_handler,
-    DoFHandler<dim> &                      void_fraction_dof_handler)
+    DoFHandler<dim>                       &dof_handler,
+    DoFHandler<dim>                       &void_fraction_dof_handler)
   {
     const FiniteElement<dim> &fe = this->fe_values.get_fe();
     const FiniteElement<dim> &fe_void_fraction =
@@ -782,7 +774,8 @@ public:
     // Relative velocity and particle Reynolds
     unsigned int particle_no                 = 0;
     average_fluid_particle_relative_velocity = 0;
-    double viscosity = properties_manager.get_viscosity_scale();
+    double kinematic_viscosity =
+      properties_manager.get_kinematic_viscosity_scale();
 
     for (auto &particle : pic)
       {
@@ -799,7 +792,7 @@ public:
             fluid_particle_relative_velocity_at_particle_location[particle_no]
               .norm() *
             particle_properties[DEM::PropertiesIndex::dp] /
-            (viscosity + DBL_MIN);
+            (kinematic_viscosity + DBL_MIN);
         particle_no++;
       }
     if (particle_no > 0)
@@ -869,7 +862,8 @@ public:
 
 
   /**
-   * @brief enable_heat_transfer Enables the collection of the heat transfer data (Temperature field) by the scratch
+   * @brief enable_heat_transfer Enables the collection of the heat transfer
+   * data (Temperature field) by the scratch
    *
    * @param fe FiniteElement associated with the heat transfer.
    *
@@ -880,8 +874,8 @@ public:
 
   void
   enable_heat_transfer(const FiniteElement<dim> &fe,
-                       const Quadrature<dim> &   quadrature,
-                       const Mapping<dim> &      mapping);
+                       const Quadrature<dim>    &quadrature,
+                       const Mapping<dim>       &mapping);
 
 
   /** @brief Reinitialize the content of the scratch for the heat transfer
@@ -892,7 +886,8 @@ public:
    *
    * @param current_solution The present value of the solution for temperature
    *
-   * @param previous_solutions The solutions at the previous time steps for temperature
+   * @param previous_solutions The solutions at the previous time steps for
+   * temperature
    *
    */
 
@@ -900,7 +895,7 @@ public:
   void
   reinit_heat_transfer(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    const VectorType &                                    current_solution)
+    const VectorType                                     &current_solution)
   {
     this->fe_values_temperature->reinit(cell);
 
@@ -913,10 +908,68 @@ public:
       current_solution, this->temperature_gradients);
   }
 
-  /** @brief Calculates the physical properties. This function calculates the physical properties
-   * that may be required by the fluid dynamics problem. Namely the kinematic
-   * viscosity and, when required, the density.
+  /**
+   * @brief enable_cahn_hilliard Enables the collection of the CahnHilliard data
+   * by the scratch
    *
+   * @param fe FiniteElement associated with the CahnHilliard physics
+   *
+   * @param quadrature Quadrature rule of the Navier-Stokes problem assembly
+   *
+   * @param mapping Mapping used for the Navier-Stokes problem assembly
+   */
+  void
+  enable_cahn_hilliard(const FiniteElement<dim> &fe,
+                       const Quadrature<dim>    &quadrature,
+                       const Mapping<dim>       &mapping);
+
+
+  /** @brief Reinitialize the content of the scratch for CH
+   *
+   * @param cell The cell over which the assembly is being carried.
+   * This cell must be compatible with the CH FE and not the
+   * Navier-Stokes FE
+   *
+   * @param current_solution The present value of the solution for [phi]
+   *
+   */
+  template <typename VectorType>
+  void
+  reinit_cahn_hilliard(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    const VectorType                                     &current_solution,
+    Parameters::CahnHilliard cahn_hilliard_parameters)
+  {
+    this->fe_values_cahn_hilliard->reinit(cell);
+    this->phase_order.component        = 0;
+    this->chemical_potential.component = 1;
+
+    // Gather phase fraction (values, gradient)
+    this->fe_values_cahn_hilliard->operator[](phase_order)
+      .get_function_values(current_solution,
+                           this->phase_order_cahn_hilliard_values);
+    this->fe_values_cahn_hilliard->operator[](chemical_potential)
+      .get_function_values(current_solution,
+                           this->chemical_potential_cahn_hilliard_values);
+    this->fe_values_cahn_hilliard->operator[](phase_order)
+      .get_function_gradients(current_solution,
+                              this->phase_order_cahn_hilliard_gradients);
+    this->fe_values_cahn_hilliard->operator[](chemical_potential)
+      .get_function_gradients(current_solution,
+                              this->chemical_potential_cahn_hilliard_gradients);
+
+    // Initialize parameters
+    this->epsilon     = (cahn_hilliard_parameters.epsilon_set_method ==
+                     Parameters::EpsilonSetStrategy::manual) ?
+                          cahn_hilliard_parameters.epsilon :
+                          2 * this->cell_size;
+    this->well_height = cahn_hilliard_parameters.well_height;
+  }
+
+
+  /** @brief Calculates the physical properties. This function calculates the
+   * physical properties that may be required by the fluid dynamics problem.
+   * Namely the kinematic viscosity and, when required, the density.
    */
   void
   calculate_physical_properties();
@@ -925,26 +978,36 @@ public:
   PhysicalPropertiesManager            properties_manager;
   std::map<field, std::vector<double>> fields;
   std::vector<double>                  density;
-  double                               density_psi;
   double                               density_ref;
-  std::vector<double>                  viscosity;
-  double                               viscosity_scale;
+  double                               density_psi;
+  std::vector<double>                  dynamic_viscosity;
+  std::vector<double>                  kinematic_viscosity;
+  double                               kinematic_viscosity_scale;
   std::vector<double>                  thermal_expansion;
-  std::vector<double>                  grad_viscosity_shear_rate;
+  std::vector<double>                  grad_kinematic_viscosity_shear_rate;
   std::vector<std::vector<double>>     previous_density;
 
   // Pressure scaling factor to facilitate different scales between velocity and
   // pressure
   double pressure_scaling_factor;
 
-  // For VOF simulations. Present properties for fluid 0 and 1.
+  // For VOF and CH simulations. Present properties for fluid 0 and 1.
   std::vector<double> density_0;
   std::vector<double> density_1;
-  std::vector<double> viscosity_0;
-  std::vector<double> viscosity_1;
+  double              density_ref_0;
+  double              density_ref_1;
+  double              density_psi_0;
+  double              density_psi_1;
+  std::vector<double> compressibility_multiplier;
+  std::vector<double> dynamic_viscosity_0;
+  std::vector<double> dynamic_viscosity_1;
+  std::vector<double> kinematic_viscosity_0;
+  std::vector<double> kinematic_viscosity_1;
   std::vector<double> thermal_expansion_0;
   std::vector<double> thermal_expansion_1;
   std::vector<double> surface_tension;
+  std::vector<double> surface_tension_gradient;
+  std::vector<double> mobility_cahn_hilliard;
 
   // FEValues for the Navier-Stokes problem
   FEValues<dim>              fe_values;
@@ -977,7 +1040,6 @@ public:
   std::vector<Tensor<1, dim>>              pressure_gradients;
   std::vector<std::vector<double>>         previous_pressure_values;
   std::vector<std::vector<Tensor<1, dim>>> previous_velocity_values;
-  std::vector<std::vector<Tensor<1, dim>>> stages_velocity_values;
 
   // Shape functions
   std::vector<std::vector<double>>         div_phi_u;
@@ -1055,6 +1117,23 @@ public:
   std::vector<Tensor<1, dim>> temperature_gradients;
   // This is stored as a shared_ptr because it is only instantiated when needed
   std::shared_ptr<FEValues<dim>> fe_values_temperature;
+
+  /**
+   * Scratch component for the CahnHilliard auxiliary physics
+   */
+  double                      epsilon;
+  double                      well_height;
+  double                      density_diff;
+  bool                        gather_cahn_hilliard;
+  unsigned int                n_dofs_cahn_hilliard;
+  std::vector<double>         phase_order_cahn_hilliard_values;
+  std::vector<Tensor<1, dim>> phase_order_cahn_hilliard_gradients;
+  std::vector<double>         chemical_potential_cahn_hilliard_values;
+  std::vector<Tensor<1, dim>> chemical_potential_cahn_hilliard_gradients;
+  // This is stored as a shared_ptr because it is only instantiated when needed
+  std::shared_ptr<FEValues<dim>> fe_values_cahn_hilliard;
+  FEValuesExtractors::Scalar     phase_order;
+  FEValuesExtractors::Scalar     chemical_potential;
 
   /**
    * Is boundary cell indicator

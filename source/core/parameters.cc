@@ -55,19 +55,18 @@ namespace Parameters
   {
     prm.enter_subsection("simulation control");
     {
-      prm.declare_entry(
-        "method",
-        "steady",
-        Patterns::Selection("steady|steady_bdf|bdf1|bdf2|bdf3|sdirk2|sdirk3"),
-        "The kind of solver for the linear system. "
-        "Choices are <steady|steady_bdf|bdf1|bdf2|bdf3|sdirk2|sdirk3>.");
+      prm.declare_entry("method",
+                        "steady",
+                        Patterns::Selection("steady|steady_bdf|bdf1|bdf2|bdf3"),
+                        "The kind of solver for the linear system. "
+                        "Choices are <steady|steady_bdf|bdf1|bdf2|bdf3>.");
 
       prm.declare_entry(
         "bdf startup method",
         "multiple step bdf",
-        Patterns::Selection("multiple step bdf|sdirk step|initial solution"),
+        Patterns::Selection("multiple step bdf|initial solution"),
         "The kind of method used to startup high order bdf methods "
-        "Choices are <multiple step bdf|sdirk step|initial solution>.");
+        "Choices are <multiple step bdf|initial solution>.");
 
       prm.declare_entry("time step",
                         "1.",
@@ -171,10 +170,6 @@ namespace Parameters
         method = TimeSteppingMethod::bdf2;
       else if (sv == "bdf3")
         method = TimeSteppingMethod::bdf3;
-      else if (sv == "sdirk2")
-        method = TimeSteppingMethod::sdirk22;
-      else if (sv == "sdirk3")
-        method = TimeSteppingMethod::sdirk33;
       else
         {
           std::runtime_error("Invalid time stepping scheme");
@@ -182,8 +177,6 @@ namespace Parameters
       const std::string bdf_startup_string = prm.get("bdf startup method");
       if (bdf_startup_string == "multiple step bdf")
         bdf_startup_method = BDFStartupMethods::multiple_step_bdf;
-      else if (bdf_startup_string == "sdirk step")
-        bdf_startup_method = BDFStartupMethods::sdirk_step;
       else if (bdf_startup_string == "initial solution")
         bdf_startup_method = BDFStartupMethods::initial_solution;
       else
@@ -283,7 +276,7 @@ namespace Parameters
   }
 
   void
-  PowerLawParameters::parse_parameters(ParameterHandler &   prm,
+  PowerLawParameters::parse_parameters(ParameterHandler    &prm,
                                        const Dimensionality dimensions)
   {
     prm.enter_subsection("power-law");
@@ -310,11 +303,11 @@ namespace Parameters
       prm.declare_entry("viscosity_0",
                         "1.0",
                         Patterns::Double(),
-                        "Viscosity at rest");
+                        "Kinematic viscosity at rest");
       prm.declare_entry("viscosity_inf",
                         "1.0",
                         Patterns::Double(),
-                        "Viscosity for an infinite shear rate");
+                        "Kinematic viscosity for an infinite shear rate");
       prm.declare_entry("lambda", "1.0", Patterns::Double(), "Relaxation time");
       prm.declare_entry("a", "2.0", Patterns::Double(), "Carreau parameter");
       prm.declare_entry("n", "0.5", Patterns::Double(), "Power parameter");
@@ -323,17 +316,17 @@ namespace Parameters
   }
 
   void
-  CarreauParameters::parse_parameters(ParameterHandler &   prm,
+  CarreauParameters::parse_parameters(ParameterHandler    &prm,
                                       const Dimensionality dimensions)
   {
     prm.enter_subsection("carreau");
     {
-      viscosity_0   = prm.get_double("viscosity_0");
-      viscosity_inf = prm.get_double("viscosity_inf");
+      kinematic_viscosity_0   = prm.get_double("viscosity_0");
+      kinematic_viscosity_inf = prm.get_double("viscosity_inf");
 
-      // Both viscosities are in L^2 T^-1
-      viscosity_0 *= dimensions.viscosity_scaling;
-      viscosity_inf *= dimensions.viscosity_scaling;
+      // Both kinematic viscosities are in L^2 T^-1
+      kinematic_viscosity_0 *= dimensions.viscosity_scaling;
+      kinematic_viscosity_inf *= dimensions.viscosity_scaling;
 
       lambda = prm.get_double("lambda");
 
@@ -359,7 +352,7 @@ namespace Parameters
   }
 
   void
-  NonNewtonian::parse_parameters(ParameterHandler &   prm,
+  NonNewtonian::parse_parameters(ParameterHandler    &prm,
                                  const Dimensionality dimensions)
   {
     prm.enter_subsection("non newtonian");
@@ -399,7 +392,7 @@ namespace Parameters
 
   void
   IsothermalIdealGasDensityParameters::parse_parameters(
-    ParameterHandler &   prm,
+    ParameterHandler    &prm,
     const Dimensionality dimensions)
   {
     prm.enter_subsection("isothermal_ideal_gas");
@@ -425,15 +418,46 @@ namespace Parameters
   {
     prm.declare_entry(
       "surface tension coefficient",
-      "0",
+      "0.0",
       Patterns::Double(),
       "Surface tension coefficient for the corresponding pair of fluids or fluid-solid pair");
+    prm.declare_entry(
+      "reference state temperature",
+      "0.0",
+      Patterns::Double(),
+      "Temperature of the reference state corresponding to the surface tension coefficient");
+    prm.declare_entry(
+      "temperature-driven surface tension gradient",
+      "0.0",
+      Patterns::Double(),
+      "Surface tension gradient with respect to the temperature for the corresponding pair of fluids or fluid-solid pair");
   }
 
   void
   SurfaceTensionParameters::parse_parameters(ParameterHandler &prm)
   {
     surface_tension_coefficient = prm.get_double("surface tension coefficient");
+    T_0                         = prm.get_double("reference state temperature");
+    surface_tension_gradient =
+      prm.get_double("temperature-driven surface tension gradient");
+  }
+
+  void
+  MobilityCahnHilliardParameters::declare_parameters(
+    dealii::ParameterHandler &prm)
+  {
+    prm.declare_entry(
+      "cahn hilliard mobility constant",
+      "1",
+      Patterns::Double(),
+      "Cahn-Hilliard mobility constant for the corresponding pair of fluids");
+  }
+
+  void
+  MobilityCahnHilliardParameters::parse_parameters(ParameterHandler &prm)
+  {
+    mobility_cahn_hilliard_constant =
+      prm.get_double("cahn hilliard mobility constant");
   }
 
   void
@@ -487,7 +511,7 @@ namespace Parameters
   }
 
   void
-  PhaseChange::parse_parameters(ParameterHandler &   prm,
+  PhaseChange::parse_parameters(ParameterHandler    &prm,
                                 const Dimensionality dimensions)
   {
     prm.enter_subsection("phase change");
@@ -509,12 +533,12 @@ namespace Parameters
       cp_s = prm.get_double("specific heat solid");
       // cp_s  in L^2 theta^-1 T^-2
       cp_s *= dimensions.specific_heat_scaling;
-      viscosity_l = prm.get_double("viscosity liquid");
+      kinematic_viscosity_l = prm.get_double("viscosity liquid");
       // viscosity_l  in L^2 T^-1
-      viscosity_l *= dimensions.viscosity_scaling;
-      viscosity_s = prm.get_double("viscosity solid");
+      kinematic_viscosity_l *= dimensions.viscosity_scaling;
+      kinematic_viscosity_s = prm.get_double("viscosity solid");
       // viscosity_l  in L^2 T^-1
-      viscosity_s *= dimensions.viscosity_scaling;
+      kinematic_viscosity_s *= dimensions.viscosity_scaling;
       thermal_conductivity_l = prm.get_double("thermal conductivity liquid");
       // thermal_conductivity_l is in M L T^-3 theta ^-1
       thermal_conductivity_l *= dimensions.thermal_conductivity_scaling;
@@ -587,12 +611,12 @@ namespace Parameters
       prm.declare_entry("viscosity liquid",
                         "1",
                         Patterns::Double(),
-                        "Viscosity of the liquid phase");
+                        "Kinematic viscosity of the liquid phase");
 
       prm.declare_entry("viscosity solid",
                         "1",
                         Patterns::Double(),
-                        "Viscosity of the solid phase");
+                        "Kinematic viscosity of the solid phase");
     }
     prm.leave_subsection();
   }
@@ -653,7 +677,7 @@ namespace Parameters
   }
 
   void
-  PhysicalProperties::parse_parameters(ParameterHandler &   prm,
+  PhysicalProperties::parse_parameters(ParameterHandler    &prm,
                                        const Dimensionality dimensions)
   {
     prm.enter_subsection("physical properties");
@@ -683,6 +707,7 @@ namespace Parameters
       AssertThrow(number_of_material_interactions <= max_material_interactions,
                   NumberOfMaterialInteractionsError(
                     number_of_material_interactions));
+      material_interactions.resize(number_of_material_interactions);
       for (unsigned int i_material_interaction = 0;
            i_material_interaction < number_of_material_interactions;
            ++i_material_interaction)
@@ -807,7 +832,7 @@ namespace Parameters
   }
 
   void
-  Material::parse_parameters(ParameterHandler &               prm,
+  Material::parse_parameters(ParameterHandler                &prm,
                              std::string                      material_prefix,
                              const unsigned int               id,
                              const Parameters::Dimensionality dimensions)
@@ -836,7 +861,7 @@ namespace Parameters
       isothermal_ideal_gas_density_parameters.parse_parameters(prm, dimensions);
 
       //---------------------------------------------------
-      // Viscosity and Rheology
+      // Kinematic viscosity and Rheology
       //---------------------------------------------------
       op = prm.get("rheological model");
       if (op == "power-law")
@@ -856,9 +881,9 @@ namespace Parameters
           rheological_model = RheologicalModel::phase_change;
         }
 
-      viscosity = prm.get_double("kinematic viscosity");
+      kinematic_viscosity = prm.get_double("kinematic viscosity");
       // Kinematic viscosity is in L^2 T^-1, rescale
-      viscosity *= dimensions.viscosity_scaling;
+      kinematic_viscosity *= dimensions.viscosity_scaling;
       non_newtonian_parameters.parse_parameters(prm, dimensions);
 
       //--------------
@@ -940,7 +965,7 @@ namespace Parameters
         "type",
         "fluid-fluid",
         Patterns::Selection("fluid-fluid|fluid-solid"),
-        "Type of materials interacting. Choices are <fluid-fluid|fluid-solid>");
+        "Type of materials interacting. The choices are <fluid-fluid|fluid-solid>");
 
       // Fluid-fluid interactions
       prm.enter_subsection("fluid-fluid interaction");
@@ -960,10 +985,19 @@ namespace Parameters
         prm.declare_entry(
           "surface tension model",
           "constant",
-          Patterns::Selection("constant"),
-          "Model used for the calculation of the surface tension coefficient"
-          "At the moment, the only choice is <constant>");
+          Patterns::Selection("constant|linear"),
+          "Model used for the calculation of the surface tension coefficient\n"
+          "The choices are <constant|linear>.");
         surface_tension_parameters.declare_parameters(prm);
+
+        // Cahn-Hilliard mobility
+        prm.declare_entry(
+          "cahn hilliard mobility model",
+          "constant",
+          Patterns::Selection("constant|quartic"),
+          "Model used for the calculation of the mobility in the Cahn-Hilliard equations\n"
+          "The choices are <constant|quartic>.");
+        mobility_cahn_hilliard_parameters.declare_parameters(prm);
       }
       prm.leave_subsection();
 
@@ -983,9 +1017,9 @@ namespace Parameters
         prm.declare_entry(
           "surface tension model",
           "constant",
-          Patterns::Selection("constant"),
-          "Model used for the calculation of the surface tension coefficient"
-          "At the moment, the only choice is <constant>");
+          Patterns::Selection("constant|linear"),
+          "Model used for the calculation of the surface tension coefficient\n"
+          "The choices are <constant|linear>.");
         surface_tension_parameters.declare_parameters(prm);
       }
       prm.leave_subsection();
@@ -1007,7 +1041,7 @@ namespace Parameters
         material_interaction_type = MaterialInteractionsType::fluid_solid;
       else
         throw(std::runtime_error(
-          "Invalid material interaction type. Choices are <fluid-fluid|fluid-solid>"));
+          "Invalid material interaction type. The choices are <fluid-fluid|fluid-solid>."));
 
       if (material_interaction_type == MaterialInteractionsType::fluid_fluid)
         {
@@ -1030,9 +1064,31 @@ namespace Parameters
               surface_tension_model = SurfaceTensionModel::constant;
               surface_tension_parameters.parse_parameters(prm);
             }
+          else if (op == "linear")
+            {
+              surface_tension_model = SurfaceTensionModel::linear;
+              surface_tension_parameters.parse_parameters(prm);
+            }
           else
             throw(std::runtime_error(
-              "Invalid surface tension model. At the moment, the only choice is <constant>"));
+              "Invalid surface tension model. The choices are <constant|linear>."));
+
+          // Cahn-Hilliard mobility
+          op = prm.get("cahn hilliard mobility model");
+          if (op == "constant")
+            {
+              mobility_cahn_hilliard_model =
+                MobilityCahnHilliardModel::constant;
+              mobility_cahn_hilliard_parameters.parse_parameters(prm);
+            }
+          else if (op == "quartic")
+            {
+              mobility_cahn_hilliard_model = MobilityCahnHilliardModel::quartic;
+              mobility_cahn_hilliard_parameters.parse_parameters(prm);
+            }
+          else
+            throw(std::runtime_error(
+              "Invalid mobility model. The choices are <constant|quartic>."));
 
           prm.leave_subsection();
         }
@@ -1053,9 +1109,14 @@ namespace Parameters
               surface_tension_model = SurfaceTensionModel::constant;
               surface_tension_parameters.parse_parameters(prm);
             }
+          else if (op == "linear")
+            {
+              surface_tension_model = SurfaceTensionModel::linear;
+              surface_tension_parameters.parse_parameters(prm);
+            }
           else
             throw(std::runtime_error(
-              "Invalid surface tension model. At the moment, the only choice is <constant>"));
+              "Invalid surface tension model. The choices are <constant|linear>."));
           std::pair<std::pair<unsigned int, unsigned int>, SurfaceTensionModel>
             fluid_solid_surface_tension_interaction(fluid_solid_interaction,
                                                     surface_tension_model);
@@ -1095,12 +1156,12 @@ namespace Parameters
                         Patterns::Integer(),
                         "interpolation order tracer");
       prm.declare_entry(
-        "phase ch order",
+        "phase cahn hilliard order",
         "1",
         Patterns::Integer(),
         "interpolation order phase parameter in the Cahn-Hilliard equations");
       prm.declare_entry(
-        "potential ch order",
+        "potential cahn hilliard order",
         "1",
         Patterns::Integer(),
         "interpolation order chemical potential in the Cahn-Hilliard equations");
@@ -1117,15 +1178,16 @@ namespace Parameters
   {
     prm.enter_subsection("FEM");
     {
-      velocity_order      = prm.get_integer("velocity order");
-      pressure_order      = prm.get_integer("pressure order");
-      void_fraction_order = prm.get_integer("void fraction order");
-      temperature_order   = prm.get_integer("temperature order");
-      tracer_order        = prm.get_integer("tracer order");
-      VOF_order           = prm.get_integer("VOF order");
-      phase_ch_order      = prm.get_integer("phase ch order");
-      potential_ch_order  = prm.get_integer("potential ch order");
-      qmapping_all        = prm.get_bool("qmapping all");
+      velocity_order            = prm.get_integer("velocity order");
+      pressure_order            = prm.get_integer("pressure order");
+      void_fraction_order       = prm.get_integer("void fraction order");
+      temperature_order         = prm.get_integer("temperature order");
+      tracer_order              = prm.get_integer("tracer order");
+      VOF_order                 = prm.get_integer("VOF order");
+      phase_cahn_hilliard_order = prm.get_integer("phase cahn hilliard order");
+      potential_cahn_hilliard_order =
+        prm.get_integer("potential cahn hilliard order");
+      qmapping_all = prm.get_bool("qmapping all");
     }
     prm.leave_subsection();
   }
@@ -1264,10 +1326,6 @@ namespace Parameters
       prm.enter_subsection("path");
       laser_scan_path = std::make_shared<Functions::ParsedFunction<dim>>(dim);
       laser_scan_path->declare_parameters(prm, dim);
-      if (dim == 2)
-        prm.set("Function expression", "0; 0");
-      if (dim == 3)
-        prm.set("Function expression", "0; 0; 0");
       prm.leave_subsection();
 
       prm.declare_entry("start time",
@@ -1608,131 +1666,141 @@ namespace Parameters
   }
 
   void
-  NonLinearSolver::declare_parameters(ParameterHandler &prm)
+  NonLinearSolver::declare_parameters(ParameterHandler  &prm,
+                                      const std::string &physics_name)
   {
     prm.enter_subsection("non-linear solver");
     {
-      prm.declare_entry(
-        "verbosity",
-        "verbose",
-        Patterns::Selection("quiet|verbose"),
-        "State whether the outputs from the non-linear solver should be printed. "
-        "Choices are <quiet|verbose>.");
+      prm.enter_subsection(physics_name);
+      {
+        prm.declare_entry(
+          "verbosity",
+          "verbose",
+          Patterns::Selection("quiet|verbose"),
+          "State whether the outputs from the non-linear solver should be printed. "
+          "Choices are <quiet|verbose>.");
 
-      prm.declare_entry(
-        "solver",
-        "newton",
-        Patterns::Selection("newton|kinsol_newton|inexact_newton"),
-        "Non-linear solver that will be used "
-        "Choices are <newton|kinsol_newton|inexact_newton>."
-        " The newton solver is a traditional newton solver with"
-        "an analytical jacobian formulation. The jacobian matrix and the preconditioner"
-        "are assembled every iteration. In the kinsol_newton method, the nonlinear solver"
-        "Kinsol from the SUNDIALS library is used. This solver has an internal algorithm"
-        "that decides whether to reassemble the Jacobian matrix or not.");
+        prm.declare_entry(
+          "solver",
+          "newton",
+          Patterns::Selection("newton|kinsol_newton|inexact_newton"),
+          "Non-linear solver that will be used "
+          "Choices are <newton|kinsol_newton|inexact_newton>."
+          " The newton solver is a traditional newton solver with"
+          "an analytical jacobian formulation. The jacobian matrix and the preconditioner"
+          "are assembled every iteration. In the kinsol_newton method, the nonlinear solver"
+          "Kinsol from the SUNDIALS library is used. This solver has an internal algorithm"
+          "that decides whether to reassemble the Jacobian matrix or not.");
 
-      prm.declare_entry(
-        "kinsol strategy",
-        "line_search",
-        Patterns::Selection("normal_newton|line_search|fixed_point|picard"),
-        "Strategy that will be used by the kinsol newton solver");
+        prm.declare_entry(
+          "kinsol strategy",
+          "line_search",
+          Patterns::Selection("normal_newton|line_search|fixed_point|picard"),
+          "Strategy that will be used by the kinsol newton solver");
 
-      prm.declare_entry("tolerance",
-                        "1e-6",
-                        Patterns::Double(),
-                        "Newton solver tolerance");
-      prm.declare_entry("max iterations",
-                        "10",
-                        Patterns::Integer(),
-                        "Maximum number of Newton Iterations");
-      prm.declare_entry(
-        "step tolerance",
-        "0.9",
-        Patterns::Double(),
-        "Newton solver relative tolerance between steps."
-        " If a newton iteration leads to a residual > step tolerance"
-        " * previous residual then the theta relaxation"
-        " is applied until this criteria is satisfied");
+        prm.declare_entry("tolerance",
+                          "1e-6",
+                          Patterns::Double(),
+                          "Newton solver tolerance");
+        prm.declare_entry("max iterations",
+                          "10",
+                          Patterns::Integer(),
+                          "Maximum number of Newton Iterations");
+        prm.declare_entry(
+          "step tolerance",
+          "0.9",
+          Patterns::Double(),
+          "Newton solver relative tolerance between steps."
+          " If a newton iteration leads to a residual > step tolerance"
+          " * previous residual then the theta relaxation"
+          " is applied until this criteria is satisfied");
 
-      prm.declare_entry(
-        "matrix tolerance",
-        "0.1",
-        Patterns::Double(),
-        "This parameter controls the frequency at which the matrix is refreshed in the inexact Newton solvers"
-        "If the residual after a newton step < previous residual * matrix tolerance, the matrix is not re-assembled");
+        prm.declare_entry(
+          "matrix tolerance",
+          "0.1",
+          Patterns::Double(),
+          "This parameter controls the frequency at which the matrix is refreshed in the inexact Newton solvers"
+          "If the residual after a newton step < previous residual * matrix tolerance, the matrix is not re-assembled");
 
-      prm.declare_entry(
-        "force rhs calculation",
-        "false",
-        Patterns::Bool(),
-        "This is required if there is a fixed point component to the non-linear"
-        "solver that is changed at the beginning of every newton iteration."
-        "This is notably the case of the sharp edge method."
-        "The default value of this parameter is false.");
+        prm.declare_entry(
+          "force rhs calculation",
+          "false",
+          Patterns::Bool(),
+          "This is required if there is a fixed point component to the non-linear"
+          "solver that is changed at the beginning of every newton iteration."
+          "This is notably the case of the sharp edge method."
+          "The default value of this parameter is false.");
 
 
-      prm.declare_entry("residual precision",
-                        "4",
-                        Patterns::Integer(),
-                        "Number of digits displayed when showing residuals");
-      prm.declare_entry(
-        "reuse matrix",
-        "false",
-        Patterns::Bool(),
-        "Reuse the last jacobian matrix for the next non-linear problem solution");
+        prm.declare_entry("residual precision",
+                          "4",
+                          Patterns::Integer(),
+                          "Number of digits displayed when showing residuals");
+        prm.declare_entry(
+          "reuse matrix",
+          "false",
+          Patterns::Bool(),
+          "Reuse the last jacobian matrix for the next non-linear problem solution");
 
-      prm.declare_entry(
-        "abort at convergence failure",
-        "false",
-        Patterns::Bool(),
-        "Aborts Lethe by throwing an exception if non-linear solver convergence has failed");
+        prm.declare_entry(
+          "abort at convergence failure",
+          "false",
+          Patterns::Bool(),
+          "Aborts Lethe by throwing an exception if non-linear solver convergence has failed");
+      }
+      prm.leave_subsection();
     }
     prm.leave_subsection();
   }
 
   void
-  NonLinearSolver::parse_parameters(ParameterHandler &prm)
+  NonLinearSolver::parse_parameters(ParameterHandler  &prm,
+                                    const std::string &physics_name)
   {
     prm.enter_subsection("non-linear solver");
     {
-      const std::string op = prm.get("verbosity");
-      if (op == "verbose")
-        verbosity = Parameters::Verbosity::verbose;
-      else if (op == "quiet")
-        verbosity = Parameters::Verbosity::quiet;
-      else
-        throw(std::runtime_error("Invalid verbosity level"));
+      prm.enter_subsection(physics_name);
+      {
+        const std::string op = prm.get("verbosity");
+        if (op == "verbose")
+          verbosity = Parameters::Verbosity::verbose;
+        else if (op == "quiet")
+          verbosity = Parameters::Verbosity::quiet;
+        else
+          throw(std::runtime_error("Invalid verbosity level"));
 
-      const std::string str_solver = prm.get("solver");
-      if (str_solver == "newton")
-        solver = SolverType::newton;
-      else if (str_solver == "kinsol_newton")
-        solver = SolverType::kinsol_newton;
-      else if (str_solver == "inexact_newton")
-        solver = SolverType::inexact_newton;
-      else
-        throw(std::runtime_error("Invalid non-linear solver "));
+        const std::string str_solver = prm.get("solver");
+        if (str_solver == "newton")
+          solver = SolverType::newton;
+        else if (str_solver == "kinsol_newton")
+          solver = SolverType::kinsol_newton;
+        else if (str_solver == "inexact_newton")
+          solver = SolverType::inexact_newton;
+        else
+          throw(std::runtime_error("Invalid non-linear solver "));
 
-      const std::string str_kinsol_strategy = prm.get("kinsol strategy");
-      if (str_kinsol_strategy == "normal_newton")
-        kinsol_strategy = KinsolStrategy::normal_newton;
-      else if (str_kinsol_strategy == "line_search")
-        kinsol_strategy = KinsolStrategy::line_search;
-      else if (str_kinsol_strategy == "picard")
-        kinsol_strategy = KinsolStrategy::picard;
-      else
-        throw(
-          std::runtime_error("Invalid strategy for kinsol non-linear solver "));
+        const std::string str_kinsol_strategy = prm.get("kinsol strategy");
+        if (str_kinsol_strategy == "normal_newton")
+          kinsol_strategy = KinsolStrategy::normal_newton;
+        else if (str_kinsol_strategy == "line_search")
+          kinsol_strategy = KinsolStrategy::line_search;
+        else if (str_kinsol_strategy == "picard")
+          kinsol_strategy = KinsolStrategy::picard;
+        else
+          throw(std::runtime_error(
+            "Invalid strategy for kinsol non-linear solver "));
 
-      tolerance             = prm.get_double("tolerance");
-      step_tolerance        = prm.get_double("step tolerance");
-      matrix_tolerance      = prm.get_double("matrix tolerance");
-      max_iterations        = prm.get_integer("max iterations");
-      display_precision     = prm.get_integer("residual precision");
-      force_rhs_calculation = prm.get_bool("force rhs calculation");
-      reuse_matrix          = prm.get_bool("reuse matrix");
-      abort_at_convergence_failure =
-        prm.get_bool("abort at convergence failure");
+        tolerance             = prm.get_double("tolerance");
+        step_tolerance        = prm.get_double("step tolerance");
+        matrix_tolerance      = prm.get_double("matrix tolerance");
+        max_iterations        = prm.get_integer("max iterations");
+        display_precision     = prm.get_integer("residual precision");
+        force_rhs_calculation = prm.get_bool("force rhs calculation");
+        reuse_matrix          = prm.get_bool("reuse matrix");
+        abort_at_convergence_failure =
+          prm.get_bool("abort at convergence failure");
+      }
+      prm.leave_subsection();
     }
     prm.leave_subsection();
   }
@@ -1913,161 +1981,176 @@ namespace Parameters
   }
 
   void
-  LinearSolver::declare_parameters(ParameterHandler &prm)
+  LinearSolver::declare_parameters(ParameterHandler  &prm,
+                                   const std::string &physics_name)
   {
     prm.enter_subsection("linear solver");
     {
-      prm.declare_entry(
-        "verbosity",
-        "verbose",
-        Patterns::Selection("quiet|verbose|extra verbose"),
-        "State whether output from solver runs should be printed. "
-        "Choices are <quiet|verbose|extra verbose>.");
-      prm.declare_entry(
-        "method",
-        "gmres",
-        Patterns::Selection("gmres|bicgstab|amg|direct"),
-        "The iterative solver for the linear system of equations. "
-        "Choices are <gmres|bicgstab|amg|tfqmr|direct>. gmres is a GMRES iterative "
-        "solver "
-        "with ILU preconditioning. bicgstab is a BICGSTAB iterative solver "
-        "with ILU preconditioning. "
-        "amg is GMRES + AMG preconditioning with an ILU coarsener and "
-        "smoother. On coarse meshes, the gmres/bicgstab solver with ILU "
-        "preconditioning is more efficient. "
-        "As the number of mesh elements increase, the amg solver is the most "
-        "efficient. Generally, at 1M elements, the amg solver always "
-        "outperforms the gmres or bicgstab");
-      prm.declare_entry("relative residual",
-                        "1e-3",
-                        Patterns::Double(),
-                        "Linear solver residual");
-      prm.declare_entry("minimum residual",
-                        "1e-12",
-                        Patterns::Double(),
-                        "Linear solver minimum residual");
-      prm.declare_entry("max iters",
-                        "1000",
-                        Patterns::Integer(),
-                        "Maximum solver iterations");
+      prm.enter_subsection(physics_name);
+      {
+        prm.declare_entry(
+          "verbosity",
+          "verbose",
+          Patterns::Selection("quiet|verbose|extra verbose"),
+          "State whether output from solver runs should be printed. "
+          "Choices are <quiet|verbose|extra verbose>.");
+        prm.declare_entry(
+          "method",
+          "gmres",
+          Patterns::Selection("gmres|bicgstab|direct"),
+          "The iterative solver for the linear system of equations. "
+          "Choices are <gmres|bicgstab|direct>.");
 
-      prm.declare_entry("max krylov vectors",
-                        "100",
-                        Patterns::Integer(),
-                        "Maximum number of krylov vectors for GMRES");
+        prm.declare_entry("relative residual",
+                          "1e-3",
+                          Patterns::Double(),
+                          "Linear solver residual");
+        prm.declare_entry("minimum residual",
+                          "1e-12",
+                          Patterns::Double(),
+                          "Linear solver minimum residual");
+        prm.declare_entry("max iters",
+                          "1000",
+                          Patterns::Integer(),
+                          "Maximum solver iterations");
 
-      prm.declare_entry("ilu preconditioner fill",
-                        "0",
-                        Patterns::Double(),
-                        "Ilu preconditioner fill");
+        prm.declare_entry("max krylov vectors",
+                          "100",
+                          Patterns::Integer(),
+                          "Maximum number of krylov vectors for GMRES");
 
-      prm.declare_entry("ilu preconditioner absolute tolerance",
-                        "1e-12",
-                        Patterns::Double(),
-                        "Ilu preconditioner tolerance");
+        prm.declare_entry("preconditioner",
+                          "ilu",
+                          Patterns::Selection("amg|ilu"),
+                          "The preconditioner for the linear solver."
+                          "Choices are <amg|ilu>.");
 
-      prm.declare_entry("ilu preconditioner relative tolerance",
-                        "1.00",
-                        Patterns::Double(),
-                        "Ilu relative tolerance");
+        prm.declare_entry("ilu preconditioner fill",
+                          "0",
+                          Patterns::Double(),
+                          "Ilu preconditioner fill");
 
-      prm.declare_entry("amg preconditioner ilu fill",
-                        "0",
-                        Patterns::Double(),
-                        "amg preconditioner ilu smoother/coarsener fill");
+        prm.declare_entry("ilu preconditioner absolute tolerance",
+                          "1e-12",
+                          Patterns::Double(),
+                          "Ilu preconditioner tolerance");
 
-      prm.declare_entry(
-        "amg preconditioner ilu absolute tolerance",
-        "1e-12",
-        Patterns::Double(),
-        "amg preconditioner ilu smoother/coarsener absolute tolerance");
+        prm.declare_entry("ilu preconditioner relative tolerance",
+                          "1.00",
+                          Patterns::Double(),
+                          "Ilu relative tolerance");
 
-      prm.declare_entry(
-        "amg preconditioner ilu relative tolerance",
-        "1.00",
-        Patterns::Double(),
-        "amg preconditioner ilu smoother/coarsener relative tolerance");
+        prm.declare_entry("amg preconditioner ilu fill",
+                          "0",
+                          Patterns::Double(),
+                          "amg preconditioner ilu smoother/coarsener fill");
 
-      prm.declare_entry("amg aggregation threshold",
-                        "1e-14",
-                        Patterns::Double(),
-                        "amg aggregation threshold");
-      prm.declare_entry("amg n cycles",
-                        "1",
-                        Patterns::Integer(),
-                        "amg number of cycles");
-      prm.declare_entry("amg w cycles",
-                        "false",
-                        Patterns::Bool(),
-                        "amg w cycling. If this is set to true, W cycling is "
-                        "used. Otherwise, V cycling is used.");
-      prm.declare_entry("amg smoother sweeps",
-                        "2",
-                        Patterns::Integer(),
-                        "amg smoother sweeps");
-      prm.declare_entry("amg smoother overlap",
-                        "1",
-                        Patterns::Integer(),
-                        "amg smoother overlap");
-      prm.declare_entry(
-        "force linear solver continuation",
-        "false",
-        Patterns::Bool(),
-        "A boolean that will force the linear solver to continue even if it fails");
+        prm.declare_entry(
+          "amg preconditioner ilu absolute tolerance",
+          "1e-12",
+          Patterns::Double(),
+          "amg preconditioner ilu smoother/coarsener absolute tolerance");
+
+        prm.declare_entry(
+          "amg preconditioner ilu relative tolerance",
+          "1.00",
+          Patterns::Double(),
+          "amg preconditioner ilu smoother/coarsener relative tolerance");
+
+        prm.declare_entry("amg aggregation threshold",
+                          "1e-14",
+                          Patterns::Double(),
+                          "amg aggregation threshold");
+        prm.declare_entry("amg n cycles",
+                          "1",
+                          Patterns::Integer(),
+                          "amg number of cycles");
+        prm.declare_entry("amg w cycles",
+                          "false",
+                          Patterns::Bool(),
+                          "amg w cycling. If this is set to true, W cycling is "
+                          "used. Otherwise, V cycling is used.");
+        prm.declare_entry("amg smoother sweeps",
+                          "2",
+                          Patterns::Integer(),
+                          "amg smoother sweeps");
+        prm.declare_entry("amg smoother overlap",
+                          "1",
+                          Patterns::Integer(),
+                          "amg smoother overlap");
+        prm.declare_entry(
+          "force linear solver continuation",
+          "false",
+          Patterns::Bool(),
+          "A boolean that will force the linear solver to continue even if it fails");
+      }
+      prm.leave_subsection();
     }
     prm.leave_subsection();
   }
   void
-  LinearSolver::parse_parameters(ParameterHandler &prm)
+  LinearSolver::parse_parameters(ParameterHandler  &prm,
+                                 const std::string &physics_name)
   {
     prm.enter_subsection("linear solver");
     {
-      const std::string op = prm.get("verbosity");
-      if (op == "verbose")
-        verbosity = Parameters::Verbosity::verbose;
-      else if (op == "quiet")
-        verbosity = Parameters::Verbosity::quiet;
-      else if (op == "extra verbose")
-        verbosity = Parameters::Verbosity::extra_verbose;
-      else
-        throw(
-          std::runtime_error("Unknown verbosity mode for the linear solver"));
+      prm.enter_subsection(physics_name);
+      {
+        const std::string sv = prm.get("method");
+        if (sv == "gmres")
+          solver = SolverType::gmres;
+        else if (sv == "bicgstab")
+          solver = SolverType::bicgstab;
+        else if (sv == "direct")
+          solver = SolverType::direct;
+        else
+          throw std::logic_error(
+            "Error, invalid iterative solver type. Choices are amg, gmres, bicgstab or direct");
 
-      const std::string sv = prm.get("method");
-      if (sv == "amg")
-        solver = SolverType::amg;
-      else if (sv == "gmres")
-        solver = SolverType::gmres;
-      else if (sv == "bicgstab")
-        solver = SolverType::bicgstab;
-      else if (sv == "direct")
-        solver = SolverType::direct;
-      else
-        throw std::logic_error(
-          "Error, invalid iterative solver type. Choices are amg, gmres, bicgstab or direct");
+        const std::string op = prm.get("verbosity");
+        if (op == "verbose")
+          verbosity = Parameters::Verbosity::verbose;
+        else if (op == "quiet")
+          verbosity = Parameters::Verbosity::quiet;
+        else if (op == "extra verbose")
+          verbosity = Parameters::Verbosity::extra_verbose;
+        else
+          throw(
+            std::runtime_error("Unknown verbosity mode for the linear solver"));
 
-      relative_residual  = prm.get_double("relative residual");
-      minimum_residual   = prm.get_double("minimum residual");
-      max_iterations     = prm.get_integer("max iters");
-      max_krylov_vectors = prm.get_integer("max krylov vectors");
+        relative_residual  = prm.get_double("relative residual");
+        minimum_residual   = prm.get_double("minimum residual");
+        max_iterations     = prm.get_integer("max iters");
+        max_krylov_vectors = prm.get_integer("max krylov vectors");
 
-      ilu_precond_fill = prm.get_double("ilu preconditioner fill");
-      ilu_precond_atol =
-        prm.get_double("ilu preconditioner absolute tolerance");
-      ilu_precond_rtol =
-        prm.get_double("ilu preconditioner relative tolerance");
-      amg_precond_ilu_fill = prm.get_double("amg preconditioner ilu fill");
-      amg_precond_ilu_atol =
-        prm.get_double("amg preconditioner ilu absolute tolerance");
-      amg_precond_ilu_rtol =
-        prm.get_double("amg preconditioner ilu relative tolerance");
-      amg_aggregation_threshold = prm.get_double("amg aggregation threshold");
-      amg_n_cycles              = prm.get_integer("amg n cycles");
-      amg_w_cycles              = prm.get_bool("amg w cycles");
-      amg_smoother_sweeps       = prm.get_integer("amg smoother sweeps");
-      amg_smoother_overlap      = prm.get_integer("amg smoother overlap");
-      force_linear_solver_continuation =
-        prm.get_bool("force linear solver continuation");
+        const std::string precond = prm.get("preconditioner");
+        if (precond == "amg")
+          preconditioner = PreconditionerType::amg;
+        else if (precond == "ilu")
+          preconditioner = PreconditionerType::ilu;
+        else
+          throw std::logic_error(
+            "Error, invalid preconditioner type. Choices are amg or ilu");
+
+        ilu_precond_fill = prm.get_double("ilu preconditioner fill");
+        ilu_precond_atol =
+          prm.get_double("ilu preconditioner absolute tolerance");
+        ilu_precond_rtol =
+          prm.get_double("ilu preconditioner relative tolerance");
+        amg_precond_ilu_fill = prm.get_double("amg preconditioner ilu fill");
+        amg_precond_ilu_atol =
+          prm.get_double("amg preconditioner ilu absolute tolerance");
+        amg_precond_ilu_rtol =
+          prm.get_double("amg preconditioner ilu relative tolerance");
+        amg_aggregation_threshold = prm.get_double("amg aggregation threshold");
+        amg_n_cycles              = prm.get_integer("amg n cycles");
+        amg_w_cycles              = prm.get_bool("amg w cycles");
+        amg_smoother_sweeps       = prm.get_integer("amg smoother sweeps");
+        amg_smoother_overlap      = prm.get_integer("amg smoother overlap");
+        force_linear_solver_continuation =
+          prm.get_bool("force linear solver continuation");
+      }
+      prm.leave_subsection();
     }
     prm.leave_subsection();
   }
@@ -2108,9 +2191,9 @@ namespace Parameters
         "variable",
         "velocity",
         Patterns::List(Patterns::Selection(
-          "velocity|pressure|phase|temperature|phase_ch|chemical_potential_ch")),
+          "velocity|pressure|phase|temperature|phase_cahn_hilliard|chemical_potential_cahn_hilliard")),
         "Variable(s) for kelly estimation"
-        "Choices are <velocity|pressure|phase|temperature|phase_ch|chemical_potential_ch>."
+        "Choices are <velocity|pressure|phase|temperature|phase_cahn_hilliard|chemical_potential_cahn_hilliard>."
         "For multi-variables refinement, separate the different variables with a comma "
         "(ex/ 'set variables = velocity,temperature')");
 
@@ -2194,13 +2277,13 @@ namespace Parameters
             vars = Variable::phase;
           else if (var_vec[i] == "temperature")
             vars = Variable::temperature;
-          else if (var_vec[i] == "phase_ch")
-            vars = Variable::phase_ch;
-          else if (var_vec[i] == "chemical_potential_ch")
-            vars = Variable::chemical_potential_ch;
+          else if (var_vec[i] == "phase_cahn_hilliard")
+            vars = Variable::phase_cahn_hilliard;
+          else if (var_vec[i] == "chemical_potential_cahn_hilliard")
+            vars = Variable::chemical_potential_cahn_hilliard;
           else
             throw std::logic_error(
-              "Error, invalid mesh adaptation variable. Choices are velocity, pressure, phase, temperature, phase_ch or chemical_potential_ch");
+              "Error, invalid mesh adaptation variable. Choices are velocity, pressure, phase, temperature, phase_cahn_hilliard or chemical_potential_cahn_hilliard");
 
           var_adaptation_param.coarsening_fraction = std::stod(coars_vec[i]);
           var_adaptation_param.refinement_fraction = std::stod(refin_vec[i]);
@@ -2376,39 +2459,34 @@ namespace Parameters
       "false",
       Patterns::Bool(),
       "Bool to define if the particle trajectory is integrated meaning its velocity and position will be updated at each time step according to the hydrodynamic force applied to it");
+    prm.declare_entry(
+      "mesh-based precalculations",
+      "true",
+      Patterns::Bool(),
+      "Bool to define if precalculations should be performed between refinements. Precalculations can introduce shape deformation when the type is RBF and some nodes are located outside the background mesh.");
 
     prm.enter_subsection("position");
     particles[index].f_position =
       std::make_shared<Functions::ParsedFunction<dim>>(dim);
     particles[index].f_position->declare_parameters(prm, dim);
-    if (dim == 2)
-      prm.set("Function expression", "0; 0");
-    if (dim == 3)
-      prm.set("Function expression", "0; 0; 0");
     prm.leave_subsection();
 
     prm.enter_subsection("orientation");
     particles[index].f_orientation =
       std::make_shared<Functions::ParsedFunction<dim>>(3);
-    particles[index].f_orientation->declare_parameters(prm, dim);
-    prm.set("Function expression", "0; 0; 0");
+    particles[index].f_orientation->declare_parameters(prm, 3);
     prm.leave_subsection();
 
     prm.enter_subsection("velocity");
     particles[index].f_velocity =
       std::make_shared<Functions::ParsedFunction<dim>>(dim);
     particles[index].f_velocity->declare_parameters(prm, dim);
-    if (dim == 2)
-      prm.set("Function expression", "0; 0");
-    if (dim == 3)
-      prm.set("Function expression", "0; 0; 0");
     prm.leave_subsection();
 
     prm.enter_subsection("omega");
     particles[index].f_omega =
       std::make_shared<Functions::ParsedFunction<dim>>(3);
-    particles[index].f_omega->declare_parameters(prm, dim);
-    prm.set("Function expression", "0; 0; 0");
+    particles[index].f_omega->declare_parameters(prm, 3);
     prm.leave_subsection();
 
     prm.declare_entry(
@@ -2507,14 +2585,6 @@ namespace Parameters
         "The number of particles represented by IB. The maximal number of particles is equal to 10 when defined individually. If particles are loaded from a file, this parameter is overridden, and there is no limit to the number of particles.");
 
       prm.declare_entry(
-        "levels not precalculated",
-        "0",
-        Patterns::Integer(),
-        "Number of levels that are ignored in precalculations. Setting this "
-        "parameter higher allows for a lower memory footprint at the cost of"
-        " higher computing time.");
-
-      prm.declare_entry(
         "assemble Navier-Stokes inside particles",
         "false",
         Patterns::Bool(),
@@ -2532,6 +2602,14 @@ namespace Parameters
           "4",
           Patterns::Double(),
           "The length ratio used to define the points for the IB stencil. See definition of epsilon_n in the paper on sharp IB.");
+        prm.declare_entry(
+          "enable extrapolation",
+          "true",
+          Patterns::Bool(),
+          "Bool to define if extrapolation should be enabled (default). If disabled, all velocity degrees of freedom "
+          "in a cell will be set to the particle velocity if that cell is cut. Setting to false is intended for "
+          "debugging purposes.");
+
         prm.leave_subsection();
       }
 
@@ -2681,10 +2759,6 @@ namespace Parameters
 
         prm.enter_subsection("gravity");
         f_gravity->declare_parameters(prm, dim);
-        if (dim == 2)
-          prm.set("Function expression", "0; 0");
-        if (dim == 3)
-          prm.set("Function expression", "0; 0; 0");
         prm.leave_subsection();
 
         prm.leave_subsection();
@@ -2714,8 +2788,9 @@ namespace Parameters
     {
       prm.enter_subsection("extrapolation function");
       {
-        order        = prm.get_integer("stencil order");
-        length_ratio = prm.get_double("length ratio");
+        order                = prm.get_integer("stencil order");
+        length_ratio         = prm.get_double("length ratio");
+        enable_extrapolation = prm.get_bool("enable extrapolation");
         prm.leave_subsection();
       }
 
@@ -2782,7 +2857,6 @@ namespace Parameters
 
       nb = prm.get_integer("number of particles");
 
-      levels_not_precalculated = prm.get_integer("levels not precalculated");
       assemble_navier_stokes_inside =
         prm.get_bool("assemble Navier-Stokes inside particles");
 
@@ -2794,6 +2868,8 @@ namespace Parameters
           prm.enter_subsection(section);
 
           particles[i].integrate_motion = prm.get_bool("integrate motion");
+          particles[i].mesh_based_precalculations =
+            prm.get_bool("mesh-based precalculations");
 
           prm.enter_subsection("position");
           particles[i].f_position->parse_parameters(prm);

@@ -5,7 +5,7 @@ RheologicalModel::model_cast(const Parameters::Material &material_properties)
 {
   if (material_properties.rheological_model ==
       Parameters::Material::RheologicalModel::newtonian)
-    return std::make_shared<Newtonian>(material_properties.viscosity);
+    return std::make_shared<Newtonian>(material_properties.kinematic_viscosity);
   else if (material_properties.rheological_model ==
            Parameters::Material::RheologicalModel::powerlaw)
     return std::make_shared<PowerLaw>(
@@ -17,9 +17,9 @@ RheologicalModel::model_cast(const Parameters::Material &material_properties)
            Parameters::Material::RheologicalModel::carreau)
     return std::make_shared<Carreau>(
       material_properties.non_newtonian_parameters.carreau_parameters
-        .viscosity_0,
+        .kinematic_viscosity_0,
       material_properties.non_newtonian_parameters.carreau_parameters
-        .viscosity_inf,
+        .kinematic_viscosity_inf,
       material_properties.non_newtonian_parameters.carreau_parameters.lambda,
       material_properties.non_newtonian_parameters.carreau_parameters.a,
       material_properties.non_newtonian_parameters.carreau_parameters.n);
@@ -33,7 +33,7 @@ RheologicalModel::model_cast(const Parameters::Material &material_properties)
 double
 Newtonian::value(const std::map<field, double> & /*field_values*/)
 {
-  return viscosity;
+  return kinematic_viscosity;
 }
 
 double
@@ -41,18 +41,18 @@ PowerLaw::value(const std::map<field, double> &field_values)
 {
   const double shear_rate_magnitude = field_values.at(field::shear_rate);
 
-  return calculate_viscosity(shear_rate_magnitude);
+  return calculate_kinematic_viscosity(shear_rate_magnitude);
 }
 
 void
 PowerLaw::vector_value(
   const std::map<field, std::vector<double>> &field_vectors,
-  std::vector<double> &                       property_vector)
+  std::vector<double>                        &property_vector)
 {
   const auto shear_rate_magnitude = field_vectors.at(field::shear_rate);
 
   for (unsigned int i = 0; i < shear_rate_magnitude.size(); ++i)
-    property_vector[i] = calculate_viscosity(shear_rate_magnitude[i]);
+    property_vector[i] = calculate_kinematic_viscosity(shear_rate_magnitude[i]);
 }
 
 double
@@ -69,7 +69,7 @@ void
 PowerLaw::vector_jacobian(
   const std::map<field, std::vector<double>> &field_vectors,
   const field                                 id,
-  std::vector<double> &                       jacobian_vector)
+  std::vector<double>                        &jacobian_vector)
 {
   const auto shear_rate_magnitude = field_vectors.at(field::shear_rate);
 
@@ -85,7 +85,7 @@ Carreau::value(const std::map<field, double> &field_values)
 {
   const double shear_rate_magnitude = field_values.at(field::shear_rate);
 
-  return calculate_viscosity(shear_rate_magnitude);
+  return calculate_kinematic_viscosity(shear_rate_magnitude);
 }
 
 void
@@ -96,7 +96,8 @@ Carreau::vector_value(const std::map<field, std::vector<double>> &field_vectors,
 
   for (unsigned int i = 0; i < shear_rate_magnitude.size(); ++i)
     {
-      property_vector[i] = calculate_viscosity(shear_rate_magnitude[i]);
+      property_vector[i] =
+        calculate_kinematic_viscosity(shear_rate_magnitude[i]);
     }
 }
 
@@ -113,7 +114,7 @@ void
 Carreau::vector_jacobian(
   const std::map<field, std::vector<double>> &field_vectors,
   const field                                 id,
-  std::vector<double> &                       jacobian_vector)
+  std::vector<double>                        &jacobian_vector)
 {
   if (id == field::shear_rate)
     this->vector_numerical_jacobian(field_vectors,
@@ -130,20 +131,20 @@ PhaseChangeRheology::value(const std::map<field, double> &field_values)
 {
   const double temperature = field_values.at(field::temperature);
 
-  return viscosity(temperature);
+  return kinematic_viscosity(temperature);
 }
 
 void
 PhaseChangeRheology::vector_value(
   const std::map<field, std::vector<double>> &field_vectors,
-  std::vector<double> &                       property_vector)
+  std::vector<double>                        &property_vector)
 {
   const std::vector<double> &temperature_vec =
     field_vectors.at(field::temperature);
 
   for (unsigned int i = 0; i < temperature_vec.size(); ++i)
     {
-      property_vector[i] = viscosity(temperature_vec[i]);
+      property_vector[i] = kinematic_viscosity(temperature_vec[i]);
     }
 }
 
@@ -161,7 +162,7 @@ void
 PhaseChangeRheology::vector_jacobian(
   const std::map<field, std::vector<double>> &field_vectors,
   const field                                 id,
-  std::vector<double> &                       jacobian_vector)
+  std::vector<double>                        &jacobian_vector)
 {
   vector_numerical_jacobian(field_vectors, id, jacobian_vector);
 }

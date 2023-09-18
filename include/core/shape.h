@@ -16,11 +16,15 @@
 #ifndef lethe_shape_h
 #define lethe_shape_h
 
+#include <core/utilities.h>
+
 #include <deal.II/base/auto_derivative_function.h>
 #include <deal.II/base/function.h>
 
 #include <deal.II/grid/manifold.h>
 #include <deal.II/grid/manifold_lib.h>
+
+#include <boost/range/adaptor/map.hpp>
 
 #ifdef DEAL_II_WITH_OPENCASCADE
 #  include <deal.II/opencascade/manifold_lib.h>
@@ -91,13 +95,14 @@ public:
    * @param orientation The orientation to set the shape at
    */
   Shape(double              radius,
-        const Point<dim> &  position,
+        const Point<dim>   &position,
         const Tensor<1, 3> &orientation)
 
     : AutoDerivativeFunction<dim>(1e-8)
     , effective_radius(radius)
     , position(position)
     , orientation(orientation)
+    , part_of_a_composite(false)
   {}
 
   /**
@@ -110,7 +115,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   virtual double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override = 0;
 
   /**
@@ -123,7 +128,7 @@ public:
    */
   virtual double
   value_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int                                   component = 0);
 
@@ -135,7 +140,7 @@ public:
    */
   virtual Tensor<1, dim>
   gradient_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int                                   component = 0);
 
@@ -159,8 +164,8 @@ public:
    */
   virtual void
   closest_surface_point(
-    const Point<dim> &                                    p,
-    Point<dim> &                                          closest_point,
+    const Point<dim>                                     &p,
+    Point<dim>                                           &closest_point,
     const typename DoFHandler<dim>::active_cell_iterator &cell_guess);
   virtual void
   closest_surface_point(const Point<dim> &p, Point<dim> &closest_point) const;
@@ -278,6 +283,18 @@ public:
   std::string
   point_to_string(const Point<dim> &evaluation_point) const;
 
+  /**
+   * @brief Defines if this shape is part of a composite.
+   * If true, cache management is deactivated and delegated to the upper level
+   * shape, to avoid cache duplication.
+   * @param part_of_a_composite is true if this shape is a constituent of a composite shape
+   */
+  void
+  set_part_of_a_composite(const bool part_of_a_composite)
+  {
+    this->part_of_a_composite = part_of_a_composite;
+  }
+
   // Effective radius used for crown refinement
   double effective_radius;
 
@@ -299,6 +316,7 @@ protected:
   std::unordered_map<std::string, double>         value_cache;
   std::unordered_map<std::string, Tensor<1, dim>> gradient_cache;
   std::unordered_map<std::string, Point<dim>>     closest_point_cache;
+  bool                                            part_of_a_composite;
 };
 
 
@@ -313,7 +331,7 @@ public:
    * @param orientation The sphere orientation
    */
   Sphere<dim>(double              radius,
-              const Point<dim> &  position,
+              const Point<dim>   &position,
               const Tensor<1, 3> &orientation)
     : Shape<dim>(radius, position, orientation)
   {
@@ -333,7 +351,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
 
@@ -349,7 +367,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   Tensor<1, dim>
-  gradient(const Point<dim> & evaluation_point,
+  gradient(const Point<dim>  &evaluation_point,
            const unsigned int component = 0) const override;
 
   /**
@@ -401,8 +419,8 @@ public:
   Superquadric<dim>(const Tensor<1, dim> half_lengths,
                     const Tensor<1, dim> exponents,
                     const double         epsilon,
-                    const Point<dim> &   position,
-                    const Tensor<1, 3> & orientation)
+                    const Point<dim>    &position,
+                    const Tensor<1, 3>  &orientation)
     : Shape<dim>(half_lengths.norm(), position, orientation)
     , half_lengths(half_lengths)
     , exponents(exponents)
@@ -417,7 +435,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -430,7 +448,7 @@ public:
    */
   double
   value_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int /*component = 0*/) override;
 
@@ -446,7 +464,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   Tensor<1, dim>
-  gradient(const Point<dim> & evaluation_point,
+  gradient(const Point<dim>  &evaluation_point,
            const unsigned int component = 0) const override;
 
   /**
@@ -457,7 +475,7 @@ public:
    */
   Tensor<1, dim>
   gradient_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int component = 0) override;
 
@@ -475,12 +493,12 @@ public:
    */
   void
   closest_surface_point(
-    const Point<dim> &                                    p,
-    Point<dim> &                                          closest_point,
+    const Point<dim>                                     &p,
+    Point<dim>                                           &closest_point,
     const typename DoFHandler<dim>::active_cell_iterator &cell_guess) override;
   void
   closest_surface_point(const Point<dim> &p,
-                        Point<dim> &      closest_point) const override;
+                        Point<dim>       &closest_point) const override;
 
   /**
    * @brief Return the sign of the parameter. To be removed once PR#794 is merged.
@@ -552,8 +570,8 @@ public:
    * @param orientation The hyper rectangle orientation
    */
   HyperRectangle<dim>(const Tensor<1, dim> &half_lengths,
-                      const Point<dim> &    position,
-                      const Tensor<1, 3> &  orientation)
+                      const Point<dim>     &position,
+                      const Tensor<1, 3>   &orientation)
     : Shape<dim>(half_lengths.norm(), position, orientation)
     , half_lengths(half_lengths)
   {}
@@ -566,7 +584,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -599,8 +617,8 @@ public:
    * @param orientation The ellipsoid orientation
    */
   Ellipsoid<dim>(const Tensor<1, dim> &radii,
-                 const Point<dim> &    position,
-                 const Tensor<1, 3> &  orientation)
+                 const Point<dim>     &position,
+                 const Tensor<1, 3>   &orientation)
     : Shape<dim>(radii.norm(), position, orientation)
     , radii(radii)
   {}
@@ -613,7 +631,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -649,7 +667,7 @@ public:
    */
   Torus<dim>(double              ring_radius,
              double              ring_thickness,
-             const Point<dim> &  position,
+             const Point<dim>   &position,
              const Tensor<1, 3> &orientation)
     : Shape<dim>(ring_thickness, position, orientation)
     , ring_radius(ring_radius)
@@ -664,7 +682,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -700,7 +718,7 @@ public:
    */
   Cone<dim>(double              tan_base_angle,
             double              height,
-            const Point<dim> &  position,
+            const Point<dim>   &position,
             const Tensor<1, 3> &orientation)
     : Shape<dim>(height, position, orientation)
     , tan_base_angle(tan_base_angle)
@@ -717,7 +735,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -759,7 +777,7 @@ public:
   CutHollowSphere<dim>(double              radius,
                        double              cut_depth,
                        double              shell_thickness,
-                       const Point<dim> &  position,
+                       const Point<dim>   &position,
                        const Tensor<1, 3> &orientation)
     : Shape<dim>(radius, position, orientation)
     , radius(radius)
@@ -776,7 +794,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -818,7 +836,7 @@ public:
   DeathStar<dim>(double              radius,
                  double              hole_radius,
                  double              spheres_distance,
-                 const Point<dim> &  position,
+                 const Point<dim>   &position,
                  const Tensor<1, 3> &orientation)
     : Shape<dim>(radius, position, orientation)
     , radius(radius)
@@ -839,7 +857,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -893,17 +911,18 @@ public:
     std::map<unsigned int,
              std::tuple<BooleanOperation, unsigned int, unsigned int>>
                         operations,
-    const Point<dim> &  position,
+    const Point<dim>   &position,
     const Tensor<1, 3> &orientation)
     : Shape<dim>(0., position, orientation)
     , constituents(constituents)
     , operations(operations)
   {
-    // Calculation of the effective radius
-    for (auto const &[component_id, component] : constituents)
+    // Calculation of the effective radius and setting of constituents' status
+    for (auto const &constituent : constituents | boost::adaptors::map_values)
       {
         this->effective_radius =
-          std::max(this->effective_radius, component->effective_radius);
+          std::max(this->effective_radius, constituent->effective_radius);
+        constituent->set_part_of_a_composite(true);
       }
   }
 
@@ -915,8 +934,8 @@ public:
    */
   CompositeShape<dim>(
     std::vector<std::shared_ptr<Shape<dim>>> constituents_vector,
-    const Point<dim> &                       position,
-    const Tensor<1, 3> &                     orientation)
+    const Point<dim>                        &position,
+    const Tensor<1, 3>                      &orientation)
     : Shape<dim>(0., position, orientation)
   {
     size_t number_of_constituents = constituents_vector.size();
@@ -939,7 +958,7 @@ public:
           }
       }
     // Calculation of the effective radius
-    for (auto const &[constituent_id, constituent] : constituents)
+    for (auto const &constituent : constituents | boost::adaptors::map_values)
       {
         this->effective_radius =
           std::max(this->effective_radius, constituent->effective_radius);
@@ -954,7 +973,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -967,7 +986,7 @@ public:
    */
   double
   value_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int /*component = 0*/) override;
 
@@ -977,7 +996,7 @@ public:
    * @param component Not applicable
    */
   Tensor<1, dim>
-  gradient(const Point<dim> & evaluation_point,
+  gradient(const Point<dim>  &evaluation_point,
            const unsigned int component = 0) const override;
 
   /**
@@ -988,7 +1007,7 @@ public:
    */
   Tensor<1, dim>
   gradient_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int component = 0) override;
 
@@ -1002,12 +1021,28 @@ public:
    * @brief Sets the proper dof handler, then computes/updates the map of cells
    * and their likely non-null nodes
    * @param updated_dof_handler the reference to the new dof_handler
-   * @param levels_not_precalculated the number of finer levels that won't be
-   * precalculated
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if RBF typed)
    */
   void
-  update_precalculations(DoFHandler<dim> &  updated_dof_handler,
-                         const unsigned int levels_not_precalculated);
+  update_precalculations(DoFHandler<dim> &updated_dof_handler,
+                         const bool       mesh_based_precalculations);
+
+  /**
+   * @brief Load data from file. To be called at initialization, after repartitioning or when shape has moved.
+   * This function is used only for RBF shapes and its composites at the moment.
+   */
+  void
+  load_data_from_file();
+
+  /**
+   * @brief Remove data that affects only artificial cells (not locally owned and not ghost).
+   * The data is removed if it would never be accessed by the local process.
+   * @param dof_handler the reference to the new dof_handler
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if RBF typed)
+   */
+  void
+  remove_superfluous_data(DoFHandler<dim> &updated_dof_handler,
+                          const bool       mesh_based_precalculations);
 
   /**
    * @brief Computes the assigned boolean operations
@@ -1051,7 +1086,7 @@ public:
    * @param orientation The shape orientation
    */
   OpenCascadeShape<dim>(const std::string   file_name,
-                        const Point<dim> &  position,
+                        const Point<dim>   &position,
                         const Tensor<1, 3> &orientation)
     : Shape<dim>(0.1, position, orientation)
   {
@@ -1150,7 +1185,7 @@ public:
    * @param component Not applicable
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -1163,7 +1198,7 @@ public:
    */
   double
   value_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int component = 0) override;
 
@@ -1179,7 +1214,7 @@ public:
    * @param component Not applicable
    */
   Tensor<1, dim>
-  gradient(const Point<dim> & evaluation_point,
+  gradient(const Point<dim>  &evaluation_point,
            const unsigned int component = 0) const override;
 
   /**
@@ -1190,7 +1225,7 @@ public:
    */
   Tensor<1, dim>
   gradient_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int component = 0) override;
 
@@ -1283,36 +1318,31 @@ public:
    * distance field with a linear combination of radial basis functions. Each
    * radial basis function has a location and properties that are used in the
    * sum.
-   * @param support_radius the scaling of the reach of the nodes
-   * @param basis_function the basis function that is used to parametrize the RBF object
-   * @param weight the weighting associated to each node for the sum operation
-   * @param nodes the center of each basis function
+   * @param shape_arguments_str the name of the file used to load the data
    * @param position the location of the RBF shape
-   * @param orientation the orientation of the shape in relation to each main
+   * @param orientation the orientation of the shape with respect to each main
    * axis
    */
-  RBFShape<dim>(const std::vector<double> &          support_radii,
-                const std::vector<RBFBasisFunction> &basis_functions,
-                const std::vector<double> &          weights,
-                const std::vector<Point<dim>> &      nodes,
-                const Point<dim> &                   position,
-                const Tensor<1, 3> &                 orientation);
+  RBFShape<dim>(const std::string   shape_arguments_str,
+                const Point<dim>   &position,
+                const Tensor<1, 3> &orientation);
 
   /**
-   * @brief An RBFShape represents a physical object by describing its signed
-   * distance field with a linear combination of radial basis functions. Each
-   * radial basis function has a location and properties that are used in the
-   * sum.
-   * @param shape_arguments the concatenated vector of all shape arguments for
-   * an RBF in the order: weights, support_radii, basis_functions, nodes_x,
-   * nodes_y, nodes_z
-   * @param position the location of the RBF shape
-   * @param orientation the orientation of the shape in relation to each main
-   * axis
+   * @brief Load RBF data from file. To be called at initialization, after repartitioning or when shape has moved.
+   * This function is used only for RBF shapes and its composites at the moment.
    */
-  RBFShape<dim>(const std::vector<double> &shape_arguments,
-                const Point<dim> &         position,
-                const Tensor<1, 3> &       orientation);
+  void
+  load_data_from_file();
+
+  /**
+   * @brief Remove data that affects only artificial cells (not locally owned and not ghost).
+   * The data is removed if it would never be accessed by the local process.
+   * @param dof_handler the reference to the new dof_handler
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if RBF typed)
+   */
+  void
+  remove_superfluous_data(DoFHandler<dim> &dof_handler,
+                          const bool       mesh_based_precalculations);
 
   /**
    * @brief Return the evaluation of the signed distance function of this solid
@@ -1326,7 +1356,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -1351,7 +1381,7 @@ public:
    */
   Tensor<1, dim>
   gradient_with_cell_guess(
-    const Point<dim> &                                   evaluation_point,
+    const Point<dim>                                    &evaluation_point,
     const typename DoFHandler<dim>::active_cell_iterator cell,
     const unsigned int component = 0) override;
 
@@ -1361,7 +1391,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   Tensor<1, dim>
-  gradient(const Point<dim> & evaluation_point,
+  gradient(const Point<dim>  &evaluation_point,
            const unsigned int component = 0) const override;
 
   /**
@@ -1428,12 +1458,11 @@ public:
    * @brief Sets the proper dof handler, then computes/updates the map of cells
    * and their likely non-null nodes
    * @param dof_handler the reference to the new dof_handler
-   * @param levels_not_precalculated the number of finer levels that won't be
-   * precalculated
-   */
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if RBF typed)
+   * */
   void
-  update_precalculations(DoFHandler<dim> &  dof_handler,
-                         const unsigned int levels_not_precalculated);
+  update_precalculations(DoFHandler<dim> &updated_dof_handler,
+                         const bool       mesh_based_precalculations);
 
   /**
    * @brief Rotate RBF nodes in the global reference frame (the reference frame of the triangulation).
@@ -1772,55 +1801,50 @@ public:
   }
 
   /**
-   * @brief Checks if the particle moved since the last precalculations
-   */
-  bool
-  has_shape_moved();
-
-  /**
-   * @brief Checks if possible nodes affecting the current cell have been identified, and returns the proper vector to use for iteration
+   * @brief Swap the vector of all nodes with a likely node vector
    * @param cell A likely one where the evaluation point is located
    */
   void
-  prepare_iterable_nodes(
-    const typename DoFHandler<dim>::active_cell_iterator cell);
-
-  /**
-   * @brief Resets the iterable nodes to all nodes
-   * @param cell A likely one where the evaluation point is located
-   */
-  void
-  reset_iterable_nodes(
+  swap_iterable_nodes(
     const typename DoFHandler<dim>::active_cell_iterator cell);
 
 private:
+  std::string                          filename;
   size_t                               number_of_nodes;
   std::shared_ptr<HyperRectangle<dim>> bounding_box;
-  std::vector<size_t>                  iterable_nodes;
 
-  std::map<const typename DoFHandler<dim>::cell_iterator,
-           std::shared_ptr<std::vector<size_t>>>
+  // Elements of this vector are tuples containing: the cell barycenter, the
+  // cell diameter, and the RBF nodes located inside the active cell
+  std::vector<
+    std::tuple<Point<dim>, double, std::shared_ptr<std::vector<size_t>>>>
+    iterable_nodes;
+  // Entries of this map contain vectors of tuples containing the cell
+  // barycenter, diameter and likely nodes that are in that cell. The various
+  // elements of the vector are the tuples which contain information on the RBF
+  // nodes that affect the levelset evaluation in this cell. Note: the division
+  // of RBF nodes is made by separating nodes by which active cells they are in,
+  // and then these RBF nodes groups are referenced by the cells in a subsequent
+  // cell (by using a vector of pointers). This is required to avoid repeating
+  // the nodes IDs multiple times (to keep memory requirements low); they only
+  // appear once in a vector, then this vector is used by passing its shared
+  // pointer.
+  std::map<
+    const typename DoFHandler<dim>::cell_iterator,
+    std::shared_ptr<std::vector<
+      std::tuple<Point<dim>, double, std::shared_ptr<std::vector<size_t>>>>>>
                    likely_nodes_map;
-  size_t           max_number_of_nodes;
+  size_t           max_number_of_inside_nodes;
   DoFHandler<dim> *dof_handler;
-  Point<dim>       position_precalculated;
-  Tensor<1, 3>     orientation_precalculated;
 
-  // levels_not_precalculated is used in order to not precompute and store the
-  // likely RBF nodes for the finer levels of cells in the grid. Setting this
-  // parameter is a tradeoff between having faster distance evaluations and
-  // reducing the memory footprint: increasing levels_not_precalculated
-  // increases evaluation time.
-  int    levels_not_precalculated;
   double maximal_support_radius;
 
 public:
-  std::vector<size_t>           nodes_id;
-  std::vector<double>           weights;
-  std::vector<Point<dim>>       nodes_positions;
-  std::vector<Point<dim>>       rotated_nodes_positions;
-  std::vector<double>           support_radii;
-  std::vector<RBFBasisFunction> basis_functions;
+  std::vector<double>     weights;
+  std::vector<Point<dim>> nodes_positions;
+  std::vector<Point<dim>> rotated_nodes_positions;
+  std::vector<double>     support_radii;
+  std::vector<double>     basis_functions;
+  std::vector<bool>       useful_rbf_nodes;
 };
 
 
@@ -1837,7 +1861,7 @@ public:
    */
   Cylinder<dim>(double              radius,
                 double              half_length,
-                const Point<dim> &  position,
+                const Point<dim>   &position,
                 const Tensor<1, 3> &orientation)
     : Shape<dim>(radius, position, orientation)
     , radius(radius)
@@ -1852,7 +1876,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -1891,7 +1915,7 @@ public:
   CylindricalTube<dim>(double              radius_inside,
                        double              radius_outside,
                        double              half_length,
-                       const Point<dim> &  position,
+                       const Point<dim>   &position,
                        const Tensor<1, 3> &orientation)
     : Shape<dim>((radius_outside + radius_inside) / 2., position, orientation)
     , radius((radius_outside + radius_inside) / 2.)
@@ -1907,7 +1931,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**
@@ -1950,7 +1974,7 @@ public:
                         double              radius_disk,
                         double              height,
                         double              pitch,
-                        const Point<dim> &  position,
+                        const Point<dim>   &position,
                         const Tensor<1, 3> &orientation)
     : Shape<dim>(radius_disk, position, orientation)
     , radius(radius_helix)
@@ -1967,7 +1991,7 @@ public:
    * @param component This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II.
    */
   double
-  value(const Point<dim> & evaluation_point,
+  value(const Point<dim>  &evaluation_point,
         const unsigned int component = 0) const override;
 
   /**

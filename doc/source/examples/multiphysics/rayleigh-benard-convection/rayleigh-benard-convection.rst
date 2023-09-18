@@ -2,15 +2,14 @@
 Rayleigh-Bénard Convection
 ==========================
 
-This example simulates `two-dimensional Rayleigh–Benard convection`_ at Rayleigh numbers of :math:`10^4` and :math:`2.5 \times 10^4` . 
+This example simulates two-dimensional Rayleigh–Benard convection `[1] <https://doi.org/10.1017/S0022112009993685>`_ at Rayleigh numbers of :math:`10^4` and :math:`2.5 \times 10^4` .
 
-.. _two-dimensional Rayleigh–Benard convection: https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/stochastic-bifurcation-analysis-of-rayleighbenard-convection/019773F174C453F84E7EB179CB1C89F1
 
 ----------------------------------
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes_2d`` 
+- Solver: ``gls_navier_stokes`` 
 - Buoyant force (natural convection)
 - Unsteady problem handled by an adaptive BDF1 time-stepping scheme 
 
@@ -27,7 +26,7 @@ Files Used in This Example
 Description of the Case
 -----------------------------
 
-In this example, we evaluate the performance of the ``gls_navier_stokes_2d`` solver in the simulation of the stability of natural convection within a two-dimensional rectangular domain. The following schematic describes the geometry and dimensions of the simulation in the :math:`(x,y)` plane:
+In this example, we evaluate the performance of the ``gls_navier_stokes`` solver in the simulation of the stability of natural convection within a two-dimensional rectangular domain. The following schematic describes the geometry and dimensions of the simulation in the :math:`(x,y)` plane:
 
 .. image:: images/geometry.png
     :alt: Schematic
@@ -146,13 +145,13 @@ The ``physical properties`` subsection defines the physical properties of the fl
 Running the Simulation
 ---------------------------
 
-Call the gls_navier_stokes_2d by invoking:  
+Call the gls_navier_stokes by invoking:  
 
-``mpirun -np 8 gls_navier_stokes_2d rayleigh-benard-convection-Ra10k.prm``
+``mpirun -np 8 gls_navier_stokes rayleigh-benard-convection-Ra10k.prm``
 
 and
 
-``mpirun -np 8 gls_navier_stokes_2d rayleigh-benard-convection-Ra25k.prm``
+``mpirun -np 8 gls_navier_stokes rayleigh-benard-convection-Ra25k.prm``
 
 to run the simulations using eight CPU cores. Feel free to use more. Note that the first and second commands belong to the simulations at :math:`Ra=10^4` and :math:`Ra=2.5 \times 10^4`, repectively.
 
@@ -181,8 +180,6 @@ Note that at Ra=10000, two vortices exist in the fluid, while an extra (relative
 References
 -----------
 
-[1] Venturi, D., Wan, X. and Karniadakis, G.E., 2010. Stochastic bifurcation analysis of Rayleigh–Bénard convection. Journal of fluid mechanics, 650, pp.391-413.
+`[1] <https://doi.org/10.1017/S0022112009993685>`_ D. Venturi, X. Wan, and G. E. Karniadakis, “Stochastic bifurcation analysis of Rayleigh–Bénard convection,” *J. Fluid Mech.*, vol. 650, pp. 391–413, May 2010, doi: 10.1017/S0022112009993685.
 
-[2] `https://www.mis.mpg.de/applan/research/rayleigh.html`_
-
-.. _https://www.mis.mpg.de/applan/research/rayleigh.html: https://www.mis.mpg.de/applan/research/rayleigh.html
+`[2] <https://www.mis.mpg.de/applan/research/rayleigh.html>`_ “Optimal transport.” https://www.mis.mpg.de/applan/research/optimal-transport.html (accessed Jul. 06, 2022).

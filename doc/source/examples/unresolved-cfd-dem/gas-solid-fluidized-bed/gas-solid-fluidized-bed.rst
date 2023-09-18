@@ -8,7 +8,7 @@ It is strongly recommended to visit `DEM parameters <../../../parameters/dem/dem
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem_3d`` and ``cfd_dem_coupling_3d``
+- Solvers: ``dem`` and ``cfd_dem_coupling``
 - Three-dimensional problem
 - Displays the selection of models and physical properties.
 - Simulates a solid-gas fluidized bed.
@@ -17,15 +17,17 @@ Features
 ---------------------------
 Files Used in This Example
 ---------------------------
-``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/gas-solid-fluidized-bed.prm``
-``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/dem-packing-in-fluidized-bed.prm``
+
+- Parameter file for particle generation and packing: ``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/dem-packing-in-fluidized-bed.prm``
+- Parameter file for CFD-DEM simulation of the gas-solid fluidized bed: ``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/gas-solid-fluidized-bed.prm``
+
 
 
 -----------------------
 Description of the Case
 -----------------------
 
-This example simulates the fluidization of spherical particles in air. First, we use Lethe-DEM to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``cfd_dem_coupling_3d`` solver within Lethe to simulate the fluidization of the particles by initially reading the checkpoint files from the DEM simulation.
+This example simulates the fluidization of spherical particles in air. First, we use Lethe-DEM to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``cfd_dem_coupling`` solver within Lethe to simulate the fluidization of the particles by initially reading the checkpoint files from the DEM simulation.
 
 
 -------------------
@@ -71,7 +73,7 @@ Another subsection, which is generally the one we put at the top of the paramete
 Restart
 ~~~~~~~~~~~~~~~~~~~
 
-The ``cfd_dem_coupling_3d`` solver requires reading several DEM files to start the simulation. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix "dem" set in the "set filename" option. The DEM parameter file is initialized exactly as the cylindrical packed bed example. The difference is in the number of particles, their physical proprties, and the insertion box defined based on the new geometry. For more explanation about the individual subsections, refer to the `DEM parameters <../../../parameters/dem/dem.html>`_ and the `CFD-DEM parameters <../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html>`_ . 
+The ``cfd_dem_coupling`` solver requires reading several DEM files to start the simulation. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix "dem" set in the "set filename" option. The DEM parameter file is initialized exactly as the cylindrical packed bed example. The difference is in the number of particles, their physical properties, and the insertion box defined based on the new geometry. For more explanation about the individual subsections, refer to the `DEM parameters <../../../parameters/dem/dem.html>`_ and the `CFD-DEM parameters <../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html>`_ .
 
 .. code-block:: text
 
@@ -90,11 +92,15 @@ The section on model parameters is explained in the DEM examples. We show the ch
 .. code-block:: text
 
     subsection model parameters
-      set contact detection method               = dynamic
-      set load balance method                    = dynamic
-      set load balance threshold                 = 0.5
-      set dynamic load balance check frequency   = 10000
-      set neighborhood threshold                 = 1.3
+      subsection contact detection
+        set contact detection method = dynamic
+        set neighborhood threshold   = 1.3
+      end
+      subsection load balancing
+        set load balance method     = dynamic
+        set threshold               = 0.5
+        set dynamic check frequency = 10000
+      end
       set particle particle contact force method = hertz_mindlin_limit_overlap
       set particle wall contact force method     = nonlinear
       set integration method                     = velocity_verlet
@@ -185,23 +191,23 @@ We need to pack the particles in the middle of the square bed. Therefore, we cre
 ---------------------------
 Running the DEM Simulation
 ---------------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem_3d`` executable is within your path, the simulation can be launched on a single processor by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem`` executable is within your path, the simulation can be launched on a single processor by typing:
 
 .. code-block:: text
 
-  dem_3d dem-packing-in-fluidized-bed.prm
+  dem dem-packing-in-fluidized-bed.prm
 
 or in parallel (where 8 represents the number of processors)
 
 .. code-block:: text
 
-  mpirun -np 8 dem_3d dem-packing-in-fluidized-bed.prm
+  mpirun -np 8 dem dem-packing-in-fluidized-bed.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 
 
 .. note:: 
-    Running the packing should take approximatively 20 minutes on 8 cores.
+    Running the packing should take approximately 20 minutes on 8 cores.
 
 After the particles have been packed inside the square bed, it is now possible to simulate the fluidization of particles.
 
@@ -252,7 +258,6 @@ For the initial conditions, we choose zero initial conditions for the velocity.
 .. code-block:: text
 
     subsection initial conditions
-      set type = nodal
       subsection uvwp
           set Function expression = 0; 0; 0; 0
       end
@@ -352,11 +357,13 @@ We use the inexact Newton non-linear solver to minimize the number of time the m
 .. code-block:: text
 
   subsection non-linear solver
-    set solver           = inexact_newton
-    set tolerance        = 1e-7
-    set max iterations   = 20
-    set matrix tolerance = 0.2
-    set verbosity        = verbose
+    subsection fluid dynamics
+      set solver           = inexact_newton
+      set tolerance        = 1e-7
+      set max iterations   = 20
+      set matrix tolerance = 0.2
+      set verbosity        = verbose
+    end
   end
     
 Linear Solver
@@ -365,15 +372,18 @@ Linear Solver
 .. code-block:: text
 
     subsection linear solver
-      set method                                = gmres
-      set max iters                             = 5000
-      set relative residual                     = 1e-3
-      set minimum residual                      = 1e-11
-      set ilu preconditioner fill               = 1
-      set ilu preconditioner absolute tolerance = 1e-14
-      set ilu preconditioner relative tolerance = 1.00
-      set verbosity                             = verbose
-      set max krylov vectors                    = 200
+      subsection fluid dynamics
+        set method                                = gmres
+        set max iters                             = 5000
+        set relative residual                     = 1e-3
+        set minimum residual                      = 1e-11
+        set preconditioner                        = ilu
+        set ilu preconditioner fill               = 1
+        set ilu preconditioner absolute tolerance = 1e-14
+        set ilu preconditioner relative tolerance = 1.00
+        set verbosity                             = verbose
+        set max krylov vectors                    = 200
+      end
     end
 
 
@@ -381,11 +391,11 @@ Linear Solver
 Running the CFD-DEM Simulation
 ------------------------------
 
-The simulation is run using the cfd_dem_coupling_3d application as per the following command:
+The simulation is run using the cfd_dem_coupling application as per the following command:
 
 .. code-block:: text
 
-    path_to_cfd_dem_application/cfd_dem_coupling_3d fluidized-bed.prm 
+    path_to_cfd_dem_application/cfd_dem_coupling fluidized-bed.prm 
 
 --------
 Results

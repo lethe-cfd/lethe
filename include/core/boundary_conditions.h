@@ -55,12 +55,11 @@ namespace BoundaryConditions
     // for tracer
     tracer_dirichlet,
     // for vof
-    pw,
     vof_dirichlet,
     // for cahn hilliard
-    ch_noflux,
-    ch_dirichlet_phase_order,
-    ch_angle_of_contact,
+    cahn_hilliard_noflux,
+    cahn_hilliard_dirichlet_phase_order,
+    cahn_hilliard_angle_of_contact,
   };
 
   /**
@@ -156,7 +155,7 @@ namespace BoundaryConditions
   {
   public:
     // Functions for (u,v,w) for all boundaries
-    NSBoundaryFunctions<dim> *        bcFunctions;
+    NSBoundaryFunctions<dim>         *bcFunctions;
     NSPressureBoundaryFunctions<dim> *bcPressureFunction;
 
     void
@@ -227,23 +226,19 @@ namespace BoundaryConditions
                       "Direction for periodic boundary condition");
 
     prm.enter_subsection("u");
-    bcFunctions[i_bc].u.declare_parameters(prm, 1);
-    prm.set("Function expression", "0");
+    bcFunctions[i_bc].u.declare_parameters(prm);
     prm.leave_subsection();
 
     prm.enter_subsection("v");
-    bcFunctions[i_bc].v.declare_parameters(prm, 1);
-    prm.set("Function expression", "0");
+    bcFunctions[i_bc].v.declare_parameters(prm);
     prm.leave_subsection();
 
     prm.enter_subsection("w");
-    bcFunctions[i_bc].w.declare_parameters(prm, 1);
-    prm.set("Function expression", "0");
+    bcFunctions[i_bc].w.declare_parameters(prm);
     prm.leave_subsection();
 
     prm.enter_subsection("p");
-    bcPressureFunction[i_bc].p.declare_parameters(prm, 1);
-    prm.set("Function expression", "0");
+    bcPressureFunction[i_bc].p.declare_parameters(prm);
     prm.leave_subsection();
 
     // Center of rotation of the boundary condition for torque calculation
@@ -672,7 +667,6 @@ namespace BoundaryConditions
     prm.enter_subsection("dirichlet");
     tracer[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
     tracer[i_bc]->declare_parameters(prm);
-    prm.set("Function expression", "0");
     prm.leave_subsection();
   }
 
@@ -823,8 +817,7 @@ namespace BoundaryConditions
       "Inner angle of contact between the fluid 1 and the boundary (in degrees)");
 
     prm.enter_subsection("phi");
-    bcFunctions[i_bc].phi.declare_parameters(prm, 1);
-    prm.set("Function expression", "0");
+    bcFunctions[i_bc].phi.declare_parameters(prm);
     prm.leave_subsection();
 
     return;
@@ -880,24 +873,24 @@ namespace BoundaryConditions
 
   template <int dim>
   void
-  CahnHilliardBoundaryConditions<dim>::parse_boundary(ParameterHandler & prm,
+  CahnHilliardBoundaryConditions<dim>::parse_boundary(ParameterHandler  &prm,
                                                       const unsigned int i_bc)
   {
     const std::string op = prm.get("type");
     if (op == "noflux")
       {
-        this->type[i_bc] = BoundaryType::ch_noflux;
+        this->type[i_bc] = BoundaryType::cahn_hilliard_noflux;
       }
     if (op == "dirichlet")
       {
-        this->type[i_bc] = BoundaryType::ch_dirichlet_phase_order;
+        this->type[i_bc] = BoundaryType::cahn_hilliard_dirichlet_phase_order;
         prm.enter_subsection("phi");
         bcFunctions[i_bc].phi.parse_parameters(prm);
         prm.leave_subsection();
       }
     if (op == "angle_of_contact")
       {
-        this->type[i_bc]             = BoundaryType::ch_angle_of_contact;
+        this->type[i_bc] = BoundaryType::cahn_hilliard_angle_of_contact;
         this->angle_of_contact[i_bc] = prm.get_double("angle value");
       }
 
@@ -941,9 +934,6 @@ namespace BoundaryConditions
    * It introduces the boundary functions and declares the boundary conditions
    * coherently.
    *
-   *  - if bc type is "peeling/wetting", peeling/wetting of the free surface
-   * will be applied. See vof.cc for further implementation details.
-   *
    * - if bc type is "dirichlet", the function is applied on the selected
    * boundary
    *
@@ -980,9 +970,9 @@ namespace BoundaryConditions
   {
     prm.declare_entry("type",
                       "none",
-                      Patterns::Selection("none|dirichlet|peeling/wetting"),
+                      Patterns::Selection("none|dirichlet"),
                       "Type of boundary condition for VOF"
-                      "Choices are <none|dirichlet|peeling/wetting>.");
+                      "Choices are <none|dirichlet>.");
 
     prm.declare_entry("id",
                       Utilities::int_to_string(i_bc, 2),
@@ -992,7 +982,6 @@ namespace BoundaryConditions
     prm.enter_subsection("dirichlet");
     phase_fraction[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
     phase_fraction[i_bc]->declare_parameters(prm);
-    prm.set("Function expression", "0");
     prm.leave_subsection();
   }
 
@@ -1055,11 +1044,6 @@ namespace BoundaryConditions
         phase_fraction[i_bc]->parse_parameters(prm);
         prm.leave_subsection();
       }
-    else if (op == "peeling/wetting")
-      {
-        this->type[i_bc] = BoundaryType::pw;
-      }
-
     this->id[i_bc] = prm.get_integer("id");
   }
 
@@ -1132,7 +1116,7 @@ public:
  */
 template <int dim>
 double
-NavierStokesFunctionDefined<dim>::value(const Point<dim> & p,
+NavierStokesFunctionDefined<dim>::value(const Point<dim>  &p,
                                         const unsigned int component) const
 {
   Assert(component < this->n_components,
@@ -1181,7 +1165,7 @@ public:
 template <int dim>
 double
 NavierStokesPressureFunctionDefined<dim>::value(
-  const Point<dim> & point,
+  const Point<dim>  &point,
   const unsigned int component) const
 {
   if (component == dim)
@@ -1221,7 +1205,7 @@ public:
  */
 template <int dim>
 double
-CahnHilliardFunctionDefined<dim>::value(const Point<dim> & p,
+CahnHilliardFunctionDefined<dim>::value(const Point<dim>  &p,
                                         const unsigned int component) const
 {
   Assert(component < this->n_components,

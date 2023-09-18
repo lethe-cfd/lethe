@@ -1,7 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# --------------------------------------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -75,14 +78,12 @@ end
 #---------------------------------------------------
 
 subsection initial conditions
-  #    set type = viscous
-  #    set viscosity = 0.005
   subsection uvwp
     set Function expression = 0; 0; 0; 0
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -119,7 +120,7 @@ subsection boundary conditions
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Source term
 #---------------------------------------------------
 
@@ -130,7 +131,7 @@ subsection source term
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Mesh Adaptation Control
 #---------------------------------------------------
 
@@ -146,7 +147,7 @@ subsection timer
   set type = iteration
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Model parameters
 #---------------------------------------------------
 
@@ -209,29 +210,34 @@ subsection floating walls
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set solver           = inexact_newton
-  set tolerance        = 1e-7
-  set max iterations   = 20
-  set matrix tolerance = 0.2
-  set verbosity        = verbose
+  subsection fluid dynamics
+    set solver           = inexact_newton
+    set tolerance        = 1e-7
+    set max iterations   = 20
+    set matrix tolerance = 0.2
+    set verbosity        = verbose
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set method                                = gmres
-  set max iters                             = 5000
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-11
-  set ilu preconditioner fill               = 1
-  set ilu preconditioner absolute tolerance = 1e-14
-  set ilu preconditioner relative tolerance = 1.00
-  set verbosity                             = verbose
+  subsection fluid dynamics
+    set method                                = gmres
+    set max iters                             = 5000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-11
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-14
+    set ilu preconditioner relative tolerance = 1.00
+    set verbosity                             = verbose
+  end
 end

@@ -10,67 +10,68 @@
 DeclException1(
   BuoyancyWithoutFluidDynamicsError,
   bool,
-  << "Buoyancy force is activated (" << arg1
+  << std::boolalpha << "Buoyancy force is activated (" << arg1
   << "), while fluid dynamics is not activated (false)." << std::endl
   << "Buoyancy force cannot be activated without activating fluid dynamics.");
 
 DeclException1(
   BuoyancyWithoutHeatTransferError,
   bool,
-  << "Buoyancy force is activated (" << arg1
+  << std::boolalpha << "Buoyancy force is activated (" << arg1
   << "), while heat transfer is not activated (false)." << std::endl
   << "Buoyancy force cannot be activated without activating heat transfer.");
 
 DeclException1(
   MarangoniWithoutFluidDynamicsError,
   bool,
-  << "Marangoni effect is activated (" << arg1
+  << std::boolalpha << "Marangoni effect is activated (" << arg1
   << "), while fluid dynamics is not activated (false)." << std::endl
   << "Marangoni effect cannot be activated without activating fluid dynamics.");
 
 DeclException1(
   MarangoniWithoutHeatTransferError,
   bool,
-  << "Marangoni effect is activated (" << arg1
+  << std::boolalpha << "Marangoni effect is activated (" << arg1
   << "), while heat transfer is not activated (false)." << std::endl
   << "Marangoni effect cannot be activated without activating heat transfer.");
 
 DeclException1(
   MarangoniWithoutSurfaceTensionForceError,
   bool,
-  << "Marangoni effect is activated (" << arg1
+  << std::boolalpha << "Marangoni effect is activated (" << arg1
   << "), while surface tension force is not activated (false)." << std::endl
   << "Marangoni effect cannot be activated without activating surface tension force.");
 
 DeclException1(
   SurfaceTensionForceWithoutVOFError,
   bool,
-  << "Surface tension force is activated (" << arg1
+  << std::boolalpha << "Surface tension force is activated (" << arg1
   << "), while VOF is not activated (false)." << std::endl
   << "Surface tension force cannot be activated without activating VOF.");
 
 DeclException1(
   MarangoniWithoutVOFError,
   bool,
-  << "Marangoni effect is activated (" << arg1
+  << std::boolalpha << "Marangoni effect is activated (" << arg1
   << "), while VOF is not activated (false)." << std::endl
   << "Marangoni effect cannot be activated without activating VOF.");
 
 DeclException1(
   InterfaceSharpeningWithoutVOFError,
   bool,
-  << "Interface sharpening is activated (" << arg1
+  << std::boolalpha << "Interface sharpening is activated (" << arg1
   << "), while VOF is not activated (false)." << std::endl
   << "Interface sharpening cannot be activated without activating VOF.");
 
 template <int dim>
 MultiphysicsInterface<dim>::MultiphysicsInterface(
-  const SimulationParameters<dim> &                            nsparam,
+  const SimulationParameters<dim>                             &nsparam,
   std::shared_ptr<parallel::DistributedTriangulationBase<dim>> p_triangulation,
   std::shared_ptr<SimulationControl> p_simulation_control,
-  ConditionalOStream &               p_pcout)
+  ConditionalOStream                &p_pcout)
   : multiphysics_parameters(nsparam.multiphysics)
-  , verbosity(nsparam.non_linear_solver.verbosity)
+  // ,
+  // verbosity(nsparam.non_linear_solver.at(PhysicsID::fluid_dynamics).verbosity)
   , pcout(p_pcout)
 {
   inspect_multiphysics_models_dependencies(nsparam);
@@ -80,22 +81,49 @@ MultiphysicsInterface<dim>::MultiphysicsInterface(
   // the other physics. Consequently, disabling it only
   // prevents solving it, but not allocating it.
   {
+    // verbosity[PhysicsID::fluid_dynamics] =
+    // (nsparam.non_linear_solver.at(PhysicsID::fluid_dynamics).verbosity  !=
+    // Parameters::Verbosity::quiet ||
+    // nsparam.linear_solver.at(PhysicsID::fluid_dynamics).verbosity  !=
+    // Parameters::Verbosity::quiet) ? Parameters::Verbosity::verbose :
+    // Parameters::Verbosity::quiet;
     active_physics.push_back(PhysicsID::fluid_dynamics);
   }
   if (multiphysics_parameters.heat_transfer)
     {
+      verbosity[PhysicsID::heat_transfer] =
+        (nsparam.non_linear_solver.at(PhysicsID::heat_transfer).verbosity !=
+           Parameters::Verbosity::quiet ||
+         nsparam.linear_solver.at(PhysicsID::heat_transfer).verbosity !=
+           Parameters::Verbosity::quiet) ?
+          Parameters::Verbosity::verbose :
+          Parameters::Verbosity::quiet;
       active_physics.push_back(PhysicsID::heat_transfer);
       physics[PhysicsID::heat_transfer] = std::make_shared<HeatTransfer<dim>>(
         this, nsparam, p_triangulation, p_simulation_control);
     }
   if (multiphysics_parameters.tracer)
     {
+      verbosity[PhysicsID::tracer] =
+        (nsparam.non_linear_solver.at(PhysicsID::tracer).verbosity !=
+           Parameters::Verbosity::quiet ||
+         nsparam.linear_solver.at(PhysicsID::tracer).verbosity !=
+           Parameters::Verbosity::quiet) ?
+          Parameters::Verbosity::verbose :
+          Parameters::Verbosity::quiet;
       active_physics.push_back(PhysicsID::tracer);
       physics[PhysicsID::tracer] = std::make_shared<Tracer<dim>>(
         this, nsparam, p_triangulation, p_simulation_control);
     }
   if (multiphysics_parameters.VOF)
     {
+      verbosity[PhysicsID::VOF] =
+        (nsparam.non_linear_solver.at(PhysicsID::VOF).verbosity !=
+           Parameters::Verbosity::quiet ||
+         nsparam.linear_solver.at(PhysicsID::VOF).verbosity !=
+           Parameters::Verbosity::quiet) ?
+          Parameters::Verbosity::verbose :
+          Parameters::Verbosity::quiet;
       active_physics.push_back(PhysicsID::VOF);
       physics[PhysicsID::VOF] = std::make_shared<VolumeOfFluid<dim>>(
         this, nsparam, p_triangulation, p_simulation_control);
@@ -103,6 +131,13 @@ MultiphysicsInterface<dim>::MultiphysicsInterface(
 
   if (multiphysics_parameters.cahn_hilliard)
     {
+      verbosity[PhysicsID::cahn_hilliard] =
+        (nsparam.non_linear_solver.at(PhysicsID::cahn_hilliard).verbosity !=
+           Parameters::Verbosity::quiet ||
+         nsparam.linear_solver.at(PhysicsID::cahn_hilliard).verbosity !=
+           Parameters::Verbosity::quiet) ?
+          Parameters::Verbosity::verbose :
+          Parameters::Verbosity::quiet;
       active_physics.push_back(PhysicsID::cahn_hilliard);
       physics[PhysicsID::cahn_hilliard] = std::make_shared<CahnHilliard<dim>>(
         this, nsparam, p_triangulation, p_simulation_control);
@@ -205,37 +240,43 @@ MultiphysicsInterface<dim>::inspect_multiphysics_models_dependencies(
           VOF_enabled);
 
   // Dependence of buoyant force on fluid dynamics
-  Assert(!(buoyancy_force_enabled == true && fluid_dynamics_enabled == false),
-         BuoyancyWithoutFluidDynamicsError(buoyancy_force_enabled));
+  AssertThrow(!(buoyancy_force_enabled == true &&
+                fluid_dynamics_enabled == false),
+              BuoyancyWithoutFluidDynamicsError(buoyancy_force_enabled));
 
   // Dependence of buoyant force on heat transfer
-  Assert(!(buoyancy_force_enabled == true && heat_transfer_enabled == false),
-         BuoyancyWithoutHeatTransferError(buoyancy_force_enabled));
+  AssertThrow(!(buoyancy_force_enabled == true &&
+                heat_transfer_enabled == false),
+              BuoyancyWithoutHeatTransferError(buoyancy_force_enabled));
 
   // Dependence of Marangoni effect on fluid dynamics
-  Assert(!(marangoni_effect_enabled == true && fluid_dynamics_enabled == false),
-         MarangoniWithoutFluidDynamicsError(marangoni_effect_enabled));
+  AssertThrow(!(marangoni_effect_enabled == true &&
+                fluid_dynamics_enabled == false),
+              MarangoniWithoutFluidDynamicsError(marangoni_effect_enabled));
 
   // Dependence of Marangoni effect on heat transfer
-  Assert(!(marangoni_effect_enabled == true && heat_transfer_enabled == false),
-         MarangoniWithoutHeatTransferError(marangoni_effect_enabled));
+  AssertThrow(!(marangoni_effect_enabled == true &&
+                heat_transfer_enabled == false),
+              MarangoniWithoutHeatTransferError(marangoni_effect_enabled));
 
   // Dependence of Marangoni effect on surface tension force
-  Assert(!(marangoni_effect_enabled == true &&
-           surface_tension_force_enabled == false),
-         MarangoniWithoutSurfaceTensionForceError(marangoni_effect_enabled));
+  AssertThrow(!(marangoni_effect_enabled == true &&
+                surface_tension_force_enabled == false),
+              MarangoniWithoutSurfaceTensionForceError(
+                marangoni_effect_enabled));
 
   // Dependence of surface tension force on VOF
-  Assert(!(surface_tension_force_enabled == true && VOF_enabled == false),
-         SurfaceTensionForceWithoutVOFError(surface_tension_force_enabled));
+  AssertThrow(!(surface_tension_force_enabled == true && VOF_enabled == false),
+              SurfaceTensionForceWithoutVOFError(
+                surface_tension_force_enabled));
 
   // Dependence of Marangoni effect on VOF
-  Assert(!(marangoni_effect_enabled == true && VOF_enabled == false),
-         MarangoniWithoutVOFError(marangoni_effect_enabled));
+  AssertThrow(!(marangoni_effect_enabled == true && VOF_enabled == false),
+              MarangoniWithoutVOFError(marangoni_effect_enabled));
 
   // Dependence of interface sharpening on VOF
-  Assert(!(interface_sharpening_enabled == true && VOF_enabled == false),
-         InterfaceSharpeningWithoutVOFError(interface_sharpening_enabled));
+  AssertThrow(!(interface_sharpening_enabled == true && VOF_enabled == false),
+              InterfaceSharpeningWithoutVOFError(interface_sharpening_enabled));
 }
 
 template class MultiphysicsInterface<2>;

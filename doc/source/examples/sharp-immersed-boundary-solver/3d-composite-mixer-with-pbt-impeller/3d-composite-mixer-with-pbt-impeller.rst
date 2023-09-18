@@ -8,7 +8,7 @@ The mixing of stirred-tanks is a common chemical engineering problem that can be
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``gls_sharp_navier_stokes_3d``
+- Solvers: ``gls_sharp_navier_stokes``
 - Transient problem
 - Rotating complex solid  modelled with the sharp immersed boundary method
 
@@ -42,23 +42,23 @@ Shapes and boolean operations each have an ID, and boolean operations can refere
 The ``impeller.composite`` file contains these instructions.
 
 .. warning:: 
-	The .composite file cannot contain comments at this point in time.
+    The .composite file cannot contain comments at this point in time.
 
 .. code-block:: text
 
-  shapes
-  0;       cylinder; 0.025:0.375; 0:0:0.125 ; 0:0:0
-  1;       cylinder; 0.05:0.0416666;0:0:-0.208333 ; 0:0:0
-  2; hyper rectangle; 0.083333333:0.00625:0.0416666;0.08333333:0:-0.208333 ; 0.7853981:0:0
-  3; hyper rectangle; 0.00625:0.083333333:0.0416666;0:0.08333333:-0.208333; 0:0.7853981:0
-  4; hyper rectangle; 0.083333333:0.00625:0.0416666;-0.08333333:0:-0.208333 ; -0.7853981:0:0
-  5; hyper rectangle; 0.00625:0.083333333:0.0416666;0:-0.08333333:-0.208333 ; 0:-0.7853981:0
-  operations
-  6; union     ; 0:1
-  7; union     ; 6:2
-  8; union     ; 7:3
-  9; union     ; 8:4
-  10; union    ; 9:5
+    shapes
+    0;       cylinder; 0.025:0.375; 0:0:0.125 ; 0:0:0
+    1;       cylinder; 0.05:0.0416666;0:0:-0.208333 ; 0:0:0
+    2; hyper rectangle; 0.083333333:0.00625:0.0416666;0.08333333:0:-0.208333 ; 0.7853981:0:0
+    3; hyper rectangle; 0.00625:0.083333333:0.0416666;0:0.08333333:-0.208333; 0:0.7853981:0
+    4; hyper rectangle; 0.083333333:0.00625:0.0416666;-0.08333333:0:-0.208333 ; -0.7853981:0:0
+    5; hyper rectangle; 0.00625:0.083333333:0.0416666;0:-0.08333333:-0.208333 ; 0:-0.7853981:0
+    operations
+    6; union     ; 0:1
+    7; union     ; 6:2
+    8; union     ; 7:3
+    9; union     ; 8:4
+    10; union    ; 9:5
   
 Let go over each line:
 
@@ -129,7 +129,7 @@ Boundary Conditions
 Because the interpolation of the velocity field at the surface of a moving particle is not guaranteed to be divergence-free, it is necessary to have at least one boundary condition that is weakly imposed to ensure the system of equations is well-posed. For this purpose, a ``function weak`` type of boundary is used.
 Two aspects need special consideration:
 
-1. ``function weak`` is a variation of ``function``. It is used to weakly imposed a Dirichlet boundary condition, and it is necessary when using ``gls_sharp_navier_stokes_3d``.
+1. ``function weak`` is a variation of ``function``. It is used to weakly imposed a Dirichlet boundary condition, and it is necessary when using ``gls_sharp_navier_stokes``.
 2. ``beta`` has to be defined. It is a Nitsche penalization parameter that enforces more strongly the boundary condition when it increases (see :doc:`../../../parameters/cfd/nitsche`).
 
 .. code-block:: text

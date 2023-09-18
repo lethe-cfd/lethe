@@ -11,12 +11,12 @@ add_library(lethe-core
   lethe_grid_tools.cc
   manifolds.cc
   mesh_controller.cc
+  mobility_ch_model.cc
   parameters.cc
   parameters_lagrangian.cc
   parameters_multiphysics.cc
   pvd_handler.cc
   rheological_model.cc
-  sdirk.cc
   serial_solid.cc
   shape.cc
   shape_parsing.cc
@@ -47,6 +47,7 @@ add_library(lethe-core
   ../../include/core/lethe_grid_tools.h
   ../../include/core/manifolds.h
   ../../include/core/mesh_controller.h
+  ../../include/core/mobility_ch_model.h
   ../../include/core/multiphysics.h
   ../../include/core/newton_non_linear_solver.h
   ../../include/core/non_linear_solver.h
@@ -59,7 +60,6 @@ add_library(lethe-core
   ../../include/core/physics_solver.h
   ../../include/core/pvd_handler.h
   ../../include/core/rheological_model.h
-  ../../include/core/sdirk.h
   ../../include/core/serial_solid.h
   ../../include/core/shape.h
   ../../include/core/shape_parsing.h

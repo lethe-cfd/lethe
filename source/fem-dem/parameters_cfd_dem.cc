@@ -13,7 +13,7 @@ namespace Parameters
       Patterns::Selection("function|pcm|qcm|spm"),
       "Choose the method for the calculation of the void fraction");
     prm.enter_subsection("function");
-    void_fraction.declare_parameters(prm, 1);
+    void_fraction.declare_parameters(prm);
     prm.leave_subsection();
     prm.declare_entry("read dem",
                       "false",
@@ -159,7 +159,7 @@ namespace Parameters
       "grad-div length scale",
       "1",
       Patterns::Double(),
-      "Constant cs for the calculation of the grad-div stabilization (gamma = viscosity + cs * velocity)");
+      "Constant cs for the calculation of the grad-div stabilization (gamma = kinematic_viscosity + cs * velocity)");
     prm.declare_entry(
       "implicit stabilization",
       "true",

@@ -1,83 +1,45 @@
-=====================
-Linear Solver Control
-=====================
+=============
+Linear Solver
+=============
 
-In this subsection, the control options of linear solvers are specified. These control options may include solution method, maximum number of iterations, tolerance, residual precision and preconditioner information. The default values for these parameters are given in the text box below.
+In this subsection, the control options of the linear solvers are specified. The default values for the linear solver parameters are given in the text box below. Lethe supports different physics (``fluid dynamics``, ``VOF``, ``heat transfer``, ``cahn hilliard`` and ``tracer``) and it is possible to specify linear solver parameters for each of them. In the example below, only ``fluid dynamics`` is used, however, the same block can be used for other physics.
 
 .. seealso::
-	For further understanding about the numerical method used and advanced parameters, the interested reader is referred to the Theory Documentation.
+	For further understanding about the linear solvers used, the preconditioners supported and all parameters, see the :doc:`../../theory/fluid_dynamics/linear_solvers` theory section.
 
 .. code-block:: text
 
   subsection linear solver
-    # Iterative solver for the linear system of equations
-    set method                                    = gmres
+    subsection fluid dynamics
+      # Iterative solver for the linear system of equations
+      set method                           = gmres
 
-    # State whether information from the linear solver should be printed
-    set verbosity                                 = verbose
+      # State whether information from the linear solver should be printed
+      set verbosity                        = verbose
 
-    # Linear solver minimum residual
-    set minimum residual                          = 1e-12
+      # Linear solver minimum residual
+      set minimum residual                 = 1e-12
 
-    # Linear solver residual
-    set relative residual                         = 1e-3
+      # Linear solver residual
+      set relative residual                = 1e-3
 
-    # Maximum solver iterations
-    set max iters                                 = 1000
+      # Maximum solver iterations
+      set max iters                        = 1000
 
-    # Force the linear solver to continue even if it fails
-    set force linear solver continuation          = false
+      # Force the linear solver to continue even if it fails
+      set force linear solver continuation = false
 
-    # Maximum number of krylov vectors for GMRES and AMG solvers
-    set max krylov vectors                        = 100
+      # Maximum number of krylov vectors for GMRES solver
+      set max krylov vectors               = 100
 
-    #-------------------------------------------------------------
-    # ILU preconditioner parameters for GMRES and BICGSTAB solvers
-    #-------------------------------------------------------------
-    # ILU preconditioner fill
-    set ilu preconditioner fill                   = 0
-
-    # ILU preconditioner tolerance
-    set ilu preconditioner absolute tolerance     = 1e-12
-
-    # ILU relative tolerance
-    set ilu preconditioner relative tolerance     = 1.00
-
-    #---------------------------------------------------------
-    # ILU smoother/coarsener parameters for AMG preconditioner
-    #---------------------------------------------------------
-    # AMG preconditioner ILU smoother/coarsener fill
-    set amg preconditioner ilu fill               = 0
-
-    # AMG preconditioner ILU smoother/coarsener absolute tolerance
-    set amg preconditioner ilu absolute tolerance = 1e-12
-
-    # AMG preconditioner ILU smoother/coarsener relative tolerance
-    set amg preconditioner ilu relative tolerance = 1.00
-
-    #---------------------------------------------------
-    # other AMG solver parameters
-    #---------------------------------------------------
-    # AMG aggregation threshold
-    set amg aggregation threshold                 = 1e-14
-
-    # AMG number of cycles
-    set amg n cycles                              = 1
-
-    # AMG w cycling. If this is set to true, W cycling is used. Otherwise, V cycling is used.
-    set amg w cycles                              = false
-
-    # AMG smoother sweeps
-    set amg smoother sweeps                       = 2
-
-    # amg smoother overlap
-    set amg smoother overlap                      = 1
+      # Set type of preconditioner for the iterative solver
+      set preconditioner                   = ilu
+    end
   end
 
 
-* The ``method`` parameter enables to choose an iterative solver for the linear system of equations. Lethe currently supports these core solution strategies:
-	* ``gmres`` (default parameter value), a GMRES iterative solver with ILU preconditioning.
-	* ``amg``, a GMRES iterative solver with AMG preconditioning and an ILU coarsener and smoother.
+* The ``method`` parameter enables to choose an iterative solver for the linear system of equations. Lethe currently supports the following core solution strategies:
+	* ``gmres`` (default parameter value), a GMRES iterative solver with ILU preconditioning or AMG preconditioning with an ILU coarsener and smoother.
 	* ``bicgstab``, a BICGSTAB iterative solver with ILU preconditioning.
 	* ``direct``, a direct solver using `TrilinosWrappers::SolverDirect <https://www.dealii.org/current/doxygen/deal.II/classTrilinosWrappers_1_1SolverDirect.html>`_.
 
@@ -85,19 +47,14 @@ In this subsection, the control options of linear solvers are specified. These c
 		Which solver is the most efficient for a given problem?
 		
 		* For steady-state problems (2D and 3D):
-			* coarse meshes: ``gmres``/``bicgstab`` solver with ILU preconditioning.
-			* fine meshes (from :math:`\approx 1` M cells): ``amg`` solver.
+			* coarse meshes: ``gmres``/``bicgstab`` solver with ``ilu`` preconditioner.
+			* fine meshes (from :math:`\sim 1` M cells): ``gmres`` solver with ``amg`` preconditioner.
 		* For transient problems, this is much more problem dependent, but generally:
-			* relatively low :math:`\text{CFL}` condition: ``gmres`` solver with a low fill level, for instance ``set ilu preconditioner fill = 0``. This applies even the mesh is very large (:math:`>10` M cells), because the transient version of the system of equation is much easier to solve.
-			* large :math:`\text{CFL}` condition (:math:`\text{CFL}>10`) and/or very large mesh: ``amg`` solver may become preferable.
+			* relatively low :math:`\text{CFL}` condition: ``gmres`` solver with ``ilu`` preconditioner with a low fill level, for instance ``set ilu preconditioner fill = 0``. This applies even if the mesh is very large (:math:`>10` M cells), because the transient version of the system of equations is much easier to solve.
+			* large :math:`\text{CFL}` condition (:math:`\text{CFL}>10`) and/or very large mesh: ``gmres`` solver with ``amg`` preconditioner may become preferable.
 
 	.. caution:: 
-		Be aware that the setup of the ``amg`` preconditioner is very expensive and does not scale linearly with the size of the matrix. As such, it is generally preferable to minimize the number of assembly of such preconditioner. This can be achieved by using the ``inexact newton`` (see :doc:`non-linear_solver_control`).
-		
-		The use of ``direct`` solver should be avoided for 3D problems.
-
-.. warning::
-    Currently, the ``gls_sharp_navier_stokes_2d`` and ``gls_sharp_navier_stokes_2d`` solvers make it almost impossible to reach convergence with the ``amg`` linear solver. It is recommended to use ``gmres`` instead, even for fine meshes.
+		The use of ``direct`` solver should be in general avoided as it is not efficient for large problems. It can be, however, used for debugging purposes or the development of new features.
 
 
 * The ``verbosity`` option enables the display of the residual at each non-linear iteration, to monitor the progress of the linear iterations.
@@ -136,20 +93,43 @@ In this subsection, the control options of linear solvers are specified. These c
 	
 		GMRES solver failed! Trying with a higher preconditioner fill level.
 
-	meaning that the code increases the preconditioner fill (see definition below) in order to converge within the number of solver iterations. If you encounter this, consider increasing the ``max iters`` or adjusting other parameters, for example increasing ``max krylov vectors``.
+	meaning that the code increases the preconditioner fill (see tip on default values below) in order to converge within the number of solver iterations. If you encounter this, consider increasing the ``max iters`` or adjusting other parameters, for example increasing ``max krylov vectors``.
 
-* ``force linear solver continuation`` enables, when set to ``true``, to force the linear solver to continue, even if the ``minimum residual`` is not reached. Only available for ``GMRES`` solver within the ``gls_navier_stokes`` application.
+* ``force linear solver continuation`` when set to ``true``, forces the linear solver to continue, even if the ``minimum residual`` is not reached. Only available for ``gmres`` and ``bicgstab`` solvers within the ``gls_navier_stokes`` application.
 
 .. warning::
-	With this mode on, errors on the linear solver convergence are not thrown. Forcing the solver to continue can be useful for debugging purposes if a given iteration is hard to pass, but use with caution!
+	With this mode on, errors on the linear solver convergence are not thrown. Forcing the solver to continue can be useful for debugging purposes if a given iteration is hard to pass, but use it with caution!
 
-* ``max krylov vectors`` sets the maximum number of krylov vectors for ``GMRES`` and ``AMG`` solvers.
+* ``max krylov vectors`` sets the maximum number of krylov vectors for ``gmres`` solver with ``ilu`` and ``amg`` preconditioners.
 
 .. tip::
 	Consider using ``set max krylov vectors = 200`` for complex simulations with convergence issues. 
 
-* ``ilu preconditioner fill``, ``ilu preconditioner absolute tolerance`` and ``ilu preconditioner relative tolerance`` control the ILU preconditioner for ``method`` using ILU preconditioner (``gmres`` and ``bicgstab``). Conversely, ``amg preconditioner ilu fill``, ``amg preconditioner ilu absolute tolerance`` and ``amg preconditioner ilu relative tolerance`` control the ILU coarsener and smoother for the AMG preconditioner.
- 
+* ``preconditioner`` sets the type of preconditioning used for the linear solver. It can be either ``ilu`` for an Incomplete LU decomposition or ``amg`` for an Algebraic Multigrid. 
+
+.. warning::
+    Currently, the ``gls_sharp_navier_stokes`` and ``gls_sharp_navier_stokes`` solvers make it almost impossible to reach convergence with the ``amg`` preconditioner. Therefore, it is recommended to use ``ilu`` instead, even for fine meshes. In addition, the ``VOF``, ``heat transfer``, ``cahn hilliard`` and ``tracer`` physics only support ``ilu``.
+
+.. caution:: 
+		Be aware that the setup of the ``amg`` preconditioner is very expensive and does not scale linearly with the size of the matrix. As such, it is generally preferable to minimize the number of assembly of such preconditioner. This can be achieved by using the ``inexact newton`` for the nonlinear solver (see :doc:`non-linear_solver_control`).
+
+In addition to the method parameters, one can also set specific parameters for each of the preconditioners by adding specific lines inside of the specific physics subsection:
+
+-------------------
+ILU preconditioner
+-------------------
+
+.. code-block:: text
+
+    # ILU preconditioner fill
+    set ilu preconditioner fill               = 0
+
+    # ILU preconditioner tolerance
+    set ilu preconditioner absolute tolerance = 1e-12
+
+    # ILU relative tolerance
+    set ilu preconditioner relative tolerance = 1.00
+
 .. tip::
 	The default values for these parameters are good starting values. 
 
@@ -163,7 +143,35 @@ In this subsection, the control options of linear solvers are specified. These c
 
 	and it does not disappear when increasing ``max iters``, increasing the ``ilu preconditioner fill`` in the ``.prm`` file will make the computation slightly faster.
 
-* ``amg aggregation threshold``, ``amg n cycles``, ``amg w cycles`` (if this is set to ``true``, W cycling is used, if ``false``, V cycling is used), ``amg smoother sweeps``, and ``amg smoother overlap`` are parameters used for the AMG ``method`` only. 
+-------------------
+AMG preconditioner
+-------------------
+
+.. code-block:: text
+
+    # AMG preconditioner ILU smoother/coarsener fill
+    set amg preconditioner ilu fill               = 0
+
+    # AMG preconditioner ILU smoother/coarsener absolute tolerance
+    set amg preconditioner ilu absolute tolerance = 1e-12
+
+    # AMG preconditioner ILU smoother/coarsener relative tolerance
+    set amg preconditioner ilu relative tolerance = 1.00
+
+    # AMG aggregation threshold
+    set amg aggregation threshold                 = 1e-14
+
+    # AMG number of cycles
+    set amg n cycles                              = 1
+
+    # AMG w cycling. If this is set to true, W cycling is used. Otherwise, V cycling is used.
+    set amg w cycles                              = false
+
+    # AMG smoother sweeps
+    set amg smoother sweeps                       = 2
+
+    # AMG smoother overlap
+    set amg smoother overlap                      = 1
 
 .. seealso::
-	For more information about the ``amg`` solver parameters, the reader is referred to the dealII documentation for the `AMG preconditioner <https://www.dealii.org/current/doxygen/deal.II/classTrilinosWrappers_1_1PreconditionAMG.html>`_ and its `Additional Data <https://www.dealii.org/current/doxygen/deal.II/structTrilinosWrappers_1_1PreconditionAMG_1_1AdditionalData.html>`_
+	For more information about the ``amg`` preconditioner parameters, the reader is referred to the deal.II documentation for the `AMG preconditioner <https://www.dealii.org/current/doxygen/deal.II/classTrilinosWrappers_1_1PreconditionAMG.html>`_ and its `Additional Data <https://www.dealii.org/current/doxygen/deal.II/structTrilinosWrappers_1_1PreconditionAMG_1_1AdditionalData.html>`_.

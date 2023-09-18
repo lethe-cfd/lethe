@@ -21,7 +21,6 @@
 #include <core/grids.h>
 #include <core/lethe_grid_tools.h>
 #include <core/mesh_controller.h>
-#include <core/sdirk.h>
 #include <core/solutions_output.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
@@ -61,7 +60,8 @@
 template <int dim, typename VectorType, typename DofsType>
 NavierStokesBase<dim, VectorType, DofsType>::NavierStokesBase(
   SimulationParameters<dim> &p_nsparam)
-  : PhysicsSolver<VectorType>(p_nsparam.non_linear_solver)
+  : PhysicsSolver<VectorType>(
+      p_nsparam.non_linear_solver.at(PhysicsID::fluid_dynamics))
   , mpi_communicator(MPI_COMM_WORLD)
   , n_mpi_processes(Utilities::MPI::n_mpi_processes(mpi_communicator))
   , this_mpi_process(Utilities::MPI::this_mpi_process(mpi_communicator))
@@ -164,22 +164,6 @@ NavierStokesBase<dim, VectorType, DofsType>::NavierStokesBase(
   // Pre-allocate memory for the previous solutions using the information
   // of the BDF schemes
   previous_solutions.resize(maximum_number_of_previous_solutions());
-
-  // Pre-allocate memory for intermediary stages if there are any
-  if (this->simulation_parameters.simulation_control.bdf_startup_method ==
-        Parameters::SimulationControl::BDFStartupMethods::sdirk_step &&
-      this->simulation_parameters.simulation_control.method ==
-        Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-    solution_stages.resize(1);
-  else if (this->simulation_parameters.simulation_control.bdf_startup_method ==
-             Parameters::SimulationControl::BDFStartupMethods::sdirk_step &&
-           this->simulation_parameters.simulation_control.method ==
-             Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-    solution_stages.resize(2);
-  else
-    solution_stages.resize(number_of_intermediary_stages(
-      simulation_parameters.simulation_control.method));
-
 
   // Change the behavior of the timer for situations when you don't want
   // outputs
@@ -553,6 +537,7 @@ NavierStokesBase<dim, VectorType, DofsType>::finish_time_step()
   if (this->simulation_parameters.timer.type ==
       Parameters::Timer::Type::iteration)
     {
+      announce_string(this->pcout, "Fluid Dynamics");
       this->computing_timer.print_summary();
       this->computing_timer.reset();
     }
@@ -567,10 +552,35 @@ NavierStokesBase<dim, VectorType, DofsType>::iterate()
 {
   auto &present_solution = this->present_solution;
 
-  // If the fluid dynamics is not to be solved, but rather specified. Update
-  // condition and move on.
-  if (!simulation_parameters.multiphysics.fluid_dynamics)
+  if (simulation_parameters.multiphysics.fluid_dynamics)
     {
+      // Solve and percolate the auxiliary physics that should be treated BEFORE
+      // the fluid dynamics
+      multiphysics->solve(false,
+                          simulation_parameters.simulation_control.method);
+      multiphysics->percolate_time_vectors(false);
+
+      if (simulation_parameters.non_linear_solver.at(PhysicsID::fluid_dynamics)
+              .verbosity != Parameters::Verbosity::quiet ||
+          simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
+              .verbosity != Parameters::Verbosity::quiet)
+        announce_string(this->pcout, "Fluid Dynamics");
+      PhysicsSolver<VectorType>::solve_non_linear_system(false);
+
+      // Solve and percolate the auxiliary physics that should be treated AFTER
+      // the fluid dynamics
+      multiphysics->solve(true,
+                          simulation_parameters.simulation_control.method);
+      // Dear future Bruno, percolating auxiliary physics before fluid dynamics
+      // is necessary because of the checkpointing mechanism. You spent an
+      // evening debugging this, trust me.
+      multiphysics->percolate_time_vectors(true);
+    }
+  else
+    {
+      // Fluid dynamics is not to be solved, but rather specified. Update
+      // condition and move on.
+
       // Solve and percolate the auxiliary physics that should be treated
       // BEFORE the fluid dynamics
       multiphysics->solve(false,
@@ -597,60 +607,6 @@ NavierStokesBase<dim, VectorType, DofsType>::iterate()
       // AFTER the fluid dynamics
       multiphysics->solve(true,
                           simulation_parameters.simulation_control.method);
-      multiphysics->percolate_time_vectors(true);
-    }
-  else if (simulation_control->get_assembly_method() ==
-             Parameters::SimulationControl::TimeSteppingMethod::sdirk22 &&
-           simulation_parameters.multiphysics.fluid_dynamics)
-    {
-      this->simulation_control->set_assembly_method(
-        Parameters::SimulationControl::TimeSteppingMethod::sdirk22_1);
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-      this->solution_stages[0] = present_solution;
-
-      this->simulation_control->set_assembly_method(
-        Parameters::SimulationControl::TimeSteppingMethod::sdirk22_2);
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-    }
-  else if (simulation_control->get_assembly_method() ==
-             Parameters::SimulationControl::TimeSteppingMethod::sdirk33 &&
-           simulation_parameters.multiphysics.fluid_dynamics)
-    {
-      this->simulation_control->set_assembly_method(
-        Parameters::SimulationControl::TimeSteppingMethod::sdirk33_1);
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-
-      this->solution_stages[0] = present_solution;
-
-      this->simulation_control->set_assembly_method(
-        Parameters::SimulationControl::TimeSteppingMethod::sdirk33_2);
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-
-      this->solution_stages[1] = present_solution;
-
-      this->simulation_control->set_assembly_method(
-        Parameters::SimulationControl::TimeSteppingMethod::sdirk33_3);
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-    }
-  else
-    {
-      // sdirk schemes are not implemented for multiphysics simulations
-
-      // Solve and percolate the auxiliary physics that should be treated BEFORE
-      // the fluid dynamics
-      multiphysics->solve(false,
-                          simulation_parameters.simulation_control.method);
-      multiphysics->percolate_time_vectors(false);
-
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
-
-      // Solve and percolate the auxiliary physics that should be treated AFTER
-      // the fluid dynamics
-      multiphysics->solve(true,
-                          simulation_parameters.simulation_control.method);
-      // Dear future Bruno, percolating auxiliary physics before fluid dynamics
-      // is necessary because of the checkpointing mechanism. You spent an
-      // evening debugging this, trust me.
       multiphysics->percolate_time_vectors(true);
     }
 }
@@ -786,7 +742,7 @@ NavierStokesBase<dim, VectorType, DofsType>::box_refine_mesh()
         this->triangulation.get());
 
       // Time monitoring
-      TimerOutput::Scope t(this->computing_timer, "box refine");
+      TimerOutput::Scope t(this->computing_timer, "Box refine");
       this->pcout
         << "Initial refinement in box - Step  " << i + 1 << " of "
         << this->simulation_parameters.mesh_box_refinement->initial_refinement
@@ -899,12 +855,12 @@ NavierStokesBase<dim, VectorType, DofsType>::refine_mesh_kelly()
     this->triangulation.get());
 
   // Time monitoring
-  TimerOutput::Scope t(this->computing_timer, "refine");
+  TimerOutput::Scope t(this->computing_timer, "Refine");
 
   Vector<float> estimated_error_per_cell(tria.n_active_cells());
   const FEValuesExtractors::Vector velocity(0);
   const FEValuesExtractors::Scalar pressure(dim);
-  auto &                           present_solution = this->present_solution;
+  auto                            &present_solution = this->present_solution;
 
   // Global flags
   // Their dimension is consistent with the dimension returned by
@@ -1105,7 +1061,7 @@ template <int dim, typename VectorType, typename DofsType>
 void
 NavierStokesBase<dim, VectorType, DofsType>::refine_mesh_uniform()
 {
-  TimerOutput::Scope t(this->computing_timer, "refine");
+  TimerOutput::Scope t(this->computing_timer, "Refine");
 
   // Solution transfer objects for all the solutions
   parallel::distributed::SolutionTransfer<dim, VectorType> solution_transfer(
@@ -1456,6 +1412,9 @@ NavierStokesBase<dim, VectorType, DofsType>::postprocess_fd(bool firstIter)
           // Update the time of the exact solution to the actual time
           this->exact_solution->set_time(
             simulation_control->get_current_time());
+
+          present_solution.update_ghost_values();
+
           const std::pair<double, double> errors =
             calculate_L2_error(dof_handler,
                                present_solution,
@@ -1855,7 +1814,7 @@ void
 NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
   const VectorType &solution)
 {
-  TimerOutput::Scope t(this->computing_timer, "output");
+  TimerOutput::Scope t(this->computing_timer, "Output VTU");
 
   const std::string  folder        = simulation_control->get_output_path();
   const std::string  solution_name = simulation_control->get_output_name();
@@ -1961,7 +1920,7 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
 
 
   // Create the post-processors to have derived information about the velocity
-  // They are generated outside of the if condition for smoothing to ensure
+  // They are generated outside the if condition for smoothing to ensure
   // that the objects still exist when the write output of DataOut is called
   // Regular discontinuous postprocessors
   QCriterionPostprocessor<dim> qcriterion;
@@ -1969,13 +1928,62 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
   VorticityPostprocessor<dim>  vorticity;
   data_out.add_data_vector(solution, vorticity);
 
-  DensityPostprocessor<dim> density_postprocessed(
-    this->simulation_parameters.physical_properties_manager.get_density());
-  if (!this->simulation_parameters.physical_properties_manager
-         .density_is_constant()) // Only output when density is not constant
+  // Get physical properties models
+  std::vector<std::shared_ptr<DensityModel>> density_models =
+    this->simulation_parameters.physical_properties_manager
+      .get_density_vector();
+  std::vector<std::shared_ptr<RheologicalModel>> rheological_models =
+    this->simulation_parameters.physical_properties_manager
+      .get_rheology_vector();
+
+  const double n_fluids = this->simulation_parameters
+                            .physical_properties_manager.get_number_of_fluids();
+
+  std::vector<DensityPostprocessor<dim>> density_postprocessors;
+  density_postprocessors.reserve(n_fluids);
+  std::vector<KinematicViscosityPostprocessor<dim>>
+    kinematic_viscosity_postprocessors;
+  kinematic_viscosity_postprocessors.reserve(n_fluids);
+  std::vector<DynamicViscosityPostprocessor<dim>>
+    dynamic_viscosity_postprocessors;
+  dynamic_viscosity_postprocessors.reserve(n_fluids);
+
+  for (unsigned int f_id = 0; f_id < n_fluids; ++f_id)
     {
-      data_out.add_data_vector(solution, density_postprocessed);
+      density_postprocessors.push_back(
+        DensityPostprocessor<dim>(density_models[f_id], f_id));
+      kinematic_viscosity_postprocessors.push_back(
+        KinematicViscosityPostprocessor<dim>(rheological_models[f_id], f_id));
+      dynamic_viscosity_postprocessors.push_back(
+        DynamicViscosityPostprocessor<dim>(
+          rheological_models[f_id],
+          density_models[f_id]->get_density_ref(),
+          f_id));
+
+      // Only output when density is not constant or if it is a multiphase flow
+      if (!density_models[f_id]->is_constant_density_model() ||
+          this->simulation_parameters.multiphysics.VOF ||
+          this->simulation_parameters.multiphysics.cahn_hilliard)
+        data_out.add_data_vector(solution, density_postprocessors[f_id]);
+
+      // Only output the kinematic viscosity for non-newtonian rheology
+      if (rheological_models[f_id]->is_non_newtonian_rheological_model())
+        {
+          data_out.add_data_vector(solution,
+                                   kinematic_viscosity_postprocessors[f_id]);
+
+          // Only output the dynamic viscosity for multiphase flows
+          if (this->simulation_parameters.multiphysics.VOF ||
+              this->simulation_parameters.multiphysics.cahn_hilliard)
+            data_out.add_data_vector(solution,
+                                     dynamic_viscosity_postprocessors[f_id]);
+        }
     }
+
+  ShearRatePostprocessor<dim> shear_rate_processor;
+  if (this->simulation_parameters.physical_properties_manager
+        .is_non_newtonian())
+    data_out.add_data_vector(solution, shear_rate_processor);
 
   // Trilinos vector for the smoothed output fields
   QcriterionPostProcessorSmoothing<dim, VectorType> qcriterion_smoothing(
@@ -2006,7 +2014,7 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
             1, DataComponentInterpretation::component_is_scalar);
 
         std::vector<std::string> qcriterion_name = {"qcriterion"};
-        const DoFHandler<dim> &  dof_handler_qcriterion =
+        const DoFHandler<dim>   &dof_handler_qcriterion =
           qcriterion_smoothing.get_dof_handler();
         data_out.add_data_vector(dof_handler_qcriterion,
                                  qcriterion_field,
@@ -2025,7 +2033,7 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
             1, DataComponentInterpretation::component_is_scalar);
 
         std::vector<std::string> continuity_name = {"velocity_divergence"};
-        const DoFHandler<dim> &  dof_handler_qcriterion =
+        const DoFHandler<dim>   &dof_handler_qcriterion =
           continuity_smoothing.get_dof_handler();
         data_out.add_data_vector(dof_handler_qcriterion,
                                  continuity_field,
@@ -2048,17 +2056,6 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
   if (simulation_parameters.velocity_sources.type ==
       Parameters::VelocitySource::VelocitySourceType::srf)
     data_out.add_data_vector(solution, srf);
-
-  NonNewtonianViscosityPostprocessor<dim> non_newtonian_viscosity(
-    this->simulation_parameters.physical_properties_manager.get_rheology());
-  ShearRatePostprocessor<dim> shear_rate_processor;
-
-  if (this->simulation_parameters.physical_properties_manager
-        .is_non_newtonian())
-    {
-      data_out.add_data_vector(solution, non_newtonian_viscosity);
-      data_out.add_data_vector(solution, shear_rate_processor);
-    }
 
   output_field_hook(data_out);
 

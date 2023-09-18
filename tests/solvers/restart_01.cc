@@ -34,7 +34,7 @@ public:
 template <int dim>
 void
 ExactSolutionMMS<dim>::vector_value(const Point<dim> &p,
-                                    Vector<double> &  values) const
+                                    Vector<double>   &values) const
 {
   assert(dim == 2);
   const double a = M_PI;
@@ -58,7 +58,7 @@ public:
 template <int dim>
 void
 MMSSineForcingFunction<dim>::vector_value(const Point<dim> &p,
-                                          Vector<double> &  values) const
+                                          Vector<double>   &values) const
 {
   assert(dim == 2);
   const double a = M_PI;
@@ -105,14 +105,13 @@ RestartNavierStokes<dim>::run()
   physical_properties.number_of_fluids = 1;
   physical_properties.fluids[0].rheological_model =
     Parameters::Material::RheologicalModel::newtonian;
-  physical_properties.fluids[0].viscosity = 1;
+  physical_properties.fluids[0].kinematic_viscosity = 1;
   physical_properties.fluids[0].density_model =
     Parameters::Material::DensityModel::constant;
   physical_properties.number_of_solids                = 0;
   physical_properties.number_of_material_interactions = 0;
-  physical_properties.fluids[0].viscosity             = 1;
+  physical_properties.fluids[0].kinematic_viscosity   = 1;
   physical_properties.number_of_solids                = 0;
-
 
   this->simulation_parameters.physical_properties_manager.initialize(
     physical_properties);
@@ -169,8 +168,10 @@ test()
   // Manually alter some of the default parameters of the solver
   NSparam.restart_parameters.checkpoint = true;
   NSparam.restart_parameters.frequency  = 1;
-  NSparam.non_linear_solver.verbosity   = Parameters::Verbosity::quiet;
-  NSparam.linear_solver.verbosity       = Parameters::Verbosity::quiet;
+  NSparam.linear_solver.at(PhysicsID::fluid_dynamics).verbosity =
+    Parameters::Verbosity::quiet;
+  NSparam.non_linear_solver.at(PhysicsID::fluid_dynamics).verbosity =
+    Parameters::Verbosity::quiet;
   NSparam.boundary_conditions.createNoSlip();
 
   RestartNavierStokes<2> problem_2d(NSparam);

@@ -94,8 +94,8 @@ private:
   void
   assemble_local_system_matrix(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    NavierStokesScratchData<dim> &                        scratch_data,
-    StabilizedMethodsTensorCopyData<dim> &                copy_data) override;
+    NavierStokesScratchData<dim>                         &scratch_data,
+    StabilizedMethodsTensorCopyData<dim>                 &copy_data) override;
 
   /**
    * @brief Assemble the local rhs for a given cell
@@ -113,8 +113,8 @@ private:
   void
   assemble_local_system_rhs(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    NavierStokesScratchData<dim> &                        scratch_data,
-    StabilizedMethodsTensorCopyData<dim> &                copy_data) override;
+    NavierStokesScratchData<dim>                         &scratch_data,
+    StabilizedMethodsTensorCopyData<dim>                 &copy_data) override;
 
   /**
    * @brief sets up the vector of assembler functions
@@ -361,7 +361,7 @@ private:
    */
   std::tuple<bool, unsigned int, std::vector<types::global_dof_index>>
   cell_cut(const typename DoFHandler<dim>::active_cell_iterator &cell,
-           std::vector<types::global_dof_index> &         local_dof_indices,
+           std::vector<types::global_dof_index>          &local_dof_indices,
            std::map<types::global_dof_index, Point<dim>> &support_points);
 
   /**
@@ -380,7 +380,7 @@ private:
   bool
   cell_cut_by_p_absolute_distance(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    std::map<types::global_dof_index, Point<dim>> &       support_points,
+    std::map<types::global_dof_index, Point<dim>>        &support_points,
     unsigned int                                          p);
 
   /**
@@ -398,7 +398,7 @@ private:
    */
   std::tuple<bool, unsigned int, std::vector<types::global_dof_index>>
   cell_inside(const typename DoFHandler<dim>::active_cell_iterator &cell,
-              std::vector<types::global_dof_index> &         local_dof_indices,
+              std::vector<types::global_dof_index>          &local_dof_indices,
               std::map<types::global_dof_index, Point<dim>> &support_points);
 
 
@@ -476,7 +476,9 @@ Return a bool that describes  if a cell contains a specific point
   double
   get_current_residual() override
   {
-    double scalling = this->simulation_parameters.non_linear_solver.tolerance /
+    double scalling = this->simulation_parameters.non_linear_solver
+                        .at(PhysicsID::fluid_dynamics)
+                        .tolerance /
                       this->simulation_parameters.particlesParameters
                         ->particle_nonlinear_tolerance;
     return std::max(this->system_rhs.l2_norm(), particle_residual * scalling);
@@ -586,7 +588,6 @@ private:
   std::map<typename DoFHandler<dim>::active_cell_iterator,
            std::tuple<bool, unsigned int, unsigned int>>
     cut_cells_map;
-
 
   /*
    * This map uses the cell as the key, and stores the following information:

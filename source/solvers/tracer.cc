@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
 
@@ -47,6 +46,8 @@ template <int dim>
 void
 Tracer<dim>::assemble_system_matrix()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble matrix");
+
   this->system_matrix = 0;
   setup_assemblers();
 
@@ -76,8 +77,8 @@ template <int dim>
 void
 Tracer<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  TracerScratchData<dim> &                              scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  TracerScratchData<dim>                               &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -89,7 +90,6 @@ Tracer<dim>::assemble_local_system_matrix(
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      this->solution_stages,
                       &source_term);
 
   const DoFHandler<dim> *dof_handler_fluid =
@@ -167,6 +167,8 @@ template <int dim>
 void
 Tracer<dim>::assemble_system_rhs()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
+
   // TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
   this->system_rhs = 0;
   setup_assemblers();
@@ -197,8 +199,8 @@ template <int dim>
 void
 Tracer<dim>::assemble_local_system_rhs(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  TracerScratchData<dim> &                              scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  TracerScratchData<dim>                               &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -210,7 +212,6 @@ Tracer<dim>::assemble_local_system_rhs(
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      this->solution_stages,
                       &source_term);
 
   const DoFHandler<dim> *dof_handler_fluid =
@@ -399,6 +400,13 @@ Tracer<dim>::postprocess(bool first_iteration)
             this->simulation_parameters.post_processing.output_frequency ==
           0)
         this->write_tracer_statistics();
+    }
+  if (this->simulation_parameters.timer.type ==
+      Parameters::Timer::Type::iteration)
+    {
+      announce_string(this->pcout, "Tracer");
+      this->computing_timer.print_summary();
+      this->computing_timer.reset();
     }
 }
 
@@ -714,29 +722,34 @@ void
 Tracer<dim>::solve_linear_system(const bool initial_step,
                                  const bool /*renewed_matrix*/)
 {
+  TimerOutput::Scope t(this->computing_timer, "Solve linear system");
+
   auto mpi_communicator = triangulation->get_communicator();
 
   const AffineConstraints<double> &constraints_used =
     initial_step ? nonzero_constraints : this->zero_constraints;
 
   const double absolute_residual =
-    simulation_parameters.linear_solver.minimum_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).minimum_residual;
   const double relative_residual =
-    simulation_parameters.linear_solver.relative_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).relative_residual;
 
   const double linear_solver_tolerance =
     std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);
 
-  if (this->simulation_parameters.linear_solver.verbosity !=
-      Parameters::Verbosity::quiet)
+  if (this->simulation_parameters.linear_solver.at(PhysicsID::tracer)
+        .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
 
-  const double ilu_fill = simulation_parameters.linear_solver.ilu_precond_fill;
-  const double ilu_atol = simulation_parameters.linear_solver.ilu_precond_atol;
-  const double ilu_rtol = simulation_parameters.linear_solver.ilu_precond_rtol;
+  const double ilu_fill =
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).ilu_precond_fill;
+  const double ilu_atol =
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).ilu_precond_atol;
+  const double ilu_rtol =
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).ilu_precond_rtol;
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
 
@@ -748,13 +761,15 @@ Tracer<dim>::solve_linear_system(const bool initial_step,
     locally_owned_dofs, mpi_communicator);
 
   SolverControl solver_control(
-    simulation_parameters.linear_solver.max_iterations,
+    simulation_parameters.linear_solver.at(PhysicsID::tracer).max_iterations,
     linear_solver_tolerance,
     true,
     true);
 
   TrilinosWrappers::SolverGMRES::AdditionalData solver_parameters(
-    false, simulation_parameters.linear_solver.max_krylov_vectors);
+    false,
+    simulation_parameters.linear_solver.at(PhysicsID::tracer)
+      .max_krylov_vectors);
 
 
   TrilinosWrappers::SolverGMRES solver(solver_control, solver_parameters);
@@ -765,7 +780,7 @@ Tracer<dim>::solve_linear_system(const bool initial_step,
                system_rhs,
                ilu_preconditioner);
 
-  if (simulation_parameters.linear_solver.verbosity !=
+  if (simulation_parameters.linear_solver.at(PhysicsID::tracer).verbosity !=
       Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Iterative solver took : " << solver_control.last_step()

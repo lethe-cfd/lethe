@@ -2,13 +2,13 @@
 Silo
 ==================================
 
-This example simulates the filling and discharge of particles in a wedge-shaped silo. We set up this simulation according to the experiments of Golshan et al. `[1] <https://doi.org/10.1016/j.powtec.2020.06.093>`_. It is recommended to visit `DEM parameters <../../../parameters/dem/dem.html>`_ for more detailed information on the concepts and physical meanings of the parameters in Lethe-DEM.
+This example simulates the filling and discharge of particles in a wedge-shaped silo. We set up this simulation according to the experiments of Golshan *et al.* `[1] <https://doi.org/10.1016/j.powtec.2020.06.093>`_ It is recommended to visit `DEM parameters <../../../parameters/dem/dem.html>`_ for more detailed information on the concepts and physical meanings of the parameters in Lethe-DEM.
 
 
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem_3d``
+- Solvers: ``dem``
 - Floating walls
 - Gmsh grids
 - Checkpointing (restart)
@@ -182,7 +182,7 @@ This simulation can be launched in parallel (e.g. using 8 processes) by running:
 
 .. code-block:: text
 
-  mpirun -np 8 dem_3d silo-Golshan.prm
+  mpirun -np 8 dem silo-Golshan.prm
 
 .. warning::
 	This example takes approximately 14 hours on 8 cores. This high computational time is due to the long simulation time (30 s of real-time).
@@ -207,4 +207,5 @@ Animation of the subdomains distribution throughout the simulation:
 ---------
 Reference
 ---------
-`[1] <https://doi.org/10.1016/j.powtec.2020.06.093>`_ Golshan, S., Esgandari, B., Zarghami, R., Blais, B. and Saleh, K., 2020. Experimental and DEM studies of velocity profiles and residence time distribution of non-spherical particles in silos. Powder Technology, 373, pp.510-521.
+
+`[1] <https://doi.org/10.1016/j.powtec.2020.06.093>`_ S. Golshan, B. Esgandari, R. Zarghami, B. Blais, and K. Saleh, “Experimental and DEM studies of velocity profiles and residence time distribution of non-spherical particles in silos,” *Powder Technol.*, vol. 373, pp. 510–521, Aug. 2020, doi: 10.1016/j.powtec.2020.06.093.

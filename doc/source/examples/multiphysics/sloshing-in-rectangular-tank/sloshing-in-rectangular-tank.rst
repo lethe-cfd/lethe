@@ -2,14 +2,14 @@
 Sloshing in a Rectangular Tank
 ================================
 
-This example simulates the damping of a small amplitude wave for Reynolds number of (2, 20, 200 and 2000). The problem is inspired by the test case of `Carrica et al. [1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_. 
+This example simulates the damping of a small amplitude wave for Reynolds number of (2, 20, 200 and 2000). The problem is inspired by the test case of Carrica *et al.* `[1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_
 
 
 --------
 Features
 --------
 
-- Solver: ``gls_navier_stokes_2d`` 
+- Solver: ``gls_navier_stokes`` 
 - Volume of fluid (VOF)
 - Unsteady problem handled by an adaptive BDF2 time-stepping scheme 
 - Usage of a python script for post-processing data
@@ -19,10 +19,14 @@ Features
 Files Used in This Example
 ---------------------------
 
-- ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0002/sloshing-in-rectangular-tank_Re0002.prm``
-- ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0020/sloshing-in-rectangular-tank_Re0020.prm``
-- ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0200/sloshing-in-rectangular-tank_Re0200.prm``
-- ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_2000/sloshing-in-rectangular-tank_Re2000.prm``
+- Analytical data for :math:`Re=2`: ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0002/analytical_solution_Re2.csv``
+- Analytical data for :math:`Re=20`: ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0020/analytical_solution_Re20.csv``
+- Analytical data for :math:`Re=200`: ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0200/analytical_solution_Re200.csv``
+- Parameter file for :math:`Re=2`:``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0002/sloshing-in-rectangular-tank_Re0002.prm``
+- Parameter file for :math:`Re=20`:``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0020/sloshing-in-rectangular-tank_Re0020.prm``
+- Parameter file for :math:`Re=200`:``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_0200/sloshing-in-rectangular-tank_Re0200.prm``
+- Parameter file for :math:`Re=2000`:``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_2000/sloshing-in-rectangular-tank_Re2000.prm``
+- Python script for postprocessing: ``examples/multiphysics/sloshing-in-rectangular-tank/sloshing_postprocessing.py``
 
 
 -----------------------
@@ -35,7 +39,16 @@ In this problem, we simulate the damping of a small amplitude wave in a rectangu
 
 .. math::
 
-  \xi = 1+0.01*sin(\pi(x+0.5))
+  \xi = 1+0.01 \ sin(\pi(x+0.5))
+
++-------------------------------------------------------------------------------------------------------------------+
+|  .. figure:: images/initial_state.svg                                                                             |
+|     :align: center                                                                                                |
+|     :name: Initial height of the wave                                                                             |
+|                                                                                                                   |
+|     Initial height of the wave                                                                                    |
+|                                                                                                                   |
++-------------------------------------------------------------------------------------------------------------------+
 
 Four values of the Reynolds number are investigated: 2, 20, 200 and 2000. 
 
@@ -144,11 +157,11 @@ The ``source term`` subsection is used to enable the gravitational acceleration 
 Running the Simulation
 -----------------------
 
-We can call the gls_navier_stokes_2d for each Reynolds number. For :math:`Re=20`, this can be done by invoking the following command:
+We can call the gls_navier_stokes for each Reynolds number. For :math:`Re=20`, this can be done by invoking the following command:
 
 .. code-block:: text
 
-  mpirun -np 8 gls_navier_stokes_2d sloshing-in-rectangular-tank_Re0020.prm
+  mpirun -np 8 gls_navier_stokes sloshing-in-rectangular-tank_Re0020.prm
 
 to run the simulation using eight CPU cores. Feel free to use more.
 
@@ -163,14 +176,15 @@ to run the simulation using eight CPU cores. Feel free to use more.
 Results
 -------
 
-We compare the relative height of the free surface at :math:`x=0` with an analytical solution proposed by `Wu et al. [2] <https://link.springer.com/article/10.1023/A:1017558826258>`_. For the Reynolds number of 2, 20 and 200, data were directly extracted from `[1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_, whereas for the Reynolds of 2000, the simplified analytical expression of Wu *et al.* `[2] <https://link.springer.com/article/10.1023/A:1017558826258>`_ is used. The results for Reynolds number of 2, 20, 200 and 2000 can be post-processed by invoking the following command from the folder of the Reynolds number of interest (Re=20 in the example below):
+We compare the relative height of the free surface at :math:`x=0` with an analytical solution proposed by Wu *et al.* `[2] <https://link.springer.com/article/10.1023/A:1017558826258>`_ For the Reynolds number of 2, 20 and 200, data were directly extracted from Carrica *et al.* `[1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_, whereas for the Reynolds of 2000, the simplified analytical expression of Wu *et al.* `[2] <https://link.springer.com/article/10.1023/A:1017558826258>`_ is used. The results for Reynolds number of 2, 20, 200 and 2000 can be post-processed by invoking the following command from the folder of the Reynolds number of interest (Re=20 in the example below):
 
 .. code-block:: text
 
-  python3 ../sloshing_post_processing.py . sloshing-in-rectangular-tank_Re0020.prm
+  python3 ../sloshing_postprocessing.py . sloshing-in-rectangular-tank_Re0020.prm
 
 .. important::
-    You need to ensure that the ``lethe_pyvista_tools`` module included within Lethe is in your Python path.
+
+    You need to ensure that the ``lethe_pyvista_tools`` is working on your machine. Click `here <../../../tools/postprocessing/postprocessing.html>`_ for details.
 
 
 The following table presents a comparison between the analytical results and the simulation results for all Reynolds numbers mentioned above. A very good agreement is obtained for each of them, demonstrating the accuracy of the VOF solver.
@@ -192,7 +206,7 @@ The following table presents a comparison between the analytical results and the
 References
 ----------
 
-`[1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_ Carrica, P. M., Wilson, R. V., & Stern, F. (2007). An unsteady single‐phase level set method for viscous free surface flows. International Journal for Numerical Methods in Fluids, 53(2), 229-256.
+`[1] <https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1279>`_ P. M. Carrica, R. V. Wilson, and F. Stern, “An unsteady single-phase level set method for viscous free surface flows,” *Int. J. Numer. Methods Fluids*, vol. 53, no. 2, pp. 229–256, 2007, doi: 10.1002/fld.1279.
 
 
-`[2] <https://link.springer.com/article/10.1023/A:1017558826258>`_ Wu, G. X., Eatock Taylor, R., & Greaves, D. M. (2001). The effect of viscosity on the transient free-surface waves in a two-dimensional tank. Journal of Engineering Mathematics, 40, 77-90.
+`[2] <https://link.springer.com/article/10.1023/A:1017558826258>`_ G. X. Wu, R. Eatock Taylor, and D. M. Greaves, “The effect of viscosity on the transient free-surface waves in a two-dimensional tank,” *J. Eng. Math.*, vol. 40, no. 1, pp. 77–90, May 2001, doi: 10.1023/A:1017558826258.

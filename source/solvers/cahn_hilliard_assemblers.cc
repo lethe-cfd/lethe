@@ -9,22 +9,22 @@ template <int dim>
 void
 CahnHilliardAssemblerCore<dim>::assemble_matrix(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   // Gather physical properties
-  const double well_height       = this->ch_parameters.well_height;
-  const double mobility_constant = this->ch_parameters.mobility_constant;
+  const double well_height       = this->cahn_hilliard_parameters.well_height;
+  const double mobility_constant = this->mobility_constant;
   const double epsilon           = scratch_data.epsilon;
 
   // Loop and quadrature informations
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
   auto &local_matrix = copy_data.local_matrix;
 
   // Constant mobility model
-  if (this->ch_parameters.mobility_model == Parameters::MobilityModel::constant)
+  if (this->mobility_model == MobilityModel::constant)
     {
       for (unsigned int q = 0; q < n_q_points; ++q)
         {
@@ -142,22 +142,22 @@ template <int dim>
 void
 CahnHilliardAssemblerCore<dim>::assemble_rhs(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   // Gather physical properties
-  const double well_height       = this->ch_parameters.well_height;
-  const double mobility_constant = this->ch_parameters.mobility_constant;
+  const double well_height       = this->cahn_hilliard_parameters.well_height;
+  const double mobility_constant = this->mobility_constant;
   const double epsilon           = scratch_data.epsilon;
 
   // Loop and quadrature informations
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
   auto &local_rhs = copy_data.local_rhs;
 
   // Constant mobility model
-  if (this->ch_parameters.mobility_model == Parameters::MobilityModel::constant)
+  if (this->mobility_model == MobilityModel::constant)
     {
       for (unsigned int q = 0; q < n_q_points; ++q)
         {
@@ -262,7 +262,7 @@ template <int dim>
 void
 CahnHilliardAssemblerAngleOfContact<dim>::assemble_matrix(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   if (!scratch_data.is_boundary_cell)
     return;
@@ -271,17 +271,19 @@ CahnHilliardAssemblerAngleOfContact<dim>::assemble_matrix(
 
   auto &local_matrix = copy_data.local_matrix;
 
-  for (unsigned int i_bc = 0; i_bc < this->boundary_conditions_ch.size; ++i_bc)
+  for (unsigned int i_bc = 0;
+       i_bc < this->boundary_conditions_cahn_hilliard.size;
+       ++i_bc)
     {
-      if (this->boundary_conditions_ch.type[i_bc] ==
-          BoundaryConditions::BoundaryType::ch_angle_of_contact)
+      if (this->boundary_conditions_cahn_hilliard.type[i_bc] ==
+          BoundaryConditions::BoundaryType::cahn_hilliard_angle_of_contact)
         {
           const double angle_of_contact =
-            this->boundary_conditions_ch.angle_of_contact[i_bc];
+            this->boundary_conditions_cahn_hilliard.angle_of_contact[i_bc];
           for (unsigned int f = 0; f < scratch_data.n_faces; f++)
             {
               if (scratch_data.boundary_face_id[f] ==
-                  this->boundary_conditions_ch.id[i_bc])
+                  this->boundary_conditions_cahn_hilliard.id[i_bc])
                 {
                   for (unsigned int q = 0; q < scratch_data.n_faces_q_points;
                        ++q)
@@ -321,7 +323,7 @@ template <int dim>
 void
 CahnHilliardAssemblerAngleOfContact<dim>::assemble_rhs(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   if (!scratch_data.is_boundary_cell)
     return;
@@ -330,17 +332,19 @@ CahnHilliardAssemblerAngleOfContact<dim>::assemble_rhs(
 
   auto &local_rhs = copy_data.local_rhs;
 
-  for (unsigned int i_bc = 0; i_bc < this->boundary_conditions_ch.size; ++i_bc)
+  for (unsigned int i_bc = 0;
+       i_bc < this->boundary_conditions_cahn_hilliard.size;
+       ++i_bc)
     {
-      if (this->boundary_conditions_ch.type[i_bc] ==
-          BoundaryConditions::BoundaryType::ch_angle_of_contact)
+      if (this->boundary_conditions_cahn_hilliard.type[i_bc] ==
+          BoundaryConditions::BoundaryType::cahn_hilliard_angle_of_contact)
         {
           const double angle_of_contact =
-            this->boundary_conditions_ch.angle_of_contact[i_bc];
+            this->boundary_conditions_cahn_hilliard.angle_of_contact[i_bc];
           for (unsigned int f = 0; f < scratch_data.n_faces; f++)
             {
               if (scratch_data.boundary_face_id[f] ==
-                  this->boundary_conditions_ch.id[i_bc])
+                  this->boundary_conditions_cahn_hilliard.id[i_bc])
                 {
                   for (unsigned int q = 0; q < scratch_data.n_faces_q_points;
                        ++q)
@@ -375,10 +379,10 @@ template <int dim>
 void
 CahnHilliardAssemblerBDF<dim>::assemble_matrix(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   // Loop and quadrature informations
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
@@ -419,10 +423,10 @@ template <int dim>
 void
 CahnHilliardAssemblerBDF<dim>::assemble_rhs(
   CahnHilliardScratchData<dim> &scratch_data,
-  StabilizedMethodsCopyData &   copy_data)
+  StabilizedMethodsCopyData    &copy_data)
 {
   // Loop and quadrature informations
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 

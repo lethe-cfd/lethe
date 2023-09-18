@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
 
@@ -52,12 +51,8 @@ VolumeOfFluid<dim>::setup_assemblers()
   // Time-stepping schemes
   if (is_bdf(this->simulation_control->get_assembly_method()))
     {
-      if (is_sdirk(this->simulation_control->get_assembly_method()))
-        throw std::invalid_argument(
-          "SDIRK time-stepping scheme is not supported in the VOF solver ");
-      else
-        this->assemblers.push_back(
-          std::make_shared<VOFAssemblerBDF<dim>>(this->simulation_control));
+      this->assemblers.push_back(
+        std::make_shared<VOFAssemblerBDF<dim>>(this->simulation_control));
     }
 
   // Core assembler
@@ -71,6 +66,8 @@ template <int dim>
 void
 VolumeOfFluid<dim>::assemble_system_matrix()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble matrix");
+
   this->system_matrix = 0;
   setup_assemblers();
 
@@ -100,18 +97,15 @@ template <int dim>
 void
 VolumeOfFluid<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  VOFScratchData<dim> &                                 scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  VOFScratchData<dim>                                  &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
     return;
 
 
-  scratch_data.reinit(cell,
-                      this->evaluation_point,
-                      this->previous_solutions,
-                      this->solution_stages);
+  scratch_data.reinit(cell, this->evaluation_point, this->previous_solutions);
 
   const DoFHandler<dim> *dof_handler_fd =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -192,7 +186,7 @@ template <int dim>
 void
 VolumeOfFluid<dim>::assemble_system_rhs()
 {
-  // TimerOutput::Scope t(this->computing_timer, "Assemble VOF RHS");
+  TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
 
   this->system_rhs = 0;
   setup_assemblers();
@@ -223,17 +217,14 @@ template <int dim>
 void
 VolumeOfFluid<dim>::assemble_local_system_rhs(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  VOFScratchData<dim> &                                 scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  VOFScratchData<dim>                                  &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
     return;
 
-  scratch_data.reinit(cell,
-                      this->evaluation_point,
-                      this->previous_solutions,
-                      this->solution_stages);
+  scratch_data.reinit(cell, this->evaluation_point, this->previous_solutions);
 
   const DoFHandler<dim> *dof_handler_fd =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -324,13 +315,6 @@ VolumeOfFluid<dim>::attach_solution_to_output(DataOut<dim> &data_out)
 
   auto vof_parameters = this->simulation_parameters.multiphysics.vof_parameters;
 
-  if (vof_parameters.peeling_wetting.enable_peeling ||
-      vof_parameters.peeling_wetting.enable_wetting)
-    {
-      // Peeling/wetting output
-      data_out.add_data_vector(this->dof_handler, marker_pw, "marker_pw");
-    }
-
   if (vof_parameters.surface_tension_force.enable &&
       vof_parameters.surface_tension_force.output_vof_auxiliary_fields)
     {
@@ -405,7 +389,7 @@ template <typename VectorType>
 std::pair<Tensor<1, dim>, Tensor<1, dim>>
 VolumeOfFluid<dim>::calculate_barycenter(
   const TrilinosWrappers::MPI::Vector &solution,
-  const VectorType &                   solution_fd)
+  const VectorType                    &solution_fd)
 {
   const MPI_Comm mpi_communicator = this->triangulation->get_communicator();
 
@@ -498,20 +482,22 @@ VolumeOfFluid<3>::calculate_barycenter<TrilinosWrappers::MPI::Vector>(
 
 template std::pair<Tensor<1, 2>, Tensor<1, 2>>
 VolumeOfFluid<2>::calculate_barycenter<TrilinosWrappers::MPI::BlockVector>(
-  const TrilinosWrappers::MPI::Vector &     solution,
+  const TrilinosWrappers::MPI::Vector      &solution,
   const TrilinosWrappers::MPI::BlockVector &current_solution_fd);
 
 
 template std::pair<Tensor<1, 3>, Tensor<1, 3>>
 VolumeOfFluid<3>::calculate_barycenter<TrilinosWrappers::MPI::BlockVector>(
-  const TrilinosWrappers::MPI::Vector &     solution,
+  const TrilinosWrappers::MPI::Vector      &solution,
   const TrilinosWrappers::MPI::BlockVector &current_solution_fd);
 
 
 template <int dim>
+template <typename VectorType>
 void
 VolumeOfFluid<dim>::calculate_volume_and_mass(
   const TrilinosWrappers::MPI::Vector &solution,
+  const VectorType                    &current_solution_fd,
   const Parameters::FluidIndicator     monitored_fluid)
 {
   const MPI_Comm mpi_communicator = this->triangulation->get_communicator();
@@ -521,10 +507,22 @@ VolumeOfFluid<dim>::calculate_volume_and_mass(
                               *this->cell_quadrature,
                               update_values | update_JxW_values);
 
+  QGauss<dim>            quadrature_formula(this->cell_quadrature->size());
+  const DoFHandler<dim> *dof_handler_fd =
+    multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
+
+  FEValues<dim> fe_values_fd(*this->mapping,
+                             dof_handler_fd->get_fe(),
+                             quadrature_formula,
+                             update_values);
+
+  const FEValuesExtractors::Scalar pressure(dim);
+
   const unsigned int  n_q_points = this->cell_quadrature->size();
   std::vector<double> phase_values(n_q_points);
   std::vector<double> density_0(n_q_points);
   std::vector<double> density_1(n_q_points);
+  std::vector<double> pressure_values(n_q_points);
 
   this->volume_monitored = 0.;
   this->mass_monitored   = 0.;
@@ -534,14 +532,31 @@ VolumeOfFluid<dim>::calculate_volume_and_mass(
     this->simulation_parameters.physical_properties_manager
       .get_density_vector();
   std::map<field, std::vector<double>> fields;
+  fields.insert(
+    std::pair<field, std::vector<double>>(field::pressure, n_q_points));
 
-  for (const auto &cell : this->dof_handler.active_cell_iterators())
+  for (const auto &cell_vof : this->dof_handler.active_cell_iterators())
     {
-      if (cell->is_locally_owned())
+      if (cell_vof->is_locally_owned())
         {
-          fe_values_vof.reinit(cell);
+          fe_values_vof.reinit(cell_vof);
           fe_values_vof.get_function_values(solution, phase_values);
 
+          if (this->simulation_parameters.physical_properties_manager
+                .field_is_required(field::pressure))
+            {
+              // Get fluid dynamics active cell iterator
+              typename DoFHandler<dim>::active_cell_iterator cell_fd(
+                &(*(this->triangulation)),
+                cell_vof->level(),
+                cell_vof->index(),
+                dof_handler_fd);
+
+              fe_values_fd.reinit(cell_fd);
+              fe_values_fd[pressure].get_function_values(current_solution_fd,
+                                                         pressure_values);
+              set_field_vector(field::pressure, pressure_values, fields);
+            }
           // Calculate physical properties for the cell
           density_models[0]->vector_value(fields, density_0);
           density_models[1]->vector_value(fields, density_1);
@@ -550,7 +565,8 @@ VolumeOfFluid<dim>::calculate_volume_and_mass(
             {
               switch (monitored_fluid)
                 {
-                    case Parameters::FluidIndicator::fluid0: {
+                  case Parameters::FluidIndicator::fluid0:
+                    {
                       this->volume_monitored +=
                         fe_values_vof.JxW(q) * (1 - phase_values[q]);
                       this->mass_monitored += fe_values_vof.JxW(q) *
@@ -558,7 +574,8 @@ VolumeOfFluid<dim>::calculate_volume_and_mass(
                                               density_0[q];
                       break;
                     }
-                    case Parameters::FluidIndicator::fluid1: {
+                  case Parameters::FluidIndicator::fluid1:
+                    {
                       this->volume_monitored +=
                         fe_values_vof.JxW(q) * phase_values[q];
                       this->mass_monitored +=
@@ -578,107 +595,6 @@ VolumeOfFluid<dim>::calculate_volume_and_mass(
   this->mass_monitored =
     Utilities::MPI::sum(this->mass_monitored, mpi_communicator);
 }
-
-template <int dim>
-template <typename VectorType>
-double
-VolumeOfFluid<dim>::find_monitored_fluid_avg_pressure(
-  const TrilinosWrappers::MPI::Vector &solution,
-  const VectorType &                   current_solution_fd,
-  const Parameters::FluidIndicator     monitored_fluid)
-{
-  QGauss<dim>    quadrature_formula(this->cell_quadrature->size());
-  const MPI_Comm mpi_communicator = this->triangulation->get_communicator();
-
-  FEValues<dim> fe_values_vof(*this->mapping,
-                              *this->fe,
-                              *this->cell_quadrature,
-                              update_values);
-
-  const DoFHandler<dim> *dof_handler_fd =
-    multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
-
-  FEValues<dim> fe_values_fd(*this->mapping,
-                             dof_handler_fd->get_fe(),
-                             quadrature_formula,
-                             update_values);
-
-  const unsigned int  n_q_points = quadrature_formula.size();
-  std::vector<double> local_phase_values(n_q_points);
-
-  const FEValuesExtractors::Scalar pressure(dim);
-  std::vector<double>              local_pressure_values(n_q_points);
-
-  double pressure_monitored_avg = 0.;
-  int    nb_values(0);
-
-  for (const auto &cell_vof : this->dof_handler.active_cell_iterators())
-    {
-      if (cell_vof->is_locally_owned())
-        {
-          fe_values_vof.reinit(cell_vof);
-          fe_values_vof.get_function_values(solution, local_phase_values);
-
-          // Get fluid dynamics active cell iterator
-          typename DoFHandler<dim>::active_cell_iterator cell_fd(
-            &(*(this->triangulation)),
-            cell_vof->level(),
-            cell_vof->index(),
-            dof_handler_fd);
-
-          fe_values_fd.reinit(cell_fd);
-          fe_values_fd[pressure].get_function_values(current_solution_fd,
-                                                     local_pressure_values);
-
-          for (unsigned int q = 0; q < n_q_points; q++)
-            {
-              // Gather minimum and maximum pressure on the phase of interest
-              if ((monitored_fluid == Parameters::FluidIndicator::fluid0 &&
-                   local_phase_values[q] < 0.5) ||
-                  (monitored_fluid == Parameters::FluidIndicator::fluid1 &&
-                   local_phase_values[q] > 0.5))
-                {
-                  pressure_monitored_avg += local_pressure_values[q];
-                  nb_values++;
-                }
-            }
-        }
-    }
-
-  pressure_monitored_avg =
-    Utilities::MPI::sum(pressure_monitored_avg, mpi_communicator) /
-    static_cast<double>(Utilities::MPI::sum(nb_values, mpi_communicator));
-
-  return pressure_monitored_avg;
-}
-
-template double
-VolumeOfFluid<2>::find_monitored_fluid_avg_pressure<
-  TrilinosWrappers::MPI::Vector>(
-  const TrilinosWrappers::MPI::Vector &solution,
-  const TrilinosWrappers::MPI::Vector &current_solution_fd,
-  const Parameters::FluidIndicator     monitored_fluid);
-
-template double
-VolumeOfFluid<3>::find_monitored_fluid_avg_pressure<
-  TrilinosWrappers::MPI::Vector>(
-  const TrilinosWrappers::MPI::Vector &solution,
-  const TrilinosWrappers::MPI::Vector &current_solution_fd,
-  const Parameters::FluidIndicator     monitored_fluid);
-
-template double
-VolumeOfFluid<2>::find_monitored_fluid_avg_pressure<
-  TrilinosWrappers::MPI::BlockVector>(
-  const TrilinosWrappers::MPI::Vector &     solution,
-  const TrilinosWrappers::MPI::BlockVector &current_solution_fd,
-  const Parameters::FluidIndicator          monitored_fluid);
-
-template double
-VolumeOfFluid<3>::find_monitored_fluid_avg_pressure<
-  TrilinosWrappers::MPI::BlockVector>(
-  const TrilinosWrappers::MPI::Vector &     solution,
-  const TrilinosWrappers::MPI::BlockVector &current_solution_fd,
-  const Parameters::FluidIndicator          monitored_fluid);
 
 template <int dim>
 void
@@ -759,6 +675,8 @@ VolumeOfFluid<dim>::postprocess(bool first_iteration)
     {
       // Calculate volume and mass (this->mass_monitored)
       calculate_volume_and_mass(this->present_solution,
+                                *multiphysics->get_solution(
+                                  PhysicsID::fluid_dynamics),
                                 simulation_parameters.multiphysics
                                   .vof_parameters.conservation.monitored_fluid);
 
@@ -908,19 +826,21 @@ VolumeOfFluid<dim>::postprocess(bool first_iteration)
               if (dim == 3)
                 dependent_column_names.push_back("vz_vof");
 
-              std::vector<Tensor<1, dim>> position_and_velocity_vector;
-              position_and_velocity_vector.push_back(
-                position_and_velocity.first);
-              position_and_velocity_vector.push_back(
-                position_and_velocity.second);
+              std::vector<Tensor<1, dim>> position_vector{
+                position_and_velocity.first};
+              std::vector<Tensor<1, dim>> velocity_vector{
+                position_and_velocity.second};
 
-              std::vector<double> time(
-                this->simulation_control->get_current_time());
+              std::vector<std::vector<Tensor<1, dim>>>
+                position_and_velocity_vectors{position_vector, velocity_vector};
+
+              std::vector<double> time = {
+                this->simulation_control->get_current_time()};
 
               TableHandler table = make_table_scalars_tensors(
                 time,
                 independent_column_names,
-                position_and_velocity_vector,
+                position_and_velocity_vectors,
                 dependent_column_names,
                 this->simulation_parameters.simulation_control.log_precision);
 
@@ -969,6 +889,14 @@ VolumeOfFluid<dim>::postprocess(bool first_iteration)
             }
         }
     }
+
+  if (this->simulation_parameters.timer.type ==
+      Parameters::Timer::Type::iteration)
+    {
+      announce_string(this->pcout, "VOF");
+      this->computing_timer.print_summary();
+      this->computing_timer.reset();
+    }
 }
 
 template <int dim>
@@ -976,12 +904,6 @@ void
 VolumeOfFluid<dim>::modify_solution()
 {
   auto vof_parameters = this->simulation_parameters.multiphysics.vof_parameters;
-  // Peeling/wetting
-  if (vof_parameters.peeling_wetting.enable_peeling ||
-      vof_parameters.peeling_wetting.enable_wetting)
-    {
-      handle_peeling_wetting();
-    }
   // Interface sharpening
   if (vof_parameters.sharpening.enable)
     {
@@ -1106,8 +1028,9 @@ VolumeOfFluid<dim>::find_sharpening_threshold()
           st_min             = st_avg;
           mass_deviation_min = mass_deviation_avg;
         }
-  } while (std::abs(mass_deviation_avg) > mass_deviation_tol &&
-           nb_search_ite < max_iterations);
+    }
+  while (std::abs(mass_deviation_avg) > mass_deviation_tol &&
+         nb_search_ite < max_iterations);
 
   // Take minimum deviation in between the two endpoints of the last
   // interval searched, if out of the do-while loop because max_iterations is
@@ -1178,7 +1101,10 @@ VolumeOfFluid<dim>::calculate_mass_deviation(
   sharpen_interface(evaluation_point, sharpening_threshold, false);
 
   // Calculate mass of the monitored phase
-  calculate_volume_and_mass(evaluation_point, monitored_fluid);
+  calculate_volume_and_mass(evaluation_point,
+                            *multiphysics->get_solution(
+                              PhysicsID::fluid_dynamics),
+                            monitored_fluid);
 
   // Calculate relative mass deviation
   double mass_deviation = (this->mass_monitored - this->mass_first_iteration) /
@@ -1368,7 +1294,7 @@ VolumeOfFluid<dim>::solve_projection_phase_fraction(
     this->locally_owned_dofs, triangulation->get_communicator());
 
   SolverControl solver_control(
-    this->simulation_parameters.linear_solver.max_iterations,
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF).max_iterations,
     linear_solver_tolerance,
     true,
     true);
@@ -1376,11 +1302,14 @@ VolumeOfFluid<dim>::solve_projection_phase_fraction(
   TrilinosWrappers::SolverCG solver(solver_control);
 
   const double ilu_fill =
-    this->simulation_parameters.linear_solver.ilu_precond_fill;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_fill;
   const double ilu_atol =
-    this->simulation_parameters.linear_solver.ilu_precond_atol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_atol;
   const double ilu_rtol =
-    this->simulation_parameters.linear_solver.ilu_precond_rtol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_rtol;
 
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
@@ -1574,7 +1503,7 @@ VolumeOfFluid<dim>::solve_projected_phase_fraction_gradient()
     present_projected_phase_fraction_gradient_solution;
 
   SolverControl solver_control(
-    this->simulation_parameters.linear_solver.max_iterations,
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF).max_iterations,
     linear_solver_tolerance,
     true,
     true);
@@ -1582,11 +1511,14 @@ VolumeOfFluid<dim>::solve_projected_phase_fraction_gradient()
   TrilinosWrappers::SolverCG solver(solver_control);
 
   const double ilu_fill =
-    this->simulation_parameters.linear_solver.ilu_precond_fill;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_fill;
   const double ilu_atol =
-    this->simulation_parameters.linear_solver.ilu_precond_atol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_atol;
   const double ilu_rtol =
-    this->simulation_parameters.linear_solver.ilu_precond_rtol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_rtol;
 
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
@@ -1761,7 +1693,7 @@ VolumeOfFluid<dim>::solve_curvature()
   completely_distributed_curvature_solution = present_curvature_solution;
 
   SolverControl solver_control(
-    this->simulation_parameters.linear_solver.max_iterations,
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF).max_iterations,
     linear_solver_tolerance,
     true,
     true);
@@ -1769,11 +1701,14 @@ VolumeOfFluid<dim>::solve_curvature()
   TrilinosWrappers::SolverCG solver(solver_control);
 
   const double ilu_fill =
-    this->simulation_parameters.linear_solver.ilu_precond_fill;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_fill;
   const double ilu_atol =
-    this->simulation_parameters.linear_solver.ilu_precond_atol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_atol;
   const double ilu_rtol =
-    this->simulation_parameters.linear_solver.ilu_precond_rtol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_rtol;
 
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
@@ -2129,9 +2064,6 @@ VolumeOfFluid<dim>::setup_dofs()
                              dsp,
                              mpi_communicator);
 
-  // Initialize peeling/wetting variables
-  marker_pw.reinit(locally_owned_dofs, mpi_communicator);
-
   this->pcout << "   Number of VOF degrees of freedom: "
               << this->dof_handler.n_dofs() << std::endl;
 
@@ -2265,29 +2197,34 @@ void
 VolumeOfFluid<dim>::solve_linear_system(const bool initial_step,
                                         const bool /*renewed_matrix*/)
 {
+  TimerOutput::Scope t(this->computing_timer, "Solve linear system");
+
   auto mpi_communicator = this->triangulation->get_communicator();
 
   const AffineConstraints<double> &constraints_used =
     initial_step ? this->nonzero_constraints : this->zero_constraints;
 
   const double absolute_residual =
-    simulation_parameters.linear_solver.minimum_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).minimum_residual;
   const double relative_residual =
-    simulation_parameters.linear_solver.relative_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).relative_residual;
 
   const double linear_solver_tolerance =
     std::max(relative_residual * this->system_rhs.l2_norm(), absolute_residual);
 
-  if (this->simulation_parameters.linear_solver.verbosity !=
+  if (this->simulation_parameters.linear_solver.at(PhysicsID::VOF).verbosity !=
       Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
 
-  const double ilu_fill = simulation_parameters.linear_solver.ilu_precond_fill;
-  const double ilu_atol = simulation_parameters.linear_solver.ilu_precond_atol;
-  const double ilu_rtol = simulation_parameters.linear_solver.ilu_precond_rtol;
+  const double ilu_fill =
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).ilu_precond_fill;
+  const double ilu_atol =
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).ilu_precond_atol;
+  const double ilu_rtol =
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).ilu_precond_rtol;
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
 
@@ -2299,13 +2236,14 @@ VolumeOfFluid<dim>::solve_linear_system(const bool initial_step,
     this->locally_owned_dofs, mpi_communicator);
 
   SolverControl solver_control(
-    simulation_parameters.linear_solver.max_iterations,
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).max_iterations,
     linear_solver_tolerance,
     true,
     true);
 
   TrilinosWrappers::SolverGMRES::AdditionalData solver_parameters(
-    false, simulation_parameters.linear_solver.max_krylov_vectors);
+    false,
+    simulation_parameters.linear_solver.at(PhysicsID::VOF).max_krylov_vectors);
 
 
   TrilinosWrappers::SolverGMRES solver(solver_control, solver_parameters);
@@ -2316,7 +2254,7 @@ VolumeOfFluid<dim>::solve_linear_system(const bool initial_step,
                this->system_rhs,
                ilu_preconditioner);
 
-  if (simulation_parameters.linear_solver.verbosity !=
+  if (simulation_parameters.linear_solver.at(PhysicsID::VOF).verbosity !=
       Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Iterative solver took : " << solver_control.last_step()
@@ -2515,7 +2453,7 @@ VolumeOfFluid<dim>::solve_interface_sharpening(
 
 
   SolverControl solver_control(
-    this->simulation_parameters.linear_solver.max_iterations,
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF).max_iterations,
     linear_solver_tolerance,
     true,
     true);
@@ -2526,11 +2464,14 @@ VolumeOfFluid<dim>::solve_interface_sharpening(
   // Trillinos Wrapper ILU Preconditioner
   //*********************************************
   const double ilu_fill =
-    this->simulation_parameters.linear_solver.ilu_precond_fill;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_fill;
   const double ilu_atol =
-    this->simulation_parameters.linear_solver.ilu_precond_atol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_atol;
   const double ilu_rtol =
-    this->simulation_parameters.linear_solver.ilu_precond_rtol;
+    this->simulation_parameters.linear_solver.at(PhysicsID::VOF)
+      .ilu_precond_rtol;
 
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
@@ -2589,412 +2530,6 @@ VolumeOfFluid<dim>::assemble_mass_matrix(
           this->nonzero_constraints.distribute_local_to_global(
             cell_matrix, local_dof_indices, mass_matrix);
         }
-    }
-}
-
-template <int dim>
-void
-VolumeOfFluid<dim>::handle_peeling_wetting()
-{
-  this->nb_cells_wet    = 0;
-  this->nb_cells_peeled = 0;
-
-  for (unsigned int i_bc = 0;
-       i_bc < this->simulation_parameters.boundary_conditions_vof.size;
-       ++i_bc)
-    {
-      if (this->simulation_parameters.boundary_conditions_vof.type[i_bc] ==
-          BoundaryConditions::BoundaryType::pw)
-        {
-          // Parse fluid present solution to apply_peeling_wetting method
-          if (multiphysics->fluid_dynamics_is_block())
-            {
-              if (this->simulation_parameters.multiphysics
-                    .use_time_average_velocity_field &&
-                  simulation_control->get_current_time() >
-                    this->simulation_parameters.post_processing.initial_time)
-                {
-                  apply_peeling_wetting(
-                    i_bc,
-                    *multiphysics->get_block_time_average_solution(
-                      PhysicsID::fluid_dynamics));
-                }
-              else
-                {
-                  apply_peeling_wetting(i_bc,
-                                        *multiphysics->get_block_solution(
-                                          PhysicsID::fluid_dynamics));
-                }
-            }
-          else
-            {
-              if (this->simulation_parameters.multiphysics
-                    .use_time_average_velocity_field &&
-                  simulation_control->get_current_time() >
-                    this->simulation_parameters.post_processing.initial_time)
-                {
-                  apply_peeling_wetting(
-                    i_bc,
-                    *multiphysics->get_time_average_solution(
-                      PhysicsID::fluid_dynamics));
-                }
-              else
-                {
-                  apply_peeling_wetting(i_bc,
-                                        *multiphysics->get_solution(
-                                          PhysicsID::fluid_dynamics));
-                }
-            }
-        }
-    } // end loop on boundary_conditions_vof
-
-  // Output total of peeled/wet cells in the entire domain
-  if (this->simulation_parameters.multiphysics.vof_parameters.peeling_wetting
-        .verbosity != Parameters::Verbosity::quiet)
-    {
-      auto mpi_communicator = this->triangulation->get_communicator();
-
-      this->pcout << "Peeling/wetting correction at step "
-                  << this->simulation_control->get_step_number() << std::endl;
-      this->pcout << "  -number of wet cells: "
-                  << Utilities::MPI::sum(this->nb_cells_wet, mpi_communicator)
-                  << std::endl;
-      this->pcout << "  -number of peeled cells: "
-                  << Utilities::MPI::sum(this->nb_cells_peeled,
-                                         mpi_communicator)
-                  << std::endl;
-    }
-}
-
-template <int dim>
-template <typename VectorType>
-void
-VolumeOfFluid<dim>::apply_peeling_wetting(const unsigned int i_bc,
-                                          const VectorType &current_solution_fd)
-{
-  const DoFHandler<dim> *dof_handler_fd =
-    multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
-
-  // Initializations
-  locally_owned_dofs = this->dof_handler.locally_owned_dofs();
-  std::vector<types::global_dof_index> dof_indices_vof(
-    fe->dofs_per_cell); //  local connectivity
-  auto mpi_communicator = this->triangulation->get_communicator();
-
-  solution_pw.reinit(this->locally_owned_dofs, mpi_communicator);
-  solution_pw = this->present_solution;
-
-  FEFaceValues<dim> fe_face_values_vof(*this->mapping,
-                                       *this->fe,
-                                       *this->face_quadrature,
-                                       update_values);
-
-  FEFaceValues<dim> fe_face_values_fd(*this->mapping,
-                                      dof_handler_fd->get_fe(),
-                                      *this->face_quadrature,
-                                      update_values | update_gradients |
-                                        update_normal_vectors);
-
-  const unsigned int n_q_points_face = this->face_quadrature->size();
-
-  const FEValuesExtractors::Scalar pressure(dim);
-  std::vector<double>              pressure_values(n_q_points_face);
-  std::vector<Tensor<1, dim>>      pressure_gradients(n_q_points_face);
-  std::vector<double>              phase_values(n_q_points_face);
-  Tensor<1, dim>                   normal_vector_fd;
-
-  unsigned int boundary_id =
-    this->simulation_parameters.boundary_conditions_vof.id[i_bc];
-
-  // Physical properties
-  const auto density_models =
-    this->simulation_parameters.physical_properties_manager
-      .get_density_vector();
-  std::map<field, std::vector<double>> fields;
-
-  std::vector<double> density_0(n_q_points_face);
-  std::vector<double> density_1(n_q_points_face);
-
-  // Parse fluid present solution to calculate average pressure
-  double pressure_monitored_avg = 0.;
-
-  if (multiphysics->fluid_dynamics_is_block())
-    {
-      if (this->simulation_parameters.multiphysics
-            .use_time_average_velocity_field &&
-          simulation_control->get_current_time() >
-            this->simulation_parameters.post_processing.initial_time)
-        {
-          pressure_monitored_avg = find_monitored_fluid_avg_pressure(
-            this->present_solution,
-            *multiphysics->get_block_time_average_solution(
-              PhysicsID::fluid_dynamics),
-            this->simulation_parameters.multiphysics.vof_parameters.conservation
-              .monitored_fluid);
-        }
-      else
-        {
-          pressure_monitored_avg = find_monitored_fluid_avg_pressure(
-            this->present_solution,
-            *multiphysics->get_block_solution(PhysicsID::fluid_dynamics),
-            this->simulation_parameters.multiphysics.vof_parameters.conservation
-              .monitored_fluid);
-        }
-    }
-  else
-    {
-      if (this->simulation_parameters.multiphysics
-            .use_time_average_velocity_field &&
-          simulation_control->get_current_time() >
-            this->simulation_parameters.post_processing.initial_time)
-        {
-          pressure_monitored_avg = find_monitored_fluid_avg_pressure(
-            this->present_solution,
-            *multiphysics->get_time_average_solution(PhysicsID::fluid_dynamics),
-            this->simulation_parameters.multiphysics.vof_parameters.conservation
-              .monitored_fluid);
-        }
-      else
-        {
-          pressure_monitored_avg = find_monitored_fluid_avg_pressure(
-            this->present_solution,
-            *multiphysics->get_solution(PhysicsID::fluid_dynamics),
-            this->simulation_parameters.multiphysics.vof_parameters.conservation
-              .monitored_fluid);
-        }
-    }
-
-  // Loop on cell_vof
-  for (const auto &cell_vof : dof_handler.active_cell_iterators())
-    {
-      if (cell_vof->is_locally_owned() && cell_vof->at_boundary())
-        {
-          // Initialize sum of values on quadrature points
-          unsigned int phase_denser_fluid_q(0);
-          unsigned int phase_lighter_fluid_q(0);
-          float        phase_values_q(0);
-          double       pressure_values_q(0);
-          unsigned int n_q_negative_pressure_grad(0);
-          unsigned int n_q_positive_pressure_grad(0);
-
-          bool cell_face_at_pw_bounday(false);
-
-          // Local index (see deal.II step 4)
-          cell_vof->get_dof_indices(dof_indices_vof);
-
-          for (const auto face : cell_vof->face_indices())
-            {
-              if (cell_vof->face(face)->at_boundary() &&
-                  cell_vof->face(face)->boundary_id() == boundary_id)
-                {
-                  cell_face_at_pw_bounday = true;
-                  // Get fluid dynamics active cell iterator
-                  typename DoFHandler<dim>::active_cell_iterator cell_fd(
-                    &(*(this->triangulation)),
-                    cell_vof->level(),
-                    cell_vof->index(),
-                    dof_handler_fd);
-
-                  // Reinit fe_face_values for Fluid Dynamics and VOF
-                  fe_face_values_vof.reinit(cell_vof, face);
-                  fe_face_values_fd.reinit(cell_fd, face);
-
-                  // Get pressure (values, gradient)
-                  fe_face_values_fd[pressure].get_function_values(
-                    current_solution_fd, pressure_values);
-                  fe_face_values_fd[pressure].get_function_gradients(
-                    current_solution_fd, pressure_gradients);
-
-                  // Get phase values
-                  fe_face_values_vof.get_function_values(present_solution,
-                                                         phase_values);
-
-                  // Calculate physical properties for the cell
-                  density_models[0]->vector_value(fields, density_0);
-                  density_models[1]->vector_value(fields, density_1);
-
-                  // Loop on the quadrature points
-                  for (unsigned int q = 0; q < n_q_points_face; q++)
-                    {
-                      // Get denser/lighter fluid id
-                      if (density_1[q] > density_0[q])
-                        phase_denser_fluid_q += 1;
-                      else
-                        phase_lighter_fluid_q += 1;
-
-                      // Condition on the pressure gradient
-                      bool peeling_condition_q(false);
-                      bool wetting_condition_q(false);
-                      for (unsigned int d = 0; d < dim; d++)
-                        {
-                          double pressure_gradient_q =
-                            pressure_gradients[q][d] *
-                            fe_face_values_fd.normal_vector(q)[d];
-
-                          // Peeling if pressure_gradient_q is negative
-                          if (pressure_gradient_q <
-                              -std::numeric_limits<double>::min())
-                            peeling_condition_q = true;
-                          // Wetting if pressure_gradient_q is positive
-                          if (pressure_gradient_q >
-                              std::numeric_limits<double>::min())
-                            wetting_condition_q = true;
-                        }
-
-                      // Check if condition is reached for this quadrature point
-                      if (peeling_condition_q)
-                        n_q_negative_pressure_grad += 1;
-                      if (wetting_condition_q)
-                        n_q_positive_pressure_grad += 1;
-
-                      pressure_values_q += pressure_values[q];
-                      phase_values_q += phase_values[q];
-                    } // end loop on quadrature points
-                }     // end condition face at pw boundary
-            }         // end loop on faces
-
-          // Check if cell is to be treated
-          if (cell_face_at_pw_bounday)
-            {
-              // Caculate average values on the cell
-              unsigned int phase_denser_fluid_cell =
-                round(phase_denser_fluid_q / n_q_points_face);
-              unsigned int phase_lighter_fluid_cell =
-                round(phase_lighter_fluid_q / n_q_points_face);
-              double phase_values_cell =
-                phase_values_q / static_cast<double>(n_q_points_face);
-              double pressure_values_cell =
-                pressure_values_q / static_cast<double>(n_q_points_face);
-
-              // Check peeling condition
-              // Note that it has priority over the wetting condition
-              if (pressure_values_cell < pressure_monitored_avg and
-                  n_q_negative_pressure_grad > n_q_points_face * 0.5)
-                {
-                  if (this->simulation_parameters.multiphysics.vof_parameters
-                        .peeling_wetting.enable_peeling)
-                    {
-                      // Peel the higher density fluid
-                      if (phase_denser_fluid_cell == 1 and
-                          phase_values_cell > 0.5)
-                        {
-                          // Progressive phase value change
-                          double new_phase =
-                            std::max(phase_values_cell - 0.25,
-                                     static_cast<double>(
-                                       phase_lighter_fluid_cell));
-
-                          change_cell_phase(PhaseChange::peeling,
-                                            new_phase,
-                                            solution_pw,
-                                            dof_indices_vof);
-                        }
-                      if (phase_denser_fluid_cell == 0 and
-                          phase_values_cell < 0.5)
-                        {
-                          // Progressive phase value change
-                          double new_phase =
-                            std::max(phase_values_cell + 0.25,
-                                     static_cast<double>(
-                                       phase_lighter_fluid_cell));
-
-                          change_cell_phase(PhaseChange::peeling,
-                                            new_phase,
-                                            solution_pw,
-                                            dof_indices_vof);
-                        }
-                    }
-                } // end condition peeling
-              // Check wetting condition if the cell is not marked as pelt
-              else if (pressure_values_cell > pressure_monitored_avg and
-                       n_q_positive_pressure_grad > n_q_points_face * 0.5)
-                {
-                  if (this->simulation_parameters.multiphysics.vof_parameters
-                        .peeling_wetting.enable_wetting)
-                    {
-                      if (phase_denser_fluid_cell == 1 and
-                          phase_values_cell > 0.5)
-                        {
-                          // Progressive phase value change
-                          double new_phase =
-                            std::min(phase_values_cell + 0.25,
-                                     static_cast<double>(
-                                       phase_denser_fluid_cell));
-
-                          change_cell_phase(PhaseChange::wetting,
-                                            new_phase,
-                                            solution_pw,
-                                            dof_indices_vof);
-                        }
-                      else if (phase_denser_fluid_cell == 0 and
-                               phase_values_cell < 0.5)
-                        {
-                          // Progressive phase value change
-                          double new_phase =
-                            std::min(phase_values_cell - 0.25,
-                                     static_cast<double>(
-                                       phase_denser_fluid_cell));
-
-                          change_cell_phase(PhaseChange::wetting,
-                                            new_phase,
-                                            solution_pw,
-                                            dof_indices_vof);
-                        }
-                    }
-                } // end condition wetting condition
-            }     // end condition cell_face_at_pw_bounday
-
-        } // end condition cell at boundary
-    }     // end loop on cells
-
-  present_solution = solution_pw;
-}
-
-template void
-VolumeOfFluid<2>::apply_peeling_wetting<TrilinosWrappers::MPI::Vector>(
-  const unsigned int                   i_bc,
-  const TrilinosWrappers::MPI::Vector &current_solution_fd);
-
-template void
-VolumeOfFluid<3>::apply_peeling_wetting<TrilinosWrappers::MPI::Vector>(
-  const unsigned int                   i_bc,
-  const TrilinosWrappers::MPI::Vector &current_solution_fd);
-
-template void
-VolumeOfFluid<2>::apply_peeling_wetting<TrilinosWrappers::MPI::BlockVector>(
-  const unsigned int                        i_bc,
-  const TrilinosWrappers::MPI::BlockVector &current_solution_fd);
-
-template void
-VolumeOfFluid<3>::apply_peeling_wetting<TrilinosWrappers::MPI::BlockVector>(
-  const unsigned int                        i_bc,
-  const TrilinosWrappers::MPI::BlockVector &current_solution_fd);
-
-template <int dim>
-void
-VolumeOfFluid<dim>::change_cell_phase(
-  const PhaseChange &                         type,
-  const double &                              new_phase,
-  TrilinosWrappers::MPI::Vector &             solution_pw,
-  const std::vector<types::global_dof_index> &dof_indices_vof)
-{
-  if (type == PhaseChange::wetting)
-    {
-      for (unsigned int k = 0; k < fe->dofs_per_cell; ++k)
-        {
-          solution_pw[dof_indices_vof[k]]     = new_phase;
-          this->marker_pw[dof_indices_vof[k]] = 1;
-        }
-      this->nb_cells_wet++;
-    }
-  else if (type == PhaseChange::peeling)
-    {
-      for (unsigned int k = 0; k < fe->dofs_per_cell; ++k)
-        {
-          solution_pw[dof_indices_vof[k]]     = new_phase;
-          this->marker_pw[dof_indices_vof[k]] = -1;
-        }
-      this->nb_cells_peeled++;
     }
 }
 

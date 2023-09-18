@@ -55,16 +55,18 @@ PhysicalPropertiesManager::initialize(
   fluid_solid_interactions_with_material_interaction_ids =
     physical_properties.fluid_solid_interactions_with_material_interaction_ids;
 
-  viscosity_scale = physical_properties.fluids[0].viscosity;
-  density_scale   = physical_properties.fluids[0].density;
+  kinematic_viscosity_scale = physical_properties.fluids[0].kinematic_viscosity;
+  density_scale             = physical_properties.fluids[0].density;
 
-  non_newtonian_flow = false;
-  constant_density   = true;
+  non_newtonian_flow       = false;
+  constant_density         = true;
+  constant_surface_tension = true;
 
-  required_fields[field::temperature]          = false;
-  required_fields[field::previous_temperature] = false;
-  required_fields[field::shear_rate]           = false;
-  required_fields[field::pressure]             = false;
+  required_fields[field::temperature]               = false;
+  required_fields[field::previous_temperature]      = false;
+  required_fields[field::shear_rate]                = false;
+  required_fields[field::pressure]                  = false;
+  required_fields[field::phase_order_cahn_hilliard] = false;
 
   // For each fluid, declare the physical properties
   for (unsigned int f = 0; f < number_of_fluids; ++f)
@@ -76,8 +78,7 @@ PhysicalPropertiesManager::initialize(
       // Store an indicator for the density to indicate if it is not constant
       // This indicator is used elsewhere in the code to throw assertions
       // if non-constant density is not implemented in a post-processing utility
-      if (physical_properties.fluids[f].density_model !=
-          Parameters::Material::DensityModel::constant)
+      if (!density.back()->is_constant_density_model())
         constant_density = false;
 
       specific_heat.push_back(
@@ -91,6 +92,7 @@ PhysicalPropertiesManager::initialize(
       rheology.push_back(
         RheologicalModel::model_cast(physical_properties.fluids[f]));
       this->establish_fields_required_by_model(*rheology[f]);
+      rheology[f]->set_dynamic_viscosity(density[f]->get_density_ref());
 
       tracer_diffusivity.push_back(
         TracerDiffusivityModel::model_cast(physical_properties.fluids[f]));
@@ -100,10 +102,7 @@ PhysicalPropertiesManager::initialize(
         ThermalExpansionModel::model_cast(physical_properties.fluids[f]));
       establish_fields_required_by_model(*thermal_expansion[f]);
 
-      if (physical_properties.fluids[f].rheological_model !=
-            Parameters::Material::RheologicalModel::newtonian &&
-          physical_properties.fluids[f].rheological_model !=
-            Parameters::Material::RheologicalModel::phase_change)
+      if (rheology.back()->is_non_newtonian_rheological_model())
         non_newtonian_flow = true;
     }
 
@@ -117,8 +116,7 @@ PhysicalPropertiesManager::initialize(
       // Store an indicator for the density to indicate if it is not constant
       // This indicator is used elsewhere in the code to throw assertions
       // if non-constant density is not implemented in a post-processing utility
-      if (physical_properties.fluids[s].density_model !=
-          Parameters::Material::DensityModel::constant)
+      if (!density.back()->is_constant_density_model())
         constant_density = false;
 
       specific_heat.push_back(
@@ -132,6 +130,7 @@ PhysicalPropertiesManager::initialize(
       rheology.push_back(
         RheologicalModel::model_cast(physical_properties.solids[s]));
       this->establish_fields_required_by_model(*rheology[s]);
+      rheology.back()->set_dynamic_viscosity(density.back()->get_density_ref());
 
       tracer_diffusivity.push_back(
         TracerDiffusivityModel::model_cast(physical_properties.solids[s]));
@@ -147,8 +146,12 @@ PhysicalPropertiesManager::initialize(
   for (unsigned int i = 0; i < number_of_material_interactions; ++i)
     {
       surface_tension.push_back(SurfaceTensionModel::model_cast(
-        physical_properties.material_interactions[i]
-          .surface_tension_parameters));
+        physical_properties.material_interactions[i]));
       establish_fields_required_by_model(*surface_tension[i]);
+      if (!surface_tension.back()->is_constant_surface_tension_model())
+        constant_surface_tension = false;
+      mobility_ch.push_back(MobilityCahnHilliardModel::model_cast(
+        physical_properties.material_interactions[i]));
+      establish_fields_required_by_model(*mobility_ch[i]);
     }
 }

@@ -33,15 +33,6 @@ DeclException1(
   << "Adaptative sharpening requires to set 'monitoring = true', and to define"
   << " the 'fluid monitored' and the 'tolerance' to reach. See documentation for further details.");
 
-DeclException1(
-  MonitoringConservationError,
-  bool,
-  << "Sharpening type is set to 'adaptative' and monitoring is set to " << arg1
-  << " but " << std::endl
-  << "conservative fluid (choices are <fluid 0, fluid 1, both>) does not include the monitored fluid. "
-  << std::endl
-  << "Conservation must be solved on the monitored fluid for adaptative sharpening to work properly.");
-
 void
 Parameters::Multiphysics::declare_parameters(ParameterHandler &prm)
 {
@@ -92,7 +83,7 @@ Parameters::Multiphysics::declare_parameters(ParameterHandler &prm)
   prm.leave_subsection();
 
   vof_parameters.declare_parameters(prm);
-  ch_parameters.declare_parameters(prm);
+  cahn_hilliard_parameters.declare_parameters(prm);
 }
 
 void
@@ -114,7 +105,7 @@ Parameters::Multiphysics::parse_parameters(ParameterHandler &prm)
   }
   prm.leave_subsection();
   vof_parameters.parse_parameters(prm);
-  ch_parameters.parse_parameters(prm);
+  cahn_hilliard_parameters.parse_parameters(prm);
 }
 
 void
@@ -124,7 +115,6 @@ Parameters::VOF::declare_parameters(ParameterHandler &prm)
   {
     conservation.declare_parameters(prm);
     sharpening.declare_parameters(prm);
-    peeling_wetting.declare_parameters(prm);
     surface_tension_force.declare_parameters(prm);
     phase_filter.declare_parameters(prm);
 
@@ -140,6 +130,13 @@ Parameters::VOF::declare_parameters(ParameterHandler &prm)
       Patterns::Double(),
       "Diffusivity (diffusion coefficient in L^2/s) in the VOF transport equation. "
       "Default value is 0 to have pure advection.");
+
+    prm.declare_entry(
+      "compressible",
+      "false",
+      Patterns::Bool(),
+      "Enable phase compressibility in the VOF equation. This leads to the inclusion of the phase * div(u) term in the VOF conservation equation. "
+      "It should be set to false when the phases are incompressible");
   }
   prm.leave_subsection();
 }
@@ -151,7 +148,6 @@ Parameters::VOF::parse_parameters(ParameterHandler &prm)
   {
     conservation.parse_parameters(prm);
     sharpening.parse_parameters(prm);
-    peeling_wetting.parse_parameters(prm);
     surface_tension_force.parse_parameters(prm);
     phase_filter.parse_parameters(prm);
 
@@ -169,17 +165,15 @@ Parameters::VOF::parse_parameters(ParameterHandler &prm)
 
     diffusivity = prm.get_double("diffusivity");
 
+    compressible = prm.get_bool("compressible");
+
+
     // Error definitions
     if (sharpening.type == Parameters::SharpeningType::adaptative)
-      Assert(conservation.monitoring == true,
-             AdaptativeSharpeningError(conservation.monitoring));
-
-    if (sharpening.type == Parameters::SharpeningType::adaptative)
-
-      Assert(
-        (conservation.conservative_fluid == Parameters::FluidIndicator::both) or
-          (conservation.conservative_fluid == conservation.monitored_fluid),
-        MonitoringConservationError(conservation.monitoring));
+      {
+        AssertThrow(conservation.monitoring,
+                    AdaptativeSharpeningError(conservation.monitoring));
+      }
   }
   prm.leave_subsection();
 }
@@ -200,14 +194,6 @@ Parameters::VOF_MassConservation::declare_parameters(ParameterHandler &prm)
       "1e-6",
       Patterns::Double(),
       "Tolerance on the mass conservation of the monitored fluid, used with adaptative sharpening");
-
-    prm.declare_entry(
-      "conservative fluid",
-      "both",
-      Patterns::Selection("fluid 0|fluid 1|both"),
-      "Fluid for which conservation is solved <fluid 0|fluid 1|both>. "
-      "Conservation on one fluid instead of both can be used to improve the wetting mechanism. "
-      "See documentation for further details.");
 
     prm.declare_entry(
       "monitored fluid",
@@ -232,18 +218,6 @@ Parameters::VOF_MassConservation::parse_parameters(ParameterHandler &prm)
   {
     monitoring = prm.get_bool("monitoring");
     tolerance  = prm.get_double("tolerance");
-
-    // Conservative fluid
-    const std::string op_cf = prm.get("conservative fluid");
-    if (op_cf == "fluid 1")
-      conservative_fluid = Parameters::FluidIndicator::fluid1;
-    else if (op_cf == "fluid 0")
-      conservative_fluid = Parameters::FluidIndicator::fluid0;
-    else if (op_cf == "both")
-      conservative_fluid = Parameters::FluidIndicator::both;
-    else
-      throw(std::runtime_error("Invalid conservative fluid. "
-                               "Options are 'fluid 0', 'fluid 1' or 'both'."));
 
     // Monitored fluid
     const std::string op_mf = prm.get("monitored fluid");
@@ -383,52 +357,6 @@ Parameters::VOF_InterfaceSharpening::parse_parameters(ParameterHandler &prm)
 }
 
 void
-Parameters::VOF_PeelingWetting::declare_parameters(ParameterHandler &prm)
-{
-  prm.enter_subsection("peeling wetting");
-  {
-    prm.declare_entry(
-      "enable peeling",
-      "false",
-      Patterns::Bool(),
-      "Enable peeling mechanism in free surface simulation <true|false>");
-
-    prm.declare_entry(
-      "enable wetting",
-      "false",
-      Patterns::Bool(),
-      "Enable wetting mechanism in free surface simulation <true|false>");
-
-    prm.declare_entry(
-      "verbosity",
-      "quiet",
-      Patterns::Selection("quiet|verbose"),
-      "State whether from the number of wet and peeled cells should be printed. "
-      "Choices are <quiet|verbose>.");
-  }
-  prm.leave_subsection();
-}
-
-void
-Parameters::VOF_PeelingWetting::parse_parameters(ParameterHandler &prm)
-{
-  prm.enter_subsection("peeling wetting");
-  {
-    enable_peeling = prm.get_bool("enable peeling");
-    enable_wetting = prm.get_bool("enable wetting");
-
-    const std::string op = prm.get("verbosity");
-    if (op == "verbose")
-      verbosity = Parameters::Verbosity::verbose;
-    else if (op == "quiet")
-      verbosity = Parameters::Verbosity::quiet;
-    else
-      throw(std::runtime_error("Invalid verbosity level"));
-  }
-  prm.leave_subsection();
-}
-
-void
 Parameters::VOF_SurfaceTensionForce::declare_parameters(ParameterHandler &prm)
 {
   prm.enter_subsection("surface tension force");
@@ -462,19 +390,11 @@ Parameters::VOF_SurfaceTensionForce::declare_parameters(ParameterHandler &prm)
       "State whether the output from the surface tension force calculations should be printed "
       "Choices are <quiet|verbose>.");
 
-    prm.enter_subsection("marangoni effect");
-    {
-      prm.declare_entry("enable",
-                        "false",
-                        Patterns::Bool(),
-                        "Enable marangoni effect calculation <true|false>");
 
-      prm.declare_entry("surface tension gradient",
-                        "0.0",
-                        Patterns::Double(),
-                        "Surface tension gradient with respect to temperature");
-    }
-    prm.leave_subsection();
+    prm.declare_entry("enable marangoni effect",
+                      "false",
+                      Patterns::Bool(),
+                      "Enable marangoni effect calculation <true|false>");
   }
   prm.leave_subsection();
 }
@@ -499,14 +419,7 @@ Parameters::VOF_SurfaceTensionForce::parse_parameters(ParameterHandler &prm)
     else
       throw(std::runtime_error("Invalid verbosity level"));
 
-    prm.enter_subsection("marangoni effect");
-    {
-      enable_marangoni_effect = prm.get_bool("enable");
-
-      // Surface tension gradient
-      surface_tension_gradient = prm.get_double("surface tension gradient");
-    }
-    prm.leave_subsection();
+    enable_marangoni_effect = prm.get_bool("enable marangoni effect");
   }
   prm.leave_subsection();
 }
@@ -597,21 +510,6 @@ Parameters::CahnHilliard::declare_parameters(ParameterHandler &prm)
         "Parameter linked to the interface thickness. Should always be bigger than the characteristic size of the smallest element");
     }
     prm.leave_subsection();
-
-    prm.enter_subsection("mobility");
-    {
-      prm.declare_entry("model",
-                        "constant",
-                        Patterns::Selection("constant|quadratic|quartic"),
-                        "Mobility model for the Cahn-Hilliard equations"
-                        "Choices are <constant|quadratic|quartic>.");
-
-      prm.declare_entry("mobility constant",
-                        "1",
-                        Patterns::Double(),
-                        "Mobility constant for the Cahn-Hilliard equations");
-    }
-    prm.leave_subsection();
   }
   prm.leave_subsection();
 }
@@ -639,21 +537,6 @@ Parameters::CahnHilliard::parse_parameters(ParameterHandler &prm)
                                  "Options are 'automatic' or 'manual'."));
 
       epsilon = prm.get_double("value");
-    }
-    prm.leave_subsection();
-
-    prm.enter_subsection("mobility");
-    {
-      const std::string op = prm.get("model");
-      if (op == "constant")
-        mobility_model = Parameters::MobilityModel::constant;
-      else if (op == "quartic")
-        mobility_model = Parameters::MobilityModel::quartic;
-      else
-        throw(std::runtime_error("Invalid mobility model "
-                                 "Options are 'constant' or 'quartic'."));
-
-      mobility_constant = prm.get_double("mobility constant");
     }
     prm.leave_subsection();
   }

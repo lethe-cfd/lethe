@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
 
@@ -45,20 +44,32 @@ CahnHilliard<dim>::setup_assemblers()
   this->assemblers.push_back(
     std::make_shared<CahnHilliardAssemblerAngleOfContact<dim>>(
       this->simulation_control,
-      this->simulation_parameters.multiphysics.ch_parameters,
       this->simulation_parameters.boundary_conditions_cahn_hilliard));
 
 
   // Core assembler
+  // For the time being, only a two-fluid system is considered for the
+  // Cahn-Hilliard equations, hence we'll always take the first element of the
+  // material_interaction vector, since it should contain all the parameters
+  // necessary for solving the equations
+
+  const auto mobility_model =
+    this->simulation_parameters.physical_properties_manager
+      .get_mobility_cahn_hilliard();
+
   this->assemblers.push_back(std::make_shared<CahnHilliardAssemblerCore<dim>>(
     this->simulation_control,
-    this->simulation_parameters.multiphysics.ch_parameters));
+    this->simulation_parameters.multiphysics.cahn_hilliard_parameters,
+    mobility_model->get_model(),
+    mobility_model->get_mobility_constant()));
 }
 
 template <int dim>
 void
 CahnHilliard<dim>::assemble_system_matrix()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble matrix");
+
   this->system_matrix = 0;
   setup_assemblers();
 
@@ -89,8 +100,8 @@ template <int dim>
 void
 CahnHilliard<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  CahnHilliardScratchData<dim> &                        scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  CahnHilliardScratchData<dim>                         &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!copy_data.cell_is_local)
@@ -99,12 +110,12 @@ CahnHilliard<dim>::assemble_local_system_matrix(
   auto &source_term = simulation_parameters.source_term->cahn_hilliard_source;
   source_term.set_time(simulation_control->get_current_time());
 
-  scratch_data.reinit(cell,
-                      this->evaluation_point,
-                      this->previous_solutions,
-                      this->solution_stages,
-                      &source_term,
-                      this->simulation_parameters.multiphysics.ch_parameters);
+  scratch_data.reinit(
+    cell,
+    this->evaluation_point,
+    this->previous_solutions,
+    &source_term,
+    this->simulation_parameters.multiphysics.cahn_hilliard_parameters);
 
   const DoFHandler<dim> *dof_handler_fluid =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -123,8 +134,6 @@ CahnHilliard<dim>::assemble_local_system_matrix(
       scratch_data.reinit_velocity(
         velocity_cell, *multiphysics->get_solution(PhysicsID::fluid_dynamics));
     }
-
-  scratch_data.calculate_physical_properties();
 
   copy_data.reset();
 
@@ -155,6 +164,8 @@ template <int dim>
 void
 CahnHilliard<dim>::assemble_system_rhs()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
+
   this->system_rhs = 0;
   setup_assemblers();
 
@@ -185,8 +196,8 @@ template <int dim>
 void
 CahnHilliard<dim>::assemble_local_system_rhs(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  CahnHilliardScratchData<dim> &                        scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  CahnHilliardScratchData<dim>                         &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!copy_data.cell_is_local)
@@ -195,12 +206,12 @@ CahnHilliard<dim>::assemble_local_system_rhs(
   auto &source_term = simulation_parameters.source_term->cahn_hilliard_source;
   source_term.set_time(simulation_control->get_current_time());
 
-  scratch_data.reinit(cell,
-                      this->evaluation_point,
-                      this->previous_solutions,
-                      this->solution_stages,
-                      &source_term,
-                      this->simulation_parameters.multiphysics.ch_parameters);
+  scratch_data.reinit(
+    cell,
+    this->evaluation_point,
+    this->previous_solutions,
+    &source_term,
+    this->simulation_parameters.multiphysics.cahn_hilliard_parameters);
 
   const DoFHandler<dim> *dof_handler_fluid =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -220,8 +231,6 @@ CahnHilliard<dim>::assemble_local_system_rhs(
         velocity_cell, *multiphysics->get_solution(PhysicsID::fluid_dynamics));
     }
 
-
-  scratch_data.calculate_physical_properties();
   copy_data.reset();
 
   for (auto &assembler : this->assemblers)
@@ -505,6 +514,14 @@ CahnHilliard<dim>::postprocess(bool first_iteration)
           0)
         this->write_phase_statistics();
     }
+
+  if (this->simulation_parameters.timer.type ==
+      Parameters::Timer::Type::iteration)
+    {
+      announce_string(this->pcout, "Cahn-Hilliard");
+      this->computing_timer.print_summary();
+      this->computing_timer.reset();
+    }
 }
 
 
@@ -560,7 +577,7 @@ CahnHilliard<dim>::compute_kelly(
   const FEValuesExtractors::Scalar phase_order(0);
   const FEValuesExtractors::Scalar chemical_potential(1);
 
-  if (ivar.first == Parameters::MeshAdaptation::Variable::phase_ch)
+  if (ivar.first == Parameters::MeshAdaptation::Variable::phase_cahn_hilliard)
     {
       KellyErrorEstimator<dim>::estimate(
         *this->mapping,
@@ -571,8 +588,8 @@ CahnHilliard<dim>::compute_kelly(
         estimated_error_per_cell,
         this->fe->component_mask(phase_order));
     }
-  else if (ivar.first ==
-           Parameters::MeshAdaptation::Variable::chemical_potential_ch)
+  else if (ivar.first == Parameters::MeshAdaptation::Variable::
+                           chemical_potential_cahn_hilliard)
     {
       KellyErrorEstimator<dim>::estimate(
         *this->mapping,
@@ -689,8 +706,8 @@ CahnHilliard<dim>::setup_dofs()
         // To impose the boundary condition only on the phase order, a component
         // mask is used at the end of the interpolate_boundary_values function
         if (this->simulation_parameters.boundary_conditions_cahn_hilliard
-              .type[i_bc] ==
-            BoundaryConditions::BoundaryType::ch_dirichlet_phase_order)
+              .type[i_bc] == BoundaryConditions::BoundaryType::
+                               cahn_hilliard_dirichlet_phase_order)
           {
             VectorTools::interpolate_boundary_values(
               this->dof_handler,
@@ -719,8 +736,8 @@ CahnHilliard<dim>::setup_dofs()
          ++i_bc)
       {
         if (this->simulation_parameters.boundary_conditions_cahn_hilliard
-              .type[i_bc] ==
-            BoundaryConditions::BoundaryType::ch_dirichlet_phase_order)
+              .type[i_bc] == BoundaryConditions::BoundaryType::
+                               cahn_hilliard_dirichlet_phase_order)
           {
             VectorTools::interpolate_boundary_values(
               this->dof_handler,
@@ -794,29 +811,39 @@ void
 CahnHilliard<dim>::solve_linear_system(const bool initial_step,
                                        const bool /*renewed_matrix*/)
 {
+  TimerOutput::Scope t(this->computing_timer, "Solve linear system");
+
   auto mpi_communicator = triangulation->get_communicator();
 
   const AffineConstraints<double> &constraints_used =
     initial_step ? nonzero_constraints : this->zero_constraints;
 
   const double absolute_residual =
-    simulation_parameters.linear_solver.minimum_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .minimum_residual;
   const double relative_residual =
-    simulation_parameters.linear_solver.relative_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .relative_residual;
 
   const double linear_solver_tolerance =
     std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);
 
-  if (this->simulation_parameters.linear_solver.verbosity !=
-      Parameters::Verbosity::quiet)
+  if (this->simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+        .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
 
-  const double ilu_fill = simulation_parameters.linear_solver.ilu_precond_fill;
-  const double ilu_atol = simulation_parameters.linear_solver.ilu_precond_atol;
-  const double ilu_rtol = simulation_parameters.linear_solver.ilu_precond_rtol;
+  const double ilu_fill =
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .ilu_precond_fill;
+  const double ilu_atol =
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .ilu_precond_atol;
+  const double ilu_rtol =
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .ilu_precond_rtol;
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
 
@@ -827,14 +854,17 @@ CahnHilliard<dim>::solve_linear_system(const bool initial_step,
   TrilinosWrappers::MPI::Vector completely_distributed_solution(
     locally_owned_dofs, mpi_communicator);
 
-  SolverControl solver_control(
-    simulation_parameters.linear_solver.max_iterations,
-    linear_solver_tolerance,
-    true,
-    true);
+  SolverControl solver_control(simulation_parameters.linear_solver
+                                 .at(PhysicsID::cahn_hilliard)
+                                 .max_iterations,
+                               linear_solver_tolerance,
+                               true,
+                               true);
 
   TrilinosWrappers::SolverGMRES::AdditionalData solver_parameters(
-    false, simulation_parameters.linear_solver.max_krylov_vectors);
+    false,
+    simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+      .max_krylov_vectors);
 
 
   TrilinosWrappers::SolverGMRES solver(solver_control, solver_parameters);
@@ -845,8 +875,8 @@ CahnHilliard<dim>::solve_linear_system(const bool initial_step,
                system_rhs,
                ilu_preconditioner);
 
-  if (simulation_parameters.linear_solver.verbosity !=
-      Parameters::Verbosity::quiet)
+  if (simulation_parameters.linear_solver.at(PhysicsID::cahn_hilliard)
+        .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Iterative solver took : " << solver_control.last_step()
                   << " steps " << std::endl;

@@ -11,7 +11,7 @@ This example simulates a dam break experiment from the Maritime Research Institu
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes_3d`` (Q1-Q1)
+- Solver: ``gls_navier_stokes`` (Q1-Q1)
 - Two phase flow handled by the Volume-of-Fluids (VOF) approach with phase fraction filtration
 - Mesh adaptation using phase fraction
 - Unsteady problem handled by an adaptive BDF1 time-stepping scheme
@@ -88,7 +88,7 @@ Simulation Control
 ~~~~~~~~~~~~~~~~~~
 
 Time integration is handled by a 1st order backward differentiation scheme (`bdf1`), for a :math:`6 \ \text{s}` simulation time with an initial time step of :math:`0.001 \ \text{s}`. Time-step adaptation is enabled using ``adapt=true``
-and the max CFL is :math:`0.5`.
+and the max CFL is :math:`0.8`.
 
 .. note::
     This example uses an adaptive time-stepping method, where the time-steps are modified during the simulation to keep the maximum value of the CFL condition below the given threshold (0.5).
@@ -100,7 +100,7 @@ and the max CFL is :math:`0.5`.
       set time end                     = 6
       set time step                    = 0.001
       set adapt                        = true
-      set max cfl                      = 0.5
+      set max cfl                      = 0.8
       set output name                  = 3d-dam-break
       set output frequency             = 5
       set output path                  = ./output/
@@ -146,7 +146,7 @@ The ``physical properties`` subsection defines the physical properties of the fl
 Initial Conditions
 ~~~~~~~~~~~~~~~~~~
 
-In the ``initial conditions`` subsection, we need to define the interface between the two fluids. We define this interface by using a function expression in the ``VOF`` subsection of ``initial conditions``.
+In the ``initial conditions`` subsection, we need to define the interface between the two fluids. We define this interface by using a function expression in the ``VOF`` subsection of ``initial conditions``. A projection step is applied to ensure a smooth definition of the initial condition.
 
 .. code-block:: text
 
@@ -158,6 +158,10 @@ In the ``initial conditions`` subsection, we need to define the interface betwee
 
       subsection VOF
         set Function expression = if (x>1.992 & z<0.55 & y>=-0.5, 1, 0)
+        subsection projection step
+          set enable           = true
+          set diffusion factor = 1
+        end
       end
     end
 
@@ -227,9 +231,9 @@ The ``mesh adaptation`` section controls the dynamic mesh adaptation. Here, we c
 Running the Simulation
 -----------------------
 
-We call the gls_navier_stokes_3d by invoking:
+We call the gls_navier_stokes by invoking:
 
-``mpirun -np $number_of_CPU_cores gls_navier_stokes_3d 3d-dam-break.prm``
+``mpirun -np $number_of_CPU_cores gls_navier_stokes 3d-dam-break.prm``
 
 .. warning::
     Make sure to compile Lethe in `Release` mode and run in parallel using ``mpirun``. This simulation took :math:`\approx` 17 hours on 64 processes (runned on the `Narval <https://docs.alliancecan.ca/wiki/Narval/en>`_ cluster).
@@ -272,4 +276,4 @@ References
 -----------
 
 
-`[1] <https://www.spheric-sph.org/tests/test-02>`_ Issa, R., & Violeau, D. (2006). Test-case 2, 3D dambreaking, Release 1.1. ERCOFTAC, SPH European Research Interest Community SIG, Électricité de France, Laboratoire National d’Hydraulique et Environnement. 
+`[1] <https://www.spheric-sph.org/tests/test-02>`_ R. Issa and D. Violeau, “Test-case 2, 3D dambreaking, Release 1.1,” *ERCOFTAC SPH Eur. Res. Interest Community SIG Électricité Fr. Lab. Natl. Hydraul. Environ.*, 2006, Accessed: Dec. 07, 2022. [Online]. Available: https://www.spheric-sph.org/tests/test-02

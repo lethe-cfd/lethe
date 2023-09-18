@@ -20,6 +20,7 @@
 #define lethe_physical_properties_manager_h
 
 #include <core/density_model.h>
+#include <core/mobility_ch_model.h>
 #include <core/rheological_model.h>
 #include <core/specific_heat_model.h>
 #include <core/surface_tension_model.h>
@@ -161,6 +162,13 @@ public:
     return surface_tension[material_interaction_id];
   }
 
+  std::shared_ptr<MobilityCahnHilliardModel>
+  get_mobility_cahn_hilliard(
+    const unsigned int material_interaction_id = 0) const
+  {
+    return mobility_ch[material_interaction_id];
+  }
+
   // Vector Getters for the physical property models
   std::vector<std::shared_ptr<DensityModel>>
   get_density_vector() const
@@ -204,10 +212,16 @@ public:
     return surface_tension;
   }
 
-  double
-  get_viscosity_scale() const
+  std::vector<std::shared_ptr<MobilityCahnHilliardModel>>
+  get_mobility_ch_vector() const
   {
-    return viscosity_scale;
+    return mobility_ch;
+  }
+
+  double
+  get_kinematic_viscosity_scale() const
+  {
+    return kinematic_viscosity_scale;
   }
 
   double
@@ -239,6 +253,12 @@ public:
   density_is_constant() const
   {
     return constant_density;
+  }
+
+  bool
+  surface_tension_is_constant() const
+  {
+    return constant_surface_tension;
   }
 
   unsigned int
@@ -300,22 +320,24 @@ public:
   bool is_initialized;
 
 private:
-  std::vector<std::shared_ptr<DensityModel>>             density;
-  std::vector<std::shared_ptr<SpecificHeatModel>>        specific_heat;
-  std::vector<std::shared_ptr<ThermalConductivityModel>> thermal_conductivity;
-  std::vector<std::shared_ptr<RheologicalModel>>         rheology;
-  std::vector<std::shared_ptr<ThermalExpansionModel>>    thermal_expansion;
-  std::vector<std::shared_ptr<TracerDiffusivityModel>>   tracer_diffusivity;
-  std::vector<std::shared_ptr<SurfaceTensionModel>>      surface_tension;
+  std::vector<std::shared_ptr<DensityModel>>              density;
+  std::vector<std::shared_ptr<SpecificHeatModel>>         specific_heat;
+  std::vector<std::shared_ptr<ThermalConductivityModel>>  thermal_conductivity;
+  std::vector<std::shared_ptr<RheologicalModel>>          rheology;
+  std::vector<std::shared_ptr<ThermalExpansionModel>>     thermal_expansion;
+  std::vector<std::shared_ptr<TracerDiffusivityModel>>    tracer_diffusivity;
+  std::vector<std::shared_ptr<SurfaceTensionModel>>       surface_tension;
+  std::vector<std::shared_ptr<MobilityCahnHilliardModel>> mobility_ch;
 
   std::map<field, bool> required_fields;
 
   bool non_newtonian_flow;
   bool constant_density;
+  bool constant_surface_tension;
 
   // Temporary scaling variable are overly used right now. They will eventually
   // be deprecated for the majority of places they are used.
-  double viscosity_scale;
+  double kinematic_viscosity_scale;
   double density_scale;
 
   unsigned int number_of_fluids;

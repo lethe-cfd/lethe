@@ -1,6 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 2
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -156,28 +160,50 @@ subsection post-processing
   set phase statistics name      = phase_statistics
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set tolerance      = 1e-7
-  set max iterations = 20
-  set verbosity      = verbose
+  subsection cahn hilliard
+    set tolerance      = 1e-7
+    set max iterations = 20
+    set verbosity      = verbose
+  end
+  subsection fluid dynamics
+    set tolerance      = 1e-7
+    set max iterations = 20
+    set verbosity      = verbose
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity                             = verbose
-  set method                                = gmres
-  set max iters                             = 20000
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-10
-  set ilu preconditioner fill               = 1
-  set ilu preconditioner absolute tolerance = 1e-12
-  set ilu preconditioner relative tolerance = 1.00
-  set max krylov vectors                    = 2000
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 20000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-10
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 2000
+  end
+  subsection cahn hilliard
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 20000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-10
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 2000
+  end
 end

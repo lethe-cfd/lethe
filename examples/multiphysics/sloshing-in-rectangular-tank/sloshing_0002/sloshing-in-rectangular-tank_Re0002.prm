@@ -1,6 +1,9 @@
 # Listing of Parameters
-# ---------------------
-# --------------------------------------------------
+#----------------------
+
+set dimension = 2
+
+#---------------------------------------------------
 # Simulation Control
 #---------------------------------------------------
 
@@ -111,7 +114,7 @@ subsection VOF
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -133,7 +136,7 @@ subsection boundary conditions
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Source term
 #---------------------------------------------------
 
@@ -144,25 +147,44 @@ subsection source term
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set verbosity      = verbose
-  set tolerance      = 1e-8
-  set max iterations = 20
+  subsection VOF
+    set verbosity      = verbose
+    set tolerance      = 1e-8
+    set max iterations = 20
+  end
+  subsection fluid dynamics
+    set verbosity      = verbose
+    set tolerance      = 1e-8
+    set max iterations = 20
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity          = verbose
-  set method             = amg
-  set max krylov vectors = 200
-  set max iters          = 200
-  set relative residual  = 1e-5
-  set minimum residual   = 1e-9
+  subsection fluid dynamics
+    set verbosity          = verbose
+    set method             = gmres
+    set max krylov vectors = 200
+    set max iters          = 200
+    set relative residual  = 1e-5
+    set minimum residual   = 1e-9
+    set preconditioner     = amg
+  end
+  subsection VOF
+    set verbosity          = verbose
+    set method             = gmres
+    set max krylov vectors = 200
+    set max iters          = 200
+    set relative residual  = 1e-5
+    set minimum residual   = 1e-9
+    set preconditioner     = amg
+  end
 end

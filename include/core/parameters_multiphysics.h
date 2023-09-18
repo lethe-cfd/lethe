@@ -63,46 +63,6 @@ namespace Parameters
     manual
   };
 
-  enum class MobilityModel
-  {
-    constant,
-    quartic
-  };
-
-
-  /**
-   * @brief Defines the subparameters for free surface peeling/wetting mechanism.
-   * Has to be declared before member creation in VOF structure.
-   *
-   * Peeling/wetting mechanism (on boundaries explicitely stated in the
-   * "subsection boundary conditions VOF" of the .prm) works as such:
-   *  - Peeling of the higher density occurs if:
-   *    o the cell is in the domain of the higher density fluid,
-   *    o the average pressure in the cell is below the average pressure on the
-   * monitored fluid, and
-   *    o the pressure gradient is negative for more than half of the quadrature
-   * points
-   *  - Wetting of the lower density phase occurs if:
-   *    o the cell is in the domain of the lower density fluid,
-   *    o the average pressure in the cell is above the average pressure on the
-   * monitored fluid, and
-   *    o the pressure gradient is positive for more than half of the quadrature
-   * points
-   */
-  struct VOF_PeelingWetting
-  {
-    bool enable_peeling;
-    bool enable_wetting;
-
-    // Type of verbosity for the peeling-wetting mechanism
-    Parameters::Verbosity verbosity;
-
-    static void
-    declare_parameters(ParameterHandler &prm);
-    void
-    parse_parameters(ParameterHandler &prm);
-  };
-
   /**
    * @brief Defines the subparameters for free surface mass conservation.
    * Has to be declared before member creation in VOF structure.
@@ -110,11 +70,11 @@ namespace Parameters
   struct VOF_MassConservation
   {
     bool monitoring;
+
     // Conservation tolerance on the fluid monitored,
     // used with adaptative Sharpening
     double tolerance;
 
-    Parameters::FluidIndicator conservative_fluid;
     Parameters::FluidIndicator monitored_fluid;
 
     // Type of verbosity for the mass conservation algorithm
@@ -179,10 +139,6 @@ namespace Parameters
     // Enable marangoni effect
     bool enable_marangoni_effect;
 
-    // Surface tension gradient with respect to temperature
-    // This will be moved to the property manager in another PR.
-    double surface_tension_gradient;
-
     void
     declare_parameters(ParameterHandler &prm);
     void
@@ -219,7 +175,6 @@ namespace Parameters
   {
     Parameters::VOF_MassConservation    conservation;
     Parameters::VOF_InterfaceSharpening sharpening;
-    Parameters::VOF_PeelingWetting      peeling_wetting;
     Parameters::VOF_SurfaceTensionForce surface_tension_force;
     Parameters::VOF_PhaseFilter         phase_filter;
 
@@ -227,9 +182,11 @@ namespace Parameters
 
     // artificial diffusivity (diffusion coefficient) (in L^2/s) added to the
     // VOF transport equation. This parameter is zero by default, and can be
-    // increased to improve the wetting mechanism. See the documentation for
-    // more details.
+    // increased to improve the wetting of the phases in the vicinity of
+    // boundaries
     double diffusivity;
+
+    bool compressible;
 
     void
     declare_parameters(ParameterHandler &prm);
@@ -248,20 +205,11 @@ namespace Parameters
     // Epsilon value in the Cahn-Hilliard equations
     double epsilon;
 
-    // Mobility model (constant|quartic) in the Cahn-Hilliard
-    // equations
-    Parameters::MobilityModel mobility_model;
-
-    // Mobility constant in the Cahn-Hilliard equations
-    double mobility_constant;
-
     void
     declare_parameters(ParameterHandler &prm);
     void
     parse_parameters(ParameterHandler &prm);
   };
-
-
 
   /**
    * @brief Multiphysics - the parameters for multiphysics simulations
@@ -282,7 +230,7 @@ namespace Parameters
     bool buoyancy_force;
 
     Parameters::VOF          vof_parameters;
-    Parameters::CahnHilliard ch_parameters;
+    Parameters::CahnHilliard cahn_hilliard_parameters;
 
     void
     declare_parameters(ParameterHandler &prm);

@@ -27,25 +27,45 @@ class DensityModel : public PhysicalPropertyModel
 {
 public:
   /**
-   * @brief Instantiates and returns a pointer to a DensityModel object by casting it to
-   * the proper child class
+   * @brief Instantiates and returns a pointer to a DensityModel object by
+   * casting it to the proper child class
    *
    * @param material_properties Parameters for a single fluid
    */
   static std::shared_ptr<DensityModel>
   model_cast(const Parameters::Material &material_properties);
 
+
+  /**
+   * @brief get_psi Returns the value of the compressibility factor used in the
+   * density model.
+   * @return Compressibility factor
+   */
   virtual double
-  get_psi() const
+  get_psi() const = 0;
+
+  /**
+   * @brief get_density_ref Returns the value of the reference state density
+   * used in the density model.
+   * @return Reference state density
+   */
+  virtual double
+  get_density_ref() const = 0;
+
+  /**
+   * @brief is_constant_density_model Returns a boolean indicating if the model
+   * is a constant density model.
+   * @return Boolean value of if the model corresponds to a constant density
+   * model.
+   */
+  bool
+  is_constant_density_model() const
   {
-    return 0;
+    return constant_density_model;
   }
 
-  virtual double
-  get_density_ref() const
-  {
-    return 0;
-  }
+protected:
+  bool constant_density_model = false;
 };
 
 
@@ -60,11 +80,14 @@ public:
    */
   DensityConstant(const double p_density)
     : density(p_density)
-  {}
+  {
+    this->constant_density_model = true;
+  }
 
   /**
    * @brief value Calculates the density
-   * @param fields_value Value of the various field on which the property may depend.
+   * @param fields_value Value of the various field on which the property may
+   * depend.
    * @return value of the physical property calculated with the fields_value
    */
   double
@@ -86,11 +109,14 @@ public:
   }
 
   /**
-   * @brief jacobian Calculates the jacobian (the partial derivative) of the density with respect to a field
-   * @param field_values Value of the various fields on which the property may depend.
+   * @brief jacobian Calculates the jacobian (the partial derivative) of the
+   * density with respect to a field.
+   * @param field_values Value of the various fields on which the property may
+   * depend.
    * @param id Indicator of the field with respect to which the jacobian
    * should be calculated.
-   * @return value of the partial derivative of the density with respect to the field.
+   * @return value of the partial derivative of the density with respect to the
+   * field.
    */
   double
   jacobian(const std::map<field, double> & /*field_values*/,
@@ -100,10 +126,14 @@ public:
   }
 
   /**
-   * @brief vector_jacobian Calculates the derivative of the density with respect to a field.
-   * @param field_vectors Vector for the values of the fields used to evaluate the property.
-   * @param id Identifier of the field with respect to which a derivative should be calculated.
-   * @param jacobian vector of the value of the derivative of the density with respect to the field id.
+   * @brief vector_jacobian Calculates the derivative of the density with
+   * respect to a field.
+   * @param field_vectors Vector for the values of the fields used to evaluate
+   * the property.
+   * @param id Identifier of the field with respect to which a derivative should
+   * be calculated.
+   * @param jacobian vector of the value of the derivative of the density with
+   * respect to the field id.
    */
   void
   vector_jacobian(
@@ -112,6 +142,29 @@ public:
     std::vector<double> &jacobian_vector) override
   {
     std::fill(jacobian_vector.begin(), jacobian_vector.end(), 0);
+  }
+
+  /**
+   * @brief get_psi Returns the value of the compressibility factor used in the
+   * density model
+   * @return compressibility factor which in this case is null
+   */
+  double
+  get_psi() const override
+  {
+    return 0;
+  }
+
+  /**
+   * @brief get_density_ref Returns the value of the reference state density
+   * used in the density model. In the case of a constant density, like here,
+   * this remains the constant value of density.
+   * @return reference state density, here the constant density value
+   */
+  double
+  get_density_ref() const override
+  {
+    return density;
   }
 
 private:
@@ -139,7 +192,8 @@ public:
 
   /**
    * @brief value Calculates the density
-   * @param fields_value Value of the various field on which the property may depend.
+   * @param fields_value Value of the various field on which the property may
+   * depend.
    * @return value of the physical property calculated with the fields_value
    */
   double
@@ -164,11 +218,14 @@ public:
   }
 
   /**
-   * @brief jacobian Calculates the jacobian (the partial derivative) of the density with respect to a field
-   * @param field_values Value of the various fields on which the property may depend.
+   * @brief jacobian Calculates the jacobian (the partial derivative) of the
+   * density with respect to a field
+   * @param field_values Value of the various fields on which the property may
+   * depend.
    * @param id Indicator of the field with respect to which the jacobian
    * should be calculated.
-   * @return value of the partial derivative of the density with respect to the field.
+   * @return value of the partial derivative of the density with respect to the
+   * field.
    */
   double
   jacobian(const std::map<field, double> & /*field_values*/, field id) override
@@ -180,10 +237,14 @@ public:
   }
 
   /**
-   * @brief vector_jacobian Calculates the derivative of the density with respect to a field.
-   * @param field_vectors Vector for the values of the fields used to evaluate the property.
-   * @param id Identifier of the field with respect to which a derivative should be calculated.
-   * @param jacobian vector of the value of the derivative of the density with respect to the field id.
+   * @brief vector_jacobian Calculates the derivative of the density with
+   * respect to a field.
+   * @param field_vectors Vector for the values of the fields used to evaluate
+   * the property.
+   * @param id Identifier of the field with respect to which a derivative should
+   * be calculated.
+   * @param jacobian vector of the value of the derivative of the density with
+   * respect to the field id.
    */
   void
   vector_jacobian(
@@ -198,7 +259,8 @@ public:
   }
 
   /**
-   * @brief get_psi Returns the value of the compressibility factor used in the density model
+   * @brief get_psi Returns the value of the compressibility factor used in the
+   * density model.
    * @return isothermal ideal gas compressibility factor
    */
   double
@@ -208,7 +270,8 @@ public:
   }
 
   /**
-   * @brief get_density_ref Returns the value of the reference state density used in the density model
+   * @brief get_density_ref Returns the value of the reference state density
+   * used in the density model.
    * @return isothermal ideal gas reference state density
    */
   double

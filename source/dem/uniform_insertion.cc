@@ -11,7 +11,7 @@ template <int dim>
 UniformInsertion<dim>::UniformInsertion(
   const DEMSolverParameters<dim> &dem_parameters,
   const double                    maximum_particle_diameter)
-  : remained_particles_of_each_type(
+  : particles_of_each_type_remaining(
       dem_parameters.lagrangian_physical_properties.number.at(0))
 {
   // Inializing current inserting particle type
@@ -27,21 +27,21 @@ UniformInsertion<dim>::UniformInsertion(
 template <int dim>
 void
 UniformInsertion<dim>::insert(
-  Particles::ParticleHandler<dim> &                particle_handler,
+  Particles::ParticleHandler<dim>                 &particle_handler,
   const parallel::distributed::Triangulation<dim> &triangulation,
-  const DEMSolverParameters<dim> &                 dem_parameters)
+  const DEMSolverParameters<dim>                  &dem_parameters)
 {
-  if (remained_particles_of_each_type == 0 &&
+  if (particles_of_each_type_remaining == 0 &&
       current_inserting_particle_type !=
         dem_parameters.lagrangian_physical_properties.particle_type_number - 1)
     {
-      remained_particles_of_each_type =
+      particles_of_each_type_remaining =
         dem_parameters.lagrangian_physical_properties.number.at(
           ++current_inserting_particle_type);
     }
 
   // Check to see if the remained uninserted particles is equal to zero or not
-  if (remained_particles_of_each_type != 0)
+  if (particles_of_each_type_remaining != 0)
     {
       MPI_Comm           communicator = triangulation.get_communicator();
       ConditionalOStream pcout(
@@ -56,7 +56,7 @@ UniformInsertion<dim>::insert(
       // The inserted_this_step value is the mimnum of remained_particles and
       // inserted_this_step
       this->inserted_this_step =
-        std::min(remained_particles_of_each_type, this->inserted_this_step);
+        std::min(particles_of_each_type_remaining, this->inserted_this_step);
 
       // Obtaining global bounding boxes
       const auto my_bounding_box =
@@ -117,10 +117,10 @@ UniformInsertion<dim>::insert(
                                                this->particle_properties);
 
       // Updating remaining particles
-      remained_particles_of_each_type -= this->inserted_this_step;
+      particles_of_each_type_remaining -= this->inserted_this_step;
 
       this->print_insertion_info(this->inserted_this_step,
-                                 remained_particles_of_each_type,
+                                 particles_of_each_type_remaining,
                                  current_inserting_particle_type,
                                  pcout);
     }
@@ -130,8 +130,8 @@ UniformInsertion<dim>::insert(
 template <>
 void
 UniformInsertion<2>::find_insertion_location_uniform(
-  Point<2> &                                   insertion_location,
-  const unsigned int &                         id,
+  Point<2>                                    &insertion_location,
+  const unsigned int                          &id,
   const Parameters::Lagrangian::InsertionInfo &insertion_information)
 {
   std::vector<int> insertion_index;
@@ -161,8 +161,8 @@ UniformInsertion<2>::find_insertion_location_uniform(
 template <>
 void
 UniformInsertion<3>::find_insertion_location_uniform(
-  Point<3> &                                   insertion_location,
-  const unsigned int &                         id,
+  Point<3>                                    &insertion_location,
+  const unsigned int                          &id,
   const Parameters::Lagrangian::InsertionInfo &insertion_information)
 {
   std::vector<int> insertion_index;

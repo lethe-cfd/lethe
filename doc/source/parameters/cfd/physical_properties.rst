@@ -37,7 +37,7 @@ Physical Properties
 
     set number of solids = 0
 
-    set number of material interactions = 1
+    set number of material interactions = 1 #by default it is set to 0
     subsection material interaction 0
       set type = fluid-fluid
       subsection fluid-fluid interaction
@@ -47,6 +47,10 @@ Physical Properties
         # Surface tension
         set surface tension model       = constant
         set surface tension coefficient = 0
+        
+        # Mobility Cahn-Hilliard
+        set cahn hilliard mobility model    = constant
+        set cahn hilliard mobility constant = 1
       end
 
       # if fluid-solid interaction
@@ -55,8 +59,10 @@ Physical Properties
         set solid id                    = 0
 
         # Surface tension
-        set surface tension model       = constant
-        set surface tension coefficient = 0
+        set surface tension model                       = constant
+        set surface tension coefficient                 = 0
+        set reference state temperature                 = 0
+        set temperature-driven surface tension gradient = 0
       end
     end
   end
@@ -108,14 +114,22 @@ Physical Properties
       .. attention::
           The ``second fluid id`` should be greater than the ``first fluid id``.
 
-    * The ``surface tension model`` specifies the model used to calculate the surface tension coefficient of the fluid-fluid pair. At the moment, only the ``constant`` model is supported.
+    * The ``surface tension model`` specifies the model used to calculate the surface tension coefficient of the fluid-fluid pair. At the moment, a ``constant`` and a ``linear`` model are supported. For more detail on the surface tension models, see `Surface Tension Models`_.
 
-    * The ``surface tension coefficient`` parameter is the constant surface tension coefficient of the two interacting fluids in units of :math:`\text{Mass} \cdot \text{Time}^{-2}`. In SI, this is :math:`\text{N} \cdot \text{m}^{-1}`. The surface tension coefficient is used to define the Weber number (:math:`We`):
+    * The ``surface tension coefficient`` parameter is a constant surface tension coefficient of the two interacting fluids in units of :math:`\text{Mass} \cdot \text{Time}^{-2}`. In SI, this is :math:`\text{N} \cdot \text{m}^{-1}`. The surface tension coefficient is used as defined in the Weber number (:math:`We`):
 
       .. math::
           We = Re \cdot \frac{\mu_\text{ref} \; u_\text{ref}}{\sigma}
 
       where :math:`Re` is the Reynolds number, :math:`\mu_\text{ref}` and :math:`u_\text{ref}` are some reference viscosity and velocity characterizing the flow problem, and :math:`\sigma` is the surface tension coefficient.
+
+    * The ``reference state temperature`` parameter is the temperature of the reference state at which the ``surface tension coefficient`` is evaluated. This parameter is used in the calculation of the surface tension using the ``linear`` surface tension model (see `Surface Tension Models`_).
+
+    * The ``temperature-driven surface tension gradient`` parameter is the surface tension gradient with respect to the temperature of the two interacting fluids in units of :math:`\text{Mass} \cdot \text{Time}^{-2} \cdot \text{Temperature}^{-1}`. In SI, this is :math:`\text{N} \cdot \text{m}^{-1} \cdot \text{K}^{-1}`. This parameter is used in the calculation of the surface tension using the ``linear`` surface tension model (see `Surface Tension Models`_).
+      
+    * The ``cahn hilliard mobility model`` specifies the model used to calculate the mobility used in the Cahn-Hilliard equations for the fluid-fluid pair. Two models are available: a ``constant`` mobility and a ``quartic`` mobility. The reader is refered to :doc:`cahn_hilliard` for more details.
+      
+    * The ``cahn hilliard mobility coefficient`` parameter is the constant mobility coefficient of the two interacting fluids used in the Cahn-Hilliard equations. Its units are :math:`\text{Length}^{2} \cdot \text{Time}^{-1}`.
 
   * In the ``fluid-solid`` subsection we define the fluid-solid pair and their physical properties.
 
@@ -128,10 +142,14 @@ Physical Properties
 .. note:: 
   The default values for all physical properties models in Lethe is ``constant``. Consequently, it is not necessary (and not recommended) to specify the physical property model unless this model is not constant. This generates parameter files that are easier to read.
 
+
+Material Physical Property Models
+**********************************
+
 .. _two phase simulations:
 
 Two Phase Simulations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 .. note:: 
   Two phase simulations require that either ``set VOF = true`` or ``set cahn hilliard = true`` in the :doc:`multiphysics` subsection. By convention, air is usually the ``fluid 0`` and the other fluid of interest is the ``fluid 1``.
 
@@ -167,7 +185,7 @@ For two phases, the properties are defined for each fluid. Default values are:
 .. _conjugate heat transfer:
 
 Conjugate Heat Transfer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Conjugate heat transfer enables the addition of solid regions in which the fluid dynamics is not solved for. To enable the presence of a solid region, ``number of solids`` must be set to 1. By default, the region with the ``material_id=0`` will be the fluid region whereas the region with ``material_id=1`` will be the solid region. The physical properties of the solid region are set in an identical fashion as those of the fluid.
 
@@ -200,7 +218,7 @@ Conjugate heat transfer enables the addition of solid regions in which the fluid
 .. _rheological_models:
 
 Rheological Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Two families of rheological models are supported in Lethe. The first one are generalized non Newtonian rheologies (for shear thinning and shear thickening flows). In these models, the viscosity depends on the shear rate. The second family of rheological models possess a viscosity that is independent of the shear rate, but that may depend on other fields such as the temperature.
 
@@ -357,14 +375,14 @@ This model is parameterized using the ``phase change`` subsection
 .. _density_models:
 
 Density Models
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Lethe supports both ``constant`` and ``isothermal_ideal_gas`` density models. Constant density assumes a constant density value. Isothermal ideal gas density assumes that the fluid's density varies according the following state equation:
 
 .. math::
   \rho = \rho_{ref} + \psi p = \rho_{ref} + \frac{1}{R T} \ p
 
-where :math:`\rho_{ref}` is the density of the fluid at the reference state, :math:`\psi = \frac{1}{R T}` is the compressibility factor derived from the ideal gas law with :math:`R= \frac{R_u}{M}` the specific gas constant (universal gas constant (:math:`R_u`) divided by the molar mass of the gas (:math:`M`)) and :math:`T` the temperature of the gas, finally, :math:`p` is the differential pressure between the reference state and the current state.
+where :math:`\rho_{ref}` is the density of the fluid at the reference state, :math:`\psi = \frac{1}{R T}` is the compressibility factor derived from the ideal gas law with :math:`R= \frac{R_u}{M}` the specific gas constant (universal gas constant (:math:`R_u`) divided by the molar mass of the gas (:math:`M`)) and :math:`T` the temperature of the gas, finally, :math:`p` is the differential pressure between the reference state and the current state. This model is used for weakly compressible flows when temperature fluctuations' influence on density can be neglected.
 
 This model is parametrized using the ``isothermal_ideal_gas`` subsection:
 
@@ -395,9 +413,6 @@ By default, parameters are set to the values of dry air evaluated under normal t
 .. caution::
   When defining the initial pressure condition in the ``initial conditions`` subsection (see :doc:`initial_conditions`), make sure to set it to :math:`0`, as it represents the reference state for the calculated pressure. In solving the Navier-Stokes equations, the pressure is defined to within a constant. Therefore, it is more appropriate to interpret it as a differential pressure.
 
-  .. attention::
-    Currently, in two phase flow simulations, the ``isothermal_ideal_gas`` density model can only be used in conjunction with the incompressible Navier-Stokes equations. However, it is meant to be used with the isothermal formulation of compressible Navier-Stokes equations to account for weakly compressible flows. In a future update, this change will be implemented.
-
 .. _thermal_conductivity_models:
 
 Thermal Conductivity Models
@@ -420,7 +435,7 @@ In the ``phase_change`` thermal conductivity model, two different values (``ther
 where :math:`k_l`, :math:`k_s` and  :math:`\alpha_l` denote thermal conductivities of the liquid and solid phases and the liquid fraction.
 
 Specific Heat Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Lethe supports two types of specific heat models. Setting ``specific heat=constant`` sets a constant specific heat. Lethe also supports a ``phase_change`` specific heat model. This model can simulate the melting and solidification of a material. The model follows the work of Blais & Ilinca `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_. This approach defines the specific heat :math:`C_p` as:
 
@@ -477,4 +492,39 @@ This model is parameterized using the following section:
 * The ``specific heat solid`` is :math:`C_{p,s}`
 
 
+Interface Physical Property Models
+***********************************
+
+.. _surface_tension_models:
+
+Surface Tension Models
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Lethe supports two types of surface tension models: ``constant`` and ``linear``. A ``constant`` surface tension model assumes a constant value of surface tension, while a ``linear`` surface tension assumes that the surface tension evolves linearly with the temperature:
+
+.. math::
+  \sigma(T) = \sigma_0 + \frac{d\sigma}{dT} (T-T_0)
+
+where :math:`\sigma_0` is the ``surface tension coefficient`` evaluated at ``reference state temperature`` :math:`T_0` and :math:`\frac{d\sigma}{dT}` is the ``surface tension gradient`` with respect to the temperature :math:`T`.
+
+.. Warning::
+    In Lethe, the ``linear`` surface tension model is only used to account for the thermocapillary effect known as the Marangoni effect. Therefore, to enable the Marangoni effect, the surface tension model must be set to ``linear`` and a ``surface tension gradient`` different from zero :math:`(\frac{d\sigma}{dT} \neq 0)` must be specified.
+
+Cahn-Hilliard Mobility Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lethe supports two types of mobility models for the Cahn-Hilliard equations. Setting ``cahn hilliard mobility model = constant`` sets a constant mobility. Setting a ``cahn hilliard mobility model = quartic`` sets a quartic model for mobility:
+
+.. math::
+  M(\phi) = D(1-\phi^2)^2
+
+with :math:`D` the value set for ``cahn hilliard mobility constant``. A quartic mobility is required to recover a correct velocity according to Bretin *et al.* `[2] <https://doi.org/10.48550/arXiv.2105.09627>`_ Therefore, it is preferable to use it when solving the coupled Cahn-Hilliard and Navier-Stokes equations.
+
+References
+***********
+
 `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_ B. Blais and F. Ilinca, “Development and validation of a stabilized immersed boundary CFD model for freezing and melting with natural convection,” *Comput. Fluids*, vol. 172, pp. 564–581, Aug. 2018, doi: 10.1016/j.compfluid.2018.03.037.
+
+`[2] <https://doi.org/10.48550/arXiv.2105.09627>`_  E. Bretin, R. Denis, S. Masnou, A. Sengers, and G. Terii, “A multiphase Cahn-Hilliard system with mobilities and the numerical simulation of dewetting.” arXiv, Apr. 18, 2023. doi: 10.48550/arXiv.2105.09627.
+
+

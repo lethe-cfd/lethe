@@ -33,10 +33,16 @@ Sharp-Edge Immersed Boundary Method
 Nitsche Immersed Boundary Method
 ------------------------------------
 
-* `J. Joachim, C.-A. Daunais, V. Bibeau, L. Heltai and B. Blais "A Parallel and Adaptative Nitsche Immersed Boundary Method to Simulate Viscous Mixing", October 2022 <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4264140>`_
+* `J. Joachim, C.-A. Daunais, V. Bibeau, L. Heltai and B. Blais, "A Parallel and Adaptative Nitsche Immersed Boundary Method to Simulate Viscous Mixing", Journal of Computational Physics, 2023 <https://doi.org/10.1016/j.jcp.2023.112189>`_.
 
 
 Non-Newtonian Fluids
 -------------------------------
 
 * `C.-A. Daunais, L. Barbeau and B. Blais, "An Extensive Study of Shear Thinning Flow Around a Spherical Particle for Power-Law and Carreau Fluids", Journal of Non-Newtonian Fluid Mechanics, 311, 104951, 2023 <https://doi.org/10.1016/j.jnnfm.2022.104951>`_.
+
+
+Radioactive Particle Tracking
+-------------------------------
+
+*  `G. Mirakhori, A. Collard-Daigneault, A. Alphonius, J. Doucet, B. Blais, and J. Chaouki, “An improved position reconstruction method for radioactive particle tracking”, Nucl. Instrum. Methods Phys. Res. Sect. Accel. Spectrometers Detect. Assoc. Equip., vol. 1055, p. 168504, 2023 <https://doi.org/10.1016/j.nima.2023.168504>`_.

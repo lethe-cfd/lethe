@@ -13,7 +13,7 @@ This example aims to introduce the user on how to carry resolved CFD-DEM simulat
 Features
 ----------------------------------
 
-- Solvers: ``gls_sharp_navier_stokes_3d`` (with Q1Q1)
+- Solvers: ``gls_sharp_navier_stokes`` (with Q1Q1)
 - Transient problem
 - Displays the capability of the resolved CFD-DEM solver for the flow around multiple particles
 - Displays the robustness of the resolved CFD-DEM Solver.
@@ -182,11 +182,13 @@ Non-linear Solver
 .. code-block:: text
 
     subsection non-linear solver
-      set verbosity             = verbose
-      set tolerance             = 1e-4
-      set max iterations        = 10
-      set residual precision    = 5
-      set force rhs calculation = true
+      subsection fluid dynamics
+        set verbosity             = verbose
+        set tolerance             = 1e-4
+        set max iterations        = 10
+        set residual precision    = 5
+        set force rhs calculation = true
+      end
     end
 	
 * The ``tolerance`` is set to 1e-4. This is small enough to ensure that the flow field is adequately resolved, since here we expect a velocity of the particle of the order of 10.
@@ -207,18 +209,21 @@ Linear Solver
 .. code-block:: text
 
     subsection linear solver
-      set method                                = gmres
-      set max iters                             = 1000
-      set relative residual                     = 1e-4
-      set minimum residual                      = 1e-11
-      set ilu preconditioner fill               = 0
-      set ilu preconditioner absolute tolerance = 1e-6
-      set verbosity                             = verbose
-      set max krylov vectors                    = 1000
+      subsection fluid dynamics
+        set method                                = gmres
+        set max iters                             = 1000
+        set relative residual                     = 1e-4
+        set minimum residual                      = 1e-11
+        set preconditioner                        = ilu
+        set ilu preconditioner fill               = 0
+        set ilu preconditioner absolute tolerance = 1e-6
+        set verbosity                             = verbose
+        set max krylov vectors                    = 1000
+      end
     end
 
 
-* The ``method`` is set to ``gmres``. This solver is less computationally expensive than the other option, and this case does not require any special preconditioner. This makes the ``gmres`` solver the best option available.
+* The ``method`` is set to ``gmres``. This solver is less computationally expensive than the other option, and this case does not require any special preconditioner. This makes the ``gmres`` solver with ``ilu`` preconditioner the best option available.
 
 * The ``max iters`` is set to 1000. This is a lot more steps than how much it should take to solve the system.
 

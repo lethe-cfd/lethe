@@ -8,7 +8,7 @@ This example corresponds to a transient flow around a fixed cylinder at a high R
 Features
 ---------
 
-- Solver: ``gls_navier_stokes_2d`` (with Q2-Q1)
+- Solver: ``gls_navier_stokes`` (with Q2-Q1)
 - Transient problem
 - Usage of Gnuplot and Python scripts for the data post-processing
 
@@ -158,18 +158,21 @@ The Reynolds number must be high enough to capture a transient flow and study th
 Linear Solver
 ~~~~~~~~~~~~~
 
-For 2D problems, the AMG preconditioner is an adequate preconditioner. It is especially robust for the first few time-steps for which the velocity and pressure profile is not well-defined because the initial conditions are not mass conservative.
+For 2D problems, the ``amg`` preconditioner is an adequate preconditioner. It is especially robust for the first few time-steps for which the velocity and pressure profile is not well-defined because the initial conditions are not mass conservative.
 
 .. code-block:: text
 
   subsection linear solver
-    set verbosity                                 = verbose
-    set method                                    = amg
-    set relative residual                         = 1e-4
-    set minimum residual                          = 1e-8
-    set amg preconditioner ilu fill               = 0
-    set amg preconditioner ilu absolute tolerance = 1e-12
-    set amg preconditioner ilu relative tolerance = 1.00
+    subsection fluid dynamics
+      set verbosity                                 = verbose
+      set method                                    = gmres
+      set relative residual                         = 1e-4
+      set minimum residual                          = 1e-8
+      set preconditioner                            = amg
+      set amg preconditioner ilu fill               = 0
+      set amg preconditioner ilu absolute tolerance = 1e-12
+      set amg preconditioner ilu relative tolerance = 1.00
+    end
   end
 
 
@@ -215,7 +218,7 @@ The simulation is launched in parallel using 10 CPUs, as explained in `2D Transi
 
 .. code-block:: text
 
-  mpirun -np 10 gls_navier_stokes_2d cylinder.prm
+  mpirun -np 10 gls_navier_stokes cylinder.prm
 
 .. warning::
 
@@ -301,7 +304,7 @@ Possibilities for Extension
 - Study the vortex shedding of other bluff bodies.
 - Increase the Reynolds number to study a completely turbulent wake and the drag crisis phenomenon.
 - Repeat the same example in 3D for a cylinder/sphere and study the effect on the drag and lift forces.
-- Investigate the impact of the time-step and the time-stepping scheme (e.g., sdirk 3 or bdf 3)
+- Investigate the impact of the time-step and the time-stepping scheme (e.g., bdf 3)
 
 
 ----------

@@ -2,18 +2,18 @@
 Sharp-Immersed-Boundary-Solver
 ***********************************************
 
-This subsection contains the parameters related to the sharp immersed boundary solver using a **sharp interface immersed boundary** (IB) **method**. This part of the parameter file concerns the usage of ``gls_sharp_navier_stokes_2d`` or ``gls_sharp_navier_stokes_3d``. These solvers can simulate the flow around static or moving objects (with a predetermined trajectory). The solver can also simulate the coupled flow around spherical particles (Resolved CFD-DEM). Using this solver eliminates the need to define a conformal mesh for the fluid between the particles.
+This subsection contains the parameters related to the sharp immersed boundary solver using a **sharp interface immersed boundary** (IB) **method**. This part of the parameter file concerns the usage of the ``gls_sharp_navier_stokes``. This solver can simulate the flow around static or moving objects (with a predetermined trajectory). It can also simulate the coupled flow around spherical particles (Resolved CFD-DEM). Using this solver eliminates the need to define a conformal mesh for the fluid between the particles.
 
 .. code-block:: text
 
     subsection particles
       set assemble Navier-Stokes inside particles = false
-      set levels not precalculated                = 0
       set number of particles                     = 1
       
       subsection extrapolation function
-        set length ratio  = 4
-        set stencil order = 2
+        set length ratio         = 4
+        set stencil order        = 2
+        set enable extrapolation = true
       end
       
       subsection output
@@ -59,10 +59,11 @@ This subsection contains the parameters related to the sharp immersed boundary s
       end
       
       subsection particle info 0
-        set type              = sphere 
-        set shape arguments   = 1
-        set integrate motion  = false
-        set pressure location = 0; 0; 0
+        set type                       = sphere
+        set shape arguments            = 1
+        set integrate motion           = false
+        set pressure location          = 0; 0; 0
+        set mesh-based precalculations = true
         
         subsection position
           set Function expression = 0; 0; 0
@@ -92,8 +93,6 @@ This subsection contains the parameters related to the sharp immersed boundary s
 
 * The ``number of particles`` is the number of particles simulated by the sharp-edge IB.
 
-* The ``levels not precalculated`` parameter controls the number of layers of the hierarchical grid used by Lethe that are ignored by precalculations. It allows to reduce the memory footprint at the cost of an increased computing time. At the moment, this is used only for RBF shapes. The value should be increased when the RBF contains a lot of nodes and/or the grid is extremely fine.
-
 * The ``assemble Navier-Stokes inside particles`` parameter determines if the Navier-Stokes equations are solved inside the particles or not. If the Navier-Stokes equations are not solved (the parameter is false), the solver will solve a Poisson equation for each variable in the problem. This eliminates the need to define a reference value for the pressure.
 
 * The ``extrapolation function`` subsection contains the parameters associated with the extrapolation function used to impose the sharp immersed boundary condition.
@@ -106,6 +105,11 @@ This subsection contains the parameters related to the sharp immersed boundary s
 
     .. tip::
 	    A good starting value is twice the average aspect ratio of the elements in the mesh multiplied by the order of the underlying FEM scheme.
+
+    * The ``enable extrapolation`` parameter controls if extrapolation is used to impose the immersed boundary condition. For debugging purposes, this parameter can be set to ``false``; the particle velocity will then be imposed on velocity degrees of freedom of cells cut by the particle directly, which effectively amplifies the volume occupied by the solid.
+
+    .. warning::
+    	Disabling the extrapolation is not recommended since it makes the Sharp-IB solver first-order accurate in space.
 
 * The ``output`` subsection contains the parameters controlling the information printed in the terminal and output files.
     * The ``calculate force`` parameter controls if the force is evaluated on each particle.
@@ -133,6 +137,9 @@ This subsection contains the parameters related to the sharp immersed boundary s
 
     .. note::
 	    The refined cells are all those for which at least one of the degrees of freedom (dof) location satisfies both the ``refine mesh inside radius factor`` and the ``refine mesh outside radius factor`` thresholds. Each cycle of refinement reduces the length of the elements by a factor two.
+
+    .. note::
+        Using values ``refine mesh outside radius factor = 1`` and ``refine mesh inside radius factor = 1`` activates a minimal refinement mode. This enables the solver to select automatically the smallest region near the particle that guarantees stability of the solution.
 
     .. note::
 	    This near-particle zone will be systematically refined at each refinement step until reaching the ``max refinement level`` parameter (:doc:`../cfd/mesh_adaptation_control`).
@@ -245,6 +252,8 @@ The following parameter and subsection are all inside the subsection ``particle 
         As could be expected, using this type of shape requires that ``dealii`` be compiled with OpenCascade. This module can be installed with candi, by uncommenting the appropriate line in ``candi.cfg``.
 
 * The ``integrate motion`` parameter controls if the dynamics equations of the particles are calculated. If this parameter is set to false, the particles position, velocity, and angular velocity are defined directly by the functions. If ``integrate motion=true`` the position and the velocity will be defined by the integration of the particle dynamic.
+
+* The ``mesh-based precalculations`` parameter controls if the mesh-based precalculations are applied. These precalculations are critical for good performance in medium to high detailed RBFs (and its composites), but can introduce deformations. These deformations appear when some RBF nodes are located outside of the background mesh.
 
 * The ``pressure location`` parameter is used to define the X, Y, and Z coordinate offsets of the pressure reference point relative to the center of the particle. These parameters are used when the ``assemble Navier-Stokes inside particles`` parameter is set to ``true`` to define the pressure reference point.
 

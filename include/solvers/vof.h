@@ -45,6 +45,13 @@
 
 #include <deal.II/numerics/error_estimator.h>
 
+DeclException1(
+  InvalidNumberOfFluid,
+  int,
+  << "The VOF physics is enabled, but the number of fluids is set to " << arg1
+  << ". The VOF solver only supports 2 fluids.");
+
+
 template <int dim>
 class VolumeOfFluid
   : public AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>
@@ -54,14 +61,18 @@ public:
    * @brief VOF - Base constructor.
    */
   VolumeOfFluid<dim>(
-    MultiphysicsInterface<dim> *     multiphysics_interface,
+    MultiphysicsInterface<dim>      *multiphysics_interface,
     const SimulationParameters<dim> &p_simulation_parameters,
     std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
                                        p_triangulation,
     std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
-        p_simulation_parameters.non_linear_solver)
+        p_simulation_parameters.non_linear_solver.at(PhysicsID::VOF))
     , multiphysics(multiphysics_interface)
+    , computing_timer(p_triangulation->get_communicator(),
+                      this->pcout,
+                      TimerOutput::summary,
+                      TimerOutput::wall_times)
     , simulation_parameters(p_simulation_parameters)
     , triangulation(p_triangulation)
     , simulation_control(p_simulation_control)
@@ -71,6 +82,13 @@ public:
     , sharpening_threshold(
         simulation_parameters.multiphysics.vof_parameters.sharpening.threshold)
   {
+    AssertThrow(simulation_parameters.physical_properties_manager
+                    .get_number_of_fluids() == 2,
+                InvalidNumberOfFluid(
+                  simulation_parameters.physical_properties_manager
+                    .get_number_of_fluids()));
+
+
     if (simulation_parameters.mesh.simplex)
       {
         // for simplex meshes
@@ -129,6 +147,12 @@ public:
         << std::endl
         << "The interface sharpness value should be set between 1 and 2"
         << std::endl;
+
+
+    // Change the behavior of the timer for situations when you don't want
+    // outputs
+    if (simulation_parameters.timer.type == Parameters::Timer::Type::none)
+      this->computing_timer.disable_output();
   }
 
   /**
@@ -176,11 +200,15 @@ public:
    *
    * @param solution VOF solution (phase fraction)
    *
+   * @param current_solution_fd current solution for the fluid dynamics
+   *
    * @param monitored_fluid Fluid indicator (fluid0 or fluid1) corresponding to
    * the phase of interest.
    */
+  template <typename VectorType>
   void
   calculate_volume_and_mass(const TrilinosWrappers::MPI::Vector &solution,
+                            const VectorType &current_solution_fd,
                             const Parameters::FluidIndicator monitored_fluid);
 
   /**
@@ -198,26 +226,6 @@ public:
 
 
   /**
-   * @brief Calculate the average pressure value of the monitored fluid. Used for
-   * the wetting mechanism.
-   *
-   * @tparam VectorType The Vector type used for the solvers
-   *
-   * @param solution VOF solution (phase fraction)
-   *
-   * @param current_solution_fd current solution for the fluid dynamics
-   *
-   * @param monitored_fluid Fluid indicator (fluid0 or fluid1) corresponding to
-   * the phase of interest.
-   */
-  template <typename VectorType>
-  double
-  find_monitored_fluid_avg_pressure(
-    const TrilinosWrappers::MPI::Vector &solution,
-    const VectorType &                   current_solution_fd,
-    const Parameters::FluidIndicator     monitored_fluid);
-
-  /**
    * @brief Carry out the operations required to finish a simulation correctly.
    */
   void
@@ -232,7 +240,6 @@ public:
 
   /**
    * @brief Carry out modifications on the auxiliary physic solution.
-   * Used in vof method for interface sharpening and wetting/peeling.
    */
   void
   modify_solution() override;
@@ -389,14 +396,6 @@ public:
     return &present_curvature_solution;
   }
 
-
-  // enum class used for peeling/wetting
-  enum class PhaseChange
-  {
-    peeling,
-    wetting
-  };
-
 private:
   /**
    *  @brief Assembles the matrix associated with the solver
@@ -430,8 +429,8 @@ private:
   virtual void
   assemble_local_system_matrix(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    VOFScratchData<dim> &                                 scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    VOFScratchData<dim>                                  &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief Assemble the local rhs for a given cell
@@ -449,8 +448,8 @@ private:
   virtual void
   assemble_local_system_rhs(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    VOFScratchData<dim> &                                 scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    VOFScratchData<dim>                                  &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief sets up the vector of assembler functions
@@ -524,48 +523,6 @@ private:
    */
   void
   assemble_mass_matrix(TrilinosWrappers::SparseMatrix &mass_matrix);
-
-
-  /**
-   * @brief Carries out peeling and wetting. It is called in the modify solution function.
-   * Launches apply_peeling_wetting on affected boundaries and handles output
-   * messages.
-   */
-  void
-  handle_peeling_wetting();
-
-  /**
-   * @brief Modification of the solution to take into account peeling and wetting
-   *
-   * @tparam VectorType The Vector type used for the solvers
-   *
-   * @param i_bc peeling-wetting boundary index
-   *
-   * @param current_solution_fd current solution for the fluid dynamics
-   */
-  template <typename VectorType>
-  void
-  apply_peeling_wetting(const unsigned int i_bc,
-                        const VectorType & current_solution_fd);
-
-  /**
-   * @brief Change cell phase, small method called to avoid code repetition and reduce sloppy
-   * error likelihood in apply_peeling_wetting.
-   *
-   * @param type a parameter of class PhaseChange (see below) stating the needed change
-   *
-   * @param new_phase the new phase value for the cell (0 or 1)
-   *
-   * @param solution_pw VOF solution after peeling and wetting corrections are applied
-   *
-   * @param dof_indices_vof local index for the VOF solution
-   */
-  void
-  change_cell_phase(
-    const PhaseChange &                         type,
-    const double &                              new_phase,
-    TrilinosWrappers::MPI::Vector &             solution_pw,
-    const std::vector<types::global_dof_index> &dof_indices_vof);
 
   /**
    * @brief Carries out interface sharpening. It is called in the modify solution function.
@@ -701,7 +658,10 @@ private:
 
   TrilinosWrappers::MPI::Vector nodal_phase_fraction_owned;
 
-  MultiphysicsInterface<dim> *     multiphysics;
+  MultiphysicsInterface<dim> *multiphysics;
+
+  TimerOutput computing_timer;
+
   const SimulationParameters<dim> &simulation_parameters;
 
   // Core elements for the VOF simulation
@@ -740,7 +700,6 @@ private:
 
   // Previous solutions vectors
   std::vector<TrilinosWrappers::MPI::Vector> previous_solutions;
-  std::vector<TrilinosWrappers::MPI::Vector> solution_stages;
 
   // Solution transfer classes
   std::shared_ptr<
@@ -756,11 +715,6 @@ private:
   TrilinosWrappers::MPI::Vector  system_rhs_phase_fraction;
   TrilinosWrappers::MPI::Vector  complete_system_rhs_phase_fraction;
   TrilinosWrappers::SparseMatrix mass_matrix_phase_fraction;
-
-  // Peeling/Wetting analysis
-  TrilinosWrappers::MPI::Vector marker_pw;
-  unsigned int                  nb_cells_wet;
-  unsigned int                  nb_cells_peeled;
 
   // Projected phase fraction gradient (pfg) solution
   TrilinosWrappers::MPI::Vector

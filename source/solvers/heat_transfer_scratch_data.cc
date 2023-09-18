@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/utilities.h>
 
 #include <solvers/heat_transfer_scratch_data.h>
@@ -37,7 +36,7 @@ HeatTransferScratchData<dim>::allocate()
   this->grad_specific_heat_temperature = std::vector<double>(n_q_points);
   this->thermal_conductivity           = std::vector<double>(n_q_points);
   this->density                        = std::vector<double>(n_q_points);
-  this->viscosity                      = std::vector<double>(n_q_points);
+  this->dynamic_viscosity              = std::vector<double>(n_q_points);
 
   // Velocity for BDF schemes
   this->previous_temperature_values =
@@ -47,11 +46,6 @@ HeatTransferScratchData<dim>::allocate()
     std::vector<std::vector<Tensor<1, dim>>>(
       maximum_number_of_previous_solutions(),
       std::vector<Tensor<1, dim>>(n_q_points));
-
-  // Velocity for SDIRK schemes
-  this->stages_temperature_values =
-    std::vector<std::vector<double>>(max_number_of_intermediary_stages(),
-                                     std::vector<double>(n_q_points));
 
   // Initialize arrays related to shape functions
   // Velocity shape functions
@@ -72,18 +66,14 @@ HeatTransferScratchData<dim>::allocate()
                                           n_q_points));
   fields.insert(
     std::pair<field, std::vector<double>>(field::shear_rate, n_q_points));
-  specific_heat        = std::vector<double>(n_q_points);
-  density              = std::vector<double>(n_q_points);
-  thermal_conductivity = std::vector<double>(n_q_points);
-  viscosity            = std::vector<double>(n_q_points);
 }
 
 template <int dim>
 void
 HeatTransferScratchData<dim>::enable_vof(
-  const FiniteElement<dim> &         fe,
-  const Quadrature<dim> &            quadrature,
-  const Mapping<dim> &               mapping,
+  const FiniteElement<dim>          &fe,
+  const Quadrature<dim>             &quadrature,
+  const Mapping<dim>                &mapping,
   const Parameters::VOF_PhaseFilter &phase_filter_parameters)
 {
   gather_vof    = true;
@@ -99,13 +89,13 @@ HeatTransferScratchData<dim>::enable_vof(
   specific_heat_0                  = std::vector<double>(n_q_points);
   density_0                        = std::vector<double>(n_q_points);
   thermal_conductivity_0           = std::vector<double>(n_q_points);
-  viscosity_0                      = std::vector<double>(n_q_points);
+  dynamic_viscosity_0              = std::vector<double>(n_q_points);
   grad_specific_heat_temperature_0 = std::vector<double>(n_q_points);
 
   specific_heat_1                  = std::vector<double>(n_q_points);
   density_1                        = std::vector<double>(n_q_points);
   thermal_conductivity_1           = std::vector<double>(n_q_points);
-  viscosity_1                      = std::vector<double>(n_q_points);
+  dynamic_viscosity_1              = std::vector<double>(n_q_points);
   grad_specific_heat_temperature_1 = std::vector<double>(n_q_points);
 
   // Create filter
@@ -115,9 +105,9 @@ HeatTransferScratchData<dim>::enable_vof(
 template <int dim>
 void
 HeatTransferScratchData<dim>::enable_vof(
-  const FiniteElement<dim> &                      fe,
-  const Quadrature<dim> &                         quadrature,
-  const Mapping<dim> &                            mapping,
+  const FiniteElement<dim>                       &fe,
+  const Quadrature<dim>                          &quadrature,
+  const Mapping<dim>                             &mapping,
   const std::shared_ptr<VolumeOfFluidFilterBase> &filter)
 {
   gather_vof    = true;
@@ -133,13 +123,13 @@ HeatTransferScratchData<dim>::enable_vof(
   specific_heat_0                  = std::vector<double>(n_q_points);
   density_0                        = std::vector<double>(n_q_points);
   thermal_conductivity_0           = std::vector<double>(n_q_points);
-  viscosity_0                      = std::vector<double>(n_q_points);
+  dynamic_viscosity_0              = std::vector<double>(n_q_points);
   grad_specific_heat_temperature_0 = std::vector<double>(n_q_points);
 
   specific_heat_1                  = std::vector<double>(n_q_points);
   density_1                        = std::vector<double>(n_q_points);
   thermal_conductivity_1           = std::vector<double>(n_q_points);
-  viscosity_1                      = std::vector<double>(n_q_points);
+  dynamic_viscosity_1              = std::vector<double>(n_q_points);
   grad_specific_heat_temperature_1 = std::vector<double>(n_q_points);
 
   // Create filter
@@ -180,7 +170,8 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
     {
       switch (properties_manager.get_number_of_fluids())
         {
-            case 1: {
+          case 1:
+            {
               const auto density_model = properties_manager.get_density();
               const auto specific_heat_model =
                 properties_manager.get_specific_heat();
@@ -194,11 +185,13 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
                 fields, field::temperature, grad_specific_heat_temperature);
               thermal_conductivity_model->vector_value(fields,
                                                        thermal_conductivity);
-              rheology_model->vector_value(fields, viscosity);
+              rheology_model->get_dynamic_viscosity_vector(
+                density_model->get_density_ref(), fields, dynamic_viscosity);
 
               break;
             }
-            case 2: {
+          case 2:
+            {
               const auto density_models =
                 properties_manager.get_density_vector();
               const auto specific_heat_models =
@@ -212,7 +205,10 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
               specific_heat_models[0]->vector_value(fields, specific_heat_0);
               thermal_conductivity_models[0]->vector_value(
                 fields, thermal_conductivity_0);
-              rheology_models[0]->vector_value(fields, viscosity_0);
+              rheology_models[0]->get_dynamic_viscosity_vector(
+                density_models[0]->get_density_ref(),
+                fields,
+                dynamic_viscosity_0);
               specific_heat_models[0]->vector_jacobian(
                 fields, field::temperature, grad_specific_heat_temperature_0);
 
@@ -220,7 +216,10 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
               specific_heat_models[1]->vector_value(fields, specific_heat_1);
               thermal_conductivity_models[1]->vector_value(
                 fields, thermal_conductivity_1);
-              rheology_models[1]->vector_value(fields, viscosity_1);
+              rheology_models[1]->get_dynamic_viscosity_vector(
+                density_models[1]->get_density_ref(),
+                fields,
+                dynamic_viscosity_1);
               specific_heat_models[1]->vector_jacobian(
                 fields, field::temperature, grad_specific_heat_temperature_1);
 
@@ -243,9 +242,10 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
                                              this->thermal_conductivity_0[q],
                                              this->thermal_conductivity_1[q]);
 
-                  viscosity[q] = calculate_point_property(filtered_phase_value,
-                                                          this->viscosity_0[q],
-                                                          this->viscosity_1[q]);
+                  dynamic_viscosity[q] =
+                    calculate_point_property(filtered_phase_value,
+                                             this->dynamic_viscosity_0[q],
+                                             this->dynamic_viscosity_1[q]);
 
                   grad_specific_heat_temperature[q] = calculate_point_property(
                     filtered_phase_value,
@@ -274,7 +274,8 @@ HeatTransferScratchData<dim>::calculate_physical_properties()
                                            field::temperature,
                                            grad_specific_heat_temperature);
       thermal_conductivity_model->vector_value(fields, thermal_conductivity);
-      rheology_model->vector_value(fields, viscosity);
+      rheology_model->get_dynamic_viscosity_vector(
+        density_model->get_density_ref(), fields, dynamic_viscosity);
     }
 }
 

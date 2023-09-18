@@ -1,7 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# --------------------------------------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 2
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -27,12 +30,14 @@ subsection mesh
   set initial refinement = 3
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity = quiet
+  subsection fluid dynamics
+    set verbosity = quiet
+  end
 end
 
 #---------------------------------------------------
@@ -40,8 +45,8 @@ end
 #---------------------------------------------------
 
 subsection initial conditions
-  set type      = L2projection # Type of ways to set initial conditions <none|L2Projection|viscous>
-  set viscosity = 1            # Viscosity used for viscous solution
+  set type                = L2projection # Type of ways to set initial conditions <none|L2Projection|viscous>
+  set kinematic viscosity = 1            # Kinematic viscosity used for viscous solution
   subsection uvwp
     set Function expression = x; y; y # Analytical formula used for the L2 projection
   end

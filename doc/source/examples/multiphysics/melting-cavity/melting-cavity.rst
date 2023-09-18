@@ -2,7 +2,7 @@
 Melting Cavity
 ==========================
 
-This example simulates a `two-dimensional gallium melting cavity`_. 
+This example simulates a two-dimensional gallium melting cavity `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_.
 
 .. _two-dimensional gallium melting cavity: https://www.sciencedirect.com/science/article/pii/S0045793018301415
 
@@ -11,7 +11,7 @@ This example simulates a `two-dimensional gallium melting cavity`_.
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes_2d`` 
+- Solver: ``gls_navier_stokes`` 
 - Phase change (solid-liquid)
 - Buoyant force (natural convection)
 - Unsteady problem handled by an adaptive BDF2 time-stepping scheme 
@@ -48,7 +48,7 @@ where :math:`\beta` and :math:`T_0` denote thermal expansion coefficient and a r
 
 A two-dimensional block of gallium (initially in solid phase) is heated from its left wall at :math:`t = 0` s. Its initial temperature is close to (but slightly smaller than) the melting point and the temperature of the left wall is higher than the melting point. Hence, the block starts melting from the left wall. In the melted zone, close to the left wall, the buoyant force (natural convection) creates vortices inside the liquid.
 
-The simulation parameters are selected according to the references [`1 <https://doi.org/10.1016/j.compfluid.2018.03.037>`_, `2 <https://doi.org/10.1115/1.3246884>`_] to satisfy the desired values for the dimensionless numbers
+The simulation parameters are selected according to the references `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_, `[2] <https://doi.org/10.1115/1.3246884>`_ to satisfy the desired values for the dimensionless numbers
     .. math::
         \text{Ra} = \frac{\rho^2 \beta g (T_w - T_m) L^3 c_p}{k \mu} = 10^5
 
@@ -62,7 +62,7 @@ where :math:`\rho` is the fluid density, :math:`\beta` denotes the thermal expan
 
 .. note:: 
     All the four boundary conditions are ``noslip``, and an external 
-    gravity field of :math:`-0.00516` is applied in the :math:`y` direction. For the heat transfer boundary conditions the temperatures of the left (:math:`T_l = 108 ^{\circ} C`) and the right (:math:`T_l = 104.9 ^{\circ} C`) walls are defined.
+    gravity field of :math:`-0.00516` is applied in the :math:`y` direction. For the heat transfer boundary conditions the temperatures of the left (:math:`T_l = 108 \, ^{\circ} \text{C}`) and the right (:math:`T_l = 104.9 \, ^{\circ} \text{C}`) walls are defined.
 
 
 --------------
@@ -113,7 +113,7 @@ The ``multiphysics`` subsection enables to turn on `(true)` and off `(false)` th
 Initial Conditions
 ~~~~~~~~~~~~~~~~~~
 
-In the ``initial condition``, the initial velocity and initial temperature in the simulation domain are defined. The initial velocity is equal to zero as the block is in the solid phase at :math:`t = 0` s. The initial temperature is chosen slightly (0.1 :math:`^{\circ} C`) smaller than the melting point temperature.
+In the ``initial condition``, the initial velocity and initial temperature in the simulation domain are defined. The initial velocity is equal to zero as the block is in the solid phase at :math:`t = 0` s. The initial temperature is chosen slightly (:math:`0.1 \, ^{\circ} \text{C}`) smaller than the melting point temperature.
 
 .. code-block:: text
 
@@ -144,7 +144,7 @@ The ``source term`` subsection defines the gravitational acceleration. The value
 Physical Properties
 ~~~~~~~~~~~~~~~~~~~
 
-The solid block melts into liquid in this example, hence in the ``physical properties`` subsection, we define the phase change parameters. Similar to gravitational acceleration, the latent enthalphy of phase change is selected to satisfy the value of Stefan number. A :math:`\Delta T = 0.1 ^{\circ} C` is selected between the solidus and liquidus temperatures. For more information about the phase change model in Lethe, visit the :doc:`Stefan problem <../stefan-problem/stefan-problem>` example. The viscosity of the solid phase is chosen :math:`\approx 10000` times larger than the viscosity of the liquid phase.
+The solid block melts into liquid in this example, hence in the ``physical properties`` subsection, we define the phase change parameters. Similar to gravitational acceleration, the latent enthalphy of phase change is selected to satisfy the value of Stefan number. A :math:`\Delta T = 0.1 \, ^{\circ} \text{C}` is selected between the solidus and liquidus temperatures. For more information about the phase change model in Lethe, visit the :doc:`Stefan problem <../stefan-problem/stefan-problem>` example. The kinematic viscosity of the solid phase is chosen :math:`\approx 10000` times larger than the kinematic viscosity of the liquid phase.
 
 
 .. code-block:: text
@@ -179,10 +179,10 @@ The solid block melts into liquid in this example, hence in the ``physical prope
           # Specific heat of the solid phase
           set specific heat solid = 200
     
-          # viscosity of the liquid phase
+          # Kinematic viscosity of the liquid phase
           set viscosity liquid = 0.00000075
     
-          # viscosity of the solid phase
+          # Kinematic viscosity of the solid phase
           set viscosity solid = 0.008
         end
       end
@@ -193,9 +193,9 @@ The solid block melts into liquid in this example, hence in the ``physical prope
 Running the Simulation
 ---------------------------
 
-Call the gls_navier_stokes_2d by invoking:  
+Call the gls_navier_stokes by invoking:  
 
-``mpirun -np 12 gls_navier_stokes_2d melting-cavity.prm``
+``mpirun -np 12 gls_navier_stokes melting-cavity.prm``
 
 to run the simulation using twelve CPU cores. Feel free to use more.
 
@@ -221,7 +221,7 @@ A python post-processing code `(melting-cavity.py)`
 is added to the example folder to post-process the results.
 Run ``python3 ./melting-cavity.py ./output`` to execute this 
 post-processing code, where ``./output`` is the directory that 
-contains the simulation results. In post-processing, the position of the solid-liquid interface at the top, center and bottom of the cavity, as well as the melted volume fraction are plotted and compared with experiments of Gau and Viskanta `[2] <https://doi.org/10.1115/1.3246884>`_. Note that the discrepancies in the interfaces are attributed to the two-dimensional simulations and they were also observed and reported by Blais et al. `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_.
+contains the simulation results. In post-processing, the position of the solid-liquid interface at the top, center and bottom of the cavity, as well as the melted volume fraction are plotted and compared with experiments of Gau and Viskanta `[2] <https://doi.org/10.1115/1.3246884>`_. Note that the discrepancies in the interfaces are attributed to the two-dimensional simulations and they were also observed and reported by Blais and Ilinca `[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_.
 
 
 .. image:: images/xmax-t.png
@@ -239,6 +239,6 @@ contains the simulation results. In post-processing, the position of the solid-l
 References
 -----------
 
-`[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_ Blais, B. and Ilinca, F., 2018. Development and validation of a stabilized immersed boundary CFD model for freezing and melting with natural convection. Computers & Fluids, 172, pp.564-581.
+`[1] <https://doi.org/10.1016/j.compfluid.2018.03.037>`_ B. Blais and F. Ilinca, “Development and validation of a stabilized immersed boundary CFD model for freezing and melting with natural convection,” *Comput. Fluids*, vol. 172, pp. 564–581, Aug. 2018, doi: 10.1016/j.compfluid.2018.03.037.
 
-`[2] <https://doi.org/10.1115/1.3246884>`_ Gau, C. and Viskanta, R., 1986. Melting and solidification of a pure metal on a vertical wall.
+`[2] <https://doi.org/10.1115/1.3246884>`_ C. Gau and R. Viskanta, “Melting and Solidification of a Pure Metal on a Vertical Wall,” *J. Heat Transf.*, vol. 108, no. 1, pp. 174–181, Feb. 1986, doi: 10.1115/1.3246884.

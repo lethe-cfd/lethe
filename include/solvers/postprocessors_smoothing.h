@@ -48,7 +48,7 @@ public:
   // Member functions
   PostProcessorSmoothing(
     const parallel::DistributedTriangulationBase<dim> &triangulation,
-    const SimulationParameters<dim> &                  simulation_parameters,
+    const SimulationParameters<dim>                   &simulation_parameters,
     const unsigned int &number_quadrature_points);
 
   /**
@@ -76,8 +76,8 @@ public:
    * @brief Returns the smoothed field solution.
    */
   const TrilinosWrappers::MPI::Vector &
-  calculate_smoothed_field(const VectorType &            solution,
-                           const DoFHandler<dim> &       dof_handler_velocity,
+  calculate_smoothed_field(const VectorType             &solution,
+                           const DoFHandler<dim>        &dof_handler_velocity,
                            std::shared_ptr<Mapping<dim>> mapping_velocity);
 
   /**
@@ -115,19 +115,19 @@ public:
   // Member functions
   QcriterionPostProcessorSmoothing(
     const parallel::DistributedTriangulationBase<dim> &triangulation,
-    const SimulationParameters<dim> &                  simulation_parameters,
+    const SimulationParameters<dim>                   &simulation_parameters,
     const unsigned int &number_quadrature_points);
 
   /**
    * @brief Generates the right hand side based on the fluid's solution.
    *
    * @param solution The fluid's solution
-   * @param dof_hanfler_fluid The dof_handler of the fluid solution
+   * @param dof_handler_fluid The dof_handler of the fluid solution
    * @param mapping_fluid The mapping of the fluid
    */
   void
-  generate_rhs(const VectorType &            solution,
-               const DoFHandler<dim> &       dof_handler_fluid,
+  generate_rhs(const VectorType             &solution,
+               const DoFHandler<dim>        &dof_handler_fluid,
                std::shared_ptr<Mapping<dim>> mapping_fluid) override;
 
 private:
@@ -146,19 +146,19 @@ public:
   // Member functions
   ContinuityPostProcessorSmoothing(
     const parallel::DistributedTriangulationBase<dim> &triangulation,
-    const SimulationParameters<dim> &                  simulation_parameters,
+    const SimulationParameters<dim>                   &simulation_parameters,
     const unsigned int &number_quadrature_points);
 
   /**
    * @brief Generates the right hand side based on the fluid dynamics solution.
    *
    * @param solution The fluid's solution
-   * @param dof_hanfler_fluid The dof_handler of the fluid dynamics solution
+   * @param dof_handler_fluid The dof_handler of the fluid dynamics solution
    * @param mapping_fluid The mapping of the fluid
    */
   void
-  generate_rhs(const VectorType &            solution,
-               const DoFHandler<dim> &       dof_handler_fluid,
+  generate_rhs(const VectorType             &solution,
+               const DoFHandler<dim>        &dof_handler_fluid,
                std::shared_ptr<Mapping<dim>> mapping_fluid) override;
 
 private:

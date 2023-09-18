@@ -6,7 +6,7 @@ Flow past a Backward-Facing Step
 Features
 --------
 
-- Solver: ``gls_navier_stokes_2d`` (with Q1-Q1)
+- Solver: ``gls_navier_stokes`` (with Q1-Q1)
 - Steady and pseudo steady state solution
 - Comparison with benchmark solutions
 - Mesh refinement and error analysis
@@ -194,9 +194,11 @@ The ``newton`` non-linear solver is used with a medium ``tolerance``, since conv
 .. code-block:: text
 
     subsection non-linear solver
-      set verbosity      = verbose
-      set tolerance      = 1e-6
-      set max iterations = 10
+      subsection fluid dynamics
+        set verbosity      = verbose
+        set tolerance      = 1e-6
+        set max iterations = 10
+      end
     end
 
 Linear Solver
@@ -207,14 +209,17 @@ For :math:`Re < 700`, standard parameters are suitable to achieve convergence.
 .. code-block:: text
 
     subsection linear solver
-      set verbosity                             = verbose
-      set method                                = gmres
-      set max iters                             = 10000
-      set relative residual                     = 1e-4
-      set minimum residual                      = 1e-9
-      set ilu preconditioner fill               = 2
-      set ilu preconditioner absolute tolerance = 1e-12
-      set ilu preconditioner relative tolerance = 1.00
+      subsection fluid dynamics
+        set verbosity                             = verbose
+        set method                                = gmres
+        set max iters                             = 10000
+        set relative residual                     = 1e-4
+        set minimum residual                      = 1e-9
+        set preconditioner                        = ilu
+        set ilu preconditioner fill               = 2
+        set ilu preconditioner absolute tolerance = 1e-12
+        set ilu preconditioner relative tolerance = 1.00
+      end
     end         
 	
 For :math:`Re \geq 700`, however, it is often necessary to set ``ilu precondtionner fill = 2`` in order to save calculation time. Also, adjusting ``max krylov vectors = 200`` can help to reach convergence.
@@ -222,15 +227,18 @@ For :math:`Re \geq 700`, however, it is often necessary to set ``ilu precondtion
 .. code-block:: text
 
     subsection linear solver
-      set verbosity                             = verbose
-      set method                                = gmres
-      set max iters                             = 10000
-      set relative residual                     = 1e-4
-      set minimum residual                      = 1e-9
-      set ilu preconditioner fill               = 2
-      set ilu preconditioner absolute tolerance = 1e-12
-      set ilu preconditioner relative tolerance = 1.00
-      set max krylov vectors                    = 200
+      subsection fluid dynamics
+        set verbosity                             = verbose
+        set method                                = gmres
+        set max iters                             = 10000
+        set relative residual                     = 1e-4
+        set minimum residual                      = 1e-9
+        set preconditioner                        = ilu
+        set ilu preconditioner fill               = 2
+        set ilu preconditioner absolute tolerance = 1e-12
+        set ilu preconditioner relative tolerance = 1.00
+        set max krylov vectors                    = 200
+      end
     end
 	
 .. tip::
@@ -245,13 +253,13 @@ The simulation can be executed using the following command (assuming that the so
 
 .. code-block:: text
 
-	gls_navier_stokes_2d 2D-backward-facing-step-steady.prm
+	gls_navier_stokes 2D-backward-facing-step-steady.prm
 	
 However, mpi can be used to lower calculation time by using several CPUs (especially useful for pseudo-steady simulations) :
 
 .. code-block:: text
 
-	mpirun -np j gls_navier_stokes_2d 2D-backward-facing-step-steady.prm
+	mpirun -np j gls_navier_stokes 2D-backward-facing-step-steady.prm
 	
 where ``j`` is the number of CPUs used for the computations.
 

@@ -34,12 +34,13 @@ enum field : int
   shear_rate,
   temperature,
   previous_temperature,
-  pressure
+  pressure,
+  phase_order_cahn_hilliard
 };
 
 inline void
-set_field_vector(const field &                         id,
-                 const std::vector<double> &           data,
+set_field_vector(const field                          &id,
+                 const std::vector<double>            &data,
                  std::map<field, std::vector<double>> &fields)
 {
   std::vector<double> &target = fields.at(id);
@@ -69,10 +70,11 @@ public:
    */
   PhysicalPropertyModel()
   {
-    model_depends_on[shear_rate]           = false;
-    model_depends_on[temperature]          = false;
-    model_depends_on[previous_temperature] = false;
-    model_depends_on[pressure]             = false;
+    model_depends_on[shear_rate]                = false;
+    model_depends_on[temperature]               = false;
+    model_depends_on[previous_temperature]      = false;
+    model_depends_on[pressure]                  = false;
+    model_depends_on[phase_order_cahn_hilliard] = false;
   }
 
   /**
@@ -100,7 +102,7 @@ public:
    */
   virtual void
   vector_value(const std::map<field, std::vector<double>> &field_vectors,
-               std::vector<double> &                       property_vector) = 0;
+               std::vector<double>                        &property_vector) = 0;
 
   /**
    * @brief jacobian Calcualtes the jacobian (the partial derivative) of the physical
@@ -160,7 +162,7 @@ public:
   vector_numerical_jacobian(
     const std::map<field, std::vector<double>> &field_vectors,
     const field                                 id,
-    std::vector<double> &                       jacobian_vector)
+    std::vector<double>                        &jacobian_vector)
   {
     const unsigned int n_pts = jacobian_vector.size();
 

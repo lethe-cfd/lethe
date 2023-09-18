@@ -27,6 +27,7 @@
 #include <dem/list_insertion.h>
 #include <dem/non_uniform_insertion.h>
 #include <dem/particle_wall_nonlinear_force.h>
+#include <dem/plane_insertion.h>
 #include <dem/post_processing.h>
 #include <dem/read_checkpoint.h>
 #include <dem/read_mesh.h>
@@ -135,7 +136,7 @@ DEMSolver<dim>::DEMSolver(DEMSolverParameters<dim> dem_parameters)
 
   triangulation.signals.weight.connect(
     [&](const typename parallel::distributed::Triangulation<dim>::cell_iterator
-          &              cell,
+                        &cell,
         const CellStatus status) -> unsigned int {
       return this->cell_weight(cell, status);
     });
@@ -311,9 +312,9 @@ DEMSolver<dim>::cell_weight(
 #endif
 
 #if (DEAL_II_VERSION_MAJOR < 10 && DEAL_II_VERSION_MINOR < 6)
-        case parallel::distributed::Triangulation<dim>::CELL_COARSEN:
+      case parallel::distributed::Triangulation<dim>::CELL_COARSEN:
 #else
-        case CellStatus::children_will_be_coarsened:
+      case CellStatus::children_will_be_coarsened:
 #endif
         {
           unsigned int n_particles_in_cell = 0;
@@ -380,10 +381,10 @@ DEMSolver<dim>::cell_weight_with_mobility_status(
     {
 #if (DEAL_II_VERSION_MAJOR < 10 && DEAL_II_VERSION_MINOR < 6)
       case parallel::distributed::Triangulation<dim>::CELL_PERSIST:
-        case parallel::distributed::Triangulation<dim>::CELL_REFINE:
+      case parallel::distributed::Triangulation<dim>::CELL_REFINE:
 #else
       case dealii::CellStatus::cell_will_persist:
-        case dealii::CellStatus::cell_will_be_refined:
+      case dealii::CellStatus::cell_will_be_refined:
 
 #endif
         {
@@ -402,9 +403,9 @@ DEMSolver<dim>::cell_weight_with_mobility_status(
 #endif
 
 #if (DEAL_II_VERSION_MAJOR < 10 && DEAL_II_VERSION_MINOR < 6)
-        case parallel::distributed::Triangulation<dim>::CELL_COARSEN:
+      case parallel::distributed::Triangulation<dim>::CELL_COARSEN:
 #else
-        case dealii::CellStatus::children_will_be_coarsened:
+      case dealii::CellStatus::children_will_be_coarsened:
 #endif
         {
           unsigned int n_particles_in_cell = 0;
@@ -614,7 +615,7 @@ DEMSolver<dim>::check_load_balance_with_disabled_contacts()
 
   triangulation.signals.weight.connect(
     [&](const typename parallel::distributed::Triangulation<dim>::cell_iterator
-          &cell,
+                        &cell,
         const CellStatus status) -> unsigned int {
       return this->cell_weight_with_mobility_status(cell, status);
     });
@@ -673,7 +674,8 @@ DEMSolver<dim>::check_contact_search_step_dynamic()
     smallest_contact_search_criterion,
     mpi_communicator,
     sorting_in_subdomains_step,
-    displacement);
+    displacement,
+    (simulation_control->get_step_number() % contact_detection_frequency) == 0);
 
   return contact_detection_step;
 }
@@ -702,7 +704,7 @@ template <int dim>
 void
 DEMSolver<dim>::update_moment_of_inertia(
   dealii::Particles::ParticleHandler<dim> &particle_handler,
-  std::vector<double> &                    MOI)
+  std::vector<double>                     &MOI)
 {
   MOI.resize(torque.size());
 
@@ -788,13 +790,15 @@ DEMSolver<dim>::finish_simulation()
     {
       switch (parameters.test.test_type)
         {
-            case Parameters::Testing::TestType::particles: {
+          case Parameters::Testing::TestType::particles:
+            {
               visualization_object.print_xyz(particle_handler,
                                              mpi_communicator,
                                              pcout);
               break;
             }
-            case Parameters::Testing::TestType::mobility_status: {
+          case Parameters::Testing::TestType::mobility_status:
+            {
               // Get mobility status vector sorted by cell id
               Vector<float> mobility_status(triangulation.n_active_cells());
               disable_contacts_object.get_mobility_status_vector(
@@ -806,7 +810,8 @@ DEMSolver<dim>::finish_simulation()
                                                              mpi_communicator);
               break;
             }
-            case Parameters::Testing::TestType::subdomain: {
+          case Parameters::Testing::TestType::subdomain:
+            {
               // Get mobility status vector sorted by cell id
               Vector<float> subdomain(triangulation.n_active_cells());
               for (unsigned int i = 0; i < subdomain.size(); ++i)
@@ -856,6 +861,12 @@ DEMSolver<dim>::set_insertion_type(const DEMSolverParameters<dim> &parameters)
            Parameters::Lagrangian::InsertionInfo::InsertionMethod::list)
     {
       insertion_object = std::make_shared<ListInsertion<dim>>(parameters);
+    }
+  else if (parameters.insertion_info.insertion_method ==
+           Parameters::Lagrangian::InsertionInfo::InsertionMethod::plane)
+    {
+      insertion_object =
+        std::make_shared<PlaneInsertion<dim>>(parameters, triangulation);
     }
   else
     {

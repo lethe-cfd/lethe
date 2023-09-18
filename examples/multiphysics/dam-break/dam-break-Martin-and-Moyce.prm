@@ -1,11 +1,15 @@
 # Listing of Parameters
-# ---------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 2
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
   set method           = bdf1
-  set time end         = 4.1
+  set time end         = 4
   set time step        = 0.01
   set adapt            = true
   set max cfl          = 0.5
@@ -31,7 +35,7 @@ subsection VOF
     set enable              = true
     set threshold           = 0.5
     set interface sharpness = 2
-    set frequency           = 10
+    set frequency           = 20
   end
 
   subsection phase filtration
@@ -73,12 +77,12 @@ end
 subsection physical properties
   set number of fluids = 2
   subsection fluid 0
-    set density             = 0.02
-    set kinematic viscosity = 0.1
+    set density             = 1.2
+    set kinematic viscosity = 0.01516
   end
   subsection fluid 1
-    set density             = 0.9982
-    set kinematic viscosity = 0.01
+    set density             = 1000
+    set kinematic viscosity = 0.000001
   end
 end
 
@@ -117,7 +121,7 @@ subsection timer
   set type = none
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -150,28 +154,50 @@ subsection FEM
   set pressure order = 1
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set tolerance      = 1e-4
-  set max iterations = 20
-  set verbosity      = verbose
+  subsection VOF
+    set tolerance      = 1e-4
+    set max iterations = 20
+    set verbosity      = verbose
+  end
+  subsection fluid dynamics
+    set tolerance      = 1e-4
+    set max iterations = 20
+    set verbosity      = verbose
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity                             = verbose
-  set method                                = gmres
-  set max iters                             = 1000
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-5
-  set ilu preconditioner fill               = 0
-  set ilu preconditioner absolute tolerance = 1e-12
-  set ilu preconditioner relative tolerance = 1.00
-  set max krylov vectors                    = 200
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 1000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-5
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 0
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 200
+  end
+  subsection VOF
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 1000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-5
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 0
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 200
+  end
 end

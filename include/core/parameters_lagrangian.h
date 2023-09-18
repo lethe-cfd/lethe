@@ -20,6 +20,8 @@
 #ifndef lethe_parameters_lagrangian_h
 #define lethe_parameters_lagrangian_h
 
+// #include <deal.II/base/conditional_ostream.h>
+// #include <deal.II/base/function.h>
 #include <core/parameters.h>
 
 #include <deal.II/base/parameter_handler.h>
@@ -113,7 +115,7 @@ namespace Parameters
       declareDefaultEntry(ParameterHandler &prm);
       void
       parse_particle_properties(const unsigned int &particle_type,
-                                ParameterHandler &  prm);
+                                ParameterHandler   &prm);
 
     private:
       unsigned int particle_type_maximum_number = 5;
@@ -122,7 +124,7 @@ namespace Parameters
       initialize_containers(
         std::unordered_map<unsigned int, double> &particle_average_diameter,
         std::unordered_map<unsigned int, double> &particle_size_std,
-        std::unordered_map<unsigned int, int> &   number,
+        std::unordered_map<unsigned int, int>    &number,
         std::unordered_map<unsigned int, double> &density_particle,
         std::unordered_map<unsigned int, double> &youngs_modulus_particle,
         std::unordered_map<unsigned int, double> &poisson_ratio_particle,
@@ -140,7 +142,8 @@ namespace Parameters
       {
         uniform,
         non_uniform,
-        list
+        list,
+        plane
       } insertion_method;
 
       // Inserted number of particles at each time step
@@ -167,7 +170,12 @@ namespace Parameters
       // Insertion random number seed
       int random_number_seed;
 
-      std::vector<double> list_x, list_y, list_z;
+      std::vector<double> list_x, list_y, list_z, list_vx, list_vy, list_vz,
+        list_wx, list_wy, list_wz, list_d;
+
+      // Insertion plane definition
+      Tensor<1, 3> insertion_plane_normal_vector;
+      Point<3>     insertion_plane_point;
 
       static void
       declare_parameters(ParameterHandler &prm);
@@ -380,7 +388,7 @@ namespace Parameters
           &boundary_translational_velocity,
         std::unordered_map<unsigned int, double> &boundary_rotational_speed,
         std::unordered_map<unsigned int, Tensor<1, 3>>
-          &                        boundary_rotational_vector,
+                                  &boundary_rotational_vector,
         std::vector<unsigned int> &outlet_boundaries);
     };
 

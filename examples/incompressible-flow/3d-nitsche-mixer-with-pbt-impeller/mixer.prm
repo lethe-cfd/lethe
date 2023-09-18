@@ -1,5 +1,7 @@
 # Listing of Parameters
-# ---------------------
+#----------------------
+
+set dimension = 3
 
 #---------------------------------------------------
 # Simulation Control
@@ -67,7 +69,7 @@ subsection forces
   set output frequency      = 1
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Mesh Adaptation Control
 #---------------------------------------------------
 
@@ -82,7 +84,7 @@ subsection mesh adaptation
   set fraction refinement  = 0.2
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -125,25 +127,30 @@ subsection nitsche
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set tolerance = 1e-4
-  set solver    = inexact_newton
+  subsection fluid dynamics
+    set tolerance = 1e-4
+    set solver    = inexact_newton
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set method                                    = amg
-  set max iters                                 = 200
-  set minimum residual                          = 1e-7
-  set amg preconditioner ilu absolute tolerance = 1e-8
-  set amg preconditioner ilu relative tolerance = 2.00
-  set amg aggregation threshold                 = 1e-10
-  set max krylov vectors                        = 200
+  subsection fluid dynamics
+    set method                                    = gmres
+    set max iters                                 = 200
+    set minimum residual                          = 1e-7
+    set preconditioner                            = amg
+    set amg preconditioner ilu absolute tolerance = 1e-8
+    set amg preconditioner ilu relative tolerance = 2.00
+    set amg aggregation threshold                 = 1e-10
+    set max krylov vectors                        = 200
+  end
 end

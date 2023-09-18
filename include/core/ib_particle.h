@@ -86,7 +86,7 @@ public:
    * is useful to reduce computation time
    */
   inline double
-  get_levelset(const Point<dim> &                                    p,
+  get_levelset(const Point<dim>                                     &p,
                const typename DoFHandler<dim>::active_cell_iterator &cell_guess)
   {
     return shape->value_with_cell_guess(p, cell_guess);
@@ -113,8 +113,8 @@ public:
    */
   void
   closest_surface_point(
-    const Point<dim> &                                    p,
-    Point<dim> &                                          closest_point,
+    const Point<dim>                                     &p,
+    Point<dim>                                           &closest_point,
     const typename DoFHandler<dim>::active_cell_iterator &cell_guess);
 
   /**
@@ -132,14 +132,16 @@ public:
    *  @param evaluation_point The point at which the evaluation is performed
    *  @param outer_radius The factor to be multiplied by the effective radius to check if the evaluation point is inside the outer limits
    *  @param inside_radius The factor to be multiplied by the effective radius to check if the evaluation point is outside the inner limits
+   *  @param absolute_distance Whether the distance is defined as absolute or relative to radius
    *  @param cell_guess A guess of the cell containing the evaluation point, which
    *  is useful to reduce computation time
    */
   bool
   is_inside_crown(
-    const Point<dim> &                                    evaluation_point,
+    const Point<dim>                                     &evaluation_point,
     const double                                          outer_radius,
     const double                                          inside_radius,
+    const bool                                            absolute_distance,
     const typename DoFHandler<dim>::active_cell_iterator &cell_guess);
 
   /**
@@ -148,7 +150,8 @@ public:
   bool
   is_inside_crown(const Point<dim> &evaluation_point,
                   const double      outer_radius,
-                  const double      inside_radius);
+                  const double      inside_radius,
+                  const bool        absolute_distance);
 
   /**
    * @brief
@@ -221,12 +224,26 @@ public:
    * @brief Sets the proper dof handler, then computes/updates the map of cells
    * and their likely non-null nodes
    * @param updated_dof_handler the reference to the new dof_handler
-   * @param levels_not_precalculated the number of finer levels that won't be
-   * precalculated
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if type=RBF)
    */
   void
-  update_precalculations(DoFHandler<dim> &  updated_dof_handler,
-                         const unsigned int levels_not_precalculated);
+  update_precalculations(DoFHandler<dim> &updated_dof_handler,
+                         const bool       mesh_based_precalculations);
+
+  /**
+   * @brief Updates precalculations if needed, then computes and removes superfluous data
+   * @param updated_dof_handler the reference to the new dof_handler
+   * @param mesh_based_precalculations mesh-based precalculations that can lead to slight shape misrepresentation (if type=RBF)
+   */
+  void
+  remove_superfluous_data(DoFHandler<dim> &updated_dof_handler,
+                          const bool       mesh_based_precalculations);
+
+  /**
+   * @brief Loads data from the files for file-based Shapes (RBF at the moment)
+   */
+  void
+  load_data_from_file();
 
 
   // This class defines values related to a particle used in the sharp interface
@@ -333,6 +350,11 @@ public:
   // Bool that indicates if the motion of this particle must be integrated. If
   // it is false, the position and velocity are defined by the function.
   bool integrate_motion;
+  // Bool that indicates if mesh-based precalculations should be performed.
+  // For RBF shapes with nodes outside the background mesh, slight deformations
+  // can happen near the boundary when mesh-based precalculations is used (due
+  // to the RBF nodes partitioning algorithm).
+  bool mesh_based_precalculations;
   // Current residual of the particle velocity.
   double residual_velocity;
   // Current residual of the particle angular velocity.

@@ -1,7 +1,9 @@
 # Listing of Parameters
-# ---------------------
+#----------------------
 
-# --------------------------------------------------
+set dimension = 2
+
+#---------------------------------------------------
 # Simulation Control
 #---------------------------------------------------
 
@@ -85,7 +87,7 @@ subsection multiphysics
   set fluid dynamics = true
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -137,7 +139,7 @@ subsection boundary conditions heat transfer
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Source term
 #---------------------------------------------------
 
@@ -148,27 +150,48 @@ subsection source term
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set verbosity      = verbose
-  set tolerance      = 1e-8
-  set max iterations = 20
+  subsection heat transfer
+    set verbosity      = verbose
+    set tolerance      = 1e-8
+    set max iterations = 20
+  end
+  subsection fluid dynamics
+    set verbosity      = verbose
+    set tolerance      = 1e-8
+    set max iterations = 20
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity                             = verbose
-  set method                                = gmres
-  set max iters                             = 1000
-  set relative residual                     = 1e-6
-  set minimum residual                      = 1e-8
-  set ilu preconditioner fill               = 0
-  set ilu preconditioner absolute tolerance = 1e-14
-  set ilu preconditioner relative tolerance = 1.00
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 1000
+    set relative residual                     = 1e-6
+    set minimum residual                      = 1e-8
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 0
+    set ilu preconditioner absolute tolerance = 1e-14
+    set ilu preconditioner relative tolerance = 1.00
+  end
+  subsection heat transfer
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 1000
+    set relative residual                     = 1e-6
+    set minimum residual                      = 1e-8
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 0
+    set ilu preconditioner absolute tolerance = 1e-14
+    set ilu preconditioner relative tolerance = 1.00
+  end
 end

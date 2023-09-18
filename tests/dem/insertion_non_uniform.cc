@@ -25,7 +25,6 @@
 #include <deal.II/fe/mapping_q.h>
 
 #include <deal.II/grid/grid_generator.h>
-#include <deal.II/grid/tria.h>
 
 #include <deal.II/particles/particle.h>
 
@@ -80,7 +79,7 @@ test()
   Particles::ParticleHandler<dim> particle_handler(
     tr, mapping, DEM::get_number_properties());
 
-  // Calling uniform insertion
+  // Calling non-uniform insertion
   NonUniformInsertion<dim> insertion_object(
     dem_parameters,
     dem_parameters.lagrangian_physical_properties.particle_average_diameter[0]);

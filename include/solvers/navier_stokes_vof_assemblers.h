@@ -29,8 +29,9 @@
  * @brief Class that assembles the core of the Navier-Stokes equation with
  * free surface using VOF modeling.
  * This class assembles the weak form of:
- * $$\rho \mathbf{u} \cdot \nabla \mathbf{u} - \nabla p - \mu \nabla^2
- * \mathbf{u} =0 $$ with an SUPG and PSPG stabilziation
+ * $$ \nabla \cdot \mathbf{u} + \rho \mathbf{u} \cdot \nabla
+ * \mathbf{u} + \nabla p - \mu \nabla\cdot (\nabla \mathbf{u} +
+ * (\nabla \mathbf{u})^T) = 0 $$ with an SUPG and PSPG stabilization
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *
@@ -42,7 +43,7 @@ class GLSNavierStokesVOFAssemblerCore : public NavierStokesAssemblerBase<dim>
 public:
   GLSNavierStokesVOFAssemblerCore(
     std::shared_ptr<SimulationControl> simulation_control,
-    const SimulationParameters<dim> &  nsparam)
+    const SimulationParameters<dim>   &nsparam)
     : simulation_control(simulation_control)
     , vof_parameters(nsparam.multiphysics.vof_parameters)
   {}
@@ -53,7 +54,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
@@ -62,7 +63,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   const bool SUPG = true;
@@ -98,7 +99,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
@@ -107,7 +108,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   std::shared_ptr<SimulationControl> simulation_control;
@@ -129,7 +130,7 @@ class GLSNavierStokesVOFAssemblerSTF : public NavierStokesAssemblerBase<dim>
 public:
   GLSNavierStokesVOFAssemblerSTF(
     std::shared_ptr<SimulationControl> p_simulation_control,
-    const SimulationParameters<dim> &  nsparam)
+    const SimulationParameters<dim>   &nsparam)
     : simulation_control(p_simulation_control)
     , STF_parameters(nsparam.multiphysics.vof_parameters.surface_tension_force)
   {}
@@ -140,7 +141,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
@@ -149,7 +150,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   std::shared_ptr<SimulationControl> simulation_control;
@@ -190,7 +191,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
@@ -199,7 +200,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   std::shared_ptr<SimulationControl> simulation_control;
@@ -225,7 +226,7 @@ class GLSNavierStokesVOFAssemblerNonNewtonianCore
 public:
   GLSNavierStokesVOFAssemblerNonNewtonianCore(
     std::shared_ptr<SimulationControl> simulation_control,
-    const SimulationParameters<dim> &  nsparam)
+    const SimulationParameters<dim>   &nsparam)
     : simulation_control(simulation_control)
     , vof_parameters(nsparam.multiphysics.vof_parameters)
   {}
@@ -239,10 +240,11 @@ public:
      viscosity variation with a slight change in the shear_rate magnitude
    */
   inline Tensor<1, dim>
-  get_viscosity_gradient(const Tensor<2, dim> &velocity_gradient,
-                         const Tensor<3, dim> &velocity_hessians,
-                         const double          shear_rate_magnitude,
-                         const double          grad_viscosity_shear_rate) const
+  get_kinematic_viscosity_gradient(
+    const Tensor<2, dim> &velocity_gradient,
+    const Tensor<3, dim> &velocity_hessians,
+    const double          shear_rate_magnitude,
+    const double          grad_kinematic_viscosity_shear_rate) const
   {
     // Calculates an approximation of the shear rate magnitude gradient using
     // the derived form, since it does not change with rheological models
@@ -277,7 +279,7 @@ public:
               }
           }
       }
-    return grad_shear_rate * grad_viscosity_shear_rate;
+    return grad_shear_rate * grad_kinematic_viscosity_shear_rate;
   };
 
   /**
@@ -286,7 +288,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_matrix(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
 
@@ -296,7 +298,7 @@ public:
    * @param copy_data (see base class)
    */
   virtual void
-  assemble_rhs(NavierStokesScratchData<dim> &        scratch_data,
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**

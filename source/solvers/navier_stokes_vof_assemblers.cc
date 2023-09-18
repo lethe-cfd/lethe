@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/simulation_control.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
@@ -10,11 +9,11 @@
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
   const double       h          = scratch_data.cell_size;
@@ -30,35 +29,9 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
   const double dt  = time_steps_vector[0];
   const double sdt = 1. / dt;
 
-  std::vector<double> &phase_values = scratch_data.phase_values;
-
   Assert(scratch_data.properties_manager.density_is_constant(),
          RequiresConstantDensity(
            "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
-
-  // Phase cutoff to limit continuity application on non-conservative fluid
-  const double phase_cutoff = 1e-6;
-
-  // Determine whether continuity condition is solved in this cell.
-  // Removing the conservation condition on the lowest density fluid
-  // can improve the wetting mechanism in the framework of incompressible
-  // fluids. See documentation for more details.
-  auto max_phase_cell =
-    std::max_element(std::begin(phase_values), std::end(phase_values));
-  bool solve_continuity(true);
-
-  if (vof_parameters.conservation.conservative_fluid ==
-      Parameters::FluidIndicator::fluid0)
-    {
-      if (*max_phase_cell > 1. - phase_cutoff)
-        solve_continuity = false;
-    }
-  else if (vof_parameters.conservation.conservative_fluid ==
-           Parameters::FluidIndicator::fluid1)
-    {
-      if (*max_phase_cell < phase_cutoff)
-        solve_continuity = false;
-    }
 
   // Loop over the quadrature points
   for (unsigned int q = 0; q < n_q_points; ++q)
@@ -100,8 +73,7 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
 
       // Calculation of the equivalent properties at the quadrature point
       double       density_eq           = scratch_data.density[q];
-      double       viscosity_eq         = scratch_data.viscosity[q];
-      const double dynamic_viscosity_eq = density_eq * viscosity_eq;
+      const double dynamic_viscosity_eq = scratch_data.dynamic_viscosity[q];
 
       // Calculation of the GLS stabilization parameter. The
       // stabilization parameter used is different if the simulation
@@ -110,9 +82,10 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
       const double tau =
         this->simulation_control->get_assembly_method() ==
             Parameters::SimulationControl::TimeSteppingMethod::steady ?
-          calculate_navier_stokes_gls_tau_steady(u_mag, viscosity_eq, h, 1) :
+          calculate_navier_stokes_gls_tau_steady(
+            u_mag, dynamic_viscosity_eq / density_eq, h) :
           calculate_navier_stokes_gls_tau_transient(
-            u_mag, viscosity_eq, h, sdt, 1);
+            u_mag, dynamic_viscosity_eq / density_eq, h, sdt);
 
       // Calculate the strong residual for GLS stabilization
       auto strong_residual = density_eq * velocity_gradient * velocity +
@@ -169,8 +142,7 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
               const auto &phi_u_j      = scratch_data.phi_u[q][j];
               const auto &grad_phi_u_j = scratch_data.grad_phi_u[q][j];
               const auto &div_phi_u_j  = scratch_data.div_phi_u[q][j];
-              const auto &grad_shear_rate_j =
-                grad_phi_u_j + transpose(grad_phi_u_j);
+              const auto &shear_rate_j = grad_phi_u_j + transpose(grad_phi_u_j);
 
               const auto &phi_p_j =
                 scratch_data.phi_p[q][j] * pressure_scaling_factor;
@@ -179,25 +151,16 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
 
               double local_matrix_ij =
                 dynamic_viscosity_eq *
-                  scalar_product(grad_shear_rate_j, grad_phi_u_i) +
+                  scalar_product(shear_rate_j, grad_phi_u_i) +
                 density_eq * velocity_gradient_x_phi_u_j[j] * phi_u_i +
                 density_eq * grad_phi_u_j_x_velocity[j] * phi_u_i -
                 div_phi_u_i * phi_p_j;
 
-              if (solve_continuity)
-                {
-                  // Continuity
-                  local_matrix_ij += phi_p_i * div_phi_u_j;
+              // Continuity
+              local_matrix_ij += phi_p_i * div_phi_u_j;
 
-                  // PSPG GLS term
-                  local_matrix_ij +=
-                    tau / density_eq * (strong_jac * grad_phi_p_i);
-                }
-              else
-                {
-                  // assemble Jacobian corresponding to p = 0
-                  local_matrix_ij += phi_p_i * phi_p_j;
-                }
+              // PSPG GLS term
+              local_matrix_ij += tau / density_eq * (strong_jac * grad_phi_p_i);
 
               // Jacobian is currently incomplete
               if (SUPG)
@@ -217,11 +180,11 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix(
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
   const double       h          = scratch_data.cell_size;
@@ -236,35 +199,9 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs(
   const double dt  = time_steps_vector[0];
   const double sdt = 1. / dt;
 
-  std::vector<double> &phase_values = scratch_data.phase_values;
-
-  // Phase cutoff to limit continuity application on non-conservative fluid
-  const double phase_cutoff = 1e-6;
-
-  // Determine whether continuity condition is solved in this cell.
-  // Removing the conservation condition on the lowest density fluid
-  // can improve the wetting mechanism in the framework of incompressible
-  // fluids. See documentation for more details.
-  auto max_phase_cell =
-    std::max_element(std::begin(phase_values), std::end(phase_values));
-  bool solve_continuity(true);
-
-  if (vof_parameters.conservation.conservative_fluid ==
-      Parameters::FluidIndicator::fluid0)
-    {
-      if (*max_phase_cell > 1. - phase_cutoff)
-        solve_continuity = false;
-    }
-  else if (vof_parameters.conservation.conservative_fluid ==
-           Parameters::FluidIndicator::fluid1)
-    {
-      if (*max_phase_cell < phase_cutoff)
-        solve_continuity = false;
-    }
-
   Assert(scratch_data.properties_manager.density_is_constant(),
          RequiresConstantDensity(
-           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
+           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs"));
 
   // Loop over the quadrature points
   for (unsigned int q = 0; q < n_q_points; ++q)
@@ -315,8 +252,7 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs(
 
       // Calculation of the equivalent properties at the quadrature point
       double       density_eq           = scratch_data.density[q];
-      double       viscosity_eq         = scratch_data.viscosity[q];
-      const double dynamic_viscosity_eq = density_eq * viscosity_eq;
+      const double dynamic_viscosity_eq = scratch_data.dynamic_viscosity[q];
 
       // Calculation of the GLS stabilization parameter. The
       // stabilization parameter used is different if the simulation
@@ -325,9 +261,10 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs(
       const double tau =
         this->simulation_control->get_assembly_method() ==
             Parameters::SimulationControl::TimeSteppingMethod::steady ?
-          calculate_navier_stokes_gls_tau_steady(u_mag, viscosity_eq, h, 1.) :
+          calculate_navier_stokes_gls_tau_steady(
+            u_mag, dynamic_viscosity_eq / density_eq, h) :
           calculate_navier_stokes_gls_tau_transient(
-            u_mag, viscosity_eq, h, sdt, 1.);
+            u_mag, dynamic_viscosity_eq / density_eq, h, sdt);
 
 
       // Calculate the strong residual for GLS stabilization
@@ -355,20 +292,12 @@ GLSNavierStokesVOFAssemblerCore<dim>::assemble_rhs(
              pressure * div_phi_u_i + density_eq * force * phi_u_i) *
             JxW;
 
-          if (solve_continuity)
-            {
-              // Continuity
-              local_rhs(i) += -(velocity_divergence * phi_p_i) * JxW;
+          // Continuity
+          local_rhs(i) += -(velocity_divergence * phi_p_i) * JxW;
 
-              // PSPG GLS term
-              local_rhs(i) +=
-                -tau / density_eq * (strong_residual * grad_phi_p_i) * JxW;
-            }
-          else
-            {
-              // assemble RHS for p = 0
-              local_rhs(i) += -phi_p_i * pressure * JxW;
-            }
+          // PSPG GLS term
+          local_rhs(i) +=
+            -tau / density_eq * (strong_residual * grad_phi_p_i) * JxW;
 
           // SUPG GLS term
           if (SUPG)
@@ -388,11 +317,11 @@ template class GLSNavierStokesVOFAssemblerCore<3>;
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerBDF<dim>::assemble_matrix(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
@@ -450,11 +379,11 @@ GLSNavierStokesVOFAssemblerBDF<dim>::assemble_matrix(
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerBDF<dim>::assemble_rhs(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
@@ -516,16 +445,11 @@ GLSNavierStokesVOFAssemblerSTF<dim>::assemble_matrix(
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerSTF<dim>::assemble_rhs(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  // Densities of phases
-  Assert(scratch_data.properties_manager.density_is_constant(),
-         RequiresConstantDensity(
-           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
-
   // Loop and quadrature information
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
@@ -540,7 +464,7 @@ GLSNavierStokesVOFAssemblerSTF<dim>::assemble_rhs(
       const double surface_tension_coef = scratch_data.surface_tension[q];
 
       // Gather pfg and curvature values
-      const double &        curvature_value = scratch_data.curvature_values[q];
+      const double         &curvature_value = scratch_data.curvature_values[q];
       const Tensor<1, dim> &phase_gradient_value =
         scratch_data.filtered_phase_gradient_values[q];
       const double JxW_value = JxW[q];
@@ -575,20 +499,16 @@ GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_matrix(
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_rhs(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  // Surface tension gradient
-  const double surface_tension_gradient =
-    STF_properties.surface_tension_gradient;
-
   // Densities of phases
   Assert(scratch_data.properties_manager.density_is_constant(),
          RequiresConstantDensity(
-           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
+           "GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_rhs"));
 
   // Loop and quadrature information
-  const auto &       JxW        = scratch_data.JxW;
+  const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
 
@@ -599,8 +519,11 @@ GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_rhs(
   // Loop over the quadrature points
   for (unsigned int q = 0; q < n_q_points; ++q)
     {
-      // Surface tension coefficient
-      const double surface_tension_coef = scratch_data.surface_tension[q];
+      // Surface tension
+      const double surface_tension = scratch_data.surface_tension[q];
+      // Surface tension gradient with respect to the temperature
+      const double surface_tension_gradient =
+        scratch_data.surface_tension_gradient[q];
 
       const double &curvature_value = scratch_data.curvature_values[q];
 
@@ -613,9 +536,6 @@ GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_rhs(
       const Tensor<1, dim> normalized_phase_fraction_gradient =
         phase_gradient_value / (phase_gradient_norm + DBL_MIN);
 
-      // Gather temperature
-      const double temperature = scratch_data.temperature_values[q];
-
       // Gather temperature gradient
       const Tensor<1, dim> temperature_gradient =
         scratch_data.temperature_gradients[q];
@@ -624,8 +544,7 @@ GLSNavierStokesVOFAssemblerMarangoni<dim>::assemble_rhs(
 
 
       const Tensor<1, dim> surface_tension_force =
-        -(surface_tension_coef + surface_tension_gradient * temperature) *
-        curvature_value * phase_gradient_value;
+        -surface_tension * curvature_value * phase_gradient_value;
 
       const Tensor<1, dim> marangoni_effect =
         -surface_tension_gradient *
@@ -654,11 +573,11 @@ template class GLSNavierStokesVOFAssemblerMarangoni<3>;
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
   const double       h          = scratch_data.cell_size;
@@ -674,40 +593,10 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
   const double dt  = time_steps_vector[0];
   const double sdt = 1. / dt;
 
-  // Phase values and limiters
-  std::vector<double> &phase_values = scratch_data.phase_values;
-  // std::vector<double> &phase_values_m1 =
-  // scratch_data.previous_phase_values[0];
-  // std::vector<Tensor<1, dim>> &phase_gradient_values =
-  // scratch_data.phase_gradient_values;
-
-  // Phase cutoff to limit continuity application on non-conservative fluid
-  const double phase_cutoff = 1e-6;
-
-  // Determine whether continuity condition is solved in this cell.
-  // Removing the conservation condition on the lowest density fluid
-  // can improve the wetting mechanism in the framework of incompressible
-  // fluids. See documentation for more details.
-  auto max_phase_cell =
-    std::max_element(std::begin(phase_values), std::end(phase_values));
-  bool solve_continuity(true);
-
-  if (vof_parameters.conservation.conservative_fluid ==
-      Parameters::FluidIndicator::fluid0)
-    {
-      if (*max_phase_cell > 1. - phase_cutoff)
-        solve_continuity = false;
-    }
-  else if (vof_parameters.conservation.conservative_fluid ==
-           Parameters::FluidIndicator::fluid1)
-    {
-      if (*max_phase_cell < phase_cutoff)
-        solve_continuity = false;
-    }
-
-  Assert(scratch_data.properties_manager.density_is_constant(),
-         RequiresConstantDensity(
-           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
+  Assert(
+    scratch_data.properties_manager.density_is_constant(),
+    RequiresConstantDensity(
+      "GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix"));
 
   // Loop over the quadrature points
   for (unsigned int q = 0; q < n_q_points; ++q)
@@ -734,12 +623,13 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
       shear_rate_magnitude =
         shear_rate_magnitude > 1e-12 ? shear_rate_magnitude : 1e-12;
 
-      // Calculate viscosity gradient
-      const Tensor<1, dim> viscosity_gradient =
-        this->get_viscosity_gradient(velocity_gradient,
-                                     velocity_hessian,
-                                     shear_rate_magnitude,
-                                     scratch_data.grad_viscosity_shear_rate[q]);
+      // Calculate kinematic viscosity gradient
+      const Tensor<1, dim> kinematic_viscosity_gradient =
+        this->get_kinematic_viscosity_gradient(
+          velocity_gradient,
+          velocity_hessian,
+          shear_rate_magnitude,
+          scratch_data.grad_kinematic_viscosity_shear_rate[q]);
 
       // Forcing term
       Tensor<1, dim> force = scratch_data.force[q];
@@ -752,11 +642,10 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
       const double JxW = JxW_vec[q];
 
       // Calculation of the equivalent properties at the quadrature point
-      double               density_eq           = scratch_data.density[q];
-      double               viscosity_eq         = scratch_data.viscosity[q];
-      const double         dynamic_viscosity_eq = density_eq * viscosity_eq;
+      double       density_eq           = scratch_data.density[q];
+      const double dynamic_viscosity_eq = scratch_data.dynamic_viscosity[q];
       const Tensor<1, dim> dynamic_viscosity_gradient =
-        density_eq * viscosity_gradient;
+        density_eq * kinematic_viscosity_gradient;
 
       // Calculation of the GLS stabilization parameter. The
       // stabilization parameter used is different if the simulation
@@ -765,12 +654,10 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
       const double tau =
         this->simulation_control->get_assembly_method() ==
             Parameters::SimulationControl::TimeSteppingMethod::steady ?
-          calculate_navier_stokes_gls_tau_steady(u_mag,
-                                                 viscosity_eq,
-                                                 h,
-                                                 density_eq) :
+          calculate_navier_stokes_gls_tau_steady(
+            u_mag, dynamic_viscosity_eq / density_eq, h) :
           calculate_navier_stokes_gls_tau_transient(
-            u_mag, viscosity_eq, h, sdt, density_eq);
+            u_mag, dynamic_viscosity_eq / density_eq, h, sdt);
 
       // Calculate the strong residual for GLS stabilization
       auto strong_residual = density_eq * velocity_gradient * velocity +
@@ -844,7 +731,7 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
               double local_matrix_ij =
                 dynamic_viscosity_eq *
                   scalar_product(grad_phi_u_j_non_newtonian, grad_phi_u_i) +
-                0.5 * scratch_data.grad_viscosity_shear_rate[q] /
+                0.5 * scratch_data.grad_kinematic_viscosity_shear_rate[q] /
                   shear_rate_magnitude *
                   scalar_product(grad_phi_u_j_non_newtonian, shear_rate) *
                   scalar_product(shear_rate, grad_phi_u_i) +
@@ -852,19 +739,11 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
                 density_eq * grad_phi_u_j_x_velocity[j] * phi_u_i -
                 div_phi_u_i * phi_p_j;
 
-              if (solve_continuity)
-                {
-                  // Continuity
-                  local_matrix_ij += phi_p_i * div_phi_u_j;
+              // Continuity
+              local_matrix_ij += phi_p_i * div_phi_u_j;
 
-                  // PSPG GLS term
-                  local_matrix_ij += tau * (strong_jac * grad_phi_p_i);
-                }
-              else
-                {
-                  // assemble Jacobian corresponding to p = 0
-                  local_matrix_ij += phi_p_i * phi_p_j;
-                }
+              // PSPG GLS term
+              local_matrix_ij += tau * (strong_jac * grad_phi_p_i);
 
               // The jacobian matrix for the SUPG formulation
               // currently does not include the jacobian of the stabilization
@@ -887,11 +766,11 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_matrix(
 template <int dim>
 void
 GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
-  NavierStokesScratchData<dim> &        scratch_data,
+  NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
   // Loop and quadrature information
-  const auto &       JxW_vec    = scratch_data.JxW;
+  const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
   const double       h          = scratch_data.cell_size;
@@ -906,40 +785,9 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
   const double dt  = time_steps_vector[0];
   const double sdt = 1. / dt;
 
-  // Phase values and limiters
-  std::vector<double> &phase_values = scratch_data.phase_values;
-  // std::vector<double> &phase_values_m1 =
-  // scratch_data.previous_phase_values[0];
-  // std::vector<Tensor<1, dim>> &phase_gradient_values =
-  // scratch_data.phase_gradient_values;
-
-  // Phase cutoff to limit continuity application on non-conservative fluid
-  const double phase_cutoff = 1e-6;
-
-  // Determine whether continuity condition is solved in this cell.
-  // Removing the conservation condition on the lowest density fluid
-  // can improve the wetting mechanism in the framework of incompressible
-  // fluids. See documentation for more details.
-  auto max_phase_cell =
-    std::max_element(std::begin(phase_values), std::end(phase_values));
-  bool solve_continuity(true);
-
-  if (vof_parameters.conservation.conservative_fluid ==
-      Parameters::FluidIndicator::fluid0)
-    {
-      if (*max_phase_cell > 1. - phase_cutoff)
-        solve_continuity = false;
-    }
-  else if (vof_parameters.conservation.conservative_fluid ==
-           Parameters::FluidIndicator::fluid1)
-    {
-      if (*max_phase_cell < phase_cutoff)
-        solve_continuity = false;
-    }
-
   Assert(scratch_data.properties_manager.density_is_constant(),
          RequiresConstantDensity(
-           "GLSNavierStokesVOFAssemblerCore<dim>::assemble_matrix"));
+           "GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs"));
 
   // Loop over the quadrature points
   for (unsigned int q = 0; q < n_q_points; ++q)
@@ -964,12 +812,13 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
       shear_rate_magnitude =
         shear_rate_magnitude > 1e-12 ? shear_rate_magnitude : 1e-12;
 
-      // Calculate viscosity gradient
-      const Tensor<1, dim> viscosity_gradient =
-        this->get_viscosity_gradient(velocity_gradient,
-                                     velocity_hessian,
-                                     shear_rate_magnitude,
-                                     scratch_data.grad_viscosity_shear_rate[q]);
+      // Calculate kinematic viscosity gradient
+      const Tensor<1, dim> kinematic_viscosity_gradient =
+        this->get_kinematic_viscosity_gradient(
+          velocity_gradient,
+          velocity_hessian,
+          shear_rate_magnitude,
+          scratch_data.grad_kinematic_viscosity_shear_rate[q]);
 
       // Pressure
       const double         pressure = scratch_data.pressure_values[q];
@@ -987,11 +836,10 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
       const double JxW = JxW_vec[q];
 
       // Calculation of the equivalent properties at the quadrature point
-      double               density_eq           = scratch_data.density[q];
-      double               viscosity_eq         = scratch_data.viscosity[q];
-      const double         dynamic_viscosity_eq = density_eq * viscosity_eq;
+      double       density_eq           = scratch_data.density[q];
+      const double dynamic_viscosity_eq = scratch_data.dynamic_viscosity[q];
       const Tensor<1, dim> dynamic_viscosity_gradient =
-        density_eq * viscosity_gradient;
+        density_eq * kinematic_viscosity_gradient;
 
       // Calculation of the GLS stabilization parameter. The
       // stabilization parameter used is different if the simulation
@@ -1000,12 +848,10 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
       const double tau =
         this->simulation_control->get_assembly_method() ==
             Parameters::SimulationControl::TimeSteppingMethod::steady ?
-          calculate_navier_stokes_gls_tau_steady(u_mag,
-                                                 viscosity_eq,
-                                                 h,
-                                                 density_eq) :
+          calculate_navier_stokes_gls_tau_steady(
+            u_mag, dynamic_viscosity_eq / density_eq, h) :
           calculate_navier_stokes_gls_tau_transient(
-            u_mag, viscosity_eq, h, sdt, density_eq);
+            u_mag, dynamic_viscosity_eq / density_eq, h, sdt);
 
 
       // Calculate the strong residual for GLS stabilization
@@ -1033,19 +879,11 @@ GLSNavierStokesVOFAssemblerNonNewtonianCore<dim>::assemble_rhs(
               pressure * div_phi_u_i + density_eq * force * phi_u_i) *
             JxW;
 
-          if (solve_continuity)
-            {
-              // Continuity
-              local_rhs(i) += -(velocity_divergence * phi_p_i) * JxW;
+          // Continuity
+          local_rhs(i) += -(velocity_divergence * phi_p_i) * JxW;
 
-              // PSPG GLS term
-              local_rhs(i) += -tau * (strong_residual * grad_phi_p_i) * JxW;
-            }
-          else
-            {
-              // assemble RHS for p = 0
-              local_rhs(i) += -phi_p_i * pressure * JxW;
-            }
+          // PSPG GLS term
+          local_rhs(i) += -tau * (strong_residual * grad_phi_p_i) * JxW;
 
           // SUPG GLS term
           if (SUPG)

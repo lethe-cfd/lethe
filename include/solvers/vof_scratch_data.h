@@ -62,7 +62,7 @@ public:
    * @brief Constructor. The constructor creates the fe_values that will be used
    * to fill the member variables of the scratch. It also allocated the
    * necessary memory for all member variables. However, it does not do any
-   * evalution, since this needs to be done at the cell level.
+   * evaluation, since this needs to be done at the cell level.
    *
    * @param properties_manager The physical properties Manager (see physical_properties_manager.h)
    *
@@ -76,10 +76,10 @@ public:
    *
    */
   VOFScratchData(const PhysicalPropertiesManager properties_manager,
-                 const FiniteElement<dim> &      fe_vof,
-                 const Quadrature<dim> &         quadrature,
-                 const Mapping<dim> &            mapping,
-                 const FiniteElement<dim> &      fe_fd)
+                 const FiniteElement<dim>       &fe_vof,
+                 const Quadrature<dim>          &quadrature,
+                 const Mapping<dim>             &mapping,
+                 const FiniteElement<dim>       &fe_fd)
     : properties_manager(properties_manager)
     , fe_values_vof(mapping,
                     fe_vof,
@@ -127,8 +127,8 @@ public:
 
   /** @brief Reinitialize the content of the scratch
    *
-   * Using the FeValues and the content of the solutions, previous solutions and
-   * solutions stages, fills all of the class member of the scratch
+   * Using the FeValues and the content of the solutions and previous solutions,
+   * fills all of the class member of the scratch
    *
    * @tparam VectorType The Vector type used for the solvers
    *
@@ -139,16 +139,13 @@ public:
    *
    * @param previous_solutions The solutions at the previous time steps
    *
-   * @param solution_stages The solution at the intermediary stages (for SDIRK methods)
-   *
    */
 
   template <typename VectorType>
   void
   reinit(const typename DoFHandler<dim>::active_cell_iterator &cell,
-         const VectorType &                                    current_solution,
-         const std::vector<VectorType> &previous_solutions,
-         const std::vector<VectorType> &solution_stages)
+         const VectorType                                     &current_solution,
+         const std::vector<VectorType> &previous_solutions)
   {
     fe_values_vof.reinit(cell);
     this->quadrature_points = fe_values_vof.get_quadrature_points();
@@ -167,6 +164,9 @@ public:
     fe_values_vof.get_function_laplacians(current_solution,
                                           this->phase_laplacians);
 
+    fe_values_vof.get_function_gradients(previous_solutions[0],
+                                         this->previous_phase_gradients);
+
 
     // Gather previous vof values
     for (unsigned int p = 0; p < previous_solutions.size(); ++p)
@@ -174,14 +174,6 @@ public:
         fe_values_vof.get_function_values(previous_solutions[p],
                                           this->previous_phase_values[p]);
       }
-
-    // Gather fs stages
-    for (unsigned int s = 0; s < solution_stages.size(); ++s)
-      {
-        fe_values_vof.get_function_values(solution_stages[s],
-                                          this->stages_phase_values[s]);
-      }
-
 
     for (unsigned int q = 0; q < this->n_q_points; ++q)
       {
@@ -212,7 +204,7 @@ public:
   template <typename VectorType>
   void
   reinit_velocity(const typename DoFHandler<dim>::active_cell_iterator &cell,
-                  const VectorType &             current_solution,
+                  const VectorType              &current_solution,
                   const std::vector<VectorType> &previous_solutions)
   {
     fe_values_fd.reinit(cell);
@@ -222,6 +214,12 @@ public:
     fe_values_fd[velocities_fd].get_function_gradients(
       current_solution, velocity_gradient_values);
 
+    for (unsigned int q = 0; q < this->n_q_points; ++q)
+      {
+        this->velocity_divergences[q] =
+          trace(this->velocity_gradient_values[q]);
+      }
+
     for (unsigned int p = 0; p < previous_solutions.size(); ++p)
       {
         fe_values_fd[velocities_fd].get_function_values(
@@ -229,19 +227,9 @@ public:
       }
   }
 
-  /** @brief Calculates the physical properties. This method calculates the physical properties
-   * that may be required by the VOF problem. Namely the density to apply
-   * peeling/wetting.
-   *
-   */
-  void
-  calculate_physical_properties();
-
   // Physical properties
   PhysicalPropertiesManager            properties_manager;
   std::map<field, std::vector<double>> fields;
-  std::vector<double>                  density_0;
-  std::vector<double>                  density_1;
 
   // FEValues for the VOF problem
   FEValues<dim> fe_values_vof;
@@ -254,11 +242,12 @@ public:
   std::vector<Point<dim>> quadrature_points;
 
   // VOF values
-  std::vector<double>              present_phase_values;
-  std::vector<Tensor<1, dim>>      phase_gradients;
+  std::vector<double>         present_phase_values;
+  std::vector<Tensor<1, dim>> phase_gradients;
+  std::vector<Tensor<1, dim>> previous_phase_gradients;
+
   std::vector<double>              phase_laplacians;
   std::vector<std::vector<double>> previous_phase_values;
-  std::vector<std::vector<double>> stages_phase_values;
 
   // Shape functions
   std::vector<std::vector<double>>         phi;
@@ -273,10 +262,11 @@ public:
   FEValues<dim> fe_values_fd;
 
   FEValuesExtractors::Vector velocities_fd;
-  // This FEValues must mandatorily be instantiated for the velocity
+  // This FEValues must be instantiated for the velocity
   std::vector<Tensor<1, dim>>              velocity_values;
   std::vector<std::vector<Tensor<1, dim>>> previous_velocity_values;
   std::vector<Tensor<2, dim>>              velocity_gradient_values;
+  std::vector<double>                      velocity_divergences;
 };
 
 #endif

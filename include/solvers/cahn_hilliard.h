@@ -21,7 +21,8 @@
  * with Phi the phase field parameter (or phase order), eta the chemical
  * potential, and M the mobility function and epsilon the interface thickness.
  * The phase field parameter must not be confused with the order (respectively
- * phase_ch_order and potential_ch_order) of the finite elements related to the
+ * phase_cahn_hilliard_order and potential_cahn_hilliard_order) of the finite
+ elements related to the
  * phase field parameter and the chemical potential.
  */
 
@@ -38,6 +39,7 @@
 
 #include <deal.II/base/convergence_table.h>
 #include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/timer.h>
 
 #include <deal.II/distributed/solution_transfer.h>
 #include <deal.II/distributed/tria_base.h>
@@ -51,18 +53,23 @@
 #include <deal.II/lac/trilinos_vector.h>
 
 
+
 template <int dim>
 class CahnHilliard : public AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>
 {
 public:
-  CahnHilliard<dim>(MultiphysicsInterface<dim> *     multiphysics_interface,
+  CahnHilliard<dim>(MultiphysicsInterface<dim>      *multiphysics_interface,
                     const SimulationParameters<dim> &p_simulation_parameters,
                     std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
                                                        p_triangulation,
                     std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
-        p_simulation_parameters.non_linear_solver)
+        p_simulation_parameters.non_linear_solver.at(PhysicsID::cahn_hilliard))
     , multiphysics(multiphysics_interface)
+    , computing_timer(p_triangulation->get_communicator(),
+                      this->pcout,
+                      TimerOutput::summary,
+                      TimerOutput::wall_times)
     , simulation_parameters(p_simulation_parameters)
     , triangulation(p_triangulation)
     , simulation_control(p_simulation_control)
@@ -71,43 +78,54 @@ public:
     if (simulation_parameters.mesh.simplex)
       {
         // for simplex meshes
-        const FE_SimplexP<dim> phase_order_fe(
-          simulation_parameters.fem_parameters.phase_ch_order);
-        const FE_SimplexP<dim> potential_fe(
-          simulation_parameters.fem_parameters.potential_ch_order);
-        fe =
-          std::make_shared<FESystem<dim>>(phase_order_fe, 1, potential_fe, 1);
+        fe = std::make_shared<FESystem<dim>>(
+          FE_SimplexP<dim>(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order),
+          1,
+          FE_SimplexP<dim>(
+            simulation_parameters.fem_parameters.potential_cahn_hilliard_order),
+          1);
         mapping         = std::make_shared<MappingFE<dim>>(*fe);
         cell_quadrature = std::make_shared<QGaussSimplex<dim>>(
-          std::max(simulation_parameters.fem_parameters.phase_ch_order,
-                   simulation_parameters.fem_parameters.potential_ch_order) +
+          std::max(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order,
+            simulation_parameters.fem_parameters
+              .potential_cahn_hilliard_order) +
           1);
         face_quadrature = std::make_shared<QGaussSimplex<dim - 1>>(
-          std::max(simulation_parameters.fem_parameters.phase_ch_order,
-                   simulation_parameters.fem_parameters.potential_ch_order) +
+          std::max(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order,
+            simulation_parameters.fem_parameters
+              .potential_cahn_hilliard_order) +
           1);
         ;
       }
     else
       {
         // Usual case, for quad/hex meshes
-        const FE_Q<dim> phase_order_fe(
-          simulation_parameters.fem_parameters.phase_ch_order);
-        const FE_Q<dim> potential_fe(
-          simulation_parameters.fem_parameters.potential_ch_order);
-        fe =
-          std::make_shared<FESystem<dim>>(phase_order_fe, 1, potential_fe, 1);
+        fe = std::make_shared<FESystem<dim>>(
+          FE_Q<dim>(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order),
+          1,
+          FE_Q<dim>(
+            simulation_parameters.fem_parameters.potential_cahn_hilliard_order),
+          1);
         mapping = std::make_shared<MappingQ<dim>>(
-          std::max(simulation_parameters.fem_parameters.phase_ch_order,
-                   simulation_parameters.fem_parameters.potential_ch_order),
+          std::max(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order,
+            simulation_parameters.fem_parameters.potential_cahn_hilliard_order),
           simulation_parameters.fem_parameters.qmapping_all);
         cell_quadrature = std::make_shared<QGauss<dim>>(
-          std::max(simulation_parameters.fem_parameters.phase_ch_order,
-                   simulation_parameters.fem_parameters.potential_ch_order) +
+          std::max(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order,
+            simulation_parameters.fem_parameters
+              .potential_cahn_hilliard_order) +
           1);
         face_quadrature = std::make_shared<QGauss<dim - 1>>(
-          std::max(simulation_parameters.fem_parameters.phase_ch_order,
-                   simulation_parameters.fem_parameters.potential_ch_order) +
+          std::max(
+            simulation_parameters.fem_parameters.phase_cahn_hilliard_order,
+            simulation_parameters.fem_parameters
+              .potential_cahn_hilliard_order) +
           1);
       }
 
@@ -129,6 +147,11 @@ public:
             SolutionTransfer<dim, TrilinosWrappers::MPI::Vector>(
               this->dof_handler));
       }
+
+    // Change the behavior of the timer for situations when you don't want
+    // outputs
+    if (simulation_parameters.timer.type == Parameters::Timer::Type::none)
+      this->computing_timer.disable_output();
   }
 
   /**
@@ -310,8 +333,8 @@ private:
   virtual void
   assemble_local_system_matrix(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    CahnHilliardScratchData<dim> &                        scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    CahnHilliardScratchData<dim>                         &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief Assemble the local rhs for a given cell
@@ -329,8 +352,8 @@ private:
   virtual void
   assemble_local_system_rhs(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    CahnHilliardScratchData<dim> &                        scratch_data,
-    StabilizedMethodsCopyData &                           copy_data);
+    CahnHilliardScratchData<dim>                         &scratch_data,
+    StabilizedMethodsCopyData                            &copy_data);
 
   /**
    * @brief sets up the vector of assembler functions
@@ -367,7 +390,10 @@ private:
   write_phase_statistics();
 
 
-  MultiphysicsInterface<dim> *     multiphysics;
+  MultiphysicsInterface<dim> *multiphysics;
+
+  TimerOutput computing_timer;
+
   const SimulationParameters<dim> &simulation_parameters;
 
 
@@ -402,7 +428,6 @@ private:
 
   // Previous solutions vectors
   std::vector<TrilinosWrappers::MPI::Vector> previous_solutions;
-  std::vector<TrilinosWrappers::MPI::Vector> solution_stages;
 
   // Solution transfer classes
   std::shared_ptr<

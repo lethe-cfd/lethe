@@ -7,7 +7,7 @@ Flow around NACA0012 at Low Reynolds Number
 Features
 --------
 
-- Solver: ``gls_navier_stokes_2d`` (with Q1-Q1)
+- Solver: ``gls_navier_stokes`` (with Q1-Q1)
 - Transient problem
 - Boundary Layer Mesh - Transfinite Mesh
 - Spectral analysis - Fourier transform
@@ -171,10 +171,12 @@ The ``inexact_newton`` non-linear solver is used with a high ``tolerance``, sinc
 .. code-block:: text
 
     subsection non-linear solver
-      set solver         = inexact_newton
-      set verbosity      = verbose
-      set tolerance      = 1e-3
-      set max iterations = 10
+      subsection fluid dynamics
+        set solver         = inexact_newton
+        set verbosity      = verbose
+        set tolerance      = 1e-3
+        set max iterations = 10
+      end
     end
 
 Linear Solver
@@ -185,15 +187,17 @@ Again, in order to reduce the computational time, the ``minimum residual`` for t
 .. code-block:: text
 
     subsection linear solver
-      set verbosity                             = verbose
-      set method                                = gmres
-      set max iters                             = 5000
-      set relative residual                     = 1e-3
-      set minimum residual                      = 1e-8
-      set ilu preconditioner fill               = 1
-      set ilu preconditioner absolute tolerance = 1e-10
-      set ilu preconditioner relative tolerance = 1.00
-      set max krylov vectors                    = 1000
+      subsection fluid dynamics
+        set verbosity                                 = verbose
+        set method                                    = gmres
+        set relative residual                         = 1e-3
+        set minimum residual                          = 1e-8
+        set preconditioner                            = amg
+        set amg preconditioner ilu fill               = 0
+        set amg preconditioner ilu absolute tolerance = 1e-12
+        set amg preconditioner ilu relative tolerance = 1.00
+        set max krylov vectors                        = 1000
+      end
     end      
 	
 	
@@ -209,13 +213,13 @@ The simulation can be launched using the following command:
 
 .. code-block:: text
 
-	gls_navier_stokes_2d naca.prm
+	gls_navier_stokes naca.prm
 
 It can also run in parallel using:
 
 .. code-block:: text
 
-	mpirun -np X gls_navier_stokes_2d naca.prm
+	mpirun -np X gls_navier_stokes naca.prm
 
 with X the number of processors used to run it.
 	

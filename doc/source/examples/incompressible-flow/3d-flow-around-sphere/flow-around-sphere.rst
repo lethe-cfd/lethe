@@ -10,7 +10,7 @@ In this example, a fluid flows past a sphere
 Features
 ----------------------------------
 
-- Solvers: ``gls_navier_stokes_3d`` (with Q1-Q1) or  ``gd_navier_stokes_3d`` (with Q2-Q1)
+- Solvers: ``gls_navier_stokes`` (with Q1-Q1) or  ``gd_navier_stokes`` (with Q2-Q1)
 - Steady-state problem
 - Displays the importance of adaptative mesh refinement
 - Displays the effect of the Reynolds number on the convergence
@@ -165,7 +165,7 @@ We specify the interpolation order for both pressure and velocity using the ``FE
 
 .. warning:: 
 
-    If you choose to use the ``gd_navier_stokes_3d`` solver; only Q2-Q1 elements are supported. 
+    If you choose to use the ``gd_navier_stokes`` solver; only Q2-Q1 elements are supported. 
 
 
 Simulation Control
@@ -180,9 +180,8 @@ In fact, for the Re = 0.1, we have a laminar to creeping flow, meaning that the 
     subsection simulation control
       set method            = steady
       set number mesh adapt = 0
-      set output name       = sphere-output
+      set output path       = sphere-0.1/
       set output frequency  = 1
-      set subdivision       = 1
     end
 
 At Re = 150, the flow has separated, resulting in an unstable wake and recirculation. It is hence more difficult to converge to a steady-state solution. 
@@ -196,10 +195,8 @@ At Re = 150, the flow has separated, resulting in an unstable wake and recircula
       set max cfl                      = 1000
       set stop tolerance               = 1e-5
       set adaptative time step scaling = 1.2
-      set number mesh adapt            = 0
-      set output name                  = sphere-output
+      set output path                  = sphere-150/
       set output frequency             = 1
-      set subdivision                  = 1
     end
 
 The ``steady_bdf`` method solves for a steady-state simulation using adjoint time stepping with a bdf1 scheme. An initial time step is used to complete a transient iteration, and with each iteration, the time step is increased. The simulation is considered to have reached steady-state when the L2 norm of the initial residual is lower than stop tolerance at the start of a non-linear solution step, i.e. until the time step is large enough that a pseudo-steady-state has been reached.
@@ -213,8 +210,8 @@ An initial condition is introduced for the Re = 150 problem. This way, a Re = 10
 .. code-block:: text
 
     subsection initial conditions
-      set type      = viscous
-      set viscosity = 0.1
+      set type                = viscous
+      set kinematic viscosity = 0.1
     end
 
 
@@ -246,23 +243,23 @@ The ``min refinement level`` refers to the base mesh which has been used in the 
 Running the Simulation
 ----------------------
 
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes_3d`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
 
-  gls_navier_stokes_3d sphere-0.1.prm
+  gls_navier_stokes sphere-0.1.prm
 
 or 
 
 .. code-block:: text
 
-  gls_navier_stokes_3d sphere-150.prm
+  gls_navier_stokes sphere-150.prm
 
 or
 
 .. code-block:: text
 
-  gls_navier_stokes_3d sphere-adapt.prm
+  gls_navier_stokes sphere-adapt.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 

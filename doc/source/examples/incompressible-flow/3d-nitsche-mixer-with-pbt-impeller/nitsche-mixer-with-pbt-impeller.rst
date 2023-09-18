@@ -14,7 +14,7 @@ This example illustrates how the transient flow in a stirred-tank can be simulat
 Features
 --------
 
-- Solvers: ``gls_nitsche_navier_stokes_33``
+- Solvers: ``nitsche_navier_stokes``
 - Transient problem
 - Rotating complex solid modeled with Nitsche immersed boundary
 - Calculation of the average velocity
@@ -283,8 +283,10 @@ Since this is a transient problem, it is not highly non-linear except for the fi
 .. code-block:: text
 
     subsection non-linear solver
-      set tolerance = 1e-4
-      set solver    = inexact_newton
+      subsection fluid dynamics
+        set tolerance = 1e-4
+        set solver    = inexact_newton
+      end
     end
 
 Because the assembly of the Nitsche restriction for the immersed boundary is relatively expensive, we reuse the Jacobian matrix as much as possible. This is accomplished by setting ``solver = inexact_newton``.
@@ -292,18 +294,21 @@ Because the assembly of the Nitsche restriction for the immersed boundary is rel
 Linear Solver
 ~~~~~~~~~~~~~
 
-Relatively standard parameters are used for the :doc:`../../../parameters/cfd/linear_solver_control`. From our experience, the AMG preconditioner is more robust with the Nitsche immersed boundaries than the traditional ILU.
+Relatively standard parameters are used for the :doc:`../../../parameters/cfd/linear_solver_control`. From our experience, the ``amg`` preconditioner is more robust with the Nitsche immersed boundaries than the traditional ILU.
 
 .. code-block:: text
 
     subsection linear solver
-      set method                                    = amg
-      set max iters                                 = 200
-      set minimum residual                          = 1e-7
-      set amg preconditioner ilu absolute tolerance = 1e-8
-      set amg preconditioner ilu relative tolerance = 2.00
-      set amg aggregation threshold                 = 1e-10  
-      set max krylov vectors                        = 200
+      subsection fluid dynamics
+        set method                                    = gmres
+        set max iters                                 = 200
+        set minimum residual                          = 1e-7
+        set preconditioner                            = amg
+        set amg preconditioner ilu absolute tolerance = 1e-8
+        set amg preconditioner ilu relative tolerance = 2.00
+        set amg aggregation threshold                 = 1e-10  
+        set max krylov vectors                        = 200
+      end
     end
 
 
@@ -315,7 +320,7 @@ Launching the simulation is as simple as specifying the executable name and the 
 
 .. code-block:: text
 
-  mpirun -np <np> </path/to/the/build/applications/gls_nitsche_navier_stokes_33/gls_nitsche_navier_stokes_33 mixer.prm>
+  mpirun -np <np> </path/to/the/build/applications/nitsche_navier_stokes/nitsche_navier_stokes mixer.prm>
 
 Lethe generates a larger number of files when the Nitsche immersed boundary is used:
 

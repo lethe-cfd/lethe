@@ -59,7 +59,7 @@ public:
     std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
                                        p_triangulation,
     std::shared_ptr<SimulationControl> p_simulation_control,
-    ConditionalOStream &               p_pcout);
+    ConditionalOStream                &p_pcout);
 
   std::vector<PhysicsID>
   get_active_physics()
@@ -151,7 +151,7 @@ public:
                   time_stepping_method)
   {
     // Announce physic solved (verbosity = non_linear_solver.verbosity)
-    if (verbosity != Parameters::Verbosity::quiet)
+    if (verbosity.at(physics_id) != Parameters::Verbosity::quiet)
       announce_physics(physics_id);
 
     AssertThrow(std::find(active_physics.begin(),
@@ -175,7 +175,7 @@ public:
                         time_stepping_method)
   {
     // Announce physic solved (verbosity = non_linear_solver.verbosity)
-    if (verbosity != Parameters::Verbosity::quiet)
+    if (verbosity.at(physics_id) != Parameters::Verbosity::quiet)
       announce_physics(physics_id);
 
     AssertThrow(std::find(active_physics.begin(),
@@ -835,9 +835,9 @@ public:
   };
 
 private:
-  const Parameters::Multiphysics multiphysics_parameters;
-  const Parameters::Verbosity    verbosity;
-  ConditionalOStream             pcout;
+  const Parameters::Multiphysics             multiphysics_parameters;
+  std::map<PhysicsID, Parameters::Verbosity> verbosity;
+  ConditionalOStream                         pcout;
 
   // Data structure to store all physics which were enabled
   std::vector<PhysicsID> active_physics;
@@ -848,7 +848,7 @@ private:
                                             {VOF, true},
                                             {heat_transfer, false},
                                             {tracer, false},
-                                            {cahn_hilliard, false}};
+                                            {cahn_hilliard, true}};
 
   // Auxiliary physics are stored within a map of shared pointer to ensure
   // proper memory management.

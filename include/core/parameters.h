@@ -78,14 +78,7 @@ namespace Parameters
       steady_bdf,
       bdf1,
       bdf2,
-      bdf3,
-      sdirk22,
-      sdirk22_1,
-      sdirk22_2,
-      sdirk33,
-      sdirk33_1,
-      sdirk33_2,
-      sdirk33_3
+      bdf3
     } method;
 
     // Method used for time progression (steady, unsteady)
@@ -135,7 +128,6 @@ namespace Parameters
     enum class BDFStartupMethods
     {
       initial_solution,
-      sdirk_step,
       multiple_step_bdf,
     } bdf_startup_method;
 
@@ -207,10 +199,10 @@ namespace Parameters
     double thermal_expansion_s;
 
     // kinematic viscosity liquid - Units in m^2/(s)
-    double viscosity_l;
+    double kinematic_viscosity_l;
 
     // kinematic viscosity solid - Units in in m^2/(s)
-    double viscosity_s;
+    double kinematic_viscosity_s;
 
     static void
     declare_parameters(ParameterHandler &prm);
@@ -228,8 +220,8 @@ namespace Parameters
     double K;
     // Flow behavior index"
     double n;
-    // Minimal shear rate magnitude for which we calculate viscosity, since
-    // power-law does not allow for minimal viscosity
+    // Minimal shear rate magnitude for which we calculate kinematic viscosity,
+    // since power-law does not allow for minimal kinematic viscosity
     double shear_rate_min;
 
     static void
@@ -244,10 +236,11 @@ namespace Parameters
    */
   struct CarreauParameters
   {
-    // Viscosity of the flow when the shear rate tends to 0
-    double viscosity_0;
-    // Hypothetical viscosity of the flow when the shear rate is very high
-    double viscosity_inf;
+    // Kinematic viscosity of the flow when the shear rate tends to 0
+    double kinematic_viscosity_0;
+    // Hypothetical kinematic viscosity of the flow when the shear rate is very
+    // high
+    double kinematic_viscosity_inf;
     // Relaxation time
     double lambda;
     // Carreau parameter
@@ -262,9 +255,8 @@ namespace Parameters
   };
 
   /**
-   * @brief Non Newtonian - Defines the parameters for
-   * non newtonian flows according to the chosen
-   * rheological model.
+   * @brief Non Newtonian - Defines the parameters for non newtonian flows
+   * according to the chosen rheological model.
    */
   struct NonNewtonian
   {
@@ -279,8 +271,8 @@ namespace Parameters
 
 
   /**
-   * @brief Isothermal ideal gas model to solve for isothermal weakly compressible fluid
-   * flows.
+   * @brief Isothermal ideal gas model to solve for isothermal weakly
+   * compressible fluid flows.
    */
   struct IsothermalIdealGasDensityParameters
   {
@@ -298,18 +290,41 @@ namespace Parameters
   };
 
   /**
-   * @brief SurfaceTensionParameters - Defines parameters for surface tension models
+   * @brief SurfaceTensionParameters - Defines parameters for surface tension
+   * models
    */
   struct SurfaceTensionParameters
   {
-    // Surface tension coefficient (sigma) in N/m
+    // Surface tension coefficient (sigma or sigma_0) in N/m
     double surface_tension_coefficient;
+    // Temperature of the reference state corresponding to the surface tension
+    // coefficient (T_0) in K
+    double T_0;
+    // Surface tension gradient with respect to the temperature (dsigma/dT) in
+    // N/(m*K)
+    double surface_tension_gradient;
 
     void
     declare_parameters(ParameterHandler &prm);
     void
     parse_parameters(ParameterHandler &prm);
   };
+
+  /**
+   * @brief MobilityCahnHilliardParameters - Defines parameters for the mobility
+   * models used in the Cahn-Hilliard equations.
+   */
+  struct MobilityCahnHilliardParameters
+  {
+    // Mobility constant (M) in m^2/s
+    double mobility_cahn_hilliard_constant;
+
+    void
+    declare_parameters(ParameterHandler &prm);
+    void
+    parse_parameters(ParameterHandler &prm);
+  };
+
 
   /**
    * @brief Material - Class that defines the physical property of a material.
@@ -327,13 +342,13 @@ namespace Parameters
                        std::string       material_prefix,
                        unsigned int      id);
     void
-    parse_parameters(ParameterHandler &   prm,
+    parse_parameters(ParameterHandler    &prm,
                      std::string          material_prefix,
                      const unsigned int   id,
                      const Dimensionality dimensions);
 
     // Kinematic viscosity (nu = mu/rho) in units of L^2/s
-    double viscosity;
+    double kinematic_viscosity;
     // volumetric mass density (rho) in units of kg/m^3
     double density;
     // specific heat capacity (cp) in J/K/kg
@@ -407,9 +422,18 @@ namespace Parameters
     // Surface tension models
     enum class SurfaceTensionModel
     {
-      constant
+      constant,
+      linear
     } surface_tension_model;
     SurfaceTensionParameters surface_tension_parameters;
+
+    // Mobility CH models
+    enum class MobilityCahnHilliardModel
+    {
+      constant,
+      quartic
+    } mobility_cahn_hilliard_model;
+    MobilityCahnHilliardParameters mobility_cahn_hilliard_parameters;
 
     std::pair<std::pair<unsigned int, unsigned int>, unsigned int>
       fluid_fluid_interaction_with_material_interaction_id;
@@ -458,7 +482,7 @@ namespace Parameters
     void
     declare_parameters(ParameterHandler &prm);
     void
-    parse_parameters(ParameterHandler &   prm,
+    parse_parameters(ParameterHandler    &prm,
                      const Dimensionality dimensions = Dimensionality());
   };
 
@@ -780,8 +804,8 @@ namespace Parameters
     unsigned int VOF_order;
 
     // Interpolation order Cahn-Hilliard
-    unsigned int phase_ch_order;
-    unsigned int potential_ch_order;
+    unsigned int phase_cahn_hilliard_order;
+    unsigned int potential_cahn_hilliard_order;
 
     // Apply high order mapping everywhere
     bool qmapping_all;
@@ -858,14 +882,15 @@ namespace Parameters
 
 
     static void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler &prm, const std::string &physics_name);
     void
-    parse_parameters(ParameterHandler &prm);
+    parse_parameters(ParameterHandler &prm, const std::string &physics_name);
   };
 
   /**
-   * @brief LinearSolver - Parameters that controls the solution of the
-   * linear system of equations that arise from the finite element problem.
+   * @brief LinearSolver - Parameters that control the solution of the
+   * linear system of equations that arise from the finite element problem for
+   * each of the physics available in Lethe
    */
   struct LinearSolver
   {
@@ -874,14 +899,15 @@ namespace Parameters
     {
       gmres,
       bicgstab,
-      amg,
       direct
     };
+
     SolverType solver;
 
+    // Verbosity of linear solver
     Verbosity verbosity;
 
-    // Relative residual of the iterative solver
+    // Relative residuals of the iterative solver
     double relative_residual;
 
     // Minimum residual of the iterative solver
@@ -892,6 +918,15 @@ namespace Parameters
 
     // Maximum number of krylov vectors
     int max_krylov_vectors;
+
+    // Type of preconditioner
+    enum class PreconditionerType
+    {
+      ilu,
+      amg
+    };
+
+    PreconditionerType preconditioner;
 
     // ILU or ILUT fill
     double ilu_precond_fill;
@@ -930,9 +965,9 @@ namespace Parameters
     bool force_linear_solver_continuation;
 
     static void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler &prm, const std::string &physics_name);
     void
-    parse_parameters(ParameterHandler &prm);
+    parse_parameters(ParameterHandler &prm, const std::string &physics_name);
   };
 
   /**
@@ -1031,8 +1066,8 @@ namespace Parameters
       pressure,
       phase,
       temperature,
-      phase_ch,
-      chemical_potential_ch
+      phase_cahn_hilliard,
+      chemical_potential_cahn_hilliard
     } variable;
 
     // Map containing the refinement variables
@@ -1165,7 +1200,6 @@ namespace Parameters
     unsigned int                 nb;
     unsigned int                 order;
     unsigned int                 initial_refinement;
-    unsigned int                 levels_not_precalculated;
     double                       inside_radius;
     double                       outside_radius;
     bool                         time_extrapolation_of_refinement_zone;
@@ -1194,6 +1228,7 @@ namespace Parameters
 
     double      particle_nonlinear_tolerance;
     double      length_ratio;
+    bool        enable_extrapolation;
     double      alpha;
     bool        print_dem;
     std::string ib_particles_pvd_file;

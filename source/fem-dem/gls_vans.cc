@@ -1285,6 +1285,7 @@ GLSVANSSolver<dim>::solve_L2_system_void_fraction()
   const double linear_solver_tolerance = 1e-15;
 
   if (this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+        .at(PhysicsID::fluid_dynamics)
         .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Tolerance of iterative solver is : "
@@ -1297,23 +1298,31 @@ GLSVANSSolver<dim>::solve_L2_system_void_fraction()
   TrilinosWrappers::MPI::Vector completely_distributed_solution(
     locally_owned_dofs_voidfraction, this->mpi_communicator);
 
-  SolverControl solver_control(this->cfd_dem_simulation_parameters
-                                 .cfd_parameters.linear_solver.max_iterations,
-                               linear_solver_tolerance,
-                               true,
-                               true);
+  SolverControl solver_control(
+    this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+      .at(PhysicsID::fluid_dynamics)
+      .max_iterations,
+    linear_solver_tolerance,
+    true,
+    true);
 
   TrilinosWrappers::SolverCG solver(solver_control);
 
   //**********************************************
   // Trillinos Wrapper ILU Preconditioner
   //*********************************************
-  const double ilu_fill = this->cfd_dem_simulation_parameters.cfd_parameters
-                            .linear_solver.ilu_precond_fill;
-  const double ilu_atol = this->cfd_dem_simulation_parameters.cfd_parameters
-                            .linear_solver.ilu_precond_atol;
-  const double ilu_rtol = this->cfd_dem_simulation_parameters.cfd_parameters
-                            .linear_solver.ilu_precond_rtol;
+  const double ilu_fill =
+    this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+      .at(PhysicsID::fluid_dynamics)
+      .ilu_precond_fill;
+  const double ilu_atol =
+    this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+      .at(PhysicsID::fluid_dynamics)
+      .ilu_precond_atol;
+  const double ilu_rtol =
+    this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+      .at(PhysicsID::fluid_dynamics)
+      .ilu_precond_rtol;
 
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
@@ -1329,6 +1338,7 @@ GLSVANSSolver<dim>::solve_L2_system_void_fraction()
                *ilu_preconditioner);
 
   if (this->cfd_dem_simulation_parameters.cfd_parameters.linear_solver
+        .at(PhysicsID::fluid_dynamics)
         .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Iterative solver took : " << solver_control.last_step()
@@ -1568,8 +1578,8 @@ template <int dim>
 void
 GLSVANSSolver<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  NavierStokesScratchData<dim> &                        scratch_data,
-  StabilizedMethodsTensorCopyData<dim> &                copy_data)
+  NavierStokesScratchData<dim>                         &scratch_data,
+  StabilizedMethodsTensorCopyData<dim>                 &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -1579,7 +1589,6 @@ GLSVANSSolver<dim>::assemble_local_system_matrix(
     cell,
     this->evaluation_point,
     this->previous_solutions,
-    this->solution_stages,
     this->forcing_function,
     this->flow_control.get_beta(),
     this->simulation_parameters.stabilization.pressure_scaling_factor);
@@ -1590,11 +1599,9 @@ GLSVANSSolver<dim>::assemble_local_system_matrix(
     cell->index(),
     &this->void_fraction_dof_handler);
 
-  scratch_data.reinit_void_fraction(
-    void_fraction_cell,
-    nodal_void_fraction_relevant,
-    previous_void_fraction,
-    std::vector<TrilinosWrappers::MPI::Vector>());
+  scratch_data.reinit_void_fraction(void_fraction_cell,
+                                    nodal_void_fraction_relevant,
+                                    previous_void_fraction);
 
   scratch_data.reinit_particle_fluid_interactions(cell,
                                                   this->evaluation_point,
@@ -1678,8 +1685,8 @@ template <int dim>
 void
 GLSVANSSolver<dim>::assemble_local_system_rhs(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  NavierStokesScratchData<dim> &                        scratch_data,
-  StabilizedMethodsTensorCopyData<dim> &                copy_data)
+  NavierStokesScratchData<dim>                         &scratch_data,
+  StabilizedMethodsTensorCopyData<dim>                 &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -1689,7 +1696,6 @@ GLSVANSSolver<dim>::assemble_local_system_rhs(
     cell,
     this->evaluation_point,
     this->previous_solutions,
-    this->solution_stages,
     this->forcing_function,
     this->flow_control.get_beta(),
     this->simulation_parameters.stabilization.pressure_scaling_factor);
@@ -1700,11 +1706,9 @@ GLSVANSSolver<dim>::assemble_local_system_rhs(
     cell->index(),
     &this->void_fraction_dof_handler);
 
-  scratch_data.reinit_void_fraction(
-    void_fraction_cell,
-    nodal_void_fraction_relevant,
-    previous_void_fraction,
-    std::vector<TrilinosWrappers::MPI::Vector>());
+  scratch_data.reinit_void_fraction(void_fraction_cell,
+                                    nodal_void_fraction_relevant,
+                                    previous_void_fraction);
 
   scratch_data.reinit_particle_fluid_interactions(cell,
                                                   this->evaluation_point,

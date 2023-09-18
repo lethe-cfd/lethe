@@ -1,6 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 2
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -41,7 +45,7 @@ subsection laser parameters
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Source Term
 #---------------------------------------------------
 
@@ -97,10 +101,10 @@ subsection physical properties
       # Specific heat of the solid phase
       set specific heat solid = 670
 
-      # viscosity of the liquid phase
+      # Kinematic viscosity of the liquid phase
       set viscosity liquid = 0.00000069
 
-      # viscosity of the solid phase
+      # Kinematic viscosity of the solid phase
       set viscosity solid = 0.008
 
       set thermal conductivity solid  = 33.4
@@ -123,7 +127,7 @@ subsection mesh
   set initial refinement = 7
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -188,28 +192,50 @@ subsection FEM
   set pressure order = 1
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set tolerance      = 1e-8
-  set max iterations = 100
-  set verbosity      = verbose
+  subsection heat transfer
+    set tolerance      = 1e-8
+    set max iterations = 100
+    set verbosity      = verbose
+  end
+  subsection fluid dynamics
+    set tolerance      = 1e-8
+    set max iterations = 100
+    set verbosity      = verbose
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set verbosity                             = verbose
-  set method                                = gmres
-  set max iters                             = 10000
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-8
-  set ilu preconditioner fill               = 1
-  set ilu preconditioner absolute tolerance = 1e-14
-  set ilu preconditioner relative tolerance = 1.00
-  set max krylov vectors                    = 200
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 10000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-8
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-14
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 200
+  end
+  subsection heat transfer
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 10000
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-8
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-14
+    set ilu preconditioner relative tolerance = 1.00
+    set max krylov vectors                    = 200
+  end
 end

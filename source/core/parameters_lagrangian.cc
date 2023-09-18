@@ -59,7 +59,7 @@ namespace Parameters
     void
     LagrangianPhysicalProperties::parse_particle_properties(
       const unsigned int &particle_type,
-      ParameterHandler &  prm)
+      ParameterHandler   &prm)
     {
       const std::string size_distribution_type =
         prm.get("size distribution type");
@@ -228,7 +228,7 @@ namespace Parameters
     LagrangianPhysicalProperties::initialize_containers(
       std::unordered_map<unsigned int, double> &particle_average_diameter,
       std::unordered_map<unsigned int, double> &particle_size_std,
-      std::unordered_map<unsigned int, int> &   number,
+      std::unordered_map<unsigned int, int>    &number,
       std::unordered_map<unsigned int, double> &density_particle,
       std::unordered_map<unsigned int, double> &youngs_modulus_particle,
       std::unordered_map<unsigned int, double> &poisson_ratio_particle,
@@ -260,9 +260,9 @@ namespace Parameters
       {
         prm.declare_entry("insertion method",
                           "non_uniform",
-                          Patterns::Selection("uniform|non_uniform|list"),
+                          Patterns::Selection("uniform|non_uniform|list|plane"),
                           "Choosing insertion method. "
-                          "Choices are <uniform|non_uniform|list>.");
+                          "Choices are <uniform|non_uniform|list|plane>.");
         prm.declare_entry("inserted number of particles at each time step",
                           "1",
                           Patterns::Integer(),
@@ -321,7 +321,6 @@ namespace Parameters
                           "1",
                           Patterns::Integer(),
                           "Random number seed");
-
         prm.declare_entry("list x",
                           "0",
                           Patterns::List(Patterns::Double()),
@@ -334,7 +333,34 @@ namespace Parameters
                           "0",
                           Patterns::List(Patterns::Double()),
                           "List of particles z positions");
-
+        prm.declare_entry("list velocity x",
+                          "0",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial velocities x");
+        prm.declare_entry("list velocity y",
+                          "0",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial velocities y");
+        prm.declare_entry("list velocity z",
+                          "0",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial velocities z");
+        prm.declare_entry("list omega x",
+                          "0.",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial omega x");
+        prm.declare_entry("list omega y",
+                          "0.",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial omega y");
+        prm.declare_entry("list omega z",
+                          "0.",
+                          Patterns::List(Patterns::Double()),
+                          "List of initial omega z");
+        prm.declare_entry("list diameters",
+                          "1.0",
+                          Patterns::List(Patterns::Double()),
+                          "List of diameters");
         prm.declare_entry("velocity x",
                           "0.0",
                           Patterns::Double(),
@@ -359,6 +385,19 @@ namespace Parameters
                           "0.0",
                           Patterns::Double(),
                           "Initial omega z");
+        prm.declare_entry("insertion plane point",
+                          "0., 0., 0.",
+                          Patterns::List(Patterns::Double()),
+                          "Insertion plane point location");
+        prm.declare_entry("insertion plane normal vector",
+                          "1., 0., 0.",
+                          Patterns::List(Patterns::Double()),
+                          "Insertion plane normal vector");
+        prm.declare_entry(
+          "insertion plane threshold distance",
+          "0.",
+          Patterns::Double(),
+          "If all the vertices of a cell are closer or equal to this value, than this cell is in the plane");
       }
       prm.leave_subsection();
     }
@@ -375,6 +414,8 @@ namespace Parameters
           insertion_method = InsertionMethod::non_uniform;
         else if (insertion == "list")
           insertion_method = InsertionMethod::list;
+        else if (insertion == "plane")
+          insertion_method = InsertionMethod::plane;
         else
           {
             throw(std::runtime_error("Invalid insertion method "));
@@ -402,12 +443,12 @@ namespace Parameters
         omega_y = prm.get_double("omega y");
         omega_z = prm.get_double("omega z");
 
-        // Read x, y and z list as a single string
+        // Read x, y and z lists as singles strings
         std::string x_str = prm.get("list x");
         std::string y_str = prm.get("list y");
         std::string z_str = prm.get("list z");
 
-        // Convert x,y and z string to vector of strings
+        // Convert x,y and z strings to vectors of strings
         std::vector<std::string> x_str_list(
           Utilities::split_string_list(x_str));
         std::vector<std::string> y_str_list(
@@ -415,10 +456,100 @@ namespace Parameters
         std::vector<std::string> z_str_list(
           Utilities::split_string_list(z_str));
 
-        // Convert x,y and z string vector to double vector
+        // Convert x,y and z string vectors to vectors of doubles
         list_x = Utilities::string_to_double(x_str_list);
         list_y = Utilities::string_to_double(y_str_list);
         list_z = Utilities::string_to_double(z_str_list);
+
+        // Find which vector is the longest
+        int max_size = std::max({list_x.size(), list_y.size(), list_z.size()});
+
+        // Resize the vectors in the case that one was longer
+        list_x.resize(max_size);
+        list_y.resize(max_size);
+        list_z.resize(max_size);
+
+        // Read vx, vv and vz lists as singles strings
+        std::string vx_str = prm.get("list velocity x");
+        std::string vy_str = prm.get("list velocity y");
+        std::string vz_str = prm.get("list velocity z");
+
+        // Convert vx, vy and vz strings to vectors of strings
+        std::vector<std::string> vx_str_list(
+          Utilities::split_string_list(vx_str));
+        std::vector<std::string> vy_str_list(
+          Utilities::split_string_list(vy_str));
+        std::vector<std::string> vz_str_list(
+          Utilities::split_string_list(vz_str));
+
+        // Convert vx, vy and vz string vectors to vectors of doubles
+        list_vx = Utilities::string_to_double(vx_str_list);
+        list_vy = Utilities::string_to_double(vy_str_list);
+        list_vz = Utilities::string_to_double(vz_str_list);
+
+        // Fill the velocity vectors with zeros to match the size of list_x
+        if (list_vx != list_x)
+          list_vx.resize(max_size);
+        if (list_vy != list_x)
+          list_vy.resize(max_size);
+        if (list_vz != list_x)
+          list_vz.resize(max_size);
+
+        // Read wx, wy and wz lists as singles strings
+        std::string wx_str = prm.get("list omega x");
+        std::string wy_str = prm.get("list omega y");
+        std::string wz_str = prm.get("list omega z");
+
+        // Convert wx, wy and wz strings to vectors of strings
+        std::vector<std::string> wx_str_list(
+          Utilities::split_string_list(wx_str));
+        std::vector<std::string> wy_str_list(
+          Utilities::split_string_list(wy_str));
+        std::vector<std::string> wz_str_list(
+          Utilities::split_string_list(wz_str));
+
+        // Convert x, y and z string vectors to vectors of doubles
+        list_wx = Utilities::string_to_double(wx_str_list);
+        list_wy = Utilities::string_to_double(wy_str_list);
+        list_wz = Utilities::string_to_double(wz_str_list);
+
+        // Fill the angular velocity vectors with zeros to match the size of
+        // list_x
+        if (list_wx != list_x)
+          list_wx.resize(max_size);
+        if (list_wy != list_x)
+          list_wy.resize(max_size);
+        if (list_wz != list_x)
+          list_wz.resize(max_size);
+
+        // Read the diameters list as a single string
+        std::string d_str = prm.get("list diameters");
+
+        // Convert the diameters list to a vector of strings
+        std::vector<std::string> d_str_list(
+          Utilities::split_string_list(d_str));
+
+        // Convert the diameters string vector to a double vector
+        list_d = Utilities::string_to_double(d_str_list);
+
+        // Insertion plane normal vector
+        std::string plane_vector_str = prm.get("insertion plane normal vector");
+        std::vector<std::string> plane_vector_str_list =
+          Utilities::split_string_list(plane_vector_str);
+        insertion_plane_normal_vector =
+          Tensor<1, 3>({Utilities::string_to_double(plane_vector_str_list[0]),
+                        Utilities::string_to_double(plane_vector_str_list[1]),
+                        Utilities::string_to_double(plane_vector_str_list[2])});
+
+
+        // Insertion plane point
+        std::string plane_point_str = prm.get("insertion plane point");
+        std::vector<std::string> plane_point_str_list =
+          Utilities::split_string_list(plane_point_str);
+        insertion_plane_point =
+          Point<3>({Utilities::string_to_double(plane_point_str_list[0]),
+                    Utilities::string_to_double(plane_point_str_list[1]),
+                    Utilities::string_to_double(plane_point_str_list[2])});
       }
       prm.leave_subsection();
     }
@@ -491,7 +622,7 @@ namespace Parameters
                             "Choices are <constant|dynamic>.");
 
           prm.declare_entry("frequency",
-                            "10",
+                            "1",
                             Patterns::Integer(),
                             "Particle-particle contact list");
 
@@ -654,25 +785,20 @@ namespace Parameters
 
         prm.enter_subsection("contact detection");
         {
+          contact_detection_frequency = prm.get_integer("frequency");
+          dynamic_contact_search_factor =
+            prm.get_double("dynamic contact search size coefficient");
+          neighborhood_threshold = prm.get_double("neighborhood threshold");
+
           const std::string contact_search =
             prm.get("contact detection method");
-          if (contact_search == "constant")
-            {
-              contact_detection_method    = ContactDetectionMethod::constant;
-              contact_detection_frequency = prm.get_integer("frequency");
-            }
-          else if (contact_search == "dynamic")
-            {
-              contact_detection_method = ContactDetectionMethod::dynamic;
-              dynamic_contact_search_factor =
-                prm.get_double("dynamic contact search size coefficient");
-            }
-          else
-            {
-              throw(std::runtime_error("Invalid contact detection method "));
-            }
 
-          neighborhood_threshold = prm.get_double("neighborhood threshold");
+          if (contact_search == "constant")
+            contact_detection_method = ContactDetectionMethod::constant;
+          else if (contact_search == "dynamic")
+            contact_detection_method = ContactDetectionMethod::dynamic;
+          else
+            throw(std::runtime_error("Invalid contact detection method "));
         }
         prm.leave_subsection();
 
@@ -1134,10 +1260,10 @@ namespace Parameters
     void
     BCDEM::initialize_containers(
       std::unordered_map<unsigned int, Tensor<1, 3>>
-        &                                       boundary_translational_velocity,
+                                               &boundary_translational_velocity,
       std::unordered_map<unsigned int, double> &boundary_rotational_speed,
       std::unordered_map<unsigned int, Tensor<1, 3>>
-        &                        boundary_rotational_vector,
+                                &boundary_rotational_vector,
       std::vector<unsigned int> &outlet_boundaries)
     {
       Tensor<1, 3> zero_tensor({0.0, 0.0, 0.0});

@@ -34,11 +34,11 @@ using namespace dealii;
 
 template <int dim, typename VectorType>
 std::pair<double, double>
-calculate_pressure_drop(const DoFHandler<dim> &       dof_handler,
+calculate_pressure_drop(const DoFHandler<dim>        &dof_handler,
                         std::shared_ptr<Mapping<dim>> mapping,
-                        const VectorType &            evaluation_point,
-                        const Quadrature<dim> &       cell_quadrature_formula,
-                        const Quadrature<dim - 1> &   face_quadrature_formula,
+                        const VectorType             &evaluation_point,
+                        const Quadrature<dim>        &cell_quadrature_formula,
+                        const Quadrature<dim - 1>    &face_quadrature_formula,
                         const unsigned int            inlet_boundary_id,
                         const unsigned int            outlet_boundary_id)
 {
@@ -165,71 +165,71 @@ calculate_pressure_drop(const DoFHandler<dim> &       dof_handler,
 
 template std::pair<double, double>
 calculate_pressure_drop<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   std::shared_ptr<Mapping<2>>          mapping,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<2> &                cell_quadrature_formula,
-  const Quadrature<1> &                face_quadrature_formula,
+  const Quadrature<2>                 &cell_quadrature_formula,
+  const Quadrature<1>                 &face_quadrature_formula,
   const unsigned int                   inlet_boundary_id,
   const unsigned int                   outlet_boundary_id);
 
 template std::pair<double, double>
 calculate_pressure_drop<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   std::shared_ptr<Mapping<3>>          mapping,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<3> &                cell_quadrature_formula,
-  const Quadrature<2> &                face_quadrature_formula,
+  const Quadrature<3>                 &cell_quadrature_formula,
+  const Quadrature<2>                 &face_quadrature_formula,
   const unsigned int                   inlet_boundary_id,
   const unsigned int                   outlet_boundary_id);
 
 template std::pair<double, double>
 calculate_pressure_drop<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   std::shared_ptr<Mapping<2>>               mapping,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<2> &                     cell_quadrature_formula,
-  const Quadrature<1> &                     face_quadrature_formula,
+  const Quadrature<2>                      &cell_quadrature_formula,
+  const Quadrature<1>                      &face_quadrature_formula,
   const unsigned int                        inlet_boundary_id,
   const unsigned int                        outlet_boundary_id);
 
 template std::pair<double, double>
 calculate_pressure_drop<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   std::shared_ptr<Mapping<3>>               mapping,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<3> &                     cell_quadrature_formula,
-  const Quadrature<2> &                     face_quadrature_formula,
+  const Quadrature<3>                      &cell_quadrature_formula,
+  const Quadrature<2>                      &face_quadrature_formula,
   const unsigned int                        inlet_boundary_id,
   const unsigned int                        outlet_boundary_id);
 
 template std::pair<double, double>
 calculate_pressure_drop<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   std::shared_ptr<Mapping<2>>                       mapping,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<2> &                             cell_quadrature_formula,
-  const Quadrature<1> &                             face_quadrature_formula,
+  const Quadrature<2>                              &cell_quadrature_formula,
+  const Quadrature<1>                              &face_quadrature_formula,
   const unsigned int                                inlet_boundary_id,
   const unsigned int                                outlet_boundary_id);
 
 template std::pair<double, double>
 calculate_pressure_drop<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   std::shared_ptr<Mapping<3>>                       mapping,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<3> &                             cell_quadrature_formula,
-  const Quadrature<2> &                             face_quadrature_formula,
+  const Quadrature<3>                              &cell_quadrature_formula,
+  const Quadrature<2>                              &face_quadrature_formula,
   const unsigned int                                inlet_boundary_id,
   const unsigned int                                outlet_boundary_id);
 
 template <int dim, typename VectorType>
 double
 calculate_CFL(const DoFHandler<dim> &dof_handler,
-              const VectorType &     evaluation_point,
+              const VectorType      &evaluation_point,
               const double           time_step,
               const Quadrature<dim> &quadrature_formula,
-              const Mapping<dim> &   mapping)
+              const Mapping<dim>    &mapping)
 {
   FESystem<dim, dim> fe = dof_handler.get_fe();
   FEValues<dim>      fe_values(mapping,
@@ -279,59 +279,59 @@ calculate_CFL(const DoFHandler<dim> &dof_handler,
 
 template double
 calculate_CFL<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
   const double                         time_step,
-  const Quadrature<2> &                quadrature_formula,
-  const Mapping<2> &                   mapping);
+  const Quadrature<2>                 &quadrature_formula,
+  const Mapping<2>                    &mapping);
 
 template double
 calculate_CFL<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
   const double                         time_step,
-  const Quadrature<3> &                quadrature_formula,
-  const Mapping<3> &                   mapping);
+  const Quadrature<3>                 &quadrature_formula,
+  const Mapping<3>                    &mapping);
 
 template double
 calculate_CFL<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
   const double                              time_step,
-  const Quadrature<2> &                     quadrature_formula,
-  const Mapping<2> &                        mapping);
+  const Quadrature<2>                      &quadrature_formula,
+  const Mapping<2>                         &mapping);
 
 template double
 calculate_CFL<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
   const double                              time_step,
-  const Quadrature<3> &                     quadrature_formula,
-  const Mapping<3> &                        mapping);
+  const Quadrature<3>                      &quadrature_formula,
+  const Mapping<3>                         &mapping);
 
 template double
 calculate_CFL<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
   const double                                      time_step,
-  const Quadrature<2> &                             quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const Quadrature<2>                              &quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template double
 calculate_CFL<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
   const double                                      time_step,
-  const Quadrature<3> &                             quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const Quadrature<3>                              &quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 
 template <int dim, typename VectorType>
 double
 calculate_enstrophy(const DoFHandler<dim> &dof_handler,
-                    const VectorType &     evaluation_point,
+                    const VectorType      &evaluation_point,
                     const Quadrature<dim> &quadrature_formula,
-                    const Mapping<dim> &   mapping)
+                    const Mapping<dim>    &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
   FEValues<dim>            fe_values(mapping,
@@ -393,52 +393,52 @@ calculate_enstrophy(const DoFHandler<dim> &dof_handler,
 
 template double
 calculate_enstrophy<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<2> &                quadrature_formula,
-  const Mapping<2> &                   mapping);
+  const Quadrature<2>                 &quadrature_formula,
+  const Mapping<2>                    &mapping);
 
 template double
 calculate_enstrophy<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<3> &                quadrature_formula,
-  const Mapping<3> &                   mapping);
+  const Quadrature<3>                 &quadrature_formula,
+  const Mapping<3>                    &mapping);
 
 template double
 calculate_enstrophy<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<2> &                     quadrature_formula,
-  const Mapping<2> &                        mapping);
+  const Quadrature<2>                      &quadrature_formula,
+  const Mapping<2>                         &mapping);
 
 template double
 calculate_enstrophy<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<3> &                     quadrature_formula,
-  const Mapping<3> &                        mapping);
+  const Quadrature<3>                      &quadrature_formula,
+  const Mapping<3>                         &mapping);
 
 template double
 calculate_enstrophy<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<2> &                             quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const Quadrature<2>                              &quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template double
 calculate_enstrophy<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<3> &                             quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const Quadrature<3>                              &quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 template <int dim, typename VectorType>
 double
 calculate_kinetic_energy(const DoFHandler<dim> &dof_handler,
-                         const VectorType &     evaluation_point,
+                         const VectorType      &evaluation_point,
                          const Quadrature<dim> &quadrature_formula,
-                         const Mapping<dim> &   mapping)
+                         const Mapping<dim>    &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
   FEValues<dim>            fe_values(mapping,
@@ -488,60 +488,60 @@ calculate_kinetic_energy(const DoFHandler<dim> &dof_handler,
 
 template double
 calculate_kinetic_energy<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<2> &                quadrature_formula,
-  const Mapping<2> &                   mapping);
+  const Quadrature<2>                 &quadrature_formula,
+  const Mapping<2>                    &mapping);
 
 template double
 calculate_kinetic_energy<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<3> &                quadrature_formula,
-  const Mapping<3> &                   mapping);
+  const Quadrature<3>                 &quadrature_formula,
+  const Mapping<3>                    &mapping);
 
 template double
 calculate_kinetic_energy<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<2> &                     quadrature_formula,
-  const Mapping<2> &                        mapping);
+  const Quadrature<2>                      &quadrature_formula,
+  const Mapping<2>                         &mapping);
 
 template double
 calculate_kinetic_energy<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<3> &                     quadrature_formula,
-  const Mapping<3> &                        mapping);
+  const Quadrature<3>                      &quadrature_formula,
+  const Mapping<3>                         &mapping);
 
 template double
 calculate_kinetic_energy<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<2> &                             quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const Quadrature<2>                              &quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template double
 calculate_kinetic_energy<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<3> &                             quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const Quadrature<3>                              &quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 
 template <int dim, typename VectorType>
 double
-calculate_apparent_viscosity(const DoFHandler<dim> &    dof_handler,
-                             const VectorType &         evaluation_point,
-                             const Quadrature<dim> &    quadrature_formula,
-                             const Mapping<dim> &       mapping,
+calculate_apparent_viscosity(const DoFHandler<dim>     &dof_handler,
+                             const VectorType          &evaluation_point,
+                             const Quadrature<dim>     &quadrature_formula,
+                             const Mapping<dim>        &mapping,
                              PhysicalPropertiesManager &properties_manager)
 {
   double         integral_viscosity_x_shear_rate = 0;
   double         integral_shear_rate             = 0;
   double         shear_rate_magnitude;
   Tensor<2, dim> shear_rate;
-  double         viscosity;
+  double         kinematic_viscosity;
   const auto     rheological_model = properties_manager.get_rheology();
 
   const FESystem<dim, dim> fe = dof_handler.get_fe();
@@ -586,10 +586,11 @@ calculate_apparent_viscosity(const DoFHandler<dim> &    dof_handler,
               std::map<field, double> field_values;
               field_values[field::shear_rate] = shear_rate_magnitude;
 
-              viscosity = rheological_model->value(field_values);
+              kinematic_viscosity = rheological_model->value(field_values);
 
               integral_viscosity_x_shear_rate +=
-                viscosity * shear_rate_x_velocity_gradient * fe_values.JxW(q);
+                kinematic_viscosity * shear_rate_x_velocity_gradient *
+                fe_values.JxW(q);
               integral_shear_rate +=
                 shear_rate_x_velocity_gradient * fe_values.JxW(q);
             }
@@ -605,66 +606,66 @@ calculate_apparent_viscosity(const DoFHandler<dim> &    dof_handler,
 
 template double
 calculate_apparent_viscosity<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<2> &                quadrature_formula,
-  const Mapping<2> &                   mapping,
-  PhysicalPropertiesManager &          properties_manager);
+  const Quadrature<2>                 &quadrature_formula,
+  const Mapping<2>                    &mapping,
+  PhysicalPropertiesManager           &properties_manager);
 
 template double
 calculate_apparent_viscosity<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &evaluation_point,
-  const Quadrature<3> &                quadrature_formula,
-  const Mapping<3> &                   mapping,
-  PhysicalPropertiesManager &          properties_manager);
+  const Quadrature<3>                 &quadrature_formula,
+  const Mapping<3>                    &mapping,
+  PhysicalPropertiesManager           &properties_manager);
 
 template double
 calculate_apparent_viscosity<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<2> &                     quadrature_formula,
-  const Mapping<2> &                        mapping,
-  PhysicalPropertiesManager &               properties_manager);
+  const Quadrature<2>                      &quadrature_formula,
+  const Mapping<2>                         &mapping,
+  PhysicalPropertiesManager                &properties_manager);
 
 template double
 calculate_apparent_viscosity<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &evaluation_point,
-  const Quadrature<3> &                     quadrature_formula,
-  const Mapping<3> &                        mapping,
-  PhysicalPropertiesManager &               properties_manager);
+  const Quadrature<3>                      &quadrature_formula,
+  const Mapping<3>                         &mapping,
+  PhysicalPropertiesManager                &properties_manager);
 
 template double
 calculate_apparent_viscosity<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<2> &                             quadrature_formula,
-  const Mapping<2> &                                mapping,
-  PhysicalPropertiesManager &                       properties_manager);
+  const Quadrature<2>                              &quadrature_formula,
+  const Mapping<2>                                 &mapping,
+  PhysicalPropertiesManager                        &properties_manager);
 
 template double
 calculate_apparent_viscosity<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &evaluation_point,
-  const Quadrature<3> &                             quadrature_formula,
-  const Mapping<3> &                                mapping,
-  PhysicalPropertiesManager &                       properties_manager);
+  const Quadrature<3>                              &quadrature_formula,
+  const Mapping<3>                                 &mapping,
+  PhysicalPropertiesManager                        &properties_manager);
 
 template <int dim, typename VectorType>
 std::vector<std::vector<Tensor<1, dim>>>
 calculate_forces(
-  const DoFHandler<dim> &                              dof_handler,
-  const VectorType &                                   evaluation_point,
-  PhysicalPropertiesManager &                          properties_manager,
+  const DoFHandler<dim>                               &dof_handler,
+  const VectorType                                    &evaluation_point,
+  PhysicalPropertiesManager                           &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<dim> &boundary_conditions,
-  const Quadrature<dim - 1> &                          face_quadrature_formula,
-  const Mapping<dim> &                                 mapping)
+  const Quadrature<dim - 1>                           &face_quadrature_formula,
+  const Mapping<dim>                                  &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
 
   // Rheological model for viscosity properties
-  double     viscosity;
+  double     kinematic_viscosity;
   const auto rheological_model = properties_manager.get_rheology();
 
 
@@ -737,9 +738,10 @@ calculate_forces(
                               field_values[field::shear_rate] =
                                 shear_rate_magnitude;
 
-                              viscosity =
+                              kinematic_viscosity =
                                 rheological_model->value(field_values);
-                              fluid_viscous_stress = -viscosity * shear_rate;
+                              fluid_viscous_stress =
+                                -kinematic_viscosity * shear_rate;
                               fluid_stress =
                                 -fluid_viscous_stress - fluid_pressure;
 
@@ -777,71 +779,71 @@ calculate_forces(
 
 template std::vector<std::vector<Tensor<1, 2>>>
 calculate_forces<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                              dof_handler,
-  const TrilinosWrappers::MPI::Vector &              evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const TrilinosWrappers::MPI::Vector               &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 template std::vector<std::vector<Tensor<1, 3>>>
 calculate_forces<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                              dof_handler,
-  const TrilinosWrappers::MPI::Vector &              evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const TrilinosWrappers::MPI::Vector               &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 template std::vector<std::vector<Tensor<1, 2>>>
 calculate_forces<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                              dof_handler,
-  const TrilinosWrappers::MPI::BlockVector &         evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const TrilinosWrappers::MPI::BlockVector          &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 
 template std::vector<std::vector<Tensor<1, 3>>>
 calculate_forces<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                              dof_handler,
-  const TrilinosWrappers::MPI::BlockVector &         evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const TrilinosWrappers::MPI::BlockVector          &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 template std::vector<std::vector<Tensor<1, 2>>>
 calculate_forces<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                              dof_handler,
-  const LinearAlgebra::distributed::Vector<double> & evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const LinearAlgebra::distributed::Vector<double>  &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 
 template std::vector<std::vector<Tensor<1, 3>>>
 calculate_forces<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                              dof_handler,
-  const LinearAlgebra::distributed::Vector<double> & evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const LinearAlgebra::distributed::Vector<double>  &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 template <int dim, typename VectorType>
 std::vector<Tensor<1, 3>>
 calculate_torques(
-  const DoFHandler<dim> &                              dof_handler,
-  const VectorType &                                   evaluation_point,
-  PhysicalPropertiesManager &                          properties_manager,
+  const DoFHandler<dim>                               &dof_handler,
+  const VectorType                                    &evaluation_point,
+  PhysicalPropertiesManager                           &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<dim> &boundary_conditions,
-  const Quadrature<dim - 1> &                          face_quadrature_formula,
-  const Mapping<dim> &                                 mapping)
+  const Quadrature<dim - 1>                           &face_quadrature_formula,
+  const Mapping<dim>                                  &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
 
   // Rheological model for viscosity properties
-  double     viscosity;
+  double     kinematic_viscosity;
   const auto rheological_model = properties_manager.get_rheology();
 
 
@@ -905,11 +907,11 @@ calculate_torques(
                               field_values[field::shear_rate] =
                                 shear_rate_magnitude;
 
-                              viscosity =
+                              kinematic_viscosity =
                                 rheological_model->value(field_values);
 
-                              fluid_stress =
-                                viscosity * shear_rate - fluid_pressure;
+                              fluid_stress = kinematic_viscosity * shear_rate -
+                                             fluid_pressure;
                               auto force = fluid_stress * normal_vector *
                                            fe_face_values.JxW(q);
 
@@ -943,56 +945,56 @@ calculate_torques(
 
 template std::vector<Tensor<1, 3>>
 calculate_torques<2, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<2> &                              dof_handler,
-  const TrilinosWrappers::MPI::Vector &              evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const TrilinosWrappers::MPI::Vector               &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 template std::vector<Tensor<1, 3>>
 calculate_torques<3, TrilinosWrappers::MPI::Vector>(
-  const DoFHandler<3> &                              dof_handler,
-  const TrilinosWrappers::MPI::Vector &              evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const TrilinosWrappers::MPI::Vector               &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 template std::vector<Tensor<1, 3>>
 calculate_torques<2, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<2> &                              dof_handler,
-  const TrilinosWrappers::MPI::BlockVector &         evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const TrilinosWrappers::MPI::BlockVector          &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 
 template std::vector<Tensor<1, 3>>
 calculate_torques<3, TrilinosWrappers::MPI::BlockVector>(
-  const DoFHandler<3> &                              dof_handler,
-  const TrilinosWrappers::MPI::BlockVector &         evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const TrilinosWrappers::MPI::BlockVector          &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 template std::vector<Tensor<1, 3>>
 calculate_torques<2, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<2> &                              dof_handler,
-  const LinearAlgebra::distributed::Vector<double> & evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<2>                               &dof_handler,
+  const LinearAlgebra::distributed::Vector<double>  &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<2> &boundary_conditions,
-  const Quadrature<1> &                              face_quadrature_formula,
-  const Mapping<2> &                                 mapping);
+  const Quadrature<1>                               &face_quadrature_formula,
+  const Mapping<2>                                  &mapping);
 
 template std::vector<Tensor<1, 3>>
 calculate_torques<3, LinearAlgebra::distributed::Vector<double>>(
-  const DoFHandler<3> &                              dof_handler,
-  const LinearAlgebra::distributed::Vector<double> & evaluation_point,
-  PhysicalPropertiesManager &                        properties_manager,
+  const DoFHandler<3>                               &dof_handler,
+  const LinearAlgebra::distributed::Vector<double>  &evaluation_point,
+  PhysicalPropertiesManager                         &properties_manager,
   const BoundaryConditions::NSBoundaryConditions<3> &boundary_conditions,
-  const Quadrature<2> &                              face_quadrature_formula,
-  const Mapping<3> &                                 mapping);
+  const Quadrature<2>                               &face_quadrature_formula,
+  const Mapping<3>                                  &mapping);
 
 
 // Find the l2 norm of the error between the finite element sol'n and the exact
@@ -1001,10 +1003,10 @@ calculate_torques<3, LinearAlgebra::distributed::Vector<double>>(
 template <int dim, typename VectorType>
 std::pair<double, double>
 calculate_L2_error(const DoFHandler<dim> &dof_handler,
-                   const VectorType &     evaluation_point,
-                   const Function<dim> *  exact_solution,
+                   const VectorType      &evaluation_point,
+                   const Function<dim>   *exact_solution,
                    const Quadrature<dim> &quadrature_formula,
-                   const Mapping<dim> &   mapping)
+                   const Mapping<dim>    &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
   FEValues<dim>            fe_values(mapping,
@@ -1112,56 +1114,56 @@ calculate_L2_error(const DoFHandler<dim> &dof_handler,
 }
 
 template std::pair<double, double>
-calculate_L2_error(const DoFHandler<2> &                dof_handler,
+calculate_L2_error(const DoFHandler<2>                 &dof_handler,
                    const TrilinosWrappers::MPI::Vector &present_solution,
-                   const Function<2> *                  l_exact_solution,
-                   const Quadrature<2> &                quadrature_formula,
-                   const Mapping<2> &                   mapping);
+                   const Function<2>                   *l_exact_solution,
+                   const Quadrature<2>                 &quadrature_formula,
+                   const Mapping<2>                    &mapping);
 
 template std::pair<double, double>
-calculate_L2_error(const DoFHandler<3> &                dof_handler,
+calculate_L2_error(const DoFHandler<3>                 &dof_handler,
                    const TrilinosWrappers::MPI::Vector &present_solution,
-                   const Function<3> *                  l_exact_solution,
-                   const Quadrature<3> &                quadrature_formula,
-                   const Mapping<3> &                   mapping);
+                   const Function<3>                   *l_exact_solution,
+                   const Quadrature<3>                 &quadrature_formula,
+                   const Mapping<3>                    &mapping);
 
 template std::pair<double, double>
-calculate_L2_error(const DoFHandler<2> &                     dof_handler,
+calculate_L2_error(const DoFHandler<2>                      &dof_handler,
                    const TrilinosWrappers::MPI::BlockVector &present_solution,
-                   const Function<2> *                       l_exact_solution,
-                   const Quadrature<2> &                     quadrature_formula,
-                   const Mapping<2> &                        mapping);
+                   const Function<2>                        *l_exact_solution,
+                   const Quadrature<2>                      &quadrature_formula,
+                   const Mapping<2>                         &mapping);
 
 template std::pair<double, double>
-calculate_L2_error(const DoFHandler<3> &                     dof_handler,
+calculate_L2_error(const DoFHandler<3>                      &dof_handler,
                    const TrilinosWrappers::MPI::BlockVector &present_solution,
-                   const Function<3> *                       l_exact_solution,
-                   const Quadrature<3> &                     quadrature_formula,
-                   const Mapping<3> &                        mapping);
+                   const Function<3>                        *l_exact_solution,
+                   const Quadrature<3>                      &quadrature_formula,
+                   const Mapping<3>                         &mapping);
 
 template std::pair<double, double>
 calculate_L2_error(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const Function<2> *                               l_exact_solution,
-  const Quadrature<2> &                             quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const Function<2>                                *l_exact_solution,
+  const Quadrature<2>                              &quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template std::pair<double, double>
 calculate_L2_error(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const Function<3> *                               l_exact_solution,
-  const Quadrature<3> &                             quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const Function<3>                                *l_exact_solution,
+  const Quadrature<3>                              &quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 template <int dim, typename VectorType>
 std::pair<double, double>
-calculate_flow_rate(const DoFHandler<dim> &    dof_handler,
-                    const VectorType &         present_solution,
-                    const unsigned int &       boundary_id,
+calculate_flow_rate(const DoFHandler<dim>     &dof_handler,
+                    const VectorType          &present_solution,
+                    const unsigned int        &boundary_id,
                     const Quadrature<dim - 1> &face_quadrature_formula,
-                    const Mapping<dim> &       mapping)
+                    const Mapping<dim>        &mapping)
 {
   const FESystem<dim, dim> fe = dof_handler.get_fe();
 
@@ -1215,56 +1217,56 @@ calculate_flow_rate(const DoFHandler<dim> &    dof_handler,
 }
 
 template std::pair<double, double>
-calculate_flow_rate(const DoFHandler<2> &                dof_handler,
+calculate_flow_rate(const DoFHandler<2>                 &dof_handler,
                     const TrilinosWrappers::MPI::Vector &present_solution,
-                    const unsigned int &                 boundary_id,
+                    const unsigned int                  &boundary_id,
                     const Quadrature<1> &face_quadrature_formula,
-                    const Mapping<2> &   mapping);
+                    const Mapping<2>    &mapping);
 
 template std::pair<double, double>
-calculate_flow_rate(const DoFHandler<3> &                dof_handler,
+calculate_flow_rate(const DoFHandler<3>                 &dof_handler,
                     const TrilinosWrappers::MPI::Vector &present_solution,
-                    const unsigned int &                 boundary_id,
+                    const unsigned int                  &boundary_id,
                     const Quadrature<2> &face_quadrature_formula,
-                    const Mapping<3> &   mapping);
+                    const Mapping<3>    &mapping);
 
 template std::pair<double, double>
-calculate_flow_rate(const DoFHandler<2> &                     dof_handler,
+calculate_flow_rate(const DoFHandler<2>                      &dof_handler,
                     const TrilinosWrappers::MPI::BlockVector &present_solution,
-                    const unsigned int &                      boundary_id,
+                    const unsigned int                       &boundary_id,
                     const Quadrature<1> &face_quadrature_formula,
-                    const Mapping<2> &   mapping);
+                    const Mapping<2>    &mapping);
 
 template std::pair<double, double>
-calculate_flow_rate(const DoFHandler<3> &                     dof_handler,
+calculate_flow_rate(const DoFHandler<3>                      &dof_handler,
                     const TrilinosWrappers::MPI::BlockVector &present_solution,
-                    const unsigned int &                      boundary_id,
+                    const unsigned int                       &boundary_id,
                     const Quadrature<2> &face_quadrature_formula,
-                    const Mapping<3> &   mapping);
+                    const Mapping<3>    &mapping);
 
 template std::pair<double, double>
 calculate_flow_rate(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const unsigned int &                              boundary_id,
-  const Quadrature<1> &                             face_quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const unsigned int                               &boundary_id,
+  const Quadrature<1>                              &face_quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template std::pair<double, double>
 calculate_flow_rate(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const unsigned int &                              boundary_id,
-  const Quadrature<2> &                             face_quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const unsigned int                               &boundary_id,
+  const Quadrature<2>                              &face_quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 template <int dim, typename VectorType>
 double
-calculate_average_velocity(const DoFHandler<dim> &    dof_handler,
-                           const VectorType &         present_solution,
-                           const unsigned int &       boundary_id,
+calculate_average_velocity(const DoFHandler<dim>     &dof_handler,
+                           const VectorType          &present_solution,
+                           const unsigned int        &boundary_id,
                            const Quadrature<dim - 1> &face_quadrature_formula,
-                           const Mapping<dim> &       mapping)
+                           const Mapping<dim>        &mapping)
 {
   std::pair<double, double> flow_rate_and_area =
     calculate_flow_rate(dof_handler,
@@ -1281,64 +1283,64 @@ calculate_average_velocity(const DoFHandler<dim> &    dof_handler,
 
 template double
 calculate_average_velocity(
-  const DoFHandler<2> &                dof_handler,
+  const DoFHandler<2>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &present_solution,
-  const unsigned int &                 boundary_id,
-  const Quadrature<1> &                face_quadrature_formula,
-  const Mapping<2> &                   mapping);
+  const unsigned int                  &boundary_id,
+  const Quadrature<1>                 &face_quadrature_formula,
+  const Mapping<2>                    &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<3> &                dof_handler,
+  const DoFHandler<3>                 &dof_handler,
   const TrilinosWrappers::MPI::Vector &present_solution,
-  const unsigned int &                 boundary_id,
-  const Quadrature<2> &                face_quadrature_formula,
-  const Mapping<3> &                   mapping);
+  const unsigned int                  &boundary_id,
+  const Quadrature<2>                 &face_quadrature_formula,
+  const Mapping<3>                    &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<2> &                     dof_handler,
+  const DoFHandler<2>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &present_solution,
-  const unsigned int &                      boundary_id,
-  const Quadrature<1> &                     face_quadrature_formula,
-  const Mapping<2> &                        mapping);
+  const unsigned int                       &boundary_id,
+  const Quadrature<1>                      &face_quadrature_formula,
+  const Mapping<2>                         &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<3> &                     dof_handler,
+  const DoFHandler<3>                      &dof_handler,
   const TrilinosWrappers::MPI::BlockVector &present_solution,
-  const unsigned int &                      boundary_id,
-  const Quadrature<2> &                     face_quadrature_formula,
-  const Mapping<3> &                        mapping);
+  const unsigned int                       &boundary_id,
+  const Quadrature<2>                      &face_quadrature_formula,
+  const Mapping<3>                         &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<2> &                             dof_handler,
+  const DoFHandler<2>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const unsigned int &                              boundary_id,
-  const Quadrature<1> &                             face_quadrature_formula,
-  const Mapping<2> &                                mapping);
+  const unsigned int                               &boundary_id,
+  const Quadrature<1>                              &face_quadrature_formula,
+  const Mapping<2>                                 &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<3> &                             dof_handler,
+  const DoFHandler<3>                              &dof_handler,
   const LinearAlgebra::distributed::Vector<double> &present_solution,
-  const unsigned int &                              boundary_id,
-  const Quadrature<2> &                             face_quadrature_formula,
-  const Mapping<3> &                                mapping);
+  const unsigned int                               &boundary_id,
+  const Quadrature<2>                              &face_quadrature_formula,
+  const Mapping<3>                                 &mapping);
 
 template <int dim, typename VectorType>
 double
 calculate_average_velocity(const DoFHandler<dim> &dof_handler,
                            const DoFHandler<dim> &void_fraction_dof_handler,
-                           const VectorType &     present_solution,
-                           const VectorType &  present_void_fraction_solution,
+                           const VectorType      &present_solution,
+                           const VectorType   &present_void_fraction_solution,
                            const unsigned int &flow_direction,
                            const Quadrature<dim> &quadrature_formula,
-                           const Mapping<dim> &   mapping)
+                           const Mapping<dim>    &mapping)
 {
   // Set up for velocity fe values
-  const auto &                     tria       = dof_handler.get_triangulation();
+  const auto                      &tria       = dof_handler.get_triangulation();
   const FESystem<dim, dim>         fe         = dof_handler.get_fe();
   const unsigned int               n_q_points = quadrature_formula.size();
   const FEValuesExtractors::Vector velocities(0);
@@ -1409,20 +1411,20 @@ calculate_average_velocity(const DoFHandler<dim> &dof_handler,
 
 template double
 calculate_average_velocity(
-  const DoFHandler<2> &                dof_handler,
-  const DoFHandler<2> &                void_fraction_dof_handler,
+  const DoFHandler<2>                 &dof_handler,
+  const DoFHandler<2>                 &void_fraction_dof_handler,
   const TrilinosWrappers::MPI::Vector &present_solution,
   const TrilinosWrappers::MPI::Vector &present_void_fraction_solution,
-  const unsigned int &                 flow_direction,
-  const Quadrature<2> &                quadrature_formula,
-  const Mapping<2> &                   mapping);
+  const unsigned int                  &flow_direction,
+  const Quadrature<2>                 &quadrature_formula,
+  const Mapping<2>                    &mapping);
 
 template double
 calculate_average_velocity(
-  const DoFHandler<3> &                dof_handler,
-  const DoFHandler<3> &                void_fraction_dof_handler,
+  const DoFHandler<3>                 &dof_handler,
+  const DoFHandler<3>                 &void_fraction_dof_handler,
   const TrilinosWrappers::MPI::Vector &present_solution,
   const TrilinosWrappers::MPI::Vector &present_void_fraction_solution,
-  const unsigned int &                 flow_direction,
-  const Quadrature<3> &                quadrature_formula,
-  const Mapping<3> &                   mapping);
+  const unsigned int                  &flow_direction,
+  const Quadrature<3>                 &quadrature_formula,
+  const Mapping<3>                    &mapping);

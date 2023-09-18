@@ -7,6 +7,10 @@ This section regroups the peer-reviewed journal articles that **describe** core 
 2023
 ----
 
+* `M. Fazli, M. Rudman, S. Kuang and A. Chryss, "Application of Immersed Boundary Methods to Non-Newtonian Yield-Pseudoplastic Flows", Applied Mathematical Modelling, 2023 <https://doi.org/10.1016/j.apm.2023.07.034>`_.
+
+* `J. Joachim, C.-A. Daunais, V. Bibeau, L. Heltai and B. Blais, "A Parallel and Adaptative Nitsche Immersed Boundary Method to Simulate Viscous Mixing", Journal of Computational Physics, 2023 <https://doi.org/10.1016/j.jcp.2023.112189>`_.
+
 * `V. O. Ferreira, T. El Geitani, D. Silva Junior, B. Blais, and G. C. Lopes, "In-depth validation of unresolved CFD-DEM simulations of liquid fluidized beds", Powder Technology, 2023 <https://doi.org/10.1016/j.powtec.2023.118652>`_.
 
 * `T. El Geitani and B. Blais, "Quadrature-Centered Averaging Scheme for Accurate and Continuous Void Fraction Calculation in Computational Fluid Dynamics–Discrete Element Method Simulations", Industrial & Engineering Chemistry Research, 2023 <https://doi.org/10.1021/acs.iecr.3c00172>`_.
@@ -18,6 +22,8 @@ This section regroups the peer-reviewed journal articles that **describe** core 
 * `C.-A. Daunais, L. Barbeau and B. Blais, "An Extensive Study of Shear Thinning Flow Around a Spherical Particle for Power-Law and Carreau Fluids", Journal of Non-Newtonian Fluid Mechanics, 311, 104951, 2023 <https://doi.org/10.1016/j.jnnfm.2022.104951>`_.
 
 * `T. El Geitani, S. Golshan and B. Blais, "Toward High-Order CFD-DEM: Development and Validation", Industrial & Engineering Chemistry Research 62, 1141-1159, 2023 <https://doi.org/10.1021/acs.iecr.2c03546>`_.
+
+*  `G. Mirakhori, A. Collard-Daigneault, A. Alphonius, J. Doucet, B. Blais, and J. Chaouki, “An improved position reconstruction method for radioactive particle tracking”, Nucl. Instrum. Methods Phys. Res. Sect. Accel. Spectrometers Detect. Assoc. Equip., vol. 1055, p. 168504, 2023 <https://doi.org/10.1016/j.nima.2023.168504>`_.
 
 2022
 ----
@@ -40,5 +46,4 @@ This section regroups preprints of journal articles already submitted, but which
 
 * `L. Prieto Saavedra, C. E. N. Radburn, A. Collard-Daigneault and B. Blais, "An implicit large-eddy simulation perspective on the flow over periodic hills", June 2022 <https://doi.org/10.48550/arXiv.2206.08145>`_.
 
-* `J. Joachim, C.-A. Daunais, V. Bibeau, L. Heltai and B. Blais "A Parallel and Adaptative Nitsche Immersed Boundary Method to Simulate Viscous Mixing", October 2022 <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4264140>`_
 

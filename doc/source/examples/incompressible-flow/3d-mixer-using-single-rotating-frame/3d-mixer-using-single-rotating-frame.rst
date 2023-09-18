@@ -21,7 +21,7 @@ where
 Features
 -------------
 
-- Solver: ``gls_navier_stokes_3d`` (with Q1-Q1)
+- Solver: ``gls_navier_stokes`` (with Q1-Q1)
 - Steady-state problem
 - Displays the use of a single rotating frame (``srf``) when modeling a complex rotating geometry
 - Calculation of the power number (:math:`N_p`) using a python script
@@ -216,32 +216,37 @@ Non-linear Solver
 .. code-block:: text
 
     subsection non-linear solver
-      set tolerance = 1e-10
+      subsection fluid dynamics
+        set tolerance = 1e-10
+      end
     end
 
 Lethe is an implicit CFD solver. Solving a steady-state problem requires the solution of a non-linear system of equations. By default, Lethe uses a Newton solver for which a ``tolerance`` must be specified. Here, we set our tolerance at ``1e-10``.
 
 Linear Solver
 ~~~~~~~~~~~~~
-Relatively standard parameters are used for the linear solver. From our experience, the ``AMG`` preconditioner is more robust and for that reason we will use it.
+Relatively standard parameters are used for the linear solver. From our experience, the ``amg`` preconditioner is more robust and for that reason we will use it.
 
 .. code-block:: text
 
     subsection linear solver
-      set method                                    = amg
-      set max iters                                 = 100
-      set relative residual                         = 1e-4
-      set minimum residual                          = 1e-10
-      set amg preconditioner ilu fill               = 0
-      set amg preconditioner ilu absolute tolerance = 1e-11
-      set amg preconditioner ilu relative tolerance = 1.00
-      set amg aggregation threshold                 = 1e-14  # Aggregation
-      set amg n cycles                              = 2      # Number of AMG cycles
-      set amg w cycles                              = false  # W cycles, otherwise V cycles
-      set amg smoother sweeps                       = 2      # Sweeps
-      set amg smoother overlap                      = 1      # Overlap
-      set verbosity                                 = verbose
-      set max krylov vectors                        = 500
+      subsection fluid dynamics
+        set method                                    = gmres
+        set max iters                                 = 100
+        set relative residual                         = 1e-4
+        set minimum residual                          = 1e-10
+        set preconditioner                            = amg
+        set amg preconditioner ilu fill               = 0
+        set amg preconditioner ilu absolute tolerance = 1e-11
+        set amg preconditioner ilu relative tolerance = 1.00
+        set amg aggregation threshold                 = 1e-14  # Aggregation
+        set amg n cycles                              = 2      # Number of AMG cycles
+        set amg w cycles                              = false  # W cycles, otherwise V cycles
+        set amg smoother sweeps                       = 2      # Sweeps
+        set amg smoother overlap                      = 1      # Overlap
+        set verbosity                                 = verbose
+        set max krylov vectors                        = 500
+      end
     end
 
 
@@ -274,11 +279,11 @@ and then move it to the ``Np_vs_Re`` folder:
 
 Simulating for a Specific Flow Condition :math:`(Re=1)`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes_3d`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
 
-    mpirun -np $number_of_CPUs gls_navier_stokes_3d ribbon-gls-Re1.prm
+    mpirun -np $number_of_CPUs gls_navier_stokes ribbon-gls-Re1.prm
 
 Generating :math:`N_p` vs :math:`Re` Curves :math:`(Re \in [0.1, 100])`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

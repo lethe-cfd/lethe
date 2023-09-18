@@ -14,7 +14,7 @@ This example aims to numerically reproduce the results obtained by Ten Cate `et 
 Features
 ----------------------------------
 
-- Solvers: ``gls_sharp_navier_stokes_3d`` (with Q1-Q1)
+- Solvers: ``gls_sharp_navier_stokes`` (with Q1-Q1)
 - Transient problem
 - Displays the capability of the resolved CFD-DEM solver for the flow around one particle
 
@@ -61,7 +61,7 @@ Simulation and IO Control
 
 * The ``method`` is set to  ``bdf2`` to have a second-order time-stepping method. This ensures a low error due to the time discretization in this case.
 
-* The ``bdf startup method`` is set to  ``multiple step bdf``  as we do not have an initial solution that allows us to generate previous time steps. The sharp interface immersed boundary is not compatible at this point with the sdirk solver. This leaves us with the multiple step bdf approach that will ramp the order of the scheme in the first few time steps.
+* The ``bdf startup method`` is set to  ``multiple step bdf``  as we do not have an initial solution that allows us to generate previous time steps. We use a multiple step bdf approach that will ramp the order of the scheme in the first few time steps.
 
 * The ``time step`` is set to  0.0025. This ensures a low error due to the time discretization for this case.
 
@@ -212,11 +212,13 @@ Non-linear Solver
 .. code-block:: text
 
     subsection non-linear solver
-      set verbosity             = verbose
-      set tolerance             = 1e-6
-      set max iterations        = 10
-      set residual precision    = 5
-      set force rhs calculation = true
+      subsection fluid dynamics
+        set verbosity             = verbose
+        set tolerance             = 1e-6
+        set max iterations        = 10
+        set residual precision    = 5
+        set force rhs calculation = true
+      end
     end
 	
 * The ``tolerance`` is set to 1e-6. This is small enough to ensure that the flow field is adequately resolved, as here, we expect a velocity of the particle of the order of 10.
@@ -236,18 +238,21 @@ Linear Solver
 .. code-block:: text
 
     subsection linear solver
-      set method                                = gmres
-      set max iters                             = 1000
-      set relative residual                     = 1e-4
-      set minimum residual                      = 1e-11
-      set ilu preconditioner fill               = 0
-      set ilu preconditioner absolute tolerance = 1e-20
-      set ilu preconditioner relative tolerance = 1.00
-      set verbosity                             = verbose
-      set max krylov vectors                    = 1000
+      subsection fluid dynamics
+        set method                                = gmres
+        set max iters                             = 1000
+        set relative residual                     = 1e-4
+        set minimum residual                      = 1e-11
+        set preconditioner                        = ilu
+        set ilu preconditioner fill               = 0
+        set ilu preconditioner absolute tolerance = 1e-20
+        set ilu preconditioner relative tolerance = 1.00
+        set verbosity                             = verbose
+        set max krylov vectors                    = 1000
+      end
     end
 
-* The ``method`` is set to ``gmres``. This solver is less computationally expensive than the other option, and this case does not require any special preconditioner. This makes the ``gmres`` solver the best option available.
+* The ``method`` is set to ``gmres``. This solver is less computationally expensive than the other option, and this case does not require any special preconditioner. This makes the ``gmres`` solver with ``ilu`` preconditioner the best option available.
 
 * The ``max iters`` is set to 1000. This is a lot more steps than how much it should take to solve the system.
 

@@ -65,7 +65,7 @@ public:
    *
    */
   virtual void
-  insert(Particles::ParticleHandler<dim> &                particle_handler,
+  insert(Particles::ParticleHandler<dim>                 &particle_handler,
          const parallel::distributed::Triangulation<dim> &triangulation,
          const DEMSolverParameters<dim> &dem_parameters) override;
 
@@ -96,7 +96,7 @@ private:
    */
   void
   find_insertion_location_nonuniform(
-    Point<dim> &                                 insertion_location,
+    Point<dim>                                  &insertion_location,
     const unsigned int                           id,
     const double                                 random_number1,
     const double                                 random_number2,
@@ -106,7 +106,7 @@ private:
 
   // Number of particles of each type that remain to be inserted in the
   // upcoming insertion steps
-  unsigned int remained_particles_of_each_type;
+  unsigned int particles_of_each_type_remaining;
 };
 
 #endif /* nonuniform_insertion_h */

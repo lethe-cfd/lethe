@@ -151,8 +151,8 @@ protected:
   virtual void
   assemble_local_system_matrix(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    NavierStokesScratchData<dim> &                        scratch_data,
-    StabilizedMethodsTensorCopyData<dim> &                copy_data);
+    NavierStokesScratchData<dim>                         &scratch_data,
+    StabilizedMethodsTensorCopyData<dim>                 &copy_data);
 
   /**
    * @brief Assemble the local rhs for a given cell
@@ -170,8 +170,8 @@ protected:
   virtual void
   assemble_local_system_rhs(
     const typename DoFHandler<dim>::active_cell_iterator &cell,
-    NavierStokesScratchData<dim> &                        scratch_data,
-    StabilizedMethodsTensorCopyData<dim> &                copy_data);
+    NavierStokesScratchData<dim>                         &scratch_data,
+    StabilizedMethodsTensorCopyData<dim>                 &copy_data);
 
   /**
    * @brief sets up the vector of assembler functions
@@ -226,7 +226,7 @@ private:
 
 
   /**
-   * @brief GMRES solver with ILU(N) preconditioning
+   * @brief GMRES solver with ILU(N) preconditioning or AMG preconditioning
    */
   void
   solve_system_GMRES(const bool   initial_step,
@@ -240,14 +240,6 @@ private:
   solve_system_BiCGStab(const bool   initial_step,
                         const double absolute_residual,
                         const double relative_residual);
-
-  /**
-   * @brief GMRES solver with AMG preconditioner with ILU smoother and coarsener
-   */
-  void
-  solve_system_AMG(const bool   initial_step,
-                   const double absolute_residual,
-                   const double relative_residual);
 
   /**
    * @brief Direct solver using TrilinosWrappers::SolverDirect

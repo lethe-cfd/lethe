@@ -1,5 +1,4 @@
 #include <core/bdf.h>
-#include <core/sdirk.h>
 #include <core/time_integration_utilities.h>
 #include <core/utilities.h>
 
@@ -364,6 +363,8 @@ template <int dim>
 void
 HeatTransfer<dim>::assemble_system_matrix()
 {
+  TimerOutput::Scope t(this->computing_timer, "Assemble matrix");
+
   this->system_matrix = 0;
   setup_assemblers();
 
@@ -408,8 +409,8 @@ template <int dim>
 void
 HeatTransfer<dim>::assemble_local_system_matrix(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  HeatTransferScratchData<dim> &                        scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  HeatTransferScratchData<dim>                         &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -421,7 +422,6 @@ HeatTransfer<dim>::assemble_local_system_matrix(
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      this->solution_stages,
                       &source_term);
 
   const DoFHandler<dim> *dof_handler_fluid =
@@ -478,10 +478,8 @@ HeatTransfer<dim>::assemble_local_system_matrix(
         cell->index(),
         dof_handler_vof);
 
-      scratch_data.reinit_vof(phase_cell,
-                              *this->multiphysics->get_filtered_solution(
-                                PhysicsID::VOF),
-                              std::vector<TrilinosWrappers::MPI::Vector>());
+      scratch_data.reinit_vof(
+        phase_cell, *this->multiphysics->get_filtered_solution(PhysicsID::VOF));
     }
 
   scratch_data.calculate_physical_properties();
@@ -516,7 +514,8 @@ template <int dim>
 void
 HeatTransfer<dim>::assemble_system_rhs()
 {
-  // TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
+  TimerOutput::Scope t(this->computing_timer, "Assemble RHS");
+
   this->system_rhs = 0;
   setup_assemblers();
 
@@ -561,8 +560,8 @@ template <int dim>
 void
 HeatTransfer<dim>::assemble_local_system_rhs(
   const typename DoFHandler<dim>::active_cell_iterator &cell,
-  HeatTransferScratchData<dim> &                        scratch_data,
-  StabilizedMethodsCopyData &                           copy_data)
+  HeatTransferScratchData<dim>                         &scratch_data,
+  StabilizedMethodsCopyData                            &copy_data)
 {
   copy_data.cell_is_local = cell->is_locally_owned();
   if (!cell->is_locally_owned())
@@ -574,7 +573,6 @@ HeatTransfer<dim>::assemble_local_system_rhs(
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      this->solution_stages,
                       &source_term);
 
   const DoFHandler<dim> *dof_handler_fluid =
@@ -636,10 +634,8 @@ HeatTransfer<dim>::assemble_local_system_rhs(
         cell->index(),
         dof_handler_vof);
 
-      scratch_data.reinit_vof(phase_cell,
-                              *this->multiphysics->get_filtered_solution(
-                                PhysicsID::VOF),
-                              std::vector<TrilinosWrappers::MPI::Vector>());
+      scratch_data.reinit_vof(
+        phase_cell, *this->multiphysics->get_filtered_solution(PhysicsID::VOF));
     }
 
   scratch_data.calculate_physical_properties();
@@ -795,15 +791,18 @@ HeatTransfer<dim>::postprocess(bool first_iteration)
       gather_vof = true;
       switch (monitored_fluid)
         {
-            default: {
+          default:
+            {
               domain_name = "fluid";
               break;
             }
-            case Parameters::FluidIndicator::fluid0: {
+          case Parameters::FluidIndicator::fluid0:
+            {
               domain_name = "fluid_0";
               break;
             }
-            case Parameters::FluidIndicator::fluid1: {
+          case Parameters::FluidIndicator::fluid1:
+            {
               domain_name = "fluid_1";
               break;
             }
@@ -858,6 +857,14 @@ HeatTransfer<dim>::postprocess(bool first_iteration)
             this->simulation_parameters.post_processing.output_frequency ==
           0)
         this->write_heat_flux(domain_name);
+    }
+
+  if (this->simulation_parameters.timer.type ==
+      Parameters::Timer::Type::iteration)
+    {
+      announce_string(this->pcout, "Heat Transfer");
+      this->computing_timer.print_summary();
+      this->computing_timer.reset();
     }
 }
 
@@ -1101,29 +1108,39 @@ void
 HeatTransfer<dim>::solve_linear_system(const bool initial_step,
                                        const bool /*renewed_matrix*/)
 {
+  TimerOutput::Scope t(this->computing_timer, "Solve linear system");
+
   auto mpi_communicator = triangulation->get_communicator();
 
   const AffineConstraints<double> &constraints_used =
     initial_step ? nonzero_constraints : this->zero_constraints;
 
   const double absolute_residual =
-    simulation_parameters.linear_solver.minimum_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .minimum_residual;
   const double relative_residual =
-    simulation_parameters.linear_solver.relative_residual;
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .relative_residual;
 
   const double linear_solver_tolerance =
     std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);
 
-  if (this->simulation_parameters.linear_solver.verbosity !=
-      Parameters::Verbosity::quiet)
+  if (this->simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+        .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
 
-  const double ilu_fill = simulation_parameters.linear_solver.ilu_precond_fill;
-  const double ilu_atol = simulation_parameters.linear_solver.ilu_precond_atol;
-  const double ilu_rtol = simulation_parameters.linear_solver.ilu_precond_rtol;
+  const double ilu_fill =
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .ilu_precond_fill;
+  const double ilu_atol =
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .ilu_precond_atol;
+  const double ilu_rtol =
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .ilu_precond_rtol;
   TrilinosWrappers::PreconditionILU::AdditionalData preconditionerOptions(
     ilu_fill, ilu_atol, ilu_rtol, 0);
 
@@ -1134,14 +1151,17 @@ HeatTransfer<dim>::solve_linear_system(const bool initial_step,
   TrilinosWrappers::MPI::Vector completely_distributed_solution(
     locally_owned_dofs, mpi_communicator);
 
-  SolverControl solver_control(
-    simulation_parameters.linear_solver.max_iterations,
-    linear_solver_tolerance,
-    true,
-    true);
+  SolverControl solver_control(simulation_parameters.linear_solver
+                                 .at(PhysicsID::heat_transfer)
+                                 .max_iterations,
+                               linear_solver_tolerance,
+                               true,
+                               true);
 
   TrilinosWrappers::SolverGMRES::AdditionalData solver_parameters(
-    false, simulation_parameters.linear_solver.max_krylov_vectors);
+    false,
+    simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+      .max_krylov_vectors);
 
 
   TrilinosWrappers::SolverGMRES solver(solver_control, solver_parameters);
@@ -1152,8 +1172,8 @@ HeatTransfer<dim>::solve_linear_system(const bool initial_step,
                system_rhs,
                ilu_preconditioner);
 
-  if (simulation_parameters.linear_solver.verbosity !=
-      Parameters::Verbosity::quiet)
+  if (simulation_parameters.linear_solver.at(PhysicsID::heat_transfer)
+        .verbosity != Parameters::Verbosity::quiet)
     {
       this->pcout << "  -Iterative solver took : " << solver_control.last_step()
                   << " steps " << std::endl;
@@ -1181,7 +1201,7 @@ HeatTransfer<dim>::postprocess_temperature_statistics(
                              update_values | update_JxW_values);
 
   // Initialize VOF information
-  const DoFHandler<dim> *        dof_handler_vof = NULL;
+  const DoFHandler<dim>         *dof_handler_vof = NULL;
   std::shared_ptr<FEValues<dim>> fe_values_vof;
   std::vector<double>            filtered_phase_values(n_q_points);
 
@@ -1381,7 +1401,7 @@ HeatTransfer<dim>::postprocess_heat_flux_on_bc(
                                       update_values);
 
   // Initialize VOF information
-  DoFHandler<dim> *                  dof_handler_vof = NULL;
+  DoFHandler<dim>                   *dof_handler_vof = NULL;
   std::shared_ptr<FEFaceValues<dim>> fe_face_values_vof;
   std::vector<double>                filtered_phase_values(n_q_points_face);
 
@@ -1416,7 +1436,8 @@ HeatTransfer<dim>::postprocess_heat_flux_on_bc(
 
   switch (properties_manager.get_number_of_fluids())
     {
-        default: {
+      default:
+        {
           // Get values for monophase flow
           const auto density_model = properties_manager.get_density();
           const auto specific_heat_model =
@@ -1430,7 +1451,8 @@ HeatTransfer<dim>::postprocess_heat_flux_on_bc(
 
           break;
         }
-        case 2: {
+      case 2:
+        {
           // Get prm values for multiphase flow - will be blended in the
           // integration loop
           const auto density_models = properties_manager.get_density_vector();
@@ -1655,7 +1677,7 @@ HeatTransfer<dim>::postprocess_thermal_energy_in_fluid(
   const bool                       gather_vof,
   const Parameters::FluidIndicator monitored_fluid,
   const std::string                domain_name,
-  const VectorType &               current_solution_fd)
+  const VectorType                &current_solution_fd)
 {
   const unsigned int n_q_points       = this->cell_quadrature->size();
   const MPI_Comm     mpi_communicator = this->dof_handler.get_communicator();
@@ -1679,7 +1701,7 @@ HeatTransfer<dim>::postprocess_thermal_energy_in_fluid(
                              update_values);
 
   // Initialize VOF information
-  const DoFHandler<dim> *        dof_handler_vof = NULL;
+  const DoFHandler<dim>         *dof_handler_vof = NULL;
   std::shared_ptr<FEValues<dim>> fe_values_vof;
   std::vector<double>            filtered_phase_values(n_q_points);
 
@@ -1711,7 +1733,8 @@ HeatTransfer<dim>::postprocess_thermal_energy_in_fluid(
 
   switch (properties_manager.get_number_of_fluids())
     {
-        default: {
+      default:
+        {
           // Get values for monophase flow
           const auto density_model = properties_manager.get_density();
           const auto specific_heat_model =
@@ -1722,7 +1745,8 @@ HeatTransfer<dim>::postprocess_thermal_energy_in_fluid(
 
           break;
         }
-        case 2: {
+      case 2:
+        {
           // Get prm values for multiphase flow - will be blended in the
           // integration loop
           const auto density_models = properties_manager.get_density_vector();
@@ -1889,13 +1913,15 @@ HeatTransfer<dim>::set_phase_coefficient(
 
   switch (monitored_fluid)
     {
-        default: {
+      default:
+        {
           // Parameters::FluidIndicator::both
           phase_coefficient               = 1.;
           point_is_in_postprocessed_fluid = true;
           break;
         }
-        case Parameters::FluidIndicator::fluid0: {
+      case Parameters::FluidIndicator::fluid0:
+        {
           if (gather_vof)
             {
               phase_coefficient = 1. - phase_value_q;
@@ -1911,7 +1937,8 @@ HeatTransfer<dim>::set_phase_coefficient(
             }
           break;
         }
-        case Parameters::FluidIndicator::fluid1: {
+      case Parameters::FluidIndicator::fluid1:
+        {
           if (gather_vof)
             {
               phase_coefficient = phase_value_q;

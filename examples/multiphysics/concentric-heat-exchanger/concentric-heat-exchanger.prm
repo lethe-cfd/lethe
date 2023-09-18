@@ -1,7 +1,10 @@
 # Listing of Parameters
-# ---------------------
-# --------------------------------------------------
-# Simulation and IO Control
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
@@ -85,7 +88,7 @@ subsection initial conditions
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Boundary Conditions
 #---------------------------------------------------
 
@@ -155,28 +158,50 @@ subsection boundary conditions heat transfer
   end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Non-Linear Solver Control
 #---------------------------------------------------
 
 subsection non-linear solver
-  set tolerance      = 1e-3
-  set max iterations = 6
-  set verbosity      = verbose
+  subsection heat transfer
+    set tolerance      = 1e-3
+    set max iterations = 6
+    set verbosity      = verbose
+  end
+  subsection fluid dynamics
+    set tolerance      = 1e-3
+    set max iterations = 6
+    set verbosity      = verbose
+  end
 end
 
-# --------------------------------------------------
+#---------------------------------------------------
 # Linear Solver Control
 #---------------------------------------------------
 
 subsection linear solver
-  set method                                = gmres
-  set relative residual                     = 1e-3
-  set minimum residual                      = 1e-5
-  set ilu preconditioner fill               = 1
-  set ilu preconditioner absolute tolerance = 1e-7
-  set ilu preconditioner relative tolerance = 1.00
-  set verbosity                             = verbose
-  set max krylov vectors                    = 1000
-  set max iters                             = 2000
+  subsection fluid dynamics
+    set method                                = gmres
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-5
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-7
+    set ilu preconditioner relative tolerance = 1.00
+    set verbosity                             = verbose
+    set max krylov vectors                    = 1000
+    set max iters                             = 2000
+  end
+  subsection heat transfer
+    set method                                = gmres
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-5
+    set preconditioner                        = ilu
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-7
+    set ilu preconditioner relative tolerance = 1.00
+    set verbosity                             = verbose
+    set max krylov vectors                    = 1000
+    set max iters                             = 2000
+  end
 end

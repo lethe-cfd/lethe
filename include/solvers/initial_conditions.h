@@ -54,7 +54,7 @@ namespace Parameters
 
   struct Ramp_viscosity
   {
-    double viscosity_init;
+    double kinematic_viscosity_init;
     int    n_iter;
     double alpha;
 
@@ -88,8 +88,8 @@ namespace Parameters
     // Velocity components
     Functions::ParsedFunction<dim> uvwp;
 
-    // Artificial viscosity
-    double viscosity;
+    // Artificial kinematic viscosity
+    double kinematic_viscosity;
 
     // Temperature
     Functions::ParsedFunction<dim> temperature;
@@ -129,32 +129,25 @@ namespace Parameters
                         "Type of initial condition"
                         "Choices are <L2projection|viscous|nodal|ramp>.");
       prm.enter_subsection("uvwp");
-      uvwp.declare_parameters(prm, dim);
-      if (dim == 2)
-        prm.set("Function expression", "0; 0; 0");
-      if (dim == 3)
-        prm.set("Function expression", "0; 0; 0; 0");
+      uvwp.declare_parameters(prm, dim + 1);
       prm.leave_subsection();
 
-      prm.declare_entry("viscosity",
+      prm.declare_entry("kinematic viscosity",
                         "1",
                         Patterns::Double(),
-                        "viscosity for viscous initial conditions");
+                        "Kinematic viscosity for viscous initial conditions");
 
 
       prm.enter_subsection("temperature");
       temperature.declare_parameters(prm);
-      prm.set("Function expression", "0");
       prm.leave_subsection();
 
       prm.enter_subsection("tracer");
       tracer.declare_parameters(prm);
-      prm.set("Function expression", "0");
       prm.leave_subsection();
 
       prm.enter_subsection("VOF");
       VOF.declare_parameters(prm);
-      prm.set("Function expression", "0");
       prm.enter_subsection("projection step");
       prm.declare_entry(
         "enable",
@@ -171,7 +164,6 @@ namespace Parameters
 
       prm.enter_subsection("cahn hilliard");
       cahn_hilliard.declare_parameters(prm, 2);
-      prm.set("Function expression", "0; 0;");
       prm.leave_subsection();
 
       ramp.declare_parameters(prm);
@@ -195,7 +187,7 @@ namespace Parameters
       else if (op == "ramp")
         type = InitialConditionType::ramp;
 
-      viscosity = prm.get_double("viscosity");
+      kinematic_viscosity = prm.get_double("kinematic viscosity");
       prm.enter_subsection("uvwp");
       uvwp.parse_parameters(prm);
       prm.leave_subsection();

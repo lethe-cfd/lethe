@@ -1,3 +1,12 @@
+# Listing of Parameters
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
+#---------------------------------------------------
+
 subsection simulation control
   set method            = bdf2
   set output name       = mixer
@@ -7,12 +16,20 @@ subsection simulation control
   set output boundaries = true
 end
 
+#---------------------------------------------------
+# Physical Properties
+#---------------------------------------------------
+
 subsection physical properties
   subsection fluid 0
     set kinematic viscosity = 0.001
     set density             = 1000
   end
 end
+
+#---------------------------------------------------
+# Mesh
+#---------------------------------------------------
 
 subsection mesh
   set type               = dealii
@@ -21,15 +38,27 @@ subsection mesh
   set initial refinement = 4
 end
 
+#---------------------------------------------------
+# Post-Processing
+#---------------------------------------------------
+
 subsection post-processing
   set calculate average velocities = true
   set initial time                 = 2
   set smoothed output fields       = true
 end
 
+#---------------------------------------------------
+# Timer
+#---------------------------------------------------
+
 subsection timer
   set type = iteration
 end
+
+#---------------------------------------------------
+# Force
+#---------------------------------------------------
 
 subsection forces
   set verbosity             = verbose
@@ -41,6 +70,10 @@ subsection forces
   set output frequency      = 1
 end
 
+#---------------------------------------------------
+# Mesh Adaptation Control
+#---------------------------------------------------
+
 subsection mesh adaptation
   set type                 = kelly
   set variable             = velocity
@@ -51,6 +84,10 @@ subsection mesh adaptation
   set frequency            = 1
   set fraction refinement  = 0.2
 end
+
+#---------------------------------------------------
+# Boundary Conditions
+#---------------------------------------------------
 
 subsection boundary conditions
   set number = 3
@@ -77,6 +114,10 @@ subsection boundary conditions
     end
   end
 end
+
+#---------------------------------------------------
+# IB particules
+#---------------------------------------------------
 
 subsection particles
   set number of particles                     = 1
@@ -111,18 +152,31 @@ subsection particles
   end
 end
 
+#---------------------------------------------------
+# Non-Linear Solver Control
+#---------------------------------------------------
+
 subsection non-linear solver
-  set tolerance      = 1e-4
-  set max iterations = 10
-  set verbosity      = verbose
-  set solver         = newton
+  subsection fluid dynamics
+    set tolerance      = 1e-4
+    set max iterations = 10
+    set verbosity      = verbose
+    set solver         = newton
+  end
 end
 
+#---------------------------------------------------
+# Linear Solver Control
+#---------------------------------------------------
+
 subsection linear solver
-  set method             = gmres
-  set max iters          = 1000
-  set verbosity          = verbose
-  set relative residual  = 1e-3
-  set minimum residual   = 1e-8
-  set max krylov vectors = 500
+  subsection fluid dynamics
+    set method             = gmres
+    set max iters          = 1000
+    set verbosity          = verbose
+    set relative residual  = 1e-3
+    set minimum residual   = 1e-8
+    set max krylov vectors = 500
+    set preconditioner     = ilu
+  end
 end

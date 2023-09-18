@@ -1,6 +1,5 @@
 #include <core/bdf.h>
 #include <core/dem_properties.h>
-#include <core/sdirk.h>
 #include <core/utilities.h>
 
 #include <solvers/navier_stokes_scratch_data.h>
@@ -42,12 +41,6 @@ NavierStokesScratchData<dim>::allocate()
     maximum_number_of_previous_solutions(),
     std::vector<Tensor<1, dim>>(n_q_points));
 
-  // Velocity for SDIRK schemes
-  this->stages_velocity_values = std::vector<std::vector<Tensor<1, dim>>>(
-    max_number_of_intermediary_stages(),
-    std::vector<Tensor<1, dim>>(n_q_points));
-
-
   // Pressure
   this->pressure_values         = std::vector<double>(n_q_points);
   this->pressure_gradients      = std::vector<Tensor<1, dim>>(n_q_points);
@@ -82,22 +75,24 @@ NavierStokesScratchData<dim>::allocate()
   fields.insert(
     std::pair<field, std::vector<double>>(field::shear_rate, n_q_points));
 
-  density                   = std::vector<double>(n_q_points);
-  viscosity                 = std::vector<double>(n_q_points);
-  thermal_expansion         = std::vector<double>(n_q_points);
-  grad_viscosity_shear_rate = std::vector<double>(n_q_points);
+  density                             = std::vector<double>(n_q_points);
+  dynamic_viscosity                   = std::vector<double>(n_q_points);
+  kinematic_viscosity                 = std::vector<double>(n_q_points);
+  thermal_expansion                   = std::vector<double>(n_q_points);
+  grad_kinematic_viscosity_shear_rate = std::vector<double>(n_q_points);
 
   previous_density =
     std::vector<std::vector<double>>(maximum_number_of_previous_solutions(),
                                      std::vector<double>(this->n_q_points));
 }
 
+
 template <int dim>
 void
 NavierStokesScratchData<dim>::enable_vof(
-  const FiniteElement<dim> &         fe,
-  const Quadrature<dim> &            quadrature,
-  const Mapping<dim> &               mapping,
+  const FiniteElement<dim>          &fe,
+  const Quadrature<dim>             &quadrature,
+  const Mapping<dim>                &mapping,
   const Parameters::VOF_PhaseFilter &phase_filter_parameters)
 {
   gather_vof    = true;
@@ -115,24 +110,27 @@ NavierStokesScratchData<dim>::enable_vof(
     std::vector<Tensor<1, dim>>(this->n_q_points);
 
   // Allocate physical properties
-  density_0           = std::vector<double>(n_q_points);
-  density_1           = std::vector<double>(n_q_points);
-  viscosity_0         = std::vector<double>(n_q_points);
-  viscosity_1         = std::vector<double>(n_q_points);
-  thermal_expansion_0 = std::vector<double>(n_q_points);
-  thermal_expansion_1 = std::vector<double>(n_q_points);
-  surface_tension     = std::vector<double>(n_q_points);
+  density_0                  = std::vector<double>(n_q_points);
+  density_1                  = std::vector<double>(n_q_points);
+  dynamic_viscosity_0        = std::vector<double>(n_q_points);
+  dynamic_viscosity_1        = std::vector<double>(n_q_points);
+  thermal_expansion_0        = std::vector<double>(n_q_points);
+  thermal_expansion_1        = std::vector<double>(n_q_points);
+  surface_tension            = std::vector<double>(n_q_points);
+  surface_tension_gradient   = std::vector<double>(n_q_points);
+  compressibility_multiplier = std::vector<double>(n_q_points);
 
   // Create filter
   filter = VolumeOfFluidFilterBase::model_cast(phase_filter_parameters);
 }
 
+
 template <int dim>
 void
 NavierStokesScratchData<dim>::enable_vof(
-  const FiniteElement<dim> &                      fe,
-  const Quadrature<dim> &                         quadrature,
-  const Mapping<dim> &                            mapping,
+  const FiniteElement<dim>                       &fe,
+  const Quadrature<dim>                          &quadrature,
+  const Mapping<dim>                             &mapping,
   const std::shared_ptr<VolumeOfFluidFilterBase> &filter)
 {
   gather_vof    = true;
@@ -150,24 +148,66 @@ NavierStokesScratchData<dim>::enable_vof(
     std::vector<Tensor<1, dim>>(this->n_q_points);
 
   // Allocate physical properties
-  density_0           = std::vector<double>(n_q_points);
-  density_1           = std::vector<double>(n_q_points);
-  viscosity_0         = std::vector<double>(n_q_points);
-  viscosity_1         = std::vector<double>(n_q_points);
-  thermal_expansion_0 = std::vector<double>(n_q_points);
-  thermal_expansion_1 = std::vector<double>(n_q_points);
-  surface_tension     = std::vector<double>(n_q_points);
+  density_0                  = std::vector<double>(n_q_points);
+  density_1                  = std::vector<double>(n_q_points);
+  dynamic_viscosity_0        = std::vector<double>(n_q_points);
+  dynamic_viscosity_1        = std::vector<double>(n_q_points);
+  thermal_expansion_0        = std::vector<double>(n_q_points);
+  thermal_expansion_1        = std::vector<double>(n_q_points);
+  surface_tension            = std::vector<double>(n_q_points);
+  surface_tension_gradient   = std::vector<double>(n_q_points);
+  compressibility_multiplier = std::vector<double>(n_q_points);
 
   // Create filter
   this->filter = filter;
 }
 
+
+template <int dim>
+void
+NavierStokesScratchData<dim>::enable_cahn_hilliard(
+  const FiniteElement<dim> &fe,
+  const Quadrature<dim>    &quadrature,
+  const Mapping<dim>       &mapping)
+{
+  gather_cahn_hilliard    = true;
+  fe_values_cahn_hilliard = std::make_shared<FEValues<dim>>(
+    mapping, fe, quadrature, update_values | update_gradients);
+
+  // Allocate CahnHilliard values
+  phase_order_cahn_hilliard_values = std::vector<double>(this->n_q_points);
+  chemical_potential_cahn_hilliard_values =
+    std::vector<double>(this->n_q_points);
+
+  // Allocate CahnHilliard gradients
+  phase_order_cahn_hilliard_gradients =
+    std::vector<Tensor<1, dim>>(this->n_q_points);
+  chemical_potential_cahn_hilliard_gradients =
+    std::vector<Tensor<1, dim>>(this->n_q_points);
+
+  fields.insert(
+    std::pair<field, std::vector<double>>(field::phase_order_cahn_hilliard,
+                                          n_q_points));
+
+  // Allocate physical properties
+  density_0                = std::vector<double>(n_q_points);
+  density_1                = std::vector<double>(n_q_points);
+  dynamic_viscosity_0      = std::vector<double>(n_q_points);
+  dynamic_viscosity_1      = std::vector<double>(n_q_points);
+  thermal_expansion_0      = std::vector<double>(n_q_points);
+  thermal_expansion_1      = std::vector<double>(n_q_points);
+  surface_tension          = std::vector<double>(n_q_points);
+  surface_tension_gradient = std::vector<double>(n_q_points);
+  mobility_cahn_hilliard   = std::vector<double>(n_q_points);
+}
+
+
 template <int dim>
 void
 NavierStokesScratchData<dim>::enable_projected_phase_fraction_gradient(
   const FiniteElement<dim> &fe_projected_phase_fraction_gradient,
-  const Quadrature<dim> &   quadrature,
-  const Mapping<dim> &      mapping)
+  const Quadrature<dim>    &quadrature,
+  const Mapping<dim>       &mapping)
 {
   gather_projected_phase_fraction_gradient = true;
   fe_values_projected_phase_fraction_gradient =
@@ -181,12 +221,13 @@ NavierStokesScratchData<dim>::enable_projected_phase_fraction_gradient(
     std::vector<Tensor<1, dim>>(this->n_q_points);
 }
 
+
 template <int dim>
 void
 NavierStokesScratchData<dim>::enable_curvature(
   const FiniteElement<dim> &fe_curvature,
-  const Quadrature<dim> &   quadrature,
-  const Mapping<dim> &      mapping)
+  const Quadrature<dim>    &quadrature,
+  const Mapping<dim>       &mapping)
 {
   gather_curvature    = true;
   fe_values_curvature = std::make_shared<FEValues<dim>>(
@@ -201,8 +242,8 @@ template <int dim>
 void
 NavierStokesScratchData<dim>::enable_void_fraction(
   const FiniteElement<dim> &fe,
-  const Quadrature<dim> &   quadrature,
-  const Mapping<dim> &      mapping)
+  const Quadrature<dim>    &quadrature,
+  const Mapping<dim>       &mapping)
 {
   gather_void_fraction    = true;
   fe_values_void_fraction = std::make_shared<FEValues<dim>>(
@@ -238,12 +279,13 @@ NavierStokesScratchData<dim>::enable_particle_fluid_interactions(
   Re_particle = std::vector<double>(n_global_max_particles_per_cell);
 }
 
+
 template <int dim>
 void
 NavierStokesScratchData<dim>::enable_heat_transfer(
   const FiniteElement<dim> &fe,
-  const Quadrature<dim> &   quadrature,
-  const Mapping<dim> &      mapping)
+  const Quadrature<dim>    &quadrature,
+  const Mapping<dim>       &mapping)
 {
   gather_temperature    = true;
   fe_values_temperature = std::make_shared<FEValues<dim>>(
@@ -290,25 +332,34 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
 
   switch (properties_manager.get_number_of_fluids())
     {
-        case 1: {
+      case 1:
+        {
           // In the case of an incompressible flow, viscosity is the only
           // required property
           const auto rheology_model = properties_manager.get_rheology();
-          rheology_model->vector_value(fields, viscosity);
-          viscosity_scale = rheology_model->get_viscosity_scale();
+          rheology_model->vector_value(fields, kinematic_viscosity);
+          kinematic_viscosity_scale =
+            rheology_model->get_kinematic_viscosity_scale();
 
-          // For a weakly compressible flow, density variations will play a role
-          const auto density_model = properties_manager.get_density();
-          density_model->vector_value(fields, density);
-          density_psi = density_model->get_psi();
-          density_ref = density_model->get_density_ref();
+          if (!properties_manager.density_is_constant())
+            {
+              // For a weakly compressible flow, density variations will play a
+              // role
+              const auto density_model = properties_manager.get_density();
+              density_model->vector_value(fields, density);
+              density_psi = density_model->get_psi();
+              density_ref = density_model->get_density_ref();
+              // Dynamic viscosity is also necessary for compressible flows
+              rheology_model->get_dynamic_viscosity_vector(density_ref,
+                                                           fields,
+                                                           dynamic_viscosity);
+            }
 
           if (properties_manager.is_non_newtonian())
             {
               // Calculate derivative of viscosity with respect to shear rate
-              rheology_model->vector_jacobian(fields,
-                                              field::shear_rate,
-                                              grad_viscosity_shear_rate);
+              rheology_model->vector_jacobian(
+                fields, field::shear_rate, grad_kinematic_viscosity_shear_rate);
             }
 
           if (gather_temperature)
@@ -319,12 +370,16 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
             }
           break;
         }
-        case 2: {
+      case 2:
+        {
           // We need both density and viscosity
           const auto density_model_0  = properties_manager.get_density(0);
           const auto rheology_model_0 = properties_manager.get_rheology(0);
           const auto density_model_1  = properties_manager.get_density(1);
           const auto rheology_model_1 = properties_manager.get_rheology(1);
+
+          density_ref_0 = density_model_0->get_density_ref();
+          density_ref_1 = density_model_1->get_density_ref();
 
           // Gather properties from material interactions if necessary
           if (properties_manager.get_number_of_material_interactions() > 0)
@@ -336,14 +391,21 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
               const auto surface_tension_model =
                 properties_manager.get_surface_tension(material_interaction_id);
               surface_tension_model->vector_value(fields, surface_tension);
+              // Gather surface tension gradient only if necessary
+              if (!properties_manager.surface_tension_is_constant())
+                surface_tension_model->vector_jacobian(
+                  fields, field::temperature, surface_tension_gradient);
             }
 
-
           density_model_0->vector_value(fields, density_0);
-          rheology_model_0->vector_value(fields, viscosity_0);
+          rheology_model_0->get_dynamic_viscosity_vector(density_ref_0,
+                                                         fields,
+                                                         dynamic_viscosity_0);
 
           density_model_1->vector_value(fields, density_1);
-          rheology_model_1->vector_value(fields, viscosity_1);
+          rheology_model_1->get_dynamic_viscosity_vector(density_ref_1,
+                                                         fields,
+                                                         dynamic_viscosity_1);
 
           if (gather_temperature)
             {
@@ -357,38 +419,97 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
                                                       thermal_expansion_1);
             }
 
-          // Blend the physical properties using the VOF field
-          for (unsigned int q = 0; q < this->n_q_points; ++q)
+          if (gather_vof && !gather_cahn_hilliard)
             {
-              double filtered_phase_value = this->filtered_phase_values[q];
-
-              density[q] = calculate_point_property(filtered_phase_value,
-                                                    this->density_0[q],
-                                                    this->density_1[q]);
-
-              viscosity[q] = calculate_point_property(filtered_phase_value,
-                                                      this->viscosity_0[q],
-                                                      this->viscosity_1[q]);
-
-              thermal_expansion[q] =
-                calculate_point_property(filtered_phase_value,
-                                         this->thermal_expansion_0[q],
-                                         this->thermal_expansion_1[q]);
-            }
-
-
-          for (unsigned p = 0; p < previous_phase_values.size(); ++p)
-            {
-              // Blend the physical properties using the VOF field
               for (unsigned int q = 0; q < this->n_q_points; ++q)
                 {
-                  // Calculate previous density (right now assumes constant
-                  // density model per phase)
-                  previous_density[p][q] = calculate_point_property(
-                    filter->filter_phase(this->previous_phase_values[p][q]),
+                  double filtered_phase_value = this->filtered_phase_values[q];
+
+                  density[q] = calculate_point_property(filtered_phase_value,
+                                                        this->density_0[q],
+                                                        this->density_1[q]);
+
+                  dynamic_viscosity[q] =
+                    calculate_point_property(filtered_phase_value,
+                                             this->dynamic_viscosity_0[q],
+                                             this->dynamic_viscosity_1[q]);
+
+                  thermal_expansion[q] =
+                    calculate_point_property(filtered_phase_value,
+                                             this->thermal_expansion_0[q],
+                                             this->thermal_expansion_1[q]);
+                }
+
+              // Gather density_psi for isothermal compressible NS equations
+              if (!properties_manager.density_is_constant())
+                {
+                  density_psi_0 = density_model_0->get_psi();
+                  density_psi_1 = density_model_1->get_psi();
+
+                  for (unsigned int q = 0; q < this->n_q_points; ++q)
+                    {
+                      double filtered_phase_value =
+                        this->filtered_phase_values[q];
+                      // To avoid calculating twice in the assemblers
+                      compressibility_multiplier[q] =
+                        filtered_phase_value *
+                          (density_0[q] / density_1[q] * density_psi_1 -
+                           density_psi_0) +
+                        density_psi_0;
+                    }
+                }
+
+              for (unsigned p = 0; p < previous_phase_values.size(); ++p)
+                {
+                  // Blend the physical properties using the VOF field
+                  for (unsigned int q = 0; q < this->n_q_points; ++q)
+                    {
+                      // Calculate previous density (right now assumes constant
+                      // density model per phase)
+                      previous_density[p][q] = calculate_point_property(
+                        filter->filter_phase(this->previous_phase_values[p][q]),
+                        this->density_0[q],
+                        this->density_1[q]);
+                    }
+                }
+              break;
+            }
+          else if (gather_cahn_hilliard && !gather_vof)
+            {
+              // Blend the physical properties using the CahnHilliard field
+              for (unsigned int q = 0; q < this->n_q_points; ++q)
+                {
+                  this->density_diff =
+                    0.5 * std::abs(density_0[q] - density_1[q]);
+
+                  double phase_order_cahn_hilliard_value =
+                    this->phase_order_cahn_hilliard_values[q];
+
+                  density[q] = calculate_point_property_cahn_hilliard(
+                    phase_order_cahn_hilliard_value,
                     this->density_0[q],
                     this->density_1[q]);
+
+                  dynamic_viscosity[q] =
+                    calculate_point_property(phase_order_cahn_hilliard_value,
+                                             this->dynamic_viscosity_0[q],
+                                             this->dynamic_viscosity_1[q]);
+
+                  thermal_expansion[q] = calculate_point_property_cahn_hilliard(
+                    phase_order_cahn_hilliard_value,
+                    this->thermal_expansion_0[q],
+                    this->thermal_expansion_1[q]);
+
+                  const auto material_interaction_id =
+                    properties_manager.get_material_interaction_id(
+                      material_interactions_type::fluid_fluid, 0, 1);
+                  const auto mobility_cahn_hilliard_model =
+                    properties_manager.get_mobility_cahn_hilliard(
+                      material_interaction_id);
+                  mobility_cahn_hilliard_model->vector_value(
+                    fields, mobility_cahn_hilliard);
                 }
+              break;
             }
           break;
         }

@@ -9,7 +9,7 @@ This example of Lethe simulates the bounces of a single particle using the linea
 Features
 --------
 
-- Solvers: ``dem_3d``
+- Solvers: ``dem``
 - Post-processing using `Python <https://www.python.org/>`_, `PyVista <https://docs.pyvista.org/>`_, `lethe_pyvista_tools <https://github.com/lethe-cfd/lethe/tree/master/contrib/postprocessing>`_, and `ParaView <https://www.paraview.org/>`_.
 
 
@@ -108,7 +108,7 @@ Once all 6 parameter file are created, the simulation can be launched one after 
 
 .. code-block:: text
 
-  for i in $(seq -w 5 10); do dem_3d bouncing_particle_${i}.prm ; done
+  for i in $(seq -w 5 10); do dem bouncing_particle_${i}.prm ; done
 
 All 6 simulations takes less than 2 minutes to run. A folder named according to the restitution coefficient of every simulation used will be generated (``/out_xx``).
 
@@ -127,6 +127,10 @@ Once the 6 simulations have been run, use the following line in your command lin
 .. code-block:: text
 
   python3 bouncing_particle_post_processing.py
+
+.. important::
+
+    You need to ensure that ``lethe_pyvista_tools`` is working on your machine. Click `here <../../../tools/postprocessing/postprocessing.html>`_ for details.
 
 A figure will be generated which compares the analytical solution with the simulation results.
 
