@@ -619,8 +619,8 @@ $(function() {
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    displacement.save(oa, 0);</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;  }</div>
 <div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; </div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;  <span class="comment">// Re-read pvd handler from output files</span></div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  pvdhandler.save(prefix + <span class="stringliteral">&quot;_solid_object_&quot;</span> + Utilities::int_to_string(<span class="keywordtype">id</span>, 2));</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;  <span class="comment">// Write pvd handler</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  pvdhandler.save(prefix + <span class="stringliteral">&quot;.solid_object.&quot;</span> + Utilities::int_to_string(<span class="keywordtype">id</span>, 2));</div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;}</div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; </div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> spacedim&gt;</div>
