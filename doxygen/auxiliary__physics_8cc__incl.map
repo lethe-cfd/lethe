@@ -1,52 +1,52 @@
 <map id="/home/runner/work/lethe/lethe/source/solvers/auxiliary_physics.cc" name="/home/runner/work/lethe/lethe/source/solvers/auxiliary_physics.cc">
 <area shape="rect" id="node1" title=" " alt="" coords="831,5,1014,61"/>
 <area shape="rect" id="node2" href="$auxiliary__physics_8h.html" title=" " alt="" coords="823,109,1022,136"/>
-<area shape="rect" id="node3" href="$parameters_8h.html" title=" " alt="" coords="1364,452,1505,479"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1624,787,1811,814"/>
-<area shape="rect" id="node21" href="$physics__solver_8h.html" title=" " alt="" coords="461,191,622,218"/>
+<area shape="rect" id="node3" href="$parameters_8h.html" title=" " alt="" coords="1417,452,1559,479"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1048,787,1235,814"/>
+<area shape="rect" id="node21" href="$physics__solver_8h.html" title=" " alt="" coords="390,191,551,218"/>
 <area shape="rect" id="node29" href="$simulation__parameters_8h.html" title=" " alt="" coords="2406,184,2549,225"/>
 <area shape="rect" id="node50" title=" " alt="" coords="2573,184,2731,225"/>
-<area shape="rect" id="node4" href="$dimensionality_8h.html" title=" " alt="" coords="2566,527,2727,553"/>
-<area shape="rect" id="node5" title=" " alt="" coords="2493,601,2662,643"/>
-<area shape="rect" id="node6" href="$ib__particle_8h.html" title=" " alt="" coords="1367,527,1502,553"/>
-<area shape="rect" id="node10" href="$utilities_8h.html" title=" " alt="" coords="1763,698,1877,725"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1835,780,2008,821"/>
-<area shape="rect" id="node18" title=" " alt="" coords="2005,601,2150,643"/>
-<area shape="rect" id="node20" href="$multiphysics_8h.html" title=" " alt="" coords="631,527,780,553"/>
-<area shape="rect" id="node7" href="$dem__properties_8h.html" title=" " alt="" coords="983,609,1151,635"/>
-<area shape="rect" id="node8" title=" " alt="" coords="1087,698,1150,725"/>
-<area shape="rect" id="node9" href="$shape_8h.html" title=" " alt="" coords="1677,609,1782,635"/>
-<area shape="rect" id="node13" title=" " alt="" coords="1227,691,1429,732"/>
-<area shape="rect" id="node15" title=" " alt="" coords="1453,698,1688,725"/>
-<area shape="rect" id="node17" title=" " alt="" coords="1497,601,1652,643"/>
-<area shape="rect" id="node19" title=" " alt="" coords="1225,609,1372,635"/>
-<area shape="rect" id="node14" title=" " alt="" coords="2311,698,2478,725"/>
-<area shape="rect" id="node16" title=" " alt="" coords="2149,698,2227,725"/>
-<area shape="rect" id="node22" href="$inexact__newton__non__linear__solver_8h.html" title=" " alt="" coords="93,273,251,315"/>
-<area shape="rect" id="node23" href="$non__linear__solver_8h.html" title=" " alt="" coords="401,370,581,397"/>
-<area shape="rect" id="node25" href="$kinsol__newton__non__linear__solver_8h.html" title=" " alt="" coords="680,273,835,315"/>
-<area shape="rect" id="node27" href="$newton__non__linear__solver_8h.html" title=" " alt="" coords="275,273,453,315"/>
-<area shape="rect" id="node28" title=" " alt="" coords="529,273,655,315"/>
-<area shape="rect" id="node24" title=" " alt="" coords="135,370,209,397"/>
-<area shape="rect" id="node26" title=" " alt="" coords="609,370,783,397"/>
-<area shape="rect" id="node30" href="$ale_8h.html" title=" " alt="" coords="2353,527,2439,553"/>
-<area shape="rect" id="node32" href="$boundary__conditions_8h.html" title=" " alt="" coords="2803,527,3005,553"/>
-<area shape="rect" id="node34" href="$manifolds_8h.html" title=" " alt="" coords="3249,527,3380,553"/>
+<area shape="rect" id="node4" href="$dimensionality_8h.html" title=" " alt="" coords="2585,527,2746,553"/>
+<area shape="rect" id="node5" title=" " alt="" coords="2538,601,2707,643"/>
+<area shape="rect" id="node6" href="$ib__particle_8h.html" title=" " alt="" coords="1459,527,1594,553"/>
+<area shape="rect" id="node10" href="$utilities_8h.html" title=" " alt="" coords="1084,698,1199,725"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1824,780,1997,821"/>
+<area shape="rect" id="node18" title=" " alt="" coords="2050,601,2195,643"/>
+<area shape="rect" id="node20" href="$multiphysics_8h.html" title=" " alt="" coords="453,527,603,553"/>
+<area shape="rect" id="node7" href="$dem__properties_8h.html" title=" " alt="" coords="1655,609,1823,635"/>
+<area shape="rect" id="node8" title=" " alt="" coords="1785,698,1847,725"/>
+<area shape="rect" id="node9" href="$shape_8h.html" title=" " alt="" coords="1474,609,1579,635"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1223,691,1425,732"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1500,698,1735,725"/>
+<area shape="rect" id="node17" title=" " alt="" coords="1124,601,1279,643"/>
+<area shape="rect" id="node19" title=" " alt="" coords="1303,609,1449,635"/>
+<area shape="rect" id="node14" title=" " alt="" coords="2357,698,2523,725"/>
+<area shape="rect" id="node16" title=" " alt="" coords="2195,698,2272,725"/>
+<area shape="rect" id="node22" href="$inexact__newton__non__linear__solver_8h.html" title=" " alt="" coords="296,273,453,315"/>
+<area shape="rect" id="node23" href="$non__linear__solver_8h.html" title=" " alt="" coords="454,370,634,397"/>
+<area shape="rect" id="node25" href="$kinsol__newton__non__linear__solver_8h.html" title=" " alt="" coords="731,273,885,315"/>
+<area shape="rect" id="node27" href="$newton__non__linear__solver_8h.html" title=" " alt="" coords="478,273,655,315"/>
+<area shape="rect" id="node28" title=" " alt="" coords="94,273,221,315"/>
+<area shape="rect" id="node24" title=" " alt="" coords="337,370,412,397"/>
+<area shape="rect" id="node26" title=" " alt="" coords="710,370,885,397"/>
+<area shape="rect" id="node30" href="$ale_8h.html" title=" " alt="" coords="2371,527,2458,553"/>
+<area shape="rect" id="node32" href="$boundary__conditions_8h.html" title=" " alt="" coords="2822,527,3023,553"/>
+<area shape="rect" id="node34" href="$manifolds_8h.html" title=" " alt="" coords="3268,527,3399,553"/>
 <area shape="rect" id="node37" href="$parameters__multiphysics_8h.html" title=" " alt="" coords="2515,370,2746,397"/>
-<area shape="rect" id="node38" href="$solid__objects__parameters_8h.html" title=" " alt="" coords="2139,363,2277,404"/>
-<area shape="rect" id="node39" href="$analytical__solutions_8h.html" title=" " alt="" coords="2302,363,2439,404"/>
-<area shape="rect" id="node40" href="$initial__conditions_8h.html" title=" " alt="" coords="3029,527,3225,553"/>
-<area shape="rect" id="node42" href="$physical__properties__manager_8h.html" title=" " alt="" coords="1577,273,1777,315"/>
-<area shape="rect" id="node49" href="$source__terms_8h.html" title=" " alt="" coords="2155,527,2328,553"/>
-<area shape="rect" id="node31" title=" " alt="" coords="2276,609,2417,635"/>
-<area shape="rect" id="node33" title=" " alt="" coords="2686,609,2853,635"/>
-<area shape="rect" id="node35" title=" " alt="" coords="3275,601,3411,643"/>
-<area shape="rect" id="node36" title=" " alt="" coords="3435,601,3594,643"/>
-<area shape="rect" id="node41" title=" " alt="" coords="2929,601,3098,643"/>
-<area shape="rect" id="node43" href="$density__model_8h.html" title=" " alt="" coords="1952,370,2115,397"/>
-<area shape="rect" id="node44" href="$mobility__cahn__hilliard__model_8h.html" title=" " alt="" coords="1437,363,1584,404"/>
-<area shape="rect" id="node45" href="$rheological__model_8h.html" title=" " alt="" coords="1011,370,1197,397"/>
-<area shape="rect" id="node46" href="$specific__heat__model_8h.html" title=" " alt="" coords="1608,363,1747,404"/>
-<area shape="rect" id="node47" href="$surface__tension__model_8h.html" title=" " alt="" coords="1771,363,1928,404"/>
-<area shape="rect" id="node48" href="$thermal__conductivity__model_8h.html" title=" " alt="" coords="1221,363,1413,404"/>
+<area shape="rect" id="node38" href="$solid__objects__parameters_8h.html" title=" " alt="" coords="2301,363,2440,404"/>
+<area shape="rect" id="node39" href="$analytical__solutions_8h.html" title=" " alt="" coords="2139,363,2277,404"/>
+<area shape="rect" id="node40" href="$initial__conditions_8h.html" title=" " alt="" coords="3047,527,3243,553"/>
+<area shape="rect" id="node42" href="$physical__properties__manager_8h.html" title=" " alt="" coords="1552,273,1752,315"/>
+<area shape="rect" id="node49" href="$source__terms_8h.html" title=" " alt="" coords="2173,527,2347,553"/>
+<area shape="rect" id="node31" title=" " alt="" coords="2321,609,2463,635"/>
+<area shape="rect" id="node33" title=" " alt="" coords="2731,609,2898,635"/>
+<area shape="rect" id="node35" title=" " alt="" coords="3320,601,3456,643"/>
+<area shape="rect" id="node36" title=" " alt="" coords="3481,601,3639,643"/>
+<area shape="rect" id="node41" title=" " alt="" coords="2974,601,3143,643"/>
+<area shape="rect" id="node43" href="$density__model_8h.html" title=" " alt="" coords="1571,370,1733,397"/>
+<area shape="rect" id="node44" href="$mobility__cahn__hilliard__model_8h.html" title=" " alt="" coords="1757,363,1904,404"/>
+<area shape="rect" id="node45" href="$rheological__model_8h.html" title=" " alt="" coords="1928,370,2115,397"/>
+<area shape="rect" id="node46" href="$specific__heat__model_8h.html" title=" " alt="" coords="1011,363,1149,404"/>
+<area shape="rect" id="node47" href="$surface__tension__model_8h.html" title=" " alt="" coords="1173,363,1331,404"/>
+<area shape="rect" id="node48" href="$thermal__conductivity__model_8h.html" title=" " alt="" coords="1355,363,1547,404"/>
 </map>

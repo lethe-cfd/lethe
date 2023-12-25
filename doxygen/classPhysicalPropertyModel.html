@@ -72,7 +72,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classPhysicalPropertyModel-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">PhysicalPropertyModel Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -132,6 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae71d2dd28b12d69622987bced8c0c661"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#ae71d2dd28b12d69622987bced8c0c661">vector_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id, std::vector&lt; double &gt; &amp;jacobian_vector)=0</td></tr>
 <tr class="memdesc:ae71d2dd28b12d69622987bced8c0c661"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector_jacobian Calculate the derivative of the property with respect to a field  <a href="classPhysicalPropertyModel.html#ae71d2dd28b12d69622987bced8c0c661">More...</a><br /></td></tr>
 <tr class="separator:ae71d2dd28b12d69622987bced8c0c661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5498f882d9e5425f853d6457667b7035"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">provide_simulation_control</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;p_simulation_control)</td></tr>
+<tr class="memdesc:a5498f882d9e5425f853d6457667b7035"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the physical property with the simulation control object ensuring that the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> can calculate physical properties that depend on time or time-history.  <a href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">More...</a><br /></td></tr>
+<tr class="separator:a5498f882d9e5425f853d6457667b7035"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be82a7f56166add6af232ac511194d4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">numerical_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id)</td></tr>
 <tr class="memdesc:a6be82a7f56166add6af232ac511194d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">numerical_jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian through a forward finite difference (Euler) approximation. This approach, although not preferable, is meant as a fall-back when calculating the jacobian manually is too difficult.  <a href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">More...</a><br /></td></tr>
 <tr class="separator:a6be82a7f56166add6af232ac511194d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,15 +144,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa00493b8b62339bafc115cd298e01868"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector_numerical_jacobian <a class="el" href="classCalculates.html">Calculates</a> the vector of jacobian through forward finite difference (Euler) approximation. This approach, although not preferable, is meant as a fall-back when calculating the jacobian manually is too difficult.  <a href="classPhysicalPropertyModel.html#aa00493b8b62339bafc115cd298e01868">More...</a><br /></td></tr>
 <tr class="separator:aa00493b8b62339bafc115cd298e01868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a69c285f5da81c733652a5a082d13cd44"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a69c285f5da81c733652a5a082d13cd44">get_simulation_control</a> ()</td></tr>
+<tr class="separator:a69c285f5da81c733652a5a082d13cd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad805b20920189b0c308b0a4730217b81"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#ad805b20920189b0c308b0a4730217b81">model_depends_on</a></td></tr>
 <tr class="separator:ad805b20920189b0c308b0a4730217b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1af766ed5b3d57c7caa9cb7bfa701a49"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a1af766ed5b3d57c7caa9cb7bfa701a49">simulation_control</a></td></tr>
+<tr class="separator:a1af766ed5b3d57c7caa9cb7bfa701a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class that defines the interface for a physical property model Physical property model provides an abstract interface to calculate the value of a physical property or a vector of physical property value for given field value. By default, the interface does not require that all (or any) fields be specified. This is why a map is used to pass the dependent variable. To allow for the calculation of the appropriate jacobian matrix (when that is necessary) the interface also provides a jacobian function, which must provide the derivative with respect to the field specified as an argument. </p>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00065">65</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00077">77</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a790b73800189af9ff8d80f1e6f8c9306"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a790b73800189af9ff8d80f1e6f8c9306">&#9670;&nbsp;</a></span>PhysicalPropertyModel()</h2>
@@ -174,9 +189,9 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> Default constructor. Set the model_depends_on to false for all variables. </p>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00071">71</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00083">83</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00038">phase_order_cahn_hilliard</a>, <a class="el" href="physical__property__model_8h_source.html#l00037">pressure</a>, <a class="el" href="physical__property__model_8h_source.html#l00036">previous_temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00034">shear_rate</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00050">phase_order_cahn_hilliard</a>, <a class="el" href="physical__property__model_8h_source.html#l00049">pressure</a>, <a class="el" href="physical__property__model_8h_source.html#l00045">shear_rate</a>, <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, and <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>.</p>
 
 </div>
 </div>
@@ -207,7 +222,34 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns true if the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> depends on a field, false if not. </p>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00085">85</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00098">98</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a69c285f5da81c733652a5a082d13cd44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69c285f5da81c733652a5a082d13cd44">&#9670;&nbsp;</a></span>get_simulation_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classSimulationControl.html">SimulationControl</a>&gt;&amp; PhysicalPropertyModel::get_simulation_control </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00224">224</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>
@@ -303,7 +345,43 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00141">141</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00168">168</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a5498f882d9e5425f853d6457667b7035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5498f882d9e5425f853d6457667b7035">&#9670;&nbsp;</a></span>provide_simulation_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysicalPropertyModel::provide_simulation_control </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>p_simulation_control</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the physical property with the simulation control object ensuring that the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> can calculate physical properties that depend on time or time-history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_simulation_control</td><td>shared pointed to a <a class="el" href="classSimulationControl.html" title="The SimulationControl class is responsible for the control of steady-state and transient simulations ...">SimulationControl</a> object. A copy of this shared pointer is stored in the physical property. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00153">153</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>
@@ -449,7 +527,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00162">162</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00189">189</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +598,31 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00197">197</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00231">231</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a1af766ed5b3d57c7caa9cb7bfa701a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af766ed5b3d57c7caa9cb7bfa701a49">&#9670;&nbsp;</a></span>simulation_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classSimulationControl.html">SimulationControl</a>&gt; PhysicalPropertyModel::simulation_control</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00238">238</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>

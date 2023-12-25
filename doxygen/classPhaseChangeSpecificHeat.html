@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#af8211e3c849e87d2efa5c732e8a4678b">depends_on</a> (const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> &amp;id)</td></tr>
 <tr class="memdesc:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> depends on a field, false if not.  <a href="classPhysicalPropertyModel.html#af8211e3c849e87d2efa5c732e8a4678b">More...</a><br /></td></tr>
 <tr class="separator:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">provide_simulation_control</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;p_simulation_control)</td></tr>
+<tr class="memdesc:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the physical property with the simulation control object ensuring that the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> can calculate physical properties that depend on time or time-history.  <a href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">More...</a><br /></td></tr>
+<tr class="separator:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">numerical_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id)</td></tr>
 <tr class="memdesc:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">numerical_jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian through a forward finite difference (Euler) approximation. This approach, although not preferable, is meant as a fall-back when calculating the jacobian manually is too difficult.  <a href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">More...</a><br /></td></tr>
 <tr class="separator:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +144,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac17fb0fd329a03eaf11fbfeec367c72d inherit pub_static_methods_classSpecificHeatModel"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classSpecificHeatModel.html">SpecificHeatModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpecificHeatModel.html#ac17fb0fd329a03eaf11fbfeec367c72d">model_cast</a> (const <a class="el" href="classParameters_1_1Material.html">Parameters::Material</a> &amp;material_properties)</td></tr>
 <tr class="memdesc:ac17fb0fd329a03eaf11fbfeec367c72d inherit pub_static_methods_classSpecificHeatModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates and returns a pointer to a <a class="el" href="classSpecificHeatModel.html" title="Abstract class that allows to calculate the specific heat on each quadrature point using the temperat...">SpecificHeatModel</a> object by casting it to the proper child class.  <a href="classSpecificHeatModel.html#ac17fb0fd329a03eaf11fbfeec367c72d">More...</a><br /></td></tr>
 <tr class="separator:ac17fb0fd329a03eaf11fbfeec367c72d inherit pub_static_methods_classSpecificHeatModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classPhysicalPropertyModel"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classPhysicalPropertyModel')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classPhysicalPropertyModel.html">PhysicalPropertyModel</a></td></tr>
+<tr class="memitem:a69c285f5da81c733652a5a082d13cd44 inherit pro_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a69c285f5da81c733652a5a082d13cd44">get_simulation_control</a> ()</td></tr>
+<tr class="separator:a69c285f5da81c733652a5a082d13cd44 inherit pro_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classPhysicalPropertyModel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classPhysicalPropertyModel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classPhysicalPropertyModel.html">PhysicalPropertyModel</a></td></tr>
 <tr class="memitem:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#ad805b20920189b0c308b0a4730217b81">model_depends_on</a></td></tr>
 <tr class="separator:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +154,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This model takes into account the phase change of a material by considering the latent heat into the specific heat over a phase change interval determined by [T_solidus,T_liquidus]. </p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00123">123</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00124">124</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a877c3a9fc362aba7f3d29ba9b0f53f8d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a877c3a9fc362aba7f3d29ba9b0f53f8d">&#9670;&nbsp;</a></span>PhaseChangeSpecificHeat()</h2>
@@ -176,9 +182,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Default constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00129">129</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00130">130</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00036">previous_temperature</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, and <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>.</p>
 
 </div>
 </div>
@@ -225,7 +231,7 @@ Pure solid</h2>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Value of the enthalpy </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00255">255</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00350">350</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
 <p class="reference">References <a class="el" href="phase__change_8h_source.html#l00033">calculate_liquid_fraction()</a>.</p>
 
@@ -277,9 +283,9 @@ Pure solid</h2>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a3fc51243a48832ed3c6e3b4ee797c6b2">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00210">210</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00305">305</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -319,9 +325,9 @@ Pure solid</h2>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a23d2b90f4f05ee9de4be96f6f9989a37">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00142">142</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00144">144</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00036">previous_temperature</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::bdf1</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::bdf2</a>, <a class="el" href="bdf_8cc_source.html#l00023">bdf_coefficients()</a>, <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, and <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>.</p>
 
 </div>
 </div>
@@ -377,7 +383,7 @@ Pure solid</h2>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#ae71d2dd28b12d69622987bced8c0c661">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00225">225</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00320">320</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
 </div>
 </div>
@@ -426,9 +432,9 @@ Pure solid</h2>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a93dd785206d0e4e6659ca03f7f10ddec">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00166">166</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00214">214</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00036">previous_temperature</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::bdf1</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::bdf2</a>, <a class="el" href="bdf_8cc_source.html#l00023">bdf_coefficients()</a>, <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, and <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>.</p>
 
 </div>
 </div>
@@ -453,7 +459,7 @@ Pure solid</h2>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00275">275</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00370">370</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
 </div>
 </div>
@@ -477,7 +483,7 @@ Pure solid</h2>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00274">274</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00369">369</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 
 </div>
 </div>

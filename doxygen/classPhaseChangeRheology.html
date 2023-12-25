@@ -147,6 +147,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#af8211e3c849e87d2efa5c732e8a4678b">depends_on</a> (const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> &amp;id)</td></tr>
 <tr class="memdesc:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> depends on a field, false if not.  <a href="classPhysicalPropertyModel.html#af8211e3c849e87d2efa5c732e8a4678b">More...</a><br /></td></tr>
 <tr class="separator:af8211e3c849e87d2efa5c732e8a4678b inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">provide_simulation_control</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;p_simulation_control)</td></tr>
+<tr class="memdesc:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the physical property with the simulation control object ensuring that the <a class="el" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi...">PhysicalPropertyModel</a> can calculate physical properties that depend on time or time-history.  <a href="classPhysicalPropertyModel.html#a5498f882d9e5425f853d6457667b7035">More...</a><br /></td></tr>
+<tr class="separator:a5498f882d9e5425f853d6457667b7035 inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">numerical_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id)</td></tr>
 <tr class="memdesc:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">numerical_jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian through a forward finite difference (Euler) approximation. This approach, although not preferable, is meant as a fall-back when calculating the jacobian manually is too difficult.  <a href="classPhysicalPropertyModel.html#a6be82a7f56166add6af232ac511194d4">More...</a><br /></td></tr>
 <tr class="separator:a6be82a7f56166add6af232ac511194d4 inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +174,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a8dc1c9a77886e59ee701ce27749c0505 inherit pub_static_methods_classRheologicalModel"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classRheologicalModel.html">RheologicalModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a8dc1c9a77886e59ee701ce27749c0505">model_cast</a> (const <a class="el" href="classParameters_1_1Material.html">Parameters::Material</a> &amp;material_properties)</td></tr>
 <tr class="memdesc:a8dc1c9a77886e59ee701ce27749c0505 inherit pub_static_methods_classRheologicalModel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instanciates and returns a pointer to a <a class="el" href="classRheologicalModel.html" title="Abstract class that allows to calculate the non-newtonian viscosity on each quadrature point and the ...">RheologicalModel</a> object by casting it to the proper child class.  <a href="classRheologicalModel.html#a8dc1c9a77886e59ee701ce27749c0505">More...</a><br /></td></tr>
 <tr class="separator:a8dc1c9a77886e59ee701ce27749c0505 inherit pub_static_methods_classRheologicalModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classPhysicalPropertyModel"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classPhysicalPropertyModel')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classPhysicalPropertyModel.html">PhysicalPropertyModel</a></td></tr>
+<tr class="memitem:a69c285f5da81c733652a5a082d13cd44 inherit pro_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a69c285f5da81c733652a5a082d13cd44">get_simulation_control</a> ()</td></tr>
+<tr class="separator:a69c285f5da81c733652a5a082d13cd44 inherit pro_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classRheologicalModel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classRheologicalModel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classRheologicalModel.html">RheologicalModel</a></td></tr>
 <tr class="memitem:a5ce1d5923b687879e0fbc8a7c95d71c0 inherit pro_attribs_classRheologicalModel"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a5ce1d5923b687879e0fbc8a7c95d71c0">non_newtonian_rheological_model</a> = false</td></tr>
 <tr class="separator:a5ce1d5923b687879e0fbc8a7c95d71c0 inherit pro_attribs_classRheologicalModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,7 +222,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00639">639</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -268,7 +274,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00699">699</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -325,7 +331,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00714">714</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -377,7 +383,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8cc_source.html#l00152">152</a> of file <a class="el" href="rheological__model_8cc_source.html">rheological_model.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00141">PhysicalPropertyModel::numerical_jacobian()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00168">PhysicalPropertyModel::numerical_jacobian()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -454,7 +460,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8cc_source.html#l00130">130</a> of file <a class="el" href="rheological__model_8cc_source.html">rheological_model.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00736">kinematic_viscosity()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00736">kinematic_viscosity()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
@@ -512,7 +518,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8cc_source.html#l00162">162</a> of file <a class="el" href="rheological__model_8cc_source.html">rheological_model.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00162">PhysicalPropertyModel::vector_numerical_jacobian()</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00189">PhysicalPropertyModel::vector_numerical_jacobian()</a>.</p>
 
 </div>
 </div>
@@ -562,7 +568,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8cc_source.html#l00138">138</a> of file <a class="el" href="rheological__model_8cc_source.html">rheological_model.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00736">kinematic_viscosity()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00035">temperature</a>.</p>
+<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00736">kinematic_viscosity()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
 </div>
 </div>
