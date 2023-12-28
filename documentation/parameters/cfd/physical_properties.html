@@ -388,7 +388,8 @@
 <p>Lethe supports single phase, two phase (using VOF) and conjugate simulations. This is managed using the fluid and solid subsections.</p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection physical properties
-  set number of fluids = 1
+  set number of fluids      = 1
+  set reference temperature = 0
   subsection fluid 0
     # Rheology
     set rheological model          = newtonian
@@ -455,7 +456,8 @@ end
 </pre></div>
 </div>
 <ul>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">fluids</span></code> parameter controls the number of fluids in the simulation. This parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> except in <a class="reference internal" href="#two-phase-simulations">Two Phase Simulations</a> .</p>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">fluids</span></code> parameter controls the number of fluids in the simulation. This parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> except in <a class="reference internal" href="#two-phase-simulations">Two Phase Simulations</a> .</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reference</span> <span class="pre">temperature</span></code> parameter specifies the reference temperature used in the calculation of some physical properties or the thermal expansion force.</p>
 <ul>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">rheological</span> <span class="pre">model</span></code> parameter sets the choice of rheological model. The choices are between <code class="docutils literal notranslate"><span class="pre">newtonian</span></code>, <code class="docutils literal notranslate"><span class="pre">power-law</span></code>, <code class="docutils literal notranslate"><span class="pre">carreau</span></code> and <code class="docutils literal notranslate"><span class="pre">phase_change</span></code>. For more details on the rheological models, see  <a class="reference internal" href="#id3">Rheological Models</a> .</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">kinematic</span> <span class="pre">viscosity</span></code> parameter is the kinematic viscosity of the newtonian fluid in units of <span class="math notranslate nohighlight">\(\text{Length}^{2} \cdot \text{Time}^{-1}\)</span>. In SI, this is <span class="math notranslate nohighlight">\(\text{m}^{2} \cdot \text{s}^{-1}\)</span>. This viscosity is only used when <code class="docutils literal notranslate"><span class="pre">rheological</span> <span class="pre">model</span> <span class="pre">=</span> <span class="pre">newtonian</span></code>.</p></li>
@@ -465,11 +467,11 @@ end
 <li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span></code> parameter is the constant specific heat of the fluid in units of <span class="math notranslate nohighlight">\(\text{Energy} \cdot \text{Temperature}^{-1} \cdot \text{Mass}^{-1}\)</span> .</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">model</span></code> specifies the model used to calculate the thermal conductivity. At the moment, <code class="docutils literal notranslate"><span class="pre">constant</span></code> and <code class="docutils literal notranslate"><span class="pre">linear</span></code> thermal conductivity are available. For more details on the thermal conductivity models, see <a class="reference internal" href="#id5">Thermal Conductivity Models</a>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span></code> parameter is the thermal conductivity coefficient of the fluid with units of <span class="math notranslate nohighlight">\(\text{Power} \cdot \text{Temperature}^{-1} \cdot \text{Length}^{-1}\)</span>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">model</span></code> specifies the model used to calculate the thermal expansion coefficient. At the moment, only a constant thermal expansion is supported.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">model</span></code> specifies the model used to calculate the thermal expansion coefficient. At the moment, <code class="docutils literal notranslate"><span class="pre">constant</span></code> and <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">change</span></code> thermal expansion are supported. For more details on the thermal expansion models, see <a class="reference internal" href="#thermal-expansion-models">Thermal Expansion Models</a>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span></code> parameter is the thermal expansion coefficient of the fluid with dimension of <span class="math notranslate nohighlight">\(\text{Temperature}^{-1}\)</span>. It is used to define the buoyancy-driven flow (natural convection) using the Boussinesq approximation, which leads to the definition of the following source term that is added to the Navier-Stokes equation:</p>
 <div class="math-wrapper"><div class="math notranslate nohighlight">
-\[{\bf{F_{B}}} = -\beta {\bf{g}} (T-T_0)\]</div></div>
-<p>where <span class="math notranslate nohighlight">\(F_B\)</span> denotes the buoyant force source term, <span class="math notranslate nohighlight">\(\beta\)</span> is the thermal expansion coefficient, <span class="math notranslate nohighlight">\(T\)</span> is temperature, and <span class="math notranslate nohighlight">\(T_0\)</span> is the base temperature.</p>
+\[{\bf{F_{B}}} = -\beta {\bf{g}} (T-T_{ref})\]</div></div>
+<p>where <span class="math notranslate nohighlight">\(F_B\)</span> denotes the buoyant force source term, <span class="math notranslate nohighlight">\(\beta\)</span> is the thermal expansion coefficient, <span class="math notranslate nohighlight">\(T\)</span> is temperature, and <span class="math notranslate nohighlight">\(T_{ref}\)</span> is the reference temperature. This is only used when a constant thermal expansion model is used.</p>
 </li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tracer</span> <span class="pre">diffusivity</span> <span class="pre">model</span></code> specifies the model used to calculate the tracer diffusivity. At the moment, only a constant tracer diffusivity is supported.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tracer</span> <span class="pre">diffusivity</span></code> parameter is the diffusivity coefficient of the tracer in units of <span class="math notranslate nohighlight">\(\text{Length}^{2} \cdot \text{Time}^{-1}\)</span> . In SI, this is <span class="math notranslate nohighlight">\(\text{m}^{2} \cdot \text{s}^{-1}\)</span>.</p></li>
@@ -760,9 +762,9 @@ end
 \[H(T) = H_0 + \int_{T_0}^{T} c^{*}_p (T^*) dT\]</div></div>
 <p>where <span class="math notranslate nohighlight">\(H_0\)</span> is a reference enthalpy, taken to be 0, and <span class="math notranslate nohighlight">\(c^{*}_p\)</span> is:</p>
 <div class="math-wrapper"><div class="math notranslate nohighlight">
-\[\begin{split}c^{*}_p  = \begin{cases} C_{p,s}\\
-            \frac{C_{p,s}+C_{p,l}}{2}+\frac{h_l}{T_l-T_s}\\
-            C_{p,l}
+\[\begin{split}c^{*}_p  = \begin{cases} C_{p,s} \text{if}\;T&lt;T_s\\
+            \frac{C_{p,s}+C_{p,l}}{2}+\frac{h_l}{T_l-T_s} \text{if}\;T\in[T_s,T_l]\\
+            C_{p,l} \text{if} T&gt;T_l
             \end{cases}\end{split}\]</div></div>
 <p>where <span class="math notranslate nohighlight">\(C_{p,s}\)</span> and <span class="math notranslate nohighlight">\(C_{p,l}\)</span> are the solid and liquid specific heat, respectively. <span class="math notranslate nohighlight">\(h_l\)</span> is the latent enthalpy (enthalpy related to the phase change), <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span> are the liquidus and solidus temperature. The underlying hypothesis of this model is that the melting and the solidification occurs over a phase change interval. Melting will occur between <span class="math notranslate nohighlight">\(T_s\)</span> and <span class="math notranslate nohighlight">\(T_l\)</span> and solidification will occur between <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span>.</p>
 <p>This model is parameterized using the following section:</p>
@@ -790,6 +792,36 @@ end
 <li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(C_{p,l}\)</span></p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(C_{p,s}\)</span></p></li>
+</ul>
+</section>
+<section id="thermal-expansion-models">
+<h3>Thermal Expansion Models<a class="headerlink" href="#thermal-expansion-models" title="Permalink to this headline">¶</a></h3>
+<p>Lethe supports two types of thermal expansion heat models. Setting <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">model=constant</span></code> sets a constant thermal expansion. Lethe also supports a <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> thermal expansion model. This model can simulate the melting and solidification of a material with natural convection. It works by defining a different value of the thermal expansion coefficient depending on the value of the temperature:</p>
+<div class="math-wrapper"><div class="math notranslate nohighlight">
+\[\begin{split}\beta =   c^{*}_p  = \begin{cases} \beta_s, \text{if}\;T \leq T_l\\
+            \beta_l, \text{if}\;T &gt; T_l
+            \end{cases}\end{split}\]</div></div>
+<p>This model is parameterized using the following section:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection phase change
+  # Temperature of the liquidus
+  set liquidus temperature = 1
+
+  # Temperature of the solidus
+  set solidus temperature  = 0
+
+  # Thermal expansion of the liquid phase
+  set thermal expansion liquid = 0
+
+  # Thermal expansion of the solid phase
+  set thermal expansion solid  = 1
+end
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_l\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\beta_{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\beta_{s}\)</span></p></li>
 </ul>
 </section>
 </section>
@@ -901,6 +933,7 @@ end
 <li><a class="reference internal" href="#density-models">Density Models</a></li>
 <li><a class="reference internal" href="#thermal-conductivity-models">Thermal Conductivity Models</a></li>
 <li><a class="reference internal" href="#specific-heat-models">Specific Heat Models</a></li>
+<li><a class="reference internal" href="#thermal-expansion-models">Thermal Expansion Models</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#interface-physical-property-models">Interface Physical Property Models</a><ul>
