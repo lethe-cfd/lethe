@@ -386,15 +386,15 @@
 <p>This subsection allows you to defined velocity-dependant source term. At the moment, this used to solve a problems in a Lagrangian reference frame for which the Coriolis and centrifugal forces must be added.</p>
 <p>The default values are:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
-  set type    = none
-  set omega_x = 0
-  set omega_y = 0
-  set omega_z = 0
+  set rotating frame type    = none
+  set omega_x                = 0
+  set omega_y                = 0
+  set omega_z                = 0
 end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> parameter specifies the type of reference frame that is selected. The options are <code class="docutils literal notranslate"><span class="pre">none</span></code> for an Eulerian reference frame or <code class="docutils literal notranslate"><span class="pre">srf</span></code> for a single rotating frame. By selecting <code class="docutils literal notranslate"><span class="pre">srf</span></code> the additional contributions of the centrifugal force and Coriolis force induced by the rotating movement are taken into account in the Navier-Stokes equations.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">rotating</span> <span class="pre">frame</span> <span class="pre">type</span></code> parameter specifies the type of reference frame that is selected. The options are <code class="docutils literal notranslate"><span class="pre">none</span></code> for an Eulerian reference frame or <code class="docutils literal notranslate"><span class="pre">srf</span></code> for a single rotating frame. By selecting <code class="docutils literal notranslate"><span class="pre">srf</span></code> the additional contributions of the centrifugal force and Coriolis force induced by the rotating movement are taken into account in the Navier-Stokes equations.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">omega_x</span></code> parameter is a double representing the <span class="math notranslate nohighlight">\(x\)</span> component of the angular velocity of the reference frame.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">omega_y</span></code> parameter is a double representing the <span class="math notranslate nohighlight">\(y\)</span> component of the angular velocity of the reference frame.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">omega_z</span></code> parameter is a double representing the <span class="math notranslate nohighlight">\(z\)</span> component of the angular velocity of the reference frame.</p></li>

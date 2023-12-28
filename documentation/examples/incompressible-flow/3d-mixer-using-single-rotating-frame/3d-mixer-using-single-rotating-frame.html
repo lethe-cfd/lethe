@@ -546,12 +546,12 @@ end
 <section id="velocity-source">
 <h3>Velocity Source<a class="headerlink" href="#velocity-source" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
-    set type    = srf
-    set omega_z = -10
+    set rotating frame type    = srf
+    set omega_z                = -10
 end
 </pre></div>
 </div>
-<p>In the <code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">source</span></code> subsection, we specify with <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">srf</span></code> that we are in a single rotating reference frame. Since a centrifugal and a Coriolis force are induced by the rotating movement of the system, we are in a non-Galilean reference frame. These two additional force contributions must be taken into account in the Navier-Stokes equations and by setting the <code class="docutils literal notranslate"><span class="pre">type</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">srf</span></code> we do so. The <code class="docutils literal notranslate"><span class="pre">omega_z</span></code> parameter represents the angular velocity of the reference frame.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">source</span></code> subsection, we specify with <code class="docutils literal notranslate"><span class="pre">rotating</span> <span class="pre">frame</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">srf</span></code> that we are in a single rotating reference frame. Since a centrifugal and a Coriolis force are induced by the rotating movement of the system, we are in a non-Galilean reference frame. These two additional force contributions must be taken into account in the Navier-Stokes equations and by setting the <code class="docutils literal notranslate"><span class="pre">rotating</span> <span class="pre">frame</span> <span class="pre">type</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">srf</span></code> we do so. The <code class="docutils literal notranslate"><span class="pre">omega_z</span></code> parameter represents the angular velocity of the reference frame.</p>
 </section>
 <section id="forces">
 <h3>Forces<a class="headerlink" href="#forces" title="Permalink to this headline">¶</a></h3>
