@@ -477,7 +477,7 @@ BlockRawSchurPreconditioner<BSPreconditioner>::vmult(
                               TimerOutput::summary,
                               TimerOutput::wall_times);
 
-  const double alpha = 0.9;
+  const double alpha = 0.1;
 
   TrilinosWrappers::MPI::Vector utmp(dst.block(0));
   TrilinosWrappers::MPI::Vector dutmp(dst.block(0));
