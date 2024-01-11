@@ -627,41 +627,37 @@ DEMSolver<dim>::check_load_balance_with_disabled_contacts()
       // since where are no mobility status yet (weight are the default ones)
       if (simulation_control->get_step_number() > 1)
         {
-
-
-
-
-  // Clear and connect a new cell weight function
-  triangulation.signals.weight.disconnect_all_slots();
+          // Clear and connect a new cell weight function
+          triangulation.signals.weight.disconnect_all_slots();
 
 #if (DEAL_II_VERSION_MAJOR < 10 && DEAL_II_VERSION_MINOR < 6)
-  triangulation.signals.weight.connect(
-    [](const typename Triangulation<dim>::cell_iterator &,
-       const typename Triangulation<dim>::CellStatus) -> unsigned int {
-      return 1000;
-    });
+          triangulation.signals.weight.connect(
+            [](const typename Triangulation<dim>::cell_iterator &,
+               const typename Triangulation<dim>::CellStatus) -> unsigned int {
+              return 1000;
+            });
 
-  triangulation.signals.weight.connect(
-    [&](const typename parallel::distributed::Triangulation<dim>::cell_iterator
-          &cell,
-        const typename parallel::distributed::Triangulation<dim>::CellStatus
-          status) -> unsigned int {
-      return this->cell_weight_with_mobility_status(cell, status);
-    });
+          triangulation.signals.weight.connect(
+            [&](const typename parallel::distributed::Triangulation<
+                  dim>::cell_iterator &cell,
+                const typename parallel::distributed::Triangulation<
+                  dim>::CellStatus status) -> unsigned int {
+              return this->cell_weight_with_mobility_status(cell, status);
+            });
 
 #else
-  triangulation.signals.weight.connect(
-    [](const typename Triangulation<dim>::cell_iterator &,
-       const CellStatus) -> unsigned int { return 1000; });
+          triangulation.signals.weight.connect(
+            [](const typename Triangulation<dim>::cell_iterator &,
+               const CellStatus) -> unsigned int { return 1000; });
 
-  triangulation.signals.weight.connect(
-    [&](const typename parallel::distributed::Triangulation<dim>::cell_iterator
-                        &cell,
-        const CellStatus status) -> unsigned int {
-      return this->cell_weight_with_mobility_status(cell, status);
-    });
+          triangulation.signals.weight.connect(
+            [&](const typename parallel::distributed::Triangulation<
+                  dim>::cell_iterator &cell,
+                const CellStatus       status) -> unsigned int {
+              return this->cell_weight_with_mobility_status(cell, status);
+            });
 #endif
-  load_balance();
+          load_balance();
         }
     }
 

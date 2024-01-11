@@ -304,7 +304,7 @@ public:
   void
   update_average_velocities_acceleration(
     Particles::ParticleHandler<dim> &particle_handler,
-    const Tensor<1, 3> &             g,
+    const Tensor<1, 3>              &g,
     const std::vector<Tensor<1, 3>> &force,
     const double                     dt)
   {

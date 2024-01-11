@@ -908,8 +908,7 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
   // Particles displacement if passing through a periodic boundary
   if (has_periodic_boundaries)
     periodic_boundaries_object.execute_particles_displacement(
-      this->particle_handler,
-      periodic_boundaries_cells_information);
+      this->particle_handler, periodic_boundaries_cells_information);
 
   // Check to see if it is contact search step
   contact_detection_step =
