@@ -18,6 +18,7 @@
  */
 
 #include <dem/dem_solver_parameters.h>
+#include <dem/particle_wall_jkr_force.h>
 #include <dem/particle_wall_linear_force.h>
 #include <dem/particle_wall_nonlinear_force.h>
 
@@ -34,14 +35,12 @@ using namespace std;
  *
  * @param dem_parameters DEM parameters
  * @param triangulation Triangulation
- * @param triangulation_cell_diameter Triangulation cell diameter
  * @return A pointer to the particle-wall contact force object
  */
 template <int dim>
 std::shared_ptr<ParticleWallContactForce<dim>>
 set_particle_wall_contact_force_model(
   const DEMSolverParameters<dim>                  &dem_parameters,
-  const parallel::distributed::Triangulation<dim> &triangulation,
-  const double                                     triangulation_cell_diameter);
+  const parallel::distributed::Triangulation<dim> &triangulation);
 
 #endif /* set_particle_wall_contact_force_model_h */

@@ -7,7 +7,7 @@ Flow around NACA0012 at Low Reynolds Number
 Features
 --------
 
-- Solver: ``gls_navier_stokes`` (with Q1-Q1)
+- Solver: ``lethe-fluid`` (with Q1-Q1)
 - Transient problem
 - Boundary Layer Mesh - Transfinite Mesh
 - Spectral analysis - Fourier transform
@@ -17,9 +17,11 @@ Features
 Files Used in This Example
 --------------------------
 
-- Base case parameter file (:math:`Re=1000`): ``/examples/incompressible-flow/2d-naca0012-low-reynolds/naca.prm``
-- Geometry file: ``/examples/incompressible-flow/2d-naca0012-low-reynolds/c_type_mesh.geo``
-- Python script for postprocessing: ``examples/incompressible-flow/2d-naca0012-low-reynolds/post_processing.py``
+All files mentioned below are located in the example's folder (``examples/incompressible-flow/2d-naca0012-low-reynolds``).
+
+- Geometry file: ``c_type_mesh.geo``
+- Parameter file for the base case (:math:`Re=1000`): ``naca.prm``
+- Postprocessing Python script: ``postprocessing.py``
 
 
 -----------------------
@@ -95,6 +97,14 @@ Mesh
 
 A C-Type mesh was created around the NACA. It is one of the usual types of mesh chosen for airfoils because it allows for the curvature of the grid to match the leading edge of the airfoil. Also, it allows the user to place more cells in areas which require higher resolution, typically near the upper and lower surfaces of the airfoil and in the wake. These properties are also true for O-type meshes, the difference being that the exterior boundary is a full circle, instead of a semi-circle in entry. In order to obtain such a mesh, the Transfinite functions of ``gmsh`` were used. To get a good understanding of how it was done, the reader is advised to read through the ``c_type_mesh.geo`` file included in the example, which is thoroughly commented on. To generate a mesh with a different angle of attack, the only thing required is to change the ``angle`` parameter in the ``c_type_mesh.geo`` file.
 
+.. note::
+  Assuming that the ``gmsh`` executable is within your path, you can generate the mesh with:
+
+  .. code-block:: text
+    :class: copy-button
+
+    gmsh -2 c_type_mesh.geo -o naca.msh
+
 .. code-block:: text
 	
     subsection mesh
@@ -161,7 +171,7 @@ The boundary conditions are defined as presented above:
        end
      end
 	
-The boundary 0, corresponding to the NACA0012 surface, is a ``noslip`` boundary condition that sets the velocity to zero on the boundary. Boundary 1 is the inlet where the velocity field was chosen to be horizontal and unitary to ensure that :math:`Re = 1000` is correct. It is represented in green on the figure. Boundary 2, in black on the image, corresponds to the upper and lower walls which are endowed with a ``slip`` boundary condition. Finally, boundary 3 is of type ``outlet`` with a parameter :math:`\beta = 1.3`. The reader is referred to the `Parameters Guide <https://lethe-cfd.github.io/lethe/parameters/cfd/linear_solver_control.html>`_ for more information about the :math:`\beta` parameter.
+The boundary 0, corresponding to the NACA0012 surface, is a ``noslip`` boundary condition that sets the velocity to zero on the boundary. Boundary 1 is the inlet where the velocity field was chosen to be horizontal and unitary to ensure that :math:`Re = 1000` is correct. It is represented in green on the figure. Boundary 2, in black on the image, corresponds to the upper and lower walls which are endowed with a ``slip`` boundary condition. Finally, boundary 3 is of type ``outlet`` with a parameter :math:`\beta = 1.3`. The reader is referred to the `Parameters Guide <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/linear_solver_control.html>`_ for more information about the :math:`\beta` parameter.
 
 Non-linear Solver
 ~~~~~~~~~~~~~~~~~
@@ -202,7 +212,7 @@ Again, in order to reduce the computational time, the ``minimum residual`` for t
 	
 	
 .. tip::
-	It is important to note that the ``minimum residual`` of the linear solver is smaller than the ``tolerance`` of the non-linear solver. The reader can consult the `Parameters Guide <https://lethe-cfd.github.io/lethe/parameters/cfd/linear_solver_control.html>`_ for more information.
+	It is important to note that the ``minimum residual`` of the linear solver is smaller than the ``tolerance`` of the non-linear solver. The reader can consult the `Parameters Guide <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/linear_solver_control.html>`_ for more information.
 
 
 -----------------------
@@ -212,14 +222,16 @@ Running the Simulations
 The simulation can be launched using the following command:
 
 .. code-block:: text
+  :class: copy-button
 
-	gls_navier_stokes naca.prm
+  lethe-fluid naca.prm
 
 It can also run in parallel using:
 
 .. code-block:: text
+  :class: copy-button
 
-	mpirun -np X gls_navier_stokes naca.prm
+  mpirun -np X lethe-fluid naca.prm
 
 with X the number of processors used to run it.
 	
@@ -242,7 +254,7 @@ It is already noticeable that the higher the angle of attack, the greater the pr
 .. math::
         C_L = \frac{F_L}{0.5\rho_{\infty} u_{\infty}^2 S} \; \; \; \; \; C_D = \frac{F_D}{0.5\rho_{\infty} u_{\infty}^2 S}
         
-with :math:`F_L` and :math:`F_D`, respectively, the lift and drag forces. Those forces can be obtained in the ``force.00.dat`` and post-processed using the ``post_processing.py`` python file included in the folder of this example. :math:`S` represents a reference area; here, it is equal to the product of the chord length :math:`C` (equal to 1 in this example) multiplied by a unitary transversal length.
+with :math:`F_L` and :math:`F_D`, respectively, the lift and drag forces. Those forces can be obtained in the ``force.00.dat`` and post-processed using the ``postprocessing.py`` python file included in the folder of this example. :math:`S` represents a reference area; here, it is equal to the product of the chord length :math:`C` (equal to 1 in this example) multiplied by a unitary transversal length.
         
 .. image:: image/cl_cd_results_plot.png
 

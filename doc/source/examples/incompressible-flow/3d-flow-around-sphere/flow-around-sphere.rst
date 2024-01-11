@@ -3,14 +3,14 @@
 Flow around a Sphere
 ==================================
 
-In this example, a fluid flows past a sphere
+In this example, a fluid flows past a sphere.
 
 
 ----------------------------------
 Features
 ----------------------------------
 
-- Solvers: ``gls_navier_stokes`` (with Q1-Q1) or  ``gd_navier_stokes`` (with Q2-Q1)
+- Solvers: ``lethe-fluid`` (with Q1-Q1) or  ``lethe-fluid-block`` (with Q2-Q1)
 - Steady-state problem
 - Displays the importance of adaptative mesh refinement
 - Displays the effect of the Reynolds number on the convergence
@@ -20,9 +20,11 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Parameter file for :math:`Re=0.1`: ``/examples/incompressible-flow/3d-flow-around-sphere/sphere-0.1.prm``
-- Parameter file For :math:`Re=150`: ``/examples/incompressible-flow/3d-flow-around-sphere/sphere-150.prm``
-- Parameter file for :math:`Re=150` using adaptative mesh refinement: ``/examples/incompressible-flow/3d-flow-around-sphere/sphere-adapt.prm``
+All files mentioned below are located in the example's folder (``examples/incompressible-flow/3d-flow-around-sphere``).
+
+- Parameter file for :math:`Re=0.1`: ``sphere-0.1.prm``
+- Parameter file for :math:`Re=150`: ``sphere-150.prm``
+- Parameter file for :math:`Re=150` using adaptative mesh refinement: ``sphere-adapt.prm``
 
 
 -----------------------
@@ -165,7 +167,7 @@ We specify the interpolation order for both pressure and velocity using the ``FE
 
 .. warning:: 
 
-    If you choose to use the ``gd_navier_stokes`` solver; only Q2-Q1 elements are supported. 
+    If you choose to use the ``lethe-fluid-block`` solver; only Q2-Q1 elements are supported. 
 
 
 Simulation Control
@@ -243,23 +245,26 @@ The ``min refinement level`` refers to the base mesh which has been used in the 
 Running the Simulation
 ----------------------
 
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-fluid`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  gls_navier_stokes sphere-0.1.prm
+  lethe-fluid sphere-0.1.prm
 
 or 
 
 .. code-block:: text
+  :class: copy-button
 
-  gls_navier_stokes sphere-150.prm
+  lethe-fluid sphere-150.prm
 
 or
 
 .. code-block:: text
+  :class: copy-button
 
-  gls_navier_stokes sphere-adapt.prm
+  lethe-fluid sphere-adapt.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 

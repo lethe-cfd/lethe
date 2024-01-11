@@ -26,7 +26,7 @@ subsection model parameters
     set dynamic contact search size coefficient = 0.9
     set neighborhood threshold                  = 1.3
   end
-  subsection contact model
+  subsection load balancing
     set load balance method = frequent
     set frequency           = 10000
   end
@@ -48,7 +48,7 @@ subsection lagrangian physical properties
   subsection particle type 0
     set size distribution type            = uniform
     set diameter                          = 0.01
-    set number                            = 60000
+    set number of particles               = 60000
     set density particles                 = 2560
     set young modulus particles           = 1e6
     set poisson ratio particles           = 0.2
@@ -68,7 +68,7 @@ end
 #---------------------------------------------------
 
 subsection insertion info
-  set insertion method                               = non_uniform
+  set insertion method                               = volume
   set inserted number of particles at each time step = 60000
   set insertion frequency                            = 10000
   set insertion box minimum x                        = 0.0025
@@ -78,8 +78,8 @@ subsection insertion info
   set insertion box maximum y                        = 0.340
   set insertion box maximum z                        = 0.397
   set insertion distance threshold                   = 1.075
-  set insertion random number range                  = 0.025
-  set insertion random number seed                   = 19
+  set insertion maximum offset                       = 0.025
+  set insertion prn seed                             = 19
 end
 
 #---------------------------------------------------

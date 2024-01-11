@@ -2,7 +2,6 @@
 #include <core/solutions_output.h>
 
 #include <dem/explicit_euler_integrator.h>
-#include <dem/find_maximum_particle_size.h>
 #include <dem/gear3_integrator.h>
 #include <dem/post_processing.h>
 #include <dem/set_particle_particle_contact_force_model.h>
@@ -735,8 +734,7 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
       this->cfd_dem_simulation_parameters.dem_parameters);
   particle_wall_contact_force_object = set_particle_wall_contact_force_model(
     this->cfd_dem_simulation_parameters.dem_parameters,
-    *parallel_triangulation,
-    triangulation_cell_diameter);
+    *parallel_triangulation);
 
   this->particle_handler.sort_particles_into_subdomains_and_cells();
 
@@ -1309,8 +1307,7 @@ CFDDEMSolver<dim>::print_particles_summary()
          << "v_x: " << particle_properties[DEM::PropertiesIndex::v_x] << ",  "
          << "v_y: " << particle_properties[DEM::PropertiesIndex::v_y] << ",  "
          << "vz: " << particle_properties[DEM::PropertiesIndex::v_z];
-
-      announce_string(this->pcout, ss.str(), '-');
+      this->pcout << ss.str() << std::endl;
     }
 }
 
@@ -1320,8 +1317,6 @@ CFDDEMSolver<dim>::dem_setup_contact_parameters()
 {
   coupling_frequency =
     this->cfd_dem_simulation_parameters.cfd_dem.coupling_frequency;
-
-  standard_deviation_multiplier = 2.5;
 
   // Initialize DEM Parameters
   dem_parameters.lagrangian_physical_properties =
@@ -1341,18 +1336,61 @@ CFDDEMSolver<dim>::dem_setup_contact_parameters()
   dem_parameters.mesh = this->cfd_dem_simulation_parameters.dem_parameters.mesh;
   dem_parameters.restart =
     this->cfd_dem_simulation_parameters.dem_parameters.restart;
+  distribution_object_container.reserve(
+    dem_parameters.lagrangian_physical_properties.particle_type_number);
 
+  maximum_particle_diameter = 0.;
+  for (unsigned int particle_type = 0;
+       particle_type <
+       dem_parameters.lagrangian_physical_properties.particle_type_number;
+       particle_type++)
+    {
+      if (dem_parameters.lagrangian_physical_properties.distribution_type.at(
+            particle_type) ==
+          Parameters::Lagrangian::SizeDistributionType::uniform)
+        {
+          distribution_object_container.push_back(
+            std::make_shared<UniformDistribution>(
+              dem_parameters.lagrangian_physical_properties
+                .particle_average_diameter.at(particle_type)));
+        }
+      else if (dem_parameters.lagrangian_physical_properties.distribution_type
+                 .at(particle_type) ==
+               Parameters::Lagrangian::SizeDistributionType::normal)
+        {
+          distribution_object_container.push_back(
+            std::make_shared<NormalDistribution>(
+              dem_parameters.lagrangian_physical_properties
+                .particle_average_diameter.at(particle_type),
+              dem_parameters.lagrangian_physical_properties.particle_size_std
+                .at(particle_type),
+              dem_parameters.lagrangian_physical_properties
+                .seed_for_distributions[particle_type]));
+        }
+      else if (dem_parameters.lagrangian_physical_properties.distribution_type
+                 .at(particle_type) ==
+               Parameters::Lagrangian::SizeDistributionType::custom)
+        {
+          distribution_object_container.push_back(
+            std::make_shared<CustomDistribution>(
+              dem_parameters.lagrangian_physical_properties
+                .particle_custom_diameter.at(particle_type),
+              dem_parameters.lagrangian_physical_properties
+                .particle_custom_probability.at(particle_type),
+              dem_parameters.lagrangian_physical_properties
+                .seed_for_distributions[particle_type]));
+        }
 
-  maximum_particle_diameter =
-    find_maximum_particle_size(dem_parameters.lagrangian_physical_properties,
-                               standard_deviation_multiplier);
+      maximum_particle_diameter = std::max(
+        maximum_particle_diameter,
+        distribution_object_container[particle_type]->find_max_diameter());
+    }
+
   neighborhood_threshold_squared =
     std::pow(dem_parameters.model_parameters.neighborhood_threshold *
                maximum_particle_diameter,
              2);
 
-
-  triangulation_cell_diameter = 0.5 * GridTools::diameter(*this->triangulation);
 
   //   Finding the smallest contact search frequency criterion between (smallest
   //   cell size - largest particle radius) and (security factor * (blab
@@ -1513,15 +1551,23 @@ CFDDEMSolver<dim>::solve()
   while (this->simulation_control->integrate())
     {
       this->simulation_control->print_progression(this->pcout);
-      if ((this->simulation_control->get_step_number() %
-               this->simulation_parameters.mesh_adaptation.frequency !=
-             0 ||
-           this->simulation_parameters.mesh_adaptation.type ==
-             Parameters::MeshAdaptation::Type::none ||
-           this->simulation_control->is_at_start()) &&
-          this->simulation_parameters.boundary_conditions.time_dependent)
+      bool refinement_step;
+      if (this->simulation_parameters.mesh_adaptation.refinement_at_frequency)
+        refinement_step =
+          this->simulation_control->get_step_number() %
+            this->simulation_parameters.mesh_adaptation.frequency !=
+          0;
+      else
+        refinement_step = this->simulation_control->get_step_number() == 0;
+      if (refinement_step ||
+          this->simulation_parameters.mesh_adaptation.type ==
+            Parameters::MeshAdaptation::Type::none ||
+          this->simulation_control->is_at_start())
         {
+          // We allow the physics to update their boundary conditions
+          // according to their own parameters
           this->update_boundary_conditions();
+          this->multiphysics->update_boundary_conditions();
         }
 
       this->dynamic_flow_control();

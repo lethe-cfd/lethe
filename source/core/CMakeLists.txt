@@ -5,13 +5,14 @@ add_library(lethe-core
   dem_properties.cc
   density_model.cc
   dimensionality.cc
+  evaporation_model.cc
   grids.cc
   ib_particle.cc
   ib_stencil.cc
   lethe_grid_tools.cc
   manifolds.cc
   mesh_controller.cc
-  mobility_ch_model.cc
+  mobility_cahn_hilliard_model.cc
   parameters.cc
   parameters_lagrangian.cc
   parameters_multiphysics.cc
@@ -31,12 +32,14 @@ add_library(lethe-core
   tracer_diffusivity_model.cc
   utilities.cc
   # Headers
+  ../../include/core/ale.h
   ../../include/core/auxiliary_math_functions.h
   ../../include/core/bdf.h
   ../../include/core/boundary_conditions.h
   ../../include/core/dem_properties.h
   ../../include/core/density_model.h
   ../../include/core/dimensionality.h
+  ../../include/core/evaporation_model.h
   ../../include/core/exceptions.h
   ../../include/core/grids.h
   ../../include/core/ib_particle.h
@@ -47,7 +50,7 @@ add_library(lethe-core
   ../../include/core/lethe_grid_tools.h
   ../../include/core/manifolds.h
   ../../include/core/mesh_controller.h
-  ../../include/core/mobility_ch_model.h
+  ../../include/core/mobility_cahn_hilliard_model.h
   ../../include/core/multiphysics.h
   ../../include/core/newton_non_linear_solver.h
   ../../include/core/non_linear_solver.h

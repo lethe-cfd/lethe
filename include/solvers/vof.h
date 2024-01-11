@@ -60,12 +60,11 @@ public:
   /**
    * @brief VOF - Base constructor.
    */
-  VolumeOfFluid<dim>(
-    MultiphysicsInterface<dim>      *multiphysics_interface,
-    const SimulationParameters<dim> &p_simulation_parameters,
-    std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
-                                       p_triangulation,
-    std::shared_ptr<SimulationControl> p_simulation_control)
+  VolumeOfFluid(MultiphysicsInterface<dim>      *multiphysics_interface,
+                const SimulationParameters<dim> &p_simulation_parameters,
+                std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
+                                                   p_triangulation,
+                std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
         p_simulation_parameters.non_linear_solver.at(PhysicsID::VOF))
     , multiphysics(multiphysics_interface)
@@ -323,6 +322,12 @@ public:
   set_initial_conditions() override;
 
   /**
+   * @brief Update non zero constraints if the boundary is time dependent
+   */
+  void
+  update_boundary_conditions() override;
+
+  /**
    * @brief Call for the solution of the linear system of equation using a strategy appropriate
    * to the auxiliary physics
    *
@@ -544,7 +549,7 @@ private:
    * @brief Calculate the mass deviation of the monitored fluid, between the current
    * iteration and the mass at first iteration (mass_first_iteration). Used to
    * test multiple sharpening threshold in the binary search algorithm
-   * (adaptative sharpening).
+   * (adaptive sharpening).
    *
    * @param monitored_fluid Fluid indicator (fluid0 or fluid1) corresponding to
    * the phase of interest.

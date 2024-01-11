@@ -53,7 +53,7 @@ template <int dim>
 class BoundaryCellsInformation
 {
 public:
-  BoundaryCellsInformation<dim>();
+  BoundaryCellsInformation();
 
   /**
    * @brief The build function builds all the boundary cell information
@@ -269,7 +269,7 @@ private:
 
   // Structure that contains the boundary cells with floating walls
   std::unordered_map<
-    unsigned int,
+    types::global_dof_index,
     std::set<typename Triangulation<dim>::active_cell_iterator>>
     boundary_cells_for_floating_walls;
 

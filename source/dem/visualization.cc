@@ -87,7 +87,12 @@ Visualization<dim>::print_xyz(
   const ConditionalOStream                &pcout)
 {
   pcout << "id, type, dp, x, y, z " << std::endl;
-  usleep(100);
+  // Agressively force synchronization of the header line
+  usleep(500);
+  MPI_Barrier(mpi_communicator);
+  usleep(500);
+  MPI_Barrier(mpi_communicator);
+
 
   std::map<int, Particles::ParticleIterator<dim>> global_particles;
   unsigned int current_id, current_id_max = 0;
@@ -127,7 +132,7 @@ Visualization<dim>::print_xyz(
                         << std::endl;
             }
         }
-      usleep(100);
+      usleep(500);
       MPI_Barrier(mpi_communicator);
     }
 }

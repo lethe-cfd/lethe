@@ -23,7 +23,7 @@
 using namespace dealii;
 
 /**
- * @brief InterfacePropertyModel. Abstract class that defines the interface for a interface property model
+ * @brief Abstract class that defines the interface for a interface property model.
  * Interface property model provides an abstract interface to calculate the
  * value of an interface property or a vector of interface property value for
  * given field value. By default, the interface does not require that all (or
@@ -43,7 +43,7 @@ public:
   {
     model_depends_on[shear_rate]                = false;
     model_depends_on[temperature]               = false;
-    model_depends_on[previous_temperature]      = false;
+    model_depends_on[temperature_p1]            = false;
     model_depends_on[pressure]                  = false;
     model_depends_on[phase_order_cahn_hilliard] = false;
   }

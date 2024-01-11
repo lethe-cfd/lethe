@@ -9,7 +9,7 @@ This example is the three-dimensional version of the ``packing_in_circle`` examp
 Features
 ----------------------------------
 
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Three-dimensional problem
 - Parallelism
 
@@ -18,7 +18,7 @@ Features
 Files Used in This Example
 ----------------------------
 
-``/examples/dem/3d-packing-in-ball/packing-in-ball.prm``
+- Parameter file: ``examples/dem/3d-packing-in-ball/packing-in-ball.prm``
 
 
 -----------------------
@@ -28,7 +28,7 @@ Description of the Case
 Packing in ball example is the three-dimensional version of the packing in circle example.
 
 .. warning::
-	Two-dimensional DEM solver (dem) is not an accurate model, since several phenomena including torque on particles are intrinsically three-dimensional. dem solver may only be used for simple basic analyses before performing three-dimensional simulations with dem solver becomes necessary.
+	The ``lethe-particles`` DEM solver in two dimensions is not an accurate model, since several phenomena including torque on particles are intrinsically three-dimensional. Therefore, it should only be used for simple basic analyses before performing three-dimensional simulations.
 
 
 --------------
@@ -61,7 +61,7 @@ In a three-dimensional simulation, we have to define the minimum and maximum dim
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 1000
       set insertion frequency                            = 150000
       set insertion box minimum x                        = -0.05
@@ -71,8 +71,8 @@ In a three-dimensional simulation, we have to define the minimum and maximum dim
       set insertion box maximum y                        = 0.05
       set insertion box maximum z                        = 0.07
       set insertion distance threshold                   = 2
-      set insertion random number range                  = 0.75
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.75
+      set insertion prn seed                             = 19
     end
 
 
@@ -91,7 +91,7 @@ Gravitational acceleration has three components in three directions.
       subsection particle type 0
         set size distribution type            = uniform
         set diameter                          = 0.005
-        set number                            = 5000
+        set number of particles               = 5000
         set density particles                 = 2000
         set young modulus particles           = 10000000
         set poisson ratio particles           = 0.3
@@ -142,14 +142,16 @@ Running the Simulation
 This simulation can be launched by:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem packing-in-ball.prm
+  lethe-particles packing-in-ball.prm
 
 We can also launch this simulation in parallel mode. For example, to launch the simulation on 8 processes:
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem packing-in-ball.prm
+  mpirun -np 8 lethe-particles packing-in-ball.prm
 
 .. note::
 	The parallel simulations are generally faster than simulations on a single process. However, to leverage the full performance of a parallel simulation, it should be performed with a load-balancing strategy throughout the simulation. Load-balancing is explained in the `next example <../rotating-drum/rotating-drum.html>`_.

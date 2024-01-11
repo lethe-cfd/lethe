@@ -285,8 +285,9 @@ GLSSharpNavierStokesSolver<dim>::generate_cut_cells_map()
 
   if (mapping_overconstrained_cells)
     {
+      local_dof_overconstrained.compress(VectorOperation::insert);
       dof_overconstrained = local_dof_overconstrained;
-      dof_overconstrained.compress(VectorOperation::insert);
+
 
       for (const auto &cell : cell_iterator)
         {
@@ -1977,7 +1978,7 @@ GLSSharpNavierStokesSolver<dim>::calculate_L2_error_particles()
                     trace(present_velocity_gradients[q]);
                   double mass_source =
                     this->simulation_parameters.source_term
-                      ->navier_stokes_source.value(
+                      .navier_stokes_source->value(
                         fe_values.get_quadrature_points()[q], dim);
 
 
@@ -2051,7 +2052,7 @@ GLSSharpNavierStokesSolver<dim>::integrate_particles()
   // implicit Euler algorithm. To find the force at t+dt the function use the
   // fix point algorithm in parallel to the newton iteration used for the fluid
   // resolution.
-  using numbers::PI;
+  using dealii::numbers::PI;
   double dt    = this->simulation_control->get_time_steps_vector()[0];
   double time  = this->simulation_control->get_current_time();
   double alpha = this->simulation_parameters.particlesParameters->alpha;
@@ -2901,7 +2902,7 @@ GLSSharpNavierStokesSolver<dim>::sharp_edge()
   // on a solid of dim=2 or dim=3
 
   TimerOutput::Scope t(this->computing_timer, "assemble_sharp");
-  using numbers::PI;
+  using dealii::numbers::PI;
   Point<dim>                                                  center_immersed;
   Point<dim>                                                  pressure_bridge;
   std::vector<typename DoFHandler<dim>::active_cell_iterator> active_neighbors;
@@ -3743,8 +3744,8 @@ GLSSharpNavierStokesSolver<dim>::setup_assemblers()
         }
 
       // Velocity sources term
-      if (this->simulation_parameters.velocity_sources.type ==
-          Parameters::VelocitySource::VelocitySourceType::srf)
+      if (this->simulation_parameters.velocity_sources.rotating_frame_type ==
+          Parameters::VelocitySource::RotatingFrameType::srf)
         {
           this->assemblers.push_back(
             std::make_shared<GLSNavierStokesAssemblerSRF<dim>>(
@@ -3974,10 +3975,8 @@ GLSSharpNavierStokesSolver<dim>::write_checkpoint()
         this->simulation_parameters.simulation_control.output_folder +
         this->simulation_parameters.restart_parameters.filename;
 
-      TableHandler particles_information_table;
-      std::string  filename =
-        this->simulation_parameters.simulation_control.output_folder + prefix +
-        ".ib_particles";
+      TableHandler  particles_information_table;
+      std::string   filename = prefix + ".ib_particles";
       std::ofstream output(filename.c_str());
       this->simulation_control->save(prefix);
       ib_particles_pvdhandler.save(prefix + ".ib_particles");
@@ -4107,9 +4106,7 @@ GLSSharpNavierStokesSolver<dim>::read_checkpoint()
     this->simulation_parameters.simulation_control.output_folder +
     this->simulation_parameters.restart_parameters.filename;
 
-  std::string filename =
-    this->simulation_parameters.simulation_control.output_folder + prefix +
-    ".ib_particles";
+  std::string filename = prefix + ".ib_particles";
 
   ib_particles_pvdhandler.read(prefix + ".ib_particles");
   // refill the table from checkpoint
@@ -4295,13 +4292,21 @@ GLSSharpNavierStokesSolver<dim>::read_checkpoint()
       particles[p_i].residual_omega       = DBL_MAX;
     }
   // Finish the time step of the particle.
+
+  update_precalculations_for_ib();
+  for (unsigned int p_i = 0; p_i < particles.size(); ++p_i)
+    {
+      TimerOutput::Scope t(this->computing_timer, "removing_rbf_nodes");
+      particles[p_i].remove_superfluous_data(
+        this->dof_handler, particles[p_i].mesh_based_precalculations);
+    }
 }
 
 template <int dim>
 void
 GLSSharpNavierStokesSolver<dim>::load_particles_from_file()
 {
-  using numbers::PI;
+  using dealii::numbers::PI;
   TimerOutput::Scope t(this->computing_timer,
                        "Reset Sharp-Edge particle information");
   this->pcout << "Loading particles from a file" << std::endl;
@@ -4557,6 +4562,7 @@ GLSSharpNavierStokesSolver<dim>::solve()
   this->set_initial_condition(
     this->simulation_parameters.initial_condition->type,
     this->simulation_parameters.restart_parameters.restart);
+  this->update_multiphysics_time_average_solution();
 
   while (this->simulation_control->integrate())
     {
@@ -4564,15 +4570,23 @@ GLSSharpNavierStokesSolver<dim>::solve()
       this->forcing_function->set_time(
         this->simulation_control->get_current_time());
 
-      if ((this->simulation_control->get_step_number() %
-               this->simulation_parameters.mesh_adaptation.frequency !=
-             0 ||
-           this->simulation_parameters.mesh_adaptation.type ==
-             Parameters::MeshAdaptation::Type::none ||
-           this->simulation_control->is_at_start()) &&
-          this->simulation_parameters.boundary_conditions.time_dependent)
+      bool refinement_step;
+      if (this->simulation_parameters.mesh_adaptation.refinement_at_frequency)
+        refinement_step =
+          this->simulation_control->get_step_number() %
+            this->simulation_parameters.mesh_adaptation.frequency !=
+          0;
+      else
+        refinement_step = this->simulation_control->get_step_number() == 0;
+      if (refinement_step ||
+          this->simulation_parameters.mesh_adaptation.type ==
+            Parameters::MeshAdaptation::Type::none ||
+          this->simulation_control->is_at_start())
         {
+          // We allow the physics to update their boundary conditions
+          // according to their own parameters
           this->update_boundary_conditions();
+          this->multiphysics->update_boundary_conditions();
         }
 
       if (some_particles_are_coupled == false)

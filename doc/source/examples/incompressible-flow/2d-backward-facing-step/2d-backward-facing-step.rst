@@ -6,7 +6,7 @@ Flow past a Backward-Facing Step
 Features
 --------
 
-- Solver: ``gls_navier_stokes`` (with Q1-Q1)
+- Solver: ``lethe-fluid`` (with Q1-Q1)
 - Steady and pseudo steady state solution
 - Comparison with benchmark solutions
 - Mesh refinement and error analysis
@@ -16,8 +16,14 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Base case (:math:`Re < 700`): ``/examples/incompressible-flow/2d-backward-facing-step/Reynolds100-600.prm``
-- Higher-Reynolds case (:math:`Re \geq 700`): ``/examples/incompressible-flow/2d-backward-facing-step/Reynolds700-1000.prm``
+All files mentioned below are located in the example's folder (``examples/incompressible-flow/2d-backward-facing-step``).
+
+- Geometry file: ``backward-facing-step.geo``
+- Mesh file: ``backward-facing-step.msh``
+- Parameter file for the base case (:math:`Re < 700`): ``Reynolds100-600.prm``
+- Parameter file for the higher-Reynolds case (:math:`Re \geq 700`): ``Reynolds700-1000.prm``
+- Postprocessing Python script for computing the reattachment length: ``bisection.py``
+- Postprocessing Python script for computing velocity distributions at inlet and outlet: ``velocity_distribution.py``
 
 
 -----------------------
@@ -242,7 +248,7 @@ For :math:`Re \geq 700`, however, it is often necessary to set ``ilu precondtion
     end
 	
 .. tip::
-	It is important to note that the ``minimum residual`` of the linear solver is smaller than the ``tolerance`` of the nonlinear solver. The reader can consult the `Parameters Guide <https://lethe-cfd.github.io/lethe/parameters/cfd/linear_solver_control.html>`_ for more information.
+	It is important to note that the ``minimum residual`` of the linear solver is smaller than the ``tolerance`` of the nonlinear solver. The reader can consult the `Parameters Guide <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/linear_solver_control.html>`_ for more information.
 
 
 -----------------------
@@ -252,14 +258,16 @@ Running the Simulations
 The simulation can be executed using the following command (assuming that the solver's location is in your PATH environment variable):
 
 .. code-block:: text
+  :class: copy-button
 
-	gls_navier_stokes 2D-backward-facing-step-steady.prm
+  lethe-fluid 2D-backward-facing-step-steady.prm
 	
 However, mpi can be used to lower calculation time by using several CPUs (especially useful for pseudo-steady simulations) :
 
 .. code-block:: text
+  :class: copy-button
 
-	mpirun -np j gls_navier_stokes 2D-backward-facing-step-steady.prm
+  mpirun -np j lethe-fluid 2D-backward-facing-step-steady.prm
 	
 where ``j`` is the number of CPUs used for the computations.
 

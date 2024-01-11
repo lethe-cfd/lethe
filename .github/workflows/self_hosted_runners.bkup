@@ -1,0 +1,74 @@
+name: CI-Debug
+
+on: 
+# Runs on every push on master branch. If a push contains multiple commits, it will be ran on the latest one.
+  push:
+    paths-ignore:
+      - 'doc/**'
+  pull_request_target:
+    paths-ignore:
+      - 'doc/**'
+    
+# Cancels running instances when a pull request is updated by a commit
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: true
+
+
+env:
+  COMPILE_JOBS: 8
+  TEST_JOBS: 5
+
+
+jobs:
+  build:
+    name: Build (deal.ii:${{ matrix.dealii_version }})
+    runs-on: self-hosted
+
+    strategy:
+      fail-fast: false
+      matrix:
+        dealii_version: ["master", "v9.5.0"]
+    
+    # Run steps in container of dealii's master branch
+    container:
+      image: dealii/dealii:${{ matrix.dealii_version }}-focal
+      options: --user root
+
+    steps:
+      - name: Setup
+        run: |
+          # Since dealii image doesn't include Node.js, we'll install it
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends nodejs
+
+
+
+          echo "Github actions is sane!"
+          echo "Running build with deal.ii version ${{ matrix.dealii_version }} on branch ${GITHUB_REF#refs/heads/}"
+
+      # Checks-out Lethe with branch of triggering commit
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      #
+      # Debug
+      #
+      - name: Compile Lethe (Debug-deal.ii:${{ matrix.dealii_version }})
+        run: |
+          mkdir build-debug
+          cd build-debug
+          cmake ../ -DCMAKE_BUILD_TYPE=Debug
+          make -j${{ env.COMPILE_JOBS }}
+
+      # These tests require a single core each so we will run them in parallel
+      - name: Run Lethe tests (Debug-deal.ii:${{ matrix.dealii_version }})
+        run: |
+          #Allow OMPI to run as root
+          export OMPI_ALLOW_RUN_AS_ROOT=1
+          export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+          cd build-debug
+          ctest -N
+
+          # Run in parallel
+          ctest --output-on-failure -j${{ env.TEST_JOBS }} 

@@ -32,6 +32,7 @@
 #include <solvers/heat_transfer_assemblers.h>
 #include <solvers/heat_transfer_scratch_data.h>
 #include <solvers/multiphysics_interface.h>
+#include <solvers/postprocessors.h>
 
 #include <deal.II/base/convergence_table.h>
 #include <deal.II/base/quadrature_lib.h>
@@ -54,11 +55,11 @@ template <int dim>
 class HeatTransfer : public AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>
 {
 public:
-  HeatTransfer<dim>(MultiphysicsInterface<dim>      *multiphysics_interface,
-                    const SimulationParameters<dim> &p_simulation_parameters,
-                    std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
-                                                       p_triangulation,
-                    std::shared_ptr<SimulationControl> p_simulation_control)
+  HeatTransfer(MultiphysicsInterface<dim>      *multiphysics_interface,
+               const SimulationParameters<dim> &p_simulation_parameters,
+               std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
+                                                  p_triangulation,
+               std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
         p_simulation_parameters.non_linear_solver.at(PhysicsID::heat_transfer))
     , multiphysics(multiphysics_interface)
@@ -70,6 +71,9 @@ public:
     , triangulation(p_triangulation)
     , simulation_control(p_simulation_control)
     , dof_handler(*triangulation)
+    , thermal_conductivity_models(
+        p_simulation_parameters.physical_properties_manager
+          .get_thermal_conductivity_vector())
 
   {
     if (simulation_parameters.mesh.simplex)
@@ -234,6 +238,12 @@ public:
   set_initial_conditions() override;
 
   /**
+   * @brief Update non zero constraints if the boundary is time-dependent
+   */
+  void
+  update_boundary_conditions() override;
+
+  /**
    * @brief Call for the solution of the linear system of equation using a strategy appropriate
    * to the auxiliary physics
    *
@@ -396,6 +406,24 @@ private:
   write_temperature_statistics(const std::string domain_name);
 
   /**
+   * @brief Post-processing.
+   * Calculate liquid fraction on the domain.
+   *
+   * @param gather_vof boolean true when VOF=true (multiphase flow), used to gather
+   * VOF information
+   */
+
+  void
+  postprocess_liquid_fraction(const bool gather_vof);
+
+  /**
+   * @brief Post-processing. Write the liquid fraction to a file
+   */
+
+  void
+  write_liquid_fraction();
+
+  /**
    * Post-processing. Calculate the heat flux at heat transfer boundary
    * conditions.
    *
@@ -544,6 +572,23 @@ private:
   // - the convective heat flux on a boundary: h(T-T_inf)
   // - the total fluxes on the nitsche immersed boundaries (if active)
   TableHandler heat_flux_table;
+
+  // Heat flux postprocessing
+  std::vector<std::shared_ptr<ThermalConductivityModel>>
+                                          thermal_conductivity_models;
+  std::vector<HeatFluxPostprocessor<dim>> heat_flux_postprocessors;
+
+
+  /*
+   * Phase change post-processing. These parameters track the presence of a
+   * phase change physical property and the associated post-processing
+   * information
+   */
+
+  /*
+   * Liquid fraction in the domain
+   */
+  TableHandler liquid_fraction_table;
 };
 
 

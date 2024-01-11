@@ -16,7 +16,7 @@ set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 if(DEFINED deal.II_DIR)
   set(_had_deal_ii TRUE)
 endif()
-find_package(deal.II 9.4.0 QUIET REQUIRED
+find_package(deal.II 9.5.0 QUIET REQUIRED
   HINTS "${deal.II_DIR}" "${DEAL_II_DIR}" "$ENV{DEAL_II_DIR}")
 deal_ii_initialize_cached_variables()
 
@@ -29,7 +29,6 @@ project(lethe VERSION 0.1 LANGUAGES CXX)
 if(NOT _had_deal_ii)
   set(_missing_deal_ii_features)
   foreach(_feat IN ITEMS
-      DEAL_II_WITH_METIS
       # MPI is required for p4est and Trilinos, but leave it here as
       # additional documentation.
       DEAL_II_WITH_MPI
@@ -42,6 +41,7 @@ if(NOT _had_deal_ii)
   endforeach()
 
   foreach(_feat IN ITEMS
+      DEAL_II_WITH_METIS
       DEAL_II_WITH_OPENCASCADE
       DEAL_II_WITH_SUNDIALS)
     message(STATUS "Checking optional ${_feat}: " ${${_feat}})
@@ -67,6 +67,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   add_compile_options(
     -Wall -Wextra -Wpedantic # Actually already in DEAL_II_CXX_FLAGS
     -Wunused-variable -Wdisabled-optimization -std=c++17)
+    
 
   if(CMAKE_VERSION VERSION_LESS 3.24)
     option(CMAKE_COMPILE_WARNING_AS_ERROR "Treat warnings on compile as errors")
@@ -122,6 +123,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif()
 endif()
 
+
 add_subdirectory(source)
 add_subdirectory(applications)
 
@@ -131,6 +133,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif()
 
   if(BUILD_TESTING)
+    set(DEAL_II_WITH_DEALII ON)
+    set(DEAL_II_DEALII_VERSION ${DEAL_II_VERSION})
     add_subdirectory(tests)
     add_subdirectory(applications_tests)
 
@@ -142,3 +146,5 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
   endif()
 endif()
+
+ADD_SUBDIRECTORY(doc/doxygen)

@@ -11,22 +11,32 @@ namespace Parameters
     {
       prm.declare_entry("size distribution type",
                         "uniform",
-                        Patterns::Selection("uniform|normal"),
+                        Patterns::Selection("uniform|normal|custom"),
                         "Particle size distribution"
-                        "Choices are <uniform|normall>.");
+                        "Choices are <uniform|normal|custom>.");
       prm.declare_entry("diameter",
                         "0.001",
                         Patterns::Double(),
                         "Particle diameter");
-      prm.declare_entry("average diameter",
-                        "0.001",
-                        Patterns::Double(),
-                        "Average particle diameter");
       prm.declare_entry("standard deviation",
                         "0",
                         Patterns::Double(),
                         "Particle size standard deviation");
-      prm.declare_entry("number",
+      prm.declare_entry("custom diameters",
+                        "0.001 , 0.0005",
+                        Patterns::List(Patterns::Double()),
+                        "Diameter values for a custom distribution");
+      prm.declare_entry(
+        "custom volume fractions",
+        "0.6 , 0.4",
+        Patterns::List(Patterns::Double()),
+        "Probabilities of each diameter of the custom distribution based on the volume fraction");
+      prm.declare_entry(
+        "random seed distribution",
+        "1",
+        Patterns::Integer(),
+        "Seed for generation of random numbers for the size distribution");
+      prm.declare_entry("number of particles",
                         "0",
                         Patterns::Integer(),
                         "Number of particles of this type");
@@ -39,7 +49,7 @@ namespace Parameters
                         Patterns::Double(),
                         "Particle Young's modulus");
       prm.declare_entry("poisson ratio particles",
-                        "0.1",
+                        "0.3",
                         Patterns::Double(),
                         "Particle Poisson ratio");
       prm.declare_entry("restitution coefficient particles",
@@ -54,6 +64,10 @@ namespace Parameters
                         "0.1",
                         Patterns::Double(),
                         "Particle rolling friction");
+      prm.declare_entry("surface energy particles",
+                        "0.0",
+                        Patterns::Double(),
+                        "Particle surface energy");
     }
 
     void
@@ -61,25 +75,46 @@ namespace Parameters
       const unsigned int &particle_type,
       ParameterHandler   &prm)
     {
-      const std::string size_distribution_type =
-        prm.get("size distribution type");
-      if (size_distribution_type == "uniform")
+      particle_average_diameter.at(particle_type) = prm.get_double("diameter");
+      particle_size_std.at(particle_type) =
+        prm.get_double("standard deviation");
+      particle_custom_diameter.at(particle_type) =
+        convert_string_to_vector(prm, "custom diameters");
+      particle_custom_probability.at(particle_type) =
+        convert_string_to_vector(prm, "custom volume fractions");
+      seed_for_distributions.push_back(
+        prm.get_integer("random seed distribution"));
+
+      double probability_sum =
+        std::reduce(particle_custom_probability.at(particle_type).begin(),
+                    particle_custom_probability.at(particle_type).end());
+
+      // We make sure that the cumulative probability is equal to 1.
+      if (std::abs(probability_sum - 1.0) > 1.e-5)
         {
-          particle_average_diameter.at(particle_type) =
-            prm.get_double("diameter");
+          throw(std::runtime_error(
+            "Invalid custom volume fraction. The sum of volume fractions should be equal to 1.0 "));
         }
-      else if (size_distribution_type == "normal")
+      const std::string size_distribution_type_str =
+        prm.get("size distribution type");
+      if (size_distribution_type_str == "uniform")
         {
-          particle_average_diameter.at(particle_type) =
-            prm.get_double("average diameter");
-          particle_size_std.at(particle_type) =
-            prm.get_double("standard deviation");
+          distribution_type.at(particle_type) = SizeDistributionType::uniform;
+        }
+      else if (size_distribution_type_str == "normal")
+        {
+          distribution_type.at(particle_type) = SizeDistributionType::normal;
+        }
+      else if (size_distribution_type_str == "custom")
+        {
+          distribution_type.at(particle_type) = SizeDistributionType::custom;
         }
       else
         {
-          throw(std::runtime_error("Invalid size distribution type "));
+          throw(std::runtime_error(
+            "Invalid size distribution type. Choices are <uniform|normal|custom>."));
         }
-      number.at(particle_type)           = prm.get_integer("number");
+      number.at(particle_type) = prm.get_integer("number of particles");
       density_particle.at(particle_type) = prm.get_double("density particles");
       youngs_modulus_particle.at(particle_type) =
         prm.get_double("young modulus particles");
@@ -91,6 +126,8 @@ namespace Parameters
         prm.get_double("friction coefficient particles");
       rolling_friction_coefficient_particle.at(particle_type) =
         prm.get_double("rolling friction particles");
+      surface_energy_particle.at(particle_type) =
+        prm.get_double("surface energy particles");
     }
 
     void
@@ -133,7 +170,7 @@ namespace Parameters
                           Patterns::Double(),
                           "Young's modulus of wall");
         prm.declare_entry("poisson ratio wall",
-                          "1000000.",
+                          "0.3",
                           Patterns::Double(),
                           "Poisson's ratio of wall");
         prm.declare_entry("restitution coefficient wall",
@@ -148,6 +185,10 @@ namespace Parameters
                           "0.1",
                           Patterns::Double(),
                           "Rolling friction coefficient of wall");
+        prm.declare_entry("surface energy wall",
+                          "0.0",
+                          Patterns::Double(),
+                          "Surface energy of wall");
       }
       prm.leave_subsection();
     }
@@ -158,69 +199,41 @@ namespace Parameters
       prm.enter_subsection("lagrangian physical properties");
       initialize_containers(particle_average_diameter,
                             particle_size_std,
+                            distribution_type,
+                            particle_custom_diameter,
+                            particle_custom_probability,
+                            seed_for_distributions,
                             number,
                             density_particle,
                             youngs_modulus_particle,
                             poisson_ratio_particle,
                             restitution_coefficient_particle,
                             friction_coefficient_particle,
-                            rolling_friction_coefficient_particle);
-      {
-        g[0] = prm.get_double("gx");
-        g[1] = prm.get_double("gy");
-        g[2] = prm.get_double("gz");
+                            rolling_friction_coefficient_particle,
+                            surface_energy_particle);
 
-        particle_type_number = prm.get_integer("number of particle types");
+      g[0] = prm.get_double("gx");
+      g[1] = prm.get_double("gy");
+      g[2] = prm.get_double("gz");
 
-        if (particle_type_number >= 1)
-          {
-            prm.enter_subsection("particle type 0");
-            {
-              parse_particle_properties(0, prm);
-            }
-            prm.leave_subsection();
-          }
-        if (particle_type_number >= 2)
-          {
-            prm.enter_subsection("particle type 1");
-            {
-              parse_particle_properties(1, prm);
-            }
-            prm.leave_subsection();
-          }
-        if (particle_type_number >= 3)
-          {
-            prm.enter_subsection("particle type 2");
-            {
-              parse_particle_properties(2, prm);
-            }
-            prm.leave_subsection();
-          }
-        if (particle_type_number >= 4)
-          {
-            prm.enter_subsection("particle type 3");
-            {
-              parse_particle_properties(3, prm);
-            }
-            prm.leave_subsection();
-          }
-        if (particle_type_number >= 5)
-          {
-            prm.enter_subsection("particle type 4");
-            {
-              parse_particle_properties(4, prm);
-            }
-            prm.leave_subsection();
-          }
+      particle_type_number = prm.get_integer("number of particle types");
 
+      for (unsigned int id = 0; id < particle_type_number; ++id)
+        {
+          prm.enter_subsection("particle type " +
+                               Utilities::int_to_string(id, 1));
+          parse_particle_properties(id, prm);
+          prm.leave_subsection();
+        }
 
-        youngs_modulus_wall = prm.get_double("young modulus wall");
-        poisson_ratio_wall  = prm.get_double("poisson ratio wall");
-        restitution_coefficient_wall =
-          prm.get_double("restitution coefficient wall");
-        friction_coefficient_wall = prm.get_double("friction coefficient wall");
-        rolling_friction_wall     = prm.get_double("rolling friction wall");
-      }
+      youngs_modulus_wall = prm.get_double("young modulus wall");
+      poisson_ratio_wall  = prm.get_double("poisson ratio wall");
+      restitution_coefficient_wall =
+        prm.get_double("restitution coefficient wall");
+      friction_coefficient_wall = prm.get_double("friction coefficient wall");
+      rolling_friction_wall     = prm.get_double("rolling friction wall");
+      surface_energy_wall       = prm.get_double("surface energy wall");
+
       prm.leave_subsection();
     }
 
@@ -228,6 +241,12 @@ namespace Parameters
     LagrangianPhysicalProperties::initialize_containers(
       std::unordered_map<unsigned int, double> &particle_average_diameter,
       std::unordered_map<unsigned int, double> &particle_size_std,
+      std::vector<SizeDistributionType>        &distribution_type,
+      std::unordered_map<unsigned int, std::vector<double>>
+        &particle_custom_diameter,
+      std::unordered_map<unsigned int, std::vector<double>>
+                                               &particle_custom_probability,
+      std::vector<unsigned int>                &seed_for_distributions,
       std::unordered_map<unsigned int, int>    &number,
       std::unordered_map<unsigned int, double> &density_particle,
       std::unordered_map<unsigned int, double> &youngs_modulus_particle,
@@ -236,21 +255,27 @@ namespace Parameters
         &restitution_coefficient_particle,
       std::unordered_map<unsigned int, double> &friction_coefficient_particle,
       std::unordered_map<unsigned int, double>
-        &rolling_friction_coefficient_particle)
+        &rolling_friction_coefficient_particle,
+      std::unordered_map<unsigned int, double> &surface_energy_particle)
     {
       for (unsigned int counter = 0; counter < particle_type_maximum_number;
            ++counter)
         {
           particle_average_diameter.insert({counter, 0.});
           particle_size_std.insert({counter, 0.});
-          number.insert({counter, 0.});
+          distribution_type.push_back(SizeDistributionType::uniform);
+          particle_custom_diameter.insert({counter, {0.}});
+          particle_custom_probability.insert({counter, {1.}});
+          number.insert({counter, 0});
           density_particle.insert({counter, 0.});
           youngs_modulus_particle.insert({counter, 0.});
           poisson_ratio_particle.insert({counter, 0.});
           restitution_coefficient_particle.insert({counter, 0.});
           friction_coefficient_particle.insert({counter, 0.});
           rolling_friction_coefficient_particle.insert({counter, 0.});
+          surface_energy_particle.insert({counter, 0.});
         }
+      seed_for_distributions.reserve(particle_type_maximum_number);
     }
 
     void
@@ -259,10 +284,10 @@ namespace Parameters
       prm.enter_subsection("insertion info");
       {
         prm.declare_entry("insertion method",
-                          "non_uniform",
-                          Patterns::Selection("uniform|non_uniform|list|plane"),
+                          "volume",
+                          Patterns::Selection("volume|list|plane"),
                           "Choosing insertion method. "
-                          "Choices are <uniform|non_uniform|list|plane>.");
+                          "Choices are <volume|list|plane>.");
         prm.declare_entry("inserted number of particles at each time step",
                           "1",
                           Patterns::Integer(),
@@ -313,14 +338,14 @@ namespace Parameters
                           "1",
                           Patterns::Double(),
                           "Distance threshold");
-        prm.declare_entry("insertion random number range",
+        prm.declare_entry("insertion maximum offset",
                           "1",
                           Patterns::Double(),
-                          "Random number range");
-        prm.declare_entry("insertion random number seed",
+                          "Maximum position offset went insertion particles");
+        prm.declare_entry("insertion prn seed",
                           "1",
                           Patterns::Integer(),
-                          "Random number seed");
+                          "Prn seed used to generate the position offsets");
         prm.declare_entry("list x",
                           "0",
                           Patterns::List(Patterns::Double()),
@@ -408,10 +433,8 @@ namespace Parameters
       prm.enter_subsection("insertion info");
       {
         const std::string insertion = prm.get("insertion method");
-        if (insertion == "uniform")
-          insertion_method = InsertionMethod::uniform;
-        else if (insertion == "non_uniform")
-          insertion_method = InsertionMethod::non_uniform;
+        if (insertion == "volume")
+          insertion_method = InsertionMethod::volume;
         else if (insertion == "list")
           insertion_method = InsertionMethod::list;
         else if (insertion == "plane")
@@ -433,8 +456,8 @@ namespace Parameters
         y_max               = prm.get_double("insertion box maximum y");
         z_max               = prm.get_double("insertion box maximum z");
         distance_threshold  = prm.get_double("insertion distance threshold");
-        random_number_range = prm.get_double("insertion random number range");
-        random_number_seed  = prm.get_double("insertion random number seed");
+        insertion_maximum_offset = prm.get_double("insertion maximum offset");
+        seed_for_insertion       = prm.get_integer("insertion prn seed");
 
         vel_x   = prm.get_double("velocity x");
         vel_y   = prm.get_double("velocity y");
@@ -533,23 +556,12 @@ namespace Parameters
         list_d = Utilities::string_to_double(d_str_list);
 
         // Insertion plane normal vector
-        std::string plane_vector_str = prm.get("insertion plane normal vector");
-        std::vector<std::string> plane_vector_str_list =
-          Utilities::split_string_list(plane_vector_str);
         insertion_plane_normal_vector =
-          Tensor<1, 3>({Utilities::string_to_double(plane_vector_str_list[0]),
-                        Utilities::string_to_double(plane_vector_str_list[1]),
-                        Utilities::string_to_double(plane_vector_str_list[2])});
-
+          entry_string_to_tensor3(prm, "insertion plane normal vector");
 
         // Insertion plane point
-        std::string plane_point_str = prm.get("insertion plane point");
-        std::vector<std::string> plane_point_str_list =
-          Utilities::split_string_list(plane_point_str);
         insertion_plane_point =
-          Point<3>({Utilities::string_to_double(plane_point_str_list[0]),
-                    Utilities::string_to_double(plane_point_str_list[1]),
-                    Utilities::string_to_double(plane_point_str_list[2])});
+          entry_string_to_tensor3(prm, "insertion plane point");
       }
       prm.leave_subsection();
     }
@@ -644,15 +656,15 @@ namespace Parameters
           "particle particle contact force method",
           "hertz_mindlin_limit_overlap",
           Patterns::Selection(
-            "linear|hertz_mindlin_limit_force|hertz_mindlin_limit_overlap|hertz"),
+            "linear|hertz_mindlin_limit_force|hertz_mindlin_limit_overlap|hertz|hertz_JKR"),
           "Choosing particle-particle contact force model"
-          "Choices are <linear|hertz_mindlin_limit_force|hertz_mindlin_limit_overlap|hertz>.");
+          "Choices are <linear|hertz_mindlin_limit_force|hertz_mindlin_limit_overlap|hertz|hertz_JKR>.");
 
         prm.declare_entry("particle wall contact force method",
                           "nonlinear",
-                          Patterns::Selection("linear|nonlinear"),
+                          Patterns::Selection("linear|nonlinear|JKR"),
                           "Choosing particle-wall contact force model"
-                          "Choices are <linear|nonlinear>.");
+                          "Choices are <linear|nonlinear|JKR>.");
 
         prm.declare_entry(
           "rolling resistance torque method",
@@ -746,9 +758,10 @@ namespace Parameters
             }
           else if (load_balance == "dynamic_with_disabling_contacts")
             {
-              // Check if dynamic disabling contacts is enabled, otherwise throw
-              // an error message indicating that the user should use dynamic
-              // load balancing instead or enable dynamic disabling contacts
+              // Check if dynamic disabling contacts is enabled, otherwise
+              // throw an error message indicating that the user should use
+              // dynamic load balancing instead or enable dynamic disabling
+              // contacts
               if (disable_particle_contacts)
                 {
                   load_balance_method =
@@ -816,6 +829,9 @@ namespace Parameters
         else if (ppcf == "hertz")
           particle_particle_contact_force_model =
             ParticleParticleContactForceModel::hertz;
+        else if (ppcf == "hertz_JKR")
+          particle_particle_contact_force_model =
+            ParticleParticleContactForceModel::hertz_JKR;
         else
           {
             throw(std::runtime_error(
@@ -829,6 +845,11 @@ namespace Parameters
         else if (pwcf == "nonlinear")
           particle_wall_contact_force_method =
             ParticleWallContactForceModel::nonlinear;
+        else if (pwcf == "JKR")
+          {
+            particle_wall_contact_force_method =
+              ParticleWallContactForceModel::JKR;
+          }
         else
           {
             throw(
@@ -1131,18 +1152,12 @@ namespace Parameters
                         "0.",
                         Patterns::Double(),
                         "Rotational boundary speed");
-      prm.declare_entry("rotational vector x",
-                        "0.",
-                        Patterns::Double(),
-                        "Rotational vector element in x direction");
-      prm.declare_entry("rotational vector y",
-                        "0.",
-                        Patterns::Double(),
-                        "Rotational vector element in y direction");
-      prm.declare_entry("rotational vector z",
-                        "0.",
-                        Patterns::Double(),
-                        "Rotational vector element in z direction");
+
+      prm.declare_entry("rotational vector",
+                        "1.,0.,0.",
+                        Patterns::List(Patterns::Double()),
+                        "Rotational vector elements");
+
       prm.declare_entry("periodic id 0",
                         "0",
                         Patterns::Integer(),
@@ -1151,6 +1166,11 @@ namespace Parameters
                         "0",
                         Patterns::Integer(),
                         "Periodic boundary ID 1");
+
+      prm.declare_entry("point on rotational vector",
+                        "0, 0, 0",
+                        Patterns::List(Patterns::Double()),
+                        "Point on the rotational vector");
       prm.declare_entry(
         "periodic direction",
         "0",
@@ -1182,16 +1202,26 @@ namespace Parameters
         }
       else if (boundary_type == "rotational")
         {
-          BC_type                       = BoundaryType::rotational;
-          double       rotational_speed = prm.get_double("rotational speed");
-          Tensor<1, 3> rotational_vector;
+          BC_type                 = BoundaryType::rotational;
+          double rotational_speed = prm.get_double("rotational speed");
 
-          rotational_vector[0] = prm.get_double("rotational vector x");
-          rotational_vector[1] = prm.get_double("rotational vector y");
-          rotational_vector[2] = prm.get_double("rotational vector z");
+          // Read the rotational vector from a list of doubles
+          Tensor<1, 3> rotational_vector =
+            entry_string_to_tensor3(prm, "rotational vector");
+          if (rotational_vector.norm() == 0.)
+            {
+              throw(std::runtime_error(
+                "Invalid rotational vector. Its norm cannot be equal to zero."));
+            }
+          // Read the point from a list of doubles
+          Tensor<1, 3> point_on_rotation_axis_tensor =
+            entry_string_to_tensor3(prm, "point on rotational vector");
 
-          this->boundary_rotational_speed.at(boundary_id)  = rotational_speed;
-          this->boundary_rotational_vector.at(boundary_id) = rotational_vector;
+          this->boundary_rotational_speed.at(boundary_id) = rotational_speed;
+          this->boundary_rotational_vector.at(boundary_id) =
+            rotational_vector / rotational_vector.norm();
+          this->point_on_rotation_axis.at(boundary_id) =
+            point_on_rotation_axis_tensor;
         }
       else if (boundary_type == "fixed_wall")
         {
@@ -1243,6 +1273,7 @@ namespace Parameters
       initialize_containers(boundary_translational_velocity,
                             boundary_rotational_speed,
                             boundary_rotational_vector,
+                            point_on_rotation_axis,
                             outlet_boundaries);
 
       for (unsigned int counter = 0; counter < DEM_BC_number; ++counter)
@@ -1263,8 +1294,9 @@ namespace Parameters
                                                &boundary_translational_velocity,
       std::unordered_map<unsigned int, double> &boundary_rotational_speed,
       std::unordered_map<unsigned int, Tensor<1, 3>>
-                                &boundary_rotational_vector,
-      std::vector<unsigned int> &outlet_boundaries)
+                                                 &boundary_rotational_vector,
+      std::unordered_map<unsigned int, Point<3>> &point_on_rotation_axis,
+      std::vector<unsigned int>                  &outlet_boundaries)
     {
       Tensor<1, 3> zero_tensor({0.0, 0.0, 0.0});
 
@@ -1273,6 +1305,7 @@ namespace Parameters
           boundary_translational_velocity.insert({counter, zero_tensor});
           boundary_rotational_speed.insert({counter, 0});
           boundary_rotational_vector.insert({counter, zero_tensor});
+          point_on_rotation_axis.insert({counter, Point<3>(zero_tensor)});
         }
 
       outlet_boundaries.reserve(DEM_BC_number);
@@ -1417,5 +1450,4 @@ namespace Parameters
     template class GridMotion<3>;
 
   } // namespace Lagrangian
-
 } // namespace Parameters

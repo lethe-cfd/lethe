@@ -43,6 +43,20 @@ using namespace dealii;
 
 namespace Parameters
 {
+  struct SizeOfSubsections
+  {
+    int boundary_conditions;
+  };
+
+
+  /**
+   * @brief Extract the maximum number of all variable size sections within the parameter file
+   *
+   * @param file_name Name of the parameter file from which the size are parsed
+   */
+  SizeOfSubsections
+  get_size_of_subsections(const std::string &file_name);
+
   enum class Verbosity
   {
     quiet,
@@ -304,6 +318,12 @@ namespace Parameters
     // N/(m*K)
     double surface_tension_gradient;
 
+    // Solidus temperature - Units in K
+    double T_solidus;
+
+    // Liquidus temperature - Units in K
+    double T_liquidus;
+
     void
     declare_parameters(ParameterHandler &prm);
     void
@@ -423,7 +443,8 @@ namespace Parameters
     enum class SurfaceTensionModel
     {
       constant,
-      linear
+      linear,
+      phase_change
     } surface_tension_model;
     SurfaceTensionParameters surface_tension_parameters;
 
@@ -478,6 +499,12 @@ namespace Parameters
       fluid_fluid_interactions_with_material_interaction_ids;
     std::map<std::pair<unsigned int, unsigned int>, unsigned int>
       fluid_solid_interactions_with_material_interaction_ids;
+
+    /*
+     * Reference Temperature for all physical properties of fluids and solids.
+     * Currently this is only used by the thermal expansion models
+     */
+    double reference_temperature;
 
     void
     declare_parameters(ParameterHandler &prm);
@@ -602,6 +629,17 @@ namespace Parameters
   public:
     // A boolean parameter that enables the calculations of laser heat source
     bool activate_laser;
+
+    // Type of laser model used in simulations. With "exponential_decay", the
+    // laser acts as a volumetric source, whereas, with
+    // "heat_flux_vof_interface", the laser behaves as a surface flux at the
+    // interface between fluids (VOF auxiliary physic must be enabled to use
+    // this model).
+    enum class LaserType
+    {
+      exponential_decay,
+      heat_flux_vof_interface
+    } laser_type;
 
     // Laser concentration factor indicates the definition of the beam radius.
     // In almost all the articles, it is assumed equal to 2.0
@@ -747,6 +785,12 @@ namespace Parameters
     // Prefix for the temperature output
     std::string temperature_output_name;
 
+    // Enable calculation of liquid fraction in phase change problems
+    bool calculate_liquid_fraction;
+
+    // Prefix for the temperature output
+    std::string liquid_fraction_output_name;
+
     // Enable heat flux calculation
     bool calculate_heat_flux;
 
@@ -756,10 +800,11 @@ namespace Parameters
     // Fluid domain, used when post-processing a multiphase simulation
     Parameters::FluidIndicator postprocessed_fluid;
 
-    // Enable barycenter calculation for fluid 1 in VOF simulations
-    bool calculate_vof_barycenter;
+    // Enable barycenter calculation for fluid 1 in VOF and Cahn-Hilliard
+    // simulations
+    bool calculate_barycenter;
 
-    // Prefix for the barycenter output
+    // Prefix for the VOF and Cahn-Hilliard barycenter output
     std::string barycenter_output_name;
 
     // Enable smoothing postprocessed vectors and scalars
@@ -923,9 +968,10 @@ namespace Parameters
     enum class PreconditionerType
     {
       ilu,
-      amg
+      amg,
+      lsmg,
+      gcmg
     };
-
     PreconditionerType preconditioner;
 
     // ILU or ILUT fill
@@ -937,13 +983,16 @@ namespace Parameters
     // ILU or ILUT relative tolerance
     double ilu_precond_rtol;
 
-    // ILU or ILUT fill
+    // AMG parameters either as linear solver preconditioner or as
+    // preconditioner of a coarse-grid solver for LSMG or GCMG
+
+    // ILU or ILUT fill for smoother
     double amg_precond_ilu_fill;
 
-    // ILU or ILUT absolute tolerance
+    // ILU or ILUT absolute tolerance for smoother
     double amg_precond_ilu_atol;
 
-    // ILU or ILUT relative tolerance
+    // ILU or ILUT relative tolerance for smoother
     double amg_precond_ilu_rtol;
 
     // AMG aggregation threshold
@@ -963,6 +1012,51 @@ namespace Parameters
 
     // Block linear solver to throw error.
     bool force_linear_solver_continuation;
+
+    // MG min level
+    int mg_min_level;
+
+    // MG minimum number of cells per level
+    int mg_level_min_cells;
+
+    // MG smoother number of iterations
+    int mg_smoother_iterations;
+
+    // MG smoother relaxation parameter
+    double mg_smoother_relaxation;
+
+    // MG eigenvalue estimation for smoother relaxation parameter
+    bool mg_smoother_eig_estimation;
+
+    // MG degree of Chebyshev polynomial used for eigenvalue estimation
+    int eig_estimation_degree;
+
+    // MG smoothing range to set range between eigenvalues
+    int eig_estimation_smoothing_range;
+
+    // MG number of cg iterations to find eigenvalue
+    int eig_estimation_cg_n_iterations;
+
+    // MG print max, min, eigenvalues
+    Verbosity eig_estimation_verbose;
+
+    // MG coarse-grid solver maximum number of iterations
+    int mg_coarse_grid_max_iterations;
+
+    // MG coarse-grid solver tolerance
+    double mg_coarse_grid_tolerance;
+
+    // MG coarse-grid solver reduce
+    double mg_coarse_grid_reduce;
+
+    // MG coarse-grid solver maximum number of krylov vectors
+    int mg_coarse_grid_max_krylov_vectors;
+
+    // MG coarse-grid solver preconditioner
+    PreconditionerType mg_coarse_grid_preconditioner;
+
+    // MG information about levels
+    Verbosity mg_verbosity;
 
     static void
     declare_parameters(ParameterHandler &prm, const std::string &physics_name);
@@ -1094,6 +1188,7 @@ namespace Parameters
 
     // Refinement after frequency iter
     unsigned int frequency;
+    bool         refinement_at_frequency;
 
     // Enable the control of the mesh refinement to target a specific number of
     // elements equal to the maximum number of elements.
@@ -1170,15 +1265,15 @@ namespace Parameters
 
   struct VelocitySource
   {
-    enum class VelocitySourceType
+    enum class RotatingFrameType
     {
       none,
       srf
     };
-    VelocitySourceType type;
-    double             omega_x;
-    double             omega_y;
-    double             omega_z;
+    RotatingFrameType rotating_frame_type;
+    double            omega_x;
+    double            omega_y;
+    double            omega_z;
 
     static void
     declare_parameters(ParameterHandler &prm);
@@ -1275,5 +1370,70 @@ namespace Parameters
     parse_parameters(ParameterHandler &prm);
   };
 
+  /**
+   * @brief Evaporation - Defines the subparameters for
+   * the evaporation cooling and recoil pressure at the free surface
+   * (air/metal interface).
+   */
+  struct Evaporation
+  {
+    enum class EvaporativeMassFluxModelType
+    {
+      constant,
+      temperature_dependent
+    } evaporative_mass_flux_model_type;
+
+    bool enable_evaporation_cooling;
+    bool enable_recoil_pressure;
+
+    // Parameters for the evaporation terms at the melt pool free surface
+    double evaporation_mass_flux;
+    double evaporation_coefficient;
+    double recoil_pressure_coefficient;
+    double molar_mass;
+    double boiling_temperature;
+    double latent_heat_evaporation;
+    double ambient_pressure;
+    double ambient_gas_density;
+    double liquid_density;
+    double universal_gas_constant;
+
+    static void
+    declare_parameters(ParameterHandler &prm);
+    void
+    parse_parameters(ParameterHandler &prm);
+  };
+
+
+  /**
+   * @brief Return the tensor of entry @p entry_string. If the entry is specified
+   * in the parameter file, then the changed value is returned, otherwise the
+   * default value is returned. If the entry is not equivalent to a Tensor<1,3>,
+   * an error will be thrown. This function can be use for Point<3> variables.
+   *
+   * @param prm A parameter handler which is currently used to parse the simulation information
+   * @param entry_string A declare string in the parameter file.
+   *
+   * @return A tensor<1,3> corresponding to the entry_string in the prm file.
+   */
+  Tensor<1, 3>
+  entry_string_to_tensor3(ParameterHandler  &prm,
+                          const std::string &entry_string);
+
+  /**
+   * @brief Return the vector of size N of entry @entry_string. If the entry is
+   * specified in the .prm file, then the changed value is returned, otherwise
+   * the default value is returned. If the entry is not equivalent to a vector,
+   * an error will be thrown.
+   *
+   * @param prm A parameter handler which is currently used to parse the simulation
+   * information.
+   * @param entry_string A declare string in the parameter file.
+   *
+   * @return A std::vector<double> corresponding to the entry_string in the prm file.
+   */
+  std::vector<double>
+  convert_string_to_vector(ParameterHandler  &prm,
+                           const std::string &entry_string);
 } // namespace Parameters
 #endif

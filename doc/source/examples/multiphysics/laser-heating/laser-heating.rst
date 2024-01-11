@@ -9,7 +9,7 @@ This example simulates a three-dimensional solid block heated with a laser beam 
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes`` 
+- Solver: ``lethe-fluid`` 
 - Laser heat source
 - Convection-radiation heat transfer boundary condition
 - Unsteady problem handled by an adaptive BDF2 time-stepping scheme 
@@ -20,7 +20,8 @@ Features
 ---------------------------
 Files Used in This Example
 ---------------------------
-``examples/multiphysics/laser-heating/laser-heating.prm``
+
+- Parameter file: ``examples/multiphysics/laser-heating/laser-heating.prm``
 
 
 -----------------------------
@@ -78,17 +79,22 @@ All the boundary conditions are ``noslip``, and the heat transfer boundary condi
       set number = 1
       subsection bc 0
         set type       = convection-radiation
-        set h          = 5
-        set Tinf       = 20
-        set emissivity = 0.4
+        subsection h
+          set Function expression = 5
+        end
+        subsection Tinf
+          set Function expression = 20
+        end
+        subsection emissivity
+          set Function expression = 0.4
+        end
       end
     end
 
 Multiphysics
 ~~~~~~~~~~~~
 
-The ``multiphysics`` subsection enables to turn on (``true``) 
-and off (``false``) the physics of interest. Here only ``heat transfer`` is enabled.
+The ``multiphysics`` subsection enables to turn on (``true``) and off (``false``) the physics of interest. Here only ``heat transfer`` is enabled.
 
 
 .. code-block:: text
@@ -107,7 +113,7 @@ In the ``laser parameters`` section, the parameters of the laser model are defin
     q(x,y,z) = \frac{\eta \alpha P}{\pi r^2 \mu} \exp{\left(-\eta \frac{r^2}{R^2}\right)} \exp{\left(- \frac{|z|}{\mu}\right)}
 
 
-where :math:`\eta`, :math:`\alpha`, :math:`P`, :math:`R`, :math:`\mu`, :math:`r` and :math:`z` denote concentration factor, absorptivity, laser power, beam radius, penetration depth, radial distance from the laser focal point, and axial distance from the laser focal point, respectively. These parameters are explained in more detail in the `laser parameters <https://lethe-cfd.github.io/lethe/parameters/cfd/laser_heat_source.html>`_.
+where :math:`\eta`, :math:`\alpha`, :math:`P`, :math:`R`, :math:`\mu`, :math:`r` and :math:`z` denote concentration factor, absorptivity, laser power, beam radius, penetration depth, radial distance from the laser focal point, and axial distance from the laser focal point, respectively. These parameters are explained in more detail in the `laser parameters <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/laser_heat_source.html>`_.
 
 
 .. note:: 
@@ -118,6 +124,7 @@ where :math:`\eta`, :math:`\alpha`, :math:`P`, :math:`R`, :math:`\mu`, :math:`r`
 
     subsection laser parameters
       set enable               = true
+      set type                 = exponential_decay
       set concentration factor = 50
       set power                = 3
       set absorptivity         = 0.6
@@ -134,7 +141,7 @@ where :math:`\eta`, :math:`\alpha`, :math:`P`, :math:`R`, :math:`\mu`, :math:`r`
 Mesh Adaptation
 ~~~~~~~~~~~~~~~
 
-In the ``mesh adaptation`` subsection, we choose a mesh refinement based on the variable ``temperature``. Mesh adaptation is explained in more detail in `mesh adaptation control <https://lethe-cfd.github.io/lethe/parameters/cfd/mesh_adaptation_control.html>`_
+In the ``mesh adaptation`` subsection, we choose a mesh refinement based on the variable ``temperature``. Mesh adaptation is explained in more detail in `mesh adaptation control <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/mesh_adaptation_control.html>`_
 
 
 .. code-block:: text
@@ -155,9 +162,12 @@ In the ``mesh adaptation`` subsection, we choose a mesh refinement based on the 
 Running the Simulation
 ----------------------
 
-Call the gls_navier_stokes by invoking:  
+Call the lethe-fluid by invoking:
 
-``mpirun -np 8 gls_navier_stokes laser-heating.prm``
+.. code-block:: text
+  :class: copy-button
+
+  mpirun -np 8 lethe-fluid laser-heating.prm
 
 to run the simulation using eight CPU cores. Feel free to use more.
 

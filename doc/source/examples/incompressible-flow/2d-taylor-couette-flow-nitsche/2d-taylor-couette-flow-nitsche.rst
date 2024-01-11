@@ -10,7 +10,7 @@ now using immersed boundaries to represent the inner cylinder. This example demo
 Features
 ---------
 
-- Solvers: ``nitsche_navier_stokes`` (with Q1-Q1, Q2-Q1 and Q2-Q2)
+- Solvers: ``lethe-fluid-nitsche`` (with Q1-Q1, Q2-Q1 and Q2-Q2)
 
 .. note:: 
 
@@ -26,8 +26,10 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Parameter file with uniform mesh refinement: ``examples/incompressible-flow/2d-nitsche-taylor-couette/uniform-nitsche-taylor-couette.prm``
-- Parameter file with adaptative mesh refinement: ``examples/incompressible-flow/2d-nitsche-taylor-couette/adaptative-nitsche-taylor-couette.prm``
+Both files mentioned below are located in the example's folder (``examples/incompressible-flow/2d-nitsche-taylor-couette``).
+
+- Parameter file with uniform mesh refinement: ``uniform-nitsche-taylor-couette.prm``
+- Parameter file with adaptative mesh refinement: ``adaptative-nitsche-taylor-couette.prm``
 
 
 
@@ -155,7 +157,7 @@ FEM Interpolation
 
 .. note::
 
-  In `Example 2 <https://lethe-cfd.github.io/lethe/examples/incompressible-flow/2d-taylor-couette-flow/2d-taylor-couette-flow.html>`_ we have used second order element for velocity. In this problem, since we are using immersed boundary conditions, moving to higher order polynomials would not enhance the order of convergence as the solid boundary is not represented with high accuracy.
+  In `Example 2 <https://lethe-cfd.github.io/lethe/documentation/examples/incompressible-flow/2d-taylor-couette-flow/2d-taylor-couette-flow.html>`_ we have used second order element for velocity. In this problem, since we are using immersed boundary conditions, moving to higher order polynomials would not enhance the order of convergence as the solid boundary is not represented with high accuracy.
 
 .. code-block:: text
 
@@ -266,17 +268,19 @@ The ``non-linear solver`` and ``linear solver`` subsections do not contain any n
 ----------------------
 Running the Simulation
 ----------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``nitsche_navier_stokes`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-fluid-nitsche`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  nitsche_navier_stokes uniform-nitsche-taylor-couette.prm
+  lethe-fluid-nitsche uniform-nitsche-taylor-couette.prm
 
 or 
 
 .. code-block:: text
+  :class: copy-button
 
-  nitsche_navier_stokes adaptative-nitsche-taylor-couette.prm
+  lethe-fluid-nitsche adaptative-nitsche-taylor-couette.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 

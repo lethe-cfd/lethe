@@ -247,7 +247,6 @@ GLSNavierStokesCahnHilliardAssemblerCore<dim>::assemble_rhs(
         scratch_data.velocity_gradients[q];
       const Tensor<1, dim> velocity_laplacian =
         scratch_data.velocity_laplacians[q];
-      scratch_data.velocity_gradients[q];
       const Tensor<3, dim> &velocity_hessian =
         scratch_data.velocity_hessians[q];
       // From hessian, calculate grad (div (u)) term needed for CH problems
@@ -360,7 +359,7 @@ GLSNavierStokesCahnHilliardAssemblerBDF<dim>::assemble_matrix(
   NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  // Loop and quadrature informations
+  // Loop and quadrature information
   const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;
@@ -421,7 +420,7 @@ GLSNavierStokesCahnHilliardAssemblerBDF<dim>::assemble_rhs(
   NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  // Loop and quadrature informations
+  // Loop and quadrature information
   const auto        &JxW        = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
   const unsigned int n_dofs     = scratch_data.n_dofs;

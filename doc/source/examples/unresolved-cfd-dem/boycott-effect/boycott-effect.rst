@@ -7,7 +7,8 @@ It is strongly recommended to visit `DEM parameters <../../../parameters/dem/dem
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem`` and ``cfd_dem_coupling``
+
+- Solvers: ``lethe-particles`` and ``lethe-fluid-particles``
 - Three-dimensional problem
 - Displays the selection of models and physical properties
 - Simulates a solid-liquid sedimentation
@@ -17,14 +18,17 @@ Features
 Files Used in This Example
 ---------------------------
 
-- Parameter file for particle generation and packing: ``/examples/unresolved-cfd-dem/boycott-effect/particle_generator.prm``
-- Parameter file for CFD-DEM simulation of the Boycot effect: ``/examples/unresolved-cfd-dem/boycott-effect/boycott-effect.prm``
+Both files mentioned below are located in the example's folder (``examples/unresolved-cfd-dem/boycott-effect``).
+
+- Parameter file for CFD-DEM simulation of the Boycott effect: ``boycott-effect.prm``
+- Parameter file for particle generation and packing: ``particle_generator.prm``
+
 
 -----------------------
 Description of the Case
 -----------------------
 
-This example simulates the sedimentation of a group of particles in a viscous fluid. Two cases were simulated. In the first case, the channel is placed vertically. In the second case, the channel is inclined at :math:`20^{\circ}` with respect to the gravity. First, we use Lethe-DEM to insert the particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``cfd_dem_coupling`` solver within Lethe to simulate the sedimentation of particles by initially reading the checkpoint files from the DEM simulation.
+This example simulates the sedimentation of a group of particles in a viscous fluid. Two cases were simulated. In the first case, the channel is placed vertically. In the second case, the channel is inclined at :math:`20^{\circ}` with respect to the gravity. First, we use ``lethe-particles`` to insert the particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``lethe-fluid-particles`` solver within Lethe to simulate the sedimentation of particles by initially reading the checkpoint files from the DEM simulation.
 
 
 -------------------
@@ -138,7 +142,7 @@ We insert the particles uniformly in the specified insertion box at the top of t
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 8379
       set insertion frequency                            = 2000
       set insertion box minimum x                        = -0.025
@@ -148,25 +152,27 @@ We insert the particles uniformly in the specified insertion box at the top of t
       set insertion box maximum y                        = 0.396
       set insertion box maximum z                        = 0.026
       set insertion distance threshold                   = 1.2
-      set insertion random number range                  = 0.4
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.
+      set insertion prn seed                             = 19
     end
 
 
 ---------------------------
 Running the DEM Simulation
 ---------------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem`` executable is within your path, the simulation can be launched on a single processor by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-particles`` executable is within your path, the simulation can be launched on a single processor by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem particle-generator.prm
+  lethe-particles particle-generator.prm
 
 or in parallel (where 8 represents the number of processors)
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem particle-generator.prm
+  mpirun -np 8 lethe-particles particle-generator.prm
 
 The figure below shoes the particles inserted at the top of the channel at the end of the DEM simulation.
 
@@ -357,11 +363,12 @@ For more information about the linear solver, please refer to the `Linear Solver
 Running the CFD-DEM Simulation
 ------------------------------
 
-The simulation is run using the ``cfd_dem_coupling`` application as per the following command:
+The simulation is run using the ``lethe-fluid-particles`` application.  Assuming that the executable is within your path, the simulation can be launched as per the following command:
 
 .. code-block:: text
+  :class: copy-button
 
-    path_to_cfd_dem_application/cfd_dem_coupling boycott-effect.prm
+  lethe-fluid-particles boycott-effect.prm
 
 
 --------

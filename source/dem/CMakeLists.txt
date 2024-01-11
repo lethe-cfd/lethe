@@ -4,12 +4,12 @@ add_library(lethe-dem
   dem.cc
   dem_contact_manager.cc
   dem_solver_parameters.cc
+  distributions.cc
   explicit_euler_integrator.cc
   disable_contacts.cc
   find_boundary_cells_information.cc
   find_cell_neighbors.cc
   find_contact_detection_step.cc
-  find_maximum_particle_size.cc
   gear3_integrator.cc
   grid_motion.cc
   input_parameter_inspection.cc
@@ -17,7 +17,6 @@ add_library(lethe-dem
   integrator.cc
   lagrangian_post_processing.cc
   list_insertion.cc
-  non_uniform_insertion.cc
   output_force_torque_calculation.cc
   particle_particle_broad_search.cc
   particle_particle_contact_force.cc
@@ -28,6 +27,7 @@ add_library(lethe-dem
   particle_wall_broad_search.cc
   particle_wall_contact_force.cc
   particle_wall_fine_search.cc
+  particle_wall_jkr_force.cc
   particle_wall_linear_force.cc
   particle_wall_nonlinear_force.cc
   periodic_boundaries_manipulator.cc
@@ -37,11 +37,11 @@ add_library(lethe-dem
   read_mesh.cc
   set_particle_particle_contact_force_model.cc
   set_particle_wall_contact_force_model.cc
-  uniform_insertion.cc
   update_fine_search_candidates.cc
   update_local_particle_containers.cc
   velocity_verlet_integrator.cc
   visualization.cc
+  volume_insertion.cc
   write_checkpoint.cc
   # Headers
   ../../include/dem/boundary_cells_info_struct.h
@@ -50,11 +50,11 @@ add_library(lethe-dem
   ../../include/dem/dem.h
   ../../include/dem/dem_solver_parameters.h
   ../../include/dem/disable_contacts.h
+  ../../include/dem/distributions.h
   ../../include/dem/explicit_euler_integrator.h
   ../../include/dem/find_boundary_cells_information.h
   ../../include/dem/find_cell_neighbors.h
   ../../include/dem/find_contact_detection_step.h
-  ../../include/dem/find_maximum_particle_size.h
   ../../include/dem/gear3_integrator.h
   ../../include/dem/grid_motion.h
   ../../include/dem/input_parameter_inspection.h
@@ -62,7 +62,6 @@ add_library(lethe-dem
   ../../include/dem/integrator.h
   ../../include/dem/lagrangian_post_processing.h
   ../../include/dem/list_insertion.h
-  ../../include/dem/non_uniform_insertion.h
   ../../include/dem/output_force_torque_calculation.h
   ../../include/dem/particle_particle_broad_search.h
   ../../include/dem/particle_particle_contact_force.h
@@ -76,6 +75,7 @@ add_library(lethe-dem
   ../../include/dem/particle_wall_contact_force.h
   ../../include/dem/particle_wall_contact_info.h
   ../../include/dem/particle_wall_fine_search.h
+  ../../include/dem/particle_wall_jkr_force.h
   ../../include/dem/particle_wall_linear_force.h
   ../../include/dem/particle_wall_nonlinear_force.h
   ../../include/dem/periodic_boundaries_manipulator.h
@@ -86,11 +86,11 @@ add_library(lethe-dem
   ../../include/dem/rolling_resistance_torque_models.h
   ../../include/dem/set_particle_particle_contact_force_model.h
   ../../include/dem/set_particle_wall_contact_force_model.h
-  ../../include/dem/uniform_insertion.h
   ../../include/dem/update_fine_search_candidates.h
   ../../include/dem/update_local_particle_containers.h
   ../../include/dem/velocity_verlet_integrator.h
   ../../include/dem/visualization.h
+  ../../include/dem/volume_insertion.h
   ../../include/dem/write_checkpoint.h)
 
 deal_ii_setup_target(lethe-dem)

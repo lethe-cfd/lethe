@@ -10,7 +10,7 @@ The problem is inspired by the test case of Caltagirone *et al.* `[1] <https://d
 Features
 --------
 
-- Solver: ``gls_navier_stokes`` (with Q1-Q1)
+- Solver: ``lethe-fluid`` (with Q1-Q1)
 - Volume of fluid (VOF)
 - Isothermal compressible fluid
 - Unsteady problem handled by an adaptive BDF2 time-stepping scheme
@@ -20,9 +20,10 @@ Features
 ---------------------------
 Files Used in This Example
 ---------------------------
+Both files mentioned below are located in the example's folder (``examples/multiphysics/water-injection-in-a-closed-cell``).
 
-- Parameter file: ``examples/multiphysics/water-injection-in-a-closed-cell/water-injection-in-a-closed-cell.prm``
-- Python script for postprocessing: ``examples/multiphysics/air-bubble-compression/air-bubble-compression-postprocessing.py``
+- Parameter file: ``water-injection-in-a-closed-cell.prm``
+- Postprocessing python script: ``water-injection-in-a-closed-cell-postprocessing.py``
 
 
 -----------------------
@@ -61,7 +62,7 @@ The initial time step is set to :math:`0.005 \, \text{s}` and the simulation end
       set time end         = 0.49
       set time step        = 0.005
       set adapt            = true
-      set max cfl          = 0.5
+      set max cfl          = 0.75
       set output name      = water-injection-in-a-closed-cell
       set output frequency = 5
       set output path      = ./output/
@@ -81,21 +82,22 @@ The ``multiphysics`` subsection is used to enable the VOF solver.
 VOF
 ~~~
 
-In the ``VOF`` subsection, the ``interface sharpening`` and the ``phase filtration`` features are enabled.
-The interface sharpening method and its parameters are explained in the :doc:`../dam-break/dam-break` example.
-The phase filtration filters the phase field used for the calculation of physical properties by stiffening the value of the phase fraction.
-We refer the reader to :doc:`../../../../theory/multiphysics/vof` theory guide for further explanation on the phase filtration.
+In the ``VOF`` subsection, the ``compressible``, the ``interface sharpening``, and the ``phase filtration`` features are enabled.
+The enabled ``compressible`` parameter allows interface compression by adding the term :math:`\phi (\nabla \cdot \mathbf{u})` to the VOF equation.
+The ``interface sharpening`` method and its parameters are explained in the :doc:`../dam-break/dam-break` example.
+The ``phase filtration`` filters the phase field used for the calculation of physical properties by stiffening the value of the phase fraction.
+We refer the reader to :doc:`../../../../theory/multiphysics/vof` theory guide for further explanation on the ``phase filtration``.
 
 .. code-block:: text
 
     subsection VOF
+      set compressible = true
       subsection interface sharpening
         set enable              = true
         set threshold           = 0.5
-        set interface sharpness = 2
-        set frequency           = 50
+        set interface sharpness = 1.8
+        set frequency           = 25
       end
-
       subsection phase filtration
         set type      = tanh
         set beta      = 10
@@ -173,7 +175,7 @@ Physical Properties
 ~~~~~~~~~~~~~~~~~~~~
 
 In the ``physical properties`` subsection, we define the properties of the fluids. For air, represented by ``fluid 0``, the ``isothermal_ideal_gas`` density model is used to account for the fluid's compressibility.
-We refer the reader to the `Physical Properties - Density Models <https://lethe-cfd.github.io/lethe/parameters/cfd/physical_properties.html#density-models>`_ documentation for further explanation on the isothermal compressible density model.
+We refer the reader to the `Physical Properties - Density Models <https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/physical_properties.html#density-models>`_ documentation for further explanation on the isothermal compressible density model.
 The properties of air and water at :math:`25 \, \text{°C}` are used in this example.
 
 .. code-block:: text
@@ -232,17 +234,17 @@ In the ``mesh adaptation`` subsection, adaptive mesh refinement is defined for t
 Running the Simulation
 -----------------------
 
-We can call the ``gls_navier_stokes`` by invoking the following command:
+We can call ``lethe-fluid`` by invoking the following command:
 
 .. code-block:: text
   :class: copy-button
 
-  mpirun -np 8 gls_navier_stokes water-injection-in-a-closed-cell.prm
+  mpirun -np 8 lethe-fluid water-injection-in-a-closed-cell.prm
 
 to run the simulation using eight CPU cores.
 
 .. warning:: 
-    Make sure to compile lethe in `Release` mode and run in parallel using mpirun. This simulation takes approximately one minute on 8 processes.
+    Make sure to compile lethe in `Release` mode and run in parallel using mpirun. This simulation takes approximately half a minute on 8 processes.
 
 
 -------

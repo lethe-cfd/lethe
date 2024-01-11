@@ -2,6 +2,11 @@ name: Publish doc to GitHub Pages
 
 on: push
 
+# Cancels running instances when a pull request is updated by a commit
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   SPHINX_VERSION: 4.3.1
 
@@ -18,27 +23,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Sphinx
+      - name: Setup Sphinx and doxygen
         run: |
-          sudo apt-get install -y graphviz
-          pip install sphinx==${{ env.SPHINX_VERSION }}
-          pip install sphinx-copybutton
-          pip install -r doc/requirements.txt
-
-      - name: Build HTML
+            sudo apt-get install doxygen
+            sudo apt-get install -y graphviz
+            pip install sphinx==${{ env.SPHINX_VERSION }}
+            pip install sphinx-copybutton
+            pip install -r doc/requirements.txt
+  
+      - name: Build Sphinx HTML, Doxygen and aggregate files
         run: |
           cd doc
           make html
+          cp -r build/html/ aggregate/documentation
+
+          cd doxygen
+          doxygen doxygen-config-file
+          cd ..
+          ls -lh
+          ls -lh doxygen
+          cp -r doxygen/html/ aggregate/doxygen/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: html-doc
-          path: doc/build/html/
+          path: doc/aggregate/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         if: github.ref == 'refs/heads/master'
         with:
           branch: gh-pages
-          folder: doc/build/html
+          folder: doc/aggregate

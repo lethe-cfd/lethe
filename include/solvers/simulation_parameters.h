@@ -20,6 +20,7 @@
 #ifndef lethe_navier_stokes_solver_parameters_h
 #define lethe_navier_stokes_solver_parameters_h
 
+#include <core/ale.h>
 #include <core/boundary_conditions.h>
 #include <core/dimensionality.h>
 #include <core/manifolds.h>
@@ -60,17 +61,22 @@ public:
                                       boundary_conditions_cahn_hilliard;
   Parameters::InitialConditions<dim> *initial_condition;
   AnalyticalSolutions::AnalyticalSolution<dim> *analytical_solution;
-  SourceTerms::SourceTerm<dim>                 *source_term;
+  SourceTerms::SourceTerm<dim>                  source_term;
   Parameters::VelocitySource                    velocity_sources;
   std::shared_ptr<Parameters::IBParticles<dim>> particlesParameters;
   Parameters::DynamicFlowControl                flow_control;
   Parameters::Multiphysics                      multiphysics;
   Parameters::Stabilization                     stabilization;
+  Parameters::ALE<dim>                          ale;
+  Parameters::Evaporation                       evaporation;
+
+
 
   PhysicalPropertiesManager physical_properties_manager;
 
   void
-  declare(ParameterHandler &prm)
+  declare(ParameterHandler             &prm,
+          Parameters::SizeOfSubsections size_of_subsections)
   {
     prm.declare_entry("dimension",
                       "0",
@@ -84,11 +90,16 @@ public:
     nitsche = std::make_shared<Parameters::Nitsche<dim>>();
     nitsche->declare_parameters(prm);
     Parameters::Restart::declare_parameters(prm);
-    boundary_conditions.declare_parameters(prm);
-    boundary_conditions_ht.declare_parameters(prm);
-    boundary_conditions_tracer.declare_parameters(prm);
-    boundary_conditions_vof.declare_parameters(prm);
-    boundary_conditions_cahn_hilliard.declare_parameters(prm);
+    boundary_conditions.declare_parameters(
+      prm, size_of_subsections.boundary_conditions);
+    boundary_conditions_ht.declare_parameters(
+      prm, size_of_subsections.boundary_conditions);
+    boundary_conditions_tracer.declare_parameters(
+      prm, size_of_subsections.boundary_conditions);
+    boundary_conditions_vof.declare_parameters(
+      prm, size_of_subsections.boundary_conditions);
+    boundary_conditions_cahn_hilliard.declare_parameters(
+      prm, size_of_subsections.boundary_conditions);
 
     initial_condition = new Parameters::InitialConditions<dim>;
     initial_condition->declare_parameters(prm);
@@ -115,13 +126,16 @@ public:
 
     analytical_solution = new AnalyticalSolutions::AnalyticalSolution<dim>;
     analytical_solution->declare_parameters(prm);
-    source_term = new SourceTerms::SourceTerm<dim>;
-    source_term->declare_parameters(prm);
+    source_term.declare_parameters(prm);
     Parameters::Testing::declare_parameters(prm);
 
     Parameters::VelocitySource::declare_parameters(prm);
 
     Parameters::Stabilization::declare_parameters(prm);
+
+    ale.declare_parameters(prm);
+
+    Parameters::Evaporation::declare_parameters(prm);
 
     multiphysics.declare_parameters(prm);
   }
@@ -160,12 +174,14 @@ public:
     manifolds_parameters.parse_parameters(prm);
     initial_condition->parse_parameters(prm);
     analytical_solution->parse_parameters(prm);
-    source_term->parse_parameters(prm);
+    source_term.parse_parameters(prm);
     simulation_control.parse_parameters(prm);
     velocity_sources.parse_parameters(prm);
     particlesParameters->parse_parameters(prm);
     multiphysics.parse_parameters(prm);
     stabilization.parse_parameters(prm);
+    ale.parse_parameters(prm);
+    evaporation.parse_parameters(prm);
 
     physical_properties_manager.initialize(physical_properties);
 
@@ -187,11 +203,11 @@ public:
       }
 
     if (multiphysics.vof_parameters.sharpening.type ==
-          Parameters::SharpeningType::adaptative &&
+          Parameters::SharpeningType::adaptive &&
         not(multiphysics.vof_parameters.conservation.monitoring))
       {
         throw std::logic_error(
-          "Inconsistency in .prm!\n in subsection VOF, with sharpening type = adaptative\n "
+          "Inconsistency in .prm!\n in subsection VOF, with sharpening type = adaptive\n "
           "use: monitoring = true");
       }
 
@@ -215,6 +231,16 @@ public:
           "      set temperature-driven surface tension gradient = $value_of_gradient\n"
           "    end\n");
 
+        std::string phase_change_surface_tension_model(
+          "    subsection fluid-fluid interaction\n"
+          "      set first fluid id                              = 0\n"
+          "      set second fluid id                             = 1\n"
+          "      set surface tension model                       = phase change\n"
+          "      set surface tension coefficient                 = $value_of_coefficient\n"
+          "      set temperature-driven surface tension gradient = $value_of_gradient\n"
+          "      set solidus temperature                         = $value_of_solidus_temperature\n"
+          "      set liquidus temperature                        = $value_of_liquidus_temperature\n"
+          "    end\n");
         if (!multiphysics.vof_parameters.surface_tension_force
                .enable_marangoni_effect) // constant surface tension model
           {
@@ -281,7 +307,13 @@ public:
                   "  set number of material interactions = 1\n"
                   "  subsection material interaction 0\n"
                   "    set type = fluid-fluid\n" +
-                  linear_surface_tension_model + "  end\n");
+                  linear_surface_tension_model +
+                  "\n"
+                  "or: \n\n"
+                  "  set number of material interactions = 1\n"
+                  "  subsection material interaction 0\n"
+                  "    set type = fluid-fluid\n" +
+                  phase_change_surface_tension_model + "  end\n");
               }
             else
               {
@@ -296,7 +328,13 @@ public:
                       "effect. In subsection physical properties, use:\n\n"
                       "  subsection material interaction $material_interaction_id\n"
                       "    set type = fluid-fluid\n" +
-                      linear_surface_tension_model + "  end\n");
+                      linear_surface_tension_model +
+                      "\n"
+                      "or:\n\n"
+                      "  set number of material interactions = 1\n"
+                      "  subsection material interaction 0\n"
+                      "    set type = fluid-fluid\n" +
+                      phase_change_surface_tension_model + "  end\n");
                   }
                 if (is_constant_surface_tension_model(
                       physical_properties.material_interactions))
@@ -309,7 +347,13 @@ public:
                       "effect. In subsection physical properties, use:\n\n"
                       "  subsection material interaction $material_interaction_id\n"
                       "    set type = fluid-fluid\n" +
-                      linear_surface_tension_model + "  end\n");
+                      linear_surface_tension_model +
+                      "\n"
+                      "or:\n\n"
+                      "  set number of material interactions = 1\n"
+                      "  subsection material interaction 0\n"
+                      "    set type = fluid-fluid\n" +
+                      phase_change_surface_tension_model + "  end\n");
                   }
               }
           }
@@ -339,6 +383,17 @@ public:
           "      set cahn hilliard mobility coefficient = $value_of_coefficient\n"
           "    end\n"
           "  end\n");
+      }
+    if (laser_parameters->activate_laser &&
+        laser_parameters->laser_type ==
+          Parameters::Laser<dim>::LaserType::heat_flux_vof_interface &&
+        !multiphysics.VOF)
+      {
+        throw std::logic_error(
+          "At the moment, the laser surface heat flux is not implemented for 1 fluid simulations."
+          "Please enable the VOF auxiliary physic in the 'multiphysics' subsection, \n"
+          "specify a 2nd fluid in the 'physical properties' subsection,\n"
+          "and define appropriate initial conditions in the 'initial conditions' subsection.");
       }
   }
 

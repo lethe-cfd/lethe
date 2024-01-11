@@ -61,20 +61,29 @@ test()
   dem_parameters.lagrangian_physical_properties.particle_type_number = 1;
   dem_parameters.lagrangian_physical_properties.particle_average_diameter[0] =
     0.2;
+  dem_parameters.lagrangian_physical_properties.distribution_type.push_back(
+    Parameters::Lagrangian::SizeDistributionType::uniform);
   dem_parameters.lagrangian_physical_properties.particle_size_std[0] = 0;
   dem_parameters.lagrangian_physical_properties.density_particle[0]  = 2500;
   dem_parameters.lagrangian_physical_properties.number[0]            = 16;
-  dem_parameters.insertion_info.random_number_range                  = 0.2;
-  dem_parameters.insertion_info.random_number_seed                   = 19;
+  dem_parameters.insertion_info.insertion_maximum_offset             = 0.2;
+  dem_parameters.insertion_info.seed_for_insertion                   = 19;
   dem_parameters.insertion_info.insertion_frequency                  = 2;
 
+  // Calling uniform insertion
+  std::vector<std::shared_ptr<Distribution>> distribution_object_container;
+  distribution_object_container.push_back(std::make_shared<UniformDistribution>(
+    dem_parameters.lagrangian_physical_properties
+      .particle_average_diameter[0]));
+
+  // Calling plane insertion
+  PlaneInsertion<dim> insertion_object(dem_parameters,
+                                       tr,
+                                       distribution_object_container);
 
   // Defining particle handler
   Particles::ParticleHandler<dim> particle_handler(
     tr, mapping, DEM::get_number_properties());
-
-  // Calling plane insertion
-  PlaneInsertion<dim> insertion_object(dem_parameters, tr);
 
   insertion_object.insert(particle_handler, tr, dem_parameters);
 

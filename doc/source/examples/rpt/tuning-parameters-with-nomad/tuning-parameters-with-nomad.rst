@@ -12,7 +12,7 @@ In this example, `NOMAD <https://www.gerad.ca/en/software/nomad/>`_, the blackbo
 Features
 ----------------------------------
 
-- Solver: ``rpt_3d``
+- Solver: ``lethe-rpt-3d``
 - Displays the use of NOMAD to calibrate the parameters of the Beam model
 
 
@@ -20,14 +20,16 @@ Features
 Files Used in This Example
 ---------------------------
 
-- File containing experimental particle counts: ``examples/rpt/parameters-tuning/counts.experimental``
-- File containing detector positions: ``examples/rpt/parameters-tuning/positions.detector``
-- File containing particle positions: ``examples/rpt/parameters-tuning/positions.particle``
-- Parameter file for calculating photon counts: ``examples/rpt/parameters-tuning/rpt-count-calculation.prm``
-- Parameter file for tuning parameters: ``examples/rpt/parameters-tuning/rpt-parameters.prm``
-- Python script for NOMAD: ``examples/rpt/parameters-tuning/rpt_lethe_nomad.py``
-- Python script for post-processing the data: ``examples/rpt/parameters-tuning/rpt_parameter_tuning_plot.py``
-- Text file used when running NOMAD: ``examples/rpt/parameters-tuning/param-nomad.txt``
+All files mentioned below are located in the example's folder (``examples/rpt/parameters-tuning``).
+
+- File containing experimental particle counts: ``counts.experimental``
+- File containing detector positions: ``positions.detector``
+- File containing particle positions: ``positions.particle``
+- Parameter file for calculating photon counts: ``rpt-count-calculation.prm``
+- Parameter file for tuning parameters: ``rpt-parameters.prm``
+- Python script for NOMAD: ``rpt_lethe_nomad.py``
+- Postprocessing Python script: ``rpt_parameter_tuning_plot.py``
+- Text file used when running NOMAD: ``param-nomad.txt``
 
 
 -------------------------
@@ -188,13 +190,14 @@ The ``param-nomad.txt`` file is used when running NOMAD. This file provides init
 Running the Simulation
 ----------------------
 
-Assuming that ``rpt_3d`` and ``nomad`` executables are within your path, you may run NOMAD by typing :
+Assuming that ``lethe-rpt-3d`` and ``nomad`` executables are within your path, you may run NOMAD by typing :
 
 .. code-block:: text
+  :class: copy-button
 
-    nomad param-nomad.txt
+  nomad param-nomad.txt
 
-NOMAD will then execute the Python script (``rpt_lethe_nomad.py``) which is specified in the ``param-nomad.txt`` file. The Python script ``rpt_nomad_lethe.py`` proceeds the values of parameters to tune given by NOMAD, modifies the parameter file for Lethe, and runs the ``rpt_3d`` application. ``rpt_3d`` of Lethe executes the Monte Carlo ray model and calculates a cost function which is caught by NOMAD through the terminal. NOMAD executes its MADS algorithm and generates a new set of parameters until a terminating criterion is reached.
+NOMAD will then execute the Python script (``rpt_lethe_nomad.py``) which is specified in the ``param-nomad.txt`` file. The Python script ``rpt_nomad_lethe.py`` proceeds the values of parameters to tune given by NOMAD, modifies the parameter file for Lethe, and runs the ``lethe-rpt-3d`` application. ``lethe-rpt-3d`` of Lethe executes the Monte Carlo ray model and calculates a cost function which is caught by NOMAD through the terminal. NOMAD executes its MADS algorithm and generates a new set of parameters until a terminating criterion is reached.
 
 -----------------------
 Results and Discussion
@@ -218,11 +221,12 @@ After running the optimization software, the best feasible solution will be disp
 .. tip::
     Changing the initial values of the optimization problem to ones that are closer to the solution seen above can reduce the computation time.
 
-We may now verify if these values correspond to the physical system. To do so, as it was done in the previous example (:doc:`../photon-count-calculation-in-a-cylindrical-vessel/photon-count-calculation-in-a-cylindrical-vessel`), we calculate the counts for the set of particle positions that the corresponding experimental counts are known. Assuming that the ``rpt_3d`` executable is within your path, the simulation can be launched by typing:
+We may now verify if these values correspond to the physical system. To do so, as it was done in the previous example (:doc:`../photon-count-calculation-in-a-cylindrical-vessel/photon-count-calculation-in-a-cylindrical-vessel`), we calculate the counts for the set of particle positions that the corresponding experimental counts are known. Assuming that the ``lethe-rpt-3d`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-    rpt_3d rpt-count-calculation.prm
+  lethe-rpt-3d rpt-count-calculation.prm
 
 .. attention::
     It is important to launch the simulation with ``rpt-count-calculation.prm`` and not ``rpt-parameters.prm``. The parameters in both files are set for different purposes. ``rpt-count-calculation.prm`` is suited for count calculation with the Monte Carlo technique, and ``rpt-parameters.prm`` is suited for tuning parameters.

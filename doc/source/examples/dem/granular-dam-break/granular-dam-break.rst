@@ -8,7 +8,8 @@ This example simulates the dam-break flow of a dry granular material using the d
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+
+- Solvers: ``lethe-particles``
 - Three-dimensional problem
 - Moving floating mesh
 - Load-balancing
@@ -18,10 +19,12 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Parameters file for the problem (H=20cm): ``examples/dem/3d-dam-break/granular-dam-break.prm``
-- Parameters file for the H=40cm bed: ``examples/dem/3d-dam-break/granular-dam-break-H-40cm.prm``
-- GMSH geo file: ``examples/dem/3d-dam-break/square.geo``
-- GMSH mesh file: ``examples/dem/3d-dam-break/square.msh``
+All files mentioned below are located in the example's folder (``examples/dem/3d-dam-break``).
+
+- Geometry file: ``square.geo``
+- Mesh file: ``square.msh``
+- Parameters file for the problem (:math:`H=20 \, \text{cm}`): ``granular-dam-break.prm``
+- Parameters file for the :math:`H=40 \, \text{cm}` bed: ``granular-dam-break-H-40cm.prm``
 
 
 -----------------------
@@ -64,7 +67,7 @@ The particles are mono dispersed with a radius of 0.005 m and a density of 2560 
     subsection particle type 0
       set size distribution type            = uniform
       set diameter                          = 0.01
-      set number                            = 60000
+      set number of particles               = 60000
       set density particles                 = 2560
       set young modulus particles           = 1e6
       set poisson ratio particles           = 0.2
@@ -111,7 +114,7 @@ An insertion box is defined inside the rectangular box. 60 000 particles are ins
 .. code-block:: text
 
   subsection insertion info
-    set insertion method                               = non_uniform
+    set insertion method                               = volume
     set inserted number of particles at each time step = 60000
     set insertion frequency                            = 10000
     set insertion box minimum x                        = 0.0025
@@ -121,8 +124,8 @@ An insertion box is defined inside the rectangular box. 60 000 particles are ins
     set insertion box maximum y                        = 0.340
     set insertion box maximum z                        = 0.397
     set insertion distance threshold                   = 1.075
-    set insertion random number range                  = 0.025
-    set insertion random number seed                   = 19
+    set insertion maximum offset                       = 0.025
+    set insertion prn seed                             = 19
   end
 
 
@@ -178,8 +181,9 @@ Running the Simulation
 The simulation is launched using a single input file for the insertion of the particles, the opening of the sluice gate and the granular motion of the particles.
 
 .. code-block:: text
+  :class: copy-button
 
-   mpirun -np 8 dem granular-dam-break.prm
+   mpirun -np 8 lethe-particles granular-dam-break.prm
 
 
 .. note::

@@ -191,6 +191,9 @@ template <int dim>
 void
 GLSNavierStokesSolver<dim>::update_boundary_conditions()
 {
+  if (!this->simulation_parameters.boundary_conditions.time_dependent)
+    return;
+
   double time = this->simulation_control->get_current_time();
   for (unsigned int i_bc = 0;
        i_bc < this->simulation_parameters.boundary_conditions.size;
@@ -416,11 +419,21 @@ GLSNavierStokesSolver<dim>::setup_assemblers()
           this->simulation_parameters.boundary_conditions));
     }
 
-  // Buoyant force
+  // Buoyancy force
   if (this->simulation_parameters.multiphysics.buoyancy_force)
     {
+      this->assemblers.push_back(std::make_shared<BuoyancyAssembly<dim>>(
+        this->simulation_control,
+        this->simulation_parameters.physical_properties_manager
+          .get_reference_temperature()));
+    }
+
+  // ALE
+  if (this->simulation_parameters.ale.enabled())
+    {
       this->assemblers.push_back(
-        std::make_shared<BuoyancyAssembly<dim>>(this->simulation_control));
+        std::make_shared<NavierStokesAssemblerALE<dim>>(
+          this->simulation_control, this->simulation_parameters.ale));
     }
 
   if (this->simulation_parameters.multiphysics.cahn_hilliard)
@@ -476,6 +489,15 @@ GLSNavierStokesSolver<dim>::setup_assemblers()
             }
         }
 
+      // Recoil pressure
+      if (this->simulation_parameters.evaporation.enable_recoil_pressure)
+        {
+          this->assemblers.push_back(
+            std::make_shared<NavierStokesVOFAssemblerEvaporation<dim>>(
+              this->simulation_control,
+              this->simulation_parameters.evaporation));
+        }
+
       if (this->simulation_parameters.physical_properties_manager
             .is_non_newtonian())
         {
@@ -501,7 +523,8 @@ GLSNavierStokesSolver<dim>::setup_assemblers()
         }
     }
 
-  else
+  if (!this->simulation_parameters.multiphysics.VOF &&
+      !this->simulation_parameters.multiphysics.cahn_hilliard)
     {
       // Time-stepping schemes
       if (is_bdf(this->simulation_control->get_assembly_method()))
@@ -523,8 +546,8 @@ GLSNavierStokesSolver<dim>::setup_assemblers()
         }
 
       // Velocity sources term
-      if (this->simulation_parameters.velocity_sources.type ==
-          Parameters::VelocitySource::VelocitySourceType::srf)
+      if (this->simulation_parameters.velocity_sources.rotating_frame_type ==
+          Parameters::VelocitySource::RotatingFrameType::srf)
         {
           this->assemblers.push_back(
             std::make_shared<GLSNavierStokesAssemblerSRF<dim>>(
@@ -1419,6 +1442,7 @@ GLSNavierStokesSolver<dim>::solve_system_GMRES(const bool   initial_step,
 
   const AffineConstraints<double> &constraints_used =
     initial_step ? nonzero_constraints : this->zero_constraints;
+
   const double linear_solver_tolerance =
     std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);
 
@@ -1527,6 +1551,11 @@ GLSNavierStokesSolver<dim>::solve_system_GMRES(const bool   initial_step,
   current_preconditioner_fill_level = initial_preconditioner_fill_level;
 }
 
+// The solver starts from the initial fill levle provided in the parameter file.
+// If for any reason the linear solver crashes, it will restart with a fill
+// level increased by 1. This restart happens up to a maximum of 20 times, after
+// which it will let the solver cras. If a change happened on the fill level, it
+// will go back to its original value at the end of the restart process.
 template <int dim>
 void
 GLSNavierStokesSolver<dim>::solve_system_BiCGStab(
@@ -1687,15 +1716,23 @@ GLSNavierStokesSolver<dim>::solve()
       this->forcing_function->set_time(
         this->simulation_control->get_current_time());
 
-      if ((this->simulation_control->get_step_number() %
-               this->simulation_parameters.mesh_adaptation.frequency !=
-             0 ||
-           this->simulation_parameters.mesh_adaptation.type ==
-             Parameters::MeshAdaptation::Type::none ||
-           this->simulation_control->is_at_start()) &&
-          this->simulation_parameters.boundary_conditions.time_dependent)
+      bool refinement_step;
+      if (this->simulation_parameters.mesh_adaptation.refinement_at_frequency)
+        refinement_step =
+          this->simulation_control->get_step_number() %
+            this->simulation_parameters.mesh_adaptation.frequency !=
+          0;
+      else
+        refinement_step = this->simulation_control->get_step_number() == 0;
+      if (refinement_step ||
+          this->simulation_parameters.mesh_adaptation.type ==
+            Parameters::MeshAdaptation::Type::none ||
+          this->simulation_control->is_at_start())
         {
-          update_boundary_conditions();
+          // We allow the physics to update their boundary conditions
+          // according to their own parameters
+          this->update_boundary_conditions();
+          this->multiphysics->update_boundary_conditions();
         }
 
       this->simulation_control->print_progression(this->pcout);

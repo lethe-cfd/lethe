@@ -8,7 +8,7 @@ This example of Lethe-DEM simulates dry granular flow behaviour in a small scale
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Three-dimensional problem
 - Rotational boundary
 - Load-balancing
@@ -18,15 +18,17 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Parameters file for particle insertion: ``/examples/dem/3d-small-scale-rotating-drum/packing-rotating-drum.prm``
-- Parameters file for drum rotation: ``/examples/dem/3d-small-scale-rotating-drum/small-rotating-drum-dem.prm``
+Both files mentioned below are located in the example's folder (``examples/dem/3d-small-scale-rotating-drum``).
+
+- Parameters file for particle insertion: ``packing-rotating-drum.prm``
+- Parameters file for drum rotation: ``small-rotating-drum-dem.prm``
 
 
 -----------------------
 Description of the Case
 -----------------------
 
-This example simulates a rolling regime in a small scale rotating drum. First, we use Lethe-DEM to fill the bed with 20000 particles. We enable check-pointing in order to write the DEM checkpoint files for the packing which then will be used as the starting point of the DEM simulation of the rotating drum. The solver ``dem`` is used to simulate the behaviour of dry granular flow within the rotating drum.
+This example simulates a rolling regime in a small scale rotating drum. First, we use Lethe-DEM to fill the bed with 20000 particles. We enable check-pointing in order to write the DEM checkpoint files for the packing which then will be used as the starting point of the DEM simulation of the rotating drum. The solver ``lethe-particles`` is used to simulate the behaviour of dry granular flow within the rotating drum.
 
 
 --------------
@@ -57,7 +59,7 @@ An insertion box is defined inside the cylindrical domain, inserting 8000 partic
 
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 8000
       set insertion frequency                            = 100000
       set insertion box minimum x                        = -0.05
@@ -67,8 +69,8 @@ An insertion box is defined inside the cylindrical domain, inserting 8000 partic
       set insertion box maximum y                        = 0.04
       set insertion box maximum z                        = 0.04
       set insertion distance threshold                   = 1.1
-      set insertion random number range                  = 0.05
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.05
+      set insertion prn seed                             = 19
     end
 
 Restart files are written once the packing ends. The restart files are used to start the DEM simulation with the imposed rotating boundary condition.
@@ -88,7 +90,7 @@ The particles are mono-dispersed with a radius of 0.0015 m and a density of 2500
             subsection particle type 0
                 set size distribution type            = uniform
                 set diameter                          = 0.003
-                set number                            = 20000
+                set number of particles               = 20000
                 set density particles                 = 2500
                 set young modulus particles           = 100000000
                 set poisson ratio particles           = 0.24
@@ -142,9 +144,7 @@ The rotation of the cylinder is applied using a rotational boundary condition wi
         set boundary id         = 0
         set type                = rotational
         set rotational speed    = 1
-        set rotational vector x = 1
-        set rotational vector y = 0
-        set rotational vector z = 0
+        set rotational vector   = 1, 0, 0
       end
     end
 
@@ -152,7 +152,7 @@ The rotation of the cylinder is applied using a rotational boundary condition wi
 Simulation Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The packing dem simulation was run for 2 seconds in real time.
+The packing ``lethe-particles`` simulation was run for 2 seconds in real time.
 
 .. code-block:: text
 
@@ -164,7 +164,7 @@ The packing dem simulation was run for 2 seconds in real time.
       set output path      = ./output_dem/
     end
     
-The actual rotation of the drum is 3 seconds in real time. We set the time equal to 5 seconds as the simulation is restarted after the packing dem simulation.
+The actual rotation of the drum is 3 seconds in real time. We set the time equal to 5 seconds as the simulation is restarted after the packing ``lethe-particles`` simulation.
 
 .. code-block:: text
 
@@ -184,9 +184,10 @@ Running the Simulation
 The simulation is launched in two steps: the first step packs the particle in the cylinder, while the second step rotates the drum and simulates the movement of the particles. 
 
 .. code-block:: text
+  :class: copy-button
 
-   mpirun -np 8 dem packing-rotating-drum.prm
-   mpirun -np 8 dem small-rotating-drum-dem.prm
+   mpirun -np 8 lethe-particles packing-rotating-drum.prm;
+   mpirun -np 8 lethe-particles small-rotating-drum-dem.prm
 
 
 .. note::

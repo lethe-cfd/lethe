@@ -1,4 +1,5 @@
 #include <core/parameters.h>
+#include <core/utilities.h>
 
 #include <deal.II/base/exceptions.h>
 
@@ -48,8 +49,26 @@ DeclException3(MultipleAdaptationSizeError,
                << arg2 << ") does not correspond to the number of 'variables' ("
                << arg3 << ")");
 
+DeclException3(ParameterStrictlyGreaterThanError,
+               std::string,
+               double,
+               double,
+               << "The parameter '" << arg1 << "' is set to: " << arg2
+               << ". However, it should be strictly greater than " << arg3
+               << ".");
+
 namespace Parameters
 {
+  SizeOfSubsections
+  get_size_of_subsections(const std::string &file_name)
+  {
+    SizeOfSubsections sizes;
+    sizes.boundary_conditions =
+      get_max_number_of_boundary_conditions(file_name);
+    return sizes;
+  }
+
+
   void
   SimulationControl::declare_parameters(ParameterHandler &prm)
   {
@@ -431,6 +450,16 @@ namespace Parameters
       "0.0",
       Patterns::Double(),
       "Surface tension gradient with respect to the temperature for the corresponding pair of fluids or fluid-solid pair");
+    prm.declare_entry(
+      "solidus temperature",
+      "0",
+      Patterns::Double(),
+      "Temperature of the solidus for the corresponding pair of fluids or fluid-solid pair");
+    prm.declare_entry(
+      "liquidus temperature",
+      "1",
+      Patterns::Double(),
+      "Temperature of the liquidus for the corresponding pair of fluids or fluid-solid pair");
   }
 
   void
@@ -440,6 +469,11 @@ namespace Parameters
     T_0                         = prm.get_double("reference state temperature");
     surface_tension_gradient =
       prm.get_double("temperature-driven surface tension gradient");
+    T_solidus  = prm.get_double("solidus temperature");
+    T_liquidus = prm.get_double("liquidus temperature");
+
+    Assert(T_liquidus > T_solidus,
+           PhaseChangeIntervalError(T_liquidus, T_solidus));
   }
 
   void
@@ -656,6 +690,12 @@ namespace Parameters
         {
           solids[i_solid].declare_parameters(prm, "solid", i_solid);
         }
+
+      prm.declare_entry(
+        "reference temperature",
+        "0",
+        Patterns::Double(),
+        "Reference temperature used for the calculation of physical properties and thermal expansion");
     }
 
     // Definition of interactions between materials
@@ -725,6 +765,8 @@ namespace Parameters
               material_interactions[i_material_interaction]
                 .fluid_solid_interaction_with_material_interaction_id);
         }
+
+      reference_temperature = prm.get_double("reference temperature");
     }
     prm.leave_subsection();
   }
@@ -985,9 +1027,9 @@ namespace Parameters
         prm.declare_entry(
           "surface tension model",
           "constant",
-          Patterns::Selection("constant|linear"),
+          Patterns::Selection("constant|linear|phase change"),
           "Model used for the calculation of the surface tension coefficient\n"
-          "The choices are <constant|linear>.");
+          "The choices are <constant|linear|phase change>.");
         surface_tension_parameters.declare_parameters(prm);
 
         // Cahn-Hilliard mobility
@@ -1017,9 +1059,9 @@ namespace Parameters
         prm.declare_entry(
           "surface tension model",
           "constant",
-          Patterns::Selection("constant|linear"),
+          Patterns::Selection("constant|linear|phase change"),
           "Model used for the calculation of the surface tension coefficient\n"
-          "The choices are <constant|linear>.");
+          "The choices are <constant|linear|phase change>.");
         surface_tension_parameters.declare_parameters(prm);
       }
       prm.leave_subsection();
@@ -1069,9 +1111,14 @@ namespace Parameters
               surface_tension_model = SurfaceTensionModel::linear;
               surface_tension_parameters.parse_parameters(prm);
             }
+          else if (op == "phase change")
+            {
+              surface_tension_model = SurfaceTensionModel::phase_change;
+              surface_tension_parameters.parse_parameters(prm);
+            }
           else
             throw(std::runtime_error(
-              "Invalid surface tension model. The choices are <constant|linear>."));
+              "Invalid surface tension model. The choices are <constant|linear|phase change>."));
 
           // Cahn-Hilliard mobility
           op = prm.get("cahn hilliard mobility model");
@@ -1114,9 +1161,14 @@ namespace Parameters
               surface_tension_model = SurfaceTensionModel::linear;
               surface_tension_parameters.parse_parameters(prm);
             }
+          else if (op == "phase change")
+            {
+              surface_tension_model = SurfaceTensionModel::phase_change;
+              surface_tension_parameters.parse_parameters(prm);
+            }
           else
             throw(std::runtime_error(
-              "Invalid surface tension model. The choices are <constant|linear>."));
+              "Invalid surface tension model. The choices are <constant|linear|phase change>."));
           std::pair<std::pair<unsigned int, unsigned int>, SurfaceTensionModel>
             fluid_solid_surface_tension_interaction(fluid_solid_interaction,
                                                     surface_tension_model);
@@ -1303,17 +1355,23 @@ namespace Parameters
     prm.enter_subsection("laser parameters");
     {
       prm.declare_entry("enable", "false", Patterns::Bool(), "Activate laser");
+      prm.declare_entry(
+        "type",
+        "exponential_decay",
+        Patterns::Selection("exponential_decay|heat_flux_vof_interface"),
+        "Type of laser model used."
+        "Choices are <exponential_decay|heat_flux_vof_interface>.");
       prm.declare_entry("concentration factor",
                         "2.0",
                         Patterns::Double(),
                         "Concentration factor");
-      prm.declare_entry("power", "100.0", Patterns::Double(), "Laser power");
+      prm.declare_entry("power", "0.0", Patterns::Double(), "Laser power");
       prm.declare_entry("absorptivity",
                         "0.5",
                         Patterns::Double(),
                         "Laser absorptivity");
       prm.declare_entry("penetration depth",
-                        "0.0",
+                        "1.0",
                         Patterns::Double(),
                         "Penetration depth");
       prm.declare_entry("beam radius",
@@ -1321,7 +1379,6 @@ namespace Parameters
                         Patterns::Double(),
                         "Laser beam radius");
       radiation.declare_parameters(prm);
-
 
       prm.enter_subsection("path");
       laser_scan_path = std::make_shared<Functions::ParsedFunction<dim>>(dim);
@@ -1352,12 +1409,28 @@ namespace Parameters
   {
     prm.enter_subsection("laser parameters");
     {
-      activate_laser       = prm.get_bool("enable");
+      activate_laser                = prm.get_bool("enable");
+      const std::string type_string = prm.get("type");
+      if (type_string == "exponential_decay")
+        laser_type = LaserType::exponential_decay;
+      if (type_string == "heat_flux_vof_interface")
+        laser_type = LaserType::heat_flux_vof_interface;
       concentration_factor = prm.get_double("concentration factor");
       laser_power          = prm.get_double("power");
       laser_absorptivity   = prm.get_double("absorptivity");
       penetration_depth    = prm.get_double("penetration depth");
-      beam_radius          = prm.get_double("beam radius");
+
+      // Check if penetration depth is a strictly positive double.
+      if (activate_laser && laser_type == LaserType::exponential_decay)
+        {
+          AssertThrow(laser_type == LaserType::exponential_decay &&
+                        penetration_depth > 0.0,
+                      ParameterStrictlyGreaterThanError("penetration depth",
+                                                        penetration_depth,
+                                                        0.0));
+        }
+
+      beam_radius = prm.get_double("beam radius");
       radiation.parse_parameters(prm);
 
       prm.enter_subsection("path");
@@ -1560,6 +1633,18 @@ namespace Parameters
                         Patterns::FileName(),
                         "File name output temperature statistics");
 
+      prm.declare_entry(
+        "calculate liquid fraction",
+        "false",
+        Patterns::Bool(),
+        "Enable calculation of the liquid fraction. The liquid fraction "
+        "is calculated from the volume integral of the liquid fraction divided by the volume of the domain.");
+
+      prm.declare_entry("liquid fraction name",
+                        "liquid_fraction",
+                        Patterns::FileName(),
+                        "File name output liquid fraction");
+
       prm.declare_entry("calculate heat flux",
                         "false",
                         Patterns::Bool(),
@@ -1592,16 +1677,16 @@ namespace Parameters
                         "Enable smoothing postprocessed vectors and scalars.");
 
       prm.declare_entry(
-        "calculate VOF barycenter",
+        "calculate barycenter",
         "false",
         Patterns::Bool(),
-        "Enable calculation of the barycenter location and velocity of the fluid 1 in VOF simulations.");
+        "Enable calculation of the barycenter location and velocity of fluid 1 in VOF and Cahn-Hilliard simulations.");
 
       prm.declare_entry(
-        "VOF barycenter name",
-        "vof_barycenter_information",
+        "barycenter name",
+        "barycenter_information",
         Patterns::FileName(),
-        "File name output for the barycenter information in VOF simulations");
+        "Name of barycenter information output file in VOF or Cahn-Hilliard simulations");
     }
     prm.leave_subsection();
   }
@@ -1640,11 +1725,13 @@ namespace Parameters
       phase_output_name           = prm.get("phase statistics name");
       calculate_temperature_statistics =
         prm.get_bool("calculate temperature statistics");
-      temperature_output_name  = prm.get("temperature statistics name");
-      calculate_heat_flux      = prm.get_bool("calculate heat flux");
-      heat_flux_output_name    = prm.get("heat flux name");
-      calculate_vof_barycenter = prm.get_bool("calculate VOF barycenter");
-      barycenter_output_name   = prm.get("VOF barycenter name");
+      calculate_liquid_fraction   = prm.get_bool("calculate liquid fraction");
+      liquid_fraction_output_name = prm.get("liquid fraction name");
+      temperature_output_name     = prm.get("temperature statistics name");
+      calculate_heat_flux         = prm.get_bool("calculate heat flux");
+      heat_flux_output_name       = prm.get("heat flux name");
+      calculate_barycenter        = prm.get_bool("calculate barycenter");
+      barycenter_output_name      = prm.get("barycenter name");
 
 
       // Viscous dissipative fluid
@@ -1928,25 +2015,10 @@ namespace Parameters
       target_size = prm.get_double("target size");
 
       // Initial translation
-      std::string              translation_str = prm.get("initial translation");
-      std::vector<std::string> translate_str_list =
-        Utilities::split_string_list(translation_str);
-      translation =
-        Tensor<1, 3>({Utilities::string_to_double(translate_str_list[0]),
-                      Utilities::string_to_double(translate_str_list[1]),
-                      Utilities::string_to_double(translate_str_list[2])});
+      translation = entry_string_to_tensor3(prm, "initial translation");
 
-      // Initial rotation
-      // Create a string from the input file, split the string into smaller
-      // strings and store them in a vector, transform the strings into doubles
-      // and stores those in a tensor
-      std::string              axis_str = prm.get("initial rotation axis");
-      std::vector<std::string> axis_str_list =
-        Utilities::split_string_list(axis_str);
-      rotation_axis =
-        Tensor<1, 3>({Utilities::string_to_double(axis_str_list[0]),
-                      Utilities::string_to_double(axis_str_list[1]),
-                      Utilities::string_to_double(axis_str_list[2])});
+      // Initial rotation axis and angle
+      rotation_axis  = entry_string_to_tensor3(prm, "initial rotation axis");
       rotation_angle = prm.get_double("initial rotation angle");
     }
     prm.leave_subsection();
@@ -2021,9 +2093,9 @@ namespace Parameters
 
         prm.declare_entry("preconditioner",
                           "ilu",
-                          Patterns::Selection("amg|ilu"),
+                          Patterns::Selection("amg|ilu|lsmg|gcmg"),
                           "The preconditioner for the linear solver."
-                          "Choices are <amg|ilu>.");
+                          "Choices are <amg|ilu|lsmg|gcmg>.");
 
         prm.declare_entry("ilu preconditioner fill",
                           "0",
@@ -2043,19 +2115,17 @@ namespace Parameters
         prm.declare_entry("amg preconditioner ilu fill",
                           "0",
                           Patterns::Double(),
-                          "amg preconditioner ilu smoother/coarsener fill");
+                          "amg preconditioner ilu smoother fill");
 
-        prm.declare_entry(
-          "amg preconditioner ilu absolute tolerance",
-          "1e-12",
-          Patterns::Double(),
-          "amg preconditioner ilu smoother/coarsener absolute tolerance");
+        prm.declare_entry("amg preconditioner ilu absolute tolerance",
+                          "1e-12",
+                          Patterns::Double(),
+                          "amg preconditioner ilu smoother absolute tolerance");
 
-        prm.declare_entry(
-          "amg preconditioner ilu relative tolerance",
-          "1.00",
-          Patterns::Double(),
-          "amg preconditioner ilu smoother/coarsener relative tolerance");
+        prm.declare_entry("amg preconditioner ilu relative tolerance",
+                          "1.00",
+                          Patterns::Double(),
+                          "amg preconditioner ilu smoother relative tolerance");
 
         prm.declare_entry("amg aggregation threshold",
                           "1e-14",
@@ -2083,6 +2153,85 @@ namespace Parameters
           "false",
           Patterns::Bool(),
           "A boolean that will force the linear solver to continue even if it fails");
+
+        prm.declare_entry("mg min level",
+                          "-1",
+                          Patterns::Integer(),
+                          "mg min level");
+
+        prm.declare_entry("mg level min cells",
+                          "-1",
+                          Patterns::Integer(),
+                          "mg minimum number of cells for coarse level");
+
+        prm.declare_entry("mg smoother iterations",
+                          "10",
+                          Patterns::Integer(),
+                          "mg smoother iterations for lsmg or gcmg");
+
+        prm.declare_entry("mg smoother relaxation",
+                          "0.5",
+                          Patterns::Double(),
+                          "mg smoother relaxation for lsmg or gcmg");
+
+        prm.declare_entry("mg smoother eig estimation",
+                          "false",
+                          Patterns::Bool(),
+                          "estimate eigenvalues for relaxation parameter");
+
+        prm.declare_entry("eig estimation degree",
+                          "3",
+                          Patterns::Integer(),
+                          "degree used for the Chebyshev polynomial");
+
+        prm.declare_entry("eig estimation smoothing range",
+                          "10",
+                          Patterns::Integer(),
+                          "sets range between largest and smallest eig");
+
+        prm.declare_entry("eig estimation cg n iterations",
+                          "10",
+                          Patterns::Integer(),
+                          "cg iterations performed to find eigenvalue");
+
+        prm.declare_entry("eig estimation verbosity",
+                          "verbose",
+                          Patterns::Selection("quiet|verbose"),
+                          "State whether MG should print max and min eigenvalue"
+                          "Choices are <quiet|verbose>.");
+
+        prm.declare_entry("mg coarse grid max iterations",
+                          "2000",
+                          Patterns::Integer(),
+                          "mg coarse grid iterations for lsmg or gcmg");
+
+        prm.declare_entry("mg coarse grid tolerance",
+                          "1e-14",
+                          Patterns::Double(),
+                          "mg coarse grid tolerance n for lsmg or gcmg");
+
+        prm.declare_entry("mg coarse grid reduce",
+                          "1e-4",
+                          Patterns::Double(),
+                          "mg coarse grid reduce for lsmg or gcmg");
+
+        prm.declare_entry("mg coarse grid max krylov vectors",
+                          "30",
+                          Patterns::Integer(),
+                          "mg coarse grid max krylov vectors for lsmg or gcmg");
+
+        prm.declare_entry("mg coarse grid preconditioner",
+                          "amg",
+                          Patterns::Selection("amg|ilu"),
+                          "The preconditioner for the mg coarse grid solver"
+                          "Choices are <amg|ilu>.");
+
+        prm.declare_entry(
+          "mg verbosity",
+          "verbose",
+          Patterns::Selection("quiet|verbose|extra verbose"),
+          "State whether LSMG or GCMG should print information about levels "
+          "Choices are <quiet|verbose|extra verbose>.");
       }
       prm.leave_subsection();
     }
@@ -2128,9 +2277,13 @@ namespace Parameters
           preconditioner = PreconditionerType::amg;
         else if (precond == "ilu")
           preconditioner = PreconditionerType::ilu;
+        else if (precond == "lsmg")
+          preconditioner = PreconditionerType::lsmg;
+        else if (precond == "gcmg")
+          preconditioner = PreconditionerType::gcmg;
         else
           throw std::logic_error(
-            "Error, invalid preconditioner type. Choices are amg or ilu");
+            "Error, invalid preconditioner type. Choices are amg, ilu, lsmg or gcmg.");
 
         ilu_precond_fill = prm.get_double("ilu preconditioner fill");
         ilu_precond_atol =
@@ -2138,6 +2291,7 @@ namespace Parameters
         ilu_precond_rtol =
           prm.get_double("ilu preconditioner relative tolerance");
         amg_precond_ilu_fill = prm.get_double("amg preconditioner ilu fill");
+
         amg_precond_ilu_atol =
           prm.get_double("amg preconditioner ilu absolute tolerance");
         amg_precond_ilu_rtol =
@@ -2147,8 +2301,58 @@ namespace Parameters
         amg_w_cycles              = prm.get_bool("amg w cycles");
         amg_smoother_sweeps       = prm.get_integer("amg smoother sweeps");
         amg_smoother_overlap      = prm.get_integer("amg smoother overlap");
+
         force_linear_solver_continuation =
           prm.get_bool("force linear solver continuation");
+
+        mg_min_level       = prm.get_integer("mg min level");
+        mg_level_min_cells = prm.get_integer("mg level min cells");
+
+        mg_smoother_iterations     = prm.get_integer("mg smoother iterations");
+        mg_smoother_relaxation     = prm.get_double("mg smoother relaxation");
+        mg_smoother_eig_estimation = prm.get_bool("mg smoother eig estimation");
+        eig_estimation_degree      = prm.get_integer("eig estimation degree");
+        eig_estimation_smoothing_range =
+          prm.get_integer("eig estimation smoothing range");
+        eig_estimation_cg_n_iterations =
+          prm.get_integer("eig estimation cg n iterations");
+
+        const std::string eig_estimation_v =
+          prm.get("eig estimation verbosity");
+        if (eig_estimation_v == "verbose")
+          eig_estimation_verbose = Parameters::Verbosity::verbose;
+        else if (eig_estimation_v == "quiet")
+          eig_estimation_verbose = Parameters::Verbosity::quiet;
+        else
+          throw(std::runtime_error(
+            "Unknown verbosity mode for the eigenvalue estimation"));
+
+        mg_coarse_grid_max_iterations =
+          prm.get_integer("mg coarse grid max iterations");
+        mg_coarse_grid_tolerance = prm.get_double("mg coarse grid tolerance");
+        mg_coarse_grid_reduce    = prm.get_double("mg coarse grid reduce");
+        mg_coarse_grid_max_krylov_vectors =
+          prm.get_integer("mg coarse grid max krylov vectors");
+
+        const std::string cg_precond = prm.get("mg coarse grid preconditioner");
+        if (cg_precond == "amg")
+          mg_coarse_grid_preconditioner = PreconditionerType::amg;
+        else if (cg_precond == "ilu")
+          mg_coarse_grid_preconditioner = PreconditionerType::ilu;
+        else
+          throw std::logic_error(
+            "Error, invalid preconditioner type for mg coarse grid solver. Choices are amg or ilu.");
+
+        const std::string mg_op = prm.get("mg verbosity");
+        if (mg_op == "verbose")
+          mg_verbosity = Parameters::Verbosity::verbose;
+        else if (mg_op == "extra verbose")
+          mg_verbosity = Parameters::Verbosity::extra_verbose;
+        else if (mg_op == "quiet")
+          mg_verbosity = Parameters::Verbosity::quiet;
+        else
+          throw(std::runtime_error(
+            "Unknown verbosity mode for the LSMG or GCMG preconditioners"));
       }
       prm.leave_subsection();
     }
@@ -2301,6 +2505,7 @@ namespace Parameters
       maximum_refinement_level   = prm.get_integer("max refinement level");
       minimum_refinement_level   = prm.get_integer("min refinement level");
       frequency                  = prm.get_integer("frequency");
+      refinement_at_frequency    = frequency != 0;
       mesh_controller_is_enabled = prm.get_bool("mesh refinement controller");
     }
     prm.leave_subsection();
@@ -2400,10 +2605,10 @@ namespace Parameters
     prm.enter_subsection("velocity source");
     {
       prm.declare_entry(
-        "type",
+        "rotating frame type",
         "none",
         Patterns::Selection("none|srf"),
-        "Velocity-dependent source terms"
+        "Rotating frame velocity-dependent source terms"
         "Choices are <none|srf>. The srf stands"
         "for single rotating frame and adds"
         "the coriolis and the centrifugal force to the Navier-Stokes equations");
@@ -2434,11 +2639,11 @@ namespace Parameters
   {
     prm.enter_subsection("velocity source");
     {
-      const std::string op = prm.get("type");
+      const std::string op = prm.get("rotating frame type");
       if (op == "none")
-        type = VelocitySourceType::none;
+        rotating_frame_type = RotatingFrameType::none;
       else if (op == "srf")
-        type = VelocitySourceType::srf;
+        rotating_frame_type = RotatingFrameType::srf;
       else
         throw std::logic_error("Error, invalid velocity source type");
 
@@ -2528,6 +2733,13 @@ namespace Parameters
                       "1",
                       Patterns::Anything(),
                       "Arguments defining the geometry");
+
+    prm.declare_entry(
+      "layer thickening",
+      "0",
+      Patterns::Double(),
+      "Thickness (positive or negative) of uniform additional layer of solid on particle."
+      "A negative value will decrease the particle's thickness by subtracting a layer of specified width.");
 
     prm.declare_entry(
       "pressure location",
@@ -2930,6 +3142,8 @@ namespace Parameters
           std::string shape_arguments_str = prm.get("shape arguments");
           particles[i].initialize_shape(shape_type, shape_arguments_str);
 
+          particles[i].set_layer_thickening(prm.get_double("layer thickening"));
+
           particles[i].radius = particles[i].shape->effective_radius;
           prm.enter_subsection("physical properties");
           {
@@ -3045,6 +3259,149 @@ namespace Parameters
     }
 
     prm.leave_subsection();
+  }
+
+  void
+  Evaporation::declare_parameters(dealii::ParameterHandler &prm)
+  {
+    prm.enter_subsection("evaporation");
+    {
+      prm.declare_entry(
+        "evaporation mass flux model",
+        "constant",
+        Patterns::Selection("constant|temperature_dependent"),
+        "Model used for the calculation of the evaporative mass flux"
+        "Choices are <constant|temperature_dependent>.");
+      prm.declare_entry(
+        "enable evaporative cooling",
+        "false",
+        Patterns::Bool(),
+        "Enable the evaporative cooling at the free surface (gas/liquid interface) in the energy equation <true|false>");
+      prm.declare_entry(
+        "enable recoil pressure",
+        "false",
+        Patterns::Bool(),
+        "Enable the recoil pressure due to evaporation at the free surface (gas/liquid interface) in the momentum equation <true|false>");
+      prm.declare_entry(
+        "evaporation mass flux",
+        "0.0",
+        Patterns::Double(),
+        "Evaporation mass flux used if the constant evaporation model is selected in M*L^-2*T^-1");
+      prm.declare_entry(
+        "evaporation coefficient",
+        "0.82",
+        Patterns::Double(),
+        "Evaporation coefficient corresponding to the ratio between the net mass flux (evaporation-condensation) and the mass flux of evaporation");
+      prm.declare_entry(
+        "recoil pressure coefficient",
+        "0.56",
+        Patterns::Double(),
+        "Recoil pressure coefficient corresponding to the factor applied to the saturation pressure to compute the recoil pressure in an out of equilibrium evaportation");
+      prm.declare_entry("molar mass",
+                        "1.0",
+                        Patterns::Double(),
+                        "Molar mass of the material in M*N^-1");
+      prm.declare_entry("boiling temperature",
+                        "1.0",
+                        Patterns::Double(),
+                        "Boiling temperature in Theta");
+      prm.declare_entry("evaporation latent heat",
+                        "0.0",
+                        Patterns::Double(),
+                        "Latent heat of evaporation in L^2*T^-2");
+      prm.declare_entry("ambient pressure",
+                        "101325",
+                        Patterns::Double(),
+                        "Pressure of the ambient gas in M*L^-1*T^-2");
+      prm.declare_entry("ambient gas density",
+                        "1.0",
+                        Patterns::Double(),
+                        "Ambient gas density in M*L^-3");
+      prm.declare_entry("liquid density",
+                        "10.0",
+                        Patterns::Double(),
+                        "Liquid density in M*L^-3");
+      prm.declare_entry("universal gas constant",
+                        "8.3145",
+                        Patterns::Double(),
+                        "Universal gas constant in M*L^2*T^-2*Theta^-1*N^-1");
+    }
+    prm.leave_subsection();
+  }
+
+  void
+  Evaporation::parse_parameters(ParameterHandler &prm)
+  {
+    prm.enter_subsection("evaporation");
+    {
+      std::string op;
+      op = prm.get("evaporation mass flux model");
+      if (op == "constant")
+        {
+          evaporative_mass_flux_model_type =
+            EvaporativeMassFluxModelType::constant;
+        }
+      else if (op == "temperature_dependent")
+        {
+          evaporative_mass_flux_model_type =
+            EvaporativeMassFluxModelType::temperature_dependent;
+        }
+      else
+        throw(std::runtime_error(
+          "Invalid evaporative mass flux model. The choices are <constant|temperature_dependent>."));
+
+      enable_evaporation_cooling = prm.get_bool("enable evaporative cooling");
+      enable_recoil_pressure     = prm.get_bool("enable recoil pressure");
+
+      evaporation_mass_flux   = prm.get_double("evaporation mass flux");
+      evaporation_coefficient = prm.get_double("evaporation coefficient");
+      recoil_pressure_coefficient =
+        prm.get_double("recoil pressure coefficient");
+      molar_mass              = prm.get_double("molar mass");
+      boiling_temperature     = prm.get_double("boiling temperature");
+      latent_heat_evaporation = prm.get_double("evaporation latent heat");
+      ambient_pressure        = prm.get_double("ambient pressure");
+      ambient_gas_density     = prm.get_double("ambient gas density");
+      liquid_density          = prm.get_double("liquid density");
+      universal_gas_constant  = prm.get_double("universal gas constant");
+    }
+    prm.leave_subsection();
+  }
+
+  Tensor<1, 3>
+  entry_string_to_tensor3(ParameterHandler  &prm,
+                          const std::string &entry_string)
+  {
+    std::string              full_str = prm.get(entry_string);
+    std::vector<std::string> vector_of_string(
+      Utilities::split_string_list(full_str));
+    std::vector<double> vector_of_double =
+      Utilities::string_to_double(vector_of_string);
+
+    AssertThrow(vector_of_double.size() == 3,
+                ExcMessage(
+                  "Invalid " + entry_string +
+                  ". This should be a three dimensional vector or point."));
+
+    Tensor<1, 3> output_tensor;
+    for (unsigned int i = 0; i < 3; ++i)
+      output_tensor[i] = vector_of_double[i];
+
+    return output_tensor;
+  }
+
+  std::vector<double>
+  convert_string_to_vector(ParameterHandler  &prm,
+                           const std::string &entry_string)
+  {
+    std::string              full_str = prm.get(entry_string);
+    std::vector<std::string> vector_of_string(
+      Utilities::split_string_list(full_str));
+
+    std::vector<double> vector_of_double =
+      Utilities::string_to_double(vector_of_string);
+
+    return vector_of_double;
   }
 
   template class Laser<2>;

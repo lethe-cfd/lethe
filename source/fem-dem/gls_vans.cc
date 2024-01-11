@@ -325,8 +325,14 @@ GLSVANSSolver<dim>::update_solution_and_constraints()
                                                 system_rhs_void_fraction);
 
   void_fraction_constraints.clear();
+
+  // reinitialize affine constraints
+  void_fraction_constraints.reinit(locally_relevant_dofs_voidfraction);
+
+  // Remake hanging node constraints
+  DoFTools::make_hanging_node_constraints(void_fraction_dof_handler,
+                                          void_fraction_constraints);
   active_set.clear();
-  std::vector<bool> dof_touched(void_fraction_dof_handler.n_dofs(), false);
 
   for (const auto &cell : void_fraction_dof_handler.active_cell_iterators())
     {
@@ -1969,15 +1975,23 @@ GLSVANSSolver<dim>::solve()
   while (this->simulation_control->integrate())
     {
       this->simulation_control->print_progression(this->pcout);
-      if ((this->simulation_control->get_step_number() %
-               this->simulation_parameters.mesh_adaptation.frequency !=
-             0 ||
+      bool refinement_step;
+      if (this->simulation_parameters.mesh_adaptation.refinement_at_frequency)
+        refinement_step =
+          this->simulation_control->get_step_number() %
+            this->simulation_parameters.mesh_adaptation.frequency !=
+          0;
+      else
+        refinement_step = this->simulation_control->get_step_number() == 0;
+      if ((refinement_step ||
            this->simulation_parameters.mesh_adaptation.type ==
              Parameters::MeshAdaptation::Type::none ||
-           this->simulation_control->is_at_start()) &&
-          this->simulation_parameters.boundary_conditions.time_dependent)
+           this->simulation_control->is_at_start()))
         {
+          // We allow the physics to update their boundary conditions
+          // according to their own parameters
           this->update_boundary_conditions();
+          this->multiphysics->update_boundary_conditions();
         }
 
       this->dynamic_flow_control();

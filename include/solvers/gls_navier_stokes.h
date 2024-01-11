@@ -65,7 +65,7 @@ protected:
   setup_dofs_fd() override;
 
   /**
-   * @brief update non zero constraint if the boundary is time dependant
+   * @brief update non zero constraint if the boundary is time-dependent
    */
   void
   update_boundary_conditions();
@@ -240,10 +240,9 @@ private:
   solve_system_BiCGStab(const bool   initial_step,
                         const double absolute_residual,
                         const double relative_residual);
-
   /**
    * @brief Direct solver using TrilinosWrappers::SolverDirect
-   * The use of this solver should be avoided for 3D probelm
+   * The use of this solver should be avoided for 3D problems
    */
   void
   solve_system_direct(const bool   initial_step,

@@ -38,7 +38,8 @@ namespace Parameters
       linear,
       hertz_mindlin_limit_force,
       hertz_mindlin_limit_overlap,
-      hertz
+      hertz,
+      hertz_JKR
     };
 
     enum RollingResistanceMethod
@@ -48,18 +49,18 @@ namespace Parameters
       viscous_resistance
     };
 
+    enum class SizeDistributionType
+    {
+      uniform,
+      normal,
+      custom
+    };
+
     struct LagrangianPhysicalProperties
     {
     public:
       // Gravitational acceleration
       Tensor<1, 3> g;
-
-      // Size distribution type
-      enum class size_distribution_type
-      {
-        uniform,
-        normal
-      } size_distribution_type;
 
       // Number of particle types
       unsigned int particle_type_number;
@@ -69,6 +70,21 @@ namespace Parameters
 
       // Size standard deviation of each particle type
       std::unordered_map<unsigned int, double> particle_size_std;
+
+      // List of diameters for the custom distribution for each particle type
+      std::unordered_map<unsigned int, std::vector<double>>
+        particle_custom_diameter;
+
+      // Probability of each diameter value based on volume fraction for the
+      // custom distribution for each particle type
+      std::unordered_map<unsigned int, std::vector<double>>
+        particle_custom_probability;
+
+      // Random seed for the size distribution
+      std::vector<unsigned int> seed_for_distributions;
+
+      // Distribution type of each particle type
+      std::vector<SizeDistributionType> distribution_type;
 
       // Number of each particle type
       std::unordered_map<unsigned int, int> number;
@@ -81,6 +97,9 @@ namespace Parameters
 
       // Poisson's ratio of each particle type
       std::unordered_map<unsigned int, double> poisson_ratio_particle;
+
+      // Surface energy of each particle type
+      std::unordered_map<unsigned int, double> surface_energy_particle;
 
       // Coefficients of restitution of each particle type
       std::unordered_map<unsigned int, double> restitution_coefficient_particle;
@@ -98,7 +117,7 @@ namespace Parameters
       // Poisson's ratio of wall
       double poisson_ratio_wall;
 
-      // Coefficient of restituion of wall
+      // Coefficient of restitution of wall
       double restitution_coefficient_wall;
 
       // Friction coefficient of wall
@@ -106,6 +125,9 @@ namespace Parameters
 
       // Rolling friction coefficient wall
       double rolling_friction_wall;
+
+      // Surface energy wall
+      double surface_energy_wall;
 
       void
       declare_parameters(ParameterHandler &prm);
@@ -124,6 +146,12 @@ namespace Parameters
       initialize_containers(
         std::unordered_map<unsigned int, double> &particle_average_diameter,
         std::unordered_map<unsigned int, double> &particle_size_std,
+        std::vector<SizeDistributionType>        &distribution_type,
+        std::unordered_map<unsigned int, std::vector<double>>
+          &particle_custom_diameter,
+        std::unordered_map<unsigned int, std::vector<double>>
+                                                 &particle_custom_probability,
+        std::vector<unsigned int>                &seed_for_distributions,
         std::unordered_map<unsigned int, int>    &number,
         std::unordered_map<unsigned int, double> &density_particle,
         std::unordered_map<unsigned int, double> &youngs_modulus_particle,
@@ -132,7 +160,8 @@ namespace Parameters
           &restitution_coefficient_particle,
         std::unordered_map<unsigned int, double> &friction_coefficient_particle,
         std::unordered_map<unsigned int, double>
-          &rolling_friction_coefficient_particle);
+          &rolling_friction_coefficient_particle,
+        std::unordered_map<unsigned int, double> &surface_energy_particle);
     };
 
     struct InsertionInfo
@@ -140,8 +169,7 @@ namespace Parameters
       // Insertion method
       enum class InsertionMethod
       {
-        uniform,
-        non_uniform,
+        volume,
         list,
         plane
       } insertion_method;
@@ -165,10 +193,10 @@ namespace Parameters
       double distance_threshold;
 
       // Insertion random number range
-      double random_number_range;
+      double insertion_maximum_offset;
 
       // Insertion random number seed
-      int random_number_seed;
+      int seed_for_insertion;
 
       std::vector<double> list_x, list_y, list_z, list_vx, list_vy, list_vz,
         list_wx, list_wy, list_wz, list_d;
@@ -240,7 +268,8 @@ namespace Parameters
       enum class ParticleWallContactForceModel
       {
         linear,
-        nonlinear
+        nonlinear,
+        JKR
       } particle_wall_contact_force_method;
 
       // Rolling resistance torque method
@@ -365,6 +394,9 @@ namespace Parameters
       // Rotational axes of rotating boundaries
       std::unordered_map<unsigned int, Tensor<1, 3>> boundary_rotational_vector;
 
+      // Point on rotational axis
+      std::unordered_map<unsigned int, Point<3>> point_on_rotation_axis;
+
       // Periodic boundary IDs
       types::boundary_id periodic_boundary_0;
       types::boundary_id periodic_boundary_1;
@@ -388,8 +420,9 @@ namespace Parameters
           &boundary_translational_velocity,
         std::unordered_map<unsigned int, double> &boundary_rotational_speed,
         std::unordered_map<unsigned int, Tensor<1, 3>>
-                                  &boundary_rotational_vector,
-        std::vector<unsigned int> &outlet_boundaries);
+                                                   &boundary_rotational_vector,
+        std::unordered_map<unsigned int, Point<3>> &point_on_rotation_axis,
+        std::vector<unsigned int>                  &outlet_boundaries);
     };
 
     template <int dim>
@@ -458,5 +491,4 @@ namespace Parameters
 
   } // namespace Lagrangian
 } // namespace Parameters
-
 #endif /* lethe_parameters_lagrangian_h */

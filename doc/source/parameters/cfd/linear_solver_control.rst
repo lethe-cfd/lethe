@@ -39,8 +39,8 @@ In this subsection, the control options of the linear solvers are specified. The
 
 
 * The ``method`` parameter enables to choose an iterative solver for the linear system of equations. Lethe currently supports the following core solution strategies:
-	* ``gmres`` (default parameter value), a GMRES iterative solver with ILU preconditioning or AMG preconditioning with an ILU coarsener and smoother.
-	* ``bicgstab``, a BICGSTAB iterative solver with ILU preconditioning.
+	* ``gmres`` (default parameter value), a preconditioned GMRES iterative solver.
+	* ``bicgstab``, a preconditioned BICGSTAB iterative solver.
 	* ``direct``, a direct solver using `TrilinosWrappers::SolverDirect <https://www.dealii.org/current/doxygen/deal.II/classTrilinosWrappers_1_1SolverDirect.html>`_.
 
 	.. hint::
@@ -95,7 +95,7 @@ In this subsection, the control options of the linear solvers are specified. The
 
 	meaning that the code increases the preconditioner fill (see tip on default values below) in order to converge within the number of solver iterations. If you encounter this, consider increasing the ``max iters`` or adjusting other parameters, for example increasing ``max krylov vectors``.
 
-* ``force linear solver continuation`` when set to ``true``, forces the linear solver to continue, even if the ``minimum residual`` is not reached. Only available for ``gmres`` and ``bicgstab`` solvers within the ``gls_navier_stokes`` application.
+* ``force linear solver continuation`` when set to ``true``, forces the linear solver to continue, even if the ``minimum residual`` is not reached. Only available for ``gmres`` and ``bicgstab`` solvers within the ``lethe-fluid`` application.
 
 .. warning::
 	With this mode on, errors on the linear solver convergence are not thrown. Forcing the solver to continue can be useful for debugging purposes if a given iteration is hard to pass, but use it with caution!
@@ -105,10 +105,13 @@ In this subsection, the control options of the linear solvers are specified. The
 .. tip::
 	Consider using ``set max krylov vectors = 200`` for complex simulations with convergence issues. 
 
-* ``preconditioner`` sets the type of preconditioning used for the linear solver. It can be either ``ilu`` for an Incomplete LU decomposition or ``amg`` for an Algebraic Multigrid. 
+* ``preconditioner`` sets the type of preconditioning used for the linear solver. It can be either ``ilu`` for an Incomplete LU decomposition, ``amg`` for an Algebraic Multigrid, ``lsmg`` for a Local Smoothing Multigrid, or ``gcmg`` for a Global Coarsening Multigrid.
 
 .. warning::
-    Currently, the ``gls_sharp_navier_stokes`` and ``gls_sharp_navier_stokes`` solvers make it almost impossible to reach convergence with the ``amg`` preconditioner. Therefore, it is recommended to use ``ilu`` instead, even for fine meshes. In addition, the ``VOF``, ``heat transfer``, ``cahn hilliard`` and ``tracer`` physics only support ``ilu``.
+    Currently, the ``lethe-fluid-sharp`` solver makes it almost impossible to reach convergence with the ``amg`` preconditioner. Therefore, it is recommended to use ``ilu`` instead, even for fine meshes. In addition, the ``VOF``, ``heat transfer``, ``cahn hilliard`` and ``tracer`` physics only support ``ilu``.
+
+.. warning::
+    Currently, the ``lsmg`` and ``gcmg`` preconditioners can only be used within the ``lethe-fluid-matrix-free`` application.
 
 .. caution:: 
 		Be aware that the setup of the ``amg`` preconditioner is very expensive and does not scale linearly with the size of the matrix. As such, it is generally preferable to minimize the number of assembly of such preconditioner. This can be achieved by using the ``inexact newton`` for the nonlinear solver (see :doc:`non-linear_solver_control`).
@@ -149,13 +152,13 @@ AMG preconditioner
 
 .. code-block:: text
 
-    # AMG preconditioner ILU smoother/coarsener fill
+    # AMG preconditioner ILU smoother fill
     set amg preconditioner ilu fill               = 0
 
-    # AMG preconditioner ILU smoother/coarsener absolute tolerance
+    # AMG preconditioner ILU smoother absolute tolerance
     set amg preconditioner ilu absolute tolerance = 1e-12
 
-    # AMG preconditioner ILU smoother/coarsener relative tolerance
+    # AMG preconditioner ILU smoother relative tolerance
     set amg preconditioner ilu relative tolerance = 1.00
 
     # AMG aggregation threshold
@@ -175,3 +178,58 @@ AMG preconditioner
 
 .. seealso::
 	For more information about the ``amg`` preconditioner parameters, the reader is referred to the deal.II documentation for the `AMG preconditioner <https://www.dealii.org/current/doxygen/deal.II/classTrilinosWrappers_1_1PreconditionAMG.html>`_ and its `Additional Data <https://www.dealii.org/current/doxygen/deal.II/structTrilinosWrappers_1_1PreconditionAMG_1_1AdditionalData.html>`_.
+
+------------------------------
+LSMG and GCMG preconditioners
+------------------------------
+
+Different parameters for the main components of the two geometric multigrid algorithms can be specified. The parameters can be general or can belong to either the smoother, the coarse-grid solver or the coarse-grid solver preconditioner. For the latter, one can choose between ``amg`` and ``ilu``.
+
+.. code-block:: text
+
+    # General MG parameters
+    set mg verbosity       = quiet
+    set mg min level       = -1
+    set mg level min cells = -1
+
+    # Relaxation smoother parameters
+    set mg smoother iterations     = 10
+    set mg smoother relaxation     = 0.5
+    set mg smoother eig estimation = false #if set to true, previous parameter is not used
+
+    # Eigenvalue estimation parameters
+    set eig estimation degree          = 3
+    set eig estimation smoothing range = 10
+    set eig estimation cg n iterations = 10
+    set eig estimation verbosity       = quiet
+
+    # Coarse-grid solver parameters
+    set mg coarse grid max iterations     = 2000
+    set mg coarse grid tolerance          = 1e-14
+    set mg coarse grid reduce             = 1e-4
+    set mg coarse grid max krylov vectors = 30
+    set mg coarse grid preconditioner     = amg
+    
+    # Coarse-grid AMG preconditioner parameters
+    set amg preconditioner ilu fill               = 0
+    set amg preconditioner ilu absolute tolerance = 1e-12
+    set amg preconditioner ilu relative tolerance = 1.00
+    set amg aggregation threshold                 = 1e-14
+    set amg n cycles                              = 1
+    set amg w cycles                              = false
+    set amg smoother sweeps                       = 2
+    set amg smoother overlap                      = 1
+    set amg preconditioner ilu fill               = 0
+    set amg preconditioner ilu absolute tolerance = 1e-12
+    set amg preconditioner ilu relative tolerance = 1.00
+
+    # Coarse-grid ILU preconditioner parameters
+    set ilu preconditioner fill               = 1
+    set ilu preconditioner absolute tolerance = 1e-12
+    set ilu preconditioner relative tolerance = 1
+
+.. tip::
+  The default algorithms build and use ALL the multigrid levels. There are two ways to change the number of levels, either by setting the ``mg min level`` parameter OR the ``mg level min cells`` parameter. For ``lsmg`` the coarsest mesh should cover the whole domain, i.e., no hanging nodes are allowed.
+
+.. tip::
+  If ``mg verbosity`` is set to ``verbose``, the information about the levels (cells and degrees of freedom) and the number of iterations of the coarse grid solver are displayed. If this parameter is set to ``extra verbose``, apart from all the previous information, an additional table with the time it took to set up the different components of the multigrid preconditioners is also displayed. 

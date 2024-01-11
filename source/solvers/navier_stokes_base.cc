@@ -112,9 +112,12 @@ NavierStokesBase<dim, VectorType, DofsType>::NavierStokesBase(
       triangulation =
         std::make_shared<parallel::distributed::Triangulation<dim>>(
           this->mpi_communicator,
-          typename Triangulation<dim>::MeshSmoothing(
-            Triangulation<dim>::smoothing_on_refinement |
-            Triangulation<dim>::smoothing_on_coarsening));
+          Triangulation<dim>::limit_level_difference_at_vertices,
+          (p_nsparam.linear_solver.at(fluid_dynamics).preconditioner ==
+           Parameters::LinearSolver::PreconditionerType::lsmg) ?
+            parallel::distributed::Triangulation<
+              dim>::construct_multigrid_hierarchy :
+            parallel::distributed::Triangulation<dim>::default_setting);
       dof_handler.clear();
       dof_handler.reinit(*this->triangulation);
     }
@@ -158,6 +161,10 @@ NavierStokesBase<dim, VectorType, DofsType>::NavierStokesBase(
           simulation_parameters.simulation_control);
     }
 
+  // Provide the simulation control object to the physical property manager
+  simulation_parameters.physical_properties_manager.provide_simulation_control(
+    simulation_control);
+
   multiphysics = std::make_shared<MultiphysicsInterface<dim>>(
     simulation_parameters, triangulation, simulation_control, this->pcout);
 
@@ -180,10 +187,7 @@ NavierStokesBase<dim, VectorType, DofsType>::NavierStokesBase(
   exact_solution = &simulation_parameters.analytical_solution->uvwp;
 
   // If there is a forcing function, get it from the parser
-  if (simulation_parameters.source_term->source_term())
-    forcing_function = &simulation_parameters.source_term->navier_stokes_source;
-  else
-    forcing_function = new NoForce<dim>;
+  forcing_function = simulation_parameters.source_term.navier_stokes_source;
 
   if (this->simulation_parameters.post_processing.calculate_average_velocities)
     average_velocities =
@@ -616,9 +620,14 @@ template <int dim, typename VectorType, typename DofsType>
 void
 NavierStokesBase<dim, VectorType, DofsType>::refine_mesh()
 {
-  if (simulation_control->get_step_number() %
-        this->simulation_parameters.mesh_adaptation.frequency ==
-      0)
+  bool refinement_step;
+  if (this->simulation_parameters.mesh_adaptation.refinement_at_frequency)
+    refinement_step = this->simulation_control->get_step_number() %
+                        this->simulation_parameters.mesh_adaptation.frequency ==
+                      0;
+  else
+    refinement_step = this->simulation_control->get_step_number() == 0;
+  if (refinement_step)
     {
       if (this->simulation_parameters.mesh_adaptation.type ==
           Parameters::MeshAdaptation::Type::kelly)
@@ -652,7 +661,7 @@ NavierStokesBase<dim, VectorType, DofsType>::box_refine_mesh()
           grid_in.read_msh(input_file);
 
           // By default uses the METIS partitioner.
-          // A user parameter option could be made to chose a partitionner.
+          // A user parameter option could be made to choose a partitionner.
           GridTools::partition_triangulation(0, basetria);
 
 
@@ -1609,38 +1618,59 @@ NavierStokesBase<dim, VectorType, DofsType>::read_checkpoint()
   // Deserialize all post-processing tables that are currently used
   {
     const Parameters::PostProcessing post_processing =
-      simulation_parameters.post_processing;
+      this->simulation_parameters.post_processing;
     std::string prefix =
       this->simulation_parameters.simulation_control.output_folder;
     std::string suffix = ".checkpoint";
     if (post_processing.calculate_enstrophy)
-      deserialize_table(
-        this->enstrophy_table,
-        prefix + simulation_parameters.post_processing.enstrophy_output_name +
-          suffix);
+      deserialize_table(this->enstrophy_table,
+                        prefix + post_processing.enstrophy_output_name +
+                          suffix);
     if (post_processing.calculate_kinetic_energy)
-      deserialize_table(
-        this->kinetic_energy_table,
-        prefix +
-          simulation_parameters.post_processing.kinetic_energy_output_name +
-          suffix);
+      deserialize_table(this->kinetic_energy_table,
+                        prefix + post_processing.kinetic_energy_output_name +
+                          suffix);
     if (post_processing.calculate_apparent_viscosity)
-      deserialize_table(
-        this->apparent_viscosity_table,
-        prefix +
-          simulation_parameters.post_processing.apparent_viscosity_output_name +
-          suffix);
+      deserialize_table(this->apparent_viscosity_table,
+                        prefix +
+                          post_processing.apparent_viscosity_output_name +
+                          suffix);
     if (post_processing.calculate_flow_rate)
-      deserialize_table(
-        this->flow_rate_table,
-        prefix + simulation_parameters.post_processing.flow_rate_output_name +
-          suffix);
+      deserialize_table(this->flow_rate_table,
+                        prefix + post_processing.flow_rate_output_name +
+                          suffix);
     if (post_processing.calculate_pressure_drop)
+      deserialize_table(this->pressure_drop_table,
+                        prefix + post_processing.pressure_drop_output_name +
+                          suffix);
+    if (this->simulation_parameters.forces_parameters.calculate_force)
+      for (unsigned int boundary_id = 0;
+           boundary_id < this->simulation_parameters.boundary_conditions.size;
+           ++boundary_id)
+        {
+          deserialize_table(
+            this->forces_tables[boundary_id],
+            prefix +
+              this->simulation_parameters.forces_parameters.force_output_name +
+              "_" + Utilities::int_to_string(boundary_id, 2) + suffix);
+        }
+    if (this->simulation_parameters.forces_parameters.calculate_torque)
+      for (unsigned int boundary_id = 0;
+           boundary_id < this->simulation_parameters.boundary_conditions.size;
+           ++boundary_id)
+        {
+          deserialize_table(
+            this->torques_tables[boundary_id],
+            prefix +
+              this->simulation_parameters.forces_parameters.torque_output_name +
+              "_" + Utilities::int_to_string(boundary_id, 2) + suffix);
+        }
+    if (this->simulation_parameters.analytical_solution->calculate_error())
       deserialize_table(
-        this->pressure_drop_table,
+        this->error_table,
         prefix +
-          simulation_parameters.post_processing.pressure_drop_output_name +
-          suffix);
+          this->simulation_parameters.analytical_solution->get_filename() +
+          "_FD" + suffix);
   }
 }
 
@@ -2053,8 +2083,8 @@ NavierStokesBase<dim, VectorType, DofsType>::write_output_results(
                             simulation_parameters.velocity_sources.omega_y,
                             simulation_parameters.velocity_sources.omega_z);
 
-  if (simulation_parameters.velocity_sources.type ==
-      Parameters::VelocitySource::VelocitySourceType::srf)
+  if (simulation_parameters.velocity_sources.rotating_frame_type ==
+      Parameters::VelocitySource::RotatingFrameType::srf)
     data_out.add_data_vector(solution, srf);
 
   output_field_hook(data_out);
@@ -2193,38 +2223,56 @@ NavierStokesBase<dim, VectorType, DofsType>::write_checkpoint()
   // Serialize all post-processing tables that are currently used
   {
     const Parameters::PostProcessing post_processing =
-      simulation_parameters.post_processing;
+      this->simulation_parameters.post_processing;
     std::string prefix =
       this->simulation_parameters.simulation_control.output_folder;
     std::string suffix = ".checkpoint";
     if (post_processing.calculate_enstrophy)
-      serialize_table(
-        this->enstrophy_table,
-        prefix + simulation_parameters.post_processing.enstrophy_output_name +
-          suffix);
+      serialize_table(this->enstrophy_table,
+                      prefix + post_processing.enstrophy_output_name + suffix);
     if (post_processing.calculate_kinetic_energy)
-      serialize_table(
-        this->kinetic_energy_table,
-        prefix +
-          simulation_parameters.post_processing.kinetic_energy_output_name +
-          suffix);
+      serialize_table(this->kinetic_energy_table,
+                      prefix + post_processing.kinetic_energy_output_name +
+                        suffix);
     if (post_processing.calculate_apparent_viscosity)
-      serialize_table(
-        this->apparent_viscosity_table,
-        prefix +
-          simulation_parameters.post_processing.apparent_viscosity_output_name +
-          suffix);
+      serialize_table(this->apparent_viscosity_table,
+                      prefix + post_processing.apparent_viscosity_output_name +
+                        suffix);
     if (post_processing.calculate_flow_rate)
-      serialize_table(
-        this->flow_rate_table,
-        prefix + simulation_parameters.post_processing.flow_rate_output_name +
-          suffix);
+      serialize_table(this->flow_rate_table,
+                      prefix + post_processing.flow_rate_output_name + suffix);
     if (post_processing.calculate_pressure_drop)
+      serialize_table(this->pressure_drop_table,
+                      prefix + post_processing.pressure_drop_output_name +
+                        suffix);
+    if (this->simulation_parameters.forces_parameters.calculate_force)
+      for (unsigned int boundary_id = 0;
+           boundary_id < this->simulation_parameters.boundary_conditions.size;
+           ++boundary_id)
+        {
+          serialize_table(
+            this->forces_tables[boundary_id],
+            prefix +
+              this->simulation_parameters.forces_parameters.force_output_name +
+              "_" + Utilities::int_to_string(boundary_id, 2) + suffix);
+        }
+    if (this->simulation_parameters.forces_parameters.calculate_torque)
+      for (unsigned int boundary_id = 0;
+           boundary_id < this->simulation_parameters.boundary_conditions.size;
+           ++boundary_id)
+        {
+          serialize_table(
+            this->torques_tables[boundary_id],
+            prefix +
+              this->simulation_parameters.forces_parameters.torque_output_name +
+              "_" + Utilities::int_to_string(boundary_id, 2) + suffix);
+        }
+    if (this->simulation_parameters.analytical_solution->calculate_error())
       serialize_table(
-        this->pressure_drop_table,
+        this->error_table,
         prefix +
-          simulation_parameters.post_processing.pressure_drop_output_name +
-          suffix);
+          this->simulation_parameters.analytical_solution->get_filename() +
+          "_FD" + suffix);
   }
 }
 

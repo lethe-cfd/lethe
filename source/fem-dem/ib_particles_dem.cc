@@ -60,13 +60,8 @@ IBParticlesDEM<dim>::initialize(
       dem_parameters);
   std::vector<types::boundary_id> boundary_index(0);
   particle_wall_contact_force_object =
-    std::make_shared<ParticleWallNonLinearForce<dim>>(
-      dem_parameters.boundary_conditions.boundary_translational_velocity,
-      dem_parameters.boundary_conditions.boundary_rotational_speed,
-      dem_parameters.boundary_conditions.boundary_rotational_vector,
-      triangulation_cell_diameter,
-      dem_parameters,
-      boundary_index);
+    std::make_shared<ParticleWallNonLinearForce<dim>>(dem_parameters,
+                                                      boundary_index);
 }
 template <int dim>
 void
@@ -165,8 +160,7 @@ IBParticlesDEM<dim>::calculate_pp_contact_force(
                 {
                   for (int d = 0; d < dim; ++d)
                     {
-                      contact_info.tangential_overlap[d]           = 0;
-                      contact_info.tangential_relative_velocity[d] = 0;
+                      contact_info.tangential_overlap[d] = 0;
                     }
                   pp_contact_map[particle_one.particle_id]
                                 [particle_two.particle_id] = contact_info;
@@ -303,8 +297,7 @@ IBParticlesDEM<dim>::calculate_pp_contact_force(
                   // if the adjacent pair is not in contact anymore
                   for (int d = 0; d < dim; ++d)
                     {
-                      contact_info.tangential_overlap[d]           = 0;
-                      contact_info.tangential_relative_velocity[d] = 0;
+                      contact_info.tangential_overlap[d] = 0;
                     }
                   pp_contact_map[particle_one.particle_id].erase(
                     particle_two.particle_id);
@@ -324,8 +317,8 @@ IBParticlesDEM<dim>::calculate_pp_lubrication_force(
   std::vector<Tensor<1, 3>> &lubrication_force,
   std::vector<Tensor<1, 3>> & /*lubrication_torque*/)
 {
-  using numbers::PI;
-  // loop over all particles to find pair of close partilces
+  using dealii::numbers::PI;
+  // loop over all particles to find pair of close particles
   for (auto &particle_one : dem_particles)
     {
       for (auto particle_contact_candidates_id =
@@ -627,8 +620,8 @@ IBParticlesDEM<dim>::calculate_pw_contact_force(
                   particle.mass,
                   particle.radius);
               // Updating the force of particles in the particle handler
-              contact_force[particle.particle_id] +=
-                normal_force + tangential_force;
+              contact_force[particle.particle_id] -=
+                (normal_force + tangential_force);
               // Updating the torque acting on particles
               contact_torque[particle.particle_id] +=
                 tangential_torque + rolling_resistance_torque;
@@ -657,7 +650,7 @@ IBParticlesDEM<dim>::calculate_pw_lubrication_force(
   std::vector<Tensor<1, 3>> &lubrication_force,
   std::vector<Tensor<1, 3>> & /*lubrication_torque*/)
 {
-  using numbers::PI;
+  using dealii::numbers::PI;
 
   // Loop over the particles
   for (auto &particle : dem_particles)
@@ -778,7 +771,7 @@ IBParticlesDEM<dim>::integrate_particles_motion(const double dt,
                                                 const double mu)
 {
   // Initialize local containers and physical variables
-  using numbers::PI;
+  using dealii::numbers::PI;
   double dt_dem = dt / parameters->coupling_frequency;
 
   std::vector<Tensor<1, 3>> contact_force(dem_particles.size());
@@ -1082,10 +1075,10 @@ IBParticlesDEM<dim>::integrate_particles_motion(const double dt,
             }
 
           dem_particles[p_i].omega =
-            last_velocity[p_i] + dt_dem *
-                                   (k_omega[p_i][0] + 2 * k_omega[p_i][1] +
-                                    2 * k_omega[p_i][2] + k_omega[p_i][3]) /
-                                   6;
+            last_omega[p_i] + dt_dem *
+                                (k_omega[p_i][0] + 2 * k_omega[p_i][1] +
+                                 2 * k_omega[p_i][2] + k_omega[p_i][3]) /
+                                6;
 
           // Integration of the impulsion applied to the particle.
           // This is what will be transferred to the CFD to integrate the

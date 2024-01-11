@@ -27,13 +27,13 @@
 #include <dem/insertion.h>
 #include <dem/integrator.h>
 #include <dem/lagrangian_post_processing.h>
-#include <dem/non_uniform_insertion.h>
 #include <dem/output_force_torque_calculation.h>
 #include <dem/particle_particle_contact_force.h>
 #include <dem/particle_point_line_contact_force.h>
 #include <dem/particle_wall_contact_force.h>
 #include <dem/periodic_boundaries_manipulator.h>
 #include <dem/visualization.h>
+#include <dem/volume_insertion.h>
 
 #include <deal.II/base/tensor.h>
 #include <deal.II/base/timer.h>
@@ -328,7 +328,6 @@ private:
   bool                                 load_balance_step;
   bool                                 checkpoint_step;
   Tensor<1, 3>                         g;
-  double                               triangulation_cell_diameter;
 
   DEM::DEMProperties<dim>                  properties_class;
   std::vector<std::pair<std::string, int>> properties =
@@ -353,7 +352,6 @@ private:
   Visualization<dim>            visualization_object;
   LagrangianPostProcessing<dim> post_processing_object;
   PVDHandler                    particles_pvdhandler;
-  const double                  standard_deviation_multiplier;
 
   std::vector<Tensor<1, 3>> torque;
   std::vector<Tensor<1, 3>> force;
@@ -388,6 +386,9 @@ private:
 
   // Solid DEM objects
   std::vector<std::shared_ptr<SerialSolid<dim - 1, dim>>> solids;
+
+  // Distribution objects
+  std::vector<std::shared_ptr<Distribution>> distribution_object_container;
 
   // Dynamic disabling of particle contacts in cells object
   DisableContacts<dim>      disable_contacts_object;

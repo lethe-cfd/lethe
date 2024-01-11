@@ -9,7 +9,7 @@ This example showcases another classical fluid mechanics problem, the Taylor-Cou
 Features
 ---------
 
-- Solvers: ``gls_navier_stokes`` (with Q1-Q1 and Q2-Q1) or  ``gd_navier_stokes`` (with Q2-Q1)
+- Solvers: ``lethe-fluid`` (with Q1-Q1 and Q2-Q1) or  ``lethe-fluid-block`` (with Q2-Q1)
 - Steady-state problem
 - Displays the use of the analytical solution to calculate the mesh convergence 
 - Displays the calculation of the torque induced by the fluid on a boundary
@@ -19,8 +19,10 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Parameter file: ``examples/incompressible-flow/2d-taylor-couette/taylor-couette.prm``
-- Python script for postprocessing: ``examples/incompressible-flow/2d-taylor-couette/post_process_taylor_couette.py``
+All files mentioned below are located in the example's folder (``examples/incompressible-flow/2d-taylor-couette``).
+
+- Parameter file: ``taylor-couette.prm``
+- Postprocessing Python script: ``postprocess_taylor_couette.py``
 
 
 -----------------------
@@ -130,7 +132,7 @@ Lethe supports the use of arbitrary interpolation order. The :math:`\mathcal{L}^
     end
 
 .. note::
-    With the ``gls_navier_stokes`` solver, Q2-Q2 elements could also be used. However, we have not found that these lead to better results when the flows are at a low Reynolds number.
+    With the ``lethe-fluid`` solver, Q2-Q2 elements could also be used. However, we have not found that these lead to better results when the flows are at a low Reynolds number.
 
 Analytical Solution
 ~~~~~~~~~~~~~~~~~~~~
@@ -204,11 +206,12 @@ The ``non-linear solver`` and ``linear solver`` subsections do not contain any n
 ----------------------
 Running the Simulation
 ----------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-fluid`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  gls_navier_stokes taylor-couette.prm
+  lethe-fluid taylor-couette.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by visualization programs such as `Paraview <https://www.paraview.org/>`_.
 

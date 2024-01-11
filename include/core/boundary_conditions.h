@@ -35,6 +35,7 @@ DeclException1(
 
 namespace BoundaryConditions
 {
+
   enum class BoundaryType
   {
     // common
@@ -60,6 +61,7 @@ namespace BoundaryConditions
     cahn_hilliard_noflux,
     cahn_hilliard_dirichlet_phase_order,
     cahn_hilliard_angle_of_contact,
+    cahn_hilliard_free_angle,
   };
 
   /**
@@ -88,7 +90,6 @@ namespace BoundaryConditions
 
     // Number of boundary conditions
     unsigned int size;
-    unsigned int max_size;
     bool         time_dependent;
 
     // Periodic boundary condition matching
@@ -159,11 +160,25 @@ namespace BoundaryConditions
     NSPressureBoundaryFunctions<dim> *bcPressureFunction;
 
     void
-    parse_boundary(ParameterHandler &prm, unsigned int i_bc);
+    parse_boundary(ParameterHandler &prm, const unsigned int i_bc);
     void
-    declareDefaultEntry(ParameterHandler &prm, unsigned int i_bc);
+    declareDefaultEntry(ParameterHandler &prm, const unsigned int i_bc);
+
+    /**
+     * @brief Declares the Navier-Stokes boundary conditions
+     *
+     * @param prm The parameter file
+     * @param number_of_boundary_conditions The number of boundary conditions to be declared. This parameter is generally pre-parsed from a first read of the prm file.
+     */
     void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int number_of_boundary_conditions);
+
+    /**
+     * @brief Parses the Navier-Stokes boundary conditions
+     *
+     * @param prm The parameter file
+     */
     void
     parse_parameters(ParameterHandler &prm);
     void
@@ -198,8 +213,8 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  NSBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler &prm,
-                                                 unsigned int      i_bc)
+  NSBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler  &prm,
+                                                 const unsigned int i_bc)
   {
     prm.declare_entry(
       "type",
@@ -273,8 +288,8 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  NSBoundaryConditions<dim>::parse_boundary(ParameterHandler &prm,
-                                            unsigned int      i_bc)
+  NSBoundaryConditions<dim>::parse_boundary(ParameterHandler  &prm,
+                                            const unsigned int i_bc)
   {
     const std::string op = prm.get("type");
     if (op == "none")
@@ -343,21 +358,16 @@ namespace BoundaryConditions
   }
 
 
-  /**
-   * @brief Declare the boundary conditions default parameters
-   *
-   * @param prm A parameter handler which is currently used to parse the simulation information
-   */
   template <int dim>
   void
-  NSBoundaryConditions<dim>::declare_parameters(ParameterHandler &prm)
+  NSBoundaryConditions<dim>::declare_parameters(
+    ParameterHandler  &prm,
+    const unsigned int number_of_boundary_conditions)
   {
-    this->max_size = 14;
-
     prm.enter_subsection("boundary conditions");
     {
       prm.declare_entry("number",
-                        "0",
+                        Utilities::int_to_string(number_of_boundary_conditions),
                         Patterns::Integer(),
                         "Number of boundary conditions");
       prm.declare_entry(
@@ -366,15 +376,16 @@ namespace BoundaryConditions
         Patterns::Bool(),
         "Bool to define if the boundary condition is time dependent");
 
-      this->id.resize(this->max_size);
-      this->beta.resize(this->max_size);
-      this->boundary_layer_thickness.resize(this->max_size);
-      this->periodic_id.resize(this->max_size);
-      this->periodic_direction.resize(this->max_size);
-      this->type.resize(this->max_size);
-      bcFunctions        = new NSBoundaryFunctions<dim>[this->max_size];
-      bcPressureFunction = new NSPressureBoundaryFunctions<dim>[this->max_size];
-      for (unsigned int n = 0; n < this->max_size; n++)
+      this->id.resize(number_of_boundary_conditions);
+      this->beta.resize(number_of_boundary_conditions);
+      this->boundary_layer_thickness.resize(number_of_boundary_conditions);
+      this->periodic_id.resize(number_of_boundary_conditions);
+      this->periodic_direction.resize(number_of_boundary_conditions);
+      this->type.resize(number_of_boundary_conditions);
+      bcFunctions = new NSBoundaryFunctions<dim>[number_of_boundary_conditions];
+      bcPressureFunction =
+        new NSPressureBoundaryFunctions<dim>[number_of_boundary_conditions];
+      for (unsigned int n = 0; n < number_of_boundary_conditions; n++)
         {
           prm.enter_subsection("bc " + std::to_string(n));
           {
@@ -439,18 +450,20 @@ namespace BoundaryConditions
   class HTBoundaryConditions : public BoundaryConditions<dim>
   {
   public:
-    std::vector<double> value;
-    std::vector<double> h;
-    std::vector<double> Tinf;
-    std::vector<double> emissivity;
-    double              Stefan_Boltzmann_constant;
+    std::vector<std::shared_ptr<Functions::ParsedFunction<dim>>>
+      dirichlet_value;
+    std::vector<std::shared_ptr<Functions::ParsedFunction<dim>>> h;
+    std::vector<std::shared_ptr<Functions::ParsedFunction<dim>>> Tinf;
+    std::vector<std::shared_ptr<Functions::ParsedFunction<dim>>> emissivity;
+    double Stefan_Boltzmann_constant;
 
     void
-    declareDefaultEntry(ParameterHandler &prm, unsigned int i_bc);
+    declareDefaultEntry(ParameterHandler &prm, const unsigned int i_bc);
     void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int number_of_boundary_conditions);
     void
-    parse_boundary(ParameterHandler &prm, unsigned int i_bc);
+    parse_boundary(ParameterHandler &prm, const unsigned int i_bc);
     void
     parse_parameters(ParameterHandler &prm);
   };
@@ -464,8 +477,8 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  HTBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler &prm,
-                                                 unsigned int      i_bc)
+  HTBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler  &prm,
+                                                 const unsigned int i_bc)
   {
     prm.declare_entry("type",
                       "noflux",
@@ -479,27 +492,29 @@ namespace BoundaryConditions
                       Patterns::Integer(),
                       "Mesh id for boundary conditions");
 
-    prm.declare_entry("value",
-                      "0",
-                      Patterns::Double(),
-                      "Value (Double) for constant temperature at bc");
+    // Expression for the temperature for an imposed temperature at bc
+    prm.enter_subsection("value");
+    dirichlet_value[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
+    dirichlet_value[i_bc]->declare_parameters(prm);
+    prm.leave_subsection();
 
-    prm.declare_entry(
-      "h",
-      "0",
-      Patterns::Double(),
-      "Value (Double) for the h coefficient of convection-radiation bc");
+    // Expression for the h coefficient of convection-radiation bc
+    prm.enter_subsection("h");
+    h[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
+    h[i_bc]->declare_parameters(prm);
+    prm.leave_subsection();
 
-    prm.declare_entry(
-      "Tinf",
-      "0",
-      Patterns::Double(),
-      "Temperature (Double) of environment for convection-radiation bc");
+    // Temperature of environment for convection-radiation bc
+    prm.enter_subsection("Tinf");
+    Tinf[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
+    Tinf[i_bc]->declare_parameters(prm);
+    prm.leave_subsection();
 
-    prm.declare_entry("emissivity",
-                      "0.0",
-                      Patterns::Double(),
-                      "Emissivity of the boundary for convection-radiation bc");
+    // Emissivity of the boundary for convection-radiation bc
+    prm.enter_subsection("emissivity");
+    emissivity[i_bc] = std::make_shared<Functions::ParsedFunction<dim>>();
+    emissivity[i_bc]->declare_parameters(prm);
+    prm.leave_subsection();
   }
 
   /**
@@ -510,20 +525,31 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  HTBoundaryConditions<dim>::declare_parameters(ParameterHandler &prm)
+  HTBoundaryConditions<dim>::declare_parameters(
+    ParameterHandler  &prm,
+    const unsigned int number_of_boundary_conditions)
   {
-    this->max_size = 14;
-
     prm.enter_subsection("boundary conditions heat transfer");
     {
       prm.declare_entry("number",
                         "0",
                         Patterns::Integer(),
                         "Number of boundary conditions");
-      this->id.resize(this->max_size);
-      this->type.resize(this->max_size);
 
-      for (unsigned int n = 0; n < this->max_size; n++)
+      prm.declare_entry(
+        "time dependent",
+        "false",
+        Patterns::Bool(),
+        "Bool to define if the boundary condition is time-dependent");
+
+      this->id.resize(number_of_boundary_conditions);
+      this->type.resize(number_of_boundary_conditions);
+      dirichlet_value.resize(number_of_boundary_conditions);
+      h.resize(number_of_boundary_conditions);
+      Tinf.resize(number_of_boundary_conditions);
+      emissivity.resize(number_of_boundary_conditions);
+
+      for (unsigned int n = 0; n < number_of_boundary_conditions; n++)
         {
           prm.enter_subsection("bc " + std::to_string(n));
           {
@@ -549,8 +575,8 @@ namespace BoundaryConditions
 
   template <int dim>
   void
-  HTBoundaryConditions<dim>::parse_boundary(ParameterHandler &prm,
-                                            unsigned int      i_bc)
+  HTBoundaryConditions<dim>::parse_boundary(ParameterHandler  &prm,
+                                            const unsigned int i_bc)
   {
     const std::string op = prm.get("type");
     if (op == "noflux")
@@ -559,19 +585,29 @@ namespace BoundaryConditions
       }
     if (op == "temperature")
       {
-        this->type[i_bc]  = BoundaryType::temperature;
-        this->value[i_bc] = prm.get_double("value");
+        this->type[i_bc] = BoundaryType::temperature;
       }
     else if (op == "convection-radiation")
       {
-        this->type[i_bc]       = BoundaryType::convection_radiation;
-        this->h[i_bc]          = prm.get_double("h");
-        this->Tinf[i_bc]       = prm.get_double("Tinf");
-        this->emissivity[i_bc] = prm.get_double("emissivity");
+        this->type[i_bc] = BoundaryType::convection_radiation;
 
-        Assert(this->emissivity[i_bc] <= 1.0 && this->emissivity[i_bc] >= 0.0,
-               EmissivityError(this->emissivity[i_bc]));
+        // Emissivity validity (0 <= emissivity <= 1) will be checked at
+        // evaluation.
       }
+
+    // All the functions are parsed since they might be used for post-processing
+    prm.enter_subsection("value");
+    this->dirichlet_value[i_bc]->parse_parameters(prm);
+    prm.leave_subsection();
+    prm.enter_subsection("h");
+    this->h[i_bc]->parse_parameters(prm);
+    prm.leave_subsection();
+    prm.enter_subsection("Tinf");
+    this->Tinf[i_bc]->parse_parameters(prm);
+    prm.leave_subsection();
+    prm.enter_subsection("emissivity");
+    this->emissivity[i_bc]->parse_parameters(prm);
+    prm.leave_subsection();
 
     this->id[i_bc] = prm.get_integer("id");
   }
@@ -589,11 +625,12 @@ namespace BoundaryConditions
   {
     prm.enter_subsection("boundary conditions heat transfer");
     {
-      this->size = prm.get_integer("number");
+      this->size           = prm.get_integer("number");
+      this->time_dependent = prm.get_bool("time dependent");
 
       this->type.resize(this->size);
       this->id.resize(this->size);
-      this->value.resize(this->size);
+      this->dirichlet_value.resize(this->size);
       this->h.resize(this->size);
 
       this->Tinf.resize(this->size);
@@ -631,11 +668,12 @@ namespace BoundaryConditions
 
 
     void
-    declareDefaultEntry(ParameterHandler &prm, unsigned int i_bc);
+    declareDefaultEntry(ParameterHandler &prm, const unsigned int i_bc);
     void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int number_of_boundary_conditions);
     void
-    parse_boundary(ParameterHandler &prm, unsigned int i_bc);
+    parse_boundary(ParameterHandler &prm, const unsigned int i_bc);
     void
     parse_parameters(ParameterHandler &prm);
   };
@@ -678,21 +716,28 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  TracerBoundaryConditions<dim>::declare_parameters(ParameterHandler &prm)
+  TracerBoundaryConditions<dim>::declare_parameters(
+    ParameterHandler  &prm,
+    const unsigned int number_of_boundary_conditions)
   {
-    this->max_size = 14;
-
     prm.enter_subsection("boundary conditions tracer");
     {
       prm.declare_entry("number",
                         "0",
                         Patterns::Integer(),
                         "Number of boundary conditions");
-      this->id.resize(this->max_size);
-      this->type.resize(this->max_size);
-      tracer.resize(this->max_size);
 
-      for (unsigned int n = 0; n < this->max_size; n++)
+      prm.declare_entry(
+        "time dependent",
+        "false",
+        Patterns::Bool(),
+        "Bool to define if the boundary condition is time-dependent");
+
+      this->id.resize(number_of_boundary_conditions);
+      this->type.resize(number_of_boundary_conditions);
+      tracer.resize(number_of_boundary_conditions);
+
+      for (unsigned int n = 0; n < number_of_boundary_conditions; n++)
         {
           prm.enter_subsection("bc " + std::to_string(n));
           {
@@ -742,8 +787,8 @@ namespace BoundaryConditions
   {
     prm.enter_subsection("boundary conditions tracer");
     {
-      this->size = prm.get_integer("number");
-
+      this->size           = prm.get_integer("number");
+      this->time_dependent = prm.get_bool("time dependent");
       this->type.resize(this->size);
 
       for (unsigned int n = 0; n < this->size; n++)
@@ -775,11 +820,12 @@ namespace BoundaryConditions
     CahnHilliardBoundaryFunctions<dim> *bcFunctions;
 
     void
-    declareDefaultEntry(ParameterHandler &prm, unsigned int i_bc);
+    declareDefaultEntry(ParameterHandler &prm, const unsigned int i_bc);
     void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int number_of_boundary_conditions);
     void
-    parse_boundary(ParameterHandler &prm, unsigned int i_bc);
+    parse_boundary(ParameterHandler &prm, const unsigned int i_bc);
     void
     parse_parameters(ParameterHandler &prm);
   };
@@ -795,15 +841,15 @@ namespace BoundaryConditions
   template <int dim>
   void
   CahnHilliardBoundaryConditions<dim>::declareDefaultEntry(
-    ParameterHandler &prm,
-    unsigned int      i_bc)
+    ParameterHandler  &prm,
+    const unsigned int i_bc)
   {
     prm.declare_entry(
       "type",
       "noflux",
-      Patterns::Selection("noflux|dirichlet|angle_of_contact"),
+      Patterns::Selection("noflux|dirichlet|angle_of_contact|free_angle"),
       "Type of boundary condition for the Cahn-Hilliard equations"
-      "Choices are <noflux|dirichlet|angle_of_contact>.");
+      "Choices are <noflux|dirichlet|angle_of_contact|free_angle>.");
 
     prm.declare_entry("id",
                       Utilities::int_to_string(i_bc, 2),
@@ -831,10 +877,10 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  CahnHilliardBoundaryConditions<dim>::declare_parameters(ParameterHandler &prm)
+  CahnHilliardBoundaryConditions<dim>::declare_parameters(
+    ParameterHandler  &prm,
+    const unsigned int number_of_boundary_conditions)
   {
-    this->max_size = 14;
-
     prm.enter_subsection("boundary conditions cahn hilliard");
     {
       prm.declare_entry("number",
@@ -847,11 +893,12 @@ namespace BoundaryConditions
         Patterns::Bool(),
         "Bool to define if the boundary condition is time dependent");
 
-      this->id.resize(this->max_size);
-      this->type.resize(this->max_size);
-      bcFunctions = new CahnHilliardBoundaryFunctions<dim>[this->max_size];
+      this->id.resize(number_of_boundary_conditions);
+      this->type.resize(number_of_boundary_conditions);
+      bcFunctions =
+        new CahnHilliardBoundaryFunctions<dim>[number_of_boundary_conditions];
 
-      for (unsigned int n = 0; n < this->max_size; n++)
+      for (unsigned int n = 0; n < number_of_boundary_conditions; n++)
         {
           prm.enter_subsection("bc " + std::to_string(n));
           {
@@ -892,6 +939,10 @@ namespace BoundaryConditions
       {
         this->type[i_bc] = BoundaryType::cahn_hilliard_angle_of_contact;
         this->angle_of_contact[i_bc] = prm.get_double("angle value");
+      }
+    if (op == "free_angle")
+      {
+        this->type[i_bc] = BoundaryType::cahn_hilliard_free_angle;
       }
 
     this->id[i_bc] = prm.get_integer("id");
@@ -947,11 +998,12 @@ namespace BoundaryConditions
     std::vector<std::shared_ptr<Functions::ParsedFunction<dim>>> phase_fraction;
 
     void
-    declareDefaultEntry(ParameterHandler &prm, unsigned int i_bc);
+    declareDefaultEntry(ParameterHandler &prm, const unsigned int i_bc);
     void
-    declare_parameters(ParameterHandler &prm);
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int number_of_boundary_conditions);
     void
-    parse_boundary(ParameterHandler &prm, unsigned int i_bc);
+    parse_boundary(ParameterHandler &prm, const unsigned int i_bc);
     void
     parse_parameters(ParameterHandler &prm);
   };
@@ -965,8 +1017,8 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  VOFBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler &prm,
-                                                  unsigned int      i_bc)
+  VOFBoundaryConditions<dim>::declareDefaultEntry(ParameterHandler  &prm,
+                                                  const unsigned int i_bc)
   {
     prm.declare_entry("type",
                       "none",
@@ -993,21 +1045,26 @@ namespace BoundaryConditions
    */
   template <int dim>
   void
-  VOFBoundaryConditions<dim>::declare_parameters(ParameterHandler &prm)
+  VOFBoundaryConditions<dim>::declare_parameters(
+    ParameterHandler  &prm,
+    const unsigned int number_of_boundary_conditions)
   {
-    this->max_size = 14;
-
     prm.enter_subsection("boundary conditions VOF");
     {
       prm.declare_entry("number",
                         "0",
                         Patterns::Integer(),
                         "Number of boundary conditions");
-      this->id.resize(this->max_size);
-      this->type.resize(this->max_size);
-      phase_fraction.resize(this->max_size);
+      prm.declare_entry(
+        "time dependent",
+        "false",
+        Patterns::Bool(),
+        "Bool to define if the boundary condition is time-dependent");
+      this->id.resize(number_of_boundary_conditions);
+      this->type.resize(number_of_boundary_conditions);
+      phase_fraction.resize(number_of_boundary_conditions);
 
-      for (unsigned int n = 0; n < this->max_size; n++)
+      for (unsigned int n = 0; n < number_of_boundary_conditions; n++)
         {
           prm.enter_subsection("bc " + std::to_string(n));
           {
@@ -1029,8 +1086,8 @@ namespace BoundaryConditions
 
   template <int dim>
   void
-  VOFBoundaryConditions<dim>::parse_boundary(ParameterHandler &prm,
-                                             unsigned int      i_bc)
+  VOFBoundaryConditions<dim>::parse_boundary(ParameterHandler  &prm,
+                                             const unsigned int i_bc)
   {
     const std::string op = prm.get("type");
     if (op == "none")
@@ -1060,7 +1117,8 @@ namespace BoundaryConditions
   {
     prm.enter_subsection("boundary conditions VOF");
     {
-      this->size = prm.get_integer("number");
+      this->size           = prm.get_integer("number");
+      this->time_dependent = prm.get_bool("time dependent");
 
       this->type.resize(this->size);
       this->id.resize(this->size);
@@ -1120,18 +1178,20 @@ NavierStokesFunctionDefined<dim>::value(const Point<dim>  &p,
                                         const unsigned int component) const
 {
   Assert(component < this->n_components,
-         ExcIndexRange(component, 0, this->n_components)) if (component == 0)
-  {
-    return u->value(p);
-  }
+         ExcIndexRange(component, 0, this->n_components));
+
+  if (component == 0)
+    {
+      return u->value(p);
+    }
   else if (component == 1)
-  {
-    return v->value(p);
-  }
+    {
+      return v->value(p);
+    }
   else if (component == 2)
-  {
-    return w->value(p);
-  }
+    {
+      return w->value(p);
+    }
   return 0.;
 }
 
@@ -1176,7 +1236,7 @@ NavierStokesPressureFunctionDefined<dim>::value(
 }
 
 /**
- * @brief This class implements a boundary conditions for the Cahn-Hilliard equation
+ * @brief Class that implements a boundary conditions for the Cahn-Hilliard equation
  * where the phase and chemical potential are defined using individual functions
  */
 template <int dim>
@@ -1209,14 +1269,16 @@ CahnHilliardFunctionDefined<dim>::value(const Point<dim>  &p,
                                         const unsigned int component) const
 {
   Assert(component < this->n_components,
-         ExcIndexRange(component, 0, this->n_components)) if (component == 0)
-  {
-    return phi->value(p);
-  }
+         ExcIndexRange(component, 0, this->n_components));
+
+  if (component == 0)
+    {
+      return phi->value(p);
+    }
   else if (component == 1)
-  {
-    return 0.;
-  }
+    {
+      return 0.;
+    }
   return 0.;
 }
 

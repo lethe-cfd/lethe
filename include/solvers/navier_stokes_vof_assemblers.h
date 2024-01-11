@@ -13,13 +13,13 @@
  *
  * ---------------------------------------------------------------------*/
 
-
+#include <core/evaporation_model.h>
 #include <core/simulation_control.h>
 
-#include <solvers/auxiliary_physics.h>
 #include <solvers/copy_data.h>
 #include <solvers/navier_stokes_assemblers.h>
 #include <solvers/navier_stokes_scratch_data.h>
+#include <solvers/simulation_parameters.h>
 
 #ifndef lethe_navier_stokes_vof_assemblers_h
 #  define lethe_navier_stokes_vof_assemblers_h
@@ -28,10 +28,10 @@
 /**
  * @brief Class that assembles the core of the Navier-Stokes equation with
  * free surface using VOF modeling.
- * This class assembles the weak form of:
- * $$ \nabla \cdot \mathbf{u} + \rho \mathbf{u} \cdot \nabla
+ * According to the following weak form:
+ * \f$ \nabla \cdot \mathbf{u} + \rho \mathbf{u} \cdot \nabla
  * \mathbf{u} + \nabla p - \mu \nabla\cdot (\nabla \mathbf{u} +
- * (\nabla \mathbf{u})^T) = 0 $$ with an SUPG and PSPG stabilization
+ * (\nabla \mathbf{u})^T) = 0 \f$ with an SUPG and PSPG stabilization
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *
@@ -77,7 +77,7 @@ public:
  * integration for the Navier-Stokes equation with
  * free surface using VOF modeling. For example, if a BDF1 scheme is
  * chosen, the following is assembled
- * $$\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}{\Delta t}
+ * \f$\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}}{\Delta t} \f$
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *
@@ -116,9 +116,9 @@ public:
 
 /**
  * @brief Class that assembles the Surface Tension Force (STF) for the
- * Navier-Stokes equations. The following equation is assembled
+ * Navier-Stokes equations according to the following equation:
  *
- * $$\mathbf{F_{CSV}}=\sigma k \nabla \phi \frac{2 \rho}{\rho_0 + \rho_1}
+ * \f$\mathbf{F_{CSV}}=\sigma k \nabla \phi \frac{2 \rho}{\rho_0 + \rho_1} \f$
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *
@@ -162,12 +162,12 @@ public:
 
 /**
  * @brief Class that assembles the marangoni effect for the
- * Navier-Stokes equations. The following equation is assembled
+ * Navier-Stokes equations according to the following equation:
  *
- * $$\mathbf{F_{Ma}}= \frac{\partial \sigma}{\partial T} \left[ \nabla T
+ * \f$\mathbf{F_{Ma}}= \frac{\partial \sigma}{\partial T} \left[ \nabla T
  * - \frac{\nabla \phi}{| \nabla \phi |} \left( \frac{ \nabla \phi }
  * {| \nabla \phi |} \cdot \nabla T \right) \right] | \nabla \phi |
- * \frac{2 \rho}{\rho_0 + \rho_1}
+ * \frac{2 \rho}{\rho_0 + \rho_1} \f$
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *
@@ -210,8 +210,59 @@ public:
 };
 
 /**
+ * @brief Class that assembles the momentum source due to evaporation for the
+ * Navier-Stokes equations.
+ *
+ * @tparam dim An integer that denotes the number of spatial dimensions
+ *
+ * @param simulation_control Shared pointer of the SimulationControl object
+ * controlling the current simulation
+ * @param p_evaporation Struct that holds all evaporation model
+ * parameters
+ *
+ * @ingroup assemblers
+ */
+template <int dim>
+class NavierStokesVOFAssemblerEvaporation
+  : public NavierStokesAssemblerBase<dim>
+{
+public:
+  NavierStokesVOFAssemblerEvaporation(
+    std::shared_ptr<SimulationControl> p_simulation_control,
+    const Parameters::Evaporation     &p_evaporation)
+    : simulation_control(p_simulation_control)
+  {
+    this->evaporation_model = EvaporationModel::model_cast(p_evaporation);
+  }
+
+  /**
+   * @brief assemble_matrix Assembles the matrix
+   * @param scratch_data (see base class)
+   * @param copy_data (see base class)
+   */
+  virtual void
+  assemble_matrix(NavierStokesScratchData<dim>         &scratch_data,
+                  StabilizedMethodsTensorCopyData<dim> &copy_data) override;
+
+  /**
+   * @brief assemble_rhs Assembles the rhs
+   * @param scratch_data (see base class)
+   * @param copy_data (see base class)
+   */
+  virtual void
+  assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
+               StabilizedMethodsTensorCopyData<dim> &copy_data) override;
+
+  std::shared_ptr<SimulationControl> simulation_control;
+
+private:
+  // Evaporation model
+  std::shared_ptr<EvaporationModel> evaporation_model;
+};
+
+/**
  * @brief Class that assembles the core of the Navier-Stokes equation
- * using a Rheological model to predict non Newtonian behaviors
+ * using a Rheological model to predict non-Newtonian behaviors
  *
  * @tparam dim An integer that denotes the number of spatial dimensions
  *

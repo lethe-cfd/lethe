@@ -9,7 +9,7 @@ This example showcases a classical fluid mechanics problem, the lid-driven cavit
 Features
 ----------------------------------
 
-- Solvers: ``gls_navier_stokes`` (with Q1-Q1) or  ``gd_navier_stokes`` (with Q2-Q1)
+- Solvers: ``lethe-fluid`` (with Q1-Q1) or  ``lethe-fluid-block`` (with Q2-Q1)
 - Steady-state problem
 - Displays the use of adjoint time-stepping for steady-state problems
 
@@ -18,12 +18,14 @@ Features
 Files Used in This Example
 ----------------------------
 
-- Base case parameter file (:math:`Re=400`): ``/examples/incompressible-flow/2d-lid-driven-cavity/cavity.prm``
-- Experimental data file from Ghia `et al.` (1982) `[1] <https://doi.org/10.1016/0021-9991(82)90058-4>`_: ``examples/incompressible-flow/2d-lid-driven-cavity/ref-2d-ghia-u.txt``
-- Experimental data file from Erturk `et al.` (2005) `[2] <https://doi.org/10.1002/fld.953>`_: ``examples/incompressible-flow/2d-lid-driven-cavity/ref-2d-erturk-u.txt``
-- Higher-Reynolds case parameter file (:math:`Re=7500`): ``/examples/incompressible-flow/2d-lid-driven-cavity/Reynolds_7500/cavity.prm``
-- Python script for postprocessing the :math:`Re=400` case: ``examples/incompressible-flow/2d-lid-driven-cavity/post_process_Reynolds_400.py``
-- Python script for postprocessing the :math:`Re=7500` case: ``examples/incompressible-flow/2d-lid-driven-cavity/Reynolds_7500/post_process_Reynolds_7500.py``
+All files mentioned below are located in the example's folder (``examples/incompressible-flow/2d-lid-driven-cavity``).
+
+- Base case parameter file (:math:`Re=400`): ``cavity.prm``
+- Experimental data file from Ghia `et al.` (1982) `[1] <https://doi.org/10.1016/0021-9991(82)90058-4>`_: ``ref-2d-ghia-u.txt``
+- Experimental data file from Erturk `et al.` (2005) `[2] <https://doi.org/10.1002/fld.953>`_: ``ref-2d-erturk-u.txt``
+- Higher-Reynolds case parameter file (:math:`Re=7500`): ``Reynolds_7500/cavity.prm``
+- Postprocessing Python script for the :math:`Re=400` case: ``post_process_Reynolds_400.py``
+- Postprocessing Python script for the :math:`Re=7500` case: ``Reynolds_7500/post_process_Reynolds_7500.py``
 
 
 -----------------------
@@ -134,7 +136,7 @@ By default, simulations only contain a single fluid which is labeled ``0``.
 FEM Interpolation
 ~~~~~~~~~~~~~~~~~
 
-Lethe supports the use of arbitrary interpolation order. The default solver for this case is ``gls_navier_stokes`` which uses a stabilized method and supports equal order interpolation. 
+Lethe supports the use of arbitrary interpolation order. The default solver for this case is ``lethe-fluid`` which uses a stabilized method and supports equal order interpolation. 
 
 We specify the interpolation order for both pressure and velocity using the ``FEM`` subsection:
 
@@ -146,7 +148,7 @@ We specify the interpolation order for both pressure and velocity using the ``FE
     end
 
 .. warning:: 
-    An alternative would be to use the ``gd_navier_stokes`` solver; for `LBB <https://en.wikipedia.org/wiki/Ladyzhenskaya%E2%80%93Babu%C5%A1ka%E2%80%93Brezzi_condition>`_ stable elements must be used (e.g. Qn-Q(n-1)). Only the stabilized solver supports the use of equal order elements. 
+    An alternative would be to use the ``lethe-fluid-block`` solver; for `LBB <https://en.wikipedia.org/wiki/Ladyzhenskaya%E2%80%93Babu%C5%A1ka%E2%80%93Brezzi_condition>`_ stable elements must be used (e.g. Qn-Q(n-1)). Only the stabilized solver supports the use of equal order elements. 
 
 Non-linear Solver
 ~~~~~~~~~~~~~~~~~
@@ -200,11 +202,12 @@ The last subsection, which is generally the one we put at the top of the paramet
 -----------------------
 Running the Simulations
 -----------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``gls_navier_stokes`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-fluid`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  gls_navier_stokes cavity.prm
+  lethe-fluid cavity.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_.
 

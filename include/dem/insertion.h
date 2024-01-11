@@ -12,14 +12,13 @@
  * the top level of the Lethe distribution.
  *
  * ---------------------------------------------------------------------
-
  *
- * Author: Shahab Golshan, Polytechnique Montreal, 2019
  */
 
 #include <core/dem_properties.h>
 
 #include <dem/dem_solver_parameters.h>
+#include <dem/distributions.h>
 
 #include <deal.II/base/array_view.h>
 #include <deal.II/base/data_out_base.h>
@@ -36,6 +35,9 @@
 #include <deal.II/particles/particle_handler.h>
 #include <deal.II/particles/particle_iterator.h>
 #include <deal.II/particles/property_pool.h>
+
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 #include <cmath>
 #include <fstream>
@@ -58,8 +60,18 @@ class Insertion
 {
 public:
   /**
-   * Carries out the insertion of particles. This is the base class of
-   * uniform_insertion and non_uniform_insertion classes.
+   * @brief Carries out the insertion of particles. This is the base class of
+   * volume_insertion, plane_insertion and list_insertion classes.
+   *
+   * @param distribution_object_container Contains all distribution for each
+   * type of particle
+   */
+  Insertion(const std::vector<std::shared_ptr<Distribution>>
+              &distribution_object_container);
+
+  /**
+   * @brief This function is overridden by the volume_insertion, plane_insertion and
+   * list_insertion classes to insert particles.
    *
    * @param particle_handler The particle handler of particles which are being
    * inserted
@@ -72,9 +84,33 @@ public:
          const parallel::distributed::Triangulation<dim> &triangulation,
          const DEMSolverParameters<dim>                  &dem_parameters) = 0;
 
+  /**
+   * @brief Serialize the insertion object to an output archive. Is being used
+   * when checkpointing a simulation. This function is overridden by
+   * volume_insertion, plane_insertion and list_insertion classes.
+   *
+   * @param ar Output archive where the attributes are stored.
+   *
+   */
+  virtual void
+  serialize(boost::archive::text_oarchive &ar, const unsigned int) = 0;
+
+
+  /**
+   * @brief Deserialize an input archive to the insertion object. Is being used
+   * when restarting a simulation. This function is overridden by
+   * volume_insertion, plane_insertion and list_insertion classes.
+   *
+   * @param ar Input archive where the attributes are stored.
+   *
+   */
+  virtual void
+  deserialize(boost::archive::text_iarchive &ar, const unsigned int) = 0;
+
 protected:
   /**
-   * Carries out assigning the properties of inserted particles.
+   * @brief Print information about the particles that have been inserted during an
+   * insertion time step.
    *
    * @param inserted_this_step Number of particles that are inserted
    * at each insertion step.
@@ -90,7 +126,7 @@ protected:
                        const ConditionalOStream &pcout);
 
   /**
-   * Carries out assigning the properties of inserted particles.
+   * @brief Carries out assigning the properties of inserted particles.
    *
    * @param dem_parameters DEM parameters declared in the .prm file
    * @param inserted_this_step_this_proc Number of particles that are inserted
@@ -120,9 +156,8 @@ protected:
     const DEMSolverParameters<dim> &dem_parameters,
     const ConditionalOStream       &pcout);
 
-  // Number of particles that is going to be inserted at each insetion step.This
-  // value can change in the last insertion step to reach the desired number of
-  // particles
+  // Number of particles inserted at each insertion time step. This value can
+  // change in the last insertion step to reach the desired number of particles
   unsigned int inserted_this_step;
 
   // Number of insertion points in the x, y and z directions
@@ -139,26 +174,12 @@ protected:
   // Inserted number of particles at this step on this processor
   unsigned int inserted_this_step_this_proc;
 
-  // A vector of vectors, which contains all the properties of all inserted
-  // particles at each insertion step
-  std::vector<std::vector<double>> particle_properties;
+  // A distribution object that carries out the attribution of diameter to every
+  // particle during an insertion time step
+  std::vector<std::shared_ptr<Distribution>> distributions_objects;
 
 private:
-  /**
-   * Carries out sampling from specified distributions for particle size.
-   *
-   * @param particle_sizes A vector containing size of particles sampled from
-   * specified size distribution
-   * @param average Average diameter of particles
-   * @param standard_deviation Standard deviation of particle diameter
-   * @param particle_number Number of particles
-   */
-  void
-  particle_size_sampling(std::vector<double> &particle_sizes,
-                         const double         average,
-                         const double         standard_deviation,
-                         const double         particle_number);
-
+  // Stores particles diameters
   std::vector<double> particle_sizes;
 };
 

@@ -125,7 +125,8 @@ VolumeOfFluid<dim>::assemble_local_system_matrix(
             *multiphysics->get_block_time_average_solution(
               PhysicsID::fluid_dynamics),
             *multiphysics->get_block_previous_solutions(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
@@ -133,7 +134,8 @@ VolumeOfFluid<dim>::assemble_local_system_matrix(
             velocity_cell,
             *multiphysics->get_block_solution(PhysicsID::fluid_dynamics),
             *multiphysics->get_block_previous_solutions(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
     }
   else
@@ -146,14 +148,16 @@ VolumeOfFluid<dim>::assemble_local_system_matrix(
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_time_average_solution(PhysicsID::fluid_dynamics),
-            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics));
+            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_solution(PhysicsID::fluid_dynamics),
-            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics));
+            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
     }
 
@@ -244,7 +248,8 @@ VolumeOfFluid<dim>::assemble_local_system_rhs(
             *multiphysics->get_block_time_average_solution(
               PhysicsID::fluid_dynamics),
             *multiphysics->get_block_previous_solutions(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
@@ -252,7 +257,8 @@ VolumeOfFluid<dim>::assemble_local_system_rhs(
             velocity_cell,
             *multiphysics->get_block_solution(PhysicsID::fluid_dynamics),
             *multiphysics->get_block_previous_solutions(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
     }
   else
@@ -265,14 +271,16 @@ VolumeOfFluid<dim>::assemble_local_system_rhs(
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_time_average_solution(PhysicsID::fluid_dynamics),
-            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics));
+            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_solution(PhysicsID::fluid_dynamics),
-            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics));
+            *multiphysics->get_previous_solutions(PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
     }
 
@@ -763,7 +771,7 @@ VolumeOfFluid<dim>::postprocess(bool first_iteration)
         }
     }
 
-  if (this->simulation_parameters.post_processing.calculate_vof_barycenter)
+  if (this->simulation_parameters.post_processing.calculate_barycenter)
     {
       // Calculate volume and mass (this->mass_monitored)
       std::pair<Tensor<1, dim>, Tensor<1, dim>> position_and_velocity;
@@ -938,7 +946,7 @@ VolumeOfFluid<dim>::handle_interface_sharpening()
                   << this->simulation_control->get_step_number() << std::endl;
     }
   if (this->simulation_parameters.multiphysics.vof_parameters.sharpening.type ==
-      Parameters::SharpeningType::adaptative)
+      Parameters::SharpeningType::adaptive)
     {
       if (this->simulation_parameters.multiphysics.vof_parameters.conservation
             .verbosity != Parameters::Verbosity::quiet)
@@ -1060,7 +1068,7 @@ VolumeOfFluid<dim>::find_sharpening_threshold()
           this->pcout
             << "  WARNING: Maximum number of iterations (" << nb_search_ite
             << ") reached in the " << std::endl
-            << "  adaptative sharpening threshold algorithm, remaining error"
+            << "  adaptive sharpening threshold algorithm, remaining error"
             << std::endl
             << "  on mass conservation is: "
             << (this->mass_monitored - this->mass_first_iteration) /
@@ -1824,6 +1832,40 @@ VolumeOfFluid<dim>::write_checkpoint()
       sol_set_transfer.push_back(&this->previous_solutions[i]);
     }
   this->solution_transfer->prepare_for_serialization(sol_set_transfer);
+
+  // Serialize tables
+  std::string prefix =
+    this->simulation_parameters.simulation_control.output_folder;
+  std::string suffix = ".checkpoint";
+  if (this->simulation_parameters.analytical_solution->calculate_error())
+    serialize_table(
+      this->error_table,
+      prefix + this->simulation_parameters.analytical_solution->get_filename() +
+        "_VOF" + suffix);
+  if (this->simulation_parameters.multiphysics.vof_parameters.conservation
+        .monitoring)
+    {
+      std::string fluid_id("");
+      if (this->simulation_parameters.multiphysics.vof_parameters.conservation
+            .monitored_fluid == Parameters::FluidIndicator::fluid1)
+        {
+          fluid_id = "fluid_1";
+        }
+      else if (this->simulation_parameters.multiphysics.vof_parameters
+                 .conservation.monitored_fluid ==
+               Parameters::FluidIndicator::fluid0)
+        {
+          fluid_id = "fluid_0";
+        }
+      serialize_table(this->table_monitoring_vof,
+                      prefix + "VOF_monitoring_" + fluid_id + suffix);
+    }
+  if (this->simulation_parameters.post_processing.calculate_barycenter)
+    serialize_table(
+      this->table_barycenter,
+      prefix +
+        this->simulation_parameters.post_processing.barycenter_output_name +
+        suffix);
 }
 
 template <int dim>
@@ -1858,6 +1900,40 @@ VolumeOfFluid<dim>::read_checkpoint()
     {
       this->previous_solutions[i] = distributed_previous_solutions[i];
     }
+
+  // Deserialize tables
+  const std::string prefix =
+    this->simulation_parameters.simulation_control.output_folder;
+  const std::string suffix = ".checkpoint";
+  if (this->simulation_parameters.analytical_solution->calculate_error())
+    deserialize_table(
+      this->error_table,
+      prefix + this->simulation_parameters.analytical_solution->get_filename() +
+        "_VOF" + suffix);
+  if (this->simulation_parameters.multiphysics.vof_parameters.conservation
+        .monitoring)
+    {
+      std::string fluid_id("");
+      if (this->simulation_parameters.multiphysics.vof_parameters.conservation
+            .monitored_fluid == Parameters::FluidIndicator::fluid1)
+        {
+          fluid_id = "fluid_1";
+        }
+      else if (this->simulation_parameters.multiphysics.vof_parameters
+                 .conservation.monitored_fluid ==
+               Parameters::FluidIndicator::fluid0)
+        {
+          fluid_id = "fluid_0";
+        }
+      deserialize_table(this->table_monitoring_vof,
+                        prefix + "VOF_monitoring_" + fluid_id + suffix);
+    }
+  if (this->simulation_parameters.post_processing.calculate_barycenter)
+    deserialize_table(
+      this->table_barycenter,
+      prefix +
+        this->simulation_parameters.post_processing.barycenter_output_name +
+        suffix);
 }
 
 
@@ -2082,6 +2158,29 @@ VolumeOfFluid<dim>::setup_dofs()
                                     mpi_communicator);
 
   assemble_mass_matrix(mass_matrix_phase_fraction);
+}
+
+template <int dim>
+void
+VolumeOfFluid<dim>::update_boundary_conditions()
+{
+  if (!this->simulation_parameters.boundary_conditions_vof.time_dependent)
+    return;
+
+  double time = this->simulation_control->get_current_time();
+  for (unsigned int i_bc = 0;
+       i_bc < this->simulation_parameters.boundary_conditions_vof.size;
+       ++i_bc)
+    {
+      if (this->simulation_parameters.boundary_conditions_vof.type[i_bc] ==
+          BoundaryConditions::BoundaryType::vof_dirichlet)
+        {
+          this->simulation_parameters.boundary_conditions_vof
+            .phase_fraction[i_bc]
+            ->set_time(time);
+        }
+    }
+  define_non_zero_constraints();
 }
 
 template <int dim>

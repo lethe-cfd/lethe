@@ -8,7 +8,7 @@ This example introduces the concept of parameter files to parametrize Lethe simu
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Two-dimensional problem
 - Displays the selection of models and physical properties
 
@@ -16,7 +16,8 @@ Features
 ----------------------------
 Files Used in This Example
 ----------------------------
-``/examples/dem/2d-packing-in-circle/packing-in-circle.prm``
+
+- Parameter file: ``examples/dem/2d-packing-in-circle/packing-in-circle.prm``
 
 
 -----------------------
@@ -84,7 +85,7 @@ The ``insertion info`` subsection manages the insertion of particles.
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 50
       set insertion frequency                            = 1000000
       set insertion box minimum x                        = -0.05
@@ -92,8 +93,8 @@ The ``insertion info`` subsection manages the insertion of particles.
       set insertion box maximum x                        = 0.05
       set insertion box maximum y                        = 0.07
       set insertion distance threshold                   = 2
-      set insertion random number range                  = 0.75
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.75
+      set insertion prn seed                             = 19
     end
 
 First, the ``insertion method`` is selected. There are two insertion methods (``uniform`` and ``non_uniform``) in Lethe-DEM. In ``uniform`` insertion, the particles are inserted uniformly (without randomness in their initial location), while in ``non_uniform``, particles are inserted randomly in the insertion box. ``inserted number of particles at each time step`` specifies the desired number of particles to be inserted at each insertion step.
@@ -109,7 +110,7 @@ First, the ``insertion method`` is selected. There are two insertion methods (``
 .. note::
     We recommend that the defined insertion box have at least a distance of :math:`{d^{max}_p}` (maximum diameter of particles) from the triangulation boundaries. Otherwise, particles may have an overlap with the triangulation walls in the insertion.
 
-``insertion distance threshold`` specifies the initial distance between the particles in the insertion. If we choose a ``non_uniform`` insertion, this initial distance is added by a random number to generate randomness. The random numbers are generated in the range [0 -``insertion random number range``], and from a seed of ``insertion random number seed``.
+``insertion distance threshold`` specifies the initial distance between the particles in the insertion. If we choose a ``non_uniform`` insertion, this initial distance is added by a random number to generate randomness. The random numbers are generated in the range [0 - ``insertion maximum offset``], and from a seed of ``insertion prn seed``.
 
 
 Lagrangian Physical Properties
@@ -126,7 +127,7 @@ The gravitational acceleration as well as the physical properties of particles a
       subsection particle type 0
         set size distribution type            = uniform
         set diameter                          = 0.005
-        set number                            = 150
+        set number of particles               = 150
         set density particles                 = 2000
         set young modulus particles           = 100000000
         set poisson ratio particles           = 0.3
@@ -197,11 +198,12 @@ The last subsection, which is generally the one we put at the top of the paramet
 ----------------------
 Running the Simulation
 ----------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem`` executable is within your path, the simulation can be launched by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-particles`` executable is within your path, the simulation can be launched by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem packing-in-circle.prm
+  lethe-particles packing-in-circle.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 

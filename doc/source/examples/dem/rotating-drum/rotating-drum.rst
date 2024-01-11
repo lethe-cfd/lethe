@@ -7,7 +7,7 @@ This example simulates a rotating drum. We setup this simulation according to th
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Rotational boundary
 - Load-balancing
 
@@ -15,8 +15,11 @@ Features
 ----------------------------
 Files Used in This Example
 ----------------------------
-- Parameter file to load particles: ``/examples/dem/3d-rotating-drum/load-rotating-drum.prm``
-- Parameter file for the simulation: ``/examples/dem/3d-rotating-drum/rotating-drum.prm``
+
+Both files mentioned below are located in the example's folder (``examples/dem/3d-rotating-drum``).
+
+- Parameter file to load particles: ``load-rotating-drum.prm``
+- Parameter file for the simulation: ``rotating-drum.prm``
 
 -----------------------
 Description of the Case
@@ -53,7 +56,7 @@ An insertion box is defined inside the cylindrical domain. 38000 particles are i
 .. code-block:: text
 
   subsection insertion info
-    set insertion method                               = non_uniform
+    set insertion method                               = volume
     set inserted number of particles at each time step = 38000
     set insertion frequency                            = 25000
     set insertion box minimum x                        = -0.175
@@ -63,8 +66,8 @@ An insertion box is defined inside the cylindrical domain. 38000 particles are i
     set insertion box maximum y                        = 0.07
     set insertion box maximum z                        = 0.09
     set insertion distance threshold                   = 1.575
-    set insertion random number range                  = 0.025
-    set insertion random number seed                   = 19
+    set insertion maximum offset                       = 0.025
+    set insertion prn seed                             = 19
   end
 
 
@@ -83,7 +86,7 @@ The particles (226080 particles) are monodispersed, their diameter and density a
       subsection particle type 0
         set size distribution type            = uniform
         set diameter                          = 0.003
-        set number                            = 226080
+        set number of particles               = 226080
         set density particles                 = 2500
         set young modulus particles           = 1e7
         set poisson ratio particles           = 0.24
@@ -134,12 +137,10 @@ In this subsection, the boundary conditions of the DEM simulation are defined. F
     subsection DEM boundary conditions
       set number of boundary conditions = 1
       subsection boundary condition 0
-        set boundary id         = 0
-        set type                = rotational
-        set rotational speed    = 11.6
-        set rotational vector x = 1
-        set rotational vector y = 0
-        set rotational vector z = 0
+        set boundary id       = 0
+        set type              = rotational
+        set rotational speed  = 11.6
+        set rotational vector = 1, 0, 0
       end
     end
 
@@ -183,14 +184,16 @@ Running the Simulation
 This simulation can be launched in two steps. First the particles need to be loaded (here we use 8 cores):
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem load-rotating-drum.prm
+  mpirun -np 8 lethe-particles load-rotating-drum.prm
 
 Then we run the simulation with the rotating walls:
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem rotating-drum.prm
+  mpirun -np 8 lethe-particles rotating-drum.prm
 
 .. warning::
   In this example, particles insertion requires approximately 50 minutes, while simulating their motion requires additional 8 hours on 8 cores. The high computational cost is due to the large number of particles and the long duration of the simulation.

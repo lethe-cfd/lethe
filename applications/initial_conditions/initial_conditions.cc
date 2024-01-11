@@ -55,7 +55,6 @@ InitialConditionsNavierStokes<dim>::run()
     this->simulation_parameters.restart_parameters.restart,
     this->simulation_parameters.boundary_conditions);
   this->setup_dofs_fd();
-  this->forcing_function = new NoForce<dim>;
   this->set_initial_condition(
     this->simulation_parameters.initial_condition->type,
     this->simulation_parameters.restart_parameters.restart);
@@ -116,11 +115,18 @@ main(int argc, char *argv[])
           std::cout << "Usage:" << argv[0] << " input_file" << std::endl;
           std::exit(1);
         }
+
+
+
       Utilities::MPI::MPI_InitFinalize mpi_initialization(
         argc, argv, numbers::invalid_unsigned_int);
-      ParameterHandler        prm;
+
+      const Parameters::SizeOfSubsections size_of_subsections =
+        Parameters::get_size_of_subsections(argv[1]);
+      ParameterHandler prm;
+
       SimulationParameters<2> nsparam;
-      nsparam.declare(prm);
+      nsparam.declare(prm, size_of_subsections);
       // Parsing of the file
       prm.parse_input(argv[1]);
       nsparam.parse(prm);

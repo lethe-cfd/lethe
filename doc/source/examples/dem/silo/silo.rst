@@ -8,16 +8,17 @@ This example simulates the filling and discharge of particles in a wedge-shaped 
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Floating walls
-- Gmsh grids
+- `GMSH <https://gmsh.info/>`_ grids
 - Checkpointing (restart)
 
 
 ----------------------------
 Files Used in This Example
 ----------------------------
-``/examples/dem/3d-silo/silo-Golshan.prm``
+
+- Parameter file: ``examples/dem/3d-silo/silo-Golshan.prm``
 
 
 -----------------------
@@ -54,7 +55,7 @@ An insertion box is defined inside and on the top of the silo.
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 20000
       set insertion frequency                            = 10000
       set insertion box minimum x                        = -0.37
@@ -64,8 +65,8 @@ An insertion box is defined inside and on the top of the silo.
       set insertion box maximum y                        = 0.007
       set insertion box maximum z                        = 1.09
       set insertion distance threshold                   = 1.5
-      set insertion random number range                  = 0.1
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.1
+      set insertion prn seed                             = 19
     end
 
 
@@ -84,7 +85,7 @@ The total number of particles in this simulation is equal to 132300. Considering
       subsection particle type 0
         set size distribution type            = uniform
         set diameter                          = 0.005833
-        set number                            = 132300
+        set number of particles               = 132300
         set density particles                 = 600
         set young modulus particles           = 5000000
         set poisson ratio particles           = 0.5
@@ -181,11 +182,12 @@ Running the Simulation
 This simulation can be launched in parallel (e.g. using 8 processes) by running:
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem silo-Golshan.prm
+  mpirun -np 8 lethe-particles silo-Golshan.prm
 
 .. warning::
-	This example takes approximately 14 hours on 8 cores. This high computational time is due to the long simulation time (30 s of real-time).
+  This example takes approximately 14 hours on 8 cores. This high computational time is due to the long simulation time (30 s of real-time).
 
 ---------
 Results

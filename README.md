@@ -2,11 +2,17 @@
 
 ![Lethe](logo/logo_black.png?raw=true)
 
-[![Build Status](https://github.com/lethe-cfd/lethe/workflows/CI/badge.svg)](https://github.com/lethe-cfd/lethe/workflows/CI/badge.svg)
+[![CI-Debug](https://github.com/lethe-cfd/lethe/actions/workflows/main_debug.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/main_debug.yml)
+[![CI-Release](https://github.com/lethe-cfd/lethe/actions/workflows/main_release.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/main_release.yml)
+[![CI-Warnings](https://github.com/lethe-cfd/lethe/actions/workflows/main_warnings.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/main_warnings.yml)
+[![CI-Examples](https://github.com/lethe-cfd/lethe/actions/workflows/main_parameter_files.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/main_parameter_files.yml)
+[![Documentation](https://github.com/lethe-cfd/lethe/actions/workflows/doc-github-pages.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/doc-github-pages.yml)
+[![Docker Image](https://github.com/lethe-cfd/lethe/actions/workflows/docker.yml/badge.svg)](https://github.com/lethe-cfd/lethe/actions/workflows/docker.yml)
 
 Lethe (pronounced /ˈliːθiː/) is open-source computational fluid dynamics
-(CFD) software which uses high-order continuous Galerkin formulations to
-solve the incompressible Navier–Stokes equations (among others).
+(CFD), discrete element method (DEM) and coupled CFD-DEM
+software which uses high-order continuous Galerkin formulations to
+simulate single and multiphase flows.
 Lethe contains a family of solvers that are based on
 [deal.II](https://www.dealii.org/), a finite element library.
 Through deal.II, Lethe uses [Trilinos](https://trilinos.github.io/) for
@@ -37,12 +43,15 @@ dedicated solvers like Lethe could not exist.
 ## Documentation
 
 Documentation, tutorials, and more can be found 
-[here](https://lethe-cfd.github.io/lethe/).
+[here](https://lethe-cfd.github.io/lethe/documentation/index.html).
+
+Developer documentation based on Doxygen can be found 
+[here](https://lethe-cfd.github.io/lethe/doxygen/index.html)
 
 ## Installation
 
 Follow the instructions in the
-[documentation](https://lethe-cfd.github.io/lethe/installation/installation.html).
+[documentation](https://lethe-cfd.github.io/lethe/documentation/installation/installation.html).
 
 ## Authors
 

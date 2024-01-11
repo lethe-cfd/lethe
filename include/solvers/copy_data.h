@@ -28,9 +28,8 @@
 using namespace dealii;
 
 /**
- * @brief CopyData class is responsible for
- * storing the information calculated using the assembly of regular (meaning
- * non-stablized) equations. This class is used to
+ * @brief Class responsible for storing the information calculated using the assembly of regular (meaning
+ * non-stabilized) equations. It is also used to
  * initialize, zero (reset) and store the cell_matrix, the cell_rhs and the
  * dof indices associated with the dofs of the cell.
  **/
@@ -70,8 +69,7 @@ public:
 
 
 /**
- * @brief The StabilizedMethodsCopyData class is responsible for
- * storing the information calculated using the assembly of stabilized
+ * @brief Class responsible for storing the information calculated using the assembly of stabilized
  * scalar equations. Like the CopyData class, this class is used to initialize,
  * zero (reset) and store the cell_matrix and the cell_rhs.
  * Contrary to the regular CopyData class, this class
@@ -131,8 +129,7 @@ public:
 };
 
 /**
- * @brief The StabilizedMethodsTensorCopyData class is responsible for
- * storing the information calculated using the assembly of stabilized
+ * @brief Class responsible for storing the information calculated using the assembly of stabilized
  * Tensor<1,dim> equations. Like the CopyData class, this class is used to
  * initialize, zero (reset) and store the cell_matrix and the cell_rhs. Contrary
  * to the regular CopyData class, this class also stores the strong_residual and
@@ -156,8 +153,8 @@ public:
    *
    * @param n_q_points Number of quadrature points
    */
-  StabilizedMethodsTensorCopyData<dim>(const unsigned int n_dofs,
-                                       const unsigned int n_q_points)
+  StabilizedMethodsTensorCopyData(const unsigned int n_dofs,
+                                  const unsigned int n_q_points)
     : local_matrix(n_dofs, n_dofs)
     , local_rhs(n_dofs)
     , local_dof_indices(n_dofs)

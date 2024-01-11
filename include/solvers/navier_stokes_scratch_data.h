@@ -46,8 +46,7 @@ using namespace dealii;
 
 
 /**
- * @brief NavierStokesScratchData class
- * stores the information required by the assembly procedure
+ * @brief Class that stores the information required by the assembly procedure
  * for a Navier-Stokes equation. Consequently, this class calculates
  * the velocity (values, gradients, laplacians) and the shape function
  * (values, gradients, laplacians) at all the gauss points for all degrees
@@ -225,7 +224,7 @@ public:
   reinit(const typename DoFHandler<dim>::active_cell_iterator &cell,
          const VectorType                                     &current_solution,
          const std::vector<VectorType> &previous_solutions,
-         Function<dim>                 *forcing_function,
+         std::shared_ptr<Function<dim>> forcing_function,
          Tensor<1, dim>                 beta_force,
          const double                   pressure_scaling_factor)
   {

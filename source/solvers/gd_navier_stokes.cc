@@ -67,8 +67,18 @@ GDNavierStokesSolver<dim>::setup_assemblers()
   // Buoyant force
   if (this->simulation_parameters.multiphysics.buoyancy_force)
     {
+      this->assemblers.push_back(std::make_shared<BuoyancyAssembly<dim>>(
+        this->simulation_control,
+        this->simulation_parameters.physical_properties_manager
+          .get_reference_temperature()));
+    }
+
+  // ALE
+  if (this->simulation_parameters.ale.enabled())
+    {
       this->assemblers.push_back(
-        std::make_shared<BuoyancyAssembly<dim>>(this->simulation_control));
+        std::make_shared<NavierStokesAssemblerALE<dim>>(
+          this->simulation_control, this->simulation_parameters.ale));
     }
 
   if (this->simulation_parameters.multiphysics.VOF)
@@ -116,8 +126,8 @@ GDNavierStokesSolver<dim>::setup_assemblers()
         }
 
       // Velocity sources term
-      if (this->simulation_parameters.velocity_sources.type ==
-          Parameters::VelocitySource::VelocitySourceType::srf)
+      if (this->simulation_parameters.velocity_sources.rotating_frame_type ==
+          Parameters::VelocitySource::RotatingFrameType::srf)
         {
           this->assemblers.push_back(
             std::make_shared<GLSNavierStokesAssemblerSRF<dim>>(
@@ -559,6 +569,8 @@ GDNavierStokesSolver<dim>::setup_dofs_fd()
   auto &nonzero_constraints = this->nonzero_constraints;
   {
     nonzero_constraints.clear();
+    nonzero_constraints.reinit(locally_relevant_dofs_acquisition);
+
 
     DoFTools::make_hanging_node_constraints(this->dof_handler,
                                             nonzero_constraints);
@@ -627,6 +639,8 @@ GDNavierStokesSolver<dim>::setup_dofs_fd()
 
   {
     this->zero_constraints.clear();
+    this->zero_constraints.reinit(locally_relevant_dofs_acquisition);
+
     DoFTools::make_hanging_node_constraints(this->dof_handler,
                                             this->zero_constraints);
 

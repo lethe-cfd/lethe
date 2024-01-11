@@ -7,14 +7,15 @@ This example simulates a triangulation (box) rotation. It is recommended to visi
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem``
+- Solvers: ``lethe-particles``
 - Rotating a triangulation
 
 
 ----------------------------
 Files Used in This Example
 ----------------------------
-``/examples/dem/3d-grid-rotation-in-box/grid-rotation-box.prm``
+
+- Parameter file: ``examples/dem/3d-grid-rotation-in-box/grid-rotation-box.prm``
 
 
 -----------------------
@@ -51,7 +52,7 @@ An insertion box is defined inside the cubic domain. 4000 particles are inserted
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 4000
       set insertion frequency                            = 2000000
       set insertion box minimum x                        = -0.019
@@ -61,8 +62,8 @@ An insertion box is defined inside the cubic domain. 4000 particles are inserted
       set insertion box maximum y                        = 0.019
       set insertion box maximum z                        = 0.019
       set insertion distance threshold                   = 1.5
-      set insertion random number range                  = 0.2
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.2
+      set insertion prn seed                             = 19
     end
 
 
@@ -81,7 +82,7 @@ The ``number`` of particles (4000) is equal to the specified ``inserted number o
       subsection particle type 0
         set size distribution type            = uniform
         set diameter                          = 0.001
-        set number                            = 4000
+        set number of particles               = 4000
         set density particles                 = 1000
         set young modulus particles           = 1000000
         set poisson ratio particles           = 0.3
@@ -134,8 +135,9 @@ Running the Simulation
 This simulation can be launched by:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem grid-rotation-box.prm
+  lethe-particles grid-rotation-box.prm
 
 
 ---------

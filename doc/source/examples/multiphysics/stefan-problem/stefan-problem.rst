@@ -9,8 +9,8 @@ This example simulates the Stefan `[1] <https://en.wikipedia.org/wiki/Stefan_pro
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes`` 
-- Heat transfer pĥysics
+- Solver: ``lethe-fluid`` 
+- Heat transfer physics
 - Unsteady problem handled by a BDF1 time-stepping scheme
 - Phase change specific heat model
 
@@ -19,7 +19,10 @@ Features
 Files Used in This Example
 ---------------------------
 
-``examples/multiphysics/stefan-problem/stefan.prm``
+Both files mentioned below are located in the example's folder (``examples/multiphysics/stefan-problem``).
+
+- Parameter file: ``stefan.prm``
+- Postprocessing Python script: ``stefan-problem-postprocessing.py``
 
 
 -------------------------
@@ -100,7 +103,9 @@ The next step is establishing the boundary conditions:
       subsection bc 0
         set id    = 0
         set type  = temperature
-        set value = 1
+        subsection value
+          set Function expression = 1
+        end
       end
     end
 
@@ -162,9 +167,28 @@ Finally, the only remaining section is the ``simulation control``, which control
     end
 
 
+----------------------
+Running the Simulation
+----------------------
+
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-fluid`` executable is within your path, the simulation can be launched by typing:
+
+.. code-block:: text
+  :class: copy-button
+
+  lethe-fluid stefan.prm
+
+
 -------
 Results
 -------
+
+Once the simulation is done, the results can be postprocessed using:
+
+.. code-block:: text
+  :class: copy-button
+
+  python3 stefan-problem-postprocessing.py
 
 The following image compares the results obtained with Lethe with the analytical solution for the Stefan problem at :math:`t=5`. This data is extracted through the use of a python script available in the folder of the example. We see that a quasi perfect agreement can be obtained with the analytical solution of the Stefan problem. 
 

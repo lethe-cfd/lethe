@@ -9,6 +9,11 @@ on:
     paths-ignore:
       - 'doc/**'
 
+# Cancels running instances when a pull request is updated by a commit
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   COMPILE_JOBS: 2
   MULTI_CORE_TESTS_REGEX: "mpirun=2"
@@ -21,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dealii_version: ["master", "v9.5.0"]
+        dealii_version: ["master"]
     
     # Run steps in container of dealii's master branch
     container:
@@ -49,8 +54,8 @@ jobs:
       #
       - name: Compile Lethe (Debug-deal.ii:${{ matrix.dealii_version }})
         run: |
-          mkdir build-debug
-          cd build-debug
+          mkdir build-Debug
+          cd build-Debug
           cmake ../ -DCMAKE_BUILD_TYPE=Debug
           make -j${{ env.COMPILE_JOBS }}
 
@@ -60,19 +65,19 @@ jobs:
           #Allow OMPI to run as root
           export OMPI_ALLOW_RUN_AS_ROOT=1
           export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-          cd build-debug
+          cd build-Debug
           # Print the tests to be executed
           ctest -N --exclude-regex ${{ env.MULTI_CORE_TESTS_REGEX }}
           # Run in parallel
           ctest --output-on-failure -j${{ env.COMPILE_JOBS }} --exclude-regex ${{ env.MULTI_CORE_TESTS_REGEX }}
-
+      
       # These tests require two cores each so we will run them sequencially
       - name: Run multi-core Lethe tests (Debug-deal.ii:${{ matrix.dealii_version }})
         run: |
           #Allow OMPI to run as root
           export OMPI_ALLOW_RUN_AS_ROOT=1
           export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-          cd build-debug
+          cd build-Debug
           # Print the tests to be executed
           ctest -N --tests-regex ${{ env.MULTI_CORE_TESTS_REGEX }}
           # Run sequencially

@@ -20,6 +20,7 @@
 #ifndef lethe_simulation_control_h
 #define lethe_simulation_control_h
 
+#include <core/bdf.h>
 #include <core/parameters.h>
 
 /**
@@ -131,7 +132,7 @@ protected:
   // The method use to start high order bdf scheme
   Parameters::SimulationControl::BDFStartupMethods bdf_start_method;
 
-  // The time scaling used to do small time steps at the startup of the
+  // The time scaling used to do small time-steps at the startup of the
   // simulation
   double startup_timestep_scaling;
 
@@ -275,7 +276,7 @@ public:
   update_assembly_method();
 
   /**
-   * @brief Set the value of the CFL conditoin
+   * @brief Set the value of the CFL condition
    *
    * @param p_CFL Value of the CFL condition calculated by the solver.
    */
@@ -412,6 +413,12 @@ public:
   set_assembly_method(Parameters::SimulationControl::TimeSteppingMethod method)
   {
     assembly_method = method;
+  }
+
+  unsigned int
+  get_number_of_previous_solution_in_assembly() const
+  {
+    return number_of_previous_solutions(method);
   }
 
   std::vector<double>

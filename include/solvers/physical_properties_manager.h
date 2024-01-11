@@ -20,7 +20,7 @@
 #define lethe_physical_properties_manager_h
 
 #include <core/density_model.h>
-#include <core/mobility_ch_model.h>
+#include <core/mobility_cahn_hilliard_model.h>
 #include <core/rheological_model.h>
 #include <core/specific_heat_model.h>
 #include <core/surface_tension_model.h>
@@ -29,7 +29,6 @@
 #include <core/tracer_diffusivity_model.h>
 
 using namespace dealii;
-
 
 DeclException1(
   RequiresConstantDensity,
@@ -56,7 +55,7 @@ enum material_interactions_type
 };
 
 
-/** @class The PhysicalPropertiesManager class manages the physical properties
+/** @brief Class that manages the physical properties
  * model which are required to calculate the various physical properties
  * This centralizes the place where the models are created.
  * The class can be constructed empty and initialized from parameters
@@ -94,6 +93,19 @@ public:
 
   void
   initialize(Parameters::PhysicalProperties physical_properties);
+
+  void
+  provide_simulation_control(
+    std::shared_ptr<SimulationControl> &simulation_control)
+  {
+    // At the present moment, only SpecificHeatModel can be time-dependent
+    // Consequently we only pass the SimulationControl object to the
+    // SpecificHeatModel.
+    for (unsigned int f = 0; f < number_of_fluids; ++f)
+      specific_heat[f]->provide_simulation_control(simulation_control);
+    for (unsigned int s = 0; s < number_of_solids; ++s)
+      specific_heat[s]->provide_simulation_control(simulation_control);
+  }
 
   inline unsigned int
   get_number_of_fluids() const
@@ -166,7 +178,7 @@ public:
   get_mobility_cahn_hilliard(
     const unsigned int material_interaction_id = 0) const
   {
-    return mobility_ch[material_interaction_id];
+    return mobility_cahn_hilliard[material_interaction_id];
   }
 
   // Vector Getters for the physical property models
@@ -213,21 +225,21 @@ public:
   }
 
   std::vector<std::shared_ptr<MobilityCahnHilliardModel>>
-  get_mobility_ch_vector() const
+  get_mobility_cahn_hilliard_vector() const
   {
-    return mobility_ch;
+    return mobility_cahn_hilliard;
   }
 
   double
   get_kinematic_viscosity_scale() const
   {
-    return kinematic_viscosity_scale;
+    return rheology[0]->get_kinematic_viscosity_scale();
   }
 
   double
   get_density_scale() const
   {
-    return density_scale;
+    return density[0]->get_density_ref();
   }
 
   void
@@ -253,6 +265,18 @@ public:
   density_is_constant() const
   {
     return constant_density;
+  }
+
+  Parameters::PhysicalProperties
+  get_physical_properties_parameters() const
+  {
+    return physical_properties_parameters;
+  }
+
+  bool
+  has_phase_change() const
+  {
+    return phase_change;
   }
 
   bool
@@ -289,6 +313,12 @@ public:
         "Invalid type of material interaction. The choices are <fluid-fluid|fluid-solid>"));
   }
 
+  double
+  get_reference_temperature() const
+  {
+    return reference_temperature;
+  }
+
 private:
   void
   establish_fields_required_by_model(PhysicalPropertyModel &model);
@@ -320,25 +350,31 @@ public:
   bool is_initialized;
 
 private:
-  std::vector<std::shared_ptr<DensityModel>>              density;
-  std::vector<std::shared_ptr<SpecificHeatModel>>         specific_heat;
-  std::vector<std::shared_ptr<ThermalConductivityModel>>  thermal_conductivity;
-  std::vector<std::shared_ptr<RheologicalModel>>          rheology;
-  std::vector<std::shared_ptr<ThermalExpansionModel>>     thermal_expansion;
-  std::vector<std::shared_ptr<TracerDiffusivityModel>>    tracer_diffusivity;
-  std::vector<std::shared_ptr<SurfaceTensionModel>>       surface_tension;
-  std::vector<std::shared_ptr<MobilityCahnHilliardModel>> mobility_ch;
+  std::vector<std::shared_ptr<DensityModel>>             density;
+  std::vector<std::shared_ptr<SpecificHeatModel>>        specific_heat;
+  std::vector<std::shared_ptr<ThermalConductivityModel>> thermal_conductivity;
+  std::vector<std::shared_ptr<RheologicalModel>>         rheology;
+  std::vector<std::shared_ptr<ThermalExpansionModel>>    thermal_expansion;
+  std::vector<std::shared_ptr<TracerDiffusivityModel>>   tracer_diffusivity;
+  std::vector<std::shared_ptr<SurfaceTensionModel>>      surface_tension;
+  std::vector<std::shared_ptr<MobilityCahnHilliardModel>>
+    mobility_cahn_hilliard;
 
   std::map<field, bool> required_fields;
 
   bool non_newtonian_flow;
   bool constant_density;
   bool constant_surface_tension;
+  bool phase_change;
+  /*
+   * Reference temperature used for the calculation of all physical properties
+   * of all materials. Currently, this is only used for the thermal expansion
+   * model.
+   */
+  double reference_temperature;
 
-  // Temporary scaling variable are overly used right now. They will eventually
-  // be deprecated for the majority of places they are used.
-  double kinematic_viscosity_scale;
-  double density_scale;
+  // Internal copy of the parameters used to build the manager
+  Parameters::PhysicalProperties physical_properties_parameters;
 
   unsigned int number_of_fluids;
   unsigned int number_of_solids;

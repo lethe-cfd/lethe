@@ -8,7 +8,8 @@ It is strongly recommended to visit `DEM parameters <../../../parameters/dem/dem
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem`` and ``gls_vans``
+
+- Solvers: ``lethe-particles`` and ``lethe-fluid-vans``
 - Three-dimensional problem
 - Displays the selection of models and physical properties
 
@@ -17,14 +18,17 @@ Features
 Files Used in This Example
 ---------------------------
 
-- Parameter file for particle generation and packing: ``/examples/unresolved-cfd-dem/cylindrical-packed-bed/packing-in-cylinder.prm``
-- Parameter file for CFD-DEM simulation of the packed bed: ``/examples/unresolved-cfd-dem/cylindrical-packed-bed/flow-in-bed.prm``
+Both files mentioned below are located in the example's folder (``examples/unresolved-cfd-dem/cylindrical-packed-bed``).
+
+- Parameter file for CFD-DEM simulation of the packed bed: ``cylindrical-packed-bed/flow-in-bed.prm``
+- Parameter file for particle generation and packing: ``packing-in-cylinder.prm``
+
 
 -----------------------
 Description of the Case
 -----------------------
 
-This example simulates air flow through a packing of particles. First, we use Lethe-DEM to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``gls_vans`` solver within Lethe to simulate air flow through the packed bed.
+This example simulates air flow through a packing of particles. First, we use ``lethe-particles`` to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``lethe-fluid-vans`` solver within Lethe to simulate air flow through the packed bed.
 
 
 -------------------
@@ -69,7 +73,7 @@ Another subsection, which is generally the one we put at the top of the paramete
 Restart
 ~~~~~~~~~~~~~~~~~~~
 
-The volume-averaged Navier-Stokes (VANS) solver requires reading several DEM files. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix ``dem`` set in the ``set filename`` option.
+The volume-averaged Navier-Stokes (VANS) solver requires reading several DEM files. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix ``lethe-particles`` set in the ``set filename`` option.
 
 .. code-block:: text
 
@@ -135,7 +139,7 @@ The ``insertion info`` subsection manages the insertion of particles. It allows 
 .. code-block:: text
 
   subsection insertion info
-    set insertion method                               = non_uniform
+    set insertion method                               = volume
     set inserted number of particles at each time step = 500
     set insertion frequency                            = 1000
     set insertion box minimum x                        = 0
@@ -145,8 +149,8 @@ The ``insertion info`` subsection manages the insertion of particles. It allows 
     set insertion box maximum y                        = 0.01
     set insertion box maximum z                        = 0.01
     set insertion distance threshold                   = 2.2
-    set insertion random number range                  = 0.5
-    set insertion random number seed                   = 19
+    set insertion maximum offset                       = 0.5
+    set insertion prn seed                             = 19
   end
 
 Floating Walls
@@ -178,17 +182,19 @@ We need to pack the particles in the middle of the cylinder. Therefore, we creat
 ---------------------------
 Running the DEM Simulation
 ---------------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem`` executable is within your path, the simulation can be launched on a single processor by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-particles`` executable is within your path, the simulation can be launched on a single processor by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem packing-in-circle.prm
+  lethe-particles packing-in-circle.prm
 
 or in parallel (where 8 represents the number of processors)
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem packing-in-circle.prm
+  mpirun -np 8 lethe-particles packing-in-circle.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 
@@ -292,7 +298,7 @@ The additional sections that define the VANS solver are the void fraction subsec
 Void Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- Since we are calculating the void fraction using the packed bed of the DEM simulation, we set the mode to ``dem``. For this, we need to read the dem files which we already wrote using check-pointing. We therefore set the read dem to ``true`` and specify the prefix of the ``dem`` files to be read. In order to ensure that our void fraction projection is bounded, we choose an upper bound limit of 1. We decide not to lower bound the void fraction and thus attributed a value of 0 to the L2 lower bound parameter. We now choose a smoothing factor for the void fraction as to reduce discontinuity which can lead to oscillations in the velocity. The factor we choose is around the square of twice the particle's diameter. 
+Since we are calculating the void fraction using the packed bed of the DEM simulation, we set the mode to ``dem``. For this, we need to read the dem files which we already wrote using check-pointing. We therefore set the read dem to ``true`` and specify the prefix of the ``dem`` files to be read. In order to ensure that our void fraction projection is bounded, we choose an upper bound limit of 1. We decide not to lower bound the void fraction and thus attributed a value of 0 to the L2 lower bound parameter. We now choose a smoothing factor for the void fraction as to reduce discontinuity which can lead to oscillations in the velocity. The factor we choose is around the square of twice the particle's diameter. 
  
 .. code-block:: text
 
@@ -365,11 +371,12 @@ Linear Solver
 Running the VANS Simulation
 ------------------------------
  
-The simulation is run using the ``gls_vans`` application as per the following command:
+The simulation is run using the ``lethe-fluid-vans`` application. Assuming that the ``lethe-fluid-vans`` executable is within your path, the simulation can be launched as per the following command:
 
 .. code-block:: text
+  :class: copy-button
 
-    path_to_vans_application/gls_vans parameter_file.prm 
+  lethe-fluid-vans parameter_file.prm
 
 
 -------------

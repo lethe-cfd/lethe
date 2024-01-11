@@ -9,7 +9,7 @@ This example introduces how to solve another physics along with the CFD solver.
 Features
 --------------
 
-* Solver: ``gls_navier_stokes``
+* Solver: ``lethe-fluid``
 * Transient problem
 * Multiphysics
 * Displays the use of heat transfer physics
@@ -20,7 +20,7 @@ Features
 Files Used in This Example
 ---------------------------
 
-``examples/multiphysics/warming-up-viscous-fluid``
+- Parameter file: ``examples/multiphysics/warming-up-viscous-fluid.prm``
 
 
 ------------------------
@@ -184,13 +184,19 @@ The ``boundary conditions`` are set for:
       subsection bc 0
         set id   = 0
         set type = convection-radiation
-        set h    = 0
-        set Tinf = 0
+        subsection h
+          set Function expression = 0
+        end
+        subsection Tinf
+          set Function expression = 0
+        end
       end
       subsection bc 1
         set id    = 1
         set type  = temperature
-        set value = 80
+        subsection value
+          set Function expression = 80
+        end
       end
     end
 
@@ -199,11 +205,12 @@ The ``boundary conditions`` are set for:
 Running the Simulation
 -----------------------
 
-The simulation is launched in the same folder as the ``.prm`` file, using the ``gls_navier_stokes`` solver. It takes only about 5 seconds with one cpu:
+The simulation is launched in the same folder as the ``.prm`` file, using the ``lethe-fluid`` solver. It takes only about 5 seconds with one cpu. Assuming that the ``lethe-fluid`` executable is within your path, the simulation can be launched by typing:
 
-.. code-block:: sh
-    
-    ../../exe/bin/gls_navier_stokes warming-up-viscous-fluid.prm
+.. code-block:: text
+  :class: copy-button
+
+  lethe-fluid warming-up-viscous-fluid.prm
 
 
 --------------
@@ -351,13 +358,19 @@ Several adjustments have to be made in the `.prm` to turn the domain clockwise, 
       subsection bc 2
         set id   = 2
         set type = convection-radiation
-        set h    = 0
-        set Tinf = 0
+        subsection h
+          set Function expression = 0
+        end
+        subsection Tinf
+          set Function expression = 0
+        end
       end
       subsection bc 3
         set id    = 3
         set type  = temperature
-        set value = 80
+        subsection value
+          set Function expression = 80
+        end
       end
     end
 

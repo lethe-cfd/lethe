@@ -21,7 +21,15 @@
 #include <solvers/mf_navier_stokes_operators.h>
 #include <solvers/navier_stokes_base.h>
 
+#include <deal.II/lac/solver_gmres.h>
+
+#include <deal.II/multigrid/mg_transfer_global_coarsening.h>
+#include <deal.II/multigrid/mg_transfer_matrix_free.h>
+#include <deal.II/multigrid/multigrid.h>
+
+
 using namespace dealii;
+
 
 /**
  * @brief A solver class for the Navier-Stokes equation that uses the matrix
@@ -36,7 +44,9 @@ class MFNavierStokesSolver
                             LinearAlgebra::distributed::Vector<double>,
                             IndexSet>
 {
-  using VectorType = LinearAlgebra::distributed::Vector<double>;
+  using VectorType     = LinearAlgebra::distributed::Vector<double>;
+  using LSTransferType = MGTransferMatrixFree<dim, double>;
+  using GCTransferType = MGTransferGlobalCoarsening<dim, VectorType>;
 
 public:
   /**
@@ -112,10 +122,11 @@ protected:
   update_multiphysics_time_average_solution() override;
 
   /**
-   * @brief  Set up the appropriate preconditioner.
+   * @brief Calculate and store time derivatives of previous solutions according to
+   * time-stepping scheme to use them in the operator.
    */
   void
-  setup_preconditioner();
+  calculate_time_derivative_previous_solutions();
 
   /**
    * @brief Define the non-zero constraints used to solve the problem.
@@ -163,9 +174,56 @@ private:
                      const double absolute_residual,
                      const double relative_residual);
 
+  /**
+   * @brief  Set-up local smoothing MG preconditioner
+   */
+  void
+  solve_with_LSMG(SolverGMRES<VectorType> &solver);
+
+  /**
+   * @brief Set-up global coarsening MG preconditioner
+   */
+  void
+  solve_with_GCMG(SolverGMRES<VectorType> &solver);
+
+  /**
+   * @brief Set-up ILU preconditioner
+   */
+  void
+  solve_with_ILU(SolverGMRES<VectorType> &solver);
+
+  /**
+   * @brief Estimate the eigenvalues to obtain a relaxation parameter for the
+   *  MG smoother
+   *
+   * @param operator Operator for which the estimation needs to be done
+   *
+   * @param level Corresponding MG level
+   *
+   * @param diagonal Pre-computed diagonal of level operator
+   *
+   * @return double Omega relaxation parameter
+   */
+  double
+  estimate_omega(
+    std::shared_ptr<NavierStokesOperatorBase<dim, double>> &mg_operator,
+    const unsigned int                                     &level,
+    const VectorType                                       &diagonal);
+
 protected:
   // Matrix-free operator
   std::shared_ptr<NavierStokesOperatorBase<dim, double>> system_operator;
+  // Preconditioners
+  std::shared_ptr<PreconditionMG<dim, VectorType, LSTransferType>>
+    ls_multigrid_preconditioner;
+  std::shared_ptr<PreconditionMG<dim, VectorType, GCTransferType>>
+    gc_multigrid_preconditioner;
+  std::shared_ptr<TrilinosWrappers::PreconditionILU> ilu_preconditioner;
+  // Vector to store the time derivative of the previous solutions at the end
+  // of each time step
+  VectorType time_derivative_previous_solutions;
+  // Setup timings for all MG components
+  TimerOutput mg_computing_timer;
 };
 
 #endif

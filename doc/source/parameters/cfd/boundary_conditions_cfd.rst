@@ -72,7 +72,7 @@ where `beta` is a constant and  :math:`(\mathbf{u}\cdot n)_{-}` is :math:`min (0
 
     Likewise, if ``number = 2`` and there is no ``subsection bc 0`` explicitly stated, the boundary is still created, with ``none`` by default.
 
-* ``time dependent`` specifies if a  boundary condition is time dependent (``true``) or steady (``false```). By default, this parameter is set to ``false``. This is there to improve the computational efficiency for transient cases in which the boundary conditions do not change. 
+* ``time dependent`` specifies if a boundary condition is time-dependent (``true``) or steady (``false``). By default, this parameter is set to ``false``. This is here to improve the computational efficiency for transient cases in which the boundary conditions do not change.
 
 * Each fluid dynamics boundary condition is stored in a ``bc #`` subsection :
     * ``id``  is the number associated with the boundary condition. By default, Lethe assumes that the id is equivalent to the number ``#`` of the bc. 
@@ -90,4 +90,4 @@ where `beta` is a constant and  :math:`(\mathbf{u}\cdot n)_{-}` is :math:`min (0
     * ``boundary layer thickness`` (:math:`d_w`) is the parameter applied to the ``partial slip`` boundary condition. It is used to estimate the tangential shear stress :math:`\tau_t = -\mu \frac{u}{d_w}`. For very high ``boundary layer thicknes``, the boundary layer should behave exactly like the ``slip`` condition.
 
 .. caution::
-	While using ``gls_sharp_navier_stokes`` and ``gls_sharp_navier_stokes`` solvers, it is wise to assign a weak type of boundary (``outlet``, ``partial slip``, or ``function weak``) to at least one boundary. The presence of particle(s) has a non-null contribution to the divergence of the problem, making it much harder for the linear solver to converge unless it is given some flexibility through of boundaries.
+	While using the ``lethe-fluid-sharp`` solver, it is wise to assign a weak type of boundary (``outlet``, ``partial slip``, or ``function weak``) to at least one boundary. The presence of particle(s) has a non-null contribution to the divergence of the problem, making it much harder for the linear solver to converge unless it is given some flexibility through of boundaries.

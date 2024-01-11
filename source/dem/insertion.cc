@@ -19,7 +19,15 @@
 
 #include <dem/insertion.h>
 
+#include <cmath>
 #include <sstream>
+
+template <int dim>
+Insertion<dim>::Insertion(const std::vector<std::shared_ptr<Distribution>>
+                            &distribution_object_container)
+{
+  distributions_objects = distribution_object_container;
+}
 
 // Prints the insertion information
 template <int dim>
@@ -49,19 +57,14 @@ Insertion<dim>::assign_particle_properties(
   std::vector<std::vector<double>> &particle_properties)
 {
   // Clearing and resizing particle_properties
-  particle_properties.clear();
   particle_properties.reserve(inserted_this_step_this_proc);
 
   // Getting properties as local parameters
   // TODO: MAYBE CHANGE THE INPUT TO PHYSICAL PROPERTIES DIRECTLY
   auto physical_properties = dem_parameters.lagrangian_physical_properties;
 
-  particle_size_sampling(
-    particle_sizes,
-    physical_properties
-      .particle_average_diameter[current_inserting_particle_type],
-    physical_properties.particle_size_std[current_inserting_particle_type],
-    inserted_this_step_this_proc);
+  distributions_objects[current_inserting_particle_type]
+    ->particle_size_sampling(inserted_this_step_this_proc);
 
   // A loop is defined over the number of particles which are going to be
   // inserted at this step
@@ -69,11 +72,11 @@ Insertion<dim>::assign_particle_properties(
        particle_counter < inserted_this_step_this_proc;
        ++particle_counter)
     {
-      double type     = current_inserting_particle_type;
-      double diameter = 0.;
-      (particle_sizes[particle_counter] >= 0) ?
-        diameter = particle_sizes[particle_counter] :
-        -particle_sizes[particle_counter];
+      double type = current_inserting_particle_type;
+      // We make sure that the diameter is positive
+      double diameter =
+        std::abs(distributions_objects[current_inserting_particle_type]
+                   ->particle_sizes[particle_counter]);
       double density =
         physical_properties.density_particle[current_inserting_particle_type];
       double vel_x        = dem_parameters.insertion_info.vel_x;
@@ -112,24 +115,6 @@ Insertion<dim>::assign_particle_properties(
       particle_properties.push_back(properties_of_one_particle);
       properties_of_one_particle.clear();
     }
-}
-
-template <int dim>
-void
-Insertion<dim>::particle_size_sampling(std::vector<double> &particle_sizes,
-                                       const double         average,
-                                       const double         standard_deviation,
-                                       const double         particle_number)
-{
-  particle_sizes.clear();
-  particle_sizes.reserve(particle_number);
-
-  std::random_device         rd{};
-  std::mt19937               gen{rd()};
-  std::normal_distribution<> distribution{average, standard_deviation};
-
-  for (unsigned int n = 0; n < particle_number; ++n)
-    particle_sizes.push_back(distribution(gen));
 }
 
 template <int dim>
@@ -228,6 +213,5 @@ Insertion<dim>::calculate_insertion_domain_maximum_particle_number(
       inserted_this_step = insertion_information.inserted_this_step;
     }
 }
-
 template class Insertion<2>;
 template class Insertion<3>;

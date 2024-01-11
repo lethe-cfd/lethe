@@ -8,7 +8,8 @@ It is strongly recommended to visit `DEM parameters <../../../parameters/dem/dem
 ----------------------------------
 Features
 ----------------------------------
-- Solvers: ``dem`` and ``cfd_dem_coupling``
+
+- Solvers: ``lethe-particles`` and ``lethe-fluid-particles``
 - Three-dimensional problem
 - Displays the selection of models and physical properties.
 - Simulates a solid-gas fluidized bed.
@@ -18,16 +19,17 @@ Features
 Files Used in This Example
 ---------------------------
 
-- Parameter file for particle generation and packing: ``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/dem-packing-in-fluidized-bed.prm``
-- Parameter file for CFD-DEM simulation of the gas-solid fluidized bed: ``/examples/unresolved-cfd-dem/gas-solid-fluidized-bed/gas-solid-fluidized-bed.prm``
+Both files mentioned below are located in the example's folder (``examples/unresolved-cfd-dem/gas-solid-fluidized-bed``).
 
+- Parameter file for CFD-DEM simulation of the gas-solid fluidized bed: ``gas-solid-fluidized-bed.prm``
+- Parameter file for particle generation and packing: ``dem-packing-in-fluidized-bed.prm``
 
 
 -----------------------
 Description of the Case
 -----------------------
 
-This example simulates the fluidization of spherical particles in air. First, we use Lethe-DEM to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``cfd_dem_coupling`` solver within Lethe to simulate the fluidization of the particles by initially reading the checkpoint files from the DEM simulation.
+This example simulates the fluidization of spherical particles in air. First, we use ``lethe-particles`` to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the ``lethe-fluid-particles`` solver within Lethe to simulate the fluidization of the particles by initially reading the checkpoint files from the DEM simulation.
 
 
 -------------------
@@ -73,7 +75,7 @@ Another subsection, which is generally the one we put at the top of the paramete
 Restart
 ~~~~~~~~~~~~~~~~~~~
 
-The ``cfd_dem_coupling`` solver requires reading several DEM files to start the simulation. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix "dem" set in the "set filename" option. The DEM parameter file is initialized exactly as the cylindrical packed bed example. The difference is in the number of particles, their physical properties, and the insertion box defined based on the new geometry. For more explanation about the individual subsections, refer to the `DEM parameters <../../../parameters/dem/dem.html>`_ and the `CFD-DEM parameters <../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html>`_ .
+The ``lethe-fluid-particles`` solver requires reading several DEM files to start the simulation. For this, we have to write the DEM simulation information. This is done by enabling the check-pointing option in the restart subsection. We give the written files a prefix "dem" set in the "set filename" option. The DEM parameter file is initialized exactly as the cylindrical packed bed example. The difference is in the number of particles, their physical properties, and the insertion box defined based on the new geometry. For more explanation about the individual subsections, refer to the `DEM parameters <../../../parameters/dem/dem.html>`_ and the `CFD-DEM parameters <../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html>`_ .
 
 .. code-block:: text
 
@@ -147,7 +149,7 @@ The ``insertion info`` subsection manages the insertion of particles. It allows 
 .. code-block:: text
 
     subsection insertion info
-      set insertion method                               = non_uniform
+      set insertion method                               = volume
       set inserted number of particles at each time step = 2000
       set insertion frequency                            = 2000
       set insertion box minimum x                        = -0.018
@@ -157,8 +159,8 @@ The ``insertion info`` subsection manages the insertion of particles. It allows 
       set insertion box maximum y                        = 0.05
       set insertion box maximum z                        = 0.018
       set insertion distance threshold                   = 1.5
-      set insertion random number range                  = 0.2
-      set insertion random number seed                   = 19
+      set insertion maximum offset                       = 0.2
+      set insertion prn seed                             = 19
     end
 
 
@@ -191,17 +193,19 @@ We need to pack the particles in the middle of the square bed. Therefore, we cre
 ---------------------------
 Running the DEM Simulation
 ---------------------------
-Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``dem`` executable is within your path, the simulation can be launched on a single processor by typing:
+Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the ``lethe-particles`` executable is within your path, the simulation can be launched on a single processor by typing:
 
 .. code-block:: text
+  :class: copy-button
 
-  dem dem-packing-in-fluidized-bed.prm
+  lethe-particles dem-packing-in-fluidized-bed.prm
 
 or in parallel (where 8 represents the number of processors)
 
 .. code-block:: text
+  :class: copy-button
 
-  mpirun -np 8 dem dem-packing-in-fluidized-bed.prm
+  mpirun -np 8 lethe-particles dem-packing-in-fluidized-bed.prm
 
 Lethe will generate a number of files. The most important one bears the extension ``.pvd``. It can be read by popular visualization programs such as `Paraview <https://www.paraview.org/>`_. 
 
@@ -391,11 +395,12 @@ Linear Solver
 Running the CFD-DEM Simulation
 ------------------------------
 
-The simulation is run using the cfd_dem_coupling application as per the following command:
+The simulation is run using the ``lethe-fluid-particles`` application. Assuming that the ``lethe-fluid-particles`` executable is within your path, the simulation can be launched as per the following command:
 
 .. code-block:: text
+  :class: copy-button
 
-    path_to_cfd_dem_application/cfd_dem_coupling fluidized-bed.prm 
+  lethe-fluid-particles fluidized-bed.prm
 
 --------
 Results

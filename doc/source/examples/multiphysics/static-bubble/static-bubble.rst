@@ -9,7 +9,7 @@ This example simulates a two-dimensional static bubble `[1] <https://doi.org/10.
 Features
 ----------------------------------
 
-- Solver: ``gls_navier_stokes``
+- Solver: ``lethe-fluid``
 - Two phase flow handled by the Volume of fluids (VOF) approach with surface tension force
 - Calculation of filtered phase fraction gradient and curvature fields
 - Unsteady problem handled by a BDF1 time-stepping scheme
@@ -18,9 +18,10 @@ Features
 ---------------------------
 Files Used in This Example
 ---------------------------
+Both files mentioned below are located in the example's folder (``examples/multiphysics/static-bubble``).
 
-- Parameter file: ``examples/multiphysics/static-bubble/static_bubble.prm``
-- Python file to generate plots: ``examples/multiphysics/static-bubble/static_bubble.py``
+- Parameter file: ``static_bubble.prm``
+- Postprocessing Python script: ``static_bubble.py``
 
 
 -----------------------------
@@ -42,7 +43,7 @@ Surface Tension Force
 
 When including the surface tension force in the resolution of the Navier-Stokes equations, the numerical computation of the curvature can give rise to parasitic flows near the interface between the two fluids, as presented in :doc:`../../../theory/multiphysics/vof` theory guide.
 
-The static bubble case is a relevant case to study the spurious currents, since the analytical solution is zero for the velocity. Therefore, non-zero velocities in the computed velocity field are considered as spurious currents `[1] <https://doi.org/10.1002/fld.2643>`_. The analytical pressure drop between the interior (:math:`p_{int}`) and exterior (:math:`p_{ext}`) of the bubble is given by the Young-Laplace relation:
+The static bubble case is a relevant case to study the parasitic currents, since the analytical solution is zero for the velocity. Therefore, non-zero velocities in the computed velocity field are considered parasitic currents `[1] <https://doi.org/10.1002/fld.2643>`_. The analytical pressure drop between the interior (:math:`p_{int}`) and exterior (:math:`p_{ext}`) of the bubble is given by the Young-Laplace relation:
 
 .. math::
 
@@ -201,9 +202,12 @@ When providing the analytical solution in the ``analytical solution`` subsection
 Running the Simulation
 ---------------------------
 
-Call the ``gls_navier_stokes`` by invoking:
+Call the ``lethe-fluid`` by invoking:
 
-``mpirun -np 8 gls_navier_stokes static-bubble.prm``
+.. code-block:: text
+  :class: copy-button
+
+  mpirun -np 8 lethe-fluid static-bubble.prm
 
 to run the simulation using eight CPU cores. Feel free to use more.
 
@@ -227,6 +231,7 @@ Using Paraview, we can visualize the evolution of the velocity field over the ti
 The time evolution of the :math:`\mathcal{L}^2` norm of the error on the velocity magnitude is obtained from a Gnuplot script available in the example folder by launching in the same directory the following command:
 
 .. code-block:: text
+  :class: copy-button
 
   gnuplot -c "./postprocess.gnu" "./output"
 
@@ -237,9 +242,9 @@ where ``./postprocess.gnu`` is the path to the provided script and ``./output`` 
 Mesh Convergence Study
 ~~~~~~~~~~~~~~~~~~~~~~
 
-While the filters presented in section :ref:`Normal and curvature computations` allow to decrease the magnitude of the spurious currents, it can be seen from the previous results that they don't completely disappear. It is, therefore, interesting to see if they vanish with a mesh refinement by performing a space convergence study on their magnitude.
+While the filters presented in section :ref:`Normal and curvature computations` allow to decrease the magnitude of the parasitic currents, it can be seen from the previous results that they don't completely disappear. It is, therefore, interesting to see if they vanish with a mesh refinement by performing a space convergence study on their magnitude.
 
-Four levels of refinement are studied (6 to 9) by changing the parameter ``initial refinement`` in the ``mesh`` subsection. The :math:`\mathcal{L}^2` norm of the error on the velocity at 3 seconds is selected as the verification metric. The following figure shows that the scheme reaches an order of accuracy of 2 in space.
+Four levels of refinement are studied (6 to 9) by changing the parameter ``initial refinement`` in the ``mesh`` subsection. The :math:`\mathcal{L}^2` norm of the error on the velocity at 3 seconds is selected as the verification metric. The following figure shows that the scheme reaches nearly an order of accuracy of 2 in space.
 
 .. image:: images/mesh-convergence-study-order.png
 

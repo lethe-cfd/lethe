@@ -1,19 +1,13 @@
 #include <core/bdf.h>
 #include <core/time_integration_utilities.h>
-#include <core/utilities.h>
 
 #include <solvers/heat_transfer.h>
-#include <solvers/heat_transfer_assemblers.h>
-#include <solvers/heat_transfer_scratch_data.h>
-#include <solvers/postprocessing_cfd.h>
 
 #include <deal.II/base/work_stream.h>
 
-#include <deal.II/dofs/dof_renumbering.h>
 #include <deal.II/dofs/dof_tools.h>
 
 #include <deal.II/fe/mapping.h>
-#include <deal.II/fe/mapping_q.h>
 
 #include <deal.II/lac/affine_constraints.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
@@ -24,6 +18,10 @@
 
 #include <deal.II/numerics/error_estimator.h>
 #include <deal.II/numerics/vector_tools.h>
+
+DeclExceptionMsg(
+  LiquidFractionRequiresPhaseChange,
+  "Calculation of the liquid fraction requires that a fluid has a phase_change specific heat model");
 
 template <int dim>
 void
@@ -53,19 +51,6 @@ HeatTransfer<dim>::assemble_nitsche_heat_restriction(bool assemble_matrix)
   Assert(
     !this->simulation_parameters.physical_properties_manager.is_non_newtonian(),
     RequiresConstantViscosity("assemble_nitsche_heat_restriction"));
-
-  // Evaluate fluid properties
-  // auto density_model =
-  //  this->simulation_parameters.physical_properties_manager.get_density();
-  // auto specific_heat_model =
-  //  this->simulation_parameters.physical_properties_manager.get_specific_heat();
-  // auto conductivity_model =
-  //  this->simulation_parameters.physical_properties_manager
-  //    .get_thermal_conductivity();
-  // std::map<field, double> field_values;
-
-  // double rho_cp = density_model->value(field_values) *
-  //                 specific_heat_model->value(field_values);
 
   auto solids = *this->multiphysics->get_solids(
     this->simulation_parameters.nitsche->number_solids);
@@ -293,12 +278,25 @@ HeatTransfer<dim>::setup_assemblers()
     {
       if (this->simulation_parameters.multiphysics.VOF)
         {
-          // Call for the specific assembler
-          // Assembler of the laser source term applied only to the metal phase
-          this->assemblers.push_back(
-            std::make_shared<HeatTransferAssemblerLaserVOF<dim>>(
-              this->simulation_control,
-              this->simulation_parameters.laser_parameters));
+          // Call for the specific assembler of the laser source term
+          // Laser source is applied at the interface (surface flux)
+          if (this->simulation_parameters.laser_parameters->laser_type ==
+              Parameters::Laser<dim>::LaserType::heat_flux_vof_interface)
+            {
+              this->assemblers.push_back(
+                std::make_shared<
+                  HeatTransferAssemblerLaserHeatFluxVOFInterface<dim>>(
+                  this->simulation_control,
+                  this->simulation_parameters.laser_parameters));
+            }
+          else // Laser is applied in fluid 1 as a volumetric source
+            {
+              this->assemblers.push_back(
+                std::make_shared<
+                  HeatTransferAssemblerLaserExponentialDecayVOF<dim>>(
+                  this->simulation_control,
+                  this->simulation_parameters.laser_parameters));
+            }
 
           // Assembler of the radiation sink term applied only at the air/metal
           // interface. The radiation term in that case is treated as a source
@@ -316,9 +314,21 @@ HeatTransfer<dim>::setup_assemblers()
       else
         {
           this->assemblers.push_back(
-            std::make_shared<HeatTransferAssemblerLaser<dim>>(
+            std::make_shared<HeatTransferAssemblerLaserExponentialDecay<dim>>(
               this->simulation_control,
               this->simulation_parameters.laser_parameters));
+        }
+    }
+
+  // Evaporation cooling
+  if (this->simulation_parameters.multiphysics.VOF)
+    {
+      if (this->simulation_parameters.evaporation.enable_evaporation_cooling)
+        {
+          this->assemblers.push_back(
+            std::make_shared<HeatTransferAssemblerVOFEvaporation<dim>>(
+              this->simulation_control,
+              this->simulation_parameters.evaporation));
         }
     }
 
@@ -416,13 +426,13 @@ HeatTransfer<dim>::assemble_local_system_matrix(
   if (!cell->is_locally_owned())
     return;
 
-  auto &source_term = simulation_parameters.source_term->heat_transfer_source;
-  source_term.set_time(simulation_control->get_current_time());
+  auto source_term = simulation_parameters.source_term.heat_transfer_source;
+  source_term->set_time(simulation_control->get_current_time());
 
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      &source_term);
+                      &(*source_term));
 
   const DoFHandler<dim> *dof_handler_fluid =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -440,13 +450,16 @@ HeatTransfer<dim>::assemble_local_system_matrix(
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_block_time_average_solution(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
-          scratch_data.reinit_velocity(velocity_cell,
-                                       *multiphysics->get_block_solution(
-                                         PhysicsID::fluid_dynamics));
+          if (!this->simulation_parameters.ale.enabled())
+            scratch_data.reinit_velocity(velocity_cell,
+                                         *multiphysics->get_block_solution(
+                                           PhysicsID::fluid_dynamics),
+                                         this->simulation_parameters.ale);
         }
     }
   else
@@ -458,13 +471,15 @@ HeatTransfer<dim>::assemble_local_system_matrix(
         {
           scratch_data.reinit_velocity(velocity_cell,
                                        *multiphysics->get_time_average_solution(
-                                         PhysicsID::fluid_dynamics));
+                                         PhysicsID::fluid_dynamics),
+                                       this->simulation_parameters.ale);
         }
       else
         {
           scratch_data.reinit_velocity(velocity_cell,
                                        *multiphysics->get_solution(
-                                         PhysicsID::fluid_dynamics));
+                                         PhysicsID::fluid_dynamics),
+                                       this->simulation_parameters.ale);
         }
     }
 
@@ -567,13 +582,13 @@ HeatTransfer<dim>::assemble_local_system_rhs(
   if (!cell->is_locally_owned())
     return;
 
-  auto &source_term = simulation_parameters.source_term->heat_transfer_source;
-  source_term.set_time(simulation_control->get_current_time());
+  auto source_term = simulation_parameters.source_term.heat_transfer_source;
+  source_term->set_time(simulation_control->get_current_time());
 
   scratch_data.reinit(cell,
                       this->evaluation_point,
                       this->previous_solutions,
-                      &source_term);
+                      &(*source_term));
 
   const DoFHandler<dim> *dof_handler_fluid =
     multiphysics->get_dof_handler(PhysicsID::fluid_dynamics);
@@ -591,13 +606,15 @@ HeatTransfer<dim>::assemble_local_system_rhs(
           scratch_data.reinit_velocity(
             velocity_cell,
             *multiphysics->get_block_time_average_solution(
-              PhysicsID::fluid_dynamics));
+              PhysicsID::fluid_dynamics),
+            this->simulation_parameters.ale);
         }
       else
         {
           scratch_data.reinit_velocity(velocity_cell,
                                        *multiphysics->get_block_solution(
-                                         PhysicsID::fluid_dynamics));
+                                         PhysicsID::fluid_dynamics),
+                                       this->simulation_parameters.ale);
         }
       scratch_data.reinit_velocity_gradient(
         *multiphysics->get_block_solution(PhysicsID::fluid_dynamics));
@@ -611,13 +628,15 @@ HeatTransfer<dim>::assemble_local_system_rhs(
         {
           scratch_data.reinit_velocity(velocity_cell,
                                        *multiphysics->get_time_average_solution(
-                                         PhysicsID::fluid_dynamics));
+                                         PhysicsID::fluid_dynamics),
+                                       this->simulation_parameters.ale);
         }
       else
         {
           scratch_data.reinit_velocity(velocity_cell,
                                        *multiphysics->get_solution(
-                                         PhysicsID::fluid_dynamics));
+                                         PhysicsID::fluid_dynamics),
+                                       this->simulation_parameters.ale);
         }
 
       scratch_data.reinit_velocity_gradient(
@@ -664,12 +683,41 @@ HeatTransfer<dim>::copy_local_rhs_to_global_rhs(
                                               system_rhs);
 }
 
-
 template <int dim>
 void
 HeatTransfer<dim>::attach_solution_to_output(DataOut<dim> &data_out)
 {
   data_out.add_data_vector(dof_handler, present_solution, "temperature");
+
+  // Get number of fluids and solids
+  const unsigned int n_fluids =
+    this->simulation_parameters.physical_properties_manager
+      .get_number_of_fluids();
+  const unsigned int n_solids =
+    this->simulation_parameters.physical_properties_manager
+      .get_number_of_solids();
+
+  // Postprocess heat fluxes
+  heat_flux_postprocessors.clear();
+  heat_flux_postprocessors.reserve(n_fluids + n_solids);
+  // Heat fluxes in fluids
+  for (unsigned int f_id = 0; f_id < n_fluids; ++f_id)
+    {
+      heat_flux_postprocessors.push_back(HeatFluxPostprocessor<dim>(
+        thermal_conductivity_models[f_id], "f", f_id, f_id));
+      data_out.add_data_vector(this->dof_handler,
+                               this->present_solution,
+                               heat_flux_postprocessors[f_id]);
+    }
+  // Heat fluxes in solids
+  for (unsigned int m_id = n_fluids; m_id < n_fluids + n_solids; ++m_id)
+    {
+      heat_flux_postprocessors.push_back(HeatFluxPostprocessor<dim>(
+        thermal_conductivity_models[m_id], "s", m_id - n_fluids, m_id));
+      data_out.add_data_vector(this->dof_handler,
+                               this->present_solution,
+                               heat_flux_postprocessors[m_id]);
+    }
 }
 
 template <int dim>
@@ -859,6 +907,20 @@ HeatTransfer<dim>::postprocess(bool first_iteration)
         this->write_heat_flux(domain_name);
     }
 
+  // Liquid fraction
+  if (simulation_parameters.post_processing.calculate_liquid_fraction)
+    {
+      AssertThrow(
+        simulation_parameters.physical_properties_manager.has_phase_change(),
+        LiquidFractionRequiresPhaseChange());
+      postprocess_liquid_fraction(gather_vof);
+
+      if (simulation_control->get_step_number() %
+            this->simulation_parameters.post_processing.output_frequency ==
+          0)
+        this->write_liquid_fraction();
+    }
+
   if (this->simulation_parameters.timer.type ==
       Parameters::Timer::Type::iteration)
     {
@@ -950,6 +1012,36 @@ HeatTransfer<dim>::write_checkpoint()
       sol_set_transfer.push_back(&previous_solutions[i]);
     }
   solution_transfer->prepare_for_serialization(sol_set_transfer);
+
+  // Serialize error table
+  std::string prefix =
+    this->simulation_parameters.simulation_control.output_folder;
+  std::string suffix = ".checkpoint";
+  if (this->simulation_parameters.analytical_solution->calculate_error())
+    serialize_table(
+      this->error_table,
+      prefix + this->simulation_parameters.analytical_solution->get_filename() +
+        "_HT" + suffix);
+  if (this->simulation_parameters.post_processing.calculate_heat_flux)
+    serialize_table(
+      this->heat_flux_table,
+      prefix +
+        this->simulation_parameters.post_processing.heat_flux_output_name +
+        suffix);
+  if (this->simulation_parameters.post_processing
+        .calculate_temperature_statistics)
+    serialize_table(
+      this->statistics_table,
+      prefix +
+        this->simulation_parameters.post_processing.temperature_output_name +
+        suffix);
+
+  if (this->simulation_parameters.post_processing.calculate_liquid_fraction)
+    serialize_table(this->liquid_fraction_table,
+                    prefix +
+                      this->simulation_parameters.post_processing
+                        .liquid_fraction_output_name +
+                      suffix);
 }
 
 template <int dim>
@@ -982,6 +1074,35 @@ HeatTransfer<dim>::read_checkpoint()
     {
       previous_solutions[i] = distributed_previous_solutions[i];
     }
+
+  // Deserialize error table
+  std::string prefix =
+    this->simulation_parameters.simulation_control.output_folder;
+  std::string suffix = ".checkpoint";
+  if (this->simulation_parameters.analytical_solution->calculate_error())
+    deserialize_table(
+      this->error_table,
+      prefix + this->simulation_parameters.analytical_solution->get_filename() +
+        "_HT" + suffix);
+  if (this->simulation_parameters.post_processing.calculate_heat_flux)
+    deserialize_table(
+      this->heat_flux_table,
+      prefix +
+        this->simulation_parameters.post_processing.heat_flux_output_name +
+        suffix);
+  if (this->simulation_parameters.post_processing
+        .calculate_temperature_statistics)
+    deserialize_table(
+      this->statistics_table,
+      prefix +
+        this->simulation_parameters.post_processing.temperature_output_name +
+        suffix);
+  if (this->simulation_parameters.post_processing.calculate_liquid_fraction)
+    deserialize_table(this->liquid_fraction_table,
+                      prefix +
+                        this->simulation_parameters.post_processing
+                          .liquid_fraction_output_name +
+                        suffix);
 }
 
 
@@ -1018,6 +1139,7 @@ HeatTransfer<dim>::setup_dofs()
 
   {
     nonzero_constraints.clear();
+    nonzero_constraints.reinit(this->locally_relevant_dofs);
     DoFTools::make_hanging_node_constraints(this->dof_handler,
                                             nonzero_constraints);
 
@@ -1032,8 +1154,8 @@ HeatTransfer<dim>::setup_dofs()
             VectorTools::interpolate_boundary_values(
               this->dof_handler,
               this->simulation_parameters.boundary_conditions_ht.id[i_bc],
-              dealii::Functions::ConstantFunction<dim>(
-                this->simulation_parameters.boundary_conditions_ht.value[i_bc]),
+              *this->simulation_parameters.boundary_conditions_ht
+                 .dirichlet_value[i_bc],
               nonzero_constraints);
           }
       }
@@ -1043,6 +1165,7 @@ HeatTransfer<dim>::setup_dofs()
   // Boundary conditions for Newton correction
   {
     zero_constraints.clear();
+    zero_constraints.reinit(this->locally_relevant_dofs);
     DoFTools::make_hanging_node_constraints(this->dof_handler,
                                             zero_constraints);
 
@@ -1088,6 +1211,64 @@ HeatTransfer<dim>::setup_dofs()
   multiphysics->set_solution(PhysicsID::heat_transfer, &this->present_solution);
   multiphysics->set_previous_solutions(PhysicsID::heat_transfer,
                                        &this->previous_solutions);
+}
+
+template <int dim>
+void
+HeatTransfer<dim>::update_boundary_conditions()
+{
+  if (!this->simulation_parameters.boundary_conditions_ht.time_dependent)
+    return;
+
+  double time = this->simulation_control->get_current_time();
+  // We begin by setting the new time for all expressions, although the change
+  // for the convection-radiation boundary conditions won't be applied in this
+  // function
+  for (unsigned int i_bc = 0;
+       i_bc < this->simulation_parameters.boundary_conditions_ht.size;
+       ++i_bc)
+    {
+      this->simulation_parameters.boundary_conditions_ht.dirichlet_value[i_bc]
+        ->set_time(time);
+      this->simulation_parameters.boundary_conditions_ht.h[i_bc]->set_time(
+        time);
+      this->simulation_parameters.boundary_conditions_ht.Tinf[i_bc]->set_time(
+        time);
+      this->simulation_parameters.boundary_conditions_ht.emissivity[i_bc]
+        ->set_time(time);
+
+      Assert(
+        this->simulation_parameters.boundary_conditions_ht.emissivity[i_bc]
+              ->value(Point<dim>()) <= 1.0 &&
+          this->simulation_parameters.boundary_conditions_ht.emissivity[i_bc]
+              ->value(Point<dim>()) >= 0.0,
+        EmissivityError(
+          this->simulation_parameters.boundary_conditions_ht.emissivity[i_bc]
+            ->value(Point<dim>())));
+    }
+
+  nonzero_constraints.clear();
+  nonzero_constraints.reinit(this->locally_relevant_dofs);
+  DoFTools::make_hanging_node_constraints(this->dof_handler,
+                                          nonzero_constraints);
+
+  for (unsigned int i_bc = 0;
+       i_bc < this->simulation_parameters.boundary_conditions_ht.size;
+       ++i_bc)
+    {
+      // Dirichlet condition : imposed temperature at i_bc
+      if (this->simulation_parameters.boundary_conditions_ht.type[i_bc] ==
+          BoundaryConditions::BoundaryType::temperature)
+        {
+          VectorTools::interpolate_boundary_values(
+            this->dof_handler,
+            this->simulation_parameters.boundary_conditions_ht.id[i_bc],
+            *this->simulation_parameters.boundary_conditions_ht
+               .dirichlet_value[i_bc],
+            nonzero_constraints);
+        }
+    }
+  nonzero_constraints.close();
 }
 
 template <int dim>
@@ -1343,7 +1524,7 @@ HeatTransfer<dim>::postprocess_temperature_statistics(
       this->pcout << "\t Std-Dev : " << temperature_std_deviation << std::endl;
     }
 
-  // Filling table
+  // Fill table
   this->statistics_table.add_value(
     "time", this->simulation_control->get_current_time());
   this->statistics_table.add_value("min", minimum_temperature);
@@ -1369,6 +1550,162 @@ HeatTransfer<dim>::write_temperature_statistics(const std::string domain_name)
       this->statistics_table.write_text(output);
     }
 }
+
+template <int dim>
+void
+HeatTransfer<dim>::postprocess_liquid_fraction(const bool gather_vof)
+{
+  const unsigned int n_q_points       = this->cell_quadrature->size();
+  const MPI_Comm     mpi_communicator = this->dof_handler.get_communicator();
+
+  // Initialize heat transfer information
+  std::vector<double> local_temperature_values(n_q_points);
+  FEValues<dim>       fe_values_ht(*this->temperature_mapping,
+                             *this->fe,
+                             *this->cell_quadrature,
+                             update_values | update_JxW_values);
+
+  // Initialize VOF information
+  const DoFHandler<dim>         *dof_handler_vof = NULL;
+  std::shared_ptr<FEValues<dim>> fe_values_vof;
+  std::vector<double>            filtered_phase_values(n_q_points);
+
+  // Get the raw physical properties parameters to calculate the liquid fraction
+  // in-situ
+  const auto &physical_properties_parameters =
+    this->simulation_parameters.physical_properties_manager
+      .get_physical_properties_parameters();
+
+  if (gather_vof)
+    {
+      dof_handler_vof = this->multiphysics->get_dof_handler(PhysicsID::VOF);
+      fe_values_vof =
+        std::make_shared<FEValues<dim>>(*this->temperature_mapping,
+                                        dof_handler_vof->get_fe(),
+                                        *this->cell_quadrature,
+                                        update_values);
+    }
+
+  // Variables for the integration
+  double volume_integral(0.);
+  double liquid_volume_integral(0.);
+
+  // Calculate min, max and average
+  for (const auto &cell : this->dof_handler.active_cell_iterators())
+    {
+      if (cell->is_locally_owned())
+        {
+          // Gather heat transfer information
+          fe_values_ht.reinit(cell);
+          fe_values_ht.get_function_values(this->present_solution,
+                                           local_temperature_values);
+
+          if (gather_vof)
+            {
+              // Get VOF active cell iterator
+              typename DoFHandler<dim>::active_cell_iterator cell_vof(
+                &(*(this->triangulation)),
+                cell->level(),
+                cell->index(),
+                dof_handler_vof);
+
+              // Gather VOF information
+              fe_values_vof->reinit(cell_vof);
+              fe_values_vof->get_function_values(
+                *this->multiphysics->get_filtered_solution(PhysicsID::VOF),
+                filtered_phase_values);
+            }
+
+          for (unsigned int q = 0; q < n_q_points; q++)
+            {
+              // If VOF is enabled, gather the liquid fraction if the fluid has
+              // a phase fraction
+              if (!gather_vof)
+                {
+                  liquid_volume_integral +=
+                    calculate_liquid_fraction(local_temperature_values[q],
+                                              physical_properties_parameters
+                                                .fluids[0]
+                                                .phase_change_parameters) *
+                    fe_values_ht.JxW(q);
+                  volume_integral += fe_values_ht.JxW(q);
+                }
+              else
+                {
+                  // Case of fluid 0 being a phase change
+                  if (physical_properties_parameters.fluids[0]
+                        .specific_heat_model ==
+                      Parameters::Material::SpecificHeatModel::phase_change)
+                    {
+                      liquid_volume_integral +=
+                        (1. - filtered_phase_values[q]) *
+                        calculate_liquid_fraction(local_temperature_values[q],
+                                                  physical_properties_parameters
+                                                    .fluids[0]
+                                                    .phase_change_parameters) *
+                        fe_values_ht.JxW(q);
+                      volume_integral +=
+                        (1. - filtered_phase_values[q]) * fe_values_ht.JxW(q);
+                    }
+
+                  // Case of fluid 1 being a phase change
+                  if (physical_properties_parameters.fluids[1]
+                        .specific_heat_model ==
+                      Parameters::Material::SpecificHeatModel::phase_change)
+                    {
+                      liquid_volume_integral +=
+                        (filtered_phase_values[q]) *
+                        calculate_liquid_fraction(local_temperature_values[q],
+                                                  physical_properties_parameters
+                                                    .fluids[1]
+                                                    .phase_change_parameters) *
+                        fe_values_ht.JxW(q);
+                      volume_integral +=
+                        (filtered_phase_values[q]) * fe_values_ht.JxW(q);
+                    }
+                }
+            } // end loop on quadrature points
+        }
+    } // end loop on cell
+
+  volume_integral = Utilities::MPI::sum(volume_integral, mpi_communicator);
+  liquid_volume_integral =
+    Utilities::MPI::sum(liquid_volume_integral, mpi_communicator);
+  const double liquid_fraction = liquid_volume_integral / volume_integral;
+
+  // Console output
+  if (simulation_parameters.post_processing.verbosity ==
+      Parameters::Verbosity::verbose)
+    {
+      this->pcout << "Liquid fraction"
+                  << ": " << liquid_fraction << std::endl;
+    }
+
+  // Fill table
+  this->liquid_fraction_table.add_value(
+    "time", this->simulation_control->get_current_time());
+  this->liquid_fraction_table.add_value("liquid fraction", liquid_fraction);
+}
+
+template <int dim>
+void
+HeatTransfer<dim>::write_liquid_fraction()
+{
+  auto mpi_communicator = triangulation->get_communicator();
+
+  if (Utilities::MPI::this_mpi_process(mpi_communicator) == 0)
+    {
+      std::string filename =
+        simulation_parameters.simulation_control.output_folder +
+        simulation_parameters.post_processing.liquid_fraction_output_name +
+        ".dat";
+      std::ofstream output(filename.c_str());
+
+      this->liquid_fraction_table.write_text(output);
+    }
+}
+
+
 
 template <int dim>
 template <typename VectorType>
@@ -1507,10 +1844,12 @@ HeatTransfer<dim>::postprocess_heat_flux_on_bc(
                       // Gather h coefficient and T_inf
                       const double h_coefficient =
                         this->simulation_parameters.boundary_conditions_ht
-                          .h[vector_index];
+                          .h[vector_index]
+                          ->value(Point<dim>());
                       const double T_inf =
                         this->simulation_parameters.boundary_conditions_ht
-                          .Tinf[vector_index];
+                          .Tinf[vector_index]
+                          ->value(Point<dim>());
 
 
                       // Gather heat transfer information
@@ -1596,7 +1935,7 @@ HeatTransfer<dim>::postprocess_heat_flux_on_bc(
     }                     // end loop on cells
 
 
-  // Sum accross all cores
+  // Sum across all cores
   for (unsigned int i_bc = 0;
        i_bc < this->simulation_parameters.boundary_conditions_ht.size;
        ++i_bc)

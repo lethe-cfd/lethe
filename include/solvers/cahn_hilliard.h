@@ -58,11 +58,11 @@ template <int dim>
 class CahnHilliard : public AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>
 {
 public:
-  CahnHilliard<dim>(MultiphysicsInterface<dim>      *multiphysics_interface,
-                    const SimulationParameters<dim> &p_simulation_parameters,
-                    std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
-                                                       p_triangulation,
-                    std::shared_ptr<SimulationControl> p_simulation_control)
+  CahnHilliard(MultiphysicsInterface<dim>      *multiphysics_interface,
+               const SimulationParameters<dim> &p_simulation_parameters,
+               std::shared_ptr<parallel::DistributedTriangulationBase<dim>>
+                                                  p_triangulation,
+               std::shared_ptr<SimulationControl> p_simulation_control)
     : AuxiliaryPhysics<dim, TrilinosWrappers::MPI::Vector>(
         p_simulation_parameters.non_linear_solver.at(PhysicsID::cahn_hilliard))
     , multiphysics(multiphysics_interface)
@@ -251,6 +251,12 @@ public:
   set_initial_conditions() override;
 
   /**
+   * @brief Update non zero constraints if the boundary is time-dependent
+   */
+  void
+  update_boundary_conditions() override;
+
+  /**
    * @brief Call for the solution of the linear system of equation using a strategy appropriate
    * to the auxiliary physics
    *
@@ -389,6 +395,19 @@ private:
   void
   write_phase_statistics();
 
+  /**
+   * @brief Calculates the barycenter of fluid 1 and its velocity
+   *
+   * @param solution Cahn-Hilliard solution
+   *
+   * @param current_solution_fd Fluid dynamics solution
+   *
+   */
+  template <typename VectorType>
+  std::pair<Tensor<1, dim>, Tensor<1, dim>>
+  calculate_barycenter(const TrilinosWrappers::MPI::Vector &solution,
+                       const VectorType &current_solution_fd);
+
 
   MultiphysicsInterface<dim> *multiphysics;
 
@@ -439,6 +458,9 @@ private:
 
   // Assemblers for the matrix and rhs
   std::vector<std::shared_ptr<CahnHilliardAssemblerBase<dim>>> assemblers;
+
+  // Barycenter analysis
+  TableHandler barycenter_table;
 
   // Phase statistics table
   TableHandler statistics_table;
