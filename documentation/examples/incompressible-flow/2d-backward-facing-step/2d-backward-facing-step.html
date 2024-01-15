@@ -1,17 +1,17 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Transient Flow around an Ahmed Body" href="../2d-transient-flow-around-ahmed-body/2d-transient-flow-around-ahmed-body.html" /><link rel="prev" title="Taylor-Couette Flow" href="../2d-taylor-couette-flow/2d-taylor-couette-flow.html" />
 
-    <meta name="generator" content="sphinx-4.3.1, furo 2021.11.23"/>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>Flow past a Backward-Facing Step - Lethe documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -22,38 +22,38 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" />
-      <line x1="4" y1="6" x2="20" y2="6" />
-      <line x1="10" y1="12" x2="20" y2="12" />
-      <line x1="6" y1="18" x2="20" y2="18" />
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
     </svg>
   </symbol>
   <symbol id="svg-menu" viewBox="0 0 24 24">
     <title>Menu</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -62,14 +62,14 @@
   </symbol>
   <symbol id="svg-arrow-right" viewBox="0 0 24 24">
     <title>Expand</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
       <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   </symbol>
   <symbol id="svg-sun" viewBox="0 0 24 24">
     <title>Light mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -84,7 +84,7 @@
   </symbol>
   <symbol id="svg-moon" viewBox="0 0 24 24">
     <title>Dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
@@ -92,7 +92,7 @@
   </symbol>
   <symbol id="svg-sun-half" viewBox="0 0 24 24">
     <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <circle cx="12" cy="12" r="9" />
@@ -151,13 +151,13 @@
   <span class="sidebar-brand-text">Lethe  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/installation.html">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/installation.html">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation/regular_installation.html">Regular Installation on Linux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation/windows_wsl.html">Windows with WSL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation/apple_arm.html">Installation on Apple ARM (M1 or M2)</a></li>
@@ -168,8 +168,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Folder Structure of Lethe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../first_simulation.html">Launching Your First Simulation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../parameters/parameters.html">Parameters Guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/cfd/cfd.html">General, CFD and Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../parameters/parameters.html">Parameters Guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Parameters Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/cfd/cfd.html">General, CFD and Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of General, CFD and Multiphysics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/ale.html">Arbitrary Lagrangian-Eulerian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/analytical_solution.html">Analytical Solution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/boundary_conditions_cfd.html">Boundary Conditions - CFD</a></li>
@@ -199,7 +199,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/volume_of_fluid.html">Volume of Fluid (Multiphase Flow)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/boundary_conditions.html">Boundary Conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_mesh.html">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_wall.html">Floating Wall</a></li>
@@ -213,13 +213,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/timer.html">Timer</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html">Unresolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/unresolved-cfd-dem/unresolved-cfd-dem.html">Unresolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Unresolved CFD-DEM</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/unresolved-cfd-dem/cfd-dem.html">CFD-DEM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/unresolved-cfd-dem/void-fraction.html">Void Fraction</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../parameters/sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp-Immersed-Boundary</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/rpt/rpt.html">Radioactive Particle Tracking (RPT)</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/rpt/rpt.html">Radioactive Particle Tracking (RPT)</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Radioactive Particle Tracking (RPT)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/rpt/detector_parameters.html">Detector Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/rpt/fem_reconstruction.html">FEM Reconstruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/rpt/parameter_tuning.html">Parameter Tuning</a></li>
@@ -228,8 +228,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../../examples.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../incompressible-flow.html">Incompressible Flow</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../examples.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../incompressible-flow.html">Incompressible Flow</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Incompressible Flow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../2d-lid%E2%80%90driven-cavity-flow/lid%E2%80%90driven-cavity-flow.html">Lid-Driven Cavity Flow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../2d-flow-around-cylinder/2d-flow-around-cylinder.html">Flow around a Cylinder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../2d-taylor-couette-flow/2d-taylor-couette-flow.html">Taylor-Couette Flow</a></li>
@@ -244,8 +244,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../3d-nitsche-mixer-with-pbt-impeller/nitsche-mixer-with-pbt-impeller.html">Mixer with Pitched-Blade Turbine Impeller Using Nitsche Immersed Boundary</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/vof.html">VOF</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Multiphysics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/vof.html">VOF</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of VOF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/dam-break/dam-break.html">Dam-Break</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/rayleigh-taylor-instability/rayleigh-taylor-instability.html">Rayleigh-Taylor Instability</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/static-bubble/static-bubble.html">Static Bubble</a></li>
@@ -257,7 +257,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/air-bubble-compression/air-bubble-compression.html">Air Bubble Compression</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/heat-transfer.html">Heat Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/heat-transfer.html">Heat Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of Heat Transfer</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/rayleigh-benard-convection/rayleigh-benard-convection.html">Rayleigh-Bénard Convection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/stefan-problem/stefan-problem.html">Stefan Problem: Melting of a Solid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/warming-up-a-viscous-fluid/warming-up-a-viscous-fluid.html">Warming up a Viscous Fluid</a></li>
@@ -267,13 +267,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/concentric-heat-exchanger/concentric-heat-exchanger.html">Concentric Heat Exchanger</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/tracer.html">Tracer</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../multiphysics/tracer.html">Tracer</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Tracer</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../multiphysics/tracer-through-cad-junction/tracer-through-cad-junction.html">Tracer through CAD Junction in Simplex</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../dem/bouncing-particle/bouncing-particle.html">Bouncing Particle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../dem/oblique-wall-impact/oblique-wall-impact.html">Oblique Wall Impact</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../dem/packing-in-circle/packing-in-circle.html">Packing in Circle</a></li>
@@ -290,7 +290,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../dem/granular-mixer/granular-mixer.html">Granular Mixer</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../unresolved-cfd-dem/unresolved-cfd-dem.html">Unresolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../unresolved-cfd-dem/unresolved-cfd-dem.html">Unresolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of Unresolved CFD-DEM</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../unresolved-cfd-dem/cylindrical-packed-bed/cylindrical-packed-bed.html">Cylindrical Packed Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../unresolved-cfd-dem/gas-solid-fluidized-bed/gas-solid-fluidized-bed.html">Gas-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../unresolved-cfd-dem/gas-solid-spouted-bed/gas-solid-spouted-bed.html">Gas-Solid Spouted Bed</a></li>
@@ -298,13 +298,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../unresolved-cfd-dem/boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/resolved-cfd-dem.html">Resolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/resolved-cfd-dem.html">Resolved CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of Resolved CFD-DEM</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/sedimentation-1-particle/sedimentation-1-particle.html">Sedimentation of One Particle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/sedimentation-64-particles/sedimentation-64-particles.html">Sedimentation of 64 Particles</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/incompressible-flow.html">Incompressible Flow</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/incompressible-flow.html">Incompressible Flow</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of Incompressible Flow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/cylinder-with-sharp-interface/cylinder-with-sharp-interface.html">Flow around a Cylinder Using the Sharp Interface Method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/sphere-carreau-with-sharp-interface/sphere-carreau-with-sharp-interface.html">Non-Newtonian Flow past a Sphere</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/3d-composite-mixer-with-pbt-impeller/3d-composite-mixer-with-pbt-impeller.html">3D Mixer with Pitched-Blade Turbine Impeller Using Composite Sharp-Immersed Boundary</a></li>
@@ -313,13 +313,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/inclined-3d-composite-mixer-with-pbt-impeller/inclined-3d-composite-mixer-with-pbt-impeller.html">Inclined 3D Mixer with Pitched-Blade Turbine Impeller Using Composite Sharp-Immersed Boundary</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/geometry-definition.html">Geometry Definition</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/geometry-definition.html">Geometry Definition</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of Geometry Definition</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../sharp-immersed-boundary/simple-plane-model-from-composite/simple-plane-model-from-composite.html">Simple Plane Model From Composite</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../rpt/rpt.html">Radioactive Particle Tracking (RPT)</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rpt/rpt.html">Radioactive Particle Tracking (RPT)</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of Radioactive Particle Tracking (RPT)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../rpt/photon-count-calculation-in-a-cylindrical-vessel/photon-count-calculation-in-a-cylindrical-vessel.html">Photon Count Calculation in a Cylindrical Vessel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../rpt/tuning-parameters-with-nomad/tuning-parameters-with-nomad.html">Tuning Count Calculation Model Parameters with NOMAD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../rpt/particle-fem-reconstruction/particle-fem-reconstruction.html">Particle FEM Reconstruction</a></li>
@@ -327,8 +327,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../theory/theory.html">Theory</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../theory/fluid_dynamics/fluid_dynamics.html">Fluid Dynamics</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../theory/theory.html">Theory</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of Theory</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../theory/fluid_dynamics/fluid_dynamics.html">Fluid Dynamics</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Fluid Dynamics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../theory/fluid_dynamics/navier-stokes.html">The Incompressible Navier-Stokes Equations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../theory/fluid_dynamics/fem_formulation.html">Origin of the Finite Element Formulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../theory/fluid_dynamics/stabilization.html">On the Need for Stabilization</a></li>
@@ -336,7 +336,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../theory/fluid_dynamics/rheology.html">Rheology and Non-Newtonian Fluids</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../theory/multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../theory/multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle navigation of Multiphysics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../theory/multiphysics/vof.html">The Volume of Fluid (VOF) Method</a></li>
 </ul>
 </li>
@@ -344,7 +344,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../theory/unresolved_cfd-dem/unresolved_cfd-dem.html">Unresolved CFD-DEM Coupling</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools/tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools/tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../tools/updating-test-results.html">Updating Test Results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../tools/gmsh/gmsh.html">Introduction on How to Use GMSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../tools/automatic_launch/automatic_launch.html">How to Automatically Create and Launch Lethe Simulations</a></li>
@@ -359,6 +359,7 @@
 
 </div>
 </div>
+
       </div>
       
     </div>
@@ -366,8 +367,15 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -382,9 +390,9 @@
         </div>
         <article role="main">
           <section id="flow-past-a-backward-facing-step">
-<h1>Flow past a Backward-Facing Step<a class="headerlink" href="#flow-past-a-backward-facing-step" title="Permalink to this headline">¶</a></h1>
+<h1>Flow past a Backward-Facing Step<a class="headerlink" href="#flow-past-a-backward-facing-step" title="Link to this heading">#</a></h1>
 <section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Solver: <code class="docutils literal notranslate"><span class="pre">lethe-fluid</span></code> (with Q1-Q1)</p></li>
 <li><p>Steady and pseudo steady state solution</p></li>
@@ -393,7 +401,7 @@
 </ul>
 </section>
 <section id="files-used-in-this-example">
-<h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Permalink to this headline">¶</a></h2>
+<h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Link to this heading">#</a></h2>
 <p>All files mentioned below are located in the example’s folder (<code class="docutils literal notranslate"><span class="pre">examples/incompressible-flow/2d-backward-facing-step</span></code>).</p>
 <ul class="simple">
 <li><p>Geometry file: <code class="docutils literal notranslate"><span class="pre">backward-facing-step.geo</span></code></p></li>
@@ -405,16 +413,16 @@
 </ul>
 </section>
 <section id="description-of-the-case">
-<h2>Description of the Case<a class="headerlink" href="#description-of-the-case" title="Permalink to this headline">¶</a></h2>
+<h2>Description of the Case<a class="headerlink" href="#description-of-the-case" title="Link to this heading">#</a></h2>
 <p>In this example, a bidimensional flow goes past a backward-facing step. The flow enters from the left inlet and separates from the bottom wall at the step, and then reattaches to it further downstream at a distance <span class="math notranslate nohighlight">\(x_r\)</span> from the step.</p>
-<img alt="../../../_images/backward-facing-step-description.png" src="../../../_images/backward-facing-step-description.png"/>
+<img alt="../../../_images/backward-facing-step-description.png" src="../../../_images/backward-facing-step-description.png" />
 <p>The backward-facing step problem is a classical computational fluid dynamics problem. The fact that it features a non-trivial solution while maintaining simple geometry and boundary conditions makes this problem a good candidate for validation purposes as well as to test the robustness of a given CFD method. First, the basic parameters used to solve the backward-facing step problem will be exposed. A solution to several Reynolds numbers (from <span class="math notranslate nohighlight">\(Re = 100\)</span> to <span class="math notranslate nohighlight">\(Re =1000\)</span>) will then be presented and compared to experimental and numerical data. A mesh adaptation and numerical error analysis will be carried on.</p>
 </section>
 <section id="parameter-file">
-<h2>Parameter File<a class="headerlink" href="#parameter-file" title="Permalink to this headline">¶</a></h2>
+<h2>Parameter File<a class="headerlink" href="#parameter-file" title="Link to this heading">#</a></h2>
 <p>The following subsections show the different parameters used in the simulations. While they all remain more or less the same throughout the various cases, some of them change as the Reynolds number is increased.</p>
 <section id="simulation-control">
-<h3>Simulation Control<a class="headerlink" href="#simulation-control" title="Permalink to this headline">¶</a></h3>
+<h3>Simulation Control<a class="headerlink" href="#simulation-control" title="Link to this heading">#</a></h3>
 <p>For <span class="math notranslate nohighlight">\(Re &lt; 700\)</span>, the solution is stable enough to be computed in steady state by setting <code class="docutils literal notranslate"><span class="pre">method</span></code> to <code class="docutils literal notranslate"><span class="pre">steady</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection simulation control
   set method            = steady
@@ -446,14 +454,18 @@ end
 <p><code class="docutils literal notranslate"><span class="pre">stop</span> <span class="pre">tolerance</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">step</span></code>, <code class="docutils literal notranslate"><span class="pre">adapt</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">cfl</span></code> and <code class="docutils literal notranslate"><span class="pre">adaptive</span> <span class="pre">time</span> <span class="pre">step</span> <span class="pre">scaling</span></code> are parameters that control the pseudo-steady simulation. In this case, choosing <code class="docutils literal notranslate"><span class="pre">stop</span> <span class="pre">tolerance</span> <span class="pre">=</span> <span class="pre">1e-6</span></code> ensures that the simulation reaches steady state while keeping the number of time iterations to a minimum. Moreover, one can notice a very high value for the <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">cfl</span></code>; however, since it is used with <code class="docutils literal notranslate"><span class="pre">adaptative</span> <span class="pre">time</span> <span class="pre">step</span> <span class="pre">scaling</span></code> (and since <em>Lethe</em> is an implicit solver), even a very high value of the CFL does not compromise the results.</p>
 </section>
 <section id="physical-properties">
-<h3>Physical Properties<a class="headerlink" href="#physical-properties" title="Permalink to this headline">¶</a></h3>
+<h3>Physical Properties<a class="headerlink" href="#physical-properties" title="Link to this heading">#</a></h3>
 <p>In this problem, the Reynolds number is defined as follows:</p>
-<div class="math-wrapper"><div class="math notranslate nohighlight">
-\[Re_{D_h} = \frac{u D_h}{\nu} = \frac{2uh}{\nu}\]</div></div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[Re_{D_h} = \frac{u D_h}{\nu} = \frac{2uh}{\nu}\]</div>
+</div>
 <p>where <span class="math notranslate nohighlight">\(h\)</span> is the step height, <span class="math notranslate nohighlight">\(D_h = 2h\)</span> is the hydraulic diameter and <span class="math notranslate nohighlight">\(\nu\)</span> the kinematic viscosity.</p>
 <p>In addition, unit values of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(h\)</span> are chosen in the goal of obtaining an adimensional problem.</p>
-<div class="math-wrapper"><div class="math notranslate nohighlight">
-\[Re_{D_h} = f(\nu) = \frac{2}{\nu}\]</div></div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[Re_{D_h} = f(\nu) = \frac{2}{\nu}\]</div>
+</div>
 <p>Consequently, the physical properties are defined as follows :</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection physical properties
   set number of fluids = 1
@@ -469,7 +481,7 @@ end
 </div>
 </section>
 <section id="mesh">
-<h3>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h3>
+<h3>Mesh<a class="headerlink" href="#mesh" title="Link to this heading">#</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection mesh
   set type      = gmsh
   set file name = ../backward-facing-step.msh
@@ -479,7 +491,7 @@ end
 <p>The mesh features quadrilateral elements as well as unit step and inlet heights (<span class="math notranslate nohighlight">\(h_{in}=h=1\)</span>). In that direction, the expansion ratio has been set to <span class="math notranslate nohighlight">\(\beta=\frac{h_{out}}{h_{in}}=2\)</span> throughout the entirety of the simulations. Also, the inlet and outlet lengths should be long enough that they allow the formation of a fully developed flow. Finally, since a <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> mesh file is used, the initial mesh should be as coarse as possible, since these cells cannot be coarsened with the mesh adaptation algorithm.</p>
 </section>
 <section id="mesh-adaptation">
-<h3>Mesh Adaptation<a class="headerlink" href="#mesh-adaptation" title="Permalink to this headline">¶</a></h3>
+<h3>Mesh Adaptation<a class="headerlink" href="#mesh-adaptation" title="Link to this heading">#</a></h3>
 <p>In this example, the mesh adaptation algorithm is based on the Kelly error estimator applied on the velocity variable. This strategy is suitable here, since a fine mesh is required in the vicinity of the step while a coarser mesh is acceptable far way from it.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection mesh adaptation
   set variable            = velocity
@@ -491,14 +503,14 @@ end
 <p>For higher Reynolds number with adjoint time stepping, <code class="docutils literal notranslate"><span class="pre">frequency</span> <span class="pre">=</span> <span class="pre">5</span></code> can be added to the above parameters in order to obtain a reasonable number of elements throughout the simulation. In this particular case, the mesh would be refined at every fifth time iteration.</p>
 <p>Here is an example of mesh adaptation using the Kelly error estimator for <span class="math notranslate nohighlight">\(Re = 100\)</span>:</p>
 <p>Initial coarse mesh:</p>
-<img alt="../../../_images/0th-mesh.png" src="../../../_images/0th-mesh.png"/>
+<img alt="../../../_images/0th-mesh.png" src="../../../_images/0th-mesh.png" />
 <p>After four refinement steps:</p>
-<img alt="../../../_images/4th-mesh.png" src="../../../_images/4th-mesh.png"/>
+<img alt="../../../_images/4th-mesh.png" src="../../../_images/4th-mesh.png" />
 <p>After eight refinement steps:</p>
-<img alt="../../../_images/8th-mesh.png" src="../../../_images/8th-mesh.png"/>
+<img alt="../../../_images/8th-mesh.png" src="../../../_images/8th-mesh.png" />
 </section>
 <section id="fem">
-<h3>FEM<a class="headerlink" href="#fem" title="Permalink to this headline">¶</a></h3>
+<h3>FEM<a class="headerlink" href="#fem" title="Link to this heading">#</a></h3>
 <p>In this example, the interpolation order has been set to one for both velocity and pressure.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection FEM
   set pressure order = 1
@@ -508,7 +520,7 @@ end
 </div>
 </section>
 <section id="boundary-conditions">
-<h3>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h3>
+<h3>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h3>
 <p>As presented in the description of the case (see figure above), three different boundary conditions (or boundary IDs) are necessary to define this particular problem.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions
   set number         = 2
@@ -534,7 +546,7 @@ end
 <p>First, <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">bc</span> <span class="pre">0</span></code> represents a Dirichlet boundary condition (or <code class="docutils literal notranslate"><span class="pre">noslip</span></code>) at each wall where <span class="math notranslate nohighlight">\(\mathbf{u}=\mathbf{0}.\)</span> The boundary condition at the inlet is represented as a uniform unit flow such that <span class="math notranslate nohighlight">\([u,v,w] = [1,0,0]\)</span>. In that case, the parameter <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">function</span></code> is used in <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">bc</span> <span class="pre">1</span></code>. With this parameter, <span class="math notranslate nohighlight">\(u\)</span>, <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> can be set numerically and independently. The outflow boundary condition is considered a natural boundary condition (also known as the <em>do nothing</em> boundary condition) and it is used since we can consider the outlet to be very far from the step. In fact, this condition specifies <span class="math notranslate nohighlight">\(p \rightarrow 0\)</span> or in other words, that the traction on the fluid equals zero. In <em>Lethe</em>, this particular boundary condition is automatically loaded when nothing is assigned to a specific ID  (in our case, there is none at the outlet).</p>
 </section>
 <section id="non-linear-solver">
-<h3>Non-linear Solver<a class="headerlink" href="#non-linear-solver" title="Permalink to this headline">¶</a></h3>
+<h3>Non-linear Solver<a class="headerlink" href="#non-linear-solver" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">newton</span></code> non-linear solver is used with a medium <code class="docutils literal notranslate"><span class="pre">tolerance</span></code>, since convergence can be hard to obtain for high Reynolds number.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection non-linear solver
   subsection fluid dynamics
@@ -547,7 +559,7 @@ end
 </div>
 </section>
 <section id="linear-solver">
-<h3>Linear Solver<a class="headerlink" href="#linear-solver" title="Permalink to this headline">¶</a></h3>
+<h3>Linear Solver<a class="headerlink" href="#linear-solver" title="Link to this heading">#</a></h3>
 <p>For <span class="math notranslate nohighlight">\(Re &lt; 700\)</span>, standard parameters are suitable to achieve convergence.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection linear solver
   subsection fluid dynamics
@@ -588,7 +600,7 @@ end
 </section>
 </section>
 <section id="running-the-simulations">
-<h2>Running the Simulations<a class="headerlink" href="#running-the-simulations" title="Permalink to this headline">¶</a></h2>
+<h2>Running the Simulations<a class="headerlink" href="#running-the-simulations" title="Link to this heading">#</a></h2>
 <p>The simulation can be executed using the following command (assuming that the solver’s location is in your PATH environment variable):</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>lethe-fluid 2D-backward-facing-step-steady.prm
 </pre></div>
@@ -600,44 +612,42 @@ end
 <p>where <code class="docutils literal notranslate"><span class="pre">j</span></code> is the number of CPUs used for the computations.</p>
 </section>
 <section id="results-and-discussion">
-<h2>Results and Discussion<a class="headerlink" href="#results-and-discussion" title="Permalink to this headline">¶</a></h2>
+<h2>Results and Discussion<a class="headerlink" href="#results-and-discussion" title="Link to this heading">#</a></h2>
 <section id="low-reynolds-number-re-100">
-<h3>Low Reynolds Number (<span class="math notranslate nohighlight">\(Re=100\)</span>)<a class="headerlink" href="#low-reynolds-number-re-100" title="Permalink to this headline">¶</a></h3>
+<h3>Low Reynolds Number (<span class="math notranslate nohighlight">\(Re=100\)</span>)<a class="headerlink" href="#low-reynolds-number-re-100" title="Link to this heading">#</a></h3>
 <p>After opening the file <code class="docutils literal notranslate"><span class="pre">backward_facing_step_output.pvd</span></code> with Paraview, the following results are obtained.</p>
 <p>For <span class="math notranslate nohighlight">\(Re = 100\)</span> :</p>
-<img alt="../../../_images/Reynolds100.png" src="../../../_images/Reynolds100.png"/>
-<img alt="../../../_images/Reynolds100-zoom.png" src="../../../_images/Reynolds100-zoom.png"/>
+<img alt="../../../_images/Reynolds100.png" src="../../../_images/Reynolds100.png" />
+<img alt="../../../_images/Reynolds100-zoom.png" src="../../../_images/Reynolds100-zoom.png" />
 <p>It is possible to notice that there seems to be a lot of diffusion past the step. This phenomenon is coherent with what is known of the Navier-Stokes equations: the diffusivity term is inversely proportional to the Reynolds number. Most importantly, a small eddy adjacent to the step is clearly observable. It is also visually noticeable that <span class="math notranslate nohighlight">\(x_r \simeq 2.9\)</span> (<span class="math notranslate nohighlight">\(x \simeq 17.9\)</span>). With the Python module <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, raw simulation data can be extracted (from the .vtu files) and this data can be used to compute <span class="math notranslate nohighlight">\(x_r\)</span> numerically. This can be calculated with the following equation.</p>
-<div class="math-wrapper"><div class="math notranslate nohighlight">
-\[\left[ \frac{du}{dy} \right]_{y=0} = 0\]</div></div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\left[ \frac{du}{dy} \right]_{y=0} = 0\]</div>
+</div>
 <p>which can be resolved with a bisection algorithm or with any other appropriate numerical approach. By doing this step for each successively refined mesh (10 meshes as specified by <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">number</span> <span class="pre">mesh</span> <span class="pre">adapt</span></code> in the simulation control section), a mesh refinement analysis can be achieved.</p>
-<img alt="../../../_images/Reynolds100-mesh-refinement.png" src="../../../_images/Reynolds100-mesh-refinement.png"/>
+<img alt="../../../_images/Reynolds100-mesh-refinement.png" src="../../../_images/Reynolds100-mesh-refinement.png" />
 <p>where the final value of <span class="math notranslate nohighlight">\(x_r\)</span> is <span class="math notranslate nohighlight">\(2.893\)</span>. We notice from the graph that convergence is obtained quite quickly. In addition, the following figure illustrates the evolution of the relative error as the number of elements increases.</p>
-<img alt="../../../_images/Reynolds100-error-analysis.png" src="../../../_images/Reynolds100-error-analysis.png"/>
+<img alt="../../../_images/Reynolds100-error-analysis.png" src="../../../_images/Reynolds100-error-analysis.png" />
 <p>The reference value used in the error analysis is taken from Erturk (2008) <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a>.</p>
 </section>
 <section id="higher-reynolds-number-re-1000">
-<h3>Higher Reynolds Number (<span class="math notranslate nohighlight">\(Re=1000\)</span>)<a class="headerlink" href="#higher-reynolds-number-re-1000" title="Permalink to this headline">¶</a></h3>
+<h3>Higher Reynolds Number (<span class="math notranslate nohighlight">\(Re=1000\)</span>)<a class="headerlink" href="#higher-reynolds-number-re-1000" title="Link to this heading">#</a></h3>
 <p>In a similar way as we did in the last subsection, the solution for <span class="math notranslate nohighlight">\(Re = 1000\)</span> can be obtained.</p>
 <p>For <span class="math notranslate nohighlight">\(Re = 1000\)</span> :</p>
-<img alt="../../../_images/Reynolds1000.png" src="../../../_images/Reynolds1000.png"/>
-<img alt="../../../_images/Reynolds1000-zoom.png" src="../../../_images/Reynolds1000-zoom.png"/>
+<img alt="../../../_images/Reynolds1000.png" src="../../../_images/Reynolds1000.png" />
+<img alt="../../../_images/Reynolds1000-zoom.png" src="../../../_images/Reynolds1000-zoom.png" />
 <p>On the contrary of what we saw in the <span class="math notranslate nohighlight">\(Re = 100\)</span> case, it is clearly noticeable that there is much less diffusion within the flow. This is once more coherent with the theory. The same eddy as mentioned in the previous section is still present, but grows as the Reynolds number is increased. Furthermore, a second principal eddy can be seen adjacent to the top wall in the range <span class="math notranslate nohighlight">\(x \in [25,37]\)</span>. This “oscillating flow” characteristic is expected of a higher Reynolds flow such as this one. Finally, the <span class="math notranslate nohighlight">\(x_r\)</span> variable is evaluated visually at <span class="math notranslate nohighlight">\(x_r \simeq 12.5\)</span> (<span class="math notranslate nohighlight">\(x \simeq 27.5\)</span>). By using the same Python code as before, we obtain <span class="math notranslate nohighlight">\(x_r = 12.637\)</span> as a precise numerical result.</p>
 </section>
 </section>
 <section id="validation-and-comparison">
-<h2>Validation and Comparison<a class="headerlink" href="#validation-and-comparison" title="Permalink to this headline">¶</a></h2>
+<h2>Validation and Comparison<a class="headerlink" href="#validation-and-comparison" title="Link to this heading">#</a></h2>
 <section id="reattachment-length">
-<h3>Reattachment Length<a class="headerlink" href="#reattachment-length" title="Permalink to this headline">¶</a></h3>
+<h3>Reattachment Length<a class="headerlink" href="#reattachment-length" title="Link to this heading">#</a></h3>
 <p>In this section, the solutions obtained with Lethe are compared with data that can be found in the scientific literature (Erturk (2008) <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a>, Armaly and al. (1983) <a class="reference external" href="https://doi.org/10.1017/S0022112083002839">[2]</a> and Velivelli and Bryden (2015) <a class="reference external" href="https://doi.org/10.1016/j.advengsoft.2014.11.006">[3]</a>). Several studies include datasets of <span class="math notranslate nohighlight">\(x_r/h = f(Re)\)</span> (reattachment length) either experimentally or numerically. The next figure illustrates some of them in comparison with <em>Lethe</em>.</p>
-<img alt="../../../_images/xr-comparison.png" src="../../../_images/xr-comparison.png"/>
+<img alt="../../../_images/xr-comparison.png" src="../../../_images/xr-comparison.png" />
 <p>First, the results provided by Lethe are identical or so to all of the three selected studies for low Reynolds numbers (<span class="math notranslate nohighlight">\(Re \leq 400\)</span>). After that point, both results form <em>Lethe</em> and from Erturk (2008) <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a> diverge from the experimental data of Armaly and al. (1983) <a class="reference external" href="https://doi.org/10.1017/S0022112083002839">[2]</a>. According to <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a>, this error is due to 3D effects that are more potent as the flow becomes more and more turbulent. Furthermore, there is also a less significant but clearly noticeable error between <em>Lethe</em> and Erturk (2008) <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a>: the fact that certain tolerances have been set higher for higher Reynolds number cases might have underestimated the reattachment length. Also, first order elements have been used throughout the whole simulation process. Using second order elements for velocity, for instance, could yield better results for higher Reynolds numbers, however, at a higher computational cost. The following table illustrates the error at <span class="math notranslate nohighlight">\(Re = 600\)</span> for first and second order velocity elements.</p>
-<div class="table-wrapper"><table class="docutils align-default">
-<colgroup>
-<col style="width: 32%"/>
-<col style="width: 34%"/>
-<col style="width: 34%"/>
-</colgroup>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Order</p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(x_r/h\)</span></p></th>
@@ -658,20 +668,21 @@ end
 <td><p>N/A</p></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 </section>
 <section id="velocity-distribution">
-<h3>Velocity Distribution<a class="headerlink" href="#velocity-distribution" title="Permalink to this headline">¶</a></h3>
+<h3>Velocity Distribution<a class="headerlink" href="#velocity-distribution" title="Link to this heading">#</a></h3>
 <p>To validate the quality of the mesh/geometry as well, it is interesting to compare the obtained velocity distributions with analytical data. The following figures illustrate the velocity distributions at the outlet (right wall) in comparison to the analytical solution.</p>
 <p>For <span class="math notranslate nohighlight">\(Re = 100\)</span>:</p>
-<img alt="../../../_images/Reynolds100-poiseuille.png" src="../../../_images/Reynolds100-poiseuille.png"/>
+<img alt="../../../_images/Reynolds100-poiseuille.png" src="../../../_images/Reynolds100-poiseuille.png" />
 <p>For <span class="math notranslate nohighlight">\(Re = 1000\)</span>:</p>
-<img alt="../../../_images/Reynolds1000-poiseuille.png" src="../../../_images/Reynolds1000-poiseuille.png"/>
+<img alt="../../../_images/Reynolds1000-poiseuille.png" src="../../../_images/Reynolds1000-poiseuille.png" />
 <p>For <span class="math notranslate nohighlight">\(Re = 1000\)</span>, an error in the velocity profile is visually noticeable. We can assume that the outlet is not long enough for the flow to be fully developed at its end, meaning that there is still traction on the fluid. Consequently, increasing this length is essential in order to be able to validate cases where <span class="math notranslate nohighlight">\(Re \geq 1000\)</span>.</p>
 </section>
 </section>
 <section id="possibilities-for-extension">
-<h2>Possibilities for Extension<a class="headerlink" href="#possibilities-for-extension" title="Permalink to this headline">¶</a></h2>
+<h2>Possibilities for Extension<a class="headerlink" href="#possibilities-for-extension" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Validate with a 3D geometry/mesh</strong>: Since experimental data takes into account 3D effects, it would be interesting to compare numerical data to experimental results.</p></li>
 <li><p><strong>Use second order elements for higher Reynolds simulations</strong>: Using second order elements can improve accuracy for more turbulent flows. Also, it can be very powerful in this particular example, since quadratic elements can theoretically interpolate <em>Poiseuille</em> flows with genuinely no numerical error. Consequently, the method can yield incredibly precise results while maintaining a very coarse mesh far from the step.</p></li>
@@ -679,7 +690,7 @@ end
 </ul>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://doi.org/10.1016/j.compfluid.2007.09.003">[1]</a> E. Erturk, “Numerical solutions of 2-D steady incompressible flow over a backward-facing step, Part I: High Reynolds number solutions,” <em>Comput. Fluids</em>, vol. 37, no. 6, pp. 633–655, Jul. 2008, doi: 10.1016/j.compfluid.2007.09.003.</p>
 <p><a class="reference external" href="https://doi.org/10.1017/S0022112083002839">[2]</a> B. F. Armaly, F. Durst, J. C. F. Pereira, and B. Schönung, “Experimental and theoretical investigation of backward-facing step flow,” <em>J. Fluid Mech.</em>, vol. 127, pp. 473–496, Feb. 1983, doi: 10.1017/S0022112083002839.</p>
 <p><a class="reference external" href="https://doi.org/10.1016/j.advengsoft.2014.11.006">[3]</a> A. C. Velivelli and K. M. Bryden, “Domain decomposition based coupling between the lattice Boltzmann method and traditional CFD methods – Part II: Numerical solution to the backward facing step flow,” <em>Adv. Eng. Softw.</em>, vol. 82, pp. 65–74, Apr. 2015, doi: 10.1016/j.advengsoft.2014.11.006.</p>
@@ -698,10 +709,10 @@ end
                 </div>
                 <div class="title">Transient Flow around an Ahmed Body</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="../2d-taylor-couette-flow/2d-taylor-couette-flow.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -712,15 +723,19 @@ end
               </div>
             </a>
         </div>
-
-        <div class="related-information">
-              Copyright &#169; 2021, Lethe |
-          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../../_sources/examples/incompressible-flow/2d-backward-facing-step/2d-backward-facing-step.rst.txt"
-               rel="nofollow">
-              Show Source
-            </a>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, Lethe
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
         </div>
         
       </footer>
@@ -731,7 +746,7 @@ end
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">
@@ -776,13 +791,12 @@ end
       
     </aside>
   </div>
-</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts/furo.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=7cec7674"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
