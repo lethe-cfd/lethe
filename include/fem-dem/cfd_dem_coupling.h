@@ -212,6 +212,16 @@ private:
   void
   read_checkpoint() override;
 
+  /**
+   * @brief print_particles_summary
+   * Prints the number of particles in assorting order
+   * Note: This function is currently not implemented for parallel, meaning the
+   * order may not be correct in multicore. This is for performance reason since
+   * the print of the summary is called each CFD time step. A synchronization of
+   * processors is required and causes a significant slow down of the
+   * application test. If this option is required at some point, see the
+   * function print_xyz() in DEM section to upgrade this function.
+   */
   void
   print_particles_summary();
 

@@ -11,7 +11,7 @@ subsection simulation control
   set method               = bdf1
   set number mesh adapt    = 0
   set output name          = cfd_dem
-  set output frequency     = 1000000
+  set output frequency     = 1
   set startup time scaling = 0.6
   set time end             = 0.05
   set time step            = 1e-3
@@ -53,7 +53,7 @@ subsection lagrangian physical properties
   subsection particle type 0
     set size distribution type            = uniform
     set diameter                          = 0.01
-    set number of particles               = 1
+    set number of particles               = 2
     set density particles                 = 500
     set young modulus particles           = 1e7
     set poisson ratio particles           = 0.33
@@ -172,7 +172,7 @@ subsection model parameters
   set particle particle contact force method = hertz_mindlin_limit_overlap
   set particle wall contact force method     = nonlinear
   set integration method                     = velocity_verlet
-  set rolling resistance torque method       = constant_resistance
+  set rolling resistance torque method       = no_resistance
 end
 
 #---------------------------------------------------
