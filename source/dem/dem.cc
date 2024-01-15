@@ -618,7 +618,7 @@ DEMSolver<dim>::check_load_balance_with_disabled_contacts()
   // Check if load balance step from load balance frequency
   bool load_balance_step =
     (simulation_control->get_step_number() %
-       parameters.model_parameters.load_balance_frequency ==
+       parameters.model_parameters.dynamic_load_balance_check_frequency ==
      0);
 
   if (load_balance_step || checkpoint_step)
