@@ -92,6 +92,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a5ae0cc40541a83743f45861578bea031"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031">DarcySourceType</a> { <a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031a334c4a4c42fdb79d7ebc3e73b517e6f8">none</a>
+, <a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069">phase_change</a>
+ }</td></tr>
+<tr class="separator:a5ae0cc40541a83743f45861578bea031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d594539cc118d4406cc7bcb298d2ca2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2">RotatingFrameType</a> { <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a334c4a4c42fdb79d7ebc3e73b517e6f8">none</a>
 , <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92">srf</a>
  }</td></tr>
@@ -117,12 +121,42 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a83344f59cfb0afd497273651b1f80891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88ff5629eb12f5f137ff7b34e537439"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1VelocitySource.html#ad88ff5629eb12f5f137ff7b34e537439">omega_z</a></td></tr>
 <tr class="separator:ad88ff5629eb12f5f137ff7b34e537439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d47f52bb3c7a4fb87c7fa7765564687"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031">DarcySourceType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1VelocitySource.html#a6d47f52bb3c7a4fb87c7fa7765564687">darcy_type</a></td></tr>
+<tr class="separator:a6d47f52bb3c7a4fb87c7fa7765564687"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structParameters_1_1VelocitySource.html" title="VelocitySource - Adds velocity-dependent source term to the Navier-Stokes equations with the appropri...">VelocitySource</a> - Adds velocity-dependent source term to the Navier-Stokes equations with the appropriate jacobian matrix. Currently only a change to a rotating frame is supported, but additional terms such as a Darcy force or similar could be easily added. </p>
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01266">1266</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01272">1272</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a5ae0cc40541a83743f45861578bea031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae0cc40541a83743f45861578bea031">&#9670;&nbsp;</a></span>DarcySourceType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031">Parameters::VelocitySource::DarcySourceType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5ae0cc40541a83743f45861578bea031a334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069"></a>phase_change&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01274">1274</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+
+</div>
+</div>
 <a id="a3d594539cc118d4406cc7bcb298d2ca2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d594539cc118d4406cc7bcb298d2ca2">&#9670;&nbsp;</a></span>RotatingFrameType</h2>
 
@@ -147,7 +181,7 @@ Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92"></a>srf&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01268">1268</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01281">1281</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +210,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02603">2603</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02617">2617</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
 
 </div>
 </div>
@@ -196,13 +230,29 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02638">2638</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02658">2658</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a334c4a4c42fdb79d7ebc3e73b517e6f8">none</a>, <a class="el" href="parameters_8h_source.html#l01274">omega_x</a>, <a class="el" href="parameters_8h_source.html#l01275">omega_y</a>, <a class="el" href="parameters_8h_source.html#l01276">omega_z</a>, <a class="el" href="parameters_8h_source.html#l01273">rotating_frame_type</a>, and <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92">srf</a>.</p>
+<p class="reference">References <a class="el" href="parameters_8h_source.html#l01295">darcy_type</a>, <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a334c4a4c42fdb79d7ebc3e73b517e6f8">none</a>, <a class="el" href="parameters_8h_source.html#l01288">omega_x</a>, <a class="el" href="parameters_8h_source.html#l01289">omega_y</a>, <a class="el" href="parameters_8h_source.html#l01290">omega_z</a>, <a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069">phase_change</a>, <a class="el" href="parameters_8h_source.html#l01287">rotating_frame_type</a>, and <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92">srf</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6d47f52bb3c7a4fb87c7fa7765564687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d47f52bb3c7a4fb87c7fa7765564687">&#9670;&nbsp;</a></span>darcy_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031">DarcySourceType</a> Parameters::VelocitySource::darcy_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01295">1295</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+
+</div>
+</div>
 <a id="af6e44df580d5117c9104941e7ebc9b31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6e44df580d5117c9104941e7ebc9b31">&#9670;&nbsp;</a></span>omega_x</h2>
 
@@ -215,7 +265,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01274">1274</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01288">1288</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -231,7 +281,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01275">1275</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01289">1289</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +297,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01276">1276</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01290">1290</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -263,7 +313,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01273">1273</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01287">1287</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>

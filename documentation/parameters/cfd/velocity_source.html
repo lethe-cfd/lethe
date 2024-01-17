@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -383,7 +383,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -391,8 +391,10 @@
         <article role="main">
           <section id="velocity-source">
 <h1>Velocity Source<a class="headerlink" href="#velocity-source" title="Link to this heading">#</a></h1>
-<p>This subsection allows you to defined velocity-dependant source term. At the moment, this used to solve a problems in a Lagrangian reference frame for which the Coriolis and centrifugal forces must be added.</p>
-<p>The default values are:</p>
+<p>This subsection allows you to define velocity-dependent source terms. Two families of velocity source terms are supported. They enable the simulation of  problems in a Lagrangian reference frame for which the Coriolis and centrifugal forces must be added or of problems including porous media.</p>
+<section id="rotating-frame">
+<h2>Rotating Frame<a class="headerlink" href="#rotating-frame" title="Link to this heading">#</a></h2>
+<p>Rotating frame simulations use the following parameters:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
   set rotating frame type    = none
   set omega_x                = 0
@@ -407,6 +409,19 @@ end
 <li><p>The <code class="docutils literal notranslate"><span class="pre">omega_y</span></code> parameter is a double representing the <span class="math notranslate nohighlight">\(y\)</span> component of the angular velocity of the reference frame.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">omega_z</span></code> parameter is a double representing the <span class="math notranslate nohighlight">\(z\)</span> component of the angular velocity of the reference frame.</p></li>
 </ul>
+</section>
+<section id="darcy-penalization">
+<h2>Darcy Penalization<a class="headerlink" href="#darcy-penalization" title="Link to this heading">#</a></h2>
+<p>A Darcy-like source term can be added to the simulation using the following parmeters:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
+  set Darcy type = none
+end
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">type</span></code> parameter specifies the type of Darcy penalization term to be applied to the Navier-Stokes equations. The options are <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">phase_change</span></code>. The <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> model uses the values of the <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">liquid</span></code>  and <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">solid</span></code> set-up within the <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">change</span></code> subsection of the <a class="reference internal" href="physical_properties.html"><span class="doc">Physical Properties</span></a>.</p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -452,8 +467,28 @@ end
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Velocity Source</a><ul>
+<li><a class="reference internal" href="#rotating-frame">Rotating Frame</a></li>
+<li><a class="reference internal" href="#darcy-penalization">Darcy Penalization</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

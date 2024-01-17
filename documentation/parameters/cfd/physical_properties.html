@@ -718,8 +718,8 @@ end
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_l\)</span></p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\nu_{l}\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\nu_{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\nu_{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\nu_{s}\)</span></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -842,10 +842,10 @@ end
   set solidus temperature  = 0
 
   # Thermal expansion of the liquid phase
-  set thermal expansion liquid = 0
+  set thermal expansion liquid = 1
 
   # Thermal expansion of the solid phase
-  set thermal expansion solid  = 1
+  set thermal expansion solid  = 0
 end
 </pre></div>
 </div>
