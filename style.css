@@ -160,7 +160,7 @@ iframe {
 	margin: auto;
 	background-color: #CCCCCC;
 	background-size: cover;
-	padding: 10px;
+	padding: 15px 10px;
 	color: #303030;
 }
 
@@ -185,7 +185,7 @@ iframe {
 	margin: auto;
 	background-color: #B9D8DE;
 	background-size: cover;
-	padding: 10px;
+	padding: 15px 10px;
 	color: #31587A;
 }
 
@@ -244,9 +244,11 @@ iframe {
 
 /* The dots/bullets/indicators */
 .dot {
+	position: relative;
+	bottom: -10px;
 	height: 15px;
 	width: 15px;
-	margin: 0 2px;
+	margin: 2px;
 	background-color: #F9F9FB;
 	border-radius: 50%;
 	border: 1px #777777 solid;
@@ -328,7 +330,7 @@ iframe {
 		right: auto;
 		left: 45%;
 	}
-	
+
 	iframe {
 		height: 400px;
 	}
@@ -353,19 +355,19 @@ iframe {
 
 /* TABLET VIEW */
 @media screen and (min-width: 768px) {
-	
+
 	.style-nav ul li{
 		display: inline-block;
 	}
-	
+
 	.style-nav ul{
 		text-align: center;
 	}
-	
+
 	h1 {
 		font-size: 45px;
 	}
-	
+
 	h3 {
 		font-size: 16px;
 	}
@@ -390,7 +392,7 @@ iframe {
 	.style-logo {
 		float: left;
 	}
-		
+
 	.style-nav ul{
 		padding-top: 12px;
 		float: right;
@@ -415,16 +417,20 @@ iframe {
 /* On smaller screens */
 @media screen and (max-width: 500px) {
 
+	/*h1 {*/
+	/*	margin-bottom: 16px;*/
+	/*}*/
+
 	.style-nav ul li{
 		display: block;
 	}
 
-	.slide-button {
-		font-size: 14px;
-	}
+	/*.slide-button {*/
+	/*	font-size: 15px;*/
+	/*}*/
 
 	.prev, .next {
-		font-size: 13px;
+		font-size: 14px;
 		top: -175px;
 		padding: 10px 8px;
 		right: 45.2%;
@@ -441,5 +447,11 @@ iframe {
 
 	iframe {
 		height: 250px;
+	}
+
+	.dot {
+		height: 18px;
+		width: 18px;
+		margin: 1px;
 	}
 }
