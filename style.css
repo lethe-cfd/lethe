@@ -360,42 +360,42 @@ iframe {
 
 
 /* TABLET VIEW */
-/*@media screen and (min-width: 768px){*/
+@media screen and (min-width: 768px) and (max-device-aspect-ratio: 16/9){
 
-/*	.style-nav ul li{*/
-/*		display: inline-block;*/
-/*	}*/
+	.style-nav ul li{
+		display: inline-block;
+	}
 
-/*	.prev, .next {*/
-/*		top: -320px;*/
-/*		right: 46%;*/
-/*		padding: 16px 10px;*/
-/*		font-size: 18px;*/
-/*	}*/
+	.prev, .next {
+		top: -320px;
+		right: 46%;
+		padding: 16px 10px;
+		font-size: 18px;
+	}
 
-/*	.next{*/
-/*		right: auto;*/
-/*		left: 46%;*/
-/*	}*/
+	.next{
+		right: auto;
+		left: 46%;
+	}
 
-/*	.style-nav ul{*/
-/*		text-align: center;*/
-/*	}*/
+	.style-nav ul{
+		text-align: center;
+	}
 
-/*	h1 {*/
-/*		font-size: 45px;*/
-/*	}*/
+	h1 {
+		font-size: 45px;
+	}
 
-/*	h3 {*/
-/*		font-size: 16px;*/
-/*	}*/
+	h3 {
+		font-size: 16px;
+	}
 
-/*	.latest-articles img {*/
-/*		max-width: 720px;*/
-/*		width: auto;*/
-/*		height: 550px;*/
-/*	}*/
-/*}*/
+	.latest-articles img {
+		max-width: 720px;
+		width: auto;
+		height: 550px;
+	}
+}
 
 
 /* DESKTOP VIEW */
