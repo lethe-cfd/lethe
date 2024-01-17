@@ -320,11 +320,7 @@ iframe {
 	padding: 0px 5px;
 }
 
-@media screen and (min-width: 480px){
-	.style-logo {
-		width: 360px;
-	}
-
+@media screen and (min-width: 480px) and (min-height: 480px){
 	iframe {
 		height: 550px;
 	}
@@ -360,7 +356,10 @@ iframe {
 
 
 /* TABLET VIEW */
-@media screen and (min-width: 768px) and (max-device-aspect-ratio: 16/9){
+@media screen and (min-width: 768px){
+	.style-logo {
+		width: 360px;
+	}
 
 	.style-nav ul li{
 		display: inline-block;
