@@ -43,7 +43,7 @@ p {
 
 iframe {
 	width: 90%;
-	height: 250px;
+	height: 400px;
 }
 
 
@@ -172,16 +172,13 @@ iframe {
 	display: none;
 }
 
-.article-slide img {
-	height: auto;
-	width: 90%;
-}
-
 .latest-articles img {
 	vertical-align: middle;
 	margin-bottom: 5px;
 	margin-left: auto;
 	margin-right: auto;
+	height: auto;
+	width: 90%;
 }
 
 
@@ -225,7 +222,7 @@ iframe {
 .prev, .next {
 	cursor: pointer;
 	position: relative;
-	top: -175px;
+	top: -225px;
 	right: 45%;
 	width: auto;
 	padding: 10px 8px;
@@ -319,6 +316,11 @@ iframe {
 }
 
 @media screen and (min-width: 480px){
+	.prev, .next {
+		top: -275px;
+		padding: 16px 10px;
+	}
+
 	iframe {
 		height: 550px;
 	}
@@ -330,24 +332,6 @@ iframe {
 
 	.slide-button {
 		font-size: 16px;
-	}
-}
-
-/* Get the right size of publication images */
-@media (max-width: 745px){
-	.prev, .next {
-		top: -225px;
-		right: 45%;
-		font-size: 16px;
-	}
-
-	.next {
-		right: auto;
-		left: 45%;
-	}
-
-	iframe {
-		height: 400px;
 	}
 }
 
