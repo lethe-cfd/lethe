@@ -25,6 +25,7 @@
 // Lethe Includes
 #include <core/parameters.h>
 #include <core/solid_objects_parameters.h>
+#include <core/vector.h>
 
 // Dealii Includes
 
@@ -140,7 +141,7 @@ public:
   /**
    * @return the reference to the displacement vector
    */
-  TrilinosWrappers::MPI::Vector &
+  GlobalVectorType &
   get_displacement_vector();
 
   /**
@@ -234,6 +235,7 @@ public:
 
 private:
   IndexSet locally_owned_dofs;
+  IndexSet locally_active_dofs;
   IndexSet locally_relevant_dofs;
   // Member variables
   MPI_Comm           mpi_communicator;
@@ -255,8 +257,8 @@ private:
 
   DoFHandler<dim, spacedim>                displacement_dh;
   std::shared_ptr<FESystem<dim, spacedim>> displacement_fe;
-  TrilinosWrappers::MPI::Vector            displacement;
-  TrilinosWrappers::MPI::Vector            displacement_relevant;
+  GlobalVectorType                         displacement;
+  GlobalVectorType                         displacement_relevant;
 
 
   std::shared_ptr<Parameters::NitscheObject<spacedim>> &param;

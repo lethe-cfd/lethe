@@ -47,9 +47,8 @@
 template <int dim>
 GDNavierStokesSolver<dim>::GDNavierStokesSolver(
   SimulationParameters<dim> &p_nsparam)
-  : NavierStokesBase<dim,
-                     TrilinosWrappers::MPI::BlockVector,
-                     std::vector<IndexSet>>(p_nsparam)
+  : NavierStokesBase<dim, GlobalBlockVectorType, std::vector<IndexSet>>(
+      p_nsparam)
 {}
 
 template <int dim>
@@ -574,8 +573,8 @@ GDNavierStokesSolver<dim>::setup_dofs_fd()
     this->dof_handler.locally_owned_dofs().get_view(dof_u, dof_u + dof_p);
 
   IndexSet locally_relevant_dofs_acquisition;
-  DoFTools::extract_locally_relevant_dofs(this->dof_handler,
-                                          locally_relevant_dofs_acquisition);
+  locally_relevant_dofs_acquisition =
+    DoFTools::extract_locally_relevant_dofs(this->dof_handler);
   this->locally_relevant_dofs.resize(2);
   this->locally_relevant_dofs[0] =
     locally_relevant_dofs_acquisition.get_view(0, dof_u);
@@ -852,8 +851,7 @@ GDNavierStokesSolver<dim>::set_initial_condition_fd(
 
       this->simulation_control->set_assembly_method(
         Parameters::SimulationControl::TimeSteppingMethod::steady);
-      PhysicsSolver<
-        TrilinosWrappers::MPI::BlockVector>::solve_non_linear_system(false);
+      PhysicsSolver<GlobalBlockVectorType>::solve_non_linear_system(false);
       this->finish_time_step();
 
       this->simulation_parameters.physical_properties_manager.set_rheology(
@@ -1046,7 +1044,7 @@ GDNavierStokesSolver<dim>::setup_AMG()
   this->computing_timer.leave_subsection("AMG_pressure");
 
 
-  TrilinosWrappers::MPI::BlockVector completely_distributed_solution(
+  GlobalBlockVectorType completely_distributed_solution(
     this->locally_owned_dofs, this->mpi_communicator);
 
 
@@ -1084,7 +1082,7 @@ GDNavierStokesSolver<dim>::solve_system_GMRES(const bool   initial_step,
     }
 
 
-  TrilinosWrappers::MPI::BlockVector completely_distributed_solution(
+  GlobalBlockVectorType completely_distributed_solution(
     this->locally_owned_dofs, this->mpi_communicator);
 
   SolverControl solver_control(this->simulation_parameters.linear_solver
@@ -1094,7 +1092,7 @@ GDNavierStokesSolver<dim>::solve_system_GMRES(const bool   initial_step,
                                true,
                                true);
 
-  SolverFGMRES<TrilinosWrappers::MPI::BlockVector> solver(solver_control);
+  SolverFGMRES<GlobalBlockVectorType> solver(solver_control);
 
   if (this->simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
         .preconditioner == Parameters::LinearSolver::PreconditionerType::ilu)
@@ -1174,7 +1172,7 @@ GDNavierStokesSolver<dim>::solve_L2_system(const bool initial_step,
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
-  TrilinosWrappers::MPI::BlockVector completely_distributed_solution(
+  GlobalBlockVectorType completely_distributed_solution(
     this->locally_owned_dofs, this->mpi_communicator);
 
   SolverControl solver_control(this->simulation_parameters.linear_solver
@@ -1183,8 +1181,8 @@ GDNavierStokesSolver<dim>::solve_L2_system(const bool initial_step,
                                linear_solver_tolerance,
                                true,
                                true);
-  SolverFGMRES<TrilinosWrappers::MPI::BlockVector> solver(solver_control);
-  TrilinosWrappers::PreconditionILU                pmass_preconditioner;
+  SolverFGMRES<GlobalBlockVectorType> solver(solver_control);
+  TrilinosWrappers::PreconditionILU   pmass_preconditioner;
 
   //**********************************************
   // Trillinos Wrapper ILU Preconditioner
@@ -1266,16 +1264,15 @@ GDNavierStokesSolver<dim>::solve()
                this->simulation_parameters.mesh_adaptation.initial_refinement;
                i++)
             NavierStokesBase<dim,
-                             TrilinosWrappers::MPI::BlockVector,
+                             GlobalBlockVectorType,
                              std::vector<IndexSet>>::refine_mesh();
 
           this->iterate();
         }
       else
         {
-          NavierStokesBase<dim,
-                           TrilinosWrappers::MPI::BlockVector,
-                           std::vector<IndexSet>>::refine_mesh();
+          NavierStokesBase<dim, GlobalBlockVectorType, std::vector<IndexSet>>::
+            refine_mesh();
           this->iterate();
         }
       this->postprocess(false);

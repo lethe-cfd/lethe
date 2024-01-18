@@ -52,7 +52,7 @@
 template <int dim>
 GLSNavierStokesSolver<dim>::GLSNavierStokesSolver(
   SimulationParameters<dim> &p_nsparam)
-  : NavierStokesBase<dim, TrilinosWrappers::MPI::Vector, IndexSet>(p_nsparam)
+  : NavierStokesBase<dim, GlobalVectorType, IndexSet>(p_nsparam)
 {
   initial_preconditioner_fill_level =
     ((this->simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
@@ -89,8 +89,10 @@ GLSNavierStokesSolver<dim>::setup_dofs_fd()
   DoFRenumbering::Cuthill_McKee(this->dof_handler);
 
   this->locally_owned_dofs = this->dof_handler.locally_owned_dofs();
-  DoFTools::extract_locally_relevant_dofs(this->dof_handler,
-                                          this->locally_relevant_dofs);
+  this->locally_active_dofs =
+    DoFTools::extract_locally_active_dofs(this->dof_handler);
+  this->locally_relevant_dofs =
+    DoFTools::extract_locally_relevant_dofs(this->dof_handler);
 
   FEValuesExtractors::Vector velocities(0);
 
@@ -116,9 +118,14 @@ GLSNavierStokesSolver<dim>::setup_dofs_fd()
                       this->mpi_communicator);
     }
 
-  this->newton_update.reinit(this->locally_owned_dofs, this->mpi_communicator);
-  this->system_rhs.reinit(this->locally_owned_dofs, this->mpi_communicator);
+  this->newton_update.reinit(this->locally_owned_dofs,
+                             this->locally_active_dofs,
+                             this->mpi_communicator);
+  this->system_rhs.reinit(this->locally_owned_dofs,
+                          this->locally_relevant_dofs,
+                          this->mpi_communicator);
   this->local_evaluation_point.reinit(this->locally_owned_dofs,
+                                      this->locally_active_dofs,
                                       this->mpi_communicator);
   auto                  &nonzero_constraints = this->get_nonzero_constraints();
   DynamicSparsityPattern dsp(this->locally_relevant_dofs);
@@ -310,8 +317,8 @@ GLSNavierStokesSolver<dim>::define_zero_constraints()
   FEValuesExtractors::Vector velocities(0);
   FEValuesExtractors::Scalar pressure(dim);
   this->zero_constraints.clear();
-  DoFTools::extract_locally_relevant_dofs(this->dof_handler,
-                                          this->locally_relevant_dofs);
+  this->locally_relevant_dofs =
+    DoFTools::extract_locally_relevant_dofs(this->dof_handler);
   this->zero_constraints.reinit(this->locally_relevant_dofs);
 
   DoFTools::make_hanging_node_constraints(this->dof_handler,
@@ -707,6 +714,19 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix_without_preconditioner()
                                         *this->mapping);
     }
 
+  const bool has_ghost_elements = this->evaluation_point.has_ghost_elements();
+
+  if (true || !has_ghost_elements)
+    {
+      this->evaluation_point.update_ghost_values();
+      for (const auto &vector : this->previous_solutions)
+        vector.update_ghost_values();
+
+      if (this->simulation_parameters.multiphysics.heat_transfer)
+        this->multiphysics->get_solution(PhysicsID::heat_transfer)
+          ->update_ghost_values();
+    }
+
   WorkStream::run(
     this->dof_handler.begin_active(),
     this->dof_handler.end(),
@@ -716,6 +736,17 @@ GLSNavierStokesSolver<dim>::assemble_system_matrix_without_preconditioner()
     scratch_data,
     StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
                                          this->cell_quadrature->size()));
+
+  if (true || !has_ghost_elements)
+    {
+      this->evaluation_point.zero_out_ghost_values();
+      for (const auto &vector : this->previous_solutions)
+        vector.zero_out_ghost_values();
+
+      if (this->simulation_parameters.multiphysics.heat_transfer)
+        this->multiphysics->get_solution(PhysicsID::heat_transfer)
+          ->zero_out_ghost_values();
+    }
 
   system_matrix.compress(VectorOperation::add);
 }
@@ -913,6 +944,19 @@ GLSNavierStokesSolver<dim>::assemble_system_rhs()
                                         *this->mapping);
     }
 
+  const bool has_ghost_elements = this->evaluation_point.has_ghost_elements();
+
+  if (!has_ghost_elements)
+    {
+      this->evaluation_point.update_ghost_values();
+      for (const auto &vector : this->previous_solutions)
+        vector.update_ghost_values();
+
+      if (this->simulation_parameters.multiphysics.heat_transfer)
+        this->multiphysics->get_solution(PhysicsID::heat_transfer)
+          ->update_ghost_values();
+    }
+
   WorkStream::run(
     this->dof_handler.begin_active(),
     this->dof_handler.end(),
@@ -922,6 +966,17 @@ GLSNavierStokesSolver<dim>::assemble_system_rhs()
     scratch_data,
     StabilizedMethodsTensorCopyData<dim>(this->fe->n_dofs_per_cell(),
                                          this->cell_quadrature->size()));
+
+  if (!has_ghost_elements)
+    {
+      this->evaluation_point.zero_out_ghost_values();
+      for (const auto &vector : this->previous_solutions)
+        vector.zero_out_ghost_values();
+
+      if (this->simulation_parameters.multiphysics.heat_transfer)
+        this->multiphysics->get_solution(PhysicsID::heat_transfer)
+          ->zero_out_ghost_values();
+    }
 
   this->system_rhs.compress(VectorOperation::add);
 
@@ -1111,8 +1166,7 @@ GLSNavierStokesSolver<dim>::set_initial_condition_fd(
 
       this->simulation_control->set_assembly_method(
         Parameters::SimulationControl::TimeSteppingMethod::steady);
-      PhysicsSolver<TrilinosWrappers::MPI::Vector>::solve_non_linear_system(
-        false);
+      PhysicsSolver<GlobalVectorType>::solve_non_linear_system(false);
       this->finish_time_step();
 
       this->simulation_parameters.physical_properties_manager.set_rheology(
@@ -1170,8 +1224,7 @@ GLSNavierStokesSolver<dim>::set_initial_condition_fd(
 
           this->simulation_control->set_assembly_method(
             Parameters::SimulationControl::TimeSteppingMethod::steady);
-          PhysicsSolver<TrilinosWrappers::MPI::Vector>::solve_non_linear_system(
-            false);
+          PhysicsSolver<GlobalVectorType>::solve_non_linear_system(false);
           this->finish_time_step();
 
           n += alpha_n * (n_end - n);
@@ -1193,8 +1246,7 @@ GLSNavierStokesSolver<dim>::set_initial_condition_fd(
 
           this->simulation_control->set_assembly_method(
             Parameters::SimulationControl::TimeSteppingMethod::steady);
-          PhysicsSolver<TrilinosWrappers::MPI::Vector>::solve_non_linear_system(
-            false);
+          PhysicsSolver<GlobalVectorType>::solve_non_linear_system(false);
           this->finish_time_step();
 
           kinematic_viscosity +=
@@ -1474,8 +1526,9 @@ GLSNavierStokesSolver<dim>::solve_system_GMRES(const bool   initial_step,
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
-  TrilinosWrappers::MPI::Vector completely_distributed_solution(
-    this->locally_owned_dofs, this->mpi_communicator);
+  GlobalVectorType completely_distributed_solution(this->locally_owned_dofs,
+                                                   this->locally_active_dofs,
+                                                   this->mpi_communicator);
 
   SolverControl solver_control(this->simulation_parameters.linear_solver
                                  .at(PhysicsID::fluid_dynamics)
@@ -1604,8 +1657,9 @@ GLSNavierStokesSolver<dim>::solve_system_BiCGStab(
       this->pcout << "  -Tolerance of iterative solver is : "
                   << linear_solver_tolerance << std::endl;
     }
-  TrilinosWrappers::MPI::Vector completely_distributed_solution(
-    this->locally_owned_dofs, this->mpi_communicator);
+  GlobalVectorType completely_distributed_solution(this->locally_owned_dofs,
+                                                   this->locally_active_dofs,
+                                                   this->mpi_communicator);
 
   bool extra_verbose = false;
   if (this->simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
@@ -1693,8 +1747,9 @@ GLSNavierStokesSolver<dim>::solve_system_direct(const bool   initial_step,
   const double linear_solver_tolerance =
     std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);
 
-  TrilinosWrappers::MPI::Vector completely_distributed_solution(
-    this->locally_owned_dofs, this->mpi_communicator);
+  GlobalVectorType completely_distributed_solution(this->locally_owned_dofs,
+                                                   this->locally_active_dofs,
+                                                   this->mpi_communicator);
 
   SolverControl solver_control(this->simulation_parameters.linear_solver
                                  .at(PhysicsID::fluid_dynamics)
@@ -1766,8 +1821,7 @@ GLSNavierStokesSolver<dim>::solve()
         }
       else
         {
-          NavierStokesBase<dim, TrilinosWrappers::MPI::Vector, IndexSet>::
-            refine_mesh();
+          NavierStokesBase<dim, GlobalVectorType, IndexSet>::refine_mesh();
           this->iterate();
         }
       this->postprocess(false);
