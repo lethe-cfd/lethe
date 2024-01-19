@@ -277,12 +277,11 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
   const Tensor<1, 3> dt_g = g * dt;
 
   // Get the map of average velocities and accelerations of cells
-  auto &cell_velocities_accelerations_map =
+  auto cell_velocities_accelerations_map =
     disable_contacts_object.get_velocities_accelerations();
 
   // Get the map of mobility status of cells
-  auto &cell_mobility_status_map =
-    disable_contacts_object.get_mobility_status();
+  auto cell_mobility_status_map = disable_contacts_object.get_mobility_status();
 
   for (auto &cell : triangulation.active_cell_iterators())
     {

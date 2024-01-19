@@ -710,7 +710,11 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
   contact_manager.execute_cell_neighbors_search(
     *parallel_triangulation,
     periodic_boundaries_cells_information,
-    has_periodic_boundaries);
+    has_periodic_boundaries,
+    true);
+
+  disable_contacts_object.set_total_neighbor_list(
+    contact_manager.total_neighbor_list);
 
   // Finding boundary cells with faces
   boundary_cell_object.build(
@@ -900,6 +904,11 @@ template <int dim>
 void
 CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
 {
+  // TODO: check again for the right place for this execution
+  if (has_periodic_boundaries)
+    periodic_boundaries_object.execute_particles_displacement(
+      this->particle_handler, periodic_boundaries_cells_information);
+
   // Check to see if it is contact search step
   contact_detection_step =
     check_contact_detection_method(counter,

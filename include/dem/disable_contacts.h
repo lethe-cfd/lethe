@@ -267,6 +267,20 @@ public:
   }
 
   /**
+   * @brief Sets the total neighbor list
+   *
+   * @param total_neighbor_list The total neighbor list
+   */
+  // TODO: pass the variable to another function, not as a setter
+  void
+  set_total_neighbor_list(
+    const typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
+      &total_cell_neighbor_list)
+  {
+    total_neighbor_list = total_cell_neighbor_list;
+  }
+
+  /**
    * @brief Converts the map of mobility status to a vector of mobility status
    * because map can't be used as is in the pvd post-processing or any data out,
    * it needs to be converted to a vector of mobility status by active cell
@@ -325,31 +339,34 @@ public:
         velocity_cell_average.clear();
         acceleration_dt.clear();
 
-        for (auto &particle : particles_in_cell)
+        if (n_particles_in_cell > 0)
           {
-            // Get particle properties
-            auto particle_properties          = particle.get_properties();
-            types::particle_index particle_id = particle.get_local_index();
-
-            for (int d = 0; d < dim; ++d)
+            for (auto &particle : particles_in_cell)
               {
-                // Get the particle velocity components
-                int v_axis = DEM::PropertiesIndex::v_x + d;
-                velocity_cell_average[d] += particle_properties[v_axis];
+                // Get particle properties
+                auto particle_properties          = particle.get_properties();
+                types::particle_index particle_id = particle.get_local_index();
+
+                for (int d = 0; d < dim; ++d)
+                  {
+                    // Get the particle velocity components
+                    int v_axis = DEM::PropertiesIndex::v_x + d;
+                    velocity_cell_average[d] += particle_properties[v_axis];
+                  }
+
+                // a = F/m + g
+                acceleration_dt +=
+                  force[particle_id] /
+                    particle_properties[DEM::PropertiesIndex::mass] +
+                  g;
               }
 
-            // a = F/m + g
-            acceleration_dt +=
-              force[particle_id] /
-                particle_properties[DEM::PropertiesIndex::mass] +
-              g;
+            // Compute the average velocity and acceleration, the time step is
+            // multiplied here for the hole vector instead of each time a value
+            // is used
+            velocity_cell_average /= n_particles_in_cell;
+            acceleration_dt *= dt / n_particles_in_cell;
           }
-
-        // Compute the average velocity and acceleration, the time step is
-        // multiplied here for the hole vector instead of each time a value is
-        // used
-        velocity_cell_average /= n_particles_in_cell;
-        acceleration_dt /= n_particles_in_cell * dt;
 
         // Update acceleration for the mobile cell only
         cell_velocities_accelerations[cell] = {velocity_cell_average,
@@ -506,7 +523,9 @@ private:
   double granular_temperature_threshold;
   double solid_fraction_threshold;
 
-  int trigger_flag = 1;
+  typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
+    total_neighbor_list;
+
 
   // Map of cell velocities and accelerations, the key is the active cell
   // iterator and the value is a pair of the cell velocity and acceleration
