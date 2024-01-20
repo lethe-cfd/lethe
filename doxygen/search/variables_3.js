@@ -68,7 +68,7 @@ var searchData=
   ['drag_5fforce_5126',['drag_force',['../structParameters_1_1CFDDEM.html#a01b305e54a192dca7f3c30751d90d0bd',1,'Parameters::CFDDEM']]],
   ['drag_5fmodel_5127',['drag_model',['../structParameters_1_1CFDDEM.html#ae7ec612d9e27ce73bf5847ab2b63fbde',1,'Parameters::CFDDEM']]],
   ['dt_5128',['dt',['../structParameters_1_1SimulationControl.html#aee77fceed7309c7410747735c9385e6a',1,'Parameters::SimulationControl::dt()'],['../classParticleVisualization.html#ae4aaf3306ecc0ce9e00d30fdf92f0d71',1,'ParticleVisualization::dt()'],['../classAverageVelocities.html#a8d5018f5b1e9675896309e667b26af98',1,'AverageVelocities::dt()']]],
-  ['dt_5f0_5129',['dt_0',['../classAverageVelocities.html#a27e3f66adca490220255ab360bacdfa6',1,'AverageVelocities']]],
+  ['dt_5f0_5129',['dt_0',['../classAverageVelocities.html#a8f64adcbaaba2a5c4911ce11891f2101',1,'AverageVelocities']]],
   ['dynamic_5fcontact_5fsearch_5ffactor_5130',['dynamic_contact_search_factor',['../structParameters_1_1Lagrangian_1_1ModelParameters.html#aeb74e97487473de1b53f7a75c5cfae81',1,'Parameters::Lagrangian::ModelParameters']]],
   ['dynamic_5fload_5fbalance_5fcheck_5ffrequency_5131',['dynamic_load_balance_check_frequency',['../structParameters_1_1Lagrangian_1_1ModelParameters.html#a316931a45ce605f85f0fb95bc0c2d8c2',1,'Parameters::Lagrangian::ModelParameters']]],
   ['dynamic_5fviscosity_5132',['dynamic_viscosity',['../classNewtonian.html#ab39bac68db8920bd7137bebc03716363',1,'Newtonian::dynamic_viscosity()'],['../classHeatTransferScratchData.html#a59f6ac8fc7c7680617cc20659fe32a11',1,'HeatTransferScratchData::dynamic_viscosity()'],['../classNavierStokesScratchData.html#ae72c592369ec0d85c01f4495eaee169c',1,'NavierStokesScratchData::dynamic_viscosity()']]],

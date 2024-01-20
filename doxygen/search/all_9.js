@@ -103,7 +103,7 @@ var searchData=
   ['intermediate_5fw_1477',['intermediate_w',['../classCutHollowSphere.html#af3fe8274ea33e5b7efb5385ec6ca1f65',1,'CutHollowSphere']]],
   ['interpolated_5fvoid_5ffraction_1478',['interpolated_void_fraction',['../structParameters_1_1CFDDEM.html#a825c5406d8255e37eda65c67a14f2a14',1,'Parameters::CFDDEM::interpolated_void_fraction()'],['../classNavierStokesScratchData.html#a50e47e5746c3b8e513d798318938235b',1,'NavierStokesScratchData::interpolated_void_fraction()']]],
   ['intersection_1479',['Intersection',['../classCompositeShape.html#a531c7c1de9061dbb243d31f8d9a9b987aa06d31c2ee920b4d53e8c9c06d90ba24',1,'CompositeShape']]],
-  ['inv_5frange_5ftime_1480',['inv_range_time',['../classAverageVelocities.html#af2266caf3c3d096eeff9ee6e89e29511',1,'AverageVelocities']]],
+  ['inv_5frange_5ftime_1480',['inv_range_time',['../classAverageVelocities.html#a34ca072240b3b25558df5e4ced6ad704',1,'AverageVelocities']]],
   ['is_5fat_5fend_1481',['is_at_end',['../classSimulationControl.html#ace7a05ca520659fb2178d26a536b07f4',1,'SimulationControl::is_at_end()'],['../classSimulationControlTransient.html#aa319da7751b899049697edecee141d66',1,'SimulationControlTransient::is_at_end()'],['../classSimulationControlSteady.html#a9131dcc7cba2713e43ed16653da5f7c0',1,'SimulationControlSteady::is_at_end()'],['../classSimulationControlAdjointSteady.html#ac8534ba715f32012c81368600656323d',1,'SimulationControlAdjointSteady::is_at_end()']]],
   ['is_5fat_5fstart_1482',['is_at_start',['../classSimulationControl.html#a566e0413e49cdea412ad307783a170aa',1,'SimulationControl']]],
   ['is_5fbdf_1483',['is_bdf',['../time__integration__utilities_8h.html#a0a24876ac89130c482872183aaabb619',1,'time_integration_utilities.h']]],
