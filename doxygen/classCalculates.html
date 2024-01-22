@@ -87,16 +87,7 @@ $(function() {
 <p>on post-processing points this is used when the density isn't considered constant. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p_density_model</td><td>Density model of the material </td></tr>
-    <tr><td class="paramname">material_id</td><td>ID corresponding to the material (fluid or solid)</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>(q = -k * grad T) of a material at every quadrature point. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p_thermal_conductivity_model</td><td>Thermal conductivity model of the material </td></tr>
-    <tr><td class="paramname">p_material_string</td><td>Type of material: "f" (fluid) or "s" (solid) </td></tr>
-    <tr><td class="paramname">p_id</td><td>Either fluid ID or solid ID (as initialized in the physical properties) used to name the postprocessed variable vector. </td></tr>
-    <tr><td class="paramname">p_material_id</td><td>ID corresponding to the material. Material IDs the cumulative IDs of fluids and solids by convention, fluids are counted before solids. This is used to identify which cell lies in which material. </td></tr>
+    <tr><td class="paramname">material_id</td><td>ID corresponding to the material (fluid or solid) </td></tr>
   </table>
   </dd>
 </dl>
