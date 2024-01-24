@@ -86,9 +86,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a677842f3161ef62b244e6359c6c75e1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a677842f3161ef62b244e6359c6c75e1d">VOFScratchData</a> (const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> <a class="el" href="classVOFScratchData.html#a88b624e231b60b6d6928caa17ad9b029">properties_manager</a>, const FiniteElement&lt; dim &gt; &amp;fe_vof, const Quadrature&lt; dim &gt; &amp;quadrature, const Mapping&lt; dim &gt; &amp;mapping, const FiniteElement&lt; dim &gt; &amp;fe_fd)</td></tr>
-<tr class="memdesc:a677842f3161ef62b244e6359c6c75e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evaluation, since this needs to be done at the cell level.  <a href="classVOFScratchData.html#a677842f3161ef62b244e6359c6c75e1d">More...</a><br /></td></tr>
-<tr class="separator:a677842f3161ef62b244e6359c6c75e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#ab928fd8cbae1c8954cc81d8a6c33fa7b">VOFScratchData</a> (const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;<a class="el" href="classVOFScratchData.html#a6aeaed7557d30524cd6abe6de54477f8">simulation_control</a>, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;<a class="el" href="classVOFScratchData.html#a14fc695a065e52b6581d99c2e86d9258">properties_manager</a>, const FiniteElement&lt; dim &gt; &amp;fe_vof, const Quadrature&lt; dim &gt; &amp;quadrature, const Mapping&lt; dim &gt; &amp;mapping, const FiniteElement&lt; dim &gt; &amp;fe_fd)</td></tr>
+<tr class="memdesc:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evaluation, since this needs to be done at the cell level.  <a href="classVOFScratchData.html#ab928fd8cbae1c8954cc81d8a6c33fa7b">More...</a><br /></td></tr>
+<tr class="separator:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa11c28e251a7bcecebd335518eff9bc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#aa11c28e251a7bcecebd335518eff9bc2">VOFScratchData</a> (const <a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt; &amp;sd)</td></tr>
 <tr class="memdesc:aa11c28e251a7bcecebd335518eff9bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classVOFScratchData.html#aa11c28e251a7bcecebd335518eff9bc2">More...</a><br /></td></tr>
 <tr class="separator:aa11c28e251a7bcecebd335518eff9bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,8 +106,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a88b624e231b60b6d6928caa17ad9b029"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a88b624e231b60b6d6928caa17ad9b029">properties_manager</a></td></tr>
-<tr class="separator:a88b624e231b60b6d6928caa17ad9b029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aeaed7557d30524cd6abe6de54477f8"><td class="memItemLeft" align="right" valign="top">const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a6aeaed7557d30524cd6abe6de54477f8">simulation_control</a></td></tr>
+<tr class="separator:a6aeaed7557d30524cd6abe6de54477f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14fc695a065e52b6581d99c2e86d9258"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a14fc695a065e52b6581d99c2e86d9258">properties_manager</a></td></tr>
+<tr class="separator:a14fc695a065e52b6581d99c2e86d9258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a762990ac9c107e5fc571733734540f36"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a762990ac9c107e5fc571733734540f36">fields</a></td></tr>
 <tr class="separator:a762990ac9c107e5fc571733734540f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6649f1d1c25c40ef5eeaa8afa01312a"><td class="memItemLeft" align="right" valign="top">FEValues&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#aa6649f1d1c25c40ef5eeaa8afa01312a">fe_values_vof</a></td></tr>
@@ -165,10 +167,10 @@ class VOFScratchData&lt; dim &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00057">57</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00058">58</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a677842f3161ef62b244e6359c6c75e1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a677842f3161ef62b244e6359c6c75e1d">&#9670;&nbsp;</a></span>VOFScratchData() <span class="overload">[1/2]</span></h2>
+<a id="ab928fd8cbae1c8954cc81d8a6c33fa7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab928fd8cbae1c8954cc81d8a6c33fa7b">&#9670;&nbsp;</a></span>VOFScratchData() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +183,13 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt;::<a class="el" href="classVOFScratchData.html">VOFScratchData</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a>&#160;</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>simulation_control</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -224,7 +232,7 @@ template&lt;int dim&gt; </div>
 <p>Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evaluation, since this needs to be done at the cell level. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">properties_manager</td><td>The physical properties Manager (see <a class="el" href="physical__properties__manager_8h.html">physical_properties_manager.h</a>)</td></tr>
+    <tr><td class="paramname">simulation_control</td><td>The <a class="el" href="classSimulationControl.html" title="The SimulationControl class is responsible for the control of steady-state and transient simulations ...">SimulationControl</a> object that holds information related to the control of the steady-state or transient simulation. This is used to extrapolate velocity solutions in time for transient simulation.</td></tr>
     <tr><td class="paramname">fe_vof</td><td>The FESystem used to solve the VOF equations</td></tr>
     <tr><td class="paramname">quadrature</td><td>The quadrature to use for the assembly</td></tr>
     <tr><td class="paramname">mapping</td><td>The mapping of the domain in which the Navier-Stokes equations are solved</td></tr>
@@ -233,7 +241,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00077">77</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00082">82</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -266,12 +274,12 @@ template&lt;int dim&gt; </div>
 <p>Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sd</td><td>The scratch data </td></tr>
+    <tr><td class="paramname">sd</td><td>The scratch data to be copied </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00103">103</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00110">110</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -360,7 +368,7 @@ template&lt;typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00145">145</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00154">154</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -424,14 +432,16 @@ template&lt;typename VectorType &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cell</td><td>The cell for which the velocity is reinitialized This cell must be compatible with the Fluid Dynamics FE</td></tr>
-    <tr><td class="paramname">current_solution</td><td>The present value of the solution for [u,p] </td></tr>
+    <tr><td class="paramname">current_solution</td><td>The present value of the solution for \([u,p]\)</td></tr>
+    <tr><td class="paramname">previous_solutions</td><td>Vector of \(n\) <code>VectorType</code> containers of previous fluid dynamic solutions ( \([u,p]\)). \(n\) depends on the BDF scheme selected for time-stepping.</td></tr>
+    <tr><td class="paramname">ale</td><td>ALE parameters </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00205">205</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00220">220</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
-<p class="reference">References <a class="el" href="ale_8h_source.html#l00053">Parameters::ALE&lt; dim &gt;::enabled()</a>, and <a class="el" href="ale_8h_source.html#l00050">Parameters::ALE&lt; dim &gt;::velocity</a>.</p>
+<p class="reference">References <a class="el" href="bdf_8h_source.html#l00132">bdf_extrapolate()</a>, <a class="el" href="ale_8h_source.html#l00053">Parameters::ALE&lt; dim &gt;::enabled()</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, <a class="el" href="bdf_8h_source.html#l00106">number_of_previous_solutions()</a>, and <a class="el" href="ale_8h_source.html#l00050">Parameters::ALE&lt; dim &gt;::velocity</a>.</p>
 
 </div>
 </div>
@@ -450,7 +460,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00263">263</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00296">296</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -469,7 +479,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>Scratch component for the Navier-Stokes component </p>
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00287">287</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00320">320</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -487,7 +497,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00260">260</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00293">293</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -505,7 +515,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00257">257</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00290">290</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -523,7 +533,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00279">279</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00312">312</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -541,7 +551,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00280">280</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00313">313</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -559,7 +569,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00266">266</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00299">299</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +587,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00281">281</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00314">314</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -595,7 +605,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00261">261</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00294">294</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -613,7 +623,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00262">262</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00295">295</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -631,7 +641,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00271">271</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00304">304</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -649,7 +659,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00274">274</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00307">307</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -667,7 +677,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00278">278</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00311">311</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -685,7 +695,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00270">270</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00303">303</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -703,7 +713,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00272">272</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00305">305</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -721,7 +731,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00275">275</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00308">308</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -739,12 +749,12 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00292">292</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00325">325</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
-<a id="a88b624e231b60b6d6928caa17ad9b029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88b624e231b60b6d6928caa17ad9b029">&#9670;&nbsp;</a></span>properties_manager</h2>
+<a id="a14fc695a065e52b6581d99c2e86d9258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14fc695a065e52b6581d99c2e86d9258">&#9670;&nbsp;</a></span>properties_manager</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -752,12 +762,12 @@ template&lt;int dim&gt; </div>
 template&lt;int dim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> <a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt;::properties_manager</td>
+          <td class="memname">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> <a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt;::properties_manager</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00256">256</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00289">289</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -775,7 +785,25 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00267">267</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00300">300</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+
+</div>
+</div>
+<a id="a6aeaed7557d30524cd6abe6de54477f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aeaed7557d30524cd6abe6de54477f8">&#9670;&nbsp;</a></span>simulation_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::shared_ptr&lt;<a class="el" href="classSimulationControl.html">SimulationControl</a>&gt; <a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt;::simulation_control</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00286">286</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -793,7 +821,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00289">289</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00322">322</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -811,7 +839,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00294">294</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00327">327</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -829,7 +857,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00293">293</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00326">326</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
@@ -847,7 +875,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00291">291</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__scratch__data_8h_source.html#l00324">324</a> of file <a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>.</p>
 
 </div>
 </div>
