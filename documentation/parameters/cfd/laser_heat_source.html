@@ -444,7 +444,7 @@ end
 \[q_\text{rad} = \epsilon \sigma (T^4 - T_\text{inf}^4)\]</div>
 </div>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: controls if the radiation cooling is enabled. The radiation sink is modulated by the filtered phase fraction gradient norm, <span class="math notranslate nohighlight">\(|\nabla \phi'|\)</span>, in such way that the flux is applied at the interface between the fluids.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: controls if the radiation cooling is enabled. The radiation sink is modulated by the filtered phase fraction gradient norm, <span class="math notranslate nohighlight">\(|\nabla \psi|\)</span>, in such way that the flux is applied at the interface between the fluids.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>To apply this radiation cooling, the <code class="docutils literal notranslate"><span class="pre">VOF</span></code> parameter must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in the <a class="reference internal" href="multiphysics.html"><span class="doc">Multiphysics</span></a> subsection.</p>
@@ -466,9 +466,9 @@ end
 <p>When the <code class="docutils literal notranslate"><span class="pre">exponential_decay</span></code> is used in conjunction with the <a class="reference internal" href="volume_of_fluid.html"><span class="doc">VOF auxiliary physic</span></a> the equation takes the following form:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[q(x,y,z) = \frac{\phi' \eta \alpha P}{\pi r^2 \mu} \exp{\left(-\eta \frac{r^2}{R^2}\right)} \exp{\left(- \frac{|z|}{\mu}\right)}\]</div>
+\[q(x,y,z) = \frac{\psi \eta \alpha P}{\pi r^2 \mu} \exp{\left(-\eta \frac{r^2}{R^2}\right)} \exp{\left(- \frac{|z|}{\mu}\right)}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\phi'\)</span> is the filtered phase fraction.</p>
+<p>where <span class="math notranslate nohighlight">\(\psi\)</span> is the filtered phase fraction.</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>In this case, the heat affects the fluid initialized as <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">1</span></code>.</p>
@@ -477,9 +477,9 @@ end
 <li><p>When <code class="docutils literal notranslate"><span class="pre">type</span></code> is set to <code class="docutils literal notranslate"><span class="pre">heat_flux_vof_interface</span></code>, it <strong>must be used in conjunction with the</strong> <a class="reference internal" href="volume_of_fluid.html"><span class="doc">VOF auxiliary physic</span></a>. This model is used to apply the heat flux, given by the expression below, only at the interface.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[q(x,y,z) = \frac{|\nabla \phi'| \eta \alpha P}{\pi r^2} \exp{\left(-\eta \frac{r^2}{R^2}\right)}\]</div>
+\[q(x,y,z) = \frac{|\nabla \psi| \eta \alpha P}{\pi r^2} \exp{\left(-\eta \frac{r^2}{R^2}\right)}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(r\)</span> is the radial distance from the laser’s axis and <span class="math notranslate nohighlight">\(|\nabla \phi'|\)</span> is the <span class="math notranslate nohighlight">\(L^2\)</span> norm of the filtered phase fraction gradient.</p>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the radial distance from the laser’s axis and <span class="math notranslate nohighlight">\(|\nabla \psi|\)</span> is the <span class="math notranslate nohighlight">\(L^2\)</span> norm of the filtered phase fraction gradient.</p>
 </li>
 </ul>
 <section id="references">

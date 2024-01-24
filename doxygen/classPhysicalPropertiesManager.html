@@ -131,6 +131,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2ceb2ff319be7e92e27c53d42776e5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a123c1a376b9f6ddb165b314c610af6a7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classThermalExpansionModel.html">ThermalExpansionModel</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a123c1a376b9f6ddb165b314c610af6a7">get_thermal_expansion_vector</a> () const</td></tr>
 <tr class="separator:a123c1a376b9f6ddb165b314c610af6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36201b3aac352860d423837fb6b4492c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParameters_1_1PhaseChange.html">Parameters::PhaseChange</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a36201b3aac352860d423837fb6b4492c">get_phase_change_parameters_vector</a> () const</td></tr>
+<tr class="separator:a36201b3aac352860d423837fb6b4492c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6cd038556b4ca64a6b37342903a5753"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classTracerDiffusivityModel.html">TracerDiffusivityModel</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#ad6cd038556b4ca64a6b37342903a5753">get_tracer_diffusivity_vector</a> () const</td></tr>
 <tr class="separator:ad6cd038556b4ca64a6b37342903a5753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39514a02313c5edb5435cd7098f51247"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSurfaceTensionModel.html">SurfaceTensionModel</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a39514a02313c5edb5435cd7098f51247">get_surface_tension_vector</a> () const</td></tr>
@@ -193,6 +195,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aae8f7fb989f6044bd75c64ecbfd0b665"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdafe47434bc335403976bf7b794cdca"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classMobilityCahnHilliardModel.html">MobilityCahnHilliardModel</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#abdafe47434bc335403976bf7b794cdca">mobility_cahn_hilliard</a></td></tr>
 <tr class="separator:abdafe47434bc335403976bf7b794cdca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170f7e86ccfdbcee49330e754536d0cc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParameters_1_1PhaseChange.html">Parameters::PhaseChange</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a170f7e86ccfdbcee49330e754536d0cc">phase_change_parameters</a></td></tr>
+<tr class="separator:a170f7e86ccfdbcee49330e754536d0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7365e021bc20971a1a35f37f0d3a45f7"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a7365e021bc20971a1a35f37f0d3a45f7">required_fields</a></td></tr>
 <tr class="separator:a7365e021bc20971a1a35f37f0d3a45f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1302d81be91c291eea61894f173b2c96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertiesManager.html#a1302d81be91c291eea61894f173b2c96">non_newtonian_flow</a></td></tr>
@@ -322,7 +326,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00338">338</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00344">344</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +353,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00265">265</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00271">271</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -379,7 +383,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="physical__properties__manager_8cc_source.html#l00032">32</a> of file <a class="el" href="physical__properties__manager_8cc_source.html">physical_properties_manager.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="interface__property__model_8h_source.html#l00056">InterfacePropertyModel::depends_on()</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00363">required_fields</a>.</p>
+<p class="reference">References <a class="el" href="interface__property__model_8h_source.html#l00056">InterfacePropertyModel::depends_on()</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00370">required_fields</a>.</p>
 
 </div>
 </div>
@@ -409,7 +413,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="physical__properties__manager_8cc_source.html#l00020">20</a> of file <a class="el" href="physical__properties__manager_8cc_source.html">physical_properties_manager.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00098">PhysicalPropertyModel::depends_on()</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00363">required_fields</a>.</p>
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00098">PhysicalPropertyModel::depends_on()</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00370">required_fields</a>.</p>
 
 </div>
 </div>
@@ -437,7 +441,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00259">259</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00265">265</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -502,7 +506,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00240">240</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00246">246</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -556,7 +560,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00234">234</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00240">240</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -600,7 +604,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00289">289</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00295">295</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__properties__manager_8h_source.html#l00053">fluid_fluid</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00054">fluid_solid</a>.</p>
 
@@ -657,7 +661,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00228">228</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00234">234</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -742,6 +746,33 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a36201b3aac352860d423837fb6b4492c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36201b3aac352860d423837fb6b4492c">&#9670;&nbsp;</a></span>get_phase_change_parameters_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structParameters_1_1PhaseChange.html">Parameters::PhaseChange</a>&gt; PhysicalPropertiesManager::get_phase_change_parameters_vector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00216">216</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+
+</div>
+</div>
 <a id="a83d935b8fc7cd3037b7c65a1fb53df7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83d935b8fc7cd3037b7c65a1fb53df7c">&#9670;&nbsp;</a></span>get_physical_properties_parameters()</h2>
 
@@ -765,7 +796,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00271">271</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00277">277</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -792,7 +823,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00317">317</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00323">323</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -977,7 +1008,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00222">222</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00228">228</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1172,7 +1203,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00216">216</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00222">222</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1199,7 +1230,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00277">277</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00283">283</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1229,7 +1260,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="physical__properties__manager_8cc_source.html#l00044">44</a> of file <a class="el" href="physical__properties__manager_8cc_source.html">physical_properties_manager.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="physical__properties__manager_8h_source.html#l00366">constant_density</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00367">constant_surface_tension</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00353">density</a>, <a class="el" href="physical__properties__manager_8cc_source.html#l00020">establish_fields_required_by_model()</a>, <a class="el" href="parameters_8h_source.html#l00505">Parameters::PhysicalProperties::fluid_fluid_interactions_with_material_interaction_ids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00385">fluid_fluid_interactions_with_material_interaction_ids</a>, <a class="el" href="parameters_8h_source.html#l00507">Parameters::PhysicalProperties::fluid_solid_interactions_with_material_interaction_ids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00387">fluid_solid_interactions_with_material_interaction_ids</a>, <a class="el" href="parameters_8h_source.html#l00491">Parameters::PhysicalProperties::fluids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00350">is_initialized</a>, <a class="el" href="parameters_8h_source.html#l00501">Parameters::PhysicalProperties::material_interactions</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00361">mobility_cahn_hilliard</a>, <a class="el" href="density__model_8cc_source.html#l00020">DensityModel::model_cast()</a>, <a class="el" href="rheological__model_8cc_source.html#l00004">RheologicalModel::model_cast()</a>, <a class="el" href="specific__heat__model_8cc_source.html#l00020">SpecificHeatModel::model_cast()</a>, <a class="el" href="thermal__conductivity__model_8cc_source.html#l00020">ThermalConductivityModel::model_cast()</a>, <a class="el" href="thermal__expansion__model_8cc_source.html#l00020">ThermalExpansionModel::model_cast()</a>, <a class="el" href="tracer__diffusivity__model_8cc_source.html#l00020">TracerDiffusivityModel::model_cast()</a>, <a class="el" href="mobility__cahn__hilliard__model_8cc_source.html#l00020">MobilityCahnHilliardModel::model_cast()</a>, <a class="el" href="surface__tension__model_8cc_source.html#l00020">SurfaceTensionModel::model_cast()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00365">non_newtonian_flow</a>, <a class="el" href="parameters_8h_source.html#l00492">Parameters::PhysicalProperties::number_of_fluids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00379">number_of_fluids</a>, <a class="el" href="parameters_8h_source.html#l00502">Parameters::PhysicalProperties::number_of_material_interactions</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00381">number_of_material_interactions</a>, <a class="el" href="parameters_8h_source.html#l00497">Parameters::PhysicalProperties::number_of_solids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00380">number_of_solids</a>, <a class="el" href="classParameters_1_1Material.html#acc7336ee0289363a01ec2df5d5f1f2c7ad0b50e5bdf6e59d6f8ce448465e09069">Parameters::Material::phase_change</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00368">phase_change</a>, <a class="el" href="physical__property__model_8h_source.html#l00050">phase_order_cahn_hilliard</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00377">physical_properties_parameters</a>, <a class="el" href="physical__property__model_8h_source.html#l00049">pressure</a>, <a class="el" href="parameters_8h_source.html#l00513">Parameters::PhysicalProperties::reference_temperature</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00374">reference_temperature</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00363">required_fields</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00356">rheology</a>, <a class="el" href="physical__property__model_8h_source.html#l00045">shear_rate</a>, <a class="el" href="parameters_8h_source.html#l00496">Parameters::PhysicalProperties::solids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00354">specific_heat</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00359">surface_tension</a>, <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00355">thermal_conductivity</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00357">thermal_expansion</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00358">tracer_diffusivity</a>.</p>
+<p class="reference">References <a class="el" href="physical__properties__manager_8h_source.html#l00373">constant_density</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00374">constant_surface_tension</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00359">density</a>, <a class="el" href="physical__properties__manager_8cc_source.html#l00020">establish_fields_required_by_model()</a>, <a class="el" href="parameters_8h_source.html#l00505">Parameters::PhysicalProperties::fluid_fluid_interactions_with_material_interaction_ids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00392">fluid_fluid_interactions_with_material_interaction_ids</a>, <a class="el" href="parameters_8h_source.html#l00507">Parameters::PhysicalProperties::fluid_solid_interactions_with_material_interaction_ids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00394">fluid_solid_interactions_with_material_interaction_ids</a>, <a class="el" href="parameters_8h_source.html#l00491">Parameters::PhysicalProperties::fluids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00356">is_initialized</a>, <a class="el" href="parameters_8h_source.html#l00501">Parameters::PhysicalProperties::material_interactions</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00367">mobility_cahn_hilliard</a>, <a class="el" href="density__model_8cc_source.html#l00020">DensityModel::model_cast()</a>, <a class="el" href="rheological__model_8cc_source.html#l00004">RheologicalModel::model_cast()</a>, <a class="el" href="specific__heat__model_8cc_source.html#l00020">SpecificHeatModel::model_cast()</a>, <a class="el" href="thermal__conductivity__model_8cc_source.html#l00020">ThermalConductivityModel::model_cast()</a>, <a class="el" href="thermal__expansion__model_8cc_source.html#l00020">ThermalExpansionModel::model_cast()</a>, <a class="el" href="tracer__diffusivity__model_8cc_source.html#l00020">TracerDiffusivityModel::model_cast()</a>, <a class="el" href="mobility__cahn__hilliard__model_8cc_source.html#l00020">MobilityCahnHilliardModel::model_cast()</a>, <a class="el" href="surface__tension__model_8cc_source.html#l00020">SurfaceTensionModel::model_cast()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00372">non_newtonian_flow</a>, <a class="el" href="parameters_8h_source.html#l00492">Parameters::PhysicalProperties::number_of_fluids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00386">number_of_fluids</a>, <a class="el" href="parameters_8h_source.html#l00502">Parameters::PhysicalProperties::number_of_material_interactions</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00388">number_of_material_interactions</a>, <a class="el" href="parameters_8h_source.html#l00497">Parameters::PhysicalProperties::number_of_solids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00387">number_of_solids</a>, <a class="el" href="classParameters_1_1Material.html#acc7336ee0289363a01ec2df5d5f1f2c7ad0b50e5bdf6e59d6f8ce448465e09069">Parameters::Material::phase_change</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00375">phase_change</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00368">phase_change_parameters</a>, <a class="el" href="physical__property__model_8h_source.html#l00050">phase_order_cahn_hilliard</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00384">physical_properties_parameters</a>, <a class="el" href="physical__property__model_8h_source.html#l00049">pressure</a>, <a class="el" href="parameters_8h_source.html#l00513">Parameters::PhysicalProperties::reference_temperature</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00381">reference_temperature</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00370">required_fields</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00362">rheology</a>, <a class="el" href="physical__property__model_8h_source.html#l00045">shear_rate</a>, <a class="el" href="parameters_8h_source.html#l00496">Parameters::PhysicalProperties::solids</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00360">specific_heat</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00365">surface_tension</a>, <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, <a class="el" href="physical__property__model_8h_source.html#l00047">temperature_p1</a>, <a class="el" href="physical__property__model_8h_source.html#l00048">temperature_p2</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00361">thermal_conductivity</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00363">thermal_expansion</a>, and <a class="el" href="physical__properties__manager_8h_source.html#l00364">tracer_diffusivity</a>.</p>
 
 </div>
 </div>
@@ -1256,7 +1287,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00253">253</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00259">259</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1322,7 +1353,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00246">246</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00252">252</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1349,7 +1380,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00283">283</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00289">289</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1374,7 +1405,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00366">366</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00373">373</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1398,7 +1429,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00367">367</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00374">374</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1422,7 +1453,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00353">353</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00359">359</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1446,7 +1477,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00385">385</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00392">392</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1470,7 +1501,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00387">387</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00394">394</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1486,7 +1517,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00350">350</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00356">356</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1541,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00361">361</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00367">367</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1534,7 +1565,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00365">365</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00372">372</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1558,7 +1589,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00379">379</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00386">386</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1582,7 +1613,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00381">381</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00388">388</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1606,7 +1637,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00380">380</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00387">387</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1621,6 +1652,30 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool PhysicalPropertiesManager::phase_change</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00375">375</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+
+</div>
+</div>
+<a id="a170f7e86ccfdbcee49330e754536d0cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a170f7e86ccfdbcee49330e754536d0cc">&#9670;&nbsp;</a></span>phase_change_parameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structParameters_1_1PhaseChange.html">Parameters::PhaseChange</a>&gt; PhysicalPropertiesManager::phase_change_parameters</td>
         </tr>
       </table>
   </td>
@@ -1654,7 +1709,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00377">377</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00384">384</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1678,7 +1733,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00374">374</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00381">381</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1702,7 +1757,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00363">363</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00370">370</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1726,7 +1781,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00356">356</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00362">362</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1750,7 +1805,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00354">354</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00360">360</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1774,7 +1829,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00359">359</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00365">365</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1798,7 +1853,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00355">355</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00361">361</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1822,7 +1877,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00357">357</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00363">363</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1846,7 +1901,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00358">358</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__properties__manager_8h_source.html#l00364">364</a> of file <a class="el" href="physical__properties__manager_8h_source.html">physical_properties_manager.h</a>.</p>
 
 </div>
 </div>

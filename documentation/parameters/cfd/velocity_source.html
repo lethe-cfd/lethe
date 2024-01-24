@@ -412,7 +412,7 @@ end
 </section>
 <section id="darcy-penalization">
 <h2>Darcy Penalization<a class="headerlink" href="#darcy-penalization" title="Link to this heading">#</a></h2>
-<p>A Darcy-like source term can be added to the simulation using the following parmeters:</p>
+<p>A Darcy-like source term can be added to the simulation using the following parameters:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
   set Darcy type = none
 end
@@ -421,6 +421,10 @@ end
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">type</span></code> parameter specifies the type of Darcy penalization term to be applied to the Navier-Stokes equations. The options are <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">phase_change</span></code>. The <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> model uses the values of the <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">liquid</span></code>  and <code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">solid</span></code> set-up within the <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">change</span></code> subsection of the <a class="reference internal" href="physical_properties.html"><span class="doc">Physical Properties</span></a>.</p></li>
 </ul>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The phase change Darcy model does not currently have a Cahn-Hilliard implementation.</p>
+</div>
 </section>
 </section>
 

@@ -479,9 +479,9 @@ end
 <li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span></code> parameter is the thermal expansion coefficient of the fluid with dimension of <span class="math notranslate nohighlight">\(\text{Temperature}^{-1}\)</span>. It is used to define the buoyancy-driven flow (natural convection) using the Boussinesq approximation, which leads to the definition of the following source term that is added to the Navier-Stokes equation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[{\bf{F_{B}}} = -\beta {\bf{g}} (T-T_{ref})\]</div>
+\[{\bf{F_{B}}} = -\beta {\bf{g}} (T-T_\text{ref})\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(F_B\)</span> denotes the buoyant force source term, <span class="math notranslate nohighlight">\(\beta\)</span> is the thermal expansion coefficient, <span class="math notranslate nohighlight">\(T\)</span> is temperature, and <span class="math notranslate nohighlight">\(T_{ref}\)</span> is the reference temperature. This is only used when a constant thermal expansion model is used.</p>
+<p>where <span class="math notranslate nohighlight">\(F_B\)</span> denotes the buoyant force source term, <span class="math notranslate nohighlight">\(\beta\)</span> is the thermal expansion coefficient, <span class="math notranslate nohighlight">\(T\)</span> is temperature, and <span class="math notranslate nohighlight">\(T_\text{ref}\)</span> is the reference temperature. This is only used when a constant thermal expansion model is used.</p>
 </li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tracer</span> <span class="pre">diffusivity</span> <span class="pre">model</span></code> specifies the model used to calculate the tracer diffusivity. At the moment, only a constant tracer diffusivity is supported.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tracer</span> <span class="pre">diffusivity</span></code> parameter is the diffusivity coefficient of the tracer in units of <span class="math notranslate nohighlight">\(\text{Length}^{2} \cdot \text{Time}^{-1}\)</span> . In SI, this is <span class="math notranslate nohighlight">\(\text{m}^{2} \cdot \text{s}^{-1}\)</span>.</p></li>
@@ -689,16 +689,16 @@ end
 </div>
 </section>
 <section id="phase-change-model">
-<h4>Phase-Change Model<a class="headerlink" href="#phase-change-model" title="Link to this heading">#</a></h4>
+<span id="rheological-phase-change-model"></span><h4>Phase-Change Model<a class="headerlink" href="#phase-change-model" title="Link to this heading">#</a></h4>
 <p>The phase change model is a simple rheological model in which the viscosity depends on the temperature. This model is used to model melting and freezing of components. The kinematic viscosity <span class="math notranslate nohighlight">\(\nu\)</span> is given by :</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}\nu =   c^{*}_p  = \begin{cases} \nu_s \; \text{if} \; T&lt;T_{s} \\
-            \frac{T-T_s}{T_l-T_s} \nu_l + (1-\frac{T-T_s}{T_l-T_s}) \nu_s \; \text{if} \; T_{l}&gt;T&gt;T_{s}\\
-            \nu_l \; \text{if} \; T&gt;T_{l}
+\[\begin{split}\nu =   c^{*}_\text{p}  = \begin{cases} \nu_\text{s} &amp; \text{if} \; T&lt;T_\text{s} \\
+            \frac{T-T_\text{s}}{T_\text{l}-T_\text{s}} \nu_\text{l} + \left(1-\frac{T-T_\text{s}}{T_\text{l}-T_\text{s}}\right) \nu_\text{s} &amp; \text{if} \; T_\text{l}&gt;T&gt;T_\text{s}\\
+            \nu_\text{l} &amp; \text{if} \; T&gt;T_\text{l}
             \end{cases}\end{split}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span> are the liquidus and solidus temperature. The underlying hypothesis of this model is that the melting and the solidification occurs over a phase change interval. Melting will occur between <span class="math notranslate nohighlight">\(T_s\)</span> and <span class="math notranslate nohighlight">\(T_l\)</span> and solidification will occur between <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and <span class="math notranslate nohighlight">\(T_\text{s}\)</span> are the liquidus and solidus temperature. The underlying hypothesis of this model is that the melting and the solidification occur over a phase change interval. Melting will occur between <span class="math notranslate nohighlight">\(T_\text{s}\)</span> and <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and solidification will occur between <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and <span class="math notranslate nohighlight">\(T_\text{s}\)</span>.</p>
 <p>This model is parameterized using the <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">change</span></code> subsection</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection phase change
   # Temperature of the liquidus
@@ -707,19 +707,19 @@ end
   # Temperature of the solidus
   set solidus temperature  = 0
 
-  # Specific heat of the liquid phase
+  # Viscosity of the liquid phase
   set viscosity liquid     = 1
 
-  # viscosity of the solid phase
+  # Viscosity of the solid phase
   set viscosity solid      = 1
 end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_l\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\nu_{l}\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\nu_{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\nu_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\nu_\text{s}\)</span></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -732,9 +732,9 @@ end
 <p>Lethe supports both <code class="docutils literal notranslate"><span class="pre">constant</span></code> and <code class="docutils literal notranslate"><span class="pre">isothermal_ideal_gas</span></code> density models. Constant density assumes a constant density value. Isothermal ideal gas density assumes that the fluid’s density varies according the following state equation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\rho = \rho_{ref} + \psi p = \rho_{ref} + \frac{1}{R T} \ p\]</div>
+\[\rho = \rho_\text{ref} + \psi p = \rho_\text{ref} + \frac{1}{R T} \ p\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\rho_{ref}\)</span> is the density of the fluid at the reference state, <span class="math notranslate nohighlight">\(\psi = \frac{1}{R T}\)</span> is the compressibility factor derived from the ideal gas law with <span class="math notranslate nohighlight">\(R= \frac{R_u}{M}\)</span> the specific gas constant (universal gas constant (<span class="math notranslate nohighlight">\(R_u\)</span>) divided by the molar mass of the gas (<span class="math notranslate nohighlight">\(M\)</span>)) and <span class="math notranslate nohighlight">\(T\)</span> the temperature of the gas, finally, <span class="math notranslate nohighlight">\(p\)</span> is the differential pressure between the reference state and the current state. This model is used for weakly compressible flows when temperature fluctuations’ influence on density can be neglected.</p>
+<p>where <span class="math notranslate nohighlight">\(\rho_\text{ref}\)</span> is the density of the fluid at the reference state, <span class="math notranslate nohighlight">\(\psi = \frac{1}{R T}\)</span> is the compressibility factor derived from the ideal gas law with <span class="math notranslate nohighlight">\(R= \frac{R_u}{M}\)</span> the specific gas constant (universal gas constant (<span class="math notranslate nohighlight">\(R_u\)</span>) divided by the molar mass of the gas (<span class="math notranslate nohighlight">\(M\)</span>)) and <span class="math notranslate nohighlight">\(T\)</span> the temperature of the gas, finally, <span class="math notranslate nohighlight">\(p\)</span> is the differential pressure between the reference state and the current state. This model is used for weakly compressible flows when temperature fluctuations’ influence on density can be neglected.</p>
 <p>This model is parametrized using the <code class="docutils literal notranslate"><span class="pre">isothermal_ideal_gas</span></code> subsection:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection physical properties
   set number of fluids = 1
@@ -751,7 +751,7 @@ end
 </div>
 <p>where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">density_ref</span></code> corresponds to <span class="math notranslate nohighlight">\(\rho_{ref}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">density_ref</span></code> corresponds to <span class="math notranslate nohighlight">\(\rho_\text{ref}\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> corresponds to <span class="math notranslate nohighlight">\(R\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> corresponds to <span class="math notranslate nohighlight">\(T\)</span></p></li>
 </ul>
@@ -769,34 +769,56 @@ end
 \[k = k_{A,0}+ k_{A,1} T\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(k_{A,0}\)</span> and <span class="math notranslate nohighlight">\(k_{A,1}\)</span> are constants and <span class="math notranslate nohighlight">\(T\)</span> is the temperature. This enables a linear variation of the thermal conductivity as a function of the temperature.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> thermal conductivity model, two different values (<code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code>, and <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code>) are required for calculating the thermal conductivities of the liquid and solid phases, respectively. For the liquid phase (T&gt;T_liquidus), the <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code> is applied, while for the solid phase (T&lt;T_solidus), the model uses the <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code>. In the mushy zone between T_solidus and T_liquidus, the thermal conductivity is equal to:</p>
+<p id="thermal-conductivity-phase-change-model">In the <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> thermal conductivity model, two different values (<code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code>, and <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code>) are required for calculating the thermal conductivities of the liquid and solid phases, respectively. For the liquid phase (<span class="math notranslate nohighlight">\(T&gt;T_\text{liquidus}\)</span>), the <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code> is applied, while for the solid phase (<span class="math notranslate nohighlight">\(T&lt;T_\text{solidus}\)</span>), the model uses the <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code>. In the mushy zone between <span class="math notranslate nohighlight">\(T_\text{solidus}\)</span> and <span class="math notranslate nohighlight">\(T_\text{liquidus}\)</span>, the thermal conductivity is equal to:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[k = \alpha_l k_l + (1 - \alpha_l) k_s\]</div>
+\[k = \alpha_\text{l} k_\text{l} + (1 - \alpha_\text{l}) k_\text{s}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(k_l\)</span>, <span class="math notranslate nohighlight">\(k_s\)</span> and  <span class="math notranslate nohighlight">\(\alpha_l\)</span> denote thermal conductivities of the liquid and solid phases and the liquid fraction.</p>
+<p>where <span class="math notranslate nohighlight">\(k_\text{l}\)</span>, <span class="math notranslate nohighlight">\(k_\text{s}\)</span> and  <span class="math notranslate nohighlight">\(\alpha_\text{l}\)</span> denote thermal conductivities of the liquid and solid phases and the liquid fraction.</p>
+<p>This model is parameterized using the following section:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection phase change
+  # Temperature of the liquidus
+  set liquidus temperature = 1
+
+  # Temperature of the solidus
+  set solidus temperature  = 0
+
+  # Thermal conductivity of the liquid phase
+  set thermal conductivity liquid = 1
+
+  # Thermal conductivity of the solid phase
+  set thermal conductivity solid  = 1
+end
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(k_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(k_\text{s}\)</span></p></li>
+</ul>
 </section>
 <section id="specific-heat-models">
-<h3>Specific Heat Models<a class="headerlink" href="#specific-heat-models" title="Link to this heading">#</a></h3>
-<p>Lethe supports two types of specific heat models. Setting <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat=constant</span></code> sets a constant specific heat. Lethe also supports a <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> specific heat model. This model can simulate the melting and solidification of a material. The model follows the work of Blais &amp; Ilinca <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2018.03.037">[1]</a>. This approach defines the specific heat <span class="math notranslate nohighlight">\(C_p\)</span> as:</p>
+<span id="specific-heat-phase-change-model"></span><h3>Specific Heat Models<a class="headerlink" href="#specific-heat-models" title="Link to this heading">#</a></h3>
+<p>Lethe supports two types of specific heat models. Setting <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat=constant</span></code> sets a constant specific heat. Lethe also supports a <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> specific heat model. This model can simulate the melting and solidification of a material. The model follows the work of Blais &amp; Ilinca <a class="reference external" href="https://doi.org/10.1016/j.compfluid.2018.03.037">[1]</a>. This approach defines the specific heat <span class="math notranslate nohighlight">\(C_\text{p}\)</span> as:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[C_p = \frac{H(T)-H(T_0)}{T-T_0}\]</div>
+\[C_\text{p} = \frac{H(T)-H(T_0)}{T-T_0}\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(T\)</span> is the temperature, <span class="math notranslate nohighlight">\(T_0\)</span> is the temperature at the previous time and <span class="math notranslate nohighlight">\(H(T)\)</span> is the enthalpy, as a function of the temperature, to be:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[H(T) = H_0 + \int_{T_0}^{T} c^{*}_p (T^*) dT\]</div>
+\[H(T) = H_0 + \int_{T_0}^{T} c^{*}_\text{p} (T^*) dT\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(H_0\)</span> is a reference enthalpy, taken to be 0, and <span class="math notranslate nohighlight">\(c^{*}_p\)</span> is:</p>
+<p>where <span class="math notranslate nohighlight">\(H_0\)</span> is a reference enthalpy, taken to be 0, and <span class="math notranslate nohighlight">\(c^{*}_\text{p}\)</span> is:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}c^{*}_p  = \begin{cases} C_{p,s} \text{if}\;T&lt;T_s\\
-            \frac{C_{p,s}+C_{p,l}}{2}+\frac{h_l}{T_l-T_s} \text{if}\;T\in[T_s,T_l]\\
-            C_{p,l} \text{if} T&gt;T_l
+\[\begin{split}c^{*}_\text{p}  = \begin{cases} C_\text{p,s} &amp; \text{if} \; T&lt;T_\text{s}\\
+            \frac{C_\text{p,s}+C_\text{p,l}}{2}+\frac{h_\text{l}}{T_\text{l}-T_\text{s}} &amp; \text{if} \; T\in[T_\text{s},T_\text{l}]\\
+            C_\text{p,l} &amp; \text{if} \; T&gt;T_\text{l}
             \end{cases}\end{split}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(C_{p,s}\)</span> and <span class="math notranslate nohighlight">\(C_{p,l}\)</span> are the solid and liquid specific heat, respectively. <span class="math notranslate nohighlight">\(h_l\)</span> is the latent enthalpy (enthalpy related to the phase change), <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span> are the liquidus and solidus temperature. The underlying hypothesis of this model is that the melting and the solidification occurs over a phase change interval. Melting will occur between <span class="math notranslate nohighlight">\(T_s\)</span> and <span class="math notranslate nohighlight">\(T_l\)</span> and solidification will occur between <span class="math notranslate nohighlight">\(T_l\)</span> and <span class="math notranslate nohighlight">\(T_s\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(C_\text{p,s}\)</span> and <span class="math notranslate nohighlight">\(C_\text{p,l}\)</span> are the solid and liquid specific heat, respectively. <span class="math notranslate nohighlight">\(h_\text{l}\)</span> is the latent enthalpy (enthalpy related to the phase change), <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and <span class="math notranslate nohighlight">\(T_\text{s}\)</span> are the liquidus and solidus temperature. The underlying hypothesis of this model is that the melting and the solidification occurs over a phase change interval. Melting will occur between <span class="math notranslate nohighlight">\(T_\text{s}\)</span> and <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and solidification will occur between <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and <span class="math notranslate nohighlight">\(T_\text{s}\)</span>.</p>
 <p>This model is parameterized using the following section:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection phase change
   # Enthalpy of the phase change
@@ -817,20 +839,20 @@ end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">latent</span> <span class="pre">enthalpy</span></code> is the latent enthalpy of the phase change: <span class="math notranslate nohighlight">\(h_l\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_l\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(C_{p,l}\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(C_{p,s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">latent</span> <span class="pre">enthalpy</span></code> is the latent enthalpy of the phase change: <span class="math notranslate nohighlight">\(h_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(C_\text{p,l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(C_\text{p,s}\)</span></p></li>
 </ul>
 </section>
 <section id="thermal-expansion-models">
-<h3>Thermal Expansion Models<a class="headerlink" href="#thermal-expansion-models" title="Link to this heading">#</a></h3>
+<span id="thermal-expansion-phase-change-model"></span><h3>Thermal Expansion Models<a class="headerlink" href="#thermal-expansion-models" title="Link to this heading">#</a></h3>
 <p>Lethe supports two types of thermal expansion heat models. Setting <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">model=constant</span></code> sets a constant thermal expansion. Lethe also supports a <code class="docutils literal notranslate"><span class="pre">phase_change</span></code> thermal expansion model. This model can simulate the melting and solidification of a material with natural convection. It works by defining a different value of the thermal expansion coefficient depending on the value of the temperature:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}\beta =   c^{*}_p  = \begin{cases} \beta_s, \text{if}\;T \leq T_l\\
-            \beta_l, \text{if}\;T &gt; T_l
+\[\begin{split}\beta = \begin{cases} \beta_\text{s} &amp; \text{if}\;T \leq T_\text{l}\\
+            \beta_\text{l} &amp; \text{if}\;T &gt; T_\text{l}
             \end{cases}\end{split}\]</div>
 </div>
 <p>This model is parameterized using the following section:</p>
@@ -850,10 +872,76 @@ end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_l\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_s\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\beta_{l}\)</span></p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\beta_{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> is <span class="math notranslate nohighlight">\(T_\text{s}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">liquid</span></code> is <span class="math notranslate nohighlight">\(\beta_\text{l}\)</span></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">solid</span></code> is <span class="math notranslate nohighlight">\(\beta_\text{s}\)</span></p></li>
+</ul>
+</section>
+<section id="phase-change">
+<h3>Phase Change<a class="headerlink" href="#phase-change" title="Link to this heading">#</a></h3>
+<p>The current section recapitulates the <cite>phase change</cite> subsection.
+Snippets of this subsection can be found across the different physical property models’ descriptions.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection phase change
+  set liquidus temperature = 1
+  set solidus temperature  = 0
+
+  # Rheology
+  set viscosity liquid = 1
+  set viscosity solid  = 1
+
+  # Specific heat
+  set latent enthalpy      = 1
+  set specific heat liquid = 1
+  set specific heat solid  = 1
+
+  # Thermal conductivity
+  set thermal conductivity liquid = 1
+  set thermal conductivity solid  = 1
+
+  # Thermal expansion
+  set thermal expansion liquid = 1
+  set thermal expansion solid  = 0
+
+  # Darcy penalization
+  set Darcy penalty liquid = 0
+  set Darcy penalty solid  = 0
+end
+</pre></div>
+</div>
+<p>The phase change is modelled with the underlying hypothesis that melting and solidification occur over a phase change interval. Melting occurs between <span class="math notranslate nohighlight">\(T_\text{s}\)</span> and <span class="math notranslate nohighlight">\(T_\text{l}\)</span>, respectively the <code class="docutils literal notranslate"><span class="pre">solidus</span> <span class="pre">temperature</span></code> and the <code class="docutils literal notranslate"><span class="pre">liquidus</span> <span class="pre">temperature</span></code>. Analogously, solidification occurs between <span class="math notranslate nohighlight">\(T_\text{l}\)</span> and <span class="math notranslate nohighlight">\(T_\text{s}\)</span>.</p>
+<ul class="simple">
+<li><p>Rheology (see <a class="reference internal" href="#rheological-phase-change-model">rheological phase change model</a>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">liquid</span></code>: kinematic viscosity of the liquid phase <span class="math notranslate nohighlight">\((\nu_\text{l})\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">viscosity</span> <span class="pre">solid</span></code>: kinematic viscosity of the solid phase <span class="math notranslate nohighlight">\((\nu_\text{s})\)</span></p></li>
+</ul>
+</li>
+<li><p>Specific heat (see <a class="reference internal" href="#specific-heat-phase-change-model">specific heat phase change model</a>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">latent</span> <span class="pre">enthalpy</span></code>: latent enthalpy of the phase change <span class="math notranslate nohighlight">\((h_\text{l})\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">liquid</span></code>: specific heat of the liquid phase <span class="math notranslate nohighlight">\((C_\text{p,l})\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">specific</span> <span class="pre">heat</span> <span class="pre">solid</span></code>: specific heat of the solid phase <span class="math notranslate nohighlight">\((C_\text{p,s})\)</span></p></li>
+</ul>
+</li>
+<li><p>Thermal conductivity (see <a class="reference internal" href="#thermal-conductivity-phase-change-model">thermal conductivity phase change model</a>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">liquid</span></code>: thermal conductivity of the liquid phase <span class="math notranslate nohighlight">\((k_\text{l})\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">conductivity</span> <span class="pre">solid</span></code>: thermal conductivity of the solid phase <span class="math notranslate nohighlight">\((k_\text{s})\)</span></p></li>
+</ul>
+</li>
+<li><p>Thermal expansion (see <a class="reference internal" href="#thermal-expansion-phase-change-model">thermal expansion phase change model</a>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">liquid</span></code>: thermal expansion of the liquid phase <span class="math notranslate nohighlight">\((\beta_\text{l})\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thermal</span> <span class="pre">expansion</span> <span class="pre">solid</span></code>: thermal expansion of the solid phase <span class="math notranslate nohighlight">\((\beta_\text{s})\)</span></p></li>
+</ul>
+</li>
+<li><p>Darcy penalization (see <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/velocity_source.html#darcy-penalization">Darcy penalization</a>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">liquid</span></code>: Darcy penalty coefficient for the liquid phase</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Darcy</span> <span class="pre">penalty</span> <span class="pre">solid</span></code>: Darcy penalty coefficient for the solid phase</p></li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
@@ -883,7 +971,7 @@ end
 \[\begin{split}\alpha_{\mathrm{l}} =
   \begin{cases}
       0 &amp;\quad\text{if}\; T&lt;T_\mathrm{s}\\
-      \dfrac{T-T_\mathrm{s}}{T_\mathrm{L}-T_\mathrm{s}} &amp;\quad\text{if}\; T_\mathrm{l}\le T \le T_\mathrm{s}\\
+      \dfrac{T-T_\mathrm{s}}{T_\mathrm{l}-T_\mathrm{s}} &amp;\quad\text{if}\; T_\mathrm{l}\le T \le T_\mathrm{s}\\
       1 &amp;\quad\text{if}\; T_\mathrm{l} &lt;T
   \end{cases}\end{split}\]</div>
 </div>
@@ -978,6 +1066,7 @@ end
 <li><a class="reference internal" href="#thermal-conductivity-models">Thermal Conductivity Models</a></li>
 <li><a class="reference internal" href="#specific-heat-models">Specific Heat Models</a></li>
 <li><a class="reference internal" href="#thermal-expansion-models">Thermal Expansion Models</a></li>
+<li><a class="reference internal" href="#phase-change">Phase Change</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#interface-physical-property-models">Interface Physical Property Models</a><ul>
