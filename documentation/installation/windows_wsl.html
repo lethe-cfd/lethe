@@ -416,7 +416,13 @@
 <section id="installing-wsl-and-ubuntu-step-0">
 <h2>Installing WSL and Ubuntu (Step #0)<a class="headerlink" href="#installing-wsl-and-ubuntu-step-0" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> Install WSL (Windows Subsystem for Linux), and Ubuntu 22.04 LTS from the microsoft store, following the steps indicated <a class="reference external" href="https://linuxconfig.org/ubuntu-22-04-on-wsl-windows-subsystem-for-linux">in this tutorial</a></p></li>
+<li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> Install WSL (Windows Subsystem for Linux). Open PowerShell or Windows Command Prompt in administrator mode by right-clicking and selecting “Run as administrator”, enter the wsl –install command, then restart your machine.</p></li>
+</ol>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>wsl --install
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> Enable WSL and Ubuntu 22.04 LTS from the microsoft store, following the steps indicated <a class="reference external" href="https://linuxconfig.org/ubuntu-22-04-on-wsl-windows-subsystem-for-linux">in this tutorial</a></p></li>
 </ol>
 <div class="admonition-verify-the-installed-version-of-wsl admonition">
 <p class="admonition-title">Verify the installed version of WSL</p>
@@ -426,7 +432,7 @@
 </div>
 <p>should indicate <code class="docutils literal notranslate"><span class="pre">version</span> <span class="pre">2</span></code>. If not, follow this to update WSL: <a class="reference external" href="https://docs.microsoft.com/fr-fr/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2">https://docs.microsoft.com/fr-fr/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2</a></p>
 </div>
-<ol class="arabic simple" start="2">
+<ol class="arabic simple" start="3">
 <li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> Launch Ubuntu (from the start menu) and <a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> update Ubuntu:</p></li>
 </ol>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt update
@@ -438,7 +444,7 @@ sudo apt upgrade
 <p>The <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command will ask you to type your user password, as defined during Ubuntu installation. Note that Linux does not show any symbol while typing a password, contrary to Windows with <code class="docutils literal notranslate"><span class="pre">*</span></code>: simply type your password and press <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
 </div>
 <p>When prompted “do you want to continue?”, proceed by typing <code class="docutils literal notranslate"><span class="pre">y</span></code> and hitting <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple" start="4">
 <li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> (optional) To activate copy/paste in the Linux sub-terminal (<a class="reference external" href="https://defragged.org/2020/10/29/how-to-copy-paste-in-windows-subsystem-for-linux-wsl/">tutorial with screenshots</a>):</p></li>
 </ol>
 <blockquote>
@@ -448,7 +454,7 @@ sudo apt upgrade
 <li><p>you can then use <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+V</span></code> to paste text or commands in the Linux sub-terminal</p></li>
 </ul>
 </div></blockquote>
-<ol class="arabic simple" start="4">
+<ol class="arabic simple" start="5">
 <li><p><a class="reference internal" href="../_images/windows.png"><img alt="win_shell" src="../_images/windows.png" style="height: 15px;" /></a> (optional) For better ease in the Linux terminal (better coloring, multiple tabs), change the default terminal:</p></li>
 </ol>
 <blockquote>
@@ -475,20 +481,24 @@ sudo apt upgrade
 <p>The following step is to install deal.II. This can be done through</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Advanced Packaging Tool (apt): <strong>this is by far the easiest way to proceed</strong></p></li>
-<li><p>Candi shell script (<a class="reference external" href="https://github.com/dealii/candi">candi github page</a>).</p></li>
+<li><p>Advanced Packaging Tool (apt) (<strong>this is by far the easiest way to proceed</strong>) : <a class="reference internal" href="#install-deal-ii-apt"><span class="std std-ref">Installing deal.II using apt (Step #1)</span></a> (recommended for users)</p></li>
+<li><p>Candi shell script (<a class="reference external" href="https://github.com/dealii/candi">candi github page</a>): <a class="reference internal" href="#install-deal-ii-candi"><span class="std std-ref">Installing deal.II using Candi (Step #1)</span></a> (recommended for developers)</p></li>
 </ol>
 </div></blockquote>
 </section>
 <section id="installing-deal-ii-using-apt-step-1">
-<h2>Installing deal.II using apt (Step #1)<a class="headerlink" href="#installing-deal-ii-using-apt-step-1" title="Link to this heading">#</a></h2>
+<span id="install-deal-ii-apt"></span><h2>Installing deal.II using apt (Step #1)<a class="headerlink" href="#installing-deal-ii-using-apt-step-1" title="Link to this heading">#</a></h2>
 <p>This is done following <a class="reference external" href="https://www.dealii.org/download.html#:~:text=page%20for%20details.-,Linux%20distributions,-Arch%20Linux">this procedure</a>.</p>
-<p>In case you are using Ubuntu, you will need to <a class="reference external" href="https://launchpad.net/~ginggs/+archive/ubuntu/deal.ii-9.5.1-backports">update the backports</a>:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> In case you are using Ubuntu, you will need to <a class="reference external" href="https://launchpad.net/~ginggs/+archive/ubuntu/deal.ii-9.5.1-backports">update the backports</a>:</p></li>
+</ol>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository ppa:ginggs/deal.ii-9.5.1-backports
 sudo apt update
 </pre></div>
 </div>
-<p>To install deal.II, run:</p>
+<ol class="arabic simple" start="2">
+<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> To install deal.II, run:</p></li>
+</ol>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libdeal.ii-dev
 </pre></div>
 </div>
@@ -503,7 +513,7 @@ sudo apt update
 </div>
 </section>
 <section id="installing-deal-ii-using-candi-step-1">
-<h2>Installing deal.II using Candi (Step #1)<a class="headerlink" href="#installing-deal-ii-using-candi-step-1" title="Link to this heading">#</a></h2>
+<span id="install-deal-ii-candi"></span><h2>Installing deal.II using Candi (Step #1)<a class="headerlink" href="#installing-deal-ii-using-candi-step-1" title="Link to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This step is by far the most troublesome in all Lethe installation. Read and follow each step carefully.</p>
@@ -534,7 +544,7 @@ liblapack3 liblapack-dev libsuitesparse-dev
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gcc --version
 </pre></div>
 </div>
-<p>should return <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">(Ubuntu</span> <span class="pre">10.X.X...)</span> <span class="pre">10.X.X</span></code>. If not, go to <a class="reference internal" href="#change-compiler-default-version"><span class="std std-ref">Change Compiler Default Version</span></a>.</p>
+<p>should return <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">(Ubuntu</span> <span class="pre">10.X.X...)</span> <span class="pre">10.X.X</span></code> or higher. If not, go to <a class="reference internal" href="#change-compiler-default-version"><span class="std std-ref">Change Compiler Default Version</span></a>.</p>
 </div>
 <ol class="arabic simple" start="3">
 <li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> Create folders (suggested structure):</p></li>
@@ -719,8 +729,12 @@ mkdir candi; cd candi
 <section id="installing-lethe-step-2">
 <h2>Installing Lethe (Step #2)<a class="headerlink" href="#installing-lethe-step-2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> Set-up the folder structure: in the <code class="docutils literal notranslate"><span class="pre">Software</span></code> folder created at the beginning of Step #1 (if you are in the candi folder, type <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code>), type:</p></li>
+<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> Set-up the folder structure. Create the <code class="docutils literal notranslate"><span class="pre">Software</span></code> folder (if you are doing the candi installation, this folder should alredy exist from Step #1).</p></li>
 </ol>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mkdir Software; cd Software
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Software</span></code> folder created (if you are in the candi folder, type <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code>), type:</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mkdir -p lethe/{git,build,inst}
 </pre></div>
 </div>
@@ -760,31 +774,58 @@ cmake ../git -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../inst/
 <ol class="arabic simple" start="5">
 <li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> (optional) Finally, it is recommended to test your installation:</p></li>
 </ol>
+<p>Run the tests in the build folder:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>ctest -j$numprocs
+</pre></div>
+</div>
+<p>This will take from a few minutes to an hour, depending on your hardware. At the end, you should have this message on the console:</p>
 <blockquote>
-<div><ul class="simple">
-<li><p>If you are running these tests for the first time, install <code class="docutils literal notranslate"><span class="pre">numdiff</span></code>:</p></li>
-</ul>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>100% tests passed
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are running these tests for the first time, install <code class="docutils literal notranslate"><span class="pre">numdiff</span></code> (if you need superuser privilege, use sudo):</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>apt-get numdiff
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Run the tests in the build folder:</p></li>
-</ul>
-</div></blockquote>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>ctest -j$numprocs
-
-This will take from a few minutes to an hour, depending on your hardware. At the end, you should have this message on the console:
-
-.. code-block:: text
-
-  100% tests passed
+<p>or</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>apt install numdiff
 </pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The lethe test suites requires that deal.II be configured with p4est 2.2.1, otherwise the test which include restart files will fail.</p>
 </div>
 <p>Congratulations, you are now ready to use lethe! For instance, proceed to <a class="reference internal" href="../first_simulation.html"><span class="doc">Launching Your First Simulation</span></a>.</p>
 </section>
 <section id="updating-deal-ii-and-lethe">
 <h2>Updating deal.II and Lethe<a class="headerlink" href="#updating-deal-ii-and-lethe" title="Link to this heading">#</a></h2>
 <p>If you have already installed deal.II and lethe, you can update them without doing the entire installation from scratch:</p>
+<section id="through-apt">
+<h3>Through apt<a class="headerlink" href="#through-apt" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> As all other <code class="docutils literal notranslate"><span class="pre">apt</span></code> packages, run:</p></li>
+</ol>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt update
+sudo apt upgrade -y
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> Then, update lethe:</p></li>
+</ol>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>cd ../lethe/git
+git pull
+cd ../build
+cmake ../git -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../inst/
+make -j$numprocs
+</pre></div>
+</div>
+</section>
+<section id="with-candi">
+<h3>With Candi<a class="headerlink" href="#with-candi" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="../_images/linux.png"><img alt="linux_shell" src="../_images/linux.png" style="height: 15px;" /></a> Update deal.ii by typing, from your home directory:</p></li>
 </ol>
@@ -802,6 +843,7 @@ cmake ../git -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../inst/
 make -j$numprocs
 </pre></div>
 </div>
+</section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
@@ -921,7 +963,11 @@ nano candi.cfg
 <li><a class="reference internal" href="#installing-deal-ii-using-apt-step-1">Installing deal.II using apt (Step #1)</a></li>
 <li><a class="reference internal" href="#installing-deal-ii-using-candi-step-1">Installing deal.II using Candi (Step #1)</a></li>
 <li><a class="reference internal" href="#installing-lethe-step-2">Installing Lethe (Step #2)</a></li>
-<li><a class="reference internal" href="#updating-deal-ii-and-lethe">Updating deal.II and Lethe</a></li>
+<li><a class="reference internal" href="#updating-deal-ii-and-lethe">Updating deal.II and Lethe</a><ul>
+<li><a class="reference internal" href="#through-apt">Through apt</a></li>
+<li><a class="reference internal" href="#with-candi">With Candi</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
 <li><a class="reference internal" href="#change-compiler-default-version">Change Compiler Default Version</a></li>
 <li><a class="reference internal" href="#modify-candi-installation-parameters-with-nano">Modify Candi Installation Parameters with Nano</a></li>
