@@ -100,9 +100,17 @@ GDNavierStokesSolver<dim>::setup_assemblers()
               this->simulation_control));
         }
 
-      AssertThrow(this->simulation_parameters.velocity_sources.darcy_type !=
-                    Parameters::VelocitySource::DarcySourceType::phase_change,
-                  PhaseChangeDarcyModelDoesNotSupportVOF());
+      // Darcy force for phase change simulations
+      if (this->simulation_parameters.velocity_sources.darcy_type ==
+          Parameters::VelocitySource::DarcySourceType::phase_change)
+        {
+          AssertThrow(this->simulation_parameters.multiphysics.heat_transfer,
+                      PhaseChangeDarcyModelRequiresTemperature());
+          this->assemblers.push_back(
+            std::make_shared<PhaseChangeDarcyVOFAssembler<dim>>(
+              this->simulation_parameters.physical_properties_manager
+                .get_phase_change_parameters_vector()));
+        }
 
       if (!this->simulation_parameters.physical_properties_manager
              .density_is_constant())
@@ -156,7 +164,7 @@ GDNavierStokesSolver<dim>::setup_assemblers()
       if (this->simulation_parameters.physical_properties_manager
             .is_non_newtonian())
         {
-          // Core assembler with Non newtonian viscosity
+          // Core assembler with non-Newtonian viscosity
           this->assemblers.push_back(
             std::make_shared<GDNavierStokesAssemblerNonNewtonianCore<dim>>(
               this->simulation_control, gamma));
@@ -203,6 +211,7 @@ GDNavierStokesSolver<dim>::assemble_system_matrix()
   setup_assemblers();
 
   auto scratch_data = NavierStokesScratchData<dim>(
+    this->simulation_control,
     this->simulation_parameters.physical_properties_manager,
     *this->fe,
     *this->cell_quadrature,
@@ -332,6 +341,7 @@ GDNavierStokesSolver<dim>::assemble_system_rhs()
   setup_assemblers();
 
   auto scratch_data = NavierStokesScratchData<dim>(
+    this->simulation_control,
     this->simulation_parameters.physical_properties_manager,
     *this->fe,
     *this->cell_quadrature,
@@ -423,9 +433,10 @@ GDNavierStokesSolver<dim>::assemble_local_system_rhs(
         cell->index(),
         dof_handler_ht);
 
-      scratch_data.reinit_heat_transfer(temperature_cell,
-                                        *this->multiphysics->get_solution(
-                                          PhysicsID::heat_transfer));
+      scratch_data.reinit_heat_transfer(
+        temperature_cell,
+        *this->multiphysics->get_solution(PhysicsID::heat_transfer),
+        *this->multiphysics->get_previous_solutions(PhysicsID::heat_transfer));
     }
 
   scratch_data.calculate_physical_properties();
