@@ -262,8 +262,8 @@ $(function() {
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  this-&gt;locally_owned_dofs = this-&gt;dof_handler.locally_owned_dofs();</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler,</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                                          this-&gt;locally_relevant_dofs);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  this-&gt;locally_relevant_dofs =</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler);</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">// Non Zero constraints</span></div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  define_non_zero_constraints();</div>
@@ -672,9 +672,9 @@ $(function() {
 <div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;            {</div>
 <div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;              AffineConstraints&lt;double&gt; temp_constraints;</div>
 <div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;              temp_constraints.clear();</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;              IndexSet locally_relevant_level_dofs;</div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;              DoFTools::extract_locally_relevant_level_dofs(</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;                this-&gt;dof_handler, level, locally_relevant_level_dofs);</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;              <span class="keyword">const</span> IndexSet locally_relevant_level_dofs =</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;                DoFTools::extract_locally_relevant_level_dofs(this-&gt;dof_handler,</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;                                                              level);</div>
 <div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;              temp_constraints.reinit(locally_relevant_level_dofs);</div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;              VectorTools::compute_no_normal_flux_constraints_on_level(</div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;                this-&gt;dof_handler,</div>
@@ -1670,8 +1670,8 @@ $(function() {
 <div class="line"><a name="l01590"></a><span class="lineno"> 1590</span>&#160;  FEValuesExtractors::Vector velocities(0);</div>
 <div class="line"><a name="l01591"></a><span class="lineno"> 1591</span>&#160;  FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
 <div class="line"><a name="l01592"></a><span class="lineno"> 1592</span>&#160;  this-&gt;zero_constraints.clear();</div>
-<div class="line"><a name="l01593"></a><span class="lineno"> 1593</span>&#160;  DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler,</div>
-<div class="line"><a name="l01594"></a><span class="lineno"> 1594</span>&#160;                                          this-&gt;locally_relevant_dofs);</div>
+<div class="line"><a name="l01593"></a><span class="lineno"> 1593</span>&#160;  this-&gt;locally_relevant_dofs =</div>
+<div class="line"><a name="l01594"></a><span class="lineno"> 1594</span>&#160;    DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler);</div>
 <div class="line"><a name="l01595"></a><span class="lineno"> 1595</span>&#160;  this-&gt;zero_constraints.reinit(this-&gt;locally_relevant_dofs);</div>
 <div class="line"><a name="l01596"></a><span class="lineno"> 1596</span>&#160; </div>
 <div class="line"><a name="l01597"></a><span class="lineno"> 1597</span>&#160;  DoFTools::make_hanging_node_constraints(this-&gt;dof_handler,</div>

@@ -664,8 +664,8 @@ $(function() {
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;    this-&gt;dof_handler.locally_owned_dofs().get_view(dof_u, dof_u + dof_p);</div>
 <div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160; </div>
 <div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;  IndexSet locally_relevant_dofs_acquisition;</div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;  DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler,</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;                                          locally_relevant_dofs_acquisition);</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;  locally_relevant_dofs_acquisition =</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;    DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler);</div>
 <div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;  this-&gt;locally_relevant_dofs.resize(2);</div>
 <div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;  this-&gt;locally_relevant_dofs[0] =</div>
 <div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;    locally_relevant_dofs_acquisition.get_view(0, dof_u);</div>

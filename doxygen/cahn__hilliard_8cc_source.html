@@ -914,8 +914,8 @@ $(function() {
 <div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;  <span class="keyword">auto</span> mpi_communicator = triangulation-&gt;get_communicator();</div>
 <div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160; </div>
 <div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160; </div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;  locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;  DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant_dofs);</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;  locally_owned_dofs    = dof_handler.locally_owned_dofs();</div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;  locally_relevant_dofs = DoFTools::extract_locally_relevant_dofs(dof_handler);</div>
 <div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
 <div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;  present_solution.reinit(locally_owned_dofs,</div>
 <div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;                          locally_relevant_dofs,</div>

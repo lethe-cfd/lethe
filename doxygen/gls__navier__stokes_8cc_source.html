@@ -169,8 +169,8 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  DoFRenumbering::Cuthill_McKee(this-&gt;dof_handler);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  this-&gt;locally_owned_dofs = this-&gt;dof_handler.locally_owned_dofs();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                                          this-&gt;locally_relevant_dofs);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  this-&gt;locally_relevant_dofs =</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  FEValuesExtractors::Vector velocities(0);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
@@ -390,8 +390,8 @@ $(function() {
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  FEValuesExtractors::Vector velocities(0);</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  this-&gt;zero_constraints.clear();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler,</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                                          this-&gt;locally_relevant_dofs);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  this-&gt;locally_relevant_dofs =</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    DoFTools::extract_locally_relevant_dofs(this-&gt;dof_handler);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  this-&gt;zero_constraints.reinit(this-&gt;locally_relevant_dofs);</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  DoFTools::make_hanging_node_constraints(this-&gt;dof_handler,</div>

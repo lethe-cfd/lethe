@@ -906,8 +906,8 @@ $(function() {
 <div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;{</div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;  displacement_dh.distribute_dofs(*this-&gt;displacement_fe);</div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;  locally_owned_dofs = displacement_dh.locally_owned_dofs();</div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;  DoFTools::extract_locally_relevant_dofs(displacement_dh,</div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;                                          locally_relevant_dofs);</div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;  locally_relevant_dofs =</div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;    DoFTools::extract_locally_relevant_dofs(displacement_dh);</div>
 <div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160; </div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;  displacement.reinit(locally_owned_dofs, mpi_communicator);</div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;  displacement_relevant.reinit(locally_owned_dofs,</div>
