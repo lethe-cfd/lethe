@@ -218,27 +218,44 @@ DisableContacts<dim>::identify_mobility_status(
   for (auto cell = local_and_ghost_cells_copy.begin();
        cell != local_and_ghost_cells_copy.end();)
     {
+      const unsigned int cell_id = (*cell)->active_cell_index();
       std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
       (*cell)->get_dof_indices(local_dof_indices);
+      bool has_empty_neighbor = false;
+      bool solid_fraction_or_granular_temperature = false;
 
       // Check if the cell has any empty neighbor cell by the value at nodes
-      bool has_empty_neighbor = false;
       for (auto node_id : local_dof_indices)
         {
           if (mobility_at_nodes[node_id] == mobility_status::empty)
             {
               has_empty_neighbor = true;
-              break; // No need to check the other nodes
+              goto assign_mobile;
             }
         }
 
-      // Check if the cell is mobile by criteria
-      // (granular temperature or solid fraction or empty neighbor)
-      const unsigned int cell_id = (*cell)->active_cell_index();
       if (granular_temperature_average[cell_id] >
             granular_temperature_threshold ||
-          solid_fractions[cell_id] < solid_fraction_threshold ||
-          has_empty_neighbor)
+          solid_fractions[cell_id] < solid_fraction_threshold)
+        {
+          solid_fraction_or_granular_temperature = true;
+          goto assign_mobile;
+        }
+
+      /*
+      for (const auto &face : (*cell)->face_iterators())
+        {
+          if (face->at_boundary())
+            {
+              goto assign_mobile;
+            }
+        }
+        */
+
+      // Check if the cell is mobile by criteria
+      // (granular temperature or solid fraction or empty neighbor)
+    assign_mobile:
+      if (has_empty_neighbor || solid_fraction_or_granular_temperature)
         {
           // Assign mobile status to cell in map
           cell_mobility_status.insert({cell_id, mobility_status::mobile});
@@ -259,12 +276,12 @@ DisableContacts<dim>::identify_mobility_status(
                 std::max((int)mobility_status::mobile,
                          mobility_at_nodes[node_id]);
             }
+          break;
         }
-      else
-        {
+
           // Since erase() is not called, we need to increment the iterator
           ++cell;
-        }
+
     }
 
   mobility_at_nodes.update_ghost_values();
