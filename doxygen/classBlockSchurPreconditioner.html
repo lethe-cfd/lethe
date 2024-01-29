@@ -94,8 +94,8 @@ Inheritance diagram for BlockSchurPreconditioner&lt; BSPreconditioner &gt;:</div
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3d3964b50325b144f604e9e5d45ed77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockSchurPreconditioner.html#ab3d3964b50325b144f604e9e5d45ed77">BlockSchurPreconditioner</a> (double <a class="el" href="classBlockSchurPreconditioner.html#af4f1abb540d57aa7e33f076f99e1c7ac">gamma</a>, double <a class="el" href="classBlockSchurPreconditioner.html#a69fbcc3e1f004dbf8cb909619ada425e">kinematic_viscosity</a>, const TrilinosWrappers::BlockSparseMatrix &amp;S, const TrilinosWrappers::SparseMatrix &amp;P, const BSPreconditioner *p_amat_preconditioner, const BSPreconditioner *p_pmass_preconditioner, <a class="el" href="structParameters_1_1LinearSolver.html">Parameters::LinearSolver</a> solver_parameters)</td></tr>
 <tr class="separator:ab3d3964b50325b144f604e9e5d45ed77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f65c7f7bf9b9c041f685c3dae1dba35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockSchurPreconditioner.html#a9f65c7f7bf9b9c041f685c3dae1dba35">vmult</a> (TrilinosWrappers::MPI::BlockVector &amp;dst, const TrilinosWrappers::MPI::BlockVector &amp;src) const</td></tr>
-<tr class="separator:a9f65c7f7bf9b9c041f685c3dae1dba35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa495387c64e1ddcdd3d7a6e968d569f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockSchurPreconditioner.html#aa495387c64e1ddcdd3d7a6e968d569f0">vmult</a> (<a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;dst, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;src) const</td></tr>
+<tr class="separator:aa495387c64e1ddcdd3d7a6e968d569f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -119,7 +119,7 @@ Private Attributes</h2></td></tr>
 class BlockSchurPreconditioner&lt; BSPreconditioner &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00041">41</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00042">42</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab3d3964b50325b144f604e9e5d45ed77"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3d3964b50325b144f604e9e5d45ed77">&#9670;&nbsp;</a></span>BlockSchurPreconditioner()</h2>
@@ -179,13 +179,13 @@ template&lt;typename BSPreconditioner &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00267">267</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00265">265</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f65c7f7bf9b9c041f685c3dae1dba35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f65c7f7bf9b9c041f685c3dae1dba35">&#9670;&nbsp;</a></span>vmult()</h2>
+<a id="aa495387c64e1ddcdd3d7a6e968d569f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa495387c64e1ddcdd3d7a6e968d569f0">&#9670;&nbsp;</a></span>vmult()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,13 +195,13 @@ template&lt;class BSPreconditioner &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classBlockSchurPreconditioner.html">BlockSchurPreconditioner</a>&lt; BSPreconditioner &gt;::vmult </td>
           <td>(</td>
-          <td class="paramtype">TrilinosWrappers::MPI::BlockVector &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const TrilinosWrappers::MPI::BlockVector &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>src</em>&#160;</td>
         </tr>
         <tr>
@@ -212,7 +212,7 @@ template&lt;class BSPreconditioner &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00286">286</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00284">284</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>

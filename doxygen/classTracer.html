@@ -86,8 +86,8 @@ Inheritance diagram for Tracer&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classTracer__inherit__graph.png" border="0" usemap="#aTracer_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aTracer_3_01dim_01_4_inherit__map" id="aTracer_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="54,184,170,211"/>
-<area shape="rect" href="classAuxiliaryPhysics.html" title=" " alt="" coords="25,80,199,136"/>
+<area shape="rect" title=" " alt="" coords="54,169,170,196"/>
+<area shape="rect" href="classAuxiliaryPhysics.html" title=" " alt="" coords="25,80,199,121"/>
 <area shape="rect" href="classPhysicsSolver.html" title="Class that has all the common elements of a physics solver. It creates the nonlinear solver as specif..." alt="" coords="5,5,219,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -141,20 +141,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc61c177c601ede39a7466c526c43ae0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#afc61c177c601ede39a7466c526c43ae0">solve_linear_system</a> (const bool initial_step, const bool renewed_matrix=true) override</td></tr>
 <tr class="memdesc:afc61c177c601ede39a7466c526c43ae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call for the solution of the linear system of equation using a strategy appropriate to the auxiliary physics.  <a href="classTracer.html#afc61c177c601ede39a7466c526c43ae0">More...</a><br /></td></tr>
 <tr class="separator:afc61c177c601ede39a7466c526c43ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb5b6ff4c0ff2001a732f07d9e42a388"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#afb5b6ff4c0ff2001a732f07d9e42a388">get_evaluation_point</a> () override</td></tr>
-<tr class="memdesc:afb5b6ff4c0ff2001a732f07d9e42a388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods to get the private attributes for the physic currently solved NB : dof_handler and present_solution are passed to the multiphysics interface at the end of the setup_dofs method.  <a href="classTracer.html#afb5b6ff4c0ff2001a732f07d9e42a388">More...</a><br /></td></tr>
-<tr class="separator:afb5b6ff4c0ff2001a732f07d9e42a388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3c3e979fb7835f7e8fd386646bbd22b"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#af3c3e979fb7835f7e8fd386646bbd22b">get_local_evaluation_point</a> () override</td></tr>
-<tr class="separator:af3c3e979fb7835f7e8fd386646bbd22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee4f9ffa724c358859099bb050d6464b"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#aee4f9ffa724c358859099bb050d6464b">get_newton_update</a> () override</td></tr>
-<tr class="separator:aee4f9ffa724c358859099bb050d6464b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90e83abe5e0b2a6f341a96305b25b85f"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a90e83abe5e0b2a6f341a96305b25b85f">get_present_solution</a> () override</td></tr>
-<tr class="separator:a90e83abe5e0b2a6f341a96305b25b85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6322b7394c6fdfb5fb6ef94e990fee20"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a6322b7394c6fdfb5fb6ef94e990fee20">get_system_rhs</a> () override</td></tr>
-<tr class="separator:a6322b7394c6fdfb5fb6ef94e990fee20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a02d6aed8228a1e84c76b660c76860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a32a02d6aed8228a1e84c76b660c76860">get_evaluation_point</a> () override</td></tr>
+<tr class="memdesc:a32a02d6aed8228a1e84c76b660c76860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods to get the private attributes for the physic currently solved NB : dof_handler and present_solution are passed to the multiphysics interface at the end of the setup_dofs method.  <a href="classTracer.html#a32a02d6aed8228a1e84c76b660c76860">More...</a><br /></td></tr>
+<tr class="separator:a32a02d6aed8228a1e84c76b660c76860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac442f45123eadc6de4a8efcd82eab40a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#ac442f45123eadc6de4a8efcd82eab40a">get_local_evaluation_point</a> () override</td></tr>
+<tr class="separator:ac442f45123eadc6de4a8efcd82eab40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60080b8153f88cee0ae6d91ec33308db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a60080b8153f88cee0ae6d91ec33308db">get_newton_update</a> () override</td></tr>
+<tr class="separator:a60080b8153f88cee0ae6d91ec33308db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb91e7097cf72403580627dc658d8b93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#aeb91e7097cf72403580627dc658d8b93">get_present_solution</a> () override</td></tr>
+<tr class="separator:aeb91e7097cf72403580627dc658d8b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a49d5f1f4f41c09ec5991fdede42ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a67a49d5f1f4f41c09ec5991fdede42ac">get_system_rhs</a> () override</td></tr>
+<tr class="separator:a67a49d5f1f4f41c09ec5991fdede42ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a959f418c3a6c15cbcd88ee3495b4f8ae"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a959f418c3a6c15cbcd88ee3495b4f8ae">get_nonzero_constraints</a> () override</td></tr>
 <tr class="separator:a959f418c3a6c15cbcd88ee3495b4f8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classAuxiliaryPhysics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAuxiliaryPhysics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a></td></tr>
+<tr class="inherit_header pub_methods_classAuxiliaryPhysics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAuxiliaryPhysics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a></td></tr>
 <tr class="memitem:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#afe5c8707f20900ab81eae0526156dc82">AuxiliaryPhysics</a> (const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> non_linear_solver_parameters)</td></tr>
 <tr class="memdesc:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a> - Base constructor for Auxiliary physics. At the present moment this is an interface with nothing. The auxiliary physics is a pure virtual class.  <a href="classAuxiliaryPhysics.html#afe5c8707f20900ab81eae0526156dc82">More...</a><br /></td></tr>
 <tr class="separator:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,28 +235,28 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a6003b7ef1c05002a5a96c257129d7445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9c604fe958870a11ec5b2e5d4d2ae34"><td class="memItemLeft" align="right" valign="top">IndexSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#ac9c604fe958870a11ec5b2e5d4d2ae34">locally_relevant_dofs</a></td></tr>
 <tr class="separator:ac9c604fe958870a11ec5b2e5d4d2ae34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c90b5a458f324359cc927a28f112bd9"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a1c90b5a458f324359cc927a28f112bd9">evaluation_point</a></td></tr>
-<tr class="separator:a1c90b5a458f324359cc927a28f112bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0040c9819276a32ad9656fc11263c925"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a0040c9819276a32ad9656fc11263c925">local_evaluation_point</a></td></tr>
-<tr class="separator:a0040c9819276a32ad9656fc11263c925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415b1be26d2a642950e16bfecae386b9"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a415b1be26d2a642950e16bfecae386b9">newton_update</a></td></tr>
-<tr class="separator:a415b1be26d2a642950e16bfecae386b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6ab9d28efe08b97e45bb189fe747da0"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#af6ab9d28efe08b97e45bb189fe747da0">present_solution</a></td></tr>
-<tr class="separator:af6ab9d28efe08b97e45bb189fe747da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6032cabc1550e059a5cbd53a0b30f487"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a6032cabc1550e059a5cbd53a0b30f487">system_rhs</a></td></tr>
-<tr class="separator:a6032cabc1550e059a5cbd53a0b30f487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab717fd0b9dffd88d13e8883445ce0383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#ab717fd0b9dffd88d13e8883445ce0383">evaluation_point</a></td></tr>
+<tr class="separator:ab717fd0b9dffd88d13e8883445ce0383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc7dd4e9e5ed4ffd086e741222d1683"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#aacc7dd4e9e5ed4ffd086e741222d1683">local_evaluation_point</a></td></tr>
+<tr class="separator:aacc7dd4e9e5ed4ffd086e741222d1683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a162e9225276a7d20953cc48c029d5188"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a162e9225276a7d20953cc48c029d5188">newton_update</a></td></tr>
+<tr class="separator:a162e9225276a7d20953cc48c029d5188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab159a633ebc8dddbbfe681388fa9a4db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#ab159a633ebc8dddbbfe681388fa9a4db">present_solution</a></td></tr>
+<tr class="separator:ab159a633ebc8dddbbfe681388fa9a4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18360e3f93bb043f5e82720fdc6a5212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a18360e3f93bb043f5e82720fdc6a5212">system_rhs</a></td></tr>
+<tr class="separator:a18360e3f93bb043f5e82720fdc6a5212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa752d8d4fe4ff63c9a837ce58f7ec99"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#afa752d8d4fe4ff63c9a837ce58f7ec99">nonzero_constraints</a></td></tr>
 <tr class="separator:afa752d8d4fe4ff63c9a837ce58f7ec99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a587a36b56ed17bd0af193c220be4102b"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a587a36b56ed17bd0af193c220be4102b">zero_constraints</a></td></tr>
 <tr class="separator:a587a36b56ed17bd0af193c220be4102b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a508f7bb1a7e946d30c2e2928defb1f16"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::SparseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a508f7bb1a7e946d30c2e2928defb1f16">system_matrix</a></td></tr>
 <tr class="separator:a508f7bb1a7e946d30c2e2928defb1f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c2b46c02839b8fc4c1d2f80cc973695"><td class="memItemLeft" align="right" valign="top">std::vector&lt; TrilinosWrappers::MPI::Vector &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a6c2b46c02839b8fc4c1d2f80cc973695">previous_solutions</a></td></tr>
-<tr class="separator:a6c2b46c02839b8fc4c1d2f80cc973695"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a689b9237232d457365226e78a651bc9c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt; dim, TrilinosWrappers::MPI::Vector &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a689b9237232d457365226e78a651bc9c">solution_transfer</a></td></tr>
-<tr class="separator:a689b9237232d457365226e78a651bc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253c3bd06f4802eaaee13dba87b62182"><td class="memItemLeft" align="right" valign="top">std::vector&lt; parallel::distributed::SolutionTransfer&lt; dim, TrilinosWrappers::MPI::Vector &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a253c3bd06f4802eaaee13dba87b62182">previous_solutions_transfer</a></td></tr>
-<tr class="separator:a253c3bd06f4802eaaee13dba87b62182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75fd1aee2c087d6e114eb371d9823e6d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a75fd1aee2c087d6e114eb371d9823e6d">previous_solutions</a></td></tr>
+<tr class="separator:a75fd1aee2c087d6e114eb371d9823e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89734ddcac50d0b6ce3a264c3944a704"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a89734ddcac50d0b6ce3a264c3944a704">solution_transfer</a></td></tr>
+<tr class="separator:a89734ddcac50d0b6ce3a264c3944a704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ab23d0b82d282987614c96646dff24"><td class="memItemLeft" align="right" valign="top">std::vector&lt; parallel::distributed::SolutionTransfer&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a34ab23d0b82d282987614c96646dff24">previous_solutions_transfer</a></td></tr>
+<tr class="separator:a34ab23d0b82d282987614c96646dff24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a810c0db83b2edc9811d463fa2f919cd8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classTracerAssemblerBase.html">TracerAssemblerBase</a>&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a810c0db83b2edc9811d463fa2f919cd8">assemblers</a></td></tr>
 <tr class="separator:a810c0db83b2edc9811d463fa2f919cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61034c02d489fe94b0454cd9119cae3a"><td class="memItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracer.html#a61034c02d489fe94b0454cd9119cae3a">statistics_table</a></td></tr>
@@ -275,7 +275,7 @@ Additional Inherited Members</h2></td></tr>
 class Tracer&lt; dim &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00053">53</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00054">54</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1439103a764cca0bafe5acc6284b6e31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1439103a764cca0bafe5acc6284b6e31">&#9670;&nbsp;</a></span>Tracer()</h2>
@@ -325,9 +325,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00056">56</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00057">57</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00381">Tracer&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="tracer_8h_source.html#l00367">Tracer&lt; dim &gt;::computing_timer</a>, <a class="el" href="tracer_8h_source.html#l00375">Tracer&lt; dim &gt;::dof_handler</a>, <a class="el" href="tracer_8h_source.html#l00378">Tracer&lt; dim &gt;::fe</a>, <a class="el" href="tracer_8h_source.html#l00380">Tracer&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="tracer_8h_source.html#l00401">Tracer&lt; dim &gt;::previous_solutions</a>, <a class="el" href="tracer_8h_source.html#l00409">Tracer&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="tracer_8h_source.html#l00369">Tracer&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="tracer_8h_source.html#l00406">Tracer&lt; dim &gt;::solution_transfer</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00380">Tracer&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="tracer_8h_source.html#l00366">Tracer&lt; dim &gt;::computing_timer</a>, <a class="el" href="tracer_8h_source.html#l00374">Tracer&lt; dim &gt;::dof_handler</a>, <a class="el" href="tracer_8h_source.html#l00377">Tracer&lt; dim &gt;::fe</a>, <a class="el" href="tracer_8h_source.html#l00379">Tracer&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="tracer_8h_source.html#l00400">Tracer&lt; dim &gt;::previous_solutions</a>, <a class="el" href="tracer_8h_source.html#l00407">Tracer&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="tracer_8h_source.html#l00368">Tracer&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="tracer_8h_source.html#l00405">Tracer&lt; dim &gt;::solution_transfer</a>.</p>
 
 </div>
 </div>
@@ -541,7 +541,7 @@ template&lt;int dim&gt; </div>
 
 <p>Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00296">296</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -642,9 +642,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00176">176</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00175">175</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -740,7 +740,7 @@ template&lt;int dim&gt; </div>
 
 <p>Carry out the operations required to finish a simulation correctly. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00348">348</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -775,16 +775,16 @@ template&lt;int dim&gt; </div>
 
 <p>Returns the dof_handler of the tracer physics. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a47bd3339a5b8b1ccdc8fbe25a58c5265">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a47bd3339a5b8b1ccdc8fbe25a58c5265">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00201">201</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00200">200</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00375">Tracer&lt; dim &gt;::dof_handler</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00374">Tracer&lt; dim &gt;::dof_handler</a>.</p>
 
 </div>
 </div>
-<a id="afb5b6ff4c0ff2001a732f07d9e42a388"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb5b6ff4c0ff2001a732f07d9e42a388">&#9670;&nbsp;</a></span>get_evaluation_point()</h2>
+<a id="a32a02d6aed8228a1e84c76b660c76860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a02d6aed8228a1e84c76b660c76860">&#9670;&nbsp;</a></span>get_evaluation_point()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -795,7 +795,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_evaluation_point </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_evaluation_point </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -812,14 +812,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00245">245</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00244">244</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00390">Tracer&lt; dim &gt;::evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00389">Tracer&lt; dim &gt;::evaluation_point</a>.</p>
 
 </div>
 </div>
-<a id="af3c3e979fb7835f7e8fd386646bbd22b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3c3e979fb7835f7e8fd386646bbd22b">&#9670;&nbsp;</a></span>get_local_evaluation_point()</h2>
+<a id="ac442f45123eadc6de4a8efcd82eab40a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac442f45123eadc6de4a8efcd82eab40a">&#9670;&nbsp;</a></span>get_local_evaluation_point()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -830,7 +830,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_local_evaluation_point </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_local_evaluation_point </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -845,14 +845,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aef3b890ff2cffc97d546e32583c5ba3a">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00250">250</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00249">249</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00391">Tracer&lt; dim &gt;::local_evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00390">Tracer&lt; dim &gt;::local_evaluation_point</a>.</p>
 
 </div>
 </div>
-<a id="aee4f9ffa724c358859099bb050d6464b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee4f9ffa724c358859099bb050d6464b">&#9670;&nbsp;</a></span>get_newton_update()</h2>
+<a id="a60080b8153f88cee0ae6d91ec33308db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60080b8153f88cee0ae6d91ec33308db">&#9670;&nbsp;</a></span>get_newton_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -863,7 +863,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_newton_update </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_newton_update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -878,9 +878,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#abcd8bead5555e17de5c6e20b64cb3ebb">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00255">255</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00254">254</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00392">Tracer&lt; dim &gt;::newton_update</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00391">Tracer&lt; dim &gt;::newton_update</a>.</p>
 
 </div>
 </div>
@@ -911,14 +911,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aadfaeda6c524f54395f64cbc100c3003">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00270">270</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00269">269</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00395">Tracer&lt; dim &gt;::nonzero_constraints</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00394">Tracer&lt; dim &gt;::nonzero_constraints</a>.</p>
 
 </div>
 </div>
-<a id="a90e83abe5e0b2a6f341a96305b25b85f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90e83abe5e0b2a6f341a96305b25b85f">&#9670;&nbsp;</a></span>get_present_solution()</h2>
+<a id="aeb91e7097cf72403580627dc658d8b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb91e7097cf72403580627dc658d8b93">&#9670;&nbsp;</a></span>get_present_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -929,7 +929,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_present_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_present_solution </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -944,14 +944,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a254a20d9cf4297efac822566de52fb83">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00260">260</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00259">259</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00393">Tracer&lt; dim &gt;::present_solution</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00392">Tracer&lt; dim &gt;::present_solution</a>.</p>
 
 </div>
 </div>
-<a id="a6322b7394c6fdfb5fb6ef94e990fee20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6322b7394c6fdfb5fb6ef94e990fee20">&#9670;&nbsp;</a></span>get_system_rhs()</h2>
+<a id="a67a49d5f1f4f41c09ec5991fdede42ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a49d5f1f4f41c09ec5991fdede42ac">&#9670;&nbsp;</a></span>get_system_rhs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -962,7 +962,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_system_rhs </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::get_system_rhs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -977,9 +977,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a46683552514c3323218b73817070a95e">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00265">265</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00264">264</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tracer_8h_source.html#l00394">Tracer&lt; dim &gt;::system_rhs</a>.</p>
+<p class="reference">References <a class="el" href="tracer_8h_source.html#l00393">Tracer&lt; dim &gt;::system_rhs</a>.</p>
 
 </div>
 </div>
@@ -1007,7 +1007,7 @@ template&lt;int dim&gt; </div>
 
 <p>Rearrange vector solution correctly for transient simulations. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a0e74925e0067b4bcf2578f18a2f15204">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a0e74925e0067b4bcf2578f18a2f15204">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00375">375</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -1037,7 +1037,7 @@ template&lt;int dim&gt; </div>
 
 <p>post_mesh_adaption Interpolates the auxiliary physics variables to the new mesh </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3870a0c5dc427098c9bec1afc9a668c0">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3870a0c5dc427098c9bec1afc9a668c0">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00531">531</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -1071,11 +1071,11 @@ template&lt;int dim&gt; </div>
 
 <p>Postprocess the auxiliary physics results. Post-processing this case implies the calculation of all derived quantities using the solution vector of the physics. It does not concern the output of the solution using the DataOutObject, which is accomplished through the attach_solution_to_output function. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a5cddfe1a7224404a899d7564d908d098">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a5cddfe1a7224404a899d7564d908d098">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00386">386</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01005">calculate_L2_error()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">calculate_L2_error()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
 </div>
 </div>
@@ -1103,7 +1103,7 @@ template&lt;int dim&gt; </div>
 
 <p>pre_mesh_adaption Prepares the auxiliary physics variables for a mesh refinement/coarsening </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00518">518</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -1133,9 +1133,9 @@ template&lt;int dim&gt; </div>
 
 <p>Allows tracer physics to set-up solution vector from checkpoint file;. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00594">594</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00593">593</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00320">deserialize_table()</a>.</p>
 
@@ -1165,9 +1165,9 @@ template&lt;int dim&gt; </div>
 
 <p>Sets-up the initial conditions associated with the physics. Generally, physics only support imposing nodal values, but some physics additionnaly support the use of L2 projection or steady-state solutions. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00783">783</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00780">780</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
 </div>
 </div>
@@ -1225,9 +1225,9 @@ template&lt;int dim&gt; </div>
 
 <p>Sets-up the DofHandler and the degree of freedom associated with the physics. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00642">642</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00639">639</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00033">tracer</a>, and <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8a73b05af1b2487b24f8027cf106e0651f">BoundaryConditions::tracer_dirichlet</a>.</p>
 
@@ -1280,7 +1280,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00796">796</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00793">793</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, and <a class="el" href="multiphysics_8h_source.html#l00033">tracer</a>.</p>
 
@@ -1310,9 +1310,9 @@ template&lt;int dim&gt; </div>
 
 <p>Update non zero constraints if the boundary is time-dependent. </p>
 
-<p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#aa4eb967dee8229dc43ff95182df011fe">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#aa4eb967dee8229dc43ff95182df011fe">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00747">747</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00744">744</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8a73b05af1b2487b24f8027cf106e0651f">BoundaryConditions::tracer_dirichlet</a>.</p>
 
@@ -1342,7 +1342,7 @@ template&lt;int dim&gt; </div>
 
 <p>Prepares Heat Transfer to write checkpoint. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aac6b380b7f28d81bef3a7d33eb13ec34">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aac6b380b7f28d81bef3a7d33eb13ec34">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="tracer_8cc_source.html#l00560">560</a> of file <a class="el" href="tracer_8cc_source.html">tracer.cc</a>.</p>
 
@@ -1401,7 +1401,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00412">412</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00410">410</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1427,7 +1427,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00381">381</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00380">380</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1453,7 +1453,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00367">367</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00366">366</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1479,7 +1479,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00375">375</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00374">374</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1505,12 +1505,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00384">384</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00383">383</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a1c90b5a458f324359cc927a28f112bd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c90b5a458f324359cc927a28f112bd9">&#9670;&nbsp;</a></span>evaluation_point</h2>
+<a id="ab717fd0b9dffd88d13e8883445ce0383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab717fd0b9dffd88d13e8883445ce0383">&#9670;&nbsp;</a></span>evaluation_point</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1521,7 +1521,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::evaluation_point</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::evaluation_point</td>
         </tr>
       </table>
   </td>
@@ -1531,7 +1531,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00390">390</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00389">389</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1557,12 +1557,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00378">378</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00377">377</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a0040c9819276a32ad9656fc11263c925"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0040c9819276a32ad9656fc11263c925">&#9670;&nbsp;</a></span>local_evaluation_point</h2>
+<a id="aacc7dd4e9e5ed4ffd086e741222d1683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc7dd4e9e5ed4ffd086e741222d1683">&#9670;&nbsp;</a></span>local_evaluation_point</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1573,7 +1573,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::local_evaluation_point</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::local_evaluation_point</td>
         </tr>
       </table>
   </td>
@@ -1583,7 +1583,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00391">391</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00390">390</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1609,7 +1609,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00387">387</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00386">386</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1635,7 +1635,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00388">388</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00387">387</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1661,7 +1661,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00380">380</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00379">379</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1687,12 +1687,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00365">365</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00364">364</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a415b1be26d2a642950e16bfecae386b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a415b1be26d2a642950e16bfecae386b9">&#9670;&nbsp;</a></span>newton_update</h2>
+<a id="a162e9225276a7d20953cc48c029d5188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a162e9225276a7d20953cc48c029d5188">&#9670;&nbsp;</a></span>newton_update</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1703,7 +1703,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::newton_update</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::newton_update</td>
         </tr>
       </table>
   </td>
@@ -1713,7 +1713,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00392">392</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00391">391</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1739,12 +1739,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00395">395</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00394">394</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="af6ab9d28efe08b97e45bb189fe747da0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6ab9d28efe08b97e45bb189fe747da0">&#9670;&nbsp;</a></span>present_solution</h2>
+<a id="ab159a633ebc8dddbbfe681388fa9a4db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab159a633ebc8dddbbfe681388fa9a4db">&#9670;&nbsp;</a></span>present_solution</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1755,7 +1755,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::present_solution</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::present_solution</td>
         </tr>
       </table>
   </td>
@@ -1765,12 +1765,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00393">393</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00392">392</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a6c2b46c02839b8fc4c1d2f80cc973695"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c2b46c02839b8fc4c1d2f80cc973695">&#9670;&nbsp;</a></span>previous_solutions</h2>
+<a id="a75fd1aee2c087d6e114eb371d9823e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fd1aee2c087d6e114eb371d9823e6d">&#9670;&nbsp;</a></span>previous_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1781,7 +1781,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;TrilinosWrappers::MPI::Vector&gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::previous_solutions</td>
+          <td class="memname">std::vector&lt;<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::previous_solutions</td>
         </tr>
       </table>
   </td>
@@ -1791,12 +1791,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00401">401</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00400">400</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a253c3bd06f4802eaaee13dba87b62182"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a253c3bd06f4802eaaee13dba87b62182">&#9670;&nbsp;</a></span>previous_solutions_transfer</h2>
+<a id="a34ab23d0b82d282987614c96646dff24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ab23d0b82d282987614c96646dff24">&#9670;&nbsp;</a></span>previous_solutions_transfer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1807,7 +1807,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; parallel::distributed::SolutionTransfer&lt;dim, TrilinosWrappers::MPI::Vector&gt; &gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::previous_solutions_transfer</td>
+          <td class="memname">std::vector&lt;parallel::distributed::SolutionTransfer&lt;dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; &gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::previous_solutions_transfer</td>
         </tr>
       </table>
   </td>
@@ -1817,7 +1817,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00409">409</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00407">407</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1843,7 +1843,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00374">374</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00373">373</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1869,12 +1869,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00369">369</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00368">368</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a689b9237232d457365226e78a651bc9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a689b9237232d457365226e78a651bc9c">&#9670;&nbsp;</a></span>solution_transfer</h2>
+<a id="a89734ddcac50d0b6ce3a264c3944a704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89734ddcac50d0b6ce3a264c3944a704">&#9670;&nbsp;</a></span>solution_transfer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1885,7 +1885,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt;dim, TrilinosWrappers::MPI::Vector&gt; &gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::solution_transfer</td>
+          <td class="memname">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt;dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; &gt; <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::solution_transfer</td>
         </tr>
       </table>
   </td>
@@ -1895,7 +1895,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00406">406</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00405">405</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1921,7 +1921,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00415">415</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00413">413</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1947,12 +1947,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00397">397</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00396">396</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
-<a id="a6032cabc1550e059a5cbd53a0b30f487"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6032cabc1550e059a5cbd53a0b30f487">&#9670;&nbsp;</a></span>system_rhs</h2>
+<a id="a18360e3f93bb043f5e82720fdc6a5212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18360e3f93bb043f5e82720fdc6a5212">&#9670;&nbsp;</a></span>system_rhs</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1963,7 +1963,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::system_rhs</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classTracer.html">Tracer</a>&lt; dim &gt;::system_rhs</td>
         </tr>
       </table>
   </td>
@@ -1973,7 +1973,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00394">394</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00393">393</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -1999,7 +1999,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00373">373</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00372">372</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>
@@ -2025,7 +2025,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00396">396</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer_8h_source.html#l00395">395</a> of file <a class="el" href="tracer_8h_source.html">tracer.h</a>.</p>
 
 </div>
 </div>

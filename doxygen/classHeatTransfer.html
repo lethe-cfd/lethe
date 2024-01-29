@@ -86,8 +86,8 @@ Inheritance diagram for HeatTransfer&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classHeatTransfer__inherit__graph.png" border="0" usemap="#aHeatTransfer_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aHeatTransfer_3_01dim_01_4_inherit__map" id="aHeatTransfer_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="32,184,192,211"/>
-<area shape="rect" href="classAuxiliaryPhysics.html" title=" " alt="" coords="25,80,199,136"/>
+<area shape="rect" title=" " alt="" coords="32,169,192,196"/>
+<area shape="rect" href="classAuxiliaryPhysics.html" title=" " alt="" coords="25,80,199,121"/>
 <area shape="rect" href="classPhysicsSolver.html" title="Class that has all the common elements of a physics solver. It creates the nonlinear solver as specif..." alt="" coords="5,5,219,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -150,20 +150,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a11b59fdf3f633231b5b33450049b690a"><td class="memItemLeft" align="right" valign="top">const DoFHandler&lt; dim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a11b59fdf3f633231b5b33450049b690a">get_dof_handler</a> () override</td></tr>
 <tr class="memdesc:a11b59fdf3f633231b5b33450049b690a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods to get the private attributes for the physic currently solved NB : dof_handler and present_solution are passed to the multiphysics interface at the end of the setup_dofs method.  <a href="classHeatTransfer.html#a11b59fdf3f633231b5b33450049b690a">More...</a><br /></td></tr>
 <tr class="separator:a11b59fdf3f633231b5b33450049b690a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1439650119e0419a0a6294ff47f4463"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aa1439650119e0419a0a6294ff47f4463">get_evaluation_point</a> () override</td></tr>
-<tr class="memdesc:aa1439650119e0419a0a6294ff47f4463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods that give access to the private attributes of the physics being solved. These methods must be provided by the physics as they are the key to solve a problem using Lethe.  <a href="classHeatTransfer.html#aa1439650119e0419a0a6294ff47f4463">More...</a><br /></td></tr>
-<tr class="separator:aa1439650119e0419a0a6294ff47f4463"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a662d978f3b1fc5287b41e2cec434aec3"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a662d978f3b1fc5287b41e2cec434aec3">get_local_evaluation_point</a> () override</td></tr>
-<tr class="separator:a662d978f3b1fc5287b41e2cec434aec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18f395ddb902e801ad2345eaed4d4b4e"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a18f395ddb902e801ad2345eaed4d4b4e">get_newton_update</a> () override</td></tr>
-<tr class="separator:a18f395ddb902e801ad2345eaed4d4b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa88ac0cb5337bb9039d68bcd1a9bd24f"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aa88ac0cb5337bb9039d68bcd1a9bd24f">get_present_solution</a> () override</td></tr>
-<tr class="separator:aa88ac0cb5337bb9039d68bcd1a9bd24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05def451c171d924cf25a368f3ab06d9"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a05def451c171d924cf25a368f3ab06d9">get_system_rhs</a> () override</td></tr>
-<tr class="separator:a05def451c171d924cf25a368f3ab06d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc792333ac75d1b13734f3100c1891d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a4dc792333ac75d1b13734f3100c1891d">get_evaluation_point</a> () override</td></tr>
+<tr class="memdesc:a4dc792333ac75d1b13734f3100c1891d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods that give access to the private attributes of the physics being solved. These methods must be provided by the physics as they are the key to solve a problem using Lethe.  <a href="classHeatTransfer.html#a4dc792333ac75d1b13734f3100c1891d">More...</a><br /></td></tr>
+<tr class="separator:a4dc792333ac75d1b13734f3100c1891d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1bb1902b6ad1a11093232f939aaf62c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#ae1bb1902b6ad1a11093232f939aaf62c">get_local_evaluation_point</a> () override</td></tr>
+<tr class="separator:ae1bb1902b6ad1a11093232f939aaf62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13696b26e32ce2f572ce7cf3102f278a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a13696b26e32ce2f572ce7cf3102f278a">get_newton_update</a> () override</td></tr>
+<tr class="separator:a13696b26e32ce2f572ce7cf3102f278a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c4d63dd2326e25736fe4e77e9bd85b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a15c4d63dd2326e25736fe4e77e9bd85b">get_present_solution</a> () override</td></tr>
+<tr class="separator:a15c4d63dd2326e25736fe4e77e9bd85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0e9ead7a0fe70387ec4864cfc2796f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a2d0e9ead7a0fe70387ec4864cfc2796f">get_system_rhs</a> () override</td></tr>
+<tr class="separator:a2d0e9ead7a0fe70387ec4864cfc2796f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c8f2369b81e613ac9cd91090e1f663e"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a8c8f2369b81e613ac9cd91090e1f663e">get_nonzero_constraints</a> () override</td></tr>
 <tr class="separator:a8c8f2369b81e613ac9cd91090e1f663e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classAuxiliaryPhysics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAuxiliaryPhysics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a></td></tr>
+<tr class="inherit_header pub_methods_classAuxiliaryPhysics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAuxiliaryPhysics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a></td></tr>
 <tr class="memitem:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#afe5c8707f20900ab81eae0526156dc82">AuxiliaryPhysics</a> (const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> non_linear_solver_parameters)</td></tr>
 <tr class="memdesc:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a> - Base constructor for Auxiliary physics. At the present moment this is an interface with nothing. The auxiliary physics is a pure virtual class.  <a href="classAuxiliaryPhysics.html#afe5c8707f20900ab81eae0526156dc82">More...</a><br /></td></tr>
 <tr class="separator:afe5c8707f20900ab81eae0526156dc82 inherit pub_methods_classAuxiliaryPhysics"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,14 +223,14 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a37d9960242ca364a6fcce2105df53228"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a37d9960242ca364a6fcce2105df53228">write_liquid_fraction</a> ()</td></tr>
 <tr class="memdesc:a37d9960242ca364a6fcce2105df53228"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-processing. Write the liquid fraction to a file.  <a href="classHeatTransfer.html#a37d9960242ca364a6fcce2105df53228">More...</a><br /></td></tr>
 <tr class="separator:a37d9960242ca364a6fcce2105df53228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7095eec7820b772dbe674639d6760019"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
-<tr class="memitem:a7095eec7820b772dbe674639d6760019"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a7095eec7820b772dbe674639d6760019">postprocess_heat_flux_on_bc</a> (const bool gather_vof, const VectorType &amp;current_solution_fd)</td></tr>
-<tr class="separator:a7095eec7820b772dbe674639d6760019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e930b130b3dbf4fda567923b6be172"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:a81e930b130b3dbf4fda567923b6be172"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a81e930b130b3dbf4fda567923b6be172">postprocess_heat_flux_on_bc</a> (const bool gather_vof, const VectorType &amp;current_solution_fd)</td></tr>
+<tr class="separator:a81e930b130b3dbf4fda567923b6be172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af57f85e05f840178f1da1a9305f41704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#af57f85e05f840178f1da1a9305f41704">postprocess_heat_flux_on_nitsche_ib</a> ()</td></tr>
 <tr class="separator:af57f85e05f840178f1da1a9305f41704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89eefaba0cff1e6fda22b7459fd9f423"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
-<tr class="memitem:a89eefaba0cff1e6fda22b7459fd9f423"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a89eefaba0cff1e6fda22b7459fd9f423">postprocess_thermal_energy_in_fluid</a> (const bool gather_vof, const <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1">Parameters::FluidIndicator</a> monitored_fluid, const std::string domain_name, const VectorType &amp;current_solution_fd)</td></tr>
-<tr class="separator:a89eefaba0cff1e6fda22b7459fd9f423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70fe9d2931fbf1ddbadc881a747f44a"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:ab70fe9d2931fbf1ddbadc881a747f44a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#ab70fe9d2931fbf1ddbadc881a747f44a">postprocess_thermal_energy_in_fluid</a> (const bool gather_vof, const <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1">Parameters::FluidIndicator</a> monitored_fluid, const std::string domain_name, const VectorType &amp;current_solution_fd)</td></tr>
+<tr class="separator:ab70fe9d2931fbf1ddbadc881a747f44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea757a6ef815943cde9807f01679023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a9ea757a6ef815943cde9807f01679023">write_heat_flux</a> (const std::string domain_name)</td></tr>
 <tr class="memdesc:a9ea757a6ef815943cde9807f01679023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-processing. Write the heat transfer values to an output file.  <a href="classHeatTransfer.html#a9ea757a6ef815943cde9807f01679023">More...</a><br /></td></tr>
 <tr class="separator:a9ea757a6ef815943cde9807f01679023"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,28 +266,28 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a1b99e500c8bf8bf3c47f7f9dd4e70001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeaa91c02ddcf27cee62861459f7959d"><td class="memItemLeft" align="right" valign="top">IndexSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#abeaa91c02ddcf27cee62861459f7959d">locally_relevant_dofs</a></td></tr>
 <tr class="separator:abeaa91c02ddcf27cee62861459f7959d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d3826a4e4d74f6464a7d3b7bf911897"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a0d3826a4e4d74f6464a7d3b7bf911897">evaluation_point</a></td></tr>
-<tr class="separator:a0d3826a4e4d74f6464a7d3b7bf911897"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a852a430c0dff22929704c5ea5c82c80f"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a852a430c0dff22929704c5ea5c82c80f">local_evaluation_point</a></td></tr>
-<tr class="separator:a852a430c0dff22929704c5ea5c82c80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaac0452297b33cac3a91fc1e9dc0af4e"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aaac0452297b33cac3a91fc1e9dc0af4e">newton_update</a></td></tr>
-<tr class="separator:aaac0452297b33cac3a91fc1e9dc0af4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed3e2b88a7e24f4c900e86d806f231b2"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aed3e2b88a7e24f4c900e86d806f231b2">present_solution</a></td></tr>
-<tr class="separator:aed3e2b88a7e24f4c900e86d806f231b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a849b3f3e2968f703dc0754cdaedbf4e6"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a849b3f3e2968f703dc0754cdaedbf4e6">system_rhs</a></td></tr>
-<tr class="separator:a849b3f3e2968f703dc0754cdaedbf4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834ee3fd4293f74583c899443eeaaaac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a834ee3fd4293f74583c899443eeaaaac">evaluation_point</a></td></tr>
+<tr class="separator:a834ee3fd4293f74583c899443eeaaaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13143936fd6cc916e67fab6a860c5b0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a13143936fd6cc916e67fab6a860c5b0f">local_evaluation_point</a></td></tr>
+<tr class="separator:a13143936fd6cc916e67fab6a860c5b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ede75b8536229e4e528bc4c577e68eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a8ede75b8536229e4e528bc4c577e68eb">newton_update</a></td></tr>
+<tr class="separator:a8ede75b8536229e4e528bc4c577e68eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa54c16dbfc94259d2a0bfb31f464647"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aaa54c16dbfc94259d2a0bfb31f464647">present_solution</a></td></tr>
+<tr class="separator:aaa54c16dbfc94259d2a0bfb31f464647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d7fdd9e1b9fbc20a244f569d5a6cd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#ae9d7fdd9e1b9fbc20a244f569d5a6cd0">system_rhs</a></td></tr>
+<tr class="separator:ae9d7fdd9e1b9fbc20a244f569d5a6cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4f453316b4700edab6dcd24de4e8919"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#ae4f453316b4700edab6dcd24de4e8919">nonzero_constraints</a></td></tr>
 <tr class="separator:ae4f453316b4700edab6dcd24de4e8919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55b01472622a96a4b7da913dce0bd6b4"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a55b01472622a96a4b7da913dce0bd6b4">zero_constraints</a></td></tr>
 <tr class="separator:a55b01472622a96a4b7da913dce0bd6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b8655b81943ae6cdf173f89168df12d"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::SparseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a4b8655b81943ae6cdf173f89168df12d">system_matrix</a></td></tr>
 <tr class="separator:a4b8655b81943ae6cdf173f89168df12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09285a8d9db7811fdf4c0e056faf79f9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; TrilinosWrappers::MPI::Vector &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a09285a8d9db7811fdf4c0e056faf79f9">previous_solutions</a></td></tr>
-<tr class="separator:a09285a8d9db7811fdf4c0e056faf79f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab31fd65f8cd6653965369135fa4d06ab"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt; dim, TrilinosWrappers::MPI::Vector &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#ab31fd65f8cd6653965369135fa4d06ab">solution_transfer</a></td></tr>
-<tr class="separator:ab31fd65f8cd6653965369135fa4d06ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af100aa8d3415aece64cafee71c7631c8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; parallel::distributed::SolutionTransfer&lt; dim, TrilinosWrappers::MPI::Vector &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#af100aa8d3415aece64cafee71c7631c8">previous_solutions_transfer</a></td></tr>
-<tr class="separator:af100aa8d3415aece64cafee71c7631c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdf8cc94e9565265c04bd5b5aea1cb7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#abbdf8cc94e9565265c04bd5b5aea1cb7">previous_solutions</a></td></tr>
+<tr class="separator:abbdf8cc94e9565265c04bd5b5aea1cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b1e554759228af06cd50a6a57829ac2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a7b1e554759228af06cd50a6a57829ac2">solution_transfer</a></td></tr>
+<tr class="separator:a7b1e554759228af06cd50a6a57829ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753f11086b4af6c72bf432a2d528c450"><td class="memItemLeft" align="right" valign="top">std::vector&lt; parallel::distributed::SolutionTransfer&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a753f11086b4af6c72bf432a2d528c450">previous_solutions_transfer</a></td></tr>
+<tr class="separator:a753f11086b4af6c72bf432a2d528c450"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d07f04706e7256acf684ab6dd266d1a"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a8d07f04706e7256acf684ab6dd266d1a">GGLS</a> = true</td></tr>
 <tr class="separator:a8d07f04706e7256acf684ab6dd266d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3beb012e2186d3f8e35d9ebde0dcf1f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classHeatTransferAssemblerBase.html">HeatTransferAssemblerBase</a>&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#aa3beb012e2186d3f8e35d9ebde0dcf1f">assemblers</a></td></tr>
@@ -316,7 +316,7 @@ Additional Inherited Members</h2></td></tr>
 class HeatTransfer&lt; dim &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00055">55</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00056">56</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af350be8fd778aa516bfe3f10634b4255"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af350be8fd778aa516bfe3f10634b4255">&#9670;&nbsp;</a></span>HeatTransfer()</h2>
@@ -366,9 +366,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00058">58</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00059">59</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00525">HeatTransfer&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="heat__transfer_8h_source.html#l00510">HeatTransfer&lt; dim &gt;::computing_timer</a>, <a class="el" href="heat__transfer_8h_source.html#l00518">HeatTransfer&lt; dim &gt;::dof_handler</a>, <a class="el" href="heat__transfer_8h_source.html#l00526">HeatTransfer&lt; dim &gt;::face_quadrature</a>, <a class="el" href="heat__transfer_8h_source.html#l00520">HeatTransfer&lt; dim &gt;::fe</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="heat__transfer_8h_source.html#l00544">HeatTransfer&lt; dim &gt;::previous_solutions</a>, <a class="el" href="heat__transfer_8h_source.html#l00552">HeatTransfer&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="heat__transfer_8h_source.html#l00512">HeatTransfer&lt; dim &gt;::simulation_parameters</a>, <a class="el" href="heat__transfer_8h_source.html#l00549">HeatTransfer&lt; dim &gt;::solution_transfer</a>, and <a class="el" href="heat__transfer_8h_source.html#l00524">HeatTransfer&lt; dim &gt;::temperature_mapping</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00524">HeatTransfer&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="heat__transfer_8h_source.html#l00509">HeatTransfer&lt; dim &gt;::computing_timer</a>, <a class="el" href="heat__transfer_8h_source.html#l00517">HeatTransfer&lt; dim &gt;::dof_handler</a>, <a class="el" href="heat__transfer_8h_source.html#l00525">HeatTransfer&lt; dim &gt;::face_quadrature</a>, <a class="el" href="heat__transfer_8h_source.html#l00519">HeatTransfer&lt; dim &gt;::fe</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="heat__transfer_8h_source.html#l00543">HeatTransfer&lt; dim &gt;::previous_solutions</a>, <a class="el" href="heat__transfer_8h_source.html#l00550">HeatTransfer&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="heat__transfer_8h_source.html#l00511">HeatTransfer&lt; dim &gt;::simulation_parameters</a>, <a class="el" href="heat__transfer_8h_source.html#l00548">HeatTransfer&lt; dim &gt;::solution_transfer</a>, and <a class="el" href="heat__transfer_8h_source.html#l00523">HeatTransfer&lt; dim &gt;::temperature_mapping</a>.</p>
 
 </div>
 </div>
@@ -428,7 +428,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00431">431</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer__scratch__data_8cc_source.html#l00142">HeatTransferScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00183">HeatTransferScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00297">HeatTransferScratchData&lt; dim &gt;::reinit_velocity()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00396">HeatTransferScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer__scratch__data_8cc_source.html#l00142">HeatTransferScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00184">HeatTransferScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00298">HeatTransferScratchData&lt; dim &gt;::reinit_velocity()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00397">HeatTransferScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
 </div>
 </div>
@@ -486,7 +486,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00587">587</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer__scratch__data_8cc_source.html#l00142">HeatTransferScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00183">HeatTransferScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00297">HeatTransferScratchData&lt; dim &gt;::reinit_velocity()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00337">HeatTransferScratchData&lt; dim &gt;::reinit_velocity_gradient()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00396">HeatTransferScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer__scratch__data_8cc_source.html#l00142">HeatTransferScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00184">HeatTransferScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00298">HeatTransferScratchData&lt; dim &gt;::reinit_velocity()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00338">HeatTransferScratchData&lt; dim &gt;::reinit_velocity_gradient()</a>, <a class="el" href="heat__transfer__scratch__data_8h_source.html#l00397">HeatTransferScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
 </div>
 </div>
@@ -655,7 +655,7 @@ template&lt;int dim&gt; </div>
 
 <p>Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00699">699</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -726,7 +726,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01002">1002</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -826,7 +826,7 @@ template&lt;int dim&gt; </div>
 
 <p>Carry out the operations required to finish a simulation correctly. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00794">794</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -861,16 +861,16 @@ template&lt;int dim&gt; </div>
 
 <p>Getter methods to get the private attributes for the physic currently solved NB : dof_handler and present_solution are passed to the multiphysics interface at the end of the setup_dofs method. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a47bd3339a5b8b1ccdc8fbe25a58c5265">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a47bd3339a5b8b1ccdc8fbe25a58c5265">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00265">265</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00264">264</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00518">HeatTransfer&lt; dim &gt;::dof_handler</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00517">HeatTransfer&lt; dim &gt;::dof_handler</a>.</p>
 
 </div>
 </div>
-<a id="aa1439650119e0419a0a6294ff47f4463"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1439650119e0419a0a6294ff47f4463">&#9670;&nbsp;</a></span>get_evaluation_point()</h2>
+<a id="a4dc792333ac75d1b13734f3100c1891d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc792333ac75d1b13734f3100c1891d">&#9670;&nbsp;</a></span>get_evaluation_point()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -881,7 +881,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_evaluation_point </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_evaluation_point </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -898,14 +898,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00270">270</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00269">269</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00533">HeatTransfer&lt; dim &gt;::evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00532">HeatTransfer&lt; dim &gt;::evaluation_point</a>.</p>
 
 </div>
 </div>
-<a id="a662d978f3b1fc5287b41e2cec434aec3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a662d978f3b1fc5287b41e2cec434aec3">&#9670;&nbsp;</a></span>get_local_evaluation_point()</h2>
+<a id="ae1bb1902b6ad1a11093232f939aaf62c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1bb1902b6ad1a11093232f939aaf62c">&#9670;&nbsp;</a></span>get_local_evaluation_point()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -916,7 +916,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_local_evaluation_point </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_local_evaluation_point </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -931,14 +931,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aef3b890ff2cffc97d546e32583c5ba3a">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00275">275</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00274">274</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00534">HeatTransfer&lt; dim &gt;::local_evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00533">HeatTransfer&lt; dim &gt;::local_evaluation_point</a>.</p>
 
 </div>
 </div>
-<a id="a18f395ddb902e801ad2345eaed4d4b4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18f395ddb902e801ad2345eaed4d4b4e">&#9670;&nbsp;</a></span>get_newton_update()</h2>
+<a id="a13696b26e32ce2f572ce7cf3102f278a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13696b26e32ce2f572ce7cf3102f278a">&#9670;&nbsp;</a></span>get_newton_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -949,7 +949,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_newton_update </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_newton_update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -964,9 +964,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#abcd8bead5555e17de5c6e20b64cb3ebb">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00280">280</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00279">279</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00535">HeatTransfer&lt; dim &gt;::newton_update</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00534">HeatTransfer&lt; dim &gt;::newton_update</a>.</p>
 
 </div>
 </div>
@@ -997,14 +997,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aadfaeda6c524f54395f64cbc100c3003">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00295">295</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00294">294</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00538">HeatTransfer&lt; dim &gt;::nonzero_constraints</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00537">HeatTransfer&lt; dim &gt;::nonzero_constraints</a>.</p>
 
 </div>
 </div>
-<a id="aa88ac0cb5337bb9039d68bcd1a9bd24f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa88ac0cb5337bb9039d68bcd1a9bd24f">&#9670;&nbsp;</a></span>get_present_solution()</h2>
+<a id="a15c4d63dd2326e25736fe4e77e9bd85b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c4d63dd2326e25736fe4e77e9bd85b">&#9670;&nbsp;</a></span>get_present_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1015,7 +1015,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_present_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_present_solution </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1030,14 +1030,14 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a254a20d9cf4297efac822566de52fb83">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00285">285</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00284">284</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00536">HeatTransfer&lt; dim &gt;::present_solution</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00535">HeatTransfer&lt; dim &gt;::present_solution</a>.</p>
 
 </div>
 </div>
-<a id="a05def451c171d924cf25a368f3ab06d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05def451c171d924cf25a368f3ab06d9">&#9670;&nbsp;</a></span>get_system_rhs()</h2>
+<a id="a2d0e9ead7a0fe70387ec4864cfc2796f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d0e9ead7a0fe70387ec4864cfc2796f">&#9670;&nbsp;</a></span>get_system_rhs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1048,7 +1048,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_system_rhs </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&amp; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::get_system_rhs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1063,9 +1063,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a46683552514c3323218b73817070a95e">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00290">290</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00289">289</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
-<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00537">HeatTransfer&lt; dim &gt;::system_rhs</a>.</p>
+<p class="reference">References <a class="el" href="heat__transfer_8h_source.html#l00536">HeatTransfer&lt; dim &gt;::system_rhs</a>.</p>
 
 </div>
 </div>
@@ -1093,7 +1093,7 @@ template&lt;int dim&gt; </div>
 
 <p>Rearrange vector solution correctly for transient simulations. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a0e74925e0067b4bcf2578f18a2f15204">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a0e74925e0067b4bcf2578f18a2f15204">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00822">822</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -1123,7 +1123,7 @@ template&lt;int dim&gt; </div>
 
 <p>post_mesh_adaption Interpolates the auxiliary physics variables to the new mesh </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3870a0c5dc427098c9bec1afc9a668c0">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3870a0c5dc427098c9bec1afc9a668c0">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00972">972</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -1157,16 +1157,16 @@ template&lt;int dim&gt; </div>
 
 <p>Postprocess the auxiliary physics results. Post-processing this case implies the calculation of all derived quantities using the solution vector of the physics. It does not concern the output of the solution using the DataOutObject, which is accomplished through the attach_solution_to_output function. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a5cddfe1a7224404a899d7564d908d098">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a5cddfe1a7224404a899d7564d908d098">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00833">833</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01005">calculate_L2_error()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">calculate_L2_error()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
 </div>
 </div>
-<a id="a7095eec7820b772dbe674639d6760019"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7095eec7820b772dbe674639d6760019">&#9670;&nbsp;</a></span>postprocess_heat_flux_on_bc()</h2>
+<a id="a81e930b130b3dbf4fda567923b6be172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e930b130b3dbf4fda567923b6be172">&#9670;&nbsp;</a></span>postprocess_heat_flux_on_bc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1179,7 +1179,7 @@ template&lt;typename VectorType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">template void <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::postprocess_heat_flux_on_bc&lt; TrilinosWrappers::MPI::BlockVector &gt; </td>
+          <td class="memname">template void <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::postprocess_heat_flux_on_bc&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const bool&#160;</td>
           <td class="paramname"><em>gather_vof</em>, </td>
@@ -1211,7 +1211,7 @@ template&lt;typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01737">1737</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01734">1734</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00174">calculate_point_property()</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -1280,7 +1280,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01580">1580</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01577">1577</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="phase__change_8h_source.html#l00033">calculate_liquid_fraction()</a>, <a class="el" href="classParameters_1_1Material.html#acc7336ee0289363a01ec2df5d5f1f2c7ad0b50e5bdf6e59d6f8ce448465e09069">Parameters::Material::phase_change</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -1338,14 +1338,14 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01393">1393</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01390">1390</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
 </div>
 </div>
-<a id="a89eefaba0cff1e6fda22b7459fd9f423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89eefaba0cff1e6fda22b7459fd9f423">&#9670;&nbsp;</a></span>postprocess_thermal_energy_in_fluid()</h2>
+<a id="ab70fe9d2931fbf1ddbadc881a747f44a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab70fe9d2931fbf1ddbadc881a747f44a">&#9670;&nbsp;</a></span>postprocess_thermal_energy_in_fluid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1358,7 +1358,7 @@ template&lt;typename VectorType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">template void <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::postprocess_thermal_energy_in_fluid&lt; TrilinosWrappers::MPI::BlockVector &gt; </td>
+          <td class="memname">template void <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::postprocess_thermal_energy_in_fluid&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const bool&#160;</td>
           <td class="paramname"><em>gather_vof</em>, </td>
@@ -1404,7 +1404,7 @@ template&lt;typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02039">2039</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02034">2034</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00174">calculate_point_property()</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -1434,7 +1434,7 @@ template&lt;int dim&gt; </div>
 
 <p>pre_mesh_adaption Prepares the auxiliary physics variables for a mesh refinement/coarsening </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l00959">959</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -1464,9 +1464,9 @@ template&lt;int dim&gt; </div>
 
 <p>Allows Heat Transfer to set-up solution vector from checkpoint file;. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01073">1073</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01072">1072</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00320">deserialize_table()</a>.</p>
 
@@ -1496,9 +1496,9 @@ template&lt;int dim&gt; </div>
 
 <p>Sets-up the initial conditions associated with the physics. Generally, physics only support imposing nodal values, but some physics additionnaly support the use of L2 projection or steady-state solutions. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01300">1300</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01297">1297</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 </div>
 </div>
@@ -1558,7 +1558,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02269">2269</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02260">2260</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, and <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>.</p>
 
@@ -1618,9 +1618,9 @@ template&lt;int dim&gt; </div>
 
 <p>Sets-up the DofHandler and the degree of freedom associated with the physics. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01135">1135</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01132">1132</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8aeef438f7e448aa48c1f8db568d27b591">BoundaryConditions::temperature</a>.</p>
 
@@ -1673,7 +1673,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01313">1313</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01310">1310</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -1703,9 +1703,9 @@ template&lt;int dim&gt; </div>
 
 <p>Update non zero constraints if the boundary is time-dependent. </p>
 
-<p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#aa4eb967dee8229dc43ff95182df011fe">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#aa4eb967dee8229dc43ff95182df011fe">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01242">1242</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01239">1239</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8aeef438f7e448aa48c1f8db568d27b591">BoundaryConditions::temperature</a>.</p>
 
@@ -1735,7 +1735,7 @@ template&lt;int dim&gt; </div>
 
 <p>Prepares Heat Transfer to write checkpoint. </p>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aac6b380b7f28d81bef3a7d33eb13ec34">AuxiliaryPhysics&lt; dim, TrilinosWrappers::MPI::Vector &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aac6b380b7f28d81bef3a7d33eb13ec34">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01024">1024</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
@@ -1777,7 +1777,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02251">2251</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l02242">2242</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 </div>
 </div>
@@ -1805,7 +1805,7 @@ template&lt;int dim&gt; </div>
 
 <p>Post-processing. Write the liquid fraction to a file. </p>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01716">1716</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01713">1713</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 </div>
 </div>
@@ -1843,7 +1843,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01562">1562</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01559">1559</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
 </div>
 </div>
@@ -1870,7 +1870,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00564">564</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00562">562</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -1896,7 +1896,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00525">525</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00524">524</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -1922,7 +1922,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00510">510</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00509">509</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -1948,7 +1948,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00518">518</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00517">517</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -1974,12 +1974,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00521">521</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00520">520</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="a0d3826a4e4d74f6464a7d3b7bf911897"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d3826a4e4d74f6464a7d3b7bf911897">&#9670;&nbsp;</a></span>evaluation_point</h2>
+<a id="a834ee3fd4293f74583c899443eeaaaac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a834ee3fd4293f74583c899443eeaaaac">&#9670;&nbsp;</a></span>evaluation_point</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1990,7 +1990,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::evaluation_point</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::evaluation_point</td>
         </tr>
       </table>
   </td>
@@ -2000,7 +2000,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00533">533</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00532">532</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2026,7 +2026,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00526">526</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00525">525</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2052,7 +2052,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00520">520</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00519">519</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2078,7 +2078,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00561">561</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00559">559</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2104,7 +2104,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00579">579</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00577">577</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2130,7 +2130,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00574">574</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00572">572</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2156,12 +2156,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00591">591</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00589">589</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="a852a430c0dff22929704c5ea5c82c80f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a852a430c0dff22929704c5ea5c82c80f">&#9670;&nbsp;</a></span>local_evaluation_point</h2>
+<a id="a13143936fd6cc916e67fab6a860c5b0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13143936fd6cc916e67fab6a860c5b0f">&#9670;&nbsp;</a></span>local_evaluation_point</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2172,7 +2172,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::local_evaluation_point</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::local_evaluation_point</td>
         </tr>
       </table>
   </td>
@@ -2182,7 +2182,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00534">534</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00533">533</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2208,7 +2208,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00530">530</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00529">529</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2234,7 +2234,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00531">531</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00530">530</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2260,12 +2260,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00508">508</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00507">507</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="aaac0452297b33cac3a91fc1e9dc0af4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaac0452297b33cac3a91fc1e9dc0af4e">&#9670;&nbsp;</a></span>newton_update</h2>
+<a id="a8ede75b8536229e4e528bc4c577e68eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ede75b8536229e4e528bc4c577e68eb">&#9670;&nbsp;</a></span>newton_update</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2276,7 +2276,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::newton_update</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::newton_update</td>
         </tr>
       </table>
   </td>
@@ -2286,7 +2286,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00535">535</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00534">534</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2312,12 +2312,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00538">538</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00537">537</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="aed3e2b88a7e24f4c900e86d806f231b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed3e2b88a7e24f4c900e86d806f231b2">&#9670;&nbsp;</a></span>present_solution</h2>
+<a id="aaa54c16dbfc94259d2a0bfb31f464647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa54c16dbfc94259d2a0bfb31f464647">&#9670;&nbsp;</a></span>present_solution</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2328,7 +2328,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::present_solution</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::present_solution</td>
         </tr>
       </table>
   </td>
@@ -2338,12 +2338,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00536">536</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00535">535</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="a09285a8d9db7811fdf4c0e056faf79f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09285a8d9db7811fdf4c0e056faf79f9">&#9670;&nbsp;</a></span>previous_solutions</h2>
+<a id="abbdf8cc94e9565265c04bd5b5aea1cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdf8cc94e9565265c04bd5b5aea1cb7">&#9670;&nbsp;</a></span>previous_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2354,7 +2354,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;TrilinosWrappers::MPI::Vector&gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::previous_solutions</td>
+          <td class="memname">std::vector&lt;<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::previous_solutions</td>
         </tr>
       </table>
   </td>
@@ -2364,12 +2364,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00544">544</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00543">543</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="af100aa8d3415aece64cafee71c7631c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af100aa8d3415aece64cafee71c7631c8">&#9670;&nbsp;</a></span>previous_solutions_transfer</h2>
+<a id="a753f11086b4af6c72bf432a2d528c450"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753f11086b4af6c72bf432a2d528c450">&#9670;&nbsp;</a></span>previous_solutions_transfer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2380,7 +2380,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; parallel::distributed::SolutionTransfer&lt;dim, TrilinosWrappers::MPI::Vector&gt; &gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::previous_solutions_transfer</td>
+          <td class="memname">std::vector&lt;parallel::distributed::SolutionTransfer&lt;dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; &gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::previous_solutions_transfer</td>
         </tr>
       </table>
   </td>
@@ -2390,7 +2390,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00552">552</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00550">550</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2416,7 +2416,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00517">517</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00516">516</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2442,12 +2442,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00512">512</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00511">511</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="ab31fd65f8cd6653965369135fa4d06ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab31fd65f8cd6653965369135fa4d06ab">&#9670;&nbsp;</a></span>solution_transfer</h2>
+<a id="a7b1e554759228af06cd50a6a57829ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b1e554759228af06cd50a6a57829ac2">&#9670;&nbsp;</a></span>solution_transfer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2458,7 +2458,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt;dim, TrilinosWrappers::MPI::Vector&gt; &gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::solution_transfer</td>
+          <td class="memname">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt;dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; &gt; <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::solution_transfer</td>
         </tr>
       </table>
   </td>
@@ -2468,7 +2468,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00549">549</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00548">548</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2494,7 +2494,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00567">567</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00565">565</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2520,12 +2520,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00540">540</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00539">539</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
-<a id="a849b3f3e2968f703dc0754cdaedbf4e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a849b3f3e2968f703dc0754cdaedbf4e6">&#9670;&nbsp;</a></span>system_rhs</h2>
+<a id="ae9d7fdd9e1b9fbc20a244f569d5a6cd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d7fdd9e1b9fbc20a244f569d5a6cd0">&#9670;&nbsp;</a></span>system_rhs</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2536,7 +2536,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::system_rhs</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::system_rhs</td>
         </tr>
       </table>
   </td>
@@ -2546,7 +2546,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00537">537</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00536">536</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2572,7 +2572,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00524">524</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00523">523</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2598,7 +2598,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00578">578</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00576">576</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2624,7 +2624,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00516">516</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00515">515</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>
@@ -2650,7 +2650,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00539">539</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="heat__transfer_8h_source.html#l00538">538</a> of file <a class="el" href="heat__transfer_8h_source.html">heat_transfer.h</a>.</p>
 
 </div>
 </div>

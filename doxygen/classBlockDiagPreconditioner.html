@@ -94,8 +94,8 @@ Inheritance diagram for BlockDiagPreconditioner&lt; PreconditionerMp &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1ff4439e4dc0b8983cebb1950f43c09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#aa1ff4439e4dc0b8983cebb1950f43c09">BlockDiagPreconditioner</a> (const TrilinosWrappers::BlockSparseMatrix &amp;S, const PreconditionerMp &amp;Mppreconditioner, SolverControl &amp;A_parameters)</td></tr>
 <tr class="separator:aa1ff4439e4dc0b8983cebb1950f43c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88bf88ff699102592b019538991004b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#ac88bf88ff699102592b019538991004b">vmult</a> (TrilinosWrappers::MPI::BlockVector &amp;dst, const TrilinosWrappers::MPI::BlockVector &amp;src) const</td></tr>
-<tr class="separator:ac88bf88ff699102592b019538991004b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13cdc96881fdb19e4ca93f6919167810"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#a13cdc96881fdb19e4ca93f6919167810">vmult</a> (<a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;dst, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;src) const</td></tr>
+<tr class="separator:a13cdc96881fdb19e4ca93f6919167810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -107,15 +107,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a8ed8f235ec2f1ac3845aa55e58af203e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a458925fc7cafb87ca2cdc53fd7125e41"><td class="memItemLeft" align="right" valign="top">const PreconditionerMp &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#a458925fc7cafb87ca2cdc53fd7125e41">mp_preconditioner</a></td></tr>
 <tr class="separator:a458925fc7cafb87ca2cdc53fd7125e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a058dcacb809e8cc25b8248472c686ec5"><td class="memItemLeft" align="right" valign="top">SolverFGMRES&lt; TrilinosWrappers::MPI::Vector &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#a058dcacb809e8cc25b8248472c686ec5">A_inverse</a></td></tr>
-<tr class="separator:a058dcacb809e8cc25b8248472c686ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaebbf0f342b00811c1839c90176936bc"><td class="memItemLeft" align="right" valign="top">SolverFGMRES&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockDiagPreconditioner.html#aaebbf0f342b00811c1839c90176936bc">A_inverse</a></td></tr>
+<tr class="separator:aaebbf0f342b00811c1839c90176936bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class PreconditionerMp&gt;<br />
 class BlockDiagPreconditioner&lt; PreconditionerMp &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00346">346</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00348">348</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa1ff4439e4dc0b8983cebb1950f43c09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1ff4439e4dc0b8983cebb1950f43c09">&#9670;&nbsp;</a></span>BlockDiagPreconditioner()</h2>
@@ -151,15 +151,15 @@ template&lt;class PreconditionerMp &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00366">366</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00367">367</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
-<p class="reference">References <a class="el" href="gd__navier__stokes_8h_source.html#l00359">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::amat_preconditioner</a>, <a class="el" href="gd__navier__stokes_8h_source.html#l00360">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::pmat_preconditioner</a>, and <a class="el" href="gd__navier__stokes_8h_source.html#l00358">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::stokes_matrix</a>.</p>
+<p class="reference">References <a class="el" href="gd__navier__stokes_8h_source.html#l00360">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::amat_preconditioner</a>, <a class="el" href="gd__navier__stokes_8h_source.html#l00361">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::pmat_preconditioner</a>, and <a class="el" href="gd__navier__stokes_8h_source.html#l00359">BlockDiagPreconditioner&lt; PreconditionerMp &gt;::stokes_matrix</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac88bf88ff699102592b019538991004b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac88bf88ff699102592b019538991004b">&#9670;&nbsp;</a></span>vmult()</h2>
+<a id="a13cdc96881fdb19e4ca93f6919167810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13cdc96881fdb19e4ca93f6919167810">&#9670;&nbsp;</a></span>vmult()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,13 +169,13 @@ template&lt;class PreconditionerMp &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classBlockDiagPreconditioner.html">BlockDiagPreconditioner</a>&lt; PreconditionerMp &gt;::vmult </td>
           <td>(</td>
-          <td class="paramtype">TrilinosWrappers::MPI::BlockVector &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const TrilinosWrappers::MPI::BlockVector &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>src</em>&#160;</td>
         </tr>
         <tr>
@@ -186,13 +186,13 @@ template&lt;class PreconditionerMp &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00390">390</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00391">391</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a058dcacb809e8cc25b8248472c686ec5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a058dcacb809e8cc25b8248472c686ec5">&#9670;&nbsp;</a></span>A_inverse</h2>
+<a id="aaebbf0f342b00811c1839c90176936bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaebbf0f342b00811c1839c90176936bc">&#9670;&nbsp;</a></span>A_inverse</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,7 +203,7 @@ template&lt;class PreconditionerMp &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">SolverFGMRES&lt;TrilinosWrappers::MPI::Vector&gt; <a class="el" href="classBlockDiagPreconditioner.html">BlockDiagPreconditioner</a>&lt; PreconditionerMp &gt;::A_inverse</td>
+          <td class="memname">SolverFGMRES&lt;<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; <a class="el" href="classBlockDiagPreconditioner.html">BlockDiagPreconditioner</a>&lt; PreconditionerMp &gt;::A_inverse</td>
         </tr>
       </table>
   </td>
@@ -213,7 +213,7 @@ template&lt;class PreconditionerMp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00362">362</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00363">363</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -239,7 +239,7 @@ template&lt;class PreconditionerMp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00359">359</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00360">360</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -265,7 +265,7 @@ template&lt;class PreconditionerMp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00361">361</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00362">362</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -291,7 +291,7 @@ template&lt;class PreconditionerMp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00360">360</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00361">361</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ template&lt;class PreconditionerMp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00358">358</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gd__navier__stokes_8h_source.html#l00359">359</a> of file <a class="el" href="gd__navier__stokes_8h_source.html">gd_navier_stokes.h</a>.</p>
 
 </div>
 </div>

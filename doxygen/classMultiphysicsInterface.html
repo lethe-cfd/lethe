@@ -136,78 +136,78 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad891429bc134a12f5ec4c5b3c0398151"><td class="memItemLeft" align="right" valign="top">DoFHandler&lt; dim &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ad891429bc134a12f5ec4c5b3c0398151">get_dof_handler</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
 <tr class="memdesc:ad891429bc134a12f5ec4c5b3c0398151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request a DOF handler for a given physics ID.  <a href="classMultiphysicsInterface.html#ad891429bc134a12f5ec4c5b3c0398151">More...</a><br /></td></tr>
 <tr class="separator:ad891429bc134a12f5ec4c5b3c0398151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6776c18717b4e1058db0f20dca36f05"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa6776c18717b4e1058db0f20dca36f05">get_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:aa6776c18717b4e1058db0f20dca36f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of a given physics.  <a href="classMultiphysicsInterface.html#aa6776c18717b4e1058db0f20dca36f05">More...</a><br /></td></tr>
-<tr class="separator:aa6776c18717b4e1058db0f20dca36f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc926aa0df0650537541e1f6e33e550c"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#acc926aa0df0650537541e1f6e33e550c">get_filtered_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:acc926aa0df0650537541e1f6e33e550c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present filtered solution of a given physics (used in VOF physics for STF calculation)  <a href="classMultiphysicsInterface.html#acc926aa0df0650537541e1f6e33e550c">More...</a><br /></td></tr>
-<tr class="separator:acc926aa0df0650537541e1f6e33e550c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88b427adadd32a94a7d041478fbe1e3d"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::BlockVector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a88b427adadd32a94a7d041478fbe1e3d">get_block_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:a88b427adadd32a94a7d041478fbe1e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present block solution of a given physics.  <a href="classMultiphysicsInterface.html#a88b427adadd32a94a7d041478fbe1e3d">More...</a><br /></td></tr>
-<tr class="separator:a88b427adadd32a94a7d041478fbe1e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c20af4ebebb3fd1b65614d083decf1b"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a2c20af4ebebb3fd1b65614d083decf1b">get_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:a2c20af4ebebb3fd1b65614d083decf1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the time-average solution of a given physics.  <a href="classMultiphysicsInterface.html#a2c20af4ebebb3fd1b65614d083decf1b">More...</a><br /></td></tr>
-<tr class="separator:a2c20af4ebebb3fd1b65614d083decf1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a854e610a2bdb814ad03ddba80ac0680f"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::BlockVector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a854e610a2bdb814ad03ddba80ac0680f">get_block_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:a854e610a2bdb814ad03ddba80ac0680f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present block average solution of a given physics.  <a href="classMultiphysicsInterface.html#a854e610a2bdb814ad03ddba80ac0680f">More...</a><br /></td></tr>
-<tr class="separator:a854e610a2bdb814ad03ddba80ac0680f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbd47c11dda18a6efc80ca90fe72dabe"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#adbd47c11dda18a6efc80ca90fe72dabe">get_reynolds_stress_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:adbd47c11dda18a6efc80ca90fe72dabe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the reynolds_stress solution of a given physics. WIP for an upcoming PR, not yet implemented in the solver.  <a href="classMultiphysicsInterface.html#adbd47c11dda18a6efc80ca90fe72dabe">More...</a><br /></td></tr>
-<tr class="separator:adbd47c11dda18a6efc80ca90fe72dabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb03dff74acb44e563eb53a7fae14327"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#acb03dff74acb44e563eb53a7fae14327">get_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:acb03dff74acb44e563eb53a7fae14327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of a given physics.  <a href="classMultiphysicsInterface.html#acb03dff74acb44e563eb53a7fae14327">More...</a><br /></td></tr>
+<tr class="separator:acb03dff74acb44e563eb53a7fae14327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5229e6059a3527dbefaa3ac6e1663065"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a5229e6059a3527dbefaa3ac6e1663065">get_filtered_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:a5229e6059a3527dbefaa3ac6e1663065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present filtered solution of a given physics (used in VOF physics for STF calculation)  <a href="classMultiphysicsInterface.html#a5229e6059a3527dbefaa3ac6e1663065">More...</a><br /></td></tr>
+<tr class="separator:a5229e6059a3527dbefaa3ac6e1663065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0372f67cc2f1ef6d3904ad99248266f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a0372f67cc2f1ef6d3904ad99248266f5">get_block_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:a0372f67cc2f1ef6d3904ad99248266f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present block solution of a given physics.  <a href="classMultiphysicsInterface.html#a0372f67cc2f1ef6d3904ad99248266f5">More...</a><br /></td></tr>
+<tr class="separator:a0372f67cc2f1ef6d3904ad99248266f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c50117de12257b60b9a16252dadec11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a6c50117de12257b60b9a16252dadec11">get_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:a6c50117de12257b60b9a16252dadec11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the time-average solution of a given physics.  <a href="classMultiphysicsInterface.html#a6c50117de12257b60b9a16252dadec11">More...</a><br /></td></tr>
+<tr class="separator:a6c50117de12257b60b9a16252dadec11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70be3e3aeb1ced25d1d3283f36a78e7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a70be3e3aeb1ced25d1d3283f36a78e7d">get_block_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:a70be3e3aeb1ced25d1d3283f36a78e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present block average solution of a given physics.  <a href="classMultiphysicsInterface.html#a70be3e3aeb1ced25d1d3283f36a78e7d">More...</a><br /></td></tr>
+<tr class="separator:a70be3e3aeb1ced25d1d3283f36a78e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddcc725a7747820dc6c738f0d72eed6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a6ddcc725a7747820dc6c738f0d72eed6">get_reynolds_stress_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:a6ddcc725a7747820dc6c738f0d72eed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the reynolds_stress solution of a given physics. WIP for an upcoming PR, not yet implemented in the solver.  <a href="classMultiphysicsInterface.html#a6ddcc725a7747820dc6c738f0d72eed6">More...</a><br /></td></tr>
+<tr class="separator:a6ddcc725a7747820dc6c738f0d72eed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fd285fa3f9e62f50b6fb86996f0da11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSolidBase.html">SolidBase</a>&lt; dim, dim &gt; &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a8fd285fa3f9e62f50b6fb86996f0da11">get_solids</a> (const int number_solids)</td></tr>
 <tr class="memdesc:a8fd285fa3f9e62f50b6fb86996f0da11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the solid objects. Used an auxiliary physics needs to apply a boundary condition on a solid through Nitsche immersed boundary method.  <a href="classMultiphysicsInterface.html#a8fd285fa3f9e62f50b6fb86996f0da11">More...</a><br /></td></tr>
 <tr class="separator:a8fd285fa3f9e62f50b6fb86996f0da11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8620b69e2b62b4b13e605ee35839f6d"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ab8620b69e2b62b4b13e605ee35839f6d">get_projected_phase_fraction_gradient_solution</a> ()</td></tr>
-<tr class="memdesc:ab8620b69e2b62b4b13e605ee35839f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of the projected phase fraction gradient (PFG)  <a href="classMultiphysicsInterface.html#ab8620b69e2b62b4b13e605ee35839f6d">More...</a><br /></td></tr>
-<tr class="separator:ab8620b69e2b62b4b13e605ee35839f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e9f4665382ff27fde44fcb0998ede8f"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a8e9f4665382ff27fde44fcb0998ede8f">get_curvature_solution</a> ()</td></tr>
-<tr class="memdesc:a8e9f4665382ff27fde44fcb0998ede8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of the curvature.  <a href="classMultiphysicsInterface.html#a8e9f4665382ff27fde44fcb0998ede8f">More...</a><br /></td></tr>
-<tr class="separator:a8e9f4665382ff27fde44fcb0998ede8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0b6d20f4ad1fa877c03bf669759d35e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ab0b6d20f4ad1fa877c03bf669759d35e">get_projected_phase_fraction_gradient_solution</a> ()</td></tr>
+<tr class="memdesc:ab0b6d20f4ad1fa877c03bf669759d35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of the projected phase fraction gradient (PFG)  <a href="classMultiphysicsInterface.html#ab0b6d20f4ad1fa877c03bf669759d35e">More...</a><br /></td></tr>
+<tr class="separator:ab0b6d20f4ad1fa877c03bf669759d35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e301beacdcb653f6a083b0969cc811"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa8e301beacdcb653f6a083b0969cc811">get_curvature_solution</a> ()</td></tr>
+<tr class="memdesc:aa8e301beacdcb653f6a083b0969cc811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the present solution of the curvature.  <a href="classMultiphysicsInterface.html#aa8e301beacdcb653f6a083b0969cc811">More...</a><br /></td></tr>
+<tr class="separator:aa8e301beacdcb653f6a083b0969cc811"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a775cb1abb370cc0655309a32241c87ba"><td class="memItemLeft" align="right" valign="top">DoFHandler&lt; dim &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a775cb1abb370cc0655309a32241c87ba">get_curvature_dof_handler</a> ()</td></tr>
 <tr class="memdesc:a775cb1abb370cc0655309a32241c87ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the projected curvature DOF handler.  <a href="classMultiphysicsInterface.html#a775cb1abb370cc0655309a32241c87ba">More...</a><br /></td></tr>
 <tr class="separator:a775cb1abb370cc0655309a32241c87ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a100d7f802ef9f12948be62d32f93bef9"><td class="memItemLeft" align="right" valign="top">DoFHandler&lt; dim &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a100d7f802ef9f12948be62d32f93bef9">get_projected_phase_fraction_gradient_dof_handler</a> ()</td></tr>
 <tr class="memdesc:a100d7f802ef9f12948be62d32f93bef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the projected phase fraction gradient (pfg) DOF handler.  <a href="classMultiphysicsInterface.html#a100d7f802ef9f12948be62d32f93bef9">More...</a><br /></td></tr>
 <tr class="separator:a100d7f802ef9f12948be62d32f93bef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84670a552a7bdda7b5942120cd542158"><td class="memItemLeft" align="right" valign="top">std::vector&lt; TrilinosWrappers::MPI::Vector &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a84670a552a7bdda7b5942120cd542158">get_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:a84670a552a7bdda7b5942120cd542158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the previous solutions of a given physics.  <a href="classMultiphysicsInterface.html#a84670a552a7bdda7b5942120cd542158">More...</a><br /></td></tr>
-<tr class="separator:a84670a552a7bdda7b5942120cd542158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a315a4f5dd287b24a75f2a3c1fb0d93f4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a315a4f5dd287b24a75f2a3c1fb0d93f4">get_block_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
-<tr class="memdesc:a315a4f5dd287b24a75f2a3c1fb0d93f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the previous solutions of a given block physics.  <a href="classMultiphysicsInterface.html#a315a4f5dd287b24a75f2a3c1fb0d93f4">More...</a><br /></td></tr>
-<tr class="separator:a315a4f5dd287b24a75f2a3c1fb0d93f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf69e251d38040cc93fe723f7f47af23"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#acf69e251d38040cc93fe723f7f47af23">get_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:acf69e251d38040cc93fe723f7f47af23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the previous solutions of a given physics.  <a href="classMultiphysicsInterface.html#acf69e251d38040cc93fe723f7f47af23">More...</a><br /></td></tr>
+<tr class="separator:acf69e251d38040cc93fe723f7f47af23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2441f06c1c9df43f07c167efb5c23a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ae2441f06c1c9df43f07c167efb5c23a0">get_block_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id)</td></tr>
+<tr class="memdesc:ae2441f06c1c9df43f07c167efb5c23a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the previous solutions of a given block physics.  <a href="classMultiphysicsInterface.html#ae2441f06c1c9df43f07c167efb5c23a0">More...</a><br /></td></tr>
+<tr class="separator:ae2441f06c1c9df43f07c167efb5c23a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1c6b6666b773be05fe6027c5dcbe353"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa1c6b6666b773be05fe6027c5dcbe353">set_dof_handler</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, DoFHandler&lt; dim &gt; *dof_handler)</td></tr>
 <tr class="memdesc:aa1c6b6666b773be05fe6027c5dcbe353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the DOFHandler of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#aa1c6b6666b773be05fe6027c5dcbe353">More...</a><br /></td></tr>
 <tr class="separator:aa1c6b6666b773be05fe6027c5dcbe353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55ff9a6ec97cd2d80d3ae6c1a195aa77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a55ff9a6ec97cd2d80d3ae6c1a195aa77">set_solid</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSolidBase.html">SolidBase</a>&lt; dim, dim &gt;&gt;&gt; *solids_input)</td></tr>
 <tr class="memdesc:a55ff9a6ec97cd2d80d3ae6c1a195aa77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the vector of the <a class="el" href="classSolidBase.html">SolidBase</a> object. This allows the use of the solid base object in multiple physics at the same time.  <a href="classMultiphysicsInterface.html#a55ff9a6ec97cd2d80d3ae6c1a195aa77">More...</a><br /></td></tr>
 <tr class="separator:a55ff9a6ec97cd2d80d3ae6c1a195aa77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687798d1c1b0fd792bc0f9aaafa44c8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a687798d1c1b0fd792bc0f9aaafa44c8c">set_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::Vector *solution_vector)</td></tr>
-<tr class="memdesc:a687798d1c1b0fd792bc0f9aaafa44c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a687798d1c1b0fd792bc0f9aaafa44c8c">More...</a><br /></td></tr>
-<tr class="separator:a687798d1c1b0fd792bc0f9aaafa44c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab53fcd4a65b3032cecf766e5f7600d07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ab53fcd4a65b3032cecf766e5f7600d07">set_filtered_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::Vector *filtered_solution_vector)</td></tr>
-<tr class="memdesc:ab53fcd4a65b3032cecf766e5f7600d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the filtered solution of the physics in the multiphysics interface (used in VOF physics for STF calculation)  <a href="classMultiphysicsInterface.html#ab53fcd4a65b3032cecf766e5f7600d07">More...</a><br /></td></tr>
-<tr class="separator:ab53fcd4a65b3032cecf766e5f7600d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0e941b9516886fd4039323b74235899"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ad0e941b9516886fd4039323b74235899">set_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::Vector *solution_vector)</td></tr>
-<tr class="memdesc:ad0e941b9516886fd4039323b74235899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the time-average solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#ad0e941b9516886fd4039323b74235899">More...</a><br /></td></tr>
-<tr class="separator:ad0e941b9516886fd4039323b74235899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed6f49fb66ce408d89c0bd7ee017a01f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aed6f49fb66ce408d89c0bd7ee017a01f">set_reynolds_stress_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::Vector *solution_vector)</td></tr>
-<tr class="memdesc:aed6f49fb66ce408d89c0bd7ee017a01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the Reynolds stress of the physics in the multiphysics interface. WIP for an upcoming PR, not yet implemented in the solver.  <a href="classMultiphysicsInterface.html#aed6f49fb66ce408d89c0bd7ee017a01f">More...</a><br /></td></tr>
-<tr class="separator:aed6f49fb66ce408d89c0bd7ee017a01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a813caf2c9d6a73414f7bfbb7c77e4f86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a813caf2c9d6a73414f7bfbb7c77e4f86">set_block_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::BlockVector *solution_vector)</td></tr>
-<tr class="memdesc:a813caf2c9d6a73414f7bfbb7c77e4f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a813caf2c9d6a73414f7bfbb7c77e4f86">More...</a><br /></td></tr>
-<tr class="separator:a813caf2c9d6a73414f7bfbb7c77e4f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4b28255d51a69272f3ddc9ceb902ce0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ae4b28255d51a69272f3ddc9ceb902ce0">set_block_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, TrilinosWrappers::MPI::BlockVector *solution_vector)</td></tr>
-<tr class="memdesc:ae4b28255d51a69272f3ddc9ceb902ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the time-average solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#ae4b28255d51a69272f3ddc9ceb902ce0">More...</a><br /></td></tr>
-<tr class="separator:ae4b28255d51a69272f3ddc9ceb902ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0884a7e2d7be343088bc6841f899e741"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a0884a7e2d7be343088bc6841f899e741">set_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; TrilinosWrappers::MPI::Vector &gt; *previous_solutions_vector)</td></tr>
-<tr class="memdesc:a0884a7e2d7be343088bc6841f899e741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a0884a7e2d7be343088bc6841f899e741">More...</a><br /></td></tr>
-<tr class="separator:a0884a7e2d7be343088bc6841f899e741"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab799f81f8c797a8fd0b2af414074f50b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ab799f81f8c797a8fd0b2af414074f50b">set_block_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; *previous_solutions_vector)</td></tr>
-<tr class="memdesc:ab799f81f8c797a8fd0b2af414074f50b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the block physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#ab799f81f8c797a8fd0b2af414074f50b">More...</a><br /></td></tr>
-<tr class="separator:ab799f81f8c797a8fd0b2af414074f50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e4128bc4a25c699855446604dc7b54a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a5e4128bc4a25c699855446604dc7b54a">set_previous_block_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; *previous_solutions_vector)</td></tr>
-<tr class="memdesc:a5e4128bc4a25c699855446604dc7b54a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the block physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a5e4128bc4a25c699855446604dc7b54a">More...</a><br /></td></tr>
-<tr class="separator:a5e4128bc4a25c699855446604dc7b54a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c4630b62ccf275391781c0138d2ff5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a24c4630b62ccf275391781c0138d2ff5">set_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *solution_vector)</td></tr>
+<tr class="memdesc:a24c4630b62ccf275391781c0138d2ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a24c4630b62ccf275391781c0138d2ff5">More...</a><br /></td></tr>
+<tr class="separator:a24c4630b62ccf275391781c0138d2ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9416751da885340423298ad0fcca72c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a9416751da885340423298ad0fcca72c6">set_filtered_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *filtered_solution_vector)</td></tr>
+<tr class="memdesc:a9416751da885340423298ad0fcca72c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the filtered solution of the physics in the multiphysics interface (used in VOF physics for STF calculation)  <a href="classMultiphysicsInterface.html#a9416751da885340423298ad0fcca72c6">More...</a><br /></td></tr>
+<tr class="separator:a9416751da885340423298ad0fcca72c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791f019b8c5706bfe27dd903813e7f6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a791f019b8c5706bfe27dd903813e7f6d">set_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *solution_vector)</td></tr>
+<tr class="memdesc:a791f019b8c5706bfe27dd903813e7f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the time-average solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a791f019b8c5706bfe27dd903813e7f6d">More...</a><br /></td></tr>
+<tr class="separator:a791f019b8c5706bfe27dd903813e7f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f32d0af061c90c8b91f52488b06db5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ad8f32d0af061c90c8b91f52488b06db5">set_reynolds_stress_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *solution_vector)</td></tr>
+<tr class="memdesc:ad8f32d0af061c90c8b91f52488b06db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the Reynolds stress of the physics in the multiphysics interface. WIP for an upcoming PR, not yet implemented in the solver.  <a href="classMultiphysicsInterface.html#ad8f32d0af061c90c8b91f52488b06db5">More...</a><br /></td></tr>
+<tr class="separator:ad8f32d0af061c90c8b91f52488b06db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15d59229a7589efa7e45d29a2baf0b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ac15d59229a7589efa7e45d29a2baf0b4">set_block_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *solution_vector)</td></tr>
+<tr class="memdesc:ac15d59229a7589efa7e45d29a2baf0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#ac15d59229a7589efa7e45d29a2baf0b4">More...</a><br /></td></tr>
+<tr class="separator:ac15d59229a7589efa7e45d29a2baf0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca86184bb948dd4ecddf696300e84bcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aca86184bb948dd4ecddf696300e84bcf">set_block_time_average_solution</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *solution_vector)</td></tr>
+<tr class="memdesc:aca86184bb948dd4ecddf696300e84bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the reference to the time-average solution of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#aca86184bb948dd4ecddf696300e84bcf">More...</a><br /></td></tr>
+<tr class="separator:aca86184bb948dd4ecddf696300e84bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9254dbc7d713b2034b5f1fdd64de62a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa9254dbc7d713b2034b5f1fdd64de62a">set_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; *previous_solutions_vector)</td></tr>
+<tr class="memdesc:aa9254dbc7d713b2034b5f1fdd64de62a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#aa9254dbc7d713b2034b5f1fdd64de62a">More...</a><br /></td></tr>
+<tr class="separator:aa9254dbc7d713b2034b5f1fdd64de62a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e183b7ce22521036bdd9ab14107cf1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa2e183b7ce22521036bdd9ab14107cf1">set_block_previous_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; *previous_solutions_vector)</td></tr>
+<tr class="memdesc:aa2e183b7ce22521036bdd9ab14107cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the block physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#aa2e183b7ce22521036bdd9ab14107cf1">More...</a><br /></td></tr>
+<tr class="separator:aa2e183b7ce22521036bdd9ab14107cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c1e0a5cd0ae4e3cb11270a0273cce76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a1c1e0a5cd0ae4e3cb11270a0273cce76">set_previous_block_solutions</a> (const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a> physics_id, std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; *previous_solutions_vector)</td></tr>
+<tr class="memdesc:a1c1e0a5cd0ae4e3cb11270a0273cce76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the vector of previous solutions of the block physics in the multiphysics interface.  <a href="classMultiphysicsInterface.html#a1c1e0a5cd0ae4e3cb11270a0273cce76">More...</a><br /></td></tr>
+<tr class="separator:a1c1e0a5cd0ae4e3cb11270a0273cce76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96a42252cac260ab9c8768fdacf22dd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a96a42252cac260ab9c8768fdacf22dd0">compute_kelly</a> (const std::pair&lt; const <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcac">Parameters::MeshAdaptation::Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;ivar, dealii::Vector&lt; float &gt; &amp;estimated_error_per_cell)</td></tr>
 <tr class="memdesc:a96a42252cac260ab9c8768fdacf22dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh refinement according to an auxiliary physic parameter.  <a href="classMultiphysicsInterface.html#a96a42252cac260ab9c8768fdacf22dd0">More...</a><br /></td></tr>
 <tr class="separator:a96a42252cac260ab9c8768fdacf22dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,43 +235,43 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a14dce6e8da33be1ccb85f215c6df0634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a934fb9ccf395cdee8aece6c89f0477d3"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a934fb9ccf395cdee8aece6c89f0477d3">solve_pre_fluid</a></td></tr>
 <tr class="separator:a934fb9ccf395cdee8aece6c89f0477d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e3e2910420fb441d31cbd540eb863e1"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt; <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt; dim, TrilinosWrappers::MPI::Vector &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a5e3e2910420fb441d31cbd540eb863e1">physics</a></td></tr>
-<tr class="separator:a5e3e2910420fb441d31cbd540eb863e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a658e437e2f14986f49b2430b715f9631"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt; <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt; dim, TrilinosWrappers::MPI::BlockVector &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a658e437e2f14986f49b2430b715f9631">block_physics</a></td></tr>
-<tr class="separator:a658e437e2f14986f49b2430b715f9631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f9da9403c8164b4f59e67bad6ef5d1a"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt; <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a0f9da9403c8164b4f59e67bad6ef5d1a">physics</a></td></tr>
+<tr class="separator:a0f9da9403c8164b4f59e67bad6ef5d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74187d3ca9eb041d14f6a7bd27cfa3ba"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt; <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt; dim, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a74187d3ca9eb041d14f6a7bd27cfa3ba">block_physics</a></td></tr>
+<tr class="separator:a74187d3ca9eb041d14f6a7bd27cfa3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a1fadb4782590fe0484a4b63ef63639"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, DoFHandler&lt; dim &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a9a1fadb4782590fe0484a4b63ef63639">physics_dof_handler</a></td></tr>
 <tr class="separator:a9a1fadb4782590fe0484a4b63ef63639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92263afddc12c8542f4bdfe463533c8b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSolidBase.html">SolidBase</a>&lt; dim, dim &gt; &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a92263afddc12c8542f4bdfe463533c8b">solids</a></td></tr>
 <tr class="separator:a92263afddc12c8542f4bdfe463533c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989904c0fe52e6807b9386689656f114"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a989904c0fe52e6807b9386689656f114">physics_filtered_solutions</a></td></tr>
-<tr class="separator:a989904c0fe52e6807b9386689656f114"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02caaad0a973aefdce35d33f3be24b0e"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a02caaad0a973aefdce35d33f3be24b0e">block_physics_filtered_solutions</a></td></tr>
-<tr class="separator:a02caaad0a973aefdce35d33f3be24b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb784f961bf7210d8635514691d56e8d"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#abb784f961bf7210d8635514691d56e8d">physics_solutions</a></td></tr>
-<tr class="separator:abb784f961bf7210d8635514691d56e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0962bb6bee486539effcbb56ba5a4cdd"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a0962bb6bee486539effcbb56ba5a4cdd">block_physics_solutions</a></td></tr>
-<tr class="separator:a0962bb6bee486539effcbb56ba5a4cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cb9985ba620a7679d10bb78dd40390e"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt; TrilinosWrappers::MPI::Vector &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a9cb9985ba620a7679d10bb78dd40390e">physics_previous_solutions</a></td></tr>
-<tr class="separator:a9cb9985ba620a7679d10bb78dd40390e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81a76b382dad16748805ec96df393531"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a81a76b382dad16748805ec96df393531">block_physics_previous_solutions</a></td></tr>
-<tr class="separator:a81a76b382dad16748805ec96df393531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a467b474346a44c9ca6b95aee7b1caa6d"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a467b474346a44c9ca6b95aee7b1caa6d">physics_time_average_solutions</a></td></tr>
-<tr class="separator:a467b474346a44c9ca6b95aee7b1caa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08b2bf404add294ea48d6a8796dc8e8e"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a08b2bf404add294ea48d6a8796dc8e8e">block_physics_time_average_solutions</a></td></tr>
-<tr class="separator:a08b2bf404add294ea48d6a8796dc8e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae74676c13a72b43f9735e194e3a7169a"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ae74676c13a72b43f9735e194e3a7169a">reynolds_stress_solutions</a></td></tr>
-<tr class="separator:ae74676c13a72b43f9735e194e3a7169a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dfa24da1b3a3ecb681fd53bd100a00e"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a9dfa24da1b3a3ecb681fd53bd100a00e">physics_solutions_m1</a></td></tr>
-<tr class="separator:a9dfa24da1b3a3ecb681fd53bd100a00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e642c1bed55a1dd95e5165494ed7d54"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a4e642c1bed55a1dd95e5165494ed7d54">block_physics_solutions_m1</a></td></tr>
-<tr class="separator:a4e642c1bed55a1dd95e5165494ed7d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e672903a4964df6e590d3572ada1bd"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a04e672903a4964df6e590d3572ada1bd">physics_filtered_solutions</a></td></tr>
+<tr class="separator:a04e672903a4964df6e590d3572ada1bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3431f89bc99bec1238987645d53bf2"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a8b3431f89bc99bec1238987645d53bf2">block_physics_filtered_solutions</a></td></tr>
+<tr class="separator:a8b3431f89bc99bec1238987645d53bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02da295791592960ed3e59b78fe7946"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa02da295791592960ed3e59b78fe7946">physics_solutions</a></td></tr>
+<tr class="separator:aa02da295791592960ed3e59b78fe7946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2d01cb26d8da7ff60437d74a3cbae12"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ad2d01cb26d8da7ff60437d74a3cbae12">block_physics_solutions</a></td></tr>
+<tr class="separator:ad2d01cb26d8da7ff60437d74a3cbae12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2bc1da31500c52f90cc89adf544ed8e"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#ae2bc1da31500c52f90cc89adf544ed8e">physics_previous_solutions</a></td></tr>
+<tr class="separator:ae2bc1da31500c52f90cc89adf544ed8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a25c6b91ea8e4efb8663fed633826d"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a56a25c6b91ea8e4efb8663fed633826d">block_physics_previous_solutions</a></td></tr>
+<tr class="separator:a56a25c6b91ea8e4efb8663fed633826d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6679a79c963fb98bec7b41d2ac057248"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a6679a79c963fb98bec7b41d2ac057248">physics_time_average_solutions</a></td></tr>
+<tr class="separator:a6679a79c963fb98bec7b41d2ac057248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8467fbb94062ce3ffadeb98c2ff6e2"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#a1e8467fbb94062ce3ffadeb98c2ff6e2">block_physics_time_average_solutions</a></td></tr>
+<tr class="separator:a1e8467fbb94062ce3ffadeb98c2ff6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f1ea6af692b15c2d46ecb87ac193a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#af7f1ea6af692b15c2d46ecb87ac193a1">reynolds_stress_solutions</a></td></tr>
+<tr class="separator:af7f1ea6af692b15c2d46ecb87ac193a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3d5eacc84646adc0357fe17e75e6f72"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#aa3d5eacc84646adc0357fe17e75e6f72">physics_solutions_m1</a></td></tr>
+<tr class="separator:aa3d5eacc84646adc0357fe17e75e6f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb30191ab6f77047514aa794e4abdbc4"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMultiphysicsInterface.html#abb30191ab6f77047514aa794e4abdbc4">block_physics_solutions_m1</a></td></tr>
+<tr class="separator:abb30191ab6f77047514aa794e4abdbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class MultiphysicsInterface&lt; dim &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00049">49</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00050">50</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a00901e6d74f9972c1a90399721c1d62e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00901e6d74f9972c1a90399721c1d62e">&#9670;&nbsp;</a></span>MultiphysicsInterface()</h2>
@@ -317,7 +317,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="multiphysics__interface_8cc_source.html#l00067">67</a> of file <a class="el" href="multiphysics__interface_8cc_source.html">multiphysics_interface.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="multiphysics__interface_8h_source.html#l00859">MultiphysicsInterface&lt; dim &gt;::active_physics</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00224">Parameters::Multiphysics::cahn_hilliard</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00221">Parameters::Multiphysics::heat_transfer</a>, <a class="el" href="multiphysics__interface_8cc_source.html#l00221">MultiphysicsInterface&lt; dim &gt;::inspect_multiphysics_models_dependencies()</a>, <a class="el" href="simulation__parameters_8h_source.html#l00041">SimulationParameters&lt; dim &gt;::linear_solver</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00851">MultiphysicsInterface&lt; dim &gt;::multiphysics_parameters</a>, <a class="el" href="simulation__parameters_8h_source.html#l00042">SimulationParameters&lt; dim &gt;::non_linear_solver</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00874">MultiphysicsInterface&lt; dim &gt;::physics</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="multiphysics_8h_source.html#l00033">tracer</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00222">Parameters::Multiphysics::tracer</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00855">MultiphysicsInterface&lt; dim &gt;::verbosity</a>, <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>, and <a class="el" href="parameters__multiphysics_8h_source.html#l00223">Parameters::Multiphysics::VOF</a>.</p>
+<p class="reference">References <a class="el" href="multiphysics__interface_8h_source.html#l00858">MultiphysicsInterface&lt; dim &gt;::active_physics</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00224">Parameters::Multiphysics::cahn_hilliard</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00221">Parameters::Multiphysics::heat_transfer</a>, <a class="el" href="multiphysics__interface_8cc_source.html#l00221">MultiphysicsInterface&lt; dim &gt;::inspect_multiphysics_models_dependencies()</a>, <a class="el" href="simulation__parameters_8h_source.html#l00041">SimulationParameters&lt; dim &gt;::linear_solver</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00850">MultiphysicsInterface&lt; dim &gt;::multiphysics_parameters</a>, <a class="el" href="simulation__parameters_8h_source.html#l00042">SimulationParameters&lt; dim &gt;::non_linear_solver</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00871">MultiphysicsInterface&lt; dim &gt;::physics</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="multiphysics_8h_source.html#l00033">tracer</a>, <a class="el" href="parameters__multiphysics_8h_source.html#l00222">Parameters::Multiphysics::tracer</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, <a class="el" href="multiphysics__interface_8h_source.html#l00854">MultiphysicsInterface&lt; dim &gt;::verbosity</a>, <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>, and <a class="el" href="parameters__multiphysics_8h_source.html#l00223">Parameters::Multiphysics::VOF</a>.</p>
 
 </div>
 </div>
@@ -356,7 +356,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00076">76</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00077">77</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, <a class="el" href="multiphysics_8h_source.html#l00033">tracer</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -390,7 +390,7 @@ template&lt;int dim&gt; </div>
 
 <p>Call the attachment of the solution vector to the data out for enabled auxiliary physics. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00197">197</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00198">198</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +439,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00806">806</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00805">805</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -470,7 +470,7 @@ template&lt;int dim&gt; </div>
 
 <p>Carry out the operations required to finish a simulation correctly for all auxiliary physics. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00215">215</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00216">216</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -502,7 +502,7 @@ template&lt;int dim&gt; </div>
 <p>fluid_dynamics_is_block Verify if the fluid dynamics solution is stored as a block vector or not. </p>
 <dl class="section return"><dt>Returns</dt><dd>boolean value indicating the fluid dynamics is stored as a block vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00407">407</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00408">408</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
@@ -533,12 +533,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00065">65</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00066">66</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a315a4f5dd287b24a75f2a3c1fb0d93f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a315a4f5dd287b24a75f2a3c1fb0d93f4">&#9670;&nbsp;</a></span>get_block_previous_solutions()</h2>
+<a id="ae2441f06c1c9df43f07c167efb5c23a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2441f06c1c9df43f07c167efb5c23a0">&#9670;&nbsp;</a></span>get_block_previous_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -549,7 +549,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;TrilinosWrappers::MPI::BlockVector&gt;* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_previous_solutions </td>
+          <td class="memname">std::vector&lt;<a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>&gt;* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_previous_solutions </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -571,12 +571,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00589">589</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00590">590</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a88b427adadd32a94a7d041478fbe1e3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88b427adadd32a94a7d041478fbe1e3d">&#9670;&nbsp;</a></span>get_block_solution()</h2>
+<a id="a0372f67cc2f1ef6d3904ad99248266f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0372f67cc2f1ef6d3904ad99248266f5">&#9670;&nbsp;</a></span>get_block_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -587,7 +587,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::BlockVector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -609,12 +609,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00467">467</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00468">468</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a854e610a2bdb814ad03ddba80ac0680f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a854e610a2bdb814ad03ddba80ac0680f">&#9670;&nbsp;</a></span>get_block_time_average_solution()</h2>
+<a id="a70be3e3aeb1ced25d1d3283f36a78e7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70be3e3aeb1ced25d1d3283f36a78e7d">&#9670;&nbsp;</a></span>get_block_time_average_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -625,7 +625,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::BlockVector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_time_average_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_block_time_average_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -647,7 +647,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00498">498</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00499">499</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -673,8 +673,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a8e9f4665382ff27fde44fcb0998ede8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e9f4665382ff27fde44fcb0998ede8f">&#9670;&nbsp;</a></span>get_curvature_solution()</h2>
+<a id="aa8e301beacdcb653f6a083b0969cc811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e301beacdcb653f6a083b0969cc811">&#9670;&nbsp;</a></span>get_curvature_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,7 +682,7 @@ template&lt;int dim&gt; </div>
 template&lt;int dim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector * <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_curvature_solution</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_curvature_solution</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -729,12 +729,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00421">421</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00422">422</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="acc926aa0df0650537541e1f6e33e550c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc926aa0df0650537541e1f6e33e550c">&#9670;&nbsp;</a></span>get_filtered_solution()</h2>
+<a id="a5229e6059a3527dbefaa3ac6e1663065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5229e6059a3527dbefaa3ac6e1663065">&#9670;&nbsp;</a></span>get_filtered_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,7 +745,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_filtered_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_filtered_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -767,12 +767,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00452">452</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00453">453</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a84670a552a7bdda7b5942120cd542158"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84670a552a7bdda7b5942120cd542158">&#9670;&nbsp;</a></span>get_previous_solutions()</h2>
+<a id="acf69e251d38040cc93fe723f7f47af23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf69e251d38040cc93fe723f7f47af23">&#9670;&nbsp;</a></span>get_previous_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -783,7 +783,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;TrilinosWrappers::MPI::Vector&gt;* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_previous_solutions </td>
+          <td class="memname">std::vector&lt;<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt;* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_previous_solutions </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -805,7 +805,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00573">573</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00574">574</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -831,8 +831,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="ab8620b69e2b62b4b13e605ee35839f6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8620b69e2b62b4b13e605ee35839f6d">&#9670;&nbsp;</a></span>get_projected_phase_fraction_gradient_solution()</h2>
+<a id="ab0b6d20f4ad1fa877c03bf669759d35e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b6d20f4ad1fa877c03bf669759d35e">&#9670;&nbsp;</a></span>get_projected_phase_fraction_gradient_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -840,7 +840,7 @@ template&lt;int dim&gt; </div>
 template&lt;int dim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector * <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_projected_phase_fraction_gradient_solution</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> * <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_projected_phase_fraction_gradient_solution</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -853,8 +853,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="adbd47c11dda18a6efc80ca90fe72dabe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbd47c11dda18a6efc80ca90fe72dabe">&#9670;&nbsp;</a></span>get_reynolds_stress_solution()</h2>
+<a id="a6ddcc725a7747820dc6c738f0d72eed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ddcc725a7747820dc6c738f0d72eed6">&#9670;&nbsp;</a></span>get_reynolds_stress_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -865,7 +865,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_reynolds_stress_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_reynolds_stress_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -887,7 +887,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00514">514</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00515">515</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -920,12 +920,12 @@ template&lt;int dim&gt; </div>
 <p>Request the solid objects. Used an auxiliary physics needs to apply a boundary condition on a solid through Nitsche immersed boundary method. </p>
 <p>NB: this method is called only in <a class="el" href="classHeatTransfer.html#a4ace3576809acbeb35ea94b5114b43b0" title="Call for the assembly of the matrix and the right-hand side of the Nitsche restriction for the heat t...">HeatTransfer&lt;dim&gt;::assemble_nitsche_heat_restriction</a>, which is itself called only if number_solids &gt; 0 </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00533">533</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00534">534</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="aa6776c18717b4e1058db0f20dca36f05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6776c18717b4e1058db0f20dca36f05">&#9670;&nbsp;</a></span>get_solution()</h2>
+<a id="acb03dff74acb44e563eb53a7fae14327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb03dff74acb44e563eb53a7fae14327">&#9670;&nbsp;</a></span>get_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -936,7 +936,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -958,12 +958,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00437">437</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00438">438</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a2c20af4ebebb3fd1b65614d083decf1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c20af4ebebb3fd1b65614d083decf1b">&#9670;&nbsp;</a></span>get_time_average_solution()</h2>
+<a id="a6c50117de12257b60b9a16252dadec11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c50117de12257b60b9a16252dadec11">&#9670;&nbsp;</a></span>get_time_average_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -974,7 +974,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_time_average_solution </td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::get_time_average_solution </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>&#160;</td>
           <td class="paramname"><em>physics_id</em></td><td>)</td>
@@ -996,7 +996,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00483">483</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00484">484</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1066,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00236">236</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00237">237</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1097,7 @@ template&lt;int dim&gt; </div>
 
 <p>Interpolate solution onto new mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00327">327</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00328">328</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1129,7 +1129,7 @@ template&lt;int dim&gt; </div>
 
 <p>Postprocess the auxiliary physics results. Post-processing this case implies the calculation of all derived quantities using the solution vector of the physics. It does not concern the output of the solution using the DataOutObject, which is accomplished through the attach_solution_to_output function. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00294">294</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00295">295</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1160,7 @@ template&lt;int dim&gt; </div>
 
 <p>Prepare the auxiliary physics for mesh adaptation. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00311">311</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00312">312</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1191,12 +1191,12 @@ template&lt;int dim&gt; </div>
 
 <p>Read solution from checkpoint from auxiliary physics. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00841">841</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00840">840</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="ab799f81f8c797a8fd0b2af414074f50b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab799f81f8c797a8fd0b2af414074f50b">&#9670;&nbsp;</a></span>set_block_previous_solutions()</h2>
+<a id="aa2e183b7ce22521036bdd9ab14107cf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e183b7ce22521036bdd9ab14107cf1">&#9670;&nbsp;</a></span>set_block_previous_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1215,7 +1215,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; *&#160;</td>
           <td class="paramname"><em>previous_solutions_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1240,12 +1240,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00767">767</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00766">766</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a813caf2c9d6a73414f7bfbb7c77e4f86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a813caf2c9d6a73414f7bfbb7c77e4f86">&#9670;&nbsp;</a></span>set_block_solution()</h2>
+<a id="ac15d59229a7589efa7e45d29a2baf0b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac15d59229a7589efa7e45d29a2baf0b4">&#9670;&nbsp;</a></span>set_block_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1264,7 +1264,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::BlockVector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&#160;</td>
           <td class="paramname"><em>solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1293,8 +1293,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="ae4b28255d51a69272f3ddc9ceb902ce0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4b28255d51a69272f3ddc9ceb902ce0">&#9670;&nbsp;</a></span>set_block_time_average_solution()</h2>
+<a id="aca86184bb948dd4ecddf696300e84bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca86184bb948dd4ecddf696300e84bcf">&#9670;&nbsp;</a></span>set_block_time_average_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1313,7 +1313,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::BlockVector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&#160;</td>
           <td class="paramname"><em>solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1387,12 +1387,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00606">606</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00607">607</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="ab53fcd4a65b3032cecf766e5f7600d07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab53fcd4a65b3032cecf766e5f7600d07">&#9670;&nbsp;</a></span>set_filtered_solution()</h2>
+<a id="a9416751da885340423298ad0fcca72c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9416751da885340423298ad0fcca72c6">&#9670;&nbsp;</a></span>set_filtered_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1411,7 +1411,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::Vector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td>
           <td class="paramname"><em>filtered_solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1467,12 +1467,12 @@ template&lt;int dim&gt; </div>
 
 <p>Sets-up the initial conditions associated with the physics. Generally, physics only support imposing nodal values, but some physics additionnaly support the use of L2 projection or steady-state solutions. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00365">365</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00366">366</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a5e4128bc4a25c699855446604dc7b54a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e4128bc4a25c699855446604dc7b54a">&#9670;&nbsp;</a></span>set_previous_block_solutions()</h2>
+<a id="a1c1e0a5cd0ae4e3cb11270a0273cce76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c1e0a5cd0ae4e3cb11270a0273cce76">&#9670;&nbsp;</a></span>set_previous_block_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1491,7 +1491,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; TrilinosWrappers::MPI::BlockVector &gt; *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; *&#160;</td>
           <td class="paramname"><em>previous_solutions_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1516,12 +1516,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00786">786</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00785">785</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a0884a7e2d7be343088bc6841f899e741"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0884a7e2d7be343088bc6841f899e741">&#9670;&nbsp;</a></span>set_previous_solutions()</h2>
+<a id="aa9254dbc7d713b2034b5f1fdd64de62a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9254dbc7d713b2034b5f1fdd64de62a">&#9670;&nbsp;</a></span>set_previous_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1540,7 +1540,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; TrilinosWrappers::MPI::Vector &gt; *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; *&#160;</td>
           <td class="paramname"><em>previous_solutions_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1565,12 +1565,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00748">748</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00747">747</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="aed6f49fb66ce408d89c0bd7ee017a01f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed6f49fb66ce408d89c0bd7ee017a01f">&#9670;&nbsp;</a></span>set_reynolds_stress_solutions()</h2>
+<a id="ad8f32d0af061c90c8b91f52488b06db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f32d0af061c90c8b91f52488b06db5">&#9670;&nbsp;</a></span>set_reynolds_stress_solutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1589,7 +1589,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::Vector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td>
           <td class="paramname"><em>solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1652,12 +1652,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00621">621</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00622">622</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a687798d1c1b0fd792bc0f9aaafa44c8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a687798d1c1b0fd792bc0f9aaafa44c8c">&#9670;&nbsp;</a></span>set_solution()</h2>
+<a id="a24c4630b62ccf275391781c0138d2ff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c4630b62ccf275391781c0138d2ff5">&#9670;&nbsp;</a></span>set_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1676,7 +1676,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::Vector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td>
           <td class="paramname"><em>solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1701,12 +1701,12 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00634">634</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00635">635</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="ad0e941b9516886fd4039323b74235899"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0e941b9516886fd4039323b74235899">&#9670;&nbsp;</a></span>set_time_average_solution()</h2>
+<a id="a791f019b8c5706bfe27dd903813e7f6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a791f019b8c5706bfe27dd903813e7f6d">&#9670;&nbsp;</a></span>set_time_average_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1725,7 +1725,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TrilinosWrappers::MPI::Vector *&#160;</td>
+          <td class="paramtype"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&#160;</td>
           <td class="paramname"><em>solution_vector</em>&#160;</td>
         </tr>
         <tr>
@@ -1781,7 +1781,7 @@ template&lt;int dim&gt; </div>
 
 <p>Set-up the DofHandler and the degree of freedom associated with the physics. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00345">345</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00346">346</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1830,7 +1830,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00106">106</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00107">107</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1878,7 +1878,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00173">173</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00174">174</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -1935,7 +1935,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00387">387</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00388">388</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1983,7 +1983,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00149">149</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00150">150</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -2020,7 +2020,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00274">274</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00275">275</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2051,7 +2051,7 @@ template&lt;int dim&gt; </div>
 
 <p>Prepares auxiliary physics to write simulation checkpoint. </p>
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00824">824</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00823">823</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2078,12 +2078,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00859">859</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00858">858</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a658e437e2f14986f49b2430b715f9631"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a658e437e2f14986f49b2430b715f9631">&#9670;&nbsp;</a></span>block_physics</h2>
+<a id="a74187d3ca9eb041d14f6a7bd27cfa3ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74187d3ca9eb041d14f6a7bd27cfa3ba">&#9670;&nbsp;</a></span>block_physics</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2094,7 +2094,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt;<a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt;dim, TrilinosWrappers::MPI::BlockVector&gt; &gt; &gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt;<a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt;dim, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>&gt; &gt; &gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics</td>
         </tr>
       </table>
   </td>
@@ -2104,12 +2104,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00879">879</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00875">875</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a02caaad0a973aefdce35d33f3be24b0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02caaad0a973aefdce35d33f3be24b0e">&#9670;&nbsp;</a></span>block_physics_filtered_solutions</h2>
+<a id="a8b3431f89bc99bec1238987645d53bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3431f89bc99bec1238987645d53bf2">&#9670;&nbsp;</a></span>block_physics_filtered_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2120,7 +2120,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_filtered_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_filtered_solutions</td>
         </tr>
       </table>
   </td>
@@ -2130,12 +2130,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00891">891</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00885">885</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a81a76b382dad16748805ec96df393531"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81a76b382dad16748805ec96df393531">&#9670;&nbsp;</a></span>block_physics_previous_solutions</h2>
+<a id="a56a25c6b91ea8e4efb8663fed633826d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56a25c6b91ea8e4efb8663fed633826d">&#9670;&nbsp;</a></span>block_physics_previous_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2146,7 +2146,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt;TrilinosWrappers::MPI::BlockVector&gt; *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_previous_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt;<a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>&gt; *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_previous_solutions</td>
         </tr>
       </table>
   </td>
@@ -2156,12 +2156,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00902">902</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00895">895</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a0962bb6bee486539effcbb56ba5a4cdd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0962bb6bee486539effcbb56ba5a4cdd">&#9670;&nbsp;</a></span>block_physics_solutions</h2>
+<a id="ad2d01cb26d8da7ff60437d74a3cbae12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2d01cb26d8da7ff60437d74a3cbae12">&#9670;&nbsp;</a></span>block_physics_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2172,7 +2172,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_solutions</td>
         </tr>
       </table>
   </td>
@@ -2182,12 +2182,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00896">896</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00889">889</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a4e642c1bed55a1dd95e5165494ed7d54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e642c1bed55a1dd95e5165494ed7d54">&#9670;&nbsp;</a></span>block_physics_solutions_m1</h2>
+<a id="abb30191ab6f77047514aa794e4abdbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb30191ab6f77047514aa794e4abdbc4">&#9670;&nbsp;</a></span>block_physics_solutions_m1</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2198,7 +2198,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_solutions_m1</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_solutions_m1</td>
         </tr>
       </table>
   </td>
@@ -2208,12 +2208,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00922">922</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00913">913</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a08b2bf404add294ea48d6a8796dc8e8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b2bf404add294ea48d6a8796dc8e8e">&#9670;&nbsp;</a></span>block_physics_time_average_solutions</h2>
+<a id="a1e8467fbb94062ce3ffadeb98c2ff6e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e8467fbb94062ce3ffadeb98c2ff6e2">&#9670;&nbsp;</a></span>block_physics_time_average_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2224,7 +2224,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::BlockVector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_time_average_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::block_physics_time_average_solutions</td>
         </tr>
       </table>
   </td>
@@ -2234,7 +2234,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00911">911</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00903">903</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2260,7 +2260,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00854">854</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00853">853</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2286,12 +2286,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00856">856</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00855">855</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a5e3e2910420fb441d31cbd540eb863e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e3e2910420fb441d31cbd540eb863e1">&#9670;&nbsp;</a></span>physics</h2>
+<a id="a0f9da9403c8164b4f59e67bad6ef5d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f9da9403c8164b4f59e67bad6ef5d1a">&#9670;&nbsp;</a></span>physics</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2302,7 +2302,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; <a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt;<a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt;dim, TrilinosWrappers::MPI::Vector&gt; &gt; &gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::shared_ptr&lt;<a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt;dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; &gt; &gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics</td>
         </tr>
       </table>
   </td>
@@ -2312,7 +2312,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00874">874</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00871">871</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2338,12 +2338,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00882">882</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00878">878</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a989904c0fe52e6807b9386689656f114"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a989904c0fe52e6807b9386689656f114">&#9670;&nbsp;</a></span>physics_filtered_solutions</h2>
+<a id="a04e672903a4964df6e590d3572ada1bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04e672903a4964df6e590d3572ada1bd">&#9670;&nbsp;</a></span>physics_filtered_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2354,7 +2354,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_filtered_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_filtered_solutions</td>
         </tr>
       </table>
   </td>
@@ -2364,12 +2364,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00889">889</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00884">884</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a9cb9985ba620a7679d10bb78dd40390e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cb9985ba620a7679d10bb78dd40390e">&#9670;&nbsp;</a></span>physics_previous_solutions</h2>
+<a id="ae2bc1da31500c52f90cc89adf544ed8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2bc1da31500c52f90cc89adf544ed8e">&#9670;&nbsp;</a></span>physics_previous_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2380,7 +2380,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt;TrilinosWrappers::MPI::Vector&gt; *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_previous_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, std::vector&lt;<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&gt; *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_previous_solutions</td>
         </tr>
       </table>
   </td>
@@ -2390,12 +2390,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00900">900</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00893">893</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="abb784f961bf7210d8635514691d56e8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb784f961bf7210d8635514691d56e8d">&#9670;&nbsp;</a></span>physics_solutions</h2>
+<a id="aa02da295791592960ed3e59b78fe7946"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa02da295791592960ed3e59b78fe7946">&#9670;&nbsp;</a></span>physics_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2406,7 +2406,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_solutions</td>
         </tr>
       </table>
   </td>
@@ -2416,12 +2416,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00894">894</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00888">888</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a9dfa24da1b3a3ecb681fd53bd100a00e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dfa24da1b3a3ecb681fd53bd100a00e">&#9670;&nbsp;</a></span>physics_solutions_m1</h2>
+<a id="aa3d5eacc84646adc0357fe17e75e6f72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3d5eacc84646adc0357fe17e75e6f72">&#9670;&nbsp;</a></span>physics_solutions_m1</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2432,7 +2432,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_solutions_m1</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_solutions_m1</td>
         </tr>
       </table>
   </td>
@@ -2442,12 +2442,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00920">920</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00912">912</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
-<a id="a467b474346a44c9ca6b95aee7b1caa6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a467b474346a44c9ca6b95aee7b1caa6d">&#9670;&nbsp;</a></span>physics_time_average_solutions</h2>
+<a id="a6679a79c963fb98bec7b41d2ac057248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6679a79c963fb98bec7b41d2ac057248">&#9670;&nbsp;</a></span>physics_time_average_solutions</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2458,7 +2458,33 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, TrilinosWrappers::MPI::Vector *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_time_average_solutions</td>
+          <td class="memname">std::map&lt;<a class="el" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2">PhysicsID</a>, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> *&gt; <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::physics_time_average_solutions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00899">899</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+
+</div>
+</div>
+<a id="af7f1ea6af692b15c2d46ecb87ac193a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f1ea6af692b15c2d46ecb87ac193a1">&#9670;&nbsp;</a></span>reynolds_stress_solutions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::reynolds_stress_solutions</td>
         </tr>
       </table>
   </td>
@@ -2469,32 +2495,6 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00907">907</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
-
-</div>
-</div>
-<a id="ae74676c13a72b43f9735e194e3a7169a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae74676c13a72b43f9735e194e3a7169a">&#9670;&nbsp;</a></span>reynolds_stress_solutions</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector* <a class="el" href="classMultiphysicsInterface.html">MultiphysicsInterface</a>&lt; dim &gt;::reynolds_stress_solutions</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00915">915</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2520,7 +2520,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00884">884</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00880">880</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2556,7 +2556,7 @@ template&lt;int dim&gt; </div>
 <div class="ttc" id="amultiphysics_8h_html_ae14bb720bc9a37edc36fb8d90df712c2ad4151ddbc1976755e1fcd118d2917fa8"><div class="ttname"><a href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2ad4151ddbc1976755e1fcd118d2917fa8">heat_transfer</a></div><div class="ttdeci">@ heat_transfer</div><div class="ttdef"><b>Definition:</b> <a href="multiphysics_8h_source.html#l00032">multiphysics.h:32</a></div></div>
 <div class="ttc" id="amultiphysics_8h_html_ae14bb720bc9a37edc36fb8d90df712c2adb9b8e35efba351d474020dd829e49dd"><div class="ttname"><a href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2adb9b8e35efba351d474020dd829e49dd">cahn_hilliard</a></div><div class="ttdeci">@ cahn_hilliard</div><div class="ttdef"><b>Definition:</b> <a href="multiphysics_8h_source.html#l00036">multiphysics.h:35</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00863">863</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00862">862</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2582,7 +2582,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00855">855</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiphysics__interface_8h_source.html#l00854">854</a> of file <a class="el" href="multiphysics__interface_8h_source.html">multiphysics_interface.h</a>.</p>
 
 </div>
 </div>

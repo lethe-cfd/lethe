@@ -101,12 +101,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07df5166b6045604996f4a4181198706"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a07df5166b6045604996f4a4181198706">generate_rhs</a> (const VectorType &amp;, const DoFHandler&lt; dim &gt; &amp;, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt;)</td></tr>
 <tr class="memdesc:a07df5166b6045604996f4a4181198706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the right hand side based on the fluid's solution.  <a href="classPostProcessorSmoothing.html#a07df5166b6045604996f4a4181198706">More...</a><br /></td></tr>
 <tr class="separator:a07df5166b6045604996f4a4181198706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cb241dea583bfc1bdc397269c8063a6"><td class="memItemLeft" align="right" valign="top">const TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a6cb241dea583bfc1bdc397269c8063a6">solve_L2_projection</a> ()</td></tr>
-<tr class="memdesc:a6cb241dea583bfc1bdc397269c8063a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the matrix system and outputs the smoothed field solution.  <a href="classPostProcessorSmoothing.html#a6cb241dea583bfc1bdc397269c8063a6">More...</a><br /></td></tr>
-<tr class="separator:a6cb241dea583bfc1bdc397269c8063a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accf27dd4edb9ce8740f8a6d2244e4393"><td class="memItemLeft" align="right" valign="top">const TrilinosWrappers::MPI::Vector &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#accf27dd4edb9ce8740f8a6d2244e4393">calculate_smoothed_field</a> (const VectorType &amp;solution, const DoFHandler&lt; dim &gt; &amp;dof_handler_velocity, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; mapping_velocity)</td></tr>
-<tr class="memdesc:accf27dd4edb9ce8740f8a6d2244e4393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the smoothed field solution.  <a href="classPostProcessorSmoothing.html#accf27dd4edb9ce8740f8a6d2244e4393">More...</a><br /></td></tr>
-<tr class="separator:accf27dd4edb9ce8740f8a6d2244e4393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef38dde9b3f7a208b052e96dca7c36ea"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#aef38dde9b3f7a208b052e96dca7c36ea">solve_L2_projection</a> ()</td></tr>
+<tr class="memdesc:aef38dde9b3f7a208b052e96dca7c36ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the matrix system and outputs the smoothed field solution.  <a href="classPostProcessorSmoothing.html#aef38dde9b3f7a208b052e96dca7c36ea">More...</a><br /></td></tr>
+<tr class="separator:aef38dde9b3f7a208b052e96dca7c36ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d70d2243924667dffd1b738dabe7360"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a9d70d2243924667dffd1b738dabe7360">calculate_smoothed_field</a> (const VectorType &amp;solution, const DoFHandler&lt; dim &gt; &amp;dof_handler_velocity, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; mapping_velocity)</td></tr>
+<tr class="memdesc:a9d70d2243924667dffd1b738dabe7360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the smoothed field solution.  <a href="classPostProcessorSmoothing.html#a9d70d2243924667dffd1b738dabe7360">More...</a><br /></td></tr>
+<tr class="separator:a9d70d2243924667dffd1b738dabe7360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa14eb3b82900d49dcad89de88c0b58d3"><td class="memItemLeft" align="right" valign="top">const DoFHandler&lt; dim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#aa14eb3b82900d49dcad89de88c0b58d3">get_dof_handler</a> () const</td></tr>
 <tr class="memdesc:aa14eb3b82900d49dcad89de88c0b58d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a constant reference to the dof_handler.  <a href="classPostProcessorSmoothing.html#aa14eb3b82900d49dcad89de88c0b58d3">More...</a><br /></td></tr>
 <tr class="separator:aa14eb3b82900d49dcad89de88c0b58d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,8 +125,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a954d749b0b1634e8aa02bfee98ac2713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19394a56563bf065c3496ef06e02a647"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; TrilinosWrappers::SparseMatrix &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a19394a56563bf065c3496ef06e02a647">system_matrix</a></td></tr>
 <tr class="separator:a19394a56563bf065c3496ef06e02a647"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae33a548e199791c72e66a1ef2a3a2ea4"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#ae33a548e199791c72e66a1ef2a3a2ea4">system_rhs</a></td></tr>
-<tr class="separator:ae33a548e199791c72e66a1ef2a3a2ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4e8bdc02c1096e6670506236d84b28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#afe4e8bdc02c1096e6670506236d84b28">system_rhs</a></td></tr>
+<tr class="separator:afe4e8bdc02c1096e6670506236d84b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad032efdad66457f7e71d00807aaefdf4"><td class="memItemLeft" align="right" valign="top">MPI_Comm&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#ad032efdad66457f7e71d00807aaefdf4">mpi_communicator</a></td></tr>
 <tr class="separator:ad032efdad66457f7e71d00807aaefdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a63c28198fd4985677d01e7f4d18433"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a5a63c28198fd4985677d01e7f4d18433">constraints</a></td></tr>
@@ -135,8 +135,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5872b1288997e1a1f6838df8157e2cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33fe3bbb4723e88ed33870afadab513d"><td class="memItemLeft" align="right" valign="top">IndexSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a33fe3bbb4723e88ed33870afadab513d">locally_owned_dofs</a></td></tr>
 <tr class="separator:a33fe3bbb4723e88ed33870afadab513d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3e435844a220ad3671c400a3d50ed8c"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#af3e435844a220ad3671c400a3d50ed8c">completely_distributed_solution</a></td></tr>
-<tr class="separator:af3e435844a220ad3671c400a3d50ed8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876bbc179f5f6327734b358276938c66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a876bbc179f5f6327734b358276938c66">completely_distributed_solution</a></td></tr>
+<tr class="separator:a876bbc179f5f6327734b358276938c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int dim, typename VectorType&gt;<br />
@@ -159,7 +159,7 @@ class PostProcessorSmoothing&lt; dim, VectorType &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00045">45</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00047">47</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad8f7fc312f7f8e604e19c3d6e9000fbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad8f7fc312f7f8e604e19c3d6e9000fbf">&#9670;&nbsp;</a></span>PostProcessorSmoothing()</h2>
@@ -197,13 +197,13 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8cc_source.html#l00004">4</a> of file <a class="el" href="postprocessors__smoothing_8cc_source.html">postprocessors_smoothing.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="simulation__parameters_8h_source.html#l00050">SimulationParameters&lt; dim &gt;::fem_parameters</a>, <a class="el" href="postprocessors__smoothing_8h_source.html#l00094">PostProcessorSmoothing&lt; dim, VectorType &gt;::mapping</a>, <a class="el" href="parameters_8h_source.html#l00863">Parameters::FEM::qmapping_all</a>, and <a class="el" href="postprocessors__smoothing_8h_source.html#l00095">PostProcessorSmoothing&lt; dim, VectorType &gt;::system_matrix</a>.</p>
+<p class="reference">References <a class="el" href="simulation__parameters_8h_source.html#l00050">SimulationParameters&lt; dim &gt;::fem_parameters</a>, <a class="el" href="postprocessors__smoothing_8h_source.html#l00096">PostProcessorSmoothing&lt; dim, VectorType &gt;::mapping</a>, <a class="el" href="parameters_8h_source.html#l00863">Parameters::FEM::qmapping_all</a>, and <a class="el" href="postprocessors__smoothing_8h_source.html#l00097">PostProcessorSmoothing&lt; dim, VectorType &gt;::system_matrix</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="accf27dd4edb9ce8740f8a6d2244e4393"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accf27dd4edb9ce8740f8a6d2244e4393">&#9670;&nbsp;</a></span>calculate_smoothed_field()</h2>
+<a id="a9d70d2243924667dffd1b738dabe7360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d70d2243924667dffd1b738dabe7360">&#9670;&nbsp;</a></span>calculate_smoothed_field()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,7 +211,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 template&lt;int dim, typename VectorType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const TrilinosWrappers::MPI::Vector &amp; <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::calculate_smoothed_field </td>
+          <td class="memname">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp; <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::calculate_smoothed_field </td>
           <td>(</td>
           <td class="paramtype">const VectorType &amp;&#160;</td>
           <td class="paramname"><em>solution</em>, </td>
@@ -238,7 +238,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 <p>Returns the smoothed field solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8cc_source.html#l00151">151</a> of file <a class="el" href="postprocessors__smoothing_8cc_source.html">postprocessors_smoothing.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8cc_source.html#l00150">150</a> of file <a class="el" href="postprocessors__smoothing_8cc_source.html">postprocessors_smoothing.cc</a>.</p>
 
 </div>
 </div>
@@ -308,7 +308,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classContinuityPostProcessorSmoothing.html#aaea5a80f212896c8f9b9c4816b365f07">ContinuityPostProcessorSmoothing&lt; dim, VectorType &gt;</a>, and <a class="el" href="classQcriterionPostProcessorSmoothing.html#a8d12b1d21101907ee679c8011d49d67c">QcriterionPostProcessorSmoothing&lt; dim, VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00064">64</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00066">66</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -328,12 +328,12 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 <p>Returns a constant reference to the dof_handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8cc_source.html#l00163">163</a> of file <a class="el" href="postprocessors__smoothing_8cc_source.html">postprocessors_smoothing.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8cc_source.html#l00162">162</a> of file <a class="el" href="postprocessors__smoothing_8cc_source.html">postprocessors_smoothing.cc</a>.</p>
 
 </div>
 </div>
-<a id="a6cb241dea583bfc1bdc397269c8063a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cb241dea583bfc1bdc397269c8063a6">&#9670;&nbsp;</a></span>solve_L2_projection()</h2>
+<a id="aef38dde9b3f7a208b052e96dca7c36ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef38dde9b3f7a208b052e96dca7c36ea">&#9670;&nbsp;</a></span>solve_L2_projection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,7 +341,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 template&lt;int dim, typename VectorType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const TrilinosWrappers::MPI::Vector &amp; <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::solve_L2_projection</td>
+          <td class="memname">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp; <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::solve_L2_projection</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -355,8 +355,8 @@ template&lt;int dim, typename VectorType &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="af3e435844a220ad3671c400a3d50ed8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3e435844a220ad3671c400a3d50ed8c">&#9670;&nbsp;</a></span>completely_distributed_solution</h2>
+<a id="a876bbc179f5f6327734b358276938c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a876bbc179f5f6327734b358276938c66">&#9670;&nbsp;</a></span>completely_distributed_solution</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +367,7 @@ template&lt;int dim, typename VectorType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::completely_distributed_solution</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::completely_distributed_solution</td>
         </tr>
       </table>
   </td>
@@ -377,7 +377,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00101">101</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00103">103</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -403,7 +403,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00098">98</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00100">100</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -429,7 +429,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00091">91</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00093">93</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -455,7 +455,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00090">90</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00092">92</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -481,7 +481,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00100">100</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00102">102</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -507,7 +507,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00099">99</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00101">101</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -533,7 +533,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00094">94</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00096">96</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -559,7 +559,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00097">97</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00099">99</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -585,7 +585,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00093">93</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00095">95</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -611,7 +611,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00092">92</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00094">94</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
@@ -637,12 +637,12 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00095">95</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00097">97</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
-<a id="ae33a548e199791c72e66a1ef2a3a2ea4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae33a548e199791c72e66a1ef2a3a2ea4">&#9670;&nbsp;</a></span>system_rhs</h2>
+<a id="afe4e8bdc02c1096e6670506236d84b28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4e8bdc02c1096e6670506236d84b28">&#9670;&nbsp;</a></span>system_rhs</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -653,7 +653,7 @@ template&lt;int dim, typename VectorType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::system_rhs</td>
+          <td class="memname"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> <a class="el" href="classPostProcessorSmoothing.html">PostProcessorSmoothing</a>&lt; dim, VectorType &gt;::system_rhs</td>
         </tr>
       </table>
   </td>
@@ -663,7 +663,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00096">96</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors__smoothing_8h_source.html#l00098">98</a> of file <a class="el" href="postprocessors__smoothing_8h_source.html">postprocessors_smoothing.h</a>.</p>
 
 </div>
 </div>
