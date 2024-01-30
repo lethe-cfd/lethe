@@ -2420,29 +2420,37 @@ $(function() {
 <div class="line"><a name="l02340"></a><span class="lineno"> 2340</span>&#160;{</div>
 <div class="line"><a name="l02341"></a><span class="lineno"> 2341</span>&#160;  VectorType tmp;</div>
 <div class="line"><a name="l02342"></a><span class="lineno"> 2342</span>&#160; </div>
-<div class="line"><a name="l02343"></a><span class="lineno"> 2343</span>&#160;  tmp.reinit(locally_owned_dofs, locally_relevant_dofs, this-&gt;mpi_communicator);</div>
-<div class="line"><a name="l02344"></a><span class="lineno"> 2344</span>&#160; </div>
-<div class="line"><a name="l02345"></a><span class="lineno"> 2345</span>&#160;  <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a name="l02346"></a><span class="lineno"> 2346</span>&#160;}</div>
-<div class="line"><a name="l02347"></a><span class="lineno"> 2347</span>&#160; </div>
-<div class="line"><a name="l02348"></a><span class="lineno"> 2348</span>&#160;<span class="comment">// Pre-compile the 2D and 3D version with the types that can occur</span></div>
-<div class="line"><a name="l02349"></a><span class="lineno"> 2349</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase&lt;2, GlobalVectorType, IndexSet&gt;</a>;</div>
-<div class="line"><a name="l02350"></a><span class="lineno"> 2350</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase&lt;3, GlobalVectorType, IndexSet&gt;</a>;</div>
-<div class="line"><a name="l02351"></a><span class="lineno"> 2351</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;2,</div>
-<div class="line"><a name="l02352"></a><span class="lineno"> 2352</span>&#160;                                <a class="code" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>,</div>
-<div class="line"><a name="l02353"></a><span class="lineno"> 2353</span>&#160;                                std::vector&lt;IndexSet&gt;&gt;;</div>
-<div class="line"><a name="l02354"></a><span class="lineno"> 2354</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;3,</div>
-<div class="line"><a name="l02355"></a><span class="lineno"> 2355</span>&#160;                                <a class="code" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>,</div>
-<div class="line"><a name="l02356"></a><span class="lineno"> 2356</span>&#160;                                std::vector&lt;IndexSet&gt;&gt;;</div>
-<div class="line"><a name="l02357"></a><span class="lineno"> 2357</span>&#160; </div>
-<div class="line"><a name="l02358"></a><span class="lineno"> 2358</span>&#160;<span class="preprocessor">#ifndef LETHE_USE_LDV</span></div>
+<div class="line"><a name="l02343"></a><span class="lineno"> 2343</span>&#160;  <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;VectorType, GlobalVectorType&gt; ||</div>
+<div class="line"><a name="l02344"></a><span class="lineno"> 2344</span>&#160;                std::is_same_v&lt;VectorType, GlobalBlockVectorType&gt;)</div>
+<div class="line"><a name="l02345"></a><span class="lineno"> 2345</span>&#160;    tmp.reinit(locally_owned_dofs, this-&gt;mpi_communicator);</div>
+<div class="line"><a name="l02346"></a><span class="lineno"> 2346</span>&#160; </div>
+<div class="line"><a name="l02347"></a><span class="lineno"> 2347</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;VectorType,</div>
+<div class="line"><a name="l02348"></a><span class="lineno"> 2348</span>&#160;                                    LinearAlgebra::distributed::Vector&lt;double&gt;&gt;)</div>
+<div class="line"><a name="l02349"></a><span class="lineno"> 2349</span>&#160;    tmp.reinit(locally_owned_dofs,</div>
+<div class="line"><a name="l02350"></a><span class="lineno"> 2350</span>&#160;               locally_relevant_dofs,</div>
+<div class="line"><a name="l02351"></a><span class="lineno"> 2351</span>&#160;               this-&gt;mpi_communicator);</div>
+<div class="line"><a name="l02352"></a><span class="lineno"> 2352</span>&#160; </div>
+<div class="line"><a name="l02353"></a><span class="lineno"> 2353</span>&#160;  <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a name="l02354"></a><span class="lineno"> 2354</span>&#160;}</div>
+<div class="line"><a name="l02355"></a><span class="lineno"> 2355</span>&#160; </div>
+<div class="line"><a name="l02356"></a><span class="lineno"> 2356</span>&#160;<span class="comment">// Pre-compile the 2D and 3D version with the types that can occur</span></div>
+<div class="line"><a name="l02357"></a><span class="lineno"> 2357</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase&lt;2, GlobalVectorType, IndexSet&gt;</a>;</div>
+<div class="line"><a name="l02358"></a><span class="lineno"> 2358</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase&lt;3, GlobalVectorType, IndexSet&gt;</a>;</div>
 <div class="line"><a name="l02359"></a><span class="lineno"> 2359</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;2,</div>
-<div class="line"><a name="l02360"></a><span class="lineno"> 2360</span>&#160;                                LinearAlgebra::distributed::Vector&lt;double&gt;,</div>
-<div class="line"><a name="l02361"></a><span class="lineno"> 2361</span>&#160;                                IndexSet&gt;;</div>
+<div class="line"><a name="l02360"></a><span class="lineno"> 2360</span>&#160;                                <a class="code" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>,</div>
+<div class="line"><a name="l02361"></a><span class="lineno"> 2361</span>&#160;                                std::vector&lt;IndexSet&gt;&gt;;</div>
 <div class="line"><a name="l02362"></a><span class="lineno"> 2362</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;3,</div>
-<div class="line"><a name="l02363"></a><span class="lineno"> 2363</span>&#160;                                LinearAlgebra::distributed::Vector&lt;double&gt;,</div>
-<div class="line"><a name="l02364"></a><span class="lineno"> 2364</span>&#160;                                IndexSet&gt;;</div>
-<div class="line"><a name="l02365"></a><span class="lineno"> 2365</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l02363"></a><span class="lineno"> 2363</span>&#160;                                <a class="code" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a>,</div>
+<div class="line"><a name="l02364"></a><span class="lineno"> 2364</span>&#160;                                std::vector&lt;IndexSet&gt;&gt;;</div>
+<div class="line"><a name="l02365"></a><span class="lineno"> 2365</span>&#160; </div>
+<div class="line"><a name="l02366"></a><span class="lineno"> 2366</span>&#160;<span class="preprocessor">#ifndef LETHE_USE_LDV</span></div>
+<div class="line"><a name="l02367"></a><span class="lineno"> 2367</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;2,</div>
+<div class="line"><a name="l02368"></a><span class="lineno"> 2368</span>&#160;                                LinearAlgebra::distributed::Vector&lt;double&gt;,</div>
+<div class="line"><a name="l02369"></a><span class="lineno"> 2369</span>&#160;                                IndexSet&gt;;</div>
+<div class="line"><a name="l02370"></a><span class="lineno"> 2370</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classNavierStokesBase.html">NavierStokesBase</a>&lt;3,</div>
+<div class="line"><a name="l02371"></a><span class="lineno"> 2371</span>&#160;                                LinearAlgebra::distributed::Vector&lt;double&gt;,</div>
+<div class="line"><a name="l02372"></a><span class="lineno"> 2372</span>&#160;                                IndexSet&gt;;</div>
+<div class="line"><a name="l02373"></a><span class="lineno"> 2373</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="abdf_8h_html"><div class="ttname"><a href="bdf_8h.html">bdf.h</a></div></div>
 <div class="ttc" id="abdf_8h_html_a20abc47ca7441007f8923c529000ace5"><div class="ttname"><a href="bdf_8h.html#a20abc47ca7441007f8923c529000ace5">maximum_number_of_previous_solutions</a></div><div class="ttdeci">unsigned int maximum_number_of_previous_solutions()</div><div class="ttdoc">Returns the maximum number of previous time steps supposed by the BDF schemes implemented in Lethe....</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8h_source.html#l00096">bdf.h:96</a></div></div>
 <div class="ttc" id="aclassBoundaryPostprocessor_html"><div class="ttname"><a href="classBoundaryPostprocessor.html">BoundaryPostprocessor</a></div><div class="ttdoc">BounearyPostprocessor Post-processor class used to attach the boundary id to the faces when outputtin...</div><div class="ttdef"><b>Definition:</b> <a href="manifolds_8h_source.html#l00090">manifolds.h:91</a></div></div>
