@@ -29,7 +29,7 @@ IBStencil<dim>::p_base(const unsigned int order)
   reference_points.resize(order + 1);
   for (unsigned int i = 0; i < order + 1; ++i)
     {
-      reference_points[i] = 0.5 * (1 - cos(PI * i / order));
+      reference_points[i] = 1 * (1 - cos(PI / 2.0 * i / order));
     }
 }
 
