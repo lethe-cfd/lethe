@@ -248,37 +248,50 @@ private:
   }
 
   /**
-   * @brief triggering_step
-   * The first DEM step of the simulation needs obliously a DEM contact search.
-   * Also some features of the solver, such as the periodic boundaries or the
-   * disabled of contacts. The reasons are:
-   * PBC: The particles need to be displaced to the other side of the domain if
-   * they cross the periodic boundaries because of the fluid force.
-   * Disabled contacts: The
+   * @brief contact_search_step
+   * Checks all the conditions that require a contact search step. The check of
+   * conditions is done in order of suspected frequency occurrence.
+   *
    */
 
   inline bool
-  triggering_step(const unsigned int counter) const
+  contact_search_step(const unsigned int counter)
   {
-    if (counter > 0)
+    if (contact_detection_step)
       {
-        return false;
+        // Contact search step according to the contact detection method
+        return true;
+      }
+    else if (load_balance_step)
+      {
+        // Needs to update contacts since particles/cells may have been
+        // distributed to a different subdomain
+        return true;
+      }
+    else if ((this->simulation_control->is_at_start() && (counter == 0)) ||
+             checkpoint_step)
+      {
+        // First contact search of the simulation
+        return true;
+      }
+    else if (has_disabled_contacts && (counter == 1))
+      {
+        // First mobility status identification of the CFD time step (from the
+        // velocity computed at the first DEM time step (counter = 0) of the CFD
+        // time step) The contact search is executed to make sure the mobility
+        // status of cell match the particles that are in.
+        return true;
+      }
+    else if (has_periodic_boundaries && particle_displaced_in_pbc)
+      {
+        // Particles have been displaced in periodic boundaries
+        return true;
       }
     else
       {
-        if (this->simulation_control->is_at_start() ||
-            has_periodic_boundaries || has_disabled_contacts)
-          {
-            return true;
-          }
-        else
-          {
-            return false;
-          }
+        return false;
       }
   }
-
-
 
   unsigned int                               coupling_frequency;
   bool                                       contact_detection_step;
@@ -321,6 +334,7 @@ private:
   PeriodicBoundariesManipulator<dim> periodic_boundaries_object;
   Tensor<1, dim>                     periodic_offset;
   bool                               has_periodic_boundaries;
+  bool                               particle_displaced_in_pbc;
 
   DisableContacts<dim> disable_contacts_object;
   bool                 has_disabled_contacts;

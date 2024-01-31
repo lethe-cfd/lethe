@@ -695,6 +695,9 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
       // boundary on an axis.
       periodic_offset =
         periodic_boundaries_object.get_periodic_offset_distance();
+
+      // Initialize the flag for particle displacement in PBC
+      particle_displaced_in_pbc = false;
     }
 
   if (dem_parameters.model_parameters.disable_particle_contacts)
@@ -711,9 +714,6 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
     *parallel_triangulation,
     periodic_boundaries_cells_information,
     has_periodic_boundaries);
-
-  disable_contacts_object.set_total_neighbor_list(
-    contact_manager.total_neighbor_list);
 
   // Finding boundary cells with faces
   boundary_cell_object.build(
@@ -898,12 +898,12 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
           else // counter == 0
             {
               // The cell average velocities and accelerations are updated
-              // from the fully computed forces, but we do not use the mobility
-              // status to disabled contacts at this step.
-              // The reason is that the current mobility status are computed for
-              // the last DEM time step (from the last CFD time step) are the
-              // force of the fluid may have significantly changed the
-              // particulate agitation.
+              // from the fully computed forces at step 0, but we do not use the
+              // mobility status to disabled contacts at this step. The reason
+              // is that the current mobility status are computed for the last
+              // DEM time step (from the last CFD time step) are the force of
+              // the fluid may have significantly changed the particulate
+              // agitation.
 
               // Update the cell average velocities and accelerations
               disable_contacts_object.update_average_velocities_acceleration(
@@ -918,7 +918,8 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
   // If simulation has periodic boundaries, the particles are sorted into
   // subdomains and cells at the last DEM coupled time step otherwise the
   // particles will not match the cells that they are in when void fraction is
-  // calculated with the qcm method
+  // calculated with the qcm method. The flag is kept so the next DEM time step
+  // has a contact build step
   if (counter == (coupling_frequency - 1))
     {
       if (has_periodic_boundaries &&
@@ -930,11 +931,11 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
               this->particle_handler, periodic_boundaries_cells_information);
 
           // Exchange information between processors
-          particle_has_been_moved =
+          particle_displaced_in_pbc =
             Utilities::MPI::logical_or(particle_has_been_moved,
                                        this->mpi_communicator);
 
-          if (particle_has_been_moved)
+          if (particle_displaced_in_pbc)
             {
               this->particle_handler.sort_particles_into_subdomains_and_cells();
               this->particle_handler.exchange_ghost_particles(true);
@@ -947,7 +948,7 @@ template <int dim>
 void
 CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
 {
-  // Check to see if it is contact search step
+  // Check to see if it is contact detection step
   contact_detection_step =
     check_contact_detection_method(counter,
                                    this->cfd_dem_simulation_parameters,
@@ -961,19 +962,13 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
                                    smallest_contact_search_criterion);
 
   // Sort particles in cells
-  // The last statement in the if condition allows the calling of
-  // dem_contact_build for the first DEM iteration in the first CFD time step
-  // directly after reading the dem initial checkpoint files
-  if (contact_detection_step || checkpoint_step || load_balance_step ||
-      triggering_step(counter))
+  if (contact_search_step(counter))
     {
       this->pcout << "DEM contact search at dem step " << counter << std::endl;
       contact_build_number++;
 
-      // Particles displacement if passing through a periodic boundary
-      if (has_periodic_boundaries)
-        periodic_boundaries_object.execute_particles_displacement(
-          this->particle_handler, periodic_boundaries_cells_information);
+      periodic_boundaries_object.execute_particles_displacement(
+        this->particle_handler, periodic_boundaries_cells_information);
 
       this->particle_handler.sort_particles_into_subdomains_and_cells();
 
@@ -986,13 +981,8 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
 
       if (has_disabled_contacts)
         {
-          // Update the active and ghost cells set after a load balance or a
-          // checkpoint
-          if (load_balance_step || checkpoint_step)
-            {
-              disable_contacts_object.update_local_and_ghost_cell_set(
-                this->void_fraction_dof_handler);
-            }
+          disable_contacts_object.update_local_and_ghost_cell_set(
+            this->void_fraction_dof_handler);
 
           disable_contacts_object.identify_mobility_status(
             this->void_fraction_dof_handler,
@@ -1004,16 +994,7 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
 
       // Updating moment of inertia container
       update_moment_of_inertia(this->particle_handler, MOI);
-    }
-  else
-    {
-      this->particle_handler.update_ghost_particles();
-    }
 
-  // Modify particles contact containers by search sequence
-  if (contact_detection_step || checkpoint_step || load_balance_step ||
-      triggering_step(counter))
-    {
       // Execute broad search by filling containers of particle-particle
       // contact pair candidates and containers of particle-wall
       // contact pair candidates
@@ -1077,10 +1058,14 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
       // been performed, this functions are set to false. The checkpoint_step
       // remains false for the duration of the simulation while the load
       // balancing is reset everytime load balancing is called.
-      checkpoint_step   = false;
-      load_balance_step = false;
+      checkpoint_step           = false;
+      load_balance_step         = false;
+      particle_displaced_in_pbc = false;
     }
-
+  else
+    {
+      this->particle_handler.update_ghost_particles();
+    }
   // TODO add DEM post-processing
 }
 
@@ -1450,10 +1435,10 @@ CFDDEMSolver<dim>::dem_setup_contact_parameters()
              2);
 
 
-  //   Finding the smallest contact search frequency criterion between (smallest
-  //   cell size - largest particle radius) and (security factor * (blab
-  //   diamater - 1) *  largest particle radius). This value is used in
-  //   find_contact_detection_frequency function
+  // Finding the smallest contact search frequency criterion between (smallest
+  // cell size - largest particle radius) and (security factor * (blab diameter
+  // - 1) *  largest particle radius). This value is used in
+  // find_contact_detection_frequency function
   smallest_contact_search_criterion =
     std::min((GridTools::minimal_cell_diameter(*this->triangulation) -
               maximum_particle_diameter * 0.5),

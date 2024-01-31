@@ -231,7 +231,7 @@ public:
       {
         cell_mobility_status.clear();
 
-        for (auto &cell : local_and_ghost_cells)
+        for (auto cell : local_and_ghost_cells)
           {
             assign_mobility_status(cell->active_cell_index(),
                                    mobility_status::mobile);
@@ -297,20 +297,6 @@ public:
   }
 
   /**
-   * @brief Sets the total neighbor list
-   *
-   * @param total_neighbor_list The total neighbor list
-   */
-  // TODO: pass the variable to another function, not as a setter
-  void
-  set_total_neighbor_list(
-    const typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
-      &total_cell_neighbor_list)
-  {
-    total_neighbor_list = total_cell_neighbor_list;
-  }
-
-  /**
    * @brief Converts the map of mobility status to a vector of mobility status
    * because map can't be used as is in the pvd post-processing or any data out,
    * it needs to be converted to a vector of mobility status by active cell
@@ -362,51 +348,57 @@ public:
 
     // Loop over all the cells even if they are not mobile to reset the force
     // and torque value
-    for (auto &cell : this->local_and_ghost_cells)
+    for (auto cell : local_and_ghost_cells)
       {
-        const unsigned int n_particles_in_cell =
-          particle_handler.n_particles_in_cell(cell);
-
-        velocity_cell_average.clear();
-        acc_dt_cell_average.clear();
-
-        if (n_particles_in_cell > 0)
+        if (cell->is_locally_owned())
           {
-            auto particles_in_cell = particle_handler.particles_in_cell(cell);
-            for (auto &particle : particles_in_cell)
+            const unsigned int n_particles_in_cell =
+              particle_handler.n_particles_in_cell(cell);
+
+            velocity_cell_average.clear();
+            acc_dt_cell_average.clear();
+
+            if (n_particles_in_cell > 0)
               {
-                // Get particle properties
-                auto particle_properties          = particle.get_properties();
-                types::particle_index particle_id = particle.get_local_index();
-
-                double dt_mass_inverse =
-                  dt / particle_properties[DEM::PropertiesIndex::mass];
-
-                // Calculate the acceleration of the particle times the time
-                // step
-                Tensor<1, 3> acc_dt_particle =
-                  dt_g + force[particle_id] * dt_mass_inverse;
-                acc_dt_cell_average += acc_dt_particle;
-
-                for (int d = 0; d < dim; ++d)
+                auto particles_in_cell =
+                  particle_handler.particles_in_cell(cell);
+                for (auto &particle : particles_in_cell)
                   {
-                    // Add up the current velocity for the average velocity
-                    velocity_cell_average[d] +=
-                      particle_properties[DEM::PropertiesIndex::v_x + d] +
-                      acc_dt_particle[d];
+                    // Get particle properties
+                    auto particle_properties = particle.get_properties();
+                    types::particle_index particle_id =
+                      particle.get_local_index();
+
+                    double dt_mass_inverse =
+                      dt / particle_properties[DEM::PropertiesIndex::mass];
+
+                    // Calculate the acceleration of the particle times the time
+                    // step
+                    Tensor<1, 3> acc_dt_particle =
+                      dt_g + force[particle_id] * dt_mass_inverse;
+                    acc_dt_cell_average += acc_dt_particle;
+
+                    for (int d = 0; d < dim; ++d)
+                      {
+                        // Add up the current velocity for the average velocity
+                        velocity_cell_average[d] +=
+                          particle_properties[DEM::PropertiesIndex::v_x + d] +
+                          acc_dt_particle[d];
+                      }
                   }
+
+                // Compute the average velocity and acceleration, the time step
+                // is multiplied here for the hole vector instead of each time a
+                // value is used
+                velocity_cell_average /= n_particles_in_cell;
+                acc_dt_cell_average /= n_particles_in_cell;
               }
 
-            // Compute the average velocity and acceleration, the time step is
-            // multiplied here for the hole vector instead of each time a value
-            // is used
-            velocity_cell_average /= n_particles_in_cell;
-            acc_dt_cell_average /= n_particles_in_cell;
+            // Update acceleration for particles in cell
+            cell_velocities_accelerations.insert(std::make_pair(
+              cell,
+              std::make_pair(velocity_cell_average, acc_dt_cell_average)));
           }
-
-        // Update acceleration for particles in cell
-        cell_velocities_accelerations.insert(std::make_pair(
-          cell, std::make_pair(velocity_cell_average, acc_dt_cell_average)));
       }
   }
 
@@ -489,7 +481,7 @@ private:
     cell_mobility_status.insert({cell_id, cell_status});
 
     // Assign mobility status to nodes but don't overwrite empty or mobile nodes
-    // in regards of the case.
+    // in regard to the case
     for (auto node_id : dof_indices)
       {
         // Prevailing mobility status of the node and assignation
@@ -507,28 +499,16 @@ private:
       }
   }
 
-
-  typename DEM::dem_data_structures<dim>::cell_index_int_map
-  get_all_mobile_mobility_status()
-  {
-    return all_mobile_mobility_status;
-  }
-
-
-  // Map of cell mobility status, the key is the active cell index and the value
-  // is the mobility status
-  typename DEM::dem_data_structures<dim>::cell_index_int_map
-    cell_mobility_status;
-
-  typename DEM::dem_data_structures<dim>::cell_index_int_map
-    all_mobile_mobility_status;
-
-
   // Set of locally owned and ghost cells, used to loop over only the locally
   // owned and ghost cells without looping over all the cells in the
   // triangulation many times
   std::set<typename DoFHandler<dim>::active_cell_iterator>
     local_and_ghost_cells;
+
+  // Map of cell mobility status, the key is the active cell index and the value
+  // is the mobility status
+  typename DEM::dem_data_structures<dim>::cell_index_int_map
+    cell_mobility_status;
 
   // Vector of mobility status at nodes, used to check the value at node to
   // determine the mobility status of the cell, this type of vector is used
@@ -545,10 +525,6 @@ private:
   // Threshold values for granular temperature and solid fraction
   double granular_temperature_threshold;
   double solid_fraction_threshold;
-
-  typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
-    total_neighbor_list;
-
 
   // Map of cell velocities and accelerations, the key is the active cell
   // iterator and the value is a pair of the cell velocity and acceleration
