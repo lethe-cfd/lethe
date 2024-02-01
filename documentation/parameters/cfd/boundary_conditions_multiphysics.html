@@ -394,21 +394,21 @@
 <p>This subsection’s purpose is defining the boundary conditions associated to multiphysic problems.</p>
 <section id="heat-transfer">
 <span id="heat-transfer-bc"></span><h2>Heat Transfer<a class="headerlink" href="#heat-transfer" title="Link to this heading">#</a></h2>
-<p>For heat transfer boundary conditions, the possible <code class="docutils literal notranslate"><span class="pre">types</span></code> are <code class="docutils literal notranslate"><span class="pre">noflux</span></code> (default), <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code>.
-The default parameters for <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code> are shown:</p>
+<p>For heat transfer boundary conditions, the possible <code class="docutils literal notranslate"><span class="pre">types</span></code> are <code class="docutils literal notranslate"><span class="pre">noflux</span></code> (default), <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code>.
+The default parameters for <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> are shown:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions heat transfer
   set number         = 2
   set time dependent = false
   subsection bc 0
-    set id    = 0
-    set type  = temperature
+    set id   = 0
+    set type = temperature
     subsection value
       set Function expression = 0
     end
   end
   subsection bc 1
-    set id         = 1
-    set type       = convection-radiation
+    set id   = 1
+    set type = convection-radiation-flux
     subsection h
       set Function expression = 0
     end
@@ -416,6 +416,9 @@ The default parameters for <code class="docutils literal notranslate"><span clas
       set Function expression = 0
     end
     subsection emissivity
+      set Function expression = 0
+    end
+    subsection heat_flux
       set Function expression = 0
     end
   end
@@ -436,23 +439,31 @@ end
 <p>The index in <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">bc</span> <span class="pre">..</span></code> must be coherent with the <code class="docutils literal notranslate"><span class="pre">number</span></code> of boundary conditions set: if <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">=</span> <span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">bc</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">bc</span> <span class="pre">1</span></code> are created but <code class="docutils literal notranslate"><span class="pre">bc</span> <span class="pre">2</span></code> does not exist.</p>
 <p>Likewise, if <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">=</span> <span class="pre">2</span></code> and there is no <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">bc</span> <span class="pre">0</span></code> explicitly stated, the boundary is still created, with <code class="docutils literal notranslate"><span class="pre">noflux</span></code> by default.</p>
 </div>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> is the number associated with the boundary condition. By default, Lethe assumes that the id is equivalent to the number of the bc.</p></li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">type</span></code>: type of boundary condition being imposed. At the moment, choices are:</dt><dd><ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code>: type of boundary condition being imposed. At the moment, choices are:</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">noflux</span></code> (default) so that there is no heat transfer boundary condition,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code> (Dirichlet BC), to impose a given temperature <code class="docutils literal notranslate"><span class="pre">value</span></code> at the boundary,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code> (Robin BC) for cooling/heating, depending on the environment temperature at the boundary <code class="docutils literal notranslate"><span class="pre">Tinf</span></code>, with a given heat transfer coefficient <code class="docutils literal notranslate"><span class="pre">h</span></code> and emissivity of the boundary <span class="math notranslate nohighlight">\(\mathbf{\epsilon}\)</span> following Newton’s law of cooling (and heating) and Stefan-Boltzmann law of radiation. Note that the expressions for <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">Tinf</span></code> and <code class="docutils literal notranslate"><span class="pre">emissivity</span></code> can be time-dependent, but the current implementation doesn’t allow for space dependence (the expressions are evaluated at the origin).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> (Robin BC) for cooling/heating, depending on the environment temperature at the boundary <code class="docutils literal notranslate"><span class="pre">Tinf</span></code>, with a given heat transfer coefficient <code class="docutils literal notranslate"><span class="pre">h</span></code> and <code class="docutils literal notranslate"><span class="pre">emissivity</span></code> of the boundary <span class="math notranslate nohighlight">\(\mathbf{\epsilon}\)</span> following Newton’s law of cooling (and heating) and Stefan-Boltzmann law of radiation. It is also possible to impose a given heat flux (<span class="math notranslate nohighlight">\(q_0\)</span>) by using the parameter <code class="docutils literal notranslate"><span class="pre">heat_flux</span></code>. This BC can be represented by:</p></li>
 </ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{ \partial T}{\partial \mathbf{n}} = h (T - T_{inf}) + \epsilon \sigma (T^4 - T_{inf}^4) + q_0\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\sigma}\)</span> is the Stefan-Boltzmann constant.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the expressions for <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">Tinf</span></code>, <code class="docutils literal notranslate"><span class="pre">emissivity</span></code>, and <code class="docutils literal notranslate"><span class="pre">heat_flux</span></code> can be time-dependent, but the current implementation does not allow for space dependence (the expressions are evaluated at the origin).</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The flux represented by the <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> BC follow the direction of the normal vector to the boundary, i.e., pointing outwards the boundary. As consequence, a positive value for <code class="docutils literal notranslate"><span class="pre">heat_flux</span></code>, for example, will result on heat being extracted from the boundary.</p>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="math-wrapper docutils container">
-<div class="math notranslate nohighlight">
-\[\frac{ \partial T}{\partial \mathbf{n}} = h (T - T_{inf}) + \epsilon \sigma (T^4 - T_{inf}^4)\]</div>
-</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{\sigma}\)</span> is the Stefan-Boltzmann constant.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>The <a class="reference internal" href="../../examples/multiphysics/warming-up-a-viscous-fluid/warming-up-a-viscous-fluid.html"><span class="doc">Warming up a Viscous Fluid</span></a> example uses heat transfer boundary conditions.</p>

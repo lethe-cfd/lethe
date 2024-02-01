@@ -413,7 +413,7 @@
 <h2>Description of the Case<a class="headerlink" href="#description-of-the-case" title="Link to this heading">#</a></h2>
 <p>A laser beam heats a three-dimensional solid block. The laser beam is emitted perpendicular to the top surface of the block in the negative z direction. The following schematic describes the geometry and dimensions of block and laser beam:</p>
 <a class="reference internal image-reference" href="../../../_images/geometry.png"><img alt="Schematic" class="align-center" src="../../../_images/geometry.png" style="width: 400px;" /></a>
-<p>The laser path changes with time. The laser beam radius and penetration depth are both set to <span class="math notranslate nohighlight">\(0.00005\)</span> m. Because of this small radius and penetration depth, we use adaptive mesh refinement based on the temperature. Thermal boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code> with a convective heat transfer coefficient of 5 and an emissivity of 0.4. The corresponding parameter file is:
+<p>The laser path changes with time. The laser beam radius and penetration depth are both set to <span class="math notranslate nohighlight">\(0.00005\)</span> m. Because of this small radius and penetration depth, we use adaptive mesh refinement based on the temperature. Thermal boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> with a convective heat transfer coefficient of 5 and an emissivity of 0.4. The corresponding parameter file is:
 <code class="docutils literal notranslate"><span class="pre">laser-heating.prm</span></code>.</p>
 </section>
 <section id="parameter-file">
@@ -436,7 +436,7 @@ end
 </section>
 <section id="boundary-conditions">
 <h3>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h3>
-<p>All the boundary conditions are <code class="docutils literal notranslate"><span class="pre">noslip</span></code>, and the heat transfer boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code>.</p>
+<p>All the boundary conditions are <code class="docutils literal notranslate"><span class="pre">noslip</span></code>, and the heat transfer boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions
   set number = 1
   subsection bc 0
@@ -446,7 +446,7 @@ end
 subsection boundary conditions heat transfer
   set number = 1
   subsection bc 0
-    set type       = convection-radiation
+    set type       = convection-radiation-flux
     subsection h
       set Function expression = 5
     end

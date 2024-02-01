@@ -437,7 +437,7 @@ end
 </section>
 <section id="boundary-conditions">
 <h3>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h3>
-<p>All the four boundary conditions are <code class="docutils literal notranslate"><span class="pre">noslip</span></code>, and the heat transfer boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation</span></code> with a convective heat transfer coefficient of 80 <span class="math notranslate nohighlight">\(\text{W}\text{m}^{-2}\text{K}^{-1}\)</span>, ambient temperature is 20 <span class="math notranslate nohighlight">\(^{\circ}\text{C}\)</span>, and emissivity is 0.6.</p>
+<p>All the four boundary conditions are <code class="docutils literal notranslate"><span class="pre">noslip</span></code>, and the heat transfer boundary conditions are <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> with a convective heat transfer coefficient of 80 <span class="math notranslate nohighlight">\(\text{W}\text{m}^{-2}\text{K}^{-1}\)</span>, ambient temperature is 20 <span class="math notranslate nohighlight">\(^{\circ}\text{C}\)</span>, and emissivity is 0.6.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions
   set number = 4
   subsection bc 0
@@ -461,7 +461,7 @@ subsection boundary conditions heat transfer
   set number = 4
   subsection bc 0
     set id         = 0
-    set type       = convection-radiation
+    set type       = convection-radiation-flux
     subsection h
       set Function expression = 80
     end
@@ -474,7 +474,7 @@ subsection boundary conditions heat transfer
   end
   subsection bc 1
     set id         = 1
-    set type       = convection-radiation
+    set type       = convection-radiation-flux
     subsection h
       set Function expression = 80
     end
@@ -487,7 +487,7 @@ subsection boundary conditions heat transfer
   end
   subsection bc 2
     set id         = 2
-    set type       = convection-radiation
+    set type       = convection-radiation-flux
     subsection h
       set Function expression = 80
     end
@@ -500,7 +500,7 @@ subsection boundary conditions heat transfer
   end
   subsection bc 3
     set id         = 3
-    set type       = convection-radiation
+    set type       = convection-radiation-flux
     subsection h
       set Function expression = 80
     end

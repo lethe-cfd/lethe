@@ -122,8 +122,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a79e80e5a7c859c434b1ebf2bb6b8da22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3986fa0d088a68f7ed60c9a7299694c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; Functions::ParsedFunction&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#af3986fa0d088a68f7ed60c9a7299694c">emissivity</a></td></tr>
 <tr class="separator:af3986fa0d088a68f7ed60c9a7299694c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968ef0656af2a1644d41416f1a4ea101"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; Functions::ParsedFunction&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#a968ef0656af2a1644d41416f1a4ea101">heat_flux_bc</a></td></tr>
+<tr class="separator:a968ef0656af2a1644d41416f1a4ea101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a021fa808a9b694e4abc14ff0fcdc8b91"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#a021fa808a9b694e4abc14ff0fcdc8b91">Stefan_Boltzmann_constant</a></td></tr>
 <tr class="separator:a021fa808a9b694e4abc14ff0fcdc8b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5959028ad9c8619ae382532073c0d69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#ae5959028ad9c8619ae382532073c0d69">has_convection_radiation_bc</a> = false</td></tr>
+<tr class="separator:ae5959028ad9c8619ae382532073c0d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classBoundaryConditions_1_1BoundaryConditions')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classBoundaryConditions_1_1BoundaryConditions.html">BoundaryConditions::BoundaryConditions&lt; dim &gt;</a></td></tr>
 <tr class="memitem:a9f0a13fff1090ec20fdebe92e10fb982 inherit pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1BoundaryConditions.html#a9f0a13fff1090ec20fdebe92e10fb982">id</a></td></tr>
 <tr class="separator:a9f0a13fff1090ec20fdebe92e10fb982 inherit pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,10 +154,10 @@ class BoundaryConditions::HTBoundaryConditions&lt; dim &gt;</h3>
 <ul>
 <li>if bc type is "noflux", no flux is assembled at the boundary</li>
 <li>if bc type is "temperature" (Dirichlet condition), "value" is the double passed to the deal.ii ConstantFunction</li>
-<li>if bc type is "convection-radiation" (Robin condition), "h" is the convective heat transfer coefficient and "Tinf" is the environment temperature at the boundary, "emissivity" is the emissivity coefficient, and "Stefan-Boltzmann constant" is the Stefan-Boltzmann constant = 5.6703*10-8 (W.m-2.K-4) </li>
+<li>if bc type is "convection-radiation-flux" (Robin condition), "h" is the convective heat transfer coefficient and "Tinf" is the environment temperature at the boundary, "emissivity" is the emissivity coefficient, and "Stefan-Boltzmann constant" is the Stefan-Boltzmann constant = 5.6703*10-8 \((W.m^{-2}.K^{-4})\). It is also possible to impose a heat flux using "heat_flux" </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00450">450</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00452">452</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6a4d11829a7b0fd07ee2888db05a349b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a4d11829a7b0fd07ee2888db05a349b">&#9670;&nbsp;</a></span>declare_parameters()</h2>
@@ -191,7 +195,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00528">528</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00539">539</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -234,9 +238,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00480">480</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00485">485</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
-<p class="reference">References <a class="el" href="boundary__conditions_8h_source.html#l00528">BoundaryConditions::HTBoundaryConditions&lt; dim &gt;::declare_parameters()</a>.</p>
+<p class="reference">References <a class="el" href="boundary__conditions_8h_source.html#l00539">BoundaryConditions::HTBoundaryConditions&lt; dim &gt;::declare_parameters()</a>.</p>
 
 </div>
 </div>
@@ -277,7 +281,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00578">578</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00590">590</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>, and <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -309,7 +313,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00624">624</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00640">640</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -330,7 +334,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00454">454</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00456">456</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
@@ -348,7 +352,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00457">457</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00459">459</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +370,43 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00455">455</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00457">457</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5959028ad9c8619ae382532073c0d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5959028ad9c8619ae382532073c0d69">&#9670;&nbsp;</a></span>has_convection_radiation_bc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html">BoundaryConditions::HTBoundaryConditions</a>&lt; dim &gt;::has_convection_radiation_bc = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00473">473</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+
+</div>
+</div>
+<a id="a968ef0656af2a1644d41416f1a4ea101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968ef0656af2a1644d41416f1a4ea101">&#9670;&nbsp;</a></span>heat_flux_bc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;Functions::ParsedFunction&lt;dim&gt; &gt; &gt; <a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html">BoundaryConditions::HTBoundaryConditions</a>&lt; dim &gt;::heat_flux_bc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00460">460</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
@@ -384,7 +424,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00458">458</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00461">461</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
@@ -402,7 +442,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00456">456</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00458">458</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
