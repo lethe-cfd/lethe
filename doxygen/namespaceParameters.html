@@ -239,6 +239,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1InitialConditions.html">InitialConditions</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1TracerDriftVelocity.html">TracerDriftVelocity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a drift velocity function to account for simplified multiphase flows.  <a href="classParameters_1_1TracerDriftVelocity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -313,7 +316,8 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classParameters_1_1ALE.html">ALE</a> class provides an interface for all common element required for the introduction of the required terms for a moving referential in the governing equations.</p>
-<p>The analytical solution class provides an interface for all common elementS required for the calculation of analytical solution All equation-specific analytical solution should derive from the base class but also call it's declare_parameters and parse_parameters routine. This allows specialize class to focus on their specificity and forget about other non-specific elements that are generic to the calculation of analytical solutions </p>
+<p>The analytical solution class provides an interface for all common elementS required for the calculation of analytical solution All equation-specific analytical solution should derive from the base class but also call it's declare_parameters and parse_parameters routine. This allows specialize class to focus on their specificity and forget about other non-specific elements that are generic to the calculation of analytical solutions</p>
+<p>Drift velocity that is added to the tracer velocity to account for simplified multiphase simulations using drift-flux modeling. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a8b408c8f42632c3dd96b69b720ace6f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b408c8f42632c3dd96b69b720ace6f6">&#9670;&nbsp;</a></span>DragModel</h2>
