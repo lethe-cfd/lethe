@@ -1627,7 +1627,36 @@ CFDDEMSolver<dim>::solve()
 
       if (this->cfd_dem_simulation_parameters.cfd_parameters.test.enabled)
         {
-          print_particles_summary();
+          switch (
+            this->cfd_dem_simulation_parameters.cfd_parameters.test.test_type)
+            {
+              case Parameters::Testing::TestType::particles:
+                {
+                  print_particles_summary();
+                  break;
+                }
+              case Parameters::Testing::TestType::mobility_status:
+                {
+                  if (this->simulation_control->is_at_end())
+
+                    {
+                      // Get mobility status vector sorted by cell id
+                      Vector<float> mobility_status(
+                        this->triangulation->n_active_cells());
+                      disable_contacts_object.get_mobility_status_vector(
+                        mobility_status);
+
+                      // Output mobility status vector
+                      visualization_object.print_intermediate_format(
+                        mobility_status,
+                        this->void_fraction_dof_handler,
+                        this->mpi_communicator);
+                    }
+                  break;
+                }
+              default:
+                print_particles_summary();
+            }
         }
 
       {
