@@ -165,8 +165,7 @@ MFNavierStokesSolver<dim>::setup_dofs_fd()
 
   // Clear the preconditioners
   ilu_preconditioner.reset();
-  gc_multigrid_preconditioner.reset();
-  ls_multigrid_preconditioner.reset();
+  multigrid_preconditioner.reset();
 
   // Clear matrix free operator
   this->system_operator->clear();
@@ -531,15 +530,14 @@ MFNavierStokesSolver<dim>::solve_with_LSMG(SolverGMRES<VectorType> &solver)
   this->computing_timer.enter_subsection("Setup LSMG");
 
   using OperatorType               = NavierStokesOperatorBase<dim, double>;
-  using LSTransferType             = MGTransferMatrixFree<dim, double>;
   using SmootherPreconditionerType = DiagonalMatrix<VectorType>;
   using SmootherType =
     PreconditionRelaxation<OperatorType, SmootherPreconditionerType>;
-  using PreconditionerType = PreconditionMG<dim, VectorType, LSTransferType>;
+  using PreconditionerType = PreconditionMG<dim, VectorType, MGTransferType>;
 
   // Create level objects
   MGLevelObject<std::shared_ptr<OperatorType>> mg_operators;
-  LSTransferType                               mg_transfer;
+  MGTransferType                               mg_transfer;
   MGLevelObject<VectorType>                    mg_solution;
   MGLevelObject<VectorType> mg_time_derivative_previous_solutions;
   MGLevelObject<std::shared_ptr<OperatorType>> mg_interface_in;
@@ -966,8 +964,8 @@ MFNavierStokesSolver<dim>::solve_with_LSMG(SolverGMRES<VectorType> &solver)
     mg.set_edge_matrices(mg_interface_matrix_in, mg_interface_matrix_out);
 
   // Create MG preconditioner
-  ls_multigrid_preconditioner =
-    std::make_shared<PreconditionMG<dim, VectorType, LSTransferType>>(
+  multigrid_preconditioner =
+    std::make_shared<PreconditionMG<dim, VectorType, MGTransferType>>(
       this->dof_handler, mg, mg_transfer);
 
   this->computing_timer.leave_subsection("Setup LSMG");
@@ -977,7 +975,7 @@ MFNavierStokesSolver<dim>::solve_with_LSMG(SolverGMRES<VectorType> &solver)
   solver.solve(*(system_operator),
                this->newton_update,
                this->system_rhs,
-               *ls_multigrid_preconditioner);
+               *multigrid_preconditioner);
 
   this->computing_timer.leave_subsection("Solve linear system");
 
@@ -997,12 +995,11 @@ MFNavierStokesSolver<dim>::solve_with_GCMG(SolverGMRES<VectorType> &solver)
 {
   this->computing_timer.enter_subsection("Setup GCMG");
 
-  using OperatorType   = NavierStokesOperatorBase<dim, double>;
-  using GCTransferType = MGTransferGlobalCoarsening<dim, VectorType>;
+  using OperatorType               = NavierStokesOperatorBase<dim, double>;
   using SmootherPreconditionerType = DiagonalMatrix<VectorType>;
   using SmootherType =
     PreconditionRelaxation<OperatorType, SmootherPreconditionerType>;
-  using PreconditionerType = PreconditionMG<dim, VectorType, GCTransferType>;
+  using PreconditionerType = PreconditionMG<dim, VectorType, MGTransferType>;
 
   // Create level objects
   MGLevelObject<DoFHandler<dim>>                     dof_handlers;
@@ -1434,8 +1431,8 @@ MFNavierStokesSolver<dim>::solve_with_GCMG(SolverGMRES<VectorType> &solver)
     mg_matrix, *mg_coarse, mg_transfer, mg_smoother, mg_smoother);
 
   // Create MG preconditioner
-  gc_multigrid_preconditioner =
-    std::make_shared<PreconditionMG<dim, VectorType, GCTransferType>>(
+  multigrid_preconditioner =
+    std::make_shared<PreconditionMG<dim, VectorType, MGTransferType>>(
       this->dof_handler, mg, mg_transfer);
 
   this->computing_timer.leave_subsection("Setup GCMG");
@@ -1445,7 +1442,7 @@ MFNavierStokesSolver<dim>::solve_with_GCMG(SolverGMRES<VectorType> &solver)
   solver.solve(*(system_operator),
                this->newton_update,
                this->system_rhs,
-               *gc_multigrid_preconditioner);
+               *multigrid_preconditioner);
 
   this->computing_timer.leave_subsection("Solve linear system");
 
