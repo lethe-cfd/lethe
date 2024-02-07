@@ -981,8 +981,10 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
 
       if (has_disabled_contacts)
         {
-          disable_contacts_object.update_local_and_ghost_cell_set(
-            this->void_fraction_dof_handler);
+          if (load_balance_step || checkpoint_step ||
+              (this->simulation_control->is_at_start() && (counter == 0)))
+            disable_contacts_object.update_local_and_ghost_cell_set(
+              this->void_fraction_dof_handler);
 
           disable_contacts_object.identify_mobility_status(
             this->void_fraction_dof_handler,
@@ -1065,6 +1067,16 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
   else
     {
       this->particle_handler.update_ghost_particles();
+
+      if (has_disabled_contacts && counter == 1)
+        {
+          disable_contacts_object.identify_mobility_status(
+            this->void_fraction_dof_handler,
+            this->particle_handler,
+            (*this->triangulation).n_active_cells(),
+            this->mpi_communicator,
+            counter);
+        }
     }
   // TODO add DEM post-processing
 }

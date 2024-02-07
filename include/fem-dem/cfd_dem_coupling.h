@@ -274,14 +274,6 @@ private:
         // First contact search of the simulation
         return true;
       }
-    else if (has_disabled_contacts && (counter == 1))
-      {
-        // First mobility status identification of the CFD time step (from the
-        // velocity computed at the first DEM time step (counter = 0) of the CFD
-        // time step) The contact search is executed to make sure the mobility
-        // status of cell match the particles that are in.
-        return true;
-      }
     else if (has_periodic_boundaries && particle_displaced_in_pbc)
       {
         // Particles have been displaced in periodic boundaries
