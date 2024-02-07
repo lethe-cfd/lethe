@@ -98,7 +98,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5559d192bb50405effa6e5ef52ca3a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a> - Base destructor. At the present moment this is an interface with nothing.  <a href="classAuxiliaryPhysics.html#a5559d192bb50405effa6e5ef52ca3a1e">More...</a><br /></td></tr>
 <tr class="separator:a5559d192bb50405effa6e5ef52ca3a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf185a85398b75121b700d94b49fac05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">attach_solution_to_output</a> (DataOut&lt; dim &gt; &amp;data_out)=0</td></tr>
-<tr class="memdesc:adf185a85398b75121b700d94b49fac05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver.  <a href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">More...</a><br /></td></tr>
+<tr class="memdesc:adf185a85398b75121b700d94b49fac05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach the solution vector to the DataOut provided. <a class="el" href="classThis.html">This</a> function enable the auxiliary physics to output their solution via the core solver.  <a href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">More...</a><br /></td></tr>
 <tr class="separator:adf185a85398b75121b700d94b49fac05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa917fdacf48dbefe7657aa7978edd53a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">finish_simulation</a> ()=0</td></tr>
 <tr class="memdesc:aa917fdacf48dbefe7657aa7978edd53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out the operations required to finish a simulation correctly.  <a href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">More...</a><br /></td></tr>
@@ -175,6 +175,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">get_current_residual</a> ()</td></tr>
 <tr class="memdesc:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default way to evaluate the residual for the nonlinear solver. Some application may use more complex evaluation of the residual and override this method.  <a href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">More...</a><br /></td></tr>
 <tr class="separator:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">get_current_newton_iteration</a> () const</td></tr>
+<tr class="memdesc:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current newton iteration of this physics solver.  <a href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">More...</a><br /></td></tr>
+<tr class="separator:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -190,7 +193,7 @@ class AuxiliaryPhysics&lt; dim, VectorType &gt;</h3>
 
 <p>Au auxiliary physics is defined as a physics that is solved on top of a core physics, the latter being the Navier-Stokes equations. Auxiliary physics are simpler physics around which the entire simulation process does not need to be tailored. Examples of auxiliary physics are temperature and concentration. Generally, the auxiliary physics does not affect the core physics. For example, temperature is advected by the fluid flow, but buoyancy effects are not taken into account.</p>
 <p>The auxiliary physics are managed by the multiphysics interface of Lethe.</p>
-<p>This base class is used to establish all of the routines that an auxiliary physics must be able to provide to the Multiphysics interface. These elements are then called at specific moments of a simulation.</p>
+<p><a class="el" href="classThis.html">This</a> base class is used to establish all of the routines that an auxiliary physics must be able to provide to the Multiphysics interface. These elements are then called at specific moments of a simulation.</p>
 <p>Auxiliary physics are templated by the dimension of the problem and the vector type that is used to manage their data.</p>
 <p>Current limitations:</p>
 <ul>
@@ -291,7 +294,7 @@ template&lt;int dim, typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver. </p>
+<p>Attach the solution vector to the DataOut provided. <a class="el" href="classThis.html">This</a> function enable the auxiliary physics to output their solution via the core solver. </p>
 
 <p>Implemented in <a class="el" href="classVolumeOfFluid.html#a463bc13b582623393aba7167da3859d8">VolumeOfFluid&lt; dim &gt;</a>, <a class="el" href="classTracer.html#a6955ae103f6915c54838a8a168cf34ab">Tracer&lt; dim &gt;</a>, <a class="el" href="classHeatTransfer.html#af2d9b3b3b73b759f3b6077b49a16b8c4">HeatTransfer&lt; dim &gt;</a>, and <a class="el" href="classCahnHilliard.html#af56ea0db69002200c35099b710677727">CahnHilliard&lt; dim &gt;</a>.</p>
 

@@ -123,6 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">get_current_residual</a> ()</td></tr>
 <tr class="memdesc:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default way to evaluate the residual for the nonlinear solver. Some application may use more complex evaluation of the residual and override this method.  <a href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">More...</a><br /></td></tr>
 <tr class="separator:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">get_current_newton_iteration</a> () const</td></tr>
+<tr class="memdesc:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current newton iteration of this physics solver.  <a href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">More...</a><br /></td></tr>
+<tr class="separator:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -267,7 +270,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a117c51c5894f115d42bdbd6e4ae78320 inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a specifique boundary condition exist.  <a href="classNavierStokesBase.html#a117c51c5894f115d42bdbd6e4ae78320">More...</a><br /></td></tr>
 <tr class="separator:a117c51c5894f115d42bdbd6e4ae78320 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#aab5e1ddc5b125318c547187f880e5fad">establish_solid_domain</a> (const bool non_zero_constraints)</td></tr>
-<tr class="memdesc:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns regions of the mesh where the material_id=1 to a solid block by injecting it into the constraints This is achieved by imposing $\mathbf{u}=0$ within the cells which have a material_id=1. In addition, solid cells which are not connected to the fluid by any means also get a pressure dirichlet boundary condition which fixes the pressure to 0. This ensures that the linear system is well-posed. Right now, this routine only supports the usage of 1 solid domain, but eventually it could be extended to more than one. By default, the fluid domain is assumed to have a material_id=0 and the rest of the domains have a material_id&gt;0.  <a href="classNavierStokesBase.html#aab5e1ddc5b125318c547187f880e5fad">More...</a><br /></td></tr>
+<tr class="memdesc:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns regions of the mesh where the material_id=1 to a solid block by injecting it into the constraints <a class="el" href="classThis.html">This</a> is achieved by imposing $\mathbf{u}=0$ within the cells which have a material_id=1. In addition, solid cells which are not connected to the fluid by any means also get a pressure dirichlet boundary condition which fixes the pressure to 0. <a class="el" href="classThis.html">This</a> ensures that the linear system is well-posed. Right now, this routine only supports the usage of 1 solid domain, but eventually it could be extended to more than one. By default, the fluid domain is assumed to have a material_id=0 and the rest of the domains have a material_id&gt;0.  <a href="classNavierStokesBase.html#aab5e1ddc5b125318c547187f880e5fad">More...</a><br /></td></tr>
 <tr class="separator:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af311920c0b819b973d410db4fa5e8924 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#af311920c0b819b973d410db4fa5e8924">write_checkpoint</a> ()</td></tr>
 <tr class="memdesc:af311920c0b819b973d410db4fa5e8924 inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">write_checkpoint  <a href="classNavierStokesBase.html#af311920c0b819b973d410db4fa5e8924">More...</a><br /></td></tr>
@@ -282,10 +285,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a48c7c046a1b2395bcc368792b7deca13 inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">write_output_torques Writes the torques per boundary condition to a text file output  <a href="classNavierStokesBase.html#a48c7c046a1b2395bcc368792b7deca13">More...</a><br /></td></tr>
 <tr class="separator:a48c7c046a1b2395bcc368792b7deca13 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f9917c78ef75a806167db64cfd2227a inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a3f9917c78ef75a806167db64cfd2227a">rescale_pressure_dofs_in_newton_update</a> ()</td></tr>
-<tr class="memdesc:a3f9917c78ef75a806167db64cfd2227a inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">rescale_pressure_dofs_in_newton_update This function is used to rescale pressure DOFs in the newton correction  <a href="classNavierStokesBase.html#a3f9917c78ef75a806167db64cfd2227a">More...</a><br /></td></tr>
+<tr class="memdesc:a3f9917c78ef75a806167db64cfd2227a inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">rescale_pressure_dofs_in_newton_update <a class="el" href="classThis.html">This</a> function is used to rescale pressure DOFs in the newton correction  <a href="classNavierStokesBase.html#a3f9917c78ef75a806167db64cfd2227a">More...</a><br /></td></tr>
 <tr class="separator:a3f9917c78ef75a806167db64cfd2227a inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafccb927a868ab52abb8411752067137 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#aafccb927a868ab52abb8411752067137">init_temporary_vector</a> ()</td></tr>
-<tr class="memdesc:aafccb927a868ab52abb8411752067137 inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">init_temporary_vector This function initializes correctly a temporary vector depending on the vector type  <a href="classNavierStokesBase.html#aafccb927a868ab52abb8411752067137">More...</a><br /></td></tr>
+<tr class="memdesc:aafccb927a868ab52abb8411752067137 inherit pro_methods_classNavierStokesBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">init_temporary_vector <a class="el" href="classThis.html">This</a> function initializes correctly a temporary vector depending on the vector type  <a href="classNavierStokesBase.html#aafccb927a868ab52abb8411752067137">More...</a><br /></td></tr>
 <tr class="separator:aafccb927a868ab52abb8411752067137 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -458,7 +461,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a3387b1fef3acdab998e9ab23b2fce54b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVANSSolver.html#a3387b1fef3acdab998e9ab23b2fce54b">read_dem</a> ()</td></tr>
 <tr class="separator:a3387b1fef3acdab998e9ab23b2fce54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89814b5b708911d6ef4a740c1718a9ad"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVANSSolver.html#a89814b5b708911d6ef4a740c1718a9ad">get_periodic_offset_distance</a> (unsigned int boundary_id) const</td></tr>
-<tr class="memdesc:a89814b5b708911d6ef4a740c1718a9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function calculates and returns the periodic offset distance of the domain which is needed for the periodic boundary conditions using the QCM or SPM for void fraction with the GLS VANS/CFD-DEM solver. The distance is based on one of the periodic boundaries and all particle location shifted by this distance is according to this periodic boundary.  <a href="classGLSVANSSolver.html#a89814b5b708911d6ef4a740c1718a9ad">More...</a><br /></td></tr>
+<tr class="memdesc:a89814b5b708911d6ef4a740c1718a9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classThis.html">This</a> function calculates and returns the periodic offset distance of the domain which is needed for the periodic boundary conditions using the QCM or SPM for void fraction with the GLS VANS/CFD-DEM solver. The distance is based on one of the periodic boundaries and all particle location shifted by this distance is according to this periodic boundary.  <a href="classGLSVANSSolver.html#a89814b5b708911d6ef4a740c1718a9ad">More...</a><br /></td></tr>
 <tr class="separator:a89814b5b708911d6ef4a740c1718a9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -570,7 +573,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Assembles the local matrix for a given cell. </p>
-<p>This function is used by the WorkStream class to assemble the system matrix. It is a thread safe function.</p>
+<p><a class="el" href="classThis.html">This</a> function is used by the WorkStream class to assemble the system matrix. It is a thread safe function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cell</td><td>The cell for which the local matrix is assembled.</td></tr>
@@ -780,7 +783,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l00240">240</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fac1c425268e68385d1ab5074c17a94f14">Parameters::function</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803faec5c8103218f27aa6ecfd3f11e1a6b45">Parameters::pcm</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fa68bf09624358e484ec7c4880e70a8ba1">Parameters::qcm</a>, and <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fa51762626b4f785729159fd35eea74deb">Parameters::spm</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fac1c425268e68385d1ab5074c17a94f14">Parameters::function</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803faec5c8103218f27aa6ecfd3f11e1a6b45">Parameters::pcm</a>, <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fa68bf09624358e484ec7c4880e70a8ba1">Parameters::qcm</a>, and <a class="el" href="namespaceParameters.html#a59bccd897a552f378b3da967e9fa803fa51762626b4f785729159fd35eea74deb">Parameters::spm</a>.</p>
 
 </div>
 </div>
@@ -912,7 +915,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function calculates and returns the periodic offset distance of the domain which is needed for the periodic boundary conditions using the QCM or SPM for void fraction with the GLS VANS/CFD-DEM solver. The distance is based on one of the periodic boundaries and all particle location shifted by this distance is according to this periodic boundary. </p>
+<p><a class="el" href="classThis.html">This</a> function calculates and returns the periodic offset distance of the domain which is needed for the periodic boundary conditions using the QCM or SPM for void fraction with the GLS VANS/CFD-DEM solver. The distance is based on one of the periodic boundaries and all particle location shifted by this distance is according to this periodic boundary. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">boundary_id</td><td>The id of one of the periodic boundaries</td></tr>
@@ -979,7 +982,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01364">1364</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, and <a class="el" href="physics__solver_8h_source.html#l00154">PhysicsSolver&lt; VectorType &gt;::solve_non_linear_system()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>, and <a class="el" href="physics__solver_8h_source.html#l00163">PhysicsSolver&lt; VectorType &gt;::solve_non_linear_system()</a>.</p>
 
 </div>
 </div>
@@ -1272,7 +1275,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>solve Solves the Navier-Stokes problem </p>
-<p>This functions solves the problem defined by the Navier-Stokes paramter by iterating through time or through the mesh refinements. </p>
+<p><a class="el" href="classThis.html">This</a> functions solves the problem defined by the Navier-Stokes paramter by iterating through time or through the mesh refinements. </p>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 

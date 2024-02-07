@@ -104,15 +104,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a57611781bb5ce6d63cce90f6aa54aaa5"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a57611781bb5ce6d63cce90f6aa54aaa5">gradient</a> (const Point&lt; dim &gt; &amp;evaluation_point, const unsigned int component=0) const override</td></tr>
 <tr class="memdesc:a57611781bb5ce6d63cce90f6aa54aaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the analytical gradient of the distance.  <a href="classSphere.html#a57611781bb5ce6d63cce90f6aa54aaa5">More...</a><br /></td></tr>
 <tr class="separator:a57611781bb5ce6d63cce90f6aa54aaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6b2595df899279aa79b00a2bd56fa7c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#af6b2595df899279aa79b00a2bd56fa7c">displaced_volume</a> (const double fluid_density) override</td></tr>
-<tr class="memdesc:af6b2595df899279aa79b00a2bd56fa7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the volume displaced by the solid.  <a href="classSphere.html#af6b2595df899279aa79b00a2bd56fa7c">More...</a><br /></td></tr>
-<tr class="separator:af6b2595df899279aa79b00a2bd56fa7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b7b466be17ea5cb6b5e503c7de1958"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#ae5b7b466be17ea5cb6b5e503c7de1958">displaced_volume</a> () override</td></tr>
+<tr class="memdesc:ae5b7b466be17ea5cb6b5e503c7de1958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the volume displaced by the solid.  <a href="classSphere.html#ae5b7b466be17ea5cb6b5e503c7de1958">More...</a><br /></td></tr>
+<tr class="separator:ae5b7b466be17ea5cb6b5e503c7de1958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a62ccd8adb5caf255b60f066e4a4059"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a7a62ccd8adb5caf255b60f066e4a4059">set_position</a> (const Point&lt; dim &gt; &amp;<a class="el" href="classShape.html#ac35254a566e6850f6f9b8606aa25ddc4">position</a>) override</td></tr>
 <tr class="memdesc:a7a62ccd8adb5caf255b60f066e4a4059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a new position for the shape.  <a href="classSphere.html#a7a62ccd8adb5caf255b60f066e4a4059">More...</a><br /></td></tr>
 <tr class="separator:a7a62ccd8adb5caf255b60f066e4a4059"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a40beba8a4e583ff3fc6639ba02ddb"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; Manifold&lt; dim - 1, dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a35a40beba8a4e583ff3fc6639ba02ddb">get_shape_manifold</a> () override</td></tr>
 <tr class="memdesc:a35a40beba8a4e583ff3fc6639ba02ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the manifold of the sphere as a spherical manifold center at the position of the shape.  <a href="classSphere.html#a35a40beba8a4e583ff3fc6639ba02ddb">More...</a><br /></td></tr>
 <tr class="separator:a35a40beba8a4e583ff3fc6639ba02ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3d5c84c3b9dd56aef1f25d9139c37b"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; double, Tensor&lt; 1, dim &gt;, Point&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a8b3d5c84c3b9dd56aef1f25d9139c37b">distance_to_shape_with_cell_guess</a> (<a class="el" href="classShape.html">Shape</a>&lt; dim &gt; &amp;shape, const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, std::vector&lt; Point&lt; dim &gt;&gt; &amp;candidate_points, double precision=1e-6, bool exact_distance_outside_of_contact=false) override</td></tr>
+<tr class="memdesc:a8b3d5c84c3b9dd56aef1f25d9139c37b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the distance, the center point, and the normal between the current shape and the shape given in the argument. The center point is the point that minimized the level set obtained from the intersection of the two shapes. The normal is defined using the closest surface point on the two shapes. <a class="el" href="classThis.html">This</a> function is an optimized version of the general shape distance calculation for the case of a sphere.  <a href="classSphere.html#a8b3d5c84c3b9dd56aef1f25d9139c37b">More...</a><br /></td></tr>
+<tr class="separator:a8b3d5c84c3b9dd56aef1f25d9139c37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df887d8c6074d5e600d54854268b813"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; double, Tensor&lt; 1, dim &gt;, Point&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a7df887d8c6074d5e600d54854268b813">distance_to_shape</a> (<a class="el" href="classShape.html">Shape</a>&lt; dim &gt; &amp;shape, std::vector&lt; Point&lt; dim &gt;&gt; &amp;candidate_points, double precision=1e-6, bool exact_distance_outside_of_contact=false) override</td></tr>
+<tr class="memdesc:a7df887d8c6074d5e600d54854268b813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the distance, the center point, and the normal between the current shape and the shape given in the argument. The center point is the point that minimized the level set obtained from the intersection of the two shapes. The normal is defined using the closest surface point on the two shapes. <a class="el" href="classThis.html">This</a> function is an optimized version of the general shape distance calculation for the case of a sphere.  <a href="classSphere.html#a7df887d8c6074d5e600d54854268b813">More...</a><br /></td></tr>
+<tr class="separator:a7df887d8c6074d5e600d54854268b813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ded1d768510df6814ddc537b2ee249"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#ac2ded1d768510df6814ddc537b2ee249">local_curvature_radius</a> (Point&lt; dim &gt; p) override</td></tr>
+<tr class="memdesc:ac2ded1d768510df6814ddc537b2ee249"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the curvature of the levelset at a given point.  <a href="classSphere.html#ac2ded1d768510df6814ddc537b2ee249">More...</a><br /></td></tr>
+<tr class="separator:ac2ded1d768510df6814ddc537b2ee249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cfef064834d200cd5ef4e8b4ea2daab"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a2cfef064834d200cd5ef4e8b4ea2daab">local_curvature_radius_with_cell_guess</a> (const Point&lt; dim &gt; p, const typename DoFHandler&lt; dim &gt;::active_cell_iterator cell) override</td></tr>
+<tr class="memdesc:a2cfef064834d200cd5ef4e8b4ea2daab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the curvature of the levelset at a given point using the.  <a href="classSphere.html#a2cfef064834d200cd5ef4e8b4ea2daab">More...</a><br /></td></tr>
+<tr class="separator:a2cfef064834d200cd5ef4e8b4ea2daab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classShape"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classShape')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classShape.html">Shape&lt; dim &gt;</a></td></tr>
 <tr class="memitem:afe1e03ec9d78e28f160d88380ffd0a35 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#afe1e03ec9d78e28f160d88380ffd0a35">Shape</a> (double radius, const Point&lt; dim &gt; &amp;<a class="el" href="classShape.html#ac35254a566e6850f6f9b8606aa25ddc4">position</a>, const Tensor&lt; 1, 3 &gt; &amp;<a class="el" href="classShape.html#a2ca8b6d6616659ad6ea4727762ab0d9f">orientation</a>)</td></tr>
 <tr class="memdesc:afe1e03ec9d78e28f160d88380ffd0a35 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">A general constructor for the Shapes.  <a href="classShape.html#afe1e03ec9d78e28f160d88380ffd0a35">More...</a><br /></td></tr>
@@ -120,6 +132,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53cd426c500960e007ff2ef2f5df0d1d inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a53cd426c500960e007ff2ef2f5df0d1d">value_with_cell_guess</a> (const Point&lt; dim &gt; &amp;evaluation_point, const typename DoFHandler&lt; dim &gt;::active_cell_iterator cell, const unsigned int component=0)</td></tr>
 <tr class="memdesc:a53cd426c500960e007ff2ef2f5df0d1d inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the evaluation of the signed distance function of this solid at the given point evaluation point with a guess for the cell containing the evaluation point.  <a href="classShape.html#a53cd426c500960e007ff2ef2f5df0d1d">More...</a><br /></td></tr>
 <tr class="separator:a53cd426c500960e007ff2ef2f5df0d1d inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3beacb4994e184b9cf5c7d5719d1ab94 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a3beacb4994e184b9cf5c7d5719d1ab94">smooth_max</a> (double a, double b, double smooth_factor=10)</td></tr>
+<tr class="memdesc:a3beacb4994e184b9cf5c7d5719d1ab94 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the smoothed maximum of two variables used for shape contact calculation.  <a href="classShape.html#a3beacb4994e184b9cf5c7d5719d1ab94">More...</a><br /></td></tr>
+<tr class="separator:a3beacb4994e184b9cf5c7d5719d1ab94 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3c78b7293a5994d557ab78e3a48df69 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ac3c78b7293a5994d557ab78e3a48df69">bounding_box_contact</a> (<a class="el" href="classShape.html">Shape</a>&lt; dim &gt; &amp;shape)</td></tr>
+<tr class="memdesc:ac3c78b7293a5994d557ab78e3a48df69 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the bounding box of this shape and another one are overlapping. <a class="el" href="classThis.html">This</a> function uses the Separating Axis Theorem (SAT) to perform the bounding box check.  <a href="classShape.html#ac3c78b7293a5994d557ab78e3a48df69">More...</a><br /></td></tr>
+<tr class="separator:ac3c78b7293a5994d557ab78e3a48df69 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a816b648f0d216adbb718482f5811c115 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a816b648f0d216adbb718482f5811c115">gradient_with_cell_guess</a> (const Point&lt; dim &gt; &amp;evaluation_point, const typename DoFHandler&lt; dim &gt;::active_cell_iterator cell, const unsigned int component=0)</td></tr>
 <tr class="memdesc:a816b648f0d216adbb718482f5811c115 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the analytical gradient of the distance.  <a href="classShape.html#a816b648f0d216adbb718482f5811c115">More...</a><br /></td></tr>
 <tr class="separator:a816b648f0d216adbb718482f5811c115 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,17 +155,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9740ff4dbc197b170b42e231ebda50b0 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual Tensor&lt; 1, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a9740ff4dbc197b170b42e231ebda50b0">get_orientation</a> ()</td></tr>
 <tr class="memdesc:a9740ff4dbc197b170b42e231ebda50b0 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the orientation of the shape.  <a href="classShape.html#a9740ff4dbc197b170b42e231ebda50b0">More...</a><br /></td></tr>
 <tr class="separator:a9740ff4dbc197b170b42e231ebda50b0 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0069d5ea2a3b1bb681138824ad7927 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual Tensor&lt; 2, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a9b0069d5ea2a3b1bb681138824ad7927">get_rotation_matrix</a> ()</td></tr>
+<tr class="memdesc:a9b0069d5ea2a3b1bb681138824ad7927 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the orientation of the shape.  <a href="classShape.html#a9b0069d5ea2a3b1bb681138824ad7927">More...</a><br /></td></tr>
+<tr class="separator:a9b0069d5ea2a3b1bb681138824ad7927 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab576345bf9911406043a3a9f105e771e inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ab576345bf9911406043a3a9f105e771e">get_bounding_box_half_length</a> ()</td></tr>
+<tr class="memdesc:ab576345bf9911406043a3a9f105e771e inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the bounding box half length.  <a href="classShape.html#ab576345bf9911406043a3a9f105e771e">More...</a><br /></td></tr>
+<tr class="separator:ab576345bf9911406043a3a9f105e771e inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6aeb91ecde77d14eb824b7b989d9e34 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#af6aeb91ecde77d14eb824b7b989d9e34">get_bounding_box_center</a> ()</td></tr>
+<tr class="memdesc:af6aeb91ecde77d14eb824b7b989d9e34 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the bounding box position.  <a href="classShape.html#af6aeb91ecde77d14eb824b7b989d9e34">More...</a><br /></td></tr>
+<tr class="separator:af6aeb91ecde77d14eb824b7b989d9e34 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3358ae0d479c23c540ebc3a7763bf19c inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a3358ae0d479c23c540ebc3a7763bf19c">clear_cache</a> ()</td></tr>
 <tr class="memdesc:a3358ae0d479c23c540ebc3a7763bf19c inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the cache of the shape.  <a href="classShape.html#a3358ae0d479c23c540ebc3a7763bf19c">More...</a><br /></td></tr>
 <tr class="separator:a3358ae0d479c23c540ebc3a7763bf19c inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad60cd0c45095c2a4a0fa39d504dc4f39 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ad60cd0c45095c2a4a0fa39d504dc4f39">align_and_center</a> (const Point&lt; dim &gt; &amp;evaluation_point) const</td></tr>
-<tr class="memdesc:ad60cd0c45095c2a4a0fa39d504dc4f39 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Most value functions assume that the particle's position is at the origin and that the shape is aligned with one of the main axes. This function returns a point that is rotated and translated, in accordance with the current shape position and orientation, so that subsequent calculations for the value function are made more easily; it abstracts a step that is required in the value function for most shapes.  <a href="classShape.html#ad60cd0c45095c2a4a0fa39d504dc4f39">More...</a><br /></td></tr>
+<tr class="memdesc:ad60cd0c45095c2a4a0fa39d504dc4f39 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Most value functions assume that the particle's position is at the origin and that the shape is aligned with one of the main axes. <a class="el" href="classThis.html">This</a> function returns a point that is rotated and translated, in accordance with the current shape position and orientation, so that subsequent calculations for the value function are made more easily; it abstracts a step that is required in the value function for most shapes.  <a href="classShape.html#ad60cd0c45095c2a4a0fa39d504dc4f39">More...</a><br /></td></tr>
 <tr class="separator:ad60cd0c45095c2a4a0fa39d504dc4f39 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fb04c9145a69a03028d3cecf2cd9338 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a8fb04c9145a69a03028d3cecf2cd9338">reverse_align_and_center</a> (const Point&lt; dim &gt; &amp;evaluation_point) const</td></tr>
-<tr class="memdesc:a8fb04c9145a69a03028d3cecf2cd9338 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function applies the inverse operation of align_and_center.  <a href="classShape.html#a8fb04c9145a69a03028d3cecf2cd9338">More...</a><br /></td></tr>
+<tr class="memdesc:a8fb04c9145a69a03028d3cecf2cd9338 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classThis.html">This</a> function applies the inverse operation of align_and_center.  <a href="classShape.html#a8fb04c9145a69a03028d3cecf2cd9338">More...</a><br /></td></tr>
 <tr class="separator:a8fb04c9145a69a03028d3cecf2cd9338 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a532f0f37cbc778f665364b3a2e2a559a inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a532f0f37cbc778f665364b3a2e2a559a">point_to_string</a> (const Point&lt; dim &gt; &amp;evaluation_point) const</td></tr>
-<tr class="memdesc:a532f0f37cbc778f665364b3a2e2a559a inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function returns a point in a string of text. This is used in the cache of the shape.  <a href="classShape.html#a532f0f37cbc778f665364b3a2e2a559a">More...</a><br /></td></tr>
+<tr class="memdesc:a532f0f37cbc778f665364b3a2e2a559a inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classThis.html">This</a> function returns a point in a string of text. <a class="el" href="classThis.html">This</a> is used in the cache of the shape.  <a href="classShape.html#a532f0f37cbc778f665364b3a2e2a559a">More...</a><br /></td></tr>
 <tr class="separator:a532f0f37cbc778f665364b3a2e2a559a inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc115201008418068265ed7fd5f092ae inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#acc115201008418068265ed7fd5f092ae">set_part_of_a_composite</a> (const bool <a class="el" href="classShape.html#aa03400a77cb8749bc2eb71265f550b38">part_of_a_composite</a>)</td></tr>
 <tr class="memdesc:acc115201008418068265ed7fd5f092ae inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines if this shape is part of a composite. If true, cache management is deactivated and delegated to the upper level shape, to avoid cache duplication.  <a href="classShape.html#acc115201008418068265ed7fd5f092ae">More...</a><br /></td></tr>
@@ -155,6 +182,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4012470e896cf61c53ad611eb1a26e06 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a4012470e896cf61c53ad611eb1a26e06">set_layer_thickening</a> (const double <a class="el" href="classShape.html#a6be6b189b76d906b833a6056381ac97d">layer_thickening</a>)</td></tr>
 <tr class="memdesc:a4012470e896cf61c53ad611eb1a26e06 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the layer thickening value (positive or negative) of the particle's shape.  <a href="classShape.html#a4012470e896cf61c53ad611eb1a26e06">More...</a><br /></td></tr>
 <tr class="separator:a4012470e896cf61c53ad611eb1a26e06 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256348a6ee866fb1064738a35b529428 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a256348a6ee866fb1064738a35b529428">rotation_matrix_to_xyz_angles</a> (Tensor&lt; 2, 3 &gt; &amp;rotation_matrix_representation) const</td></tr>
+<tr class="memdesc:a256348a6ee866fb1064738a35b529428 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that return the XYZ rotation angles from a rotation matrix.  <a href="classShape.html#a256348a6ee866fb1064738a35b529428">More...</a><br /></td></tr>
+<tr class="separator:a256348a6ee866fb1064738a35b529428 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -187,6 +217,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a32546bd02c82fe6fcc6b4ac2c12937f3 inherit pub_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d041c68cb6fae00cea2989f0eb3a3d inherit pub_attribs_classShape"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ae8d041c68cb6fae00cea2989f0eb3a3d">additional_info_on_shape</a></td></tr>
 <tr class="separator:ae8d041c68cb6fae00cea2989f0eb3a3d inherit pub_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1080a0361811deb866dfbb51d9da340 inherit pub_attribs_classShape"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ab1080a0361811deb866dfbb51d9da340">bounding_box_half_length</a></td></tr>
+<tr class="separator:ab1080a0361811deb866dfbb51d9da340 inherit pub_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736b232acd7f88f4d84ad6a094b87ecc inherit pub_attribs_classShape"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a736b232acd7f88f4d84ad6a094b87ecc">bounding_box_center</a></td></tr>
+<tr class="separator:a736b232acd7f88f4d84ad6a094b87ecc inherit pub_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classShape"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classShape')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classShape.html">Shape&lt; dim &gt;</a></td></tr>
 <tr class="memitem:ac35254a566e6850f6f9b8606aa25ddc4 inherit pro_attribs_classShape"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ac35254a566e6850f6f9b8606aa25ddc4">position</a></td></tr>
 <tr class="separator:ac35254a566e6850f6f9b8606aa25ddc4 inherit pro_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,6 +234,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aad72eb3feaa5852170232e3c19855330 inherit pro_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa03400a77cb8749bc2eb71265f550b38 inherit pro_attribs_classShape"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#aa03400a77cb8749bc2eb71265f550b38">part_of_a_composite</a></td></tr>
 <tr class="separator:aa03400a77cb8749bc2eb71265f550b38 inherit pro_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a2eaa1dc203ef6ebadfa3e52e5c509 inherit pro_attribs_classShape"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 2, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a18a2eaa1dc203ef6ebadfa3e52e5c509">rotation_matrix</a></td></tr>
+<tr class="separator:a18a2eaa1dc203ef6ebadfa3e52e5c509 inherit pro_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be6b189b76d906b833a6056381ac97d inherit pro_attribs_classShape"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a6be6b189b76d906b833a6056381ac97d">layer_thickening</a></td></tr>
 <tr class="separator:a6be6b189b76d906b833a6056381ac97d inherit pro_attribs_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -208,7 +244,7 @@ Additional Inherited Members</h2></td></tr>
 class Sphere&lt; dim &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00343">343</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l01387">1387</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7773cf5d7d1316f1bdc33b00f1682a5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7773cf5d7d1316f1bdc33b00f1682a5f">&#9670;&nbsp;</a></span>Sphere()</h2>
@@ -262,13 +298,13 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00352">352</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l01396">1396</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af6b2595df899279aa79b00a2bd56fa7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6b2595df899279aa79b00a2bd56fa7c">&#9670;&nbsp;</a></span>displaced_volume()</h2>
+<a id="ae5b7b466be17ea5cb6b5e503c7de1958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b7b466be17ea5cb6b5e503c7de1958">&#9670;&nbsp;</a></span>displaced_volume()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,11 +315,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::displaced_volume </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>fluid_density</em></td><td>)</td>
-          <td></td>
+          <td class="memname">double <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::displaced_volume</td>
         </tr>
       </table>
   </td>
@@ -294,16 +326,152 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Return the volume displaced by the solid. </p>
+
+<p>Reimplemented from <a class="el" href="classShape.html#a4b59682718a14d3f9bea00a66445bb77">Shape&lt; dim &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00348">348</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7df887d8c6074d5e600d54854268b813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df887d8c6074d5e600d54854268b813">&#9670;&nbsp;</a></span>distance_to_shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; double, Tensor&lt; 1, dim &gt;, Point&lt; dim &gt; &gt; <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::distance_to_shape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShape.html">Shape</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; Point&lt; dim &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>candidate_points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>precision</em> = <code>1e-6</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exact_distance_outside_of_contact</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the distance, the center point, and the normal between the current shape and the shape given in the argument. The center point is the point that minimized the level set obtained from the intersection of the two shapes. The normal is defined using the closest surface point on the two shapes. <a class="el" href="classThis.html">This</a> function is an optimized version of the general shape distance calculation for the case of a sphere. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fluid_density</td><td>The density of the fluid that is displaced </td></tr>
+    <tr><td class="paramname">shape</td><td>The shape with which the distance is evaluated </td></tr>
+    <tr><td class="paramname">cell</td><td>The cell that is likely to contain the evaluation point </td></tr>
+    <tr><td class="paramname">candidate_points</td><td><a class="el" href="classThis.html">This</a> is the initial guess points used in the calculation. (In this implementation, this parameter is void) </td></tr>
+    <tr><td class="paramname">precision</td><td><a class="el" href="classThis.html">This</a> is the precision of the distance between the two shapes. (In this implementation, this parameter is void) </td></tr>
+    <tr><td class="paramname">exact_distance_outside_of_contact</td><td><a class="el" href="classThis.html">This</a> is a boolean to force the exact distance evaluation if the shapes are not in contact. (In this implementation, this parameter is void) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classShape.html#a51998bd72fb461f6d7cf55626cfff572">Shape&lt; dim &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classShape.html#ab4245d99d0497e960a380a70a0275343">Shape&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00343">343</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00414">414</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shape_8h_source.html#l01348">Shape&lt; dim &gt;::effective_radius</a>, <a class="el" href="shape_8h_source.html#l01198">Shape&lt; dim &gt;::get_position()</a>, and <a class="el" href="classShape.html#ad5f4333acae9352a237b917a6eb49ae9">Shape&lt; dim &gt;::value()</a>.</p>
+
+</div>
+</div>
+<a id="a8b3d5c84c3b9dd56aef1f25d9139c37b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3d5c84c3b9dd56aef1f25d9139c37b">&#9670;&nbsp;</a></span>distance_to_shape_with_cell_guess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; double, Tensor&lt; 1, dim &gt;, Point&lt; dim &gt; &gt; <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::distance_to_shape_with_cell_guess </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShape.html">Shape</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; Point&lt; dim &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>candidate_points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>precision</em> = <code>1e-6</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exact_distance_outside_of_contact</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the distance, the center point, and the normal between the current shape and the shape given in the argument. The center point is the point that minimized the level set obtained from the intersection of the two shapes. The normal is defined using the closest surface point on the two shapes. <a class="el" href="classThis.html">This</a> function is an optimized version of the general shape distance calculation for the case of a sphere. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shape</td><td>The shape with which the distance is evaluated </td></tr>
+    <tr><td class="paramname">cell</td><td>The cell that is likely to contain the evaluation point </td></tr>
+    <tr><td class="paramname">candidate_points</td><td><a class="el" href="classThis.html">This</a> is the initial guess points used in the calculation. (In this implementation this parameter is void) </td></tr>
+    <tr><td class="paramname">precision</td><td><a class="el" href="classThis.html">This</a> is the precision of the distance between the two shapes. (In this implementation this parameter is void) </td></tr>
+    <tr><td class="paramname">exact_distance_outside_of_contact</td><td><a class="el" href="classThis.html">This</a> is a boolean to force the exact distance evaluation if the shapes are not in contact. (In this implementation this parameter is void) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classShape.html#a298cbe0e61a2be71ab145cc0e0afcfa9">Shape&lt; dim &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00375">375</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shape_8h_source.html#l01348">Shape&lt; dim &gt;::effective_radius</a>, <a class="el" href="shape_8h_source.html#l01198">Shape&lt; dim &gt;::get_position()</a>, <a class="el" href="shape_8cc_source.html#l00285">Shape&lt; dim &gt;::gradient_with_cell_guess()</a>, and <a class="el" href="shape_8cc_source.html#l00275">Shape&lt; dim &gt;::value_with_cell_guess()</a>.</p>
 
 </div>
 </div>
@@ -333,7 +501,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classShape.html#a7241905f76ccff3798d1b1606f6ae43f">Shape&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00336">336</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00341">341</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
 
 </div>
 </div>
@@ -377,12 +545,103 @@ template&lt;int dim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">evaluation_point</td><td>The point at which the function will be evaluated </td></tr>
-    <tr><td class="paramname">component</td><td>This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II. </td></tr>
+    <tr><td class="paramname">component</td><td><a class="el" href="classThis.html">This</a> parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00315">315</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00320">320</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac2ded1d768510df6814ddc537b2ee249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ded1d768510df6814ddc537b2ee249">&#9670;&nbsp;</a></span>local_curvature_radius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::local_curvature_radius </td>
+          <td>(</td>
+          <td class="paramtype">Point&lt; dim &gt;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the curvature of the levelset at a given point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The point where the curvature is evaluated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classShape.html#a5648e1ee0838d6d6edbc75b4c5548665">Shape&lt; dim &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00449">449</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2cfef064834d200cd5ef4e8b4ea2daab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cfef064834d200cd5ef4e8b4ea2daab">&#9670;&nbsp;</a></span>local_curvature_radius_with_cell_guess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classSphere.html">Sphere</a>&lt; dim &gt;::local_curvature_radius_with_cell_guess </td>
+          <td>(</td>
+          <td class="paramtype">const Point&lt; dim &gt;&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename DoFHandler&lt; dim &gt;::active_cell_iterator&#160;</td>
+          <td class="paramname"><em>cell</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the curvature of the levelset at a given point using the. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>The cell that is likely to contain the evaluation point </td></tr>
+    <tr><td class="paramname">p</td><td>The point where the curvature is evaluated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classShape.html#acce50f6c4c00bc8feafc26c0df46353d">Shape&lt; dim &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00456">456</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
 
 </div>
 </div>
@@ -422,9 +681,9 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classShape.html#a81b71bed82c812367cc9bb77b74c0318">Shape&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00359">359</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00363">363</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="shape_8h_source.html#l00190">Shape&lt; dim &gt;::set_position()</a>.</p>
+<p class="reference">References <a class="el" href="shape_8h_source.html#l01150">Shape&lt; dim &gt;::set_position()</a>.</p>
 
 </div>
 </div>
@@ -454,7 +713,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classShape.html#a8ea127bd7907b7dd9974ccbf6345bbeb">Shape&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00304">304</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00309">309</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
 
 </div>
 </div>
@@ -498,14 +757,14 @@ template&lt;int dim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">evaluation_point</td><td>The point at which the function will be evaluated </td></tr>
-    <tr><td class="paramname">component</td><td>This parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II. </td></tr>
+    <tr><td class="paramname">component</td><td><a class="el" href="classThis.html">This</a> parameter is not used, but it is necessary because Shapes inherit from the Function class of deal.II. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implements <a class="el" href="classShape.html#ad5f4333acae9352a237b917a6eb49ae9">Shape&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00290">290</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shape_8cc_source.html#l00295">295</a> of file <a class="el" href="shape_8cc_source.html">shape.cc</a>.</p>
 
 </div>
 </div>

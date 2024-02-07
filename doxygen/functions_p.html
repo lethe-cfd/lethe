@@ -279,9 +279,6 @@ $(function() {
 <li>particle_mapping
 : <a class="el" href="classGLSVANSSolver.html#a4120487e8cf610886e6bcf6d2ca739c3">GLSVANSSolver&lt; dim &gt;</a>
 </li>
-<li>particle_nonlinear_tol
-: <a class="el" href="classParameters_1_1IBParticles.html#a1fdba9a263b49b50d1a9ceab191d7dbe">Parameters::IBParticles&lt; dim &gt;</a>
-</li>
 <li>particle_nonlinear_tolerance
 : <a class="el" href="classParameters_1_1IBParticles.html#afdadb62290b0a1be6dba2155281d26ca">Parameters::IBParticles&lt; dim &gt;</a>
 </li>
@@ -300,7 +297,6 @@ $(function() {
 <li>particle_particle_contact_force_object
 : <a class="el" href="classCFDDEMSolver.html#a73ec388bf7179ea9f9209e2c892425ad">CFDDEMSolver&lt; dim &gt;</a>
 , <a class="el" href="classDEMSolver.html#ad89432e169ff823d5819a9ba39f945d7">DEMSolver&lt; dim &gt;</a>
-, <a class="el" href="classIBParticlesDEM.html#a961c8566a43ea4d9210f3139c0218418">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 <li>particle_particle_contact_info()
 : <a class="el" href="classparticle__particle__contact__info.html#ab0d63d63dfc4e45fa4009edc21a6f888">particle_particle_contact_info&lt; dim &gt;</a>
@@ -398,7 +394,6 @@ $(function() {
 <li>particle_wall_contact_force_object
 : <a class="el" href="classCFDDEMSolver.html#abf4ce3d9caf342667945df7b7ad51f39">CFDDEMSolver&lt; dim &gt;</a>
 , <a class="el" href="classDEMSolver.html#a94e55668c428ec182f67afdbe528becd">DEMSolver&lt; dim &gt;</a>
-, <a class="el" href="classIBParticlesDEM.html#ac229f2564e3eb484acbb1f32770b35e1">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 <li>particle_wall_contact_info()
 : <a class="el" href="classparticle__wall__contact__info.html#abfa6a8550223b10dea0d62583d132328">particle_wall_contact_info&lt; dim &gt;</a>
@@ -737,6 +732,9 @@ $(function() {
 <li>pitch
 : <a class="el" href="classCylindricalHelix.html#a9e915209058f5c0823b1f882caab45cd">CylindricalHelix&lt; dim &gt;</a>
 </li>
+<li>Plane()
+: <a class="el" href="classPlane.html#a044673be757c5d21dd50a93f1a54f336">Plane&lt; dim &gt;</a>
+</li>
 <li>plane_cells_for_insertion
 : <a class="el" href="classPlaneInsertion.html#aa1a5826a1127f975f7496f32bca9dc13">PlaneInsertion&lt; dim &gt;</a>
 </li>
@@ -877,7 +875,7 @@ $(function() {
 : <a class="el" href="structParameters_1_1NonNewtonian.html#a40396ac89acdc7b56e94dec75ad11b0a">Parameters::NonNewtonian</a>
 </li>
 <li>pp_contact_map
-: <a class="el" href="classIBParticlesDEM.html#a2719e5fd7bd1e67f8ad7b365808fcd47">IBParticlesDEM&lt; dim &gt;</a>
+: <a class="el" href="classIBParticlesDEM.html#a71310bd230b6cc15d733f660f19f0b26">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 <li>pre_mesh_adaptation()
 : <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, VectorType &gt;</a>
@@ -971,12 +969,6 @@ $(function() {
 <li>previous_chemical_potential_values
 : <a class="el" href="classCahnHilliardScratchData.html#ab8a0d9d630278caac43d40d27d694680">CahnHilliardScratchData&lt; dim &gt;</a>
 </li>
-<li>previous_d_omega
-: <a class="el" href="classIBParticle.html#a4b6ff57bbb58ad3fadeeecc3a1d268f3">IBParticle&lt; dim &gt;</a>
-</li>
-<li>previous_d_velocity
-: <a class="el" href="classIBParticle.html#ab23863d5985da2b0757896ba204fe958">IBParticle&lt; dim &gt;</a>
-</li>
 <li>previous_density
 : <a class="el" href="classNavierStokesScratchData.html#a5c0fe0240fc3541e95df2896b0231e84">NavierStokesScratchData&lt; dim &gt;</a>
 </li>
@@ -992,12 +984,6 @@ $(function() {
 <li>previous_fluid_viscous_forces
 : <a class="el" href="classIBParticle.html#a5d539d352306c9d987b81640a012b372">IBParticle&lt; dim &gt;</a>
 </li>
-<li>previous_local_alpha_omega
-: <a class="el" href="classIBParticle.html#a956ef73b875943011c466aa48bd27d03">IBParticle&lt; dim &gt;</a>
-</li>
-<li>previous_local_alpha_velocity
-: <a class="el" href="classIBParticle.html#a10cfac9fba82bf8df40459883382f425">IBParticle&lt; dim &gt;</a>
-</li>
 <li>previous_mesh_control_error
 : <a class="el" href="classMeshController.html#afd661b97f4aed705c3f7e5aa712e25fa">MeshController</a>
 </li>
@@ -1007,8 +993,14 @@ $(function() {
 <li>previous_omega
 : <a class="el" href="classIBParticle.html#af7db7796dc2eb971cfa20b2761134066">IBParticle&lt; dim &gt;</a>
 </li>
+<li>previous_omega_residual
+: <a class="el" href="classIBParticle.html#ab62e515269a2cf6a6b07fa5b204759c0">IBParticle&lt; dim &gt;</a>
+</li>
 <li>previous_orientation
 : <a class="el" href="classIBParticle.html#a00bd1f663ff20dd664f07f5ee0f28b64">IBParticle&lt; dim &gt;</a>
+</li>
+<li>previous_particle_particle_contact_point
+: <a class="el" href="classIBParticlesDEM.html#a67db1f9118341d04081c9378f631accb">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 <li>previous_phase_gradients
 : <a class="el" href="classVOFScratchData.html#a37d729c26dde4a3b53f3c2eab4f9b67c">VOFScratchData&lt; dim &gt;</a>
@@ -1059,6 +1051,9 @@ $(function() {
 <li>previous_velocity
 : <a class="el" href="classIBParticle.html#affb7875bb991c38cc61f9d2c7b5359d3">IBParticle&lt; dim &gt;</a>
 </li>
+<li>previous_velocity_residual
+: <a class="el" href="classIBParticle.html#a200148850bb564c709cb5869113c98e8">IBParticle&lt; dim &gt;</a>
+</li>
 <li>previous_velocity_values
 : <a class="el" href="classCahnHilliardScratchData.html#a5cc3b9338eb0557f834ba4c9a08d58be">CahnHilliardScratchData&lt; dim &gt;</a>
 , <a class="el" href="classNavierStokesScratchData.html#a35e6cecb73b9e5a9d2576b8208c77da8">NavierStokesScratchData&lt; dim &gt;</a>
@@ -1069,6 +1064,9 @@ $(function() {
 </li>
 <li>previous_void_fraction_values
 : <a class="el" href="classNavierStokesScratchData.html#aa48c218f4f67db5887e6036756508bbd">NavierStokesScratchData&lt; dim &gt;</a>
+</li>
+<li>previous_wall_contact_point
+: <a class="el" href="classIBParticlesDEM.html#a4ab78944a34b43434562208a26b38a6a">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 <li>print_dem
 : <a class="el" href="classParameters_1_1IBParticles.html#a671e0fda70e68fa864689b89e70eafd0">Parameters::IBParticles&lt; dim &gt;</a>
@@ -1159,7 +1157,7 @@ $(function() {
 : <a class="el" href="classGLSNitscheNavierStokesSolver.html#af1f4c2ba10a9ba06f5c07c790e8e5906">GLSNitscheNavierStokesSolver&lt; dim, spacedim &gt;</a>
 </li>
 <li>pw_contact_map
-: <a class="el" href="classIBParticlesDEM.html#ab75ef12b958b9db1709927cd60978a24">IBParticlesDEM&lt; dim &gt;</a>
+: <a class="el" href="classIBParticlesDEM.html#af001b80b1fd8c576f9531f5cce01aaac">IBParticlesDEM&lt; dim &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

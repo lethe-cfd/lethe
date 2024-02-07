@@ -105,7 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae1cb4f68a34fdea0c78cb299c58a183e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classInsertion"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classInsertion')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classInsertion.html">Insertion&lt; dim &gt;</a></td></tr>
 <tr class="memitem:aa6720a7d2e690697207ae122d69f7320 inherit pub_methods_classInsertion"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">Insertion</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt;&gt; &amp;distribution_object_container)</td></tr>
-<tr class="memdesc:aa6720a7d2e690697207ae122d69f7320 inherit pub_methods_classInsertion"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the insertion of particles. This is the base class of volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">More...</a><br /></td></tr>
+<tr class="memdesc:aa6720a7d2e690697207ae122d69f7320 inherit pub_methods_classInsertion"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the insertion of particles. <a class="el" href="classThis.html">This</a> is the base class of volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">More...</a><br /></td></tr>
 <tr class="separator:aa6720a7d2e690697207ae122d69f7320 inherit pub_methods_classInsertion"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
@@ -168,7 +168,7 @@ class PlaneInsertion&lt; dim &gt;</h3>
 
 <p><a class="el" href="classInsertion.html">Insertion</a> of particles using cells cut by a plane</p>
 <dl class="section note"><dt>Note</dt><dd></dd></dl>
-<p>Particle insertion using cells cut by a plane. Locally owned cells that are cut by the plane are flagged. From those flagged cells, we insert a particle at their centroids if they are individually empty (contain no particle). This way, no significant overlap is occurring on the insertion of new particle which can occur with other insertion method. </p>
+<p>Particle insertion using cells cut by a plane. Locally owned cells that are cut by the plane are flagged. From those flagged cells, we insert a particle at their centroids if they are individually empty (contain no particle). <a class="el" href="classThis.html">This</a> way, no significant overlap is occurring on the insertion of new particle which can occur with other insertion method. </p>
 
 <p class="definition">Definition at line <a class="el" href="plane__insertion_8h_source.html#l00043">43</a> of file <a class="el" href="plane__insertion_8h_source.html">plane_insertion.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -205,7 +205,7 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The plane insertion class insert particles using a plane define by a point an a normal vector. This method of insertion can be useful when dealing with a domain close to be fully filled with particle. In this situation, other insertion method have a high risk to create a big overlap between particles on insertion. The plane insertion method mitigate this risk by insertion at the center of empty cells.</p>
+<p>The plane insertion class insert particles using a plane define by a point an a normal vector. <a class="el" href="classThis.html">This</a> method of insertion can be useful when dealing with a domain close to be fully filled with particle. In this situation, other insertion method have a high risk to create a big overlap between particles on insertion. The plane insertion method mitigate this risk by insertion at the center of empty cells.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dem_parameters</td><td><a class="el" href="namespaceDEM.html">DEM</a> parameters declared in the .prm file </td></tr>

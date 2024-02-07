@@ -1,20 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,276,180,303"/>
-<area shape="rect" id="node2" href="$classPeriodicHillsPullBack.html" title=" " alt="" coords="242,203,401,245"/>
-<area shape="rect" id="node3" href="$classPeriodicHillsPushForward.html" title="The push_forward &amp; the pull_back classes create the vector_value functions gradient function and beca..." alt="" coords="228,269,415,310"/>
-<area shape="rect" id="node4" href="$classShape.html" title="A base class used to represent geometrical entities. Its main uses are to return signed distance and ..." alt="" coords="263,335,380,361"/>
-<area shape="rect" id="node5" href="$classCompositeShape.html" title="This class was designed so that specific composite shapes could be defined through the parameter file..." alt="" coords="473,5,659,32"/>
-<area shape="rect" id="node6" href="$classCone.html" title=" " alt="" coords="511,56,621,83"/>
-<area shape="rect" id="node7" href="$classCutHollowSphere.html" title=" " alt="" coords="471,107,661,133"/>
-<area shape="rect" id="node8" href="$classCylinder.html" title=" " alt="" coords="501,157,631,184"/>
-<area shape="rect" id="node9" href="$classCylindricalHelix.html" title=" " alt="" coords="476,208,656,235"/>
-<area shape="rect" id="node10" href="$classCylindricalTube.html" title=" " alt="" coords="478,259,654,285"/>
-<area shape="rect" id="node11" href="$classDeathStar.html" title=" " alt="" coords="495,309,637,336"/>
-<area shape="rect" id="node12" href="$classEllipsoid.html" title=" " alt="" coords="500,360,632,387"/>
-<area shape="rect" id="node13" href="$classHyperRectangle.html" title=" " alt="" coords="475,411,657,437"/>
-<area shape="rect" id="node14" href="$classOpenCascadeShape.html" title=" " alt="" coords="463,461,669,488"/>
-<area shape="rect" id="node15" href="$classRBFShape.html" title="RBF Shapes express the signed distance function as a linear combination of Radial Basis Functions (RB..." alt="" coords="495,512,637,539"/>
-<area shape="rect" id="node16" href="$classSphere.html" title=" " alt="" coords="505,563,627,589"/>
-<area shape="rect" id="node17" href="$classSuperquadric.html" title="Class that defines superquadric shapes. Their signed distance function is: ." alt="" coords="485,613,647,640"/>
-<area shape="rect" id="node18" href="$classTorus.html" title=" " alt="" coords="511,664,621,691"/>
+<area shape="rect" id="node1" href="$classPeriodicBoundariesManipulator.html" title=" " alt="" coords="5,5,231,47"/>
 </map>

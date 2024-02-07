@@ -79,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that stores the information required by the assembly procedure for the Cahn-Hilliard equations. Consequently, this class calculates the phase field parameter Phi (values, gradients, laplacians), the chemical potential eta (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the Gauss points for all degrees of freedom and stores it into arrays. Additionally, the user can request that this class gathers additional fields for physics which are coupled to the Cahn-Hilliard equations, such as the velocity which is required. This class serves as a separation between the evaluation at the Gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9.  
+<p>Class that stores the information required by the assembly procedure for the Cahn-Hilliard equations. Consequently, this class calculates the phase field parameter Phi (values, gradients, laplacians), the chemical potential eta (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the Gauss points for all degrees of freedom and stores it into arrays. Additionally, the user can request that this class gathers additional fields for physics which are coupled to the Cahn-Hilliard equations, such as the velocity which is required. <a class="el" href="classThis.html">This</a> class serves as a separation between the evaluation at the Gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9.  
  <a href="classCahnHilliardScratchData.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cahn__hilliard__scratch__data_8h_source.html">cahn_hilliard_scratch_data.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abf1135d9526e6c5b429d23b91377af69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evaluation, since this needs to be done at the cell level.  <a href="classCahnHilliardScratchData.html#abf1135d9526e6c5b429d23b91377af69">More...</a><br /></td></tr>
 <tr class="separator:abf1135d9526e6c5b429d23b91377af69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7a6748e304e9171e8b34f3da04ad0c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliardScratchData.html#ae7a6748e304e9171e8b34f3da04ad0c3">CahnHilliardScratchData</a> (const <a class="el" href="classCahnHilliardScratchData.html">CahnHilliardScratchData</a>&lt; dim &gt; &amp;sd)</td></tr>
-<tr class="memdesc:ae7a6748e304e9171e8b34f3da04ad0c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classCahnHilliardScratchData.html#ae7a6748e304e9171e8b34f3da04ad0c3">More...</a><br /></td></tr>
+<tr class="memdesc:ae7a6748e304e9171e8b34f3da04ad0c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. <a class="el" href="classThis.html">This</a> constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classCahnHilliardScratchData.html#ae7a6748e304e9171e8b34f3da04ad0c3">More...</a><br /></td></tr>
 <tr class="separator:ae7a6748e304e9171e8b34f3da04ad0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75faf2e0facd94fa79d52d0f26489e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliardScratchData.html#a75faf2e0facd94fa79d52d0f26489e61">allocate</a> ()</td></tr>
 <tr class="memdesc:a75faf2e0facd94fa79d52d0f26489e61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the memory for the scratch.  <a href="classCahnHilliardScratchData.html#a75faf2e0facd94fa79d52d0f26489e61">More...</a><br /></td></tr>
@@ -212,7 +212,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class CahnHilliardScratchData&lt; dim &gt;</h3>
 
-<p>Class that stores the information required by the assembly procedure for the Cahn-Hilliard equations. Consequently, this class calculates the phase field parameter Phi (values, gradients, laplacians), the chemical potential eta (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the Gauss points for all degrees of freedom and stores it into arrays. Additionally, the user can request that this class gathers additional fields for physics which are coupled to the Cahn-Hilliard equations, such as the velocity which is required. This class serves as a separation between the evaluation at the Gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9. </p>
+<p>Class that stores the information required by the assembly procedure for the Cahn-Hilliard equations. Consequently, this class calculates the phase field parameter Phi (values, gradients, laplacians), the chemical potential eta (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the Gauss points for all degrees of freedom and stores it into arrays. Additionally, the user can request that this class gathers additional fields for physics which are coupled to the Cahn-Hilliard equations, such as the velocity which is required. <a class="el" href="classThis.html">This</a> class serves as a separation between the evaluation at the Gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">dim</td><td>An integer that denotes the dimension of the space in which the flow is solved </td></tr>
@@ -324,7 +324,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis. </p>
+<p>Copy Constructor. Same as the main constructor. <a class="el" href="classThis.html">This</a> constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fe</td><td>The FESystem used to solve the Navier-Stokes equations</td></tr>
@@ -354,7 +354,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Allocates the memory for the scratch. </p>
-<p>This function allocates the necessary memory for all members of the scratch </p>
+<p><a class="el" href="classThis.html">This</a> function allocates the necessary memory for all members of the scratch </p>
 
 <p class="definition">Definition at line <a class="el" href="cahn__hilliard__scratch__data_8cc_source.html#l00006">6</a> of file <a class="el" href="cahn__hilliard__scratch__data_8cc_source.html">cahn_hilliard_scratch_data.cc</a>.</p>
 
@@ -422,7 +422,7 @@ template&lt;typename VectorType &gt; </div>
 <p>Using the FeValues and the content of the solutions and previous solutions , fills all of the class member of the scratch</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cell</td><td>The cell over which the assembly is being carried. This cell must be compatible with the fe which is used to fill the FeValues</td></tr>
+    <tr><td class="paramname">cell</td><td>The cell over which the assembly is being carried. <a class="el" href="classThis.html">This</a> cell must be compatible with the fe which is used to fill the FeValues</td></tr>
     <tr><td class="paramname">current_solution</td><td>The present value of the solution for [Phi,eta]</td></tr>
     <tr><td class="paramname">previous_solutions</td><td>The solutions at the previous time steps</td></tr>
     <tr><td class="paramname">source_function</td><td>The function describing the source term in Cahn-Hilliard equations </td></tr>

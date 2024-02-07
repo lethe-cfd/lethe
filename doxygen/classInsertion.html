@@ -98,16 +98,16 @@ Inheritance diagram for Insertion&lt; dim &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6720a7d2e690697207ae122d69f7320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">Insertion</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt;&gt; &amp;distribution_object_container)</td></tr>
-<tr class="memdesc:aa6720a7d2e690697207ae122d69f7320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the insertion of particles. This is the base class of volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">More...</a><br /></td></tr>
+<tr class="memdesc:aa6720a7d2e690697207ae122d69f7320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the insertion of particles. <a class="el" href="classThis.html">This</a> is the base class of volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">More...</a><br /></td></tr>
 <tr class="separator:aa6720a7d2e690697207ae122d69f7320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#ab7b6cf7393246d7d5b3ffeec6d721a14">insert</a> (Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters)=0</td></tr>
-<tr class="memdesc:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is overridden by the volume_insertion, plane_insertion and list_insertion classes to insert particles.  <a href="classInsertion.html#ab7b6cf7393246d7d5b3ffeec6d721a14">More...</a><br /></td></tr>
+<tr class="memdesc:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classThis.html">This</a> function is overridden by the volume_insertion, plane_insertion and list_insertion classes to insert particles.  <a href="classInsertion.html#ab7b6cf7393246d7d5b3ffeec6d721a14">More...</a><br /></td></tr>
 <tr class="separator:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad090ee85ee022ca32b837150ff4fa728"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#ad090ee85ee022ca32b837150ff4fa728">serialize</a> (boost::archive::text_oarchive &amp;ar, const unsigned int)=0</td></tr>
-<tr class="memdesc:ad090ee85ee022ca32b837150ff4fa728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize the insertion object to an output archive. Is being used when checkpointing a simulation. This function is overridden by volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#ad090ee85ee022ca32b837150ff4fa728">More...</a><br /></td></tr>
+<tr class="memdesc:ad090ee85ee022ca32b837150ff4fa728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize the insertion object to an output archive. Is being used when checkpointing a simulation. <a class="el" href="classThis.html">This</a> function is overridden by volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#ad090ee85ee022ca32b837150ff4fa728">More...</a><br /></td></tr>
 <tr class="separator:ad090ee85ee022ca32b837150ff4fa728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aaf50f7896e20d9f3a1ee5c644196b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a9aaf50f7896e20d9f3a1ee5c644196b0">deserialize</a> (boost::archive::text_iarchive &amp;ar, const unsigned int)=0</td></tr>
-<tr class="memdesc:a9aaf50f7896e20d9f3a1ee5c644196b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize an input archive to the insertion object. Is being used when restarting a simulation. This function is overridden by volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#a9aaf50f7896e20d9f3a1ee5c644196b0">More...</a><br /></td></tr>
+<tr class="memdesc:a9aaf50f7896e20d9f3a1ee5c644196b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize an input archive to the insertion object. Is being used when restarting a simulation. <a class="el" href="classThis.html">This</a> function is overridden by volume_insertion, plane_insertion and list_insertion classes.  <a href="classInsertion.html#a9aaf50f7896e20d9f3a1ee5c644196b0">More...</a><br /></td></tr>
 <tr class="separator:a9aaf50f7896e20d9f3a1ee5c644196b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -170,7 +170,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Carries out the insertion of particles. This is the base class of volume_insertion, plane_insertion and list_insertion classes. </p>
+<p>Carries out the insertion of particles. <a class="el" href="classThis.html">This</a> is the base class of volume_insertion, plane_insertion and list_insertion classes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">distribution_object_container</td><td>Contains all distribution for each type of particle </td></tr>
@@ -235,7 +235,7 @@ template&lt;int dim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dem_parameters</td><td><a class="el" href="namespaceDEM.html">DEM</a> parameters declared in the .prm file </td></tr>
-    <tr><td class="paramname">inserted_this_step_this_proc</td><td>Number of particles that are inserted at each insertion step on each processor. This value can change in the last insertion step to reach the desired number of particles </td></tr>
+    <tr><td class="paramname">inserted_this_step_this_proc</td><td>Number of particles that are inserted at each insertion step on each processor. <a class="el" href="classThis.html">This</a> value can change in the last insertion step to reach the desired number of particles </td></tr>
     <tr><td class="paramname">current_inserting_particle_type</td><td>Type of inserting particles </td></tr>
     <tr><td class="paramname">particle_properties</td><td>Properties of all inserted particles at each insertion step </td></tr>
   </table>
@@ -335,7 +335,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Deserialize an input archive to the insertion object. Is being used when restarting a simulation. This function is overridden by volume_insertion, plane_insertion and list_insertion classes. </p>
+<p>Deserialize an input archive to the insertion object. Is being used when restarting a simulation. <a class="el" href="classThis.html">This</a> function is overridden by volume_insertion, plane_insertion and list_insertion classes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ar</td><td>Input archive where the attributes are stored. </td></tr>
@@ -389,7 +389,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function is overridden by the volume_insertion, plane_insertion and list_insertion classes to insert particles. </p>
+<p><a class="el" href="classThis.html">This</a> function is overridden by the volume_insertion, plane_insertion and list_insertion classes to insert particles. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">particle_handler</td><td>The particle handler of particles which are being inserted </td></tr>
@@ -464,7 +464,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00035">35</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>.</p>
 
 </div>
 </div>
@@ -504,7 +504,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Serialize the insertion object to an output archive. Is being used when checkpointing a simulation. This function is overridden by volume_insertion, plane_insertion and list_insertion classes. </p>
+<p>Serialize the insertion object to an output archive. Is being used when checkpointing a simulation. <a class="el" href="classThis.html">This</a> function is overridden by volume_insertion, plane_insertion and list_insertion classes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ar</td><td>Output archive where the attributes are stored. </td></tr>

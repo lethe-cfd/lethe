@@ -79,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that stores the information required by the assembly procedure for a <a class="el" href="classTracer.html">Tracer</a> advection-diffusion equation. Consequently, this class calculates the tracer (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the gauss points for all degrees of freedom and stores it into arrays. Additionnaly, the use can request that this class gathers additional fields for physics which are coupled to the <a class="el" href="classTracer.html">Tracer</a> equation, such as the velocity which is required. This class serves as a seperation between the evaluation at the gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9.  
+<p>Class that stores the information required by the assembly procedure for a <a class="el" href="classTracer.html">Tracer</a> advection-diffusion equation. Consequently, this class calculates the tracer (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the gauss points for all degrees of freedom and stores it into arrays. Additionnaly, the use can request that this class gathers additional fields for physics which are coupled to the <a class="el" href="classTracer.html">Tracer</a> equation, such as the velocity which is required. <a class="el" href="classThis.html">This</a> class serves as a seperation between the evaluation at the gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9.  
  <a href="classTracerScratchData.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tracer__scratch__data_8h_source.html">tracer_scratch_data.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4d8617a42475ae8091769d5d4224599d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evalution, since this needs to be done at the cell level.  <a href="classTracerScratchData.html#a4d8617a42475ae8091769d5d4224599d">More...</a><br /></td></tr>
 <tr class="separator:a4d8617a42475ae8091769d5d4224599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0594b102906d6ec2f6137d6675db0514"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracerScratchData.html#a0594b102906d6ec2f6137d6675db0514">TracerScratchData</a> (const <a class="el" href="classTracerScratchData.html">TracerScratchData</a>&lt; dim &gt; &amp;sd)</td></tr>
-<tr class="memdesc:a0594b102906d6ec2f6137d6675db0514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classTracerScratchData.html#a0594b102906d6ec2f6137d6675db0514">More...</a><br /></td></tr>
+<tr class="memdesc:a0594b102906d6ec2f6137d6675db0514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. <a class="el" href="classThis.html">This</a> constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classTracerScratchData.html#a0594b102906d6ec2f6137d6675db0514">More...</a><br /></td></tr>
 <tr class="separator:a0594b102906d6ec2f6137d6675db0514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a343bf558feb3e72bcce8426c7a3433c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracerScratchData.html#a343bf558feb3e72bcce8426c7a3433c8">allocate</a> ()</td></tr>
 <tr class="memdesc:a343bf558feb3e72bcce8426c7a3433c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the memory for the scratch.  <a href="classTracerScratchData.html#a343bf558feb3e72bcce8426c7a3433c8">More...</a><br /></td></tr>
@@ -104,7 +104,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a350ac8f9bc2980389705ecc7e1b81347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the velocity, calculated by the fluid dynamics while also taking into account ALE.  <a href="classTracerScratchData.html#a350ac8f9bc2980389705ecc7e1b81347">More...</a><br /></td></tr>
 <tr class="separator:a350ac8f9bc2980389705ecc7e1b81347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76785e295498cebd6065f73952a2cebf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracerScratchData.html#a76785e295498cebd6065f73952a2cebf">calculate_physical_properties</a> ()</td></tr>
-<tr class="memdesc:a76785e295498cebd6065f73952a2cebf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the physical properties. This function calculates the physical properties that may be required by the tracer. Namely the diffusivity.  <a href="classTracerScratchData.html#a76785e295498cebd6065f73952a2cebf">More...</a><br /></td></tr>
+<tr class="memdesc:a76785e295498cebd6065f73952a2cebf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the physical properties. <a class="el" href="classThis.html">This</a> function calculates the physical properties that may be required by the tracer. Namely the diffusivity.  <a href="classTracerScratchData.html#a76785e295498cebd6065f73952a2cebf">More...</a><br /></td></tr>
 <tr class="separator:a76785e295498cebd6065f73952a2cebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -160,7 +160,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class TracerScratchData&lt; dim &gt;</h3>
 
-<p>Class that stores the information required by the assembly procedure for a <a class="el" href="classTracer.html">Tracer</a> advection-diffusion equation. Consequently, this class calculates the tracer (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the gauss points for all degrees of freedom and stores it into arrays. Additionnaly, the use can request that this class gathers additional fields for physics which are coupled to the <a class="el" href="classTracer.html">Tracer</a> equation, such as the velocity which is required. This class serves as a seperation between the evaluation at the gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9. </p>
+<p>Class that stores the information required by the assembly procedure for a <a class="el" href="classTracer.html">Tracer</a> advection-diffusion equation. Consequently, this class calculates the tracer (values, gradients, laplacians) and the shape function (values, gradients, laplacians) at all the gauss points for all degrees of freedom and stores it into arrays. Additionnaly, the use can request that this class gathers additional fields for physics which are coupled to the <a class="el" href="classTracer.html">Tracer</a> equation, such as the velocity which is required. <a class="el" href="classThis.html">This</a> class serves as a seperation between the evaluation at the gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler functions. For more information on this design, the reader can consult deal.II step-9 "https://www.dealii.org/current/doxygen/deal.II/step_9.html". In this latter example, the scratch is a struct instead of a templated class because of the simplicity of step-9. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">dim</td><td>An integer that denotes the dimension of the space in which the flow is solved </td></tr>
@@ -264,7 +264,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copy Constructor. Same as the main constructor. This constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis. </p>
+<p>Copy Constructor. Same as the main constructor. <a class="el" href="classThis.html">This</a> constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fe</td><td>The FESystem used to solve the Navier-Stokes equations</td></tr>
@@ -294,7 +294,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Allocates the memory for the scratch. </p>
-<p>This function allocates the necessary memory for all members of the scratch </p>
+<p><a class="el" href="classThis.html">This</a> function allocates the necessary memory for all members of the scratch </p>
 
 <p class="definition">Definition at line <a class="el" href="tracer__scratch__data_8cc_source.html#l00007">7</a> of file <a class="el" href="tracer__scratch__data_8cc_source.html">tracer_scratch_data.cc</a>.</p>
 
@@ -316,7 +316,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classCalculates.html">Calculates</a> the physical properties. This function calculates the physical properties that may be required by the tracer. Namely the diffusivity. </p>
+<p><a class="el" href="classCalculates.html">Calculates</a> the physical properties. <a class="el" href="classThis.html">This</a> function calculates the physical properties that may be required by the tracer. Namely the diffusivity. </p>
 
 <p class="definition">Definition at line <a class="el" href="tracer__scratch__data_8cc_source.html#l00052">52</a> of file <a class="el" href="tracer__scratch__data_8cc_source.html">tracer_scratch_data.cc</a>.</p>
 
@@ -376,7 +376,7 @@ template&lt;typename VectorType &gt; </div>
 <p>Using the FeValues and the content ofthe solutions and previous solutions, fills all of the class member of the scratch</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cell</td><td>The cell over which the assembly is being carried. This cell must be compatible with the fe which is used to fill the FeValues</td></tr>
+    <tr><td class="paramname">cell</td><td>The cell over which the assembly is being carried. <a class="el" href="classThis.html">This</a> cell must be compatible with the fe which is used to fill the FeValues</td></tr>
     <tr><td class="paramname">current_solution</td><td>The present value of the solution for [u,p]</td></tr>
     <tr><td class="paramname">previous_solutions</td><td>The solutions at the previous time steps</td></tr>
     <tr><td class="paramname">source_function</td><td>The function describing the tracer source term </td></tr>
@@ -447,7 +447,7 @@ template&lt;typename VectorType &gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cell</td><td>The cell for which the velocity is reinitialized This cell must be compatible with the Fluid Dynamics FE</td></tr>
+    <tr><td class="paramname">cell</td><td>The cell for which the velocity is reinitialized <a class="el" href="classThis.html">This</a> cell must be compatible with the Fluid Dynamics FE</td></tr>
     <tr><td class="paramname">current_solution</td><td>The present value of the solution for [u,p]</td></tr>
     <tr><td class="paramname">ale</td><td>The ALE parameters which include the ALE function</td></tr>
     <tr><td class="paramname">drift_velocity</td><td>Function to calculate the drift velocity </td></tr>

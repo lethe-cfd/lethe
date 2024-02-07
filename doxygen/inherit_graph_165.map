@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classVolumeOfFluidFilterBase.html" title="Class that allows phase fraction filtering." alt="" coords="5,31,188,57"/>
+<area shape="rect" id="node2" href="$classVolumeOfFluidNoFilter.html" title="Class that is used as a default when no filter is applied to the phase fraction." alt="" coords="242,5,411,32"/>
+<area shape="rect" id="node3" href="$classVolumeOfFluidTanhFilter.html" title="Class used to calculate a filtered phase for VOF simulations. The filtered phase is defined as ." alt="" coords="236,56,417,83"/>
+</map>

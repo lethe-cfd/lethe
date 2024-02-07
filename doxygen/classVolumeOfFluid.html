@@ -107,7 +107,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6582b5b3727d1419758bbe9f9afdb0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call for the assembly of the right-hand side.  <a href="classVolumeOfFluid.html#a6582b5b3727d1419758bbe9f9afdb0f9">More...</a><br /></td></tr>
 <tr class="separator:a6582b5b3727d1419758bbe9f9afdb0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a463bc13b582623393aba7167da3859d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluid.html#a463bc13b582623393aba7167da3859d8">attach_solution_to_output</a> (DataOut&lt; dim &gt; &amp;data_out) override</td></tr>
-<tr class="memdesc:a463bc13b582623393aba7167da3859d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver.  <a href="classVolumeOfFluid.html#a463bc13b582623393aba7167da3859d8">More...</a><br /></td></tr>
+<tr class="memdesc:a463bc13b582623393aba7167da3859d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach the solution vector to the DataOut provided. <a class="el" href="classThis.html">This</a> function enable the auxiliary physics to output their solution via the core solver.  <a href="classVolumeOfFluid.html#a463bc13b582623393aba7167da3859d8">More...</a><br /></td></tr>
 <tr class="separator:a463bc13b582623393aba7167da3859d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c087853daf49e15a0188556b0883f4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluid.html#a3c087853daf49e15a0188556b0883f4f">calculate_L2_error</a> ()</td></tr>
 <tr class="memdesc:a3c087853daf49e15a0188556b0883f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the L2 error of the solution.  <a href="classVolumeOfFluid.html#a3c087853daf49e15a0188556b0883f4f">More...</a><br /></td></tr>
@@ -210,6 +210,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">get_current_residual</a> ()</td></tr>
 <tr class="memdesc:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default way to evaluate the residual for the nonlinear solver. Some application may use more complex evaluation of the residual and override this method.  <a href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">More...</a><br /></td></tr>
 <tr class="separator:a890a9818cde0d3b89e38ece859b7733e inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">get_current_newton_iteration</a> () const</td></tr>
+<tr class="memdesc:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current newton iteration of this physics solver.  <a href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">More...</a><br /></td></tr>
+<tr class="separator:a556929601fd0996edf883aaab9cd4e16 inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -235,7 +238,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a43b54cb67b0991e20b9618be3160065b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy local cell rhs information to global rhs.  <a href="classVolumeOfFluid.html#a43b54cb67b0991e20b9618be3160065b">More...</a><br /></td></tr>
 <tr class="separator:a43b54cb67b0991e20b9618be3160065b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea6ffb261b7d0dcc76a53aff8a3b2f11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluid.html#aea6ffb261b7d0dcc76a53aff8a3b2f11">update_solution_and_constraints</a> (<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;solution)</td></tr>
-<tr class="memdesc:aea6ffb261b7d0dcc76a53aff8a3b2f11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit the phase fractions between 0 and 1. This is necessary before interface sharpening. More information can be found in step_41 of deal.II tutorials: <a href="https://www.dealii.org/current/doxygen/deal.II/step_41.html">https://www.dealii.org/current/doxygen/deal.II/step_41.html</a>.  <a href="classVolumeOfFluid.html#aea6ffb261b7d0dcc76a53aff8a3b2f11">More...</a><br /></td></tr>
+<tr class="memdesc:aea6ffb261b7d0dcc76a53aff8a3b2f11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit the phase fractions between 0 and 1. <a class="el" href="classThis.html">This</a> is necessary before interface sharpening. More information can be found in step_41 of deal.II tutorials: <a href="https://www.dealii.org/current/doxygen/deal.II/step_41.html">https://www.dealii.org/current/doxygen/deal.II/step_41.html</a>.  <a href="classVolumeOfFluid.html#aea6ffb261b7d0dcc76a53aff8a3b2f11">More...</a><br /></td></tr>
 <tr class="separator:aea6ffb261b7d0dcc76a53aff8a3b2f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a141e819be043c1c8b25684f242aaf41d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluid.html#a141e819be043c1c8b25684f242aaf41d">assemble_L2_projection_interface_sharpening</a> (<a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;solution, const double <a class="el" href="classVolumeOfFluid.html#a0e5b3c41aff8a389d65124b1227c52fe">sharpening_threshold</a>)</td></tr>
 <tr class="memdesc:a141e819be043c1c8b25684f242aaf41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the system for interface sharpening.  <a href="classVolumeOfFluid.html#a141e819be043c1c8b25684f242aaf41d">More...</a><br /></td></tr>
@@ -495,7 +498,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vof_8h_source.html#l00063">63</a> of file <a class="el" href="vof_8h_source.html">vof.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vof_8h_source.html#l00684">VolumeOfFluid&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="vof_8h_source.html#l00665">VolumeOfFluid&lt; dim &gt;::computing_timer</a>, <a class="el" href="vof_8h_source.html#l00683">VolumeOfFluid&lt; dim &gt;::curvature_mapping</a>, <a class="el" href="vof_8h_source.html#l00672">VolumeOfFluid&lt; dim &gt;::dof_handler</a>, <a class="el" href="vof_8h_source.html#l00685">VolumeOfFluid&lt; dim &gt;::face_quadrature</a>, <a class="el" href="vof_8h_source.html#l00675">VolumeOfFluid&lt; dim &gt;::fe</a>, <a class="el" href="vof_8h_source.html#l00677">VolumeOfFluid&lt; dim &gt;::fe_curvature</a>, <a class="el" href="vof_8h_source.html#l00676">VolumeOfFluid&lt; dim &gt;::fe_projected_phase_fraction_gradient</a>, <a class="el" href="vof_8h_source.html#l00681">VolumeOfFluid&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="physics__solver_8h_source.html#l00120">PhysicsSolver&lt; VectorType &gt;::pcout</a>, <a class="el" href="vof_8h_source.html#l00704">VolumeOfFluid&lt; dim &gt;::previous_solutions</a>, <a class="el" href="vof_8h_source.html#l00711">VolumeOfFluid&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="vof_8h_source.html#l00682">VolumeOfFluid&lt; dim &gt;::projected_phase_fraction_gradient_mapping</a>, <a class="el" href="vof_8h_source.html#l00667">VolumeOfFluid&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="vof_8h_source.html#l00709">VolumeOfFluid&lt; dim &gt;::solution_transfer</a>.</p>
+<p class="reference">References <a class="el" href="vof_8h_source.html#l00684">VolumeOfFluid&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="vof_8h_source.html#l00665">VolumeOfFluid&lt; dim &gt;::computing_timer</a>, <a class="el" href="vof_8h_source.html#l00683">VolumeOfFluid&lt; dim &gt;::curvature_mapping</a>, <a class="el" href="vof_8h_source.html#l00672">VolumeOfFluid&lt; dim &gt;::dof_handler</a>, <a class="el" href="vof_8h_source.html#l00685">VolumeOfFluid&lt; dim &gt;::face_quadrature</a>, <a class="el" href="vof_8h_source.html#l00675">VolumeOfFluid&lt; dim &gt;::fe</a>, <a class="el" href="vof_8h_source.html#l00677">VolumeOfFluid&lt; dim &gt;::fe_curvature</a>, <a class="el" href="vof_8h_source.html#l00676">VolumeOfFluid&lt; dim &gt;::fe_projected_phase_fraction_gradient</a>, <a class="el" href="vof_8h_source.html#l00681">VolumeOfFluid&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="physics__solver_8h_source.html#l00129">PhysicsSolver&lt; VectorType &gt;::pcout</a>, <a class="el" href="vof_8h_source.html#l00704">VolumeOfFluid&lt; dim &gt;::previous_solutions</a>, <a class="el" href="vof_8h_source.html#l00711">VolumeOfFluid&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="vof_8h_source.html#l00682">VolumeOfFluid&lt; dim &gt;::projected_phase_fraction_gradient_mapping</a>, <a class="el" href="vof_8h_source.html#l00667">VolumeOfFluid&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="vof_8h_source.html#l00709">VolumeOfFluid&lt; dim &gt;::solution_transfer</a>.</p>
 
 </div>
 </div>
@@ -638,7 +641,7 @@ template&lt;int dim&gt; </div>
 
 <p>Assemble the system for interface sharpening. </p>
 <ul>
-<li>This function assembles the weak form of: $$ \Phi = c ^ (1 - \alpha) * (\phi ^ \alpha) if 0 &lt;= \phi &lt;= c $$ $$ \Phi = 1 - (1 - c) ^ (1 - \alpha) * (1 - \phi) ^ \alpha if c &lt; \phi &lt;= 1 $$ Reference for sharpening method <a href="https://www.sciencedirect.com/science/article/pii/S0045782500002000">https://www.sciencedirect.com/science/article/pii/S0045782500002000</a></li>
+<li><a class="el" href="classThis.html">This</a> function assembles the weak form of: $$ \Phi = c ^ (1 - \alpha) * (\phi ^ \alpha) if 0 &lt;= \phi &lt;= c $$ $$ \Phi = 1 - (1 - c) ^ (1 - \alpha) * (1 - \phi) ^ \alpha if c &lt; \phi &lt;= 1 $$ Reference for sharpening method <a href="https://www.sciencedirect.com/science/article/pii/S0045782500002000">https://www.sciencedirect.com/science/article/pii/S0045782500002000</a></li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -695,7 +698,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Assemble the local matrix for a given cell. </p>
-<p>This function is used by the WorkStream class to assemble the system matrix. It is a thread safe function.</p>
+<p><a class="el" href="classThis.html">This</a> function is used by the WorkStream class to assemble the system matrix. It is a thread safe function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cell</td><td>The cell for which the local matrix is assembled.</td></tr>
@@ -822,7 +825,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Call for the assembly of the matrix and the right-hand side. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000007">Deprecated:</a></b></dt><dd>This function is to be deprecated when the new assembly mechanism is integrated to this solver </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000007">Deprecated:</a></b></dt><dd><a class="el" href="classThis.html">This</a> function is to be deprecated when the new assembly mechanism is integrated to this solver </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l00031">31</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
@@ -920,7 +923,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>Call for the assembly of the right-hand side. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000008">Deprecated:</a></b></dt><dd>This function is to be deprecated when the new assembly mechanism is integrated to this solver </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000008">Deprecated:</a></b></dt><dd><a class="el" href="classThis.html">This</a> function is to be deprecated when the new assembly mechanism is integrated to this solver </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l00040">40</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
@@ -1016,7 +1019,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Attach the solution vector to the DataOut provided. This function enable the auxiliary physics to output their solution via the core solver. </p>
+<p>Attach the solution vector to the DataOut provided. <a class="el" href="classThis.html">This</a> function enable the auxiliary physics to output their solution via the core solver. </p>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
@@ -1986,7 +1989,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l00652">652</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00288">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">calculate_L2_error()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, <a class="el" href="utilities_8cc_source.html#l00010">make_table_scalars_tensors()</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">calculate_L2_error()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, <a class="el" href="utilities_8cc_source.html#l00010">make_table_scalars_tensors()</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
 </div>
 </div>
@@ -2048,7 +2051,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l01871">1871</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00320">deserialize_table()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, and <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00334">deserialize_table()</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, and <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>.</p>
 
 </div>
 </div>
@@ -2479,7 +2482,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Limit the phase fractions between 0 and 1. This is necessary before interface sharpening. More information can be found in step_41 of deal.II tutorials: <a href="https://www.dealii.org/current/doxygen/deal.II/step_41.html">https://www.dealii.org/current/doxygen/deal.II/step_41.html</a>. </p>
+<p>Limit the phase fractions between 0 and 1. <a class="el" href="classThis.html">This</a> is necessary before interface sharpening. More information can be found in step_41 of deal.II tutorials: <a href="https://www.dealii.org/current/doxygen/deal.II/step_41.html">https://www.dealii.org/current/doxygen/deal.II/step_41.html</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l02368">2368</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
@@ -2513,7 +2516,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="vof_8cc_source.html#l01819">1819</a> of file <a class="el" href="vof_8cc_source.html">vof.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, and <a class="el" href="utilities_8h_source.html#l00305">serialize_table()</a>.</p>
+<p class="reference">References <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::fluid0</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::fluid1</a>, and <a class="el" href="utilities_8h_source.html#l00319">serialize_table()</a>.</p>
 
 </div>
 </div>

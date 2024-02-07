@@ -123,6 +123,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a8be4ba61245379ba9fff94953aef6fa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a8be4ba61245379ba9fff94953aef6fa7">fill_vectors_from_file</a> (std::map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;map, std::string file, const std::string delimiter)</td></tr>
 <tr class="memdesc:a8be4ba61245379ba9fff94953aef6fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that read a file that was build from a dealii table and fill 2 vectors. The first vector contains all the columns names and the second one contained all the column data.  <a href="utilities_8cc.html#a8be4ba61245379ba9fff94953aef6fa7">More...</a><br /></td></tr>
 <tr class="separator:a8be4ba61245379ba9fff94953aef6fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae622cf202f387075d097d58f6770d4d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#ae622cf202f387075d097d58f6770d4d2">fill_string_vectors_from_file</a> (std::map&lt; std::string, std::vector&lt; std::string &gt;&gt; &amp;map, std::string file, const std::string delimiter)</td></tr>
+<tr class="memdesc:ae622cf202f387075d097d58f6770d4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that read a file that was build from a dealii table and create a map with the key being the column name and the variable the vectors of data.  <a href="utilities_8cc.html#ae622cf202f387075d097d58f6770d4d2">More...</a><br /></td></tr>
+<tr class="separator:ae622cf202f387075d097d58f6770d4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b182f49ed10ffa3d2d50a9a309cd2f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a4b182f49ed10ffa3d2d50a9a309cd2f0">create_output_folder</a> (const std::string &amp;dirname)</td></tr>
 <tr class="memdesc:a4b182f49ed10ffa3d2d50a9a309cd2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the simulation output folder.  <a href="utilities_8cc.html#a4b182f49ed10ffa3d2d50a9a309cd2f0">More...</a><br /></td></tr>
 <tr class="separator:a4b182f49ed10ffa3d2d50a9a309cd2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,12 +162,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a66e84841b16cdd7309e2d48d02044144"><td class="memItemLeft" align="right" valign="top">template TableHandler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a66e84841b16cdd7309e2d48d02044144">make_table_tensors_scalars</a> (const std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;independent_vector, const std::vector&lt; std::string &gt; &amp;independent_column_name, const std::vector&lt; double &gt; &amp;dependent_values, const std::string &amp;dependent_column_name, const unsigned int display_precision)</td></tr>
 <tr class="separator:a66e84841b16cdd7309e2d48d02044144"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34ac72c0df6c4a24f85c97b22d137520"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a34ac72c0df6c4a24f85c97b22d137520">get_last_value_of_parameter</a> (const std::string &amp;file_name, const std::string &amp;parameter_name)</td></tr>
-<tr class="memdesc:a34ac72c0df6c4a24f85c97b22d137520"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the value of a particular parameter from the contents of the input file. Return an empty string if not found. This function is used to read an individual parameter for an input file. This function is adapted from ASPECT and is mainly used in parsing the dim of the problem before creating the whole parameter parser  <a href="utilities_8cc.html#a34ac72c0df6c4a24f85c97b22d137520">More...</a><br /></td></tr>
+<tr class="memdesc:a34ac72c0df6c4a24f85c97b22d137520"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the value of a particular parameter from the contents of the input file. Return an empty string if not found. <a class="el" href="classThis.html">This</a> function is used to read an individual parameter for an input file. <a class="el" href="classThis.html">This</a> function is adapted from ASPECT and is mainly used in parsing the dim of the problem before creating the whole parameter parser  <a href="utilities_8cc.html#a34ac72c0df6c4a24f85c97b22d137520">More...</a><br /></td></tr>
 <tr class="separator:a34ac72c0df6c4a24f85c97b22d137520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fc5d803036352e72efcd625b2466707"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a9fc5d803036352e72efcd625b2466707">get_max_value_of_parameter</a> (const std::string &amp;file_name, const std::string &amp;parameter_name)</td></tr>
 <tr class="separator:a9fc5d803036352e72efcd625b2466707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4c4c70d98da93b973297b97e085b90"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#a2f4c4c70d98da93b973297b97e085b90">get_dimension</a> (const std::string &amp;file_name)</td></tr>
-<tr class="memdesc:a2f4c4c70d98da93b973297b97e085b90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the dimension in which to run Lethe from the the contents of the parameter file. This is something that we need to do before processing the parameter file since we need to know whether to use the dim=2 or dim=3 instantiation of the main classes.  <a href="utilities_8cc.html#a2f4c4c70d98da93b973297b97e085b90">More...</a><br /></td></tr>
+<tr class="memdesc:a2f4c4c70d98da93b973297b97e085b90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the dimension in which to run Lethe from the the contents of the parameter file. <a class="el" href="classThis.html">This</a> is something that we need to do before processing the parameter file since we need to know whether to use the dim=2 or dim=3 instantiation of the main classes.  <a href="utilities_8cc.html#a2f4c4c70d98da93b973297b97e085b90">More...</a><br /></td></tr>
 <tr class="separator:a2f4c4c70d98da93b973297b97e085b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa286625bb871dd4165a509b7ebc41763"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8cc.html#aa286625bb871dd4165a509b7ebc41763">get_max_number_of_boundary_conditions</a> (const std::string &amp;file_name)</td></tr>
 <tr class="memdesc:aa286625bb871dd4165a509b7ebc41763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the maximum number of boundary conditions from the file. The number of boundary conditions is linked to the string "number" so this feature will need to be monitored extensively in the future.  <a href="utilities_8cc.html#aa286625bb871dd4165a509b7ebc41763">More...</a><br /></td></tr>
@@ -192,6 +195,55 @@ Functions</h2></td></tr>
 <li><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dirname</td><td>Output directory name </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00302">302</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae622cf202f387075d097d58f6770d4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae622cf202f387075d097d58f6770d4d2">&#9670;&nbsp;</a></span>fill_string_vectors_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill_string_vectors_from_file </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; std::string &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>delimiter</em> = <code>&quot;&#160;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that read a file that was build from a dealii table and create a map with the key being the column name and the variable the vectors of data. </p>
+<ul>
+<li><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td>Container to be filled with the information in the dealii table.</td></tr>
+    <tr><td class="paramname">file</td><td>The path the file that will be use to fill up the table.</td></tr>
+    <tr><td class="paramname">delimiter</td><td>The delimiter used to read the table. </td></tr>
   </table>
   </dd>
 </dl>
@@ -316,7 +368,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Extract the dimension in which to run Lethe from the the contents of the parameter file. This is something that we need to do before processing the parameter file since we need to know whether to use the dim=2 or dim=3 instantiation of the main classes. </p>
+<p>Extract the dimension in which to run Lethe from the the contents of the parameter file. <a class="el" href="classThis.html">This</a> is something that we need to do before processing the parameter file since we need to know whether to use the dim=2 or dim=3 instantiation of the main classes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">file_name</td><td>The file name from which dimension is read </td></tr>
@@ -324,9 +376,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00470">470</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00525">525</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00386">get_last_value_of_parameter()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00441">get_last_value_of_parameter()</a>.</p>
 
 </div>
 </div>
@@ -356,7 +408,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>get the value of a particular parameter from the contents of the input file. Return an empty string if not found. This function is used to read an individual parameter for an input file. This function is adapted from ASPECT and is mainly used in parsing the dim of the problem before creating the whole parameter parser </p>
+<p>get the value of a particular parameter from the contents of the input file. Return an empty string if not found. <a class="el" href="classThis.html">This</a> function is used to read an individual parameter for an input file. <a class="el" href="classThis.html">This</a> function is adapted from ASPECT and is mainly used in parsing the dim of the problem before creating the whole parameter parser </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">file_name</td><td>The file name from which to read a value </td></tr>
@@ -365,7 +417,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00386">386</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00441">441</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -393,9 +445,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00536">536</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00591">591</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00426">get_max_value_of_parameter()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00481">get_max_value_of_parameter()</a>.</p>
 
 </div>
 </div>
@@ -425,7 +477,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00426">426</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00481">481</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
