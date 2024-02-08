@@ -375,7 +375,9 @@ public:
                     // Calculate the acceleration of the particle times the time
                     // step
                     Tensor<1, 3> acc_dt_particle =
-                      dt_g + force[particle_id] * dt_mass_inverse;
+                      dt_g + (force[particle_id] -
+                              particle_particle_force[particle_id]) *
+                               dt_mass_inverse;
                     acc_dt_cell_average += acc_dt_particle;
 
                     for (int d = 0; d < dim; ++d)
@@ -400,6 +402,7 @@ public:
               std::make_pair(velocity_cell_average, acc_dt_cell_average)));
           }
       }
+    particle_particle_force.clear();
   }
 
   typename DEM::dem_data_structures<dim>::cell_index_int_map &
@@ -419,6 +422,18 @@ public:
   has_advected_particles() const
   {
     return advect_particles_enabled;
+  }
+
+  void
+  copy_particle_particle_contact_force(std::vector<Tensor<1, 3>> force)
+  {
+    particle_particle_force = force;
+  }
+
+  std::vector<Tensor<1, 3>>
+  get_particle_particle_contact_force() &
+  {
+    return particle_particle_force;
   }
 
 private:
@@ -531,6 +546,8 @@ private:
   std::map<typename Triangulation<dim>::active_cell_iterator,
            std::pair<Tensor<1, 3>, Tensor<1, 3>>>
     cell_velocities_accelerations;
+
+  std::vector<Tensor<1, 3>> particle_particle_force;
 };
 
 #endif // lethe_disable_contacts_h
