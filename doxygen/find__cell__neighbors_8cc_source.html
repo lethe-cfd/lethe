@@ -349,104 +349,103 @@ $(function() {
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">// This function finds the full neighbor list (with repetition) of all the</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">// active cells in the triangulation. We need this function for the particle-</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">// floating mesh contact force calculations. In particle-floating mesh</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">// contacts , we need all the particles located in ALL the neighbor cells of</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">// the main cell to search for possible collisions with the floating mesh.</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">  278</a></span>&#160;<a class="code" href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">FindCellNeighbors&lt;dim&gt;::find_full_cell_neighbors</a>(</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="keyword">const</span> parallel::distributed::Triangulation&lt;dim&gt; &amp;triangulation,</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ca31764301c3fb1880d0a3d90840804">DEM::dem_data_structures&lt;dim&gt;::cells_total_neighbor_list</a></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    &amp;cells_total_neighbor_list)</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;{</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="keyword">auto</span> v_to_c = GridTools::vertex_to_cell_map(triangulation);</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="comment">// Looping over cells</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : triangulation.active_cell_iterators())</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="comment">// If the cell is owned by the processor</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      <span class="keywordflow">if</span> (cell-&gt;is_locally_owned())</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        {</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;          std::vector&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator&gt;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            full_neighbor_vector(0);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;          full_neighbor_vector.push_back(cell);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex = 0; vertex &lt; cell-&gt;n_vertices(); ++vertex)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;              <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;neighbor : v_to_c[cell-&gt;vertex_index(vertex)])</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                  <span class="keywordflow">if</span> (neighbor-&gt;is_locally_owned())</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                    {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                      <span class="keyword">auto</span> search_iterator =</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                        std::find(full_neighbor_vector.begin(),</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                                  full_neighbor_vector.end(),</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                                  neighbor);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                      <span class="keywordflow">if</span> (search_iterator == full_neighbor_vector.end())</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                        {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                          full_neighbor_vector.push_back(neighbor);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                        }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                    }</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                }</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;          cells_total_neighbor_list.insert(</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            {cell-&gt;global_active_cell_index(), full_neighbor_vector});</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;}</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">  322</a></span>&#160;<a class="code" href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">FindCellNeighbors&lt;dim&gt;::get_periodic_neighbor_list</a>(</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keyword">const</span> <span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  <span class="keyword">const</span> std::map&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>, std::vector&lt;unsigned int&gt;&gt;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                                             &amp;coinciding_vertex_groups,</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="keyword">const</span> std::map&lt;unsigned int, unsigned int&gt; &amp;vertex_to_coinciding_vertex_group,</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keyword">const</span> std::vector&lt;std::set&lt;<span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator&gt;&gt;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                                                      &amp;v_to_c,</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a9a91232aeb98d239ed6e94062f99e831">DEM::dem_data_structures&lt;dim&gt;::cell_vector</a> &amp;periodic_neighbor_list)</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="comment">// Loop over vertices of the cell</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex = 0; vertex &lt; cell-&gt;n_vertices(); ++vertex)</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="comment">// Get global id of vertex</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex_id = cell-&gt;vertex_index(vertex);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      <span class="comment">// Check if vertex is at periodic boundary, should be a key if so</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      <span class="keywordflow">if</span> (vertex_to_coinciding_vertex_group.find(vertex_id) !=</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;          vertex_to_coinciding_vertex_group.end())</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        {</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;          <span class="comment">// Get the coinciding vertex key to the current vertex</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;          <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> coinciding_vertex_key =</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            vertex_to_coinciding_vertex_group.at(vertex_id);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;          <span class="comment">// Store the neighbor cells in list</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;          <span class="keywordflow">for</span> (<span class="keyword">auto</span> coinciding_vertex :</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;               coinciding_vertex_groups.at(coinciding_vertex_key))</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            {</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;              <span class="comment">// Skip the current vertex since we want only cells linked</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;              <span class="comment">// to the periodic vertices</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;              <span class="keywordflow">if</span> (coinciding_vertex != vertex_id)</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                {</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                  <span class="comment">// Loop over all periodic neighbor</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;neighbor_id : v_to_c[coinciding_vertex])</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                    {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                      periodic_neighbor_list.push_back(neighbor_id);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                    }</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    }</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;}</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classFindCellNeighbors.html">FindCellNeighbors&lt;2&gt;</a>;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classFindCellNeighbors.html">FindCellNeighbors&lt;3&gt;</a>;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">// active cells in the triangulation. Because particle-floating mesh</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">// contacts need all the particles located in ALL the neighbor cells of</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">// the main cell to search for possible collisions with the floating mesh.</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">  277</a></span>&#160;<a class="code" href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">FindCellNeighbors&lt;dim&gt;::find_full_cell_neighbors</a>(</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keyword">const</span> parallel::distributed::Triangulation&lt;dim&gt; &amp;triangulation,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ca31764301c3fb1880d0a3d90840804">DEM::dem_data_structures&lt;dim&gt;::cells_total_neighbor_list</a></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    &amp;cells_total_neighbor_list)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;{</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="keyword">auto</span> v_to_c = GridTools::vertex_to_cell_map(triangulation);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="comment">// Looping over cells</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : triangulation.active_cell_iterators())</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="comment">// If the cell is owned by the processor</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="keywordflow">if</span> (cell-&gt;is_locally_owned())</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;          std::vector&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator&gt;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            full_neighbor_vector(0);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;          full_neighbor_vector.push_back(cell);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex = 0; vertex &lt; cell-&gt;n_vertices(); ++vertex)</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;              <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;neighbor : v_to_c[cell-&gt;vertex_index(vertex)])</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                {</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                  <span class="keywordflow">if</span> (neighbor-&gt;is_locally_owned())</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    {</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                      <span class="keyword">auto</span> search_iterator =</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                        std::find(full_neighbor_vector.begin(),</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                                  full_neighbor_vector.end(),</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                                  neighbor);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                      <span class="keywordflow">if</span> (search_iterator == full_neighbor_vector.end())</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                        {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                          full_neighbor_vector.push_back(neighbor);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                        }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                    }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;          cells_total_neighbor_list.insert(</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            {cell-&gt;global_active_cell_index(), full_neighbor_vector});</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">  321</a></span>&#160;<a class="code" href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">FindCellNeighbors&lt;dim&gt;::get_periodic_neighbor_list</a>(</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <span class="keyword">const</span> <span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keyword">const</span> std::map&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>, std::vector&lt;unsigned int&gt;&gt;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                                             &amp;coinciding_vertex_groups,</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="keyword">const</span> std::map&lt;unsigned int, unsigned int&gt; &amp;vertex_to_coinciding_vertex_group,</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="keyword">const</span> std::vector&lt;std::set&lt;<span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator&gt;&gt;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                                                      &amp;v_to_c,</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a9a91232aeb98d239ed6e94062f99e831">DEM::dem_data_structures&lt;dim&gt;::cell_vector</a> &amp;periodic_neighbor_list)</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;{</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="comment">// Loop over vertices of the cell</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex = 0; vertex &lt; cell-&gt;n_vertices(); ++vertex)</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      <span class="comment">// Get global id of vertex</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vertex_id = cell-&gt;vertex_index(vertex);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      <span class="comment">// Check if vertex is at periodic boundary, should be a key if so</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      <span class="keywordflow">if</span> (vertex_to_coinciding_vertex_group.find(vertex_id) !=</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;          vertex_to_coinciding_vertex_group.end())</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;          <span class="comment">// Get the coinciding vertex key to the current vertex</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;          <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> coinciding_vertex_key =</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            vertex_to_coinciding_vertex_group.at(vertex_id);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;          <span class="comment">// Store the neighbor cells in list</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;          <span class="keywordflow">for</span> (<span class="keyword">auto</span> coinciding_vertex :</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;               coinciding_vertex_groups.at(coinciding_vertex_key))</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;              <span class="comment">// Skip the current vertex since we want only cells linked</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;              <span class="comment">// to the periodic vertices</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;              <span class="keywordflow">if</span> (coinciding_vertex != vertex_id)</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                  <span class="comment">// Loop over all periodic neighbor</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;neighbor_id : v_to_c[coinciding_vertex])</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                    {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                      periodic_neighbor_list.push_back(neighbor_id);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    }</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classFindCellNeighbors.html">FindCellNeighbors&lt;2&gt;</a>;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classFindCellNeighbors.html">FindCellNeighbors&lt;3&gt;</a>;</div>
 <div class="ttc" id="aclassFindCellNeighbors_html"><div class="ttname"><a href="classFindCellNeighbors.html">FindCellNeighbors</a></div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8h_source.html#l00046">find_cell_neighbors.h:47</a></div></div>
-<div class="ttc" id="aclassFindCellNeighbors_html_a41e3ff222b168f36c6853fbbdc2c00dc"><div class="ttname"><a href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">FindCellNeighbors::get_periodic_neighbor_list</a></div><div class="ttdeci">void get_periodic_neighbor_list(const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell, const std::map&lt; unsigned int, std::vector&lt; unsigned int &gt;&gt; &amp;coinciding_vertex_groups, const std::map&lt; unsigned int, unsigned int &gt; &amp;vertex_to_coinciding_vertex_group, const std::vector&lt; std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt;&gt; &amp;v_to_c, typename DEM::dem_data_structures&lt; dim &gt;::cell_vector &amp;periodic_neighbor_list)</div><div class="ttdoc">Generate a periodic neighbor cells list of the cell. With the coinciding_vertex_groups and the vertex...</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00322">find_cell_neighbors.cc:322</a></div></div>
+<div class="ttc" id="aclassFindCellNeighbors_html_a41e3ff222b168f36c6853fbbdc2c00dc"><div class="ttname"><a href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">FindCellNeighbors::get_periodic_neighbor_list</a></div><div class="ttdeci">void get_periodic_neighbor_list(const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell, const std::map&lt; unsigned int, std::vector&lt; unsigned int &gt;&gt; &amp;coinciding_vertex_groups, const std::map&lt; unsigned int, unsigned int &gt; &amp;vertex_to_coinciding_vertex_group, const std::vector&lt; std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt;&gt; &amp;v_to_c, typename DEM::dem_data_structures&lt; dim &gt;::cell_vector &amp;periodic_neighbor_list)</div><div class="ttdoc">Generate a periodic neighbor cells list of the cell. With the coinciding_vertex_groups and the vertex...</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00321">find_cell_neighbors.cc:321</a></div></div>
 <div class="ttc" id="aclassFindCellNeighbors_html_a478a3d5f0ef2fd9804610a2a34e19732"><div class="ttname"><a href="classFindCellNeighbors.html#a478a3d5f0ef2fd9804610a2a34e19732">FindCellNeighbors::find_cell_periodic_neighbors</a></div><div class="ttdeci">void find_cell_periodic_neighbors(const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename DEM::dem_data_structures&lt; dim &gt;::periodic_boundaries_cells_info &amp;periodic_boundaries_cells_information, typename DEM::dem_data_structures&lt; dim &gt;::cells_neighbor_list &amp;cells_local_periodic_neighbor_list, typename DEM::dem_data_structures&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_periodic_neighbor_list, typename DEM::dem_data_structures&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_local_periodic_neighbor_list)</div><div class="ttdoc">Finds the periodic neighbor list (without repetition) of all the active cells in the triangulation....</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00107">find_cell_neighbors.cc:107</a></div></div>
-<div class="ttc" id="aclassFindCellNeighbors_html_a797a7daf8c996f6879cf21adfe4ddc3b"><div class="ttname"><a href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">FindCellNeighbors::find_full_cell_neighbors</a></div><div class="ttdeci">void find_full_cell_neighbors(const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename DEM::dem_data_structures&lt; dim &gt;::cells_total_neighbor_list &amp;cells_total_neighbor_list)</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00278">find_cell_neighbors.cc:278</a></div></div>
+<div class="ttc" id="aclassFindCellNeighbors_html_a797a7daf8c996f6879cf21adfe4ddc3b"><div class="ttname"><a href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">FindCellNeighbors::find_full_cell_neighbors</a></div><div class="ttdeci">void find_full_cell_neighbors(const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename DEM::dem_data_structures&lt; dim &gt;::cells_total_neighbor_list &amp;cells_total_neighbor_list)</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00277">find_cell_neighbors.cc:277</a></div></div>
 <div class="ttc" id="aclassFindCellNeighbors_html_a8c6568ad14815794636715a834599def"><div class="ttname"><a href="classFindCellNeighbors.html#a8c6568ad14815794636715a834599def">FindCellNeighbors::find_cell_neighbors</a></div><div class="ttdeci">void find_cell_neighbors(const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename DEM::dem_data_structures&lt; dim &gt;::cells_neighbor_list &amp;cells_local_neighbor_list, typename DEM::dem_data_structures&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_neighbor_list)</div><div class="ttdoc">Finds the neighbor list (without repetition) of all the active cells in the triangulation....</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00014">find_cell_neighbors.cc:14</a></div></div>
 <div class="ttc" id="aclassFindCellNeighbors_html_a925aa84e12f4ff25f6feef0881ea4276"><div class="ttname"><a href="classFindCellNeighbors.html#a925aa84e12f4ff25f6feef0881ea4276">FindCellNeighbors::FindCellNeighbors</a></div><div class="ttdeci">FindCellNeighbors()</div><div class="ttdef"><b>Definition:</b> <a href="find__cell__neighbors_8cc_source.html#l00007">find_cell_neighbors.cc:7</a></div></div>
 <div class="ttc" id="afind__cell__neighbors_8h_html"><div class="ttname"><a href="find__cell__neighbors_8h.html">find_cell_neighbors.h</a></div></div>

@@ -80,29 +80,41 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Manage the numerous of contact detection search operations in the <a class="el" href="namespaceDEM.html">DEM</a>.  
+ <a href="classDEMContactManager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afac6797f57fd9c3dca66f650b25d77d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">execute_cell_neighbors_search</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
+<tr class="memdesc:afac6797f57fd9c3dca66f650b25d77d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to find the lists of cell neighbors of the active cells in the triangulation.  <a href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">More...</a><br /></td></tr>
 <tr class="separator:afac6797f57fd9c3dca66f650b25d77d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a1aeddb251441a9e3c88afd4fbfe2d080">update_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
+<tr class="memdesc:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to clear and update the neighbor lists of all the active cells in the triangulation.  <a href="classDEMContactManager.html#a1aeddb251441a9e3c88afd4fbfe2d080">More...</a><br /></td></tr>
 <tr class="separator:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5046aa427efefdbd11ed784ecfa45476"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a5046aa427efefdbd11ed784ecfa45476">update_contacts</a> (const bool has_periodic_boundaries=false)</td></tr>
+<tr class="memdesc:a5046aa427efefdbd11ed784ecfa45476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to update the contact data containers with the new contact pairs.  <a href="classDEMContactManager.html#a5046aa427efefdbd11ed784ecfa45476">More...</a><br /></td></tr>
 <tr class="separator:a5046aa427efefdbd11ed784ecfa45476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca1028317167181db0ebce3715fb002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a9ca1028317167181db0ebce3715fb002">update_local_particles_in_cells</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const bool clear_contact_structures, const bool has_periodic_boundaries=false)</td></tr>
 <tr class="separator:a9ca1028317167181db0ebce3715fb002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2826508b4e77362e1c47bc3f21ea4b09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">execute_particle_particle_broad_search</a> (dealii::Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const bool has_periodic_boundaries=false)</td></tr>
+<tr class="memdesc:a2826508b4e77362e1c47bc3f21ea4b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particle broad searches.  <a href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">More...</a><br /></td></tr>
 <tr class="separator:a2826508b4e77362e1c47bc3f21ea4b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ae1ea4915f1dff277aa1cece1baeaea0f">execute_particle_particle_broad_search</a> (dealii::Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;disable_particle_contact_object, const bool has_periodic_boundaries=false)</td></tr>
+<tr class="memdesc:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particle broad searches with disabling of contacts.  <a href="classDEMContactManager.html#ae1ea4915f1dff277aa1cece1baeaea0f">More...</a><br /></td></tr>
 <tr class="separator:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab89bc870e9adbde380738c2f9b52ca08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const bool has_floating_mesh=false)</td></tr>
+<tr class="memdesc:ab89bc870e9adbde380738c2f9b52ca08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall broad searches.  <a href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">More...</a><br /></td></tr>
 <tr class="separator:ab89bc870e9adbde380738c2f9b52ca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a220f38991c445ac3635630f0af2c20a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a220f38991c445ac3635630f0af2c20a6">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;disable_particle_contact_object, const bool has_floating_mesh=false)</td></tr>
+<tr class="memdesc:a220f38991c445ac3635630f0af2c20a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall broad searches with disabling of contacts.  <a href="classDEMContactManager.html#a220f38991c445ac3635630f0af2c20a6">More...</a><br /></td></tr>
 <tr class="separator:a220f38991c445ac3635630f0af2c20a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab16dee556cdd33cd8307ee63cd9bb82f">execute_particle_particle_fine_search</a> (const double neighborhood_threshold, const bool has_periodic_boundaries=false, const Tensor&lt; 1, dim &gt; periodic_offset=Tensor&lt; 1, dim &gt;())</td></tr>
+<tr class="memdesc:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particles fine searches.  <a href="classDEMContactManager.html#ab16dee556cdd33cd8307ee63cd9bb82f">More...</a><br /></td></tr>
 <tr class="separator:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb698d9ff443e1ca02793b449da55fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">execute_particle_wall_fine_search</a> (const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const double neighborhood_threshold, const bool has_floating_mesh=false)</td></tr>
+<tr class="memdesc:acb698d9ff443e1ca02793b449da55fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall fine searches.  <a href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">More...</a><br /></td></tr>
 <tr class="separator:acb698d9ff443e1ca02793b449da55fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -187,8 +199,10 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class DEMContactManager&lt; dim &gt;</h3>
 
+<p>Manage the numerous of contact detection search operations in the <a class="el" href="namespaceDEM.html">DEM</a>. </p>
+<p><a class="el" href="classThis.html">This</a> class mostly calls proper functions in regards the type of contacts for the contact detection and updates of data containers. </p>
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00043">43</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00049">49</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afac6797f57fd9c3dca66f650b25d77d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afac6797f57fd9c3dca66f650b25d77d0">&#9670;&nbsp;</a></span>execute_cell_neighbors_search()</h2>
@@ -229,13 +243,15 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Finds the neighbors lists of all the active cells in the input triangulation.</p>
+
+<p>Execute functions to find the lists of cell neighbors of the active cells in the triangulation. </p>
+<p>For contacts of particles, the neighbor search excludes the repetitions of neighbors: B is neighbor of A but A will not be neighbor of B. For contacts of particles with floating meshes, the neighbor search includes all neighbors. These floating mesh contacts searches need all the particles located in all the neighbor cells of the main cell to detect collisions with the floating mesh.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells </td></tr>
-    <tr><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are used </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
-    <tr><td class="paramname">has_floating_mesh</td><td>A boolean to allow dealing with floating mesh neighbors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are enabled (next parameter). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,11 +287,13 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Execute the particle-particle broad search which finds the local and ghost particle-particle contact pairs candidates. These contact pairs will be used in the fine search to investigate if they are in contact or not. to investigate if they are in contact or not.</p>
+
+<p>Execute the particle-particle broad searches. </p>
+<p>Calls proper functions to find the candidates of local and ghost particle-particle contact pairs and the periodic particle-particle contacts if required. These contact pairs will be used in the fine search step to investigate if they are in contact.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_handler</td><td>The particle handler of particles in the broad search </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. search[in] </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -317,12 +335,14 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Execute the particle-particle broad search which finds the local and ghost particle-particle contact pairs candidates. These contact pairs will be used in the fine search to investigate if they are in contact or not. <a class="el" href="classThis.html">This</a> version of the function is used when disabling particle contacts regards mobility is enable.</p>
+
+<p>Execute the particle-particle broad searches with disabling of contacts. </p>
+<p>Calls proper functions to find the candidates of local and ghost particle-particle contact pairs and the periodic particle-particle contacts if required. These contact pairs will be used in the fine search step to investigate if they are in contact. <a class="el" href="classThis.html">This</a> version of the function is used when disabling particle contacts regards mobility is enabled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_handler</td><td>The particle handler of particles in the broad search </td></tr>
-    <tr><td class="paramname">disable_particle_contact_object</td><td>An object that handle all </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">disable_particle_contact_object</td><td>Allow to check the mobility status of cells </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -364,12 +384,14 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Iterates over a vector of maps to see if the particles which were in contact in the last time step, are still in contact or not.</p>
+
+<p>Execute the particle-particles fine searches. </p>
+<p>Executes functions that update the particle contacts pairs containers and compute the contact information of the collision pairs.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">neighborhood_threshold</td><td>A value which defines the neighbor particles </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
-    <tr><td class="paramname">periodic_offset</td><td>An offset used for tuning particle locations in periodic boundaries </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neighborhood_threshold</td><td>Threshold value of contact detection. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">periodic_offset</td><td>Offset used for tuning particle locations in periodic boundaries. </td></tr>
   </table>
   </dd>
 </dl>
@@ -429,18 +451,17 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Carries out the broad contact detection search using the background triangulation for particle-walls contact.</p>
+
+<p>Execute the particle-wall broad searches. </p>
+<p>Calls proper functions to find the candidates of particle-wall contact pairs and the particle-floating wall or particle-floating mesh if required. These contact pairs will be used in the fine search step to investigate if they are in contact.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_handler</td><td>Particle handler of particles located in boundary cells </td></tr>
-    <tr><td class="paramname">boundary_cells_object</td><td>Information of the boundary cells and faces. <a class="el" href="classThis.html">This</a> is the output of the <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a> class<ul>
-<li></li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">floating_mesh_info</td><td>Container of all of floating meshes </td></tr>
-    <tr><td class="paramname">floating_wall</td><td>Properties of the floating walls specified in the parameter handler file </td></tr>
-    <tr><td class="paramname">simulation_time</td><td>Simulation time </td></tr>
-    <tr><td class="paramname">has_floating_mesh</td><td>A boolean to allow dealing with floating mesh neighbors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">boundary_cells_object</td><td>Information of the boundary cells and faces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">floating_mesh_info</td><td>Mapping of floating meshes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow dealing with floating mesh neighbors. </td></tr>
   </table>
   </dd>
 </dl>
@@ -508,15 +529,18 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Carries out the broad contact detection search using the background triangulation for particle-walls contact.</p>
+
+<p>Execute the particle-wall broad searches with disabling of contacts. </p>
+<p>Calls proper functions to find the candidates of particle-wall contact pairs and the particle-floating wall or particle-floating mesh if required. These contact pairs will be used in the fine search step to investigate if they are in contact. <a class="el" href="classThis.html">This</a> version of the function is used when disabling particle contacts regards mobility is enabled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_handler</td><td>Particle handler of particles located in boundary cells </td></tr>
-    <tr><td class="paramname">boundary_cells_information</td><td>Information of the boundary cells and faces. <a class="el" href="classThis.html">This</a> is the output of the FindBoundaryCellsInformation class </td></tr>
-    <tr><td class="paramname">floating_mesh_info</td><td>Container of all of floating meshes </td></tr>
-    <tr><td class="paramname">floating_wall</td><td>Properties of the floating walls specified in the parameter handler file </td></tr>
-    <tr><td class="paramname">simulation_time</td><td>Simulation time </td></tr>
-    <tr><td class="paramname">has_floating_mesh</td><td>A boolean to allow dealing with floating mesh neighbors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">boundary_cells_object</td><td>Information of the boundary cells and faces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">floating_mesh_info</td><td>Mapping of floating meshes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">disable_particle_contact_object</td><td>Allow to check the mobility status of cells </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow dealing with floating mesh neighbors. </td></tr>
   </table>
   </dd>
 </dl>
@@ -566,13 +590,15 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Carries out the fine particle-wall contact detection</p>
+
+<p>Execute the particle-wall fine searches. </p>
+<p>Executes functions that update the particle-wall contacts pairs containers and compute the contact information of the collision particle-wall.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">floating_wall</td><td>Properties of the floating walls specified in the parameter handler file </td></tr>
-    <tr><td class="paramname">simulation_time</td><td>Simulation time </td></tr>
-    <tr><td class="paramname">neighborhood_threshold</td><td>A value which defines the neighbor particles </td></tr>
-    <tr><td class="paramname">has_floating_mesh</td><td>A boolean to allow dealing with floating mesh neighbors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neighborhood_threshold</td><td>Threshold value of contact detection. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the fine search with floating meshes. </td></tr>
   </table>
   </dd>
 </dl>
@@ -630,18 +656,19 @@ template&lt;int dim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Update the neighbors lists of all the active cells in the input triangulation while clearing containers before the update.</p>
+
+<p>Execute functions to clear and update the neighbor lists of all the active cells in the triangulation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells </td></tr>
-    <tr><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are used </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
-    <tr><td class="paramname">has_floating_mesh</td><td>A boolean to allow dealing with floating mesh neighbors </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are enabled (next parameter). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00077">77</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00094">94</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -662,10 +689,12 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Manages to call <a class="el" href="update__fine__search__candidates_8h.html#a23c84fac56844bb9576debb9876bbb81">update_fine_search_candidates()</a> with contact data containers to remove contact repetitions and to add new contact pairs to the contact containers when particles are exchanged between processors. Repeats the update for local particle-particle contacts, ghost particle-particle, particle-wall contacts, particle-floating wall contacts and particle-floating mesh contacts.</p>
+
+<p>Execute functions to update the contact data containers with the new contact pairs. </p>
+<p>Call proper functions to remove contact repetitions and to add new contact pairs to the contact containers when particles are exchanged between processors after the fine search. Contact pairs are local particle-particle, ghost particle-particle, particle-wall, particle-floating wall contacts and particle-floating mesh contacts.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -709,18 +738,13 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Updates the iterators to particles in local-local contact containers. <a class="el" href="classThis.html">This</a> is essential since sort_particles_into_subdomains_and_cells() and exchange_ghost_particles() functions change the iterator to particles everytime they are called.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">dim</td><td>Dimensionality of the geometry which contains the particles </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>@breif Execute functions to update the particle iterators in local-local contact containers.</p>
+<p><a class="el" href="classThis.html">This</a> is essential since sort_particles_into_subdomains_and_cells() and exchange_ghost_particles() functions change the particle iterators everytime they are called.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_handler</td><td>The particle handler of particles </td></tr>
-    <tr><td class="paramname">clear_contact_structures</td><td>A boolean to clear contact structures </td></tr>
-    <tr><td class="paramname">has_periodic_boundaries</td><td>A boolean to allow periodic container manipulations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clear_contact_structures</td><td>Allow clearing the contact structures. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -754,7 +778,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00330">330</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00371">371</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -772,7 +796,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00263">263</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00304">304</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -790,7 +814,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00257">257</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00298">298</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -808,7 +832,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00261">261</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00302">302</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -826,7 +850,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00255">255</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00296">296</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -844,7 +868,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00259">259</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00300">300</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -862,7 +886,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00307">307</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00348">348</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -880,7 +904,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00269">269</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00310">310</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -898,7 +922,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00275">275</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00316">316</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -916,7 +940,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00271">271</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00312">312</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -934,7 +958,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00277">277</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00318">318</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -952,7 +976,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00313">313</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00354">354</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -970,7 +994,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00311">311</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00352">352</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -988,7 +1012,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00305">305</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00346">346</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1006,7 +1030,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00267">267</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00308">308</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1024,7 +1048,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00273">273</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00314">314</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1042,7 +1066,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00309">309</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00350">350</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1060,7 +1084,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00248">248</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00289">289</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1078,7 +1102,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00279">279</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00320">320</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1120,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00292">292</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00333">333</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1114,7 +1138,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00281">281</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00322">322</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1132,7 +1156,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00294">294</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00335">335</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1150,7 +1174,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00285">285</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00326">326</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1168,7 +1192,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00300">300</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00341">341</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1194,7 +1218,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00320">320</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00361">361</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1220,7 +1244,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00325">325</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00366">366</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1238,7 +1262,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00283">283</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00324">324</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1264,7 +1288,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00322">322</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00363">363</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1290,7 +1314,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00327">327</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00368">368</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1308,7 +1332,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00298">298</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00339">339</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1334,7 +1358,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00321">321</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00362">362</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1352,7 +1376,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00287">287</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00328">328</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1378,7 +1402,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00326">326</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00367">367</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1396,7 +1420,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00296">296</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00337">337</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1414,7 +1438,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00316">316</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00357">357</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
@@ -1432,7 +1456,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00253">253</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00294">294</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 
 </div>
 </div>
