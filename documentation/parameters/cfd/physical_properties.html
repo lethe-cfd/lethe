@@ -444,7 +444,7 @@
 
       # Mobility Cahn-Hilliard
       set cahn hilliard mobility model    = constant
-      set cahn hilliard mobility constant = 1
+      set cahn hilliard mobility constant = 1e-7
     end
 
     # if fluid-solid interaction
@@ -988,7 +988,7 @@ end
 <div class="math notranslate nohighlight">
 \[M(\phi) = D(1-\phi^2)^2\]</div>
 </div>
-<p>with <span class="math notranslate nohighlight">\(D\)</span> the value set for <code class="docutils literal notranslate"><span class="pre">cahn</span> <span class="pre">hilliard</span> <span class="pre">mobility</span> <span class="pre">constant</span></code>. A quartic mobility is required to recover a correct velocity according to Bretin <em>et al.</em> <a class="reference external" href="https://doi.org/10.48550/arXiv.2105.09627">[2]</a> Therefore, it is preferable to use it when solving the coupled Cahn-Hilliard and Navier-Stokes equations.</p>
+<p>with <span class="math notranslate nohighlight">\(D\)</span> the value set for <code class="docutils literal notranslate"><span class="pre">cahn</span> <span class="pre">hilliard</span> <span class="pre">mobility</span> <span class="pre">constant</span></code>. A quartic mobility is required to recover a correct velocity according to Bretin <em>et al.</em> <a class="reference external" href="https://doi.org/10.48550/arXiv.2105.09627">[2]</a> Therefore, it is preferable to use it when solving the coupled Cahn-Hilliard and Navier-Stokes equations. A good rule of thumb for setting the mobility constant is to have it proportionnal to the square of the minimum cell size. This rule may depend on the duration of the simulation, so a finer tuning may be necessary.</p>
 </section>
 </section>
 <section id="references">

@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classParameters_1_1ALE.html" title=" " alt="" coords="5,5,188,32"/>
+<area shape="rect" id="node1" href="$classNonLinearSolver.html" title="NonlinearSolver. Base class for all non&#45;linear solver for non&#45;linear systems of equations...." alt="" coords="5,78,236,105"/>
+<area shape="rect" id="node2" href="$classInexactNewtonNonLinearSolver.html" title="InexactNewtonIterationNonLinearSolver. Non&#45;linear solver for non&#45;linear systems of equations which us..." alt="" coords="284,5,511,47"/>
+<area shape="rect" id="node3" href="$classKinsolNewtonNonLinearSolver.html" title="KinsolNonlinearSolver. Interface to the non&#45;linear newton solver for non&#45;linear systems of equations ..." alt="" coords="288,71,507,112"/>
+<area shape="rect" id="node4" href="$classNewtonNonLinearSolver.html" title="Non&#45;linear solver for non&#45;linear systems of equations which uses a Newton method with \alpha relaxati..." alt="" coords="308,136,487,177"/>
 </map>

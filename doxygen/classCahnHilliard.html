@@ -108,6 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acae32e8fc7fca8cd911338d65154bf22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#acae32e8fc7fca8cd911338d65154bf22">percolate_time_vectors</a> () override</td></tr>
 <tr class="memdesc:acae32e8fc7fca8cd911338d65154bf22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearrange vector solution correctly for transient simulations.  <a href="classCahnHilliard.html#acae32e8fc7fca8cd911338d65154bf22">More...</a><br /></td></tr>
 <tr class="separator:acae32e8fc7fca8cd911338d65154bf22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66eb728bcf77d15809adb397558f0681"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a66eb728bcf77d15809adb397558f0681">modify_solution</a> () override</td></tr>
+<tr class="memdesc:a66eb728bcf77d15809adb397558f0681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out modifications on the auxiliary physic solution.  <a href="classCahnHilliard.html#a66eb728bcf77d15809adb397558f0681">More...</a><br /></td></tr>
+<tr class="separator:a66eb728bcf77d15809adb397558f0681"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7097ba585595d2f1d00ea69498e7603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#ae7097ba585595d2f1d00ea69498e7603">postprocess</a> (bool first_iteration) override</td></tr>
 <tr class="memdesc:ae7097ba585595d2f1d00ea69498e7603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Postprocess the auxiliary physics results. Post-processing this case implies the calculation of all derived quantities using the solution vector of the physics. It does not concern the output of the solution using the DataOutObject, which is accomplished through the attach_solution_to_output function.  <a href="classCahnHilliard.html#ae7097ba585595d2f1d00ea69498e7603">More...</a><br /></td></tr>
 <tr class="separator:ae7097ba585595d2f1d00ea69498e7603"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,9 +164,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5559d192bb50405effa6e5ef52ca3a1e inherit pub_methods_classAuxiliaryPhysics"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#a5559d192bb50405effa6e5ef52ca3a1e">~AuxiliaryPhysics</a> ()</td></tr>
 <tr class="memdesc:a5559d192bb50405effa6e5ef52ca3a1e inherit pub_methods_classAuxiliaryPhysics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a> - Base destructor. At the present moment this is an interface with nothing.  <a href="classAuxiliaryPhysics.html#a5559d192bb50405effa6e5ef52ca3a1e">More...</a><br /></td></tr>
 <tr class="separator:a5559d192bb50405effa6e5ef52ca3a1e inherit pub_methods_classAuxiliaryPhysics"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace42d65b732019925cb4824e9af89f52 inherit pub_methods_classAuxiliaryPhysics"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#ace42d65b732019925cb4824e9af89f52">modify_solution</a> ()</td></tr>
-<tr class="memdesc:ace42d65b732019925cb4824e9af89f52 inherit pub_methods_classAuxiliaryPhysics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out modifications on the auxiliary physic solution. To be defined for some physics only (eg. free surface, see <a class="el" href="vof_8h.html">vof.h</a>).  <a href="classAuxiliaryPhysics.html#ace42d65b732019925cb4824e9af89f52">More...</a><br /></td></tr>
-<tr class="separator:ace42d65b732019925cb4824e9af89f52 inherit pub_methods_classAuxiliaryPhysics"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classPhysicsSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPhysicsSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPhysicsSolver.html">PhysicsSolver&lt; VectorType &gt;</a></td></tr>
 <tr class="memitem:a1b5dd7b4e42a885ef133816445eb3a15 inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a1b5dd7b4e42a885ef133816445eb3a15">PhysicsSolver</a> (const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> non_linear_solver_parameters)</td></tr>
 <tr class="separator:a1b5dd7b4e42a885ef133816445eb3a15 inherit pub_methods_classPhysicsSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,6 +215,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a9a979d647bfa251a583f550eef5b7f1e"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; Tensor&lt; 1, dim &gt;, Tensor&lt; 1, dim &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a9a979d647bfa251a583f550eef5b7f1e">calculate_barycenter</a> (const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;solution, const VectorType &amp;current_solution_fd)</td></tr>
 <tr class="memdesc:a9a979d647bfa251a583f550eef5b7f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the barycenter of fluid 1 and its velocity.  <a href="classCahnHilliard.html#a9a979d647bfa251a583f550eef5b7f1e">More...</a><br /></td></tr>
 <tr class="separator:a9a979d647bfa251a583f550eef5b7f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0021477a9c06b0c4d1819a5bb7c8b467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a0021477a9c06b0c4d1819a5bb7c8b467">apply_phase_filter</a> ()</td></tr>
+<tr class="memdesc:a0021477a9c06b0c4d1819a5bb7c8b467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies filter on phase fraction values.  <a href="classCahnHilliard.html#a0021477a9c06b0c4d1819a5bb7c8b467">More...</a><br /></td></tr>
+<tr class="separator:a0021477a9c06b0c4d1819a5bb7c8b467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -260,6 +263,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ab5d75d0c8d9ab97323c4a229208a571d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2155d047d25989a302121da42e02b1cd"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::SparseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a2155d047d25989a302121da42e02b1cd">system_matrix</a></td></tr>
 <tr class="separator:a2155d047d25989a302121da42e02b1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e2d2163399e31d369acf27f605de816"><td class="memItemLeft" align="right" valign="top">TrilinosWrappers::MPI::Vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a6e2d2163399e31d369acf27f605de816">filtered_solution</a></td></tr>
+<tr class="separator:a6e2d2163399e31d369acf27f605de816"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab72931bd5a919bd16c3c525b6855c906"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#ab72931bd5a919bd16c3c525b6855c906">previous_solutions</a></td></tr>
 <tr class="separator:ab72931bd5a919bd16c3c525b6855c906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a804ea4b0af726e98b5f73e8ba7280ab2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; parallel::distributed::SolutionTransfer&lt; dim, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a804ea4b0af726e98b5f73e8ba7280ab2">solution_transfer</a></td></tr>
@@ -272,6 +277,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a22290e925b93fbad53f233929a8c49a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af01b17b6808415804c7fdd8c1e500257"><td class="memItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#af01b17b6808415804c7fdd8c1e500257">statistics_table</a></td></tr>
 <tr class="separator:af01b17b6808415804c7fdd8c1e500257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e2957434a60dcf4826776a72628b3c7"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classCahnHilliardFilterBase.html">CahnHilliardFilterBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliard.html#a9e2957434a60dcf4826776a72628b3c7">filter</a></td></tr>
+<tr class="separator:a9e2957434a60dcf4826776a72628b3c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -286,7 +293,7 @@ Additional Inherited Members</h2></td></tr>
 class CahnHilliard&lt; dim &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00059">59</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00060">60</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6b0f5e5620da753939cfb068ec9a8986"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b0f5e5620da753939cfb068ec9a8986">&#9670;&nbsp;</a></span>CahnHilliard()</h2>
@@ -336,13 +343,43 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00062">62</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00063">63</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00427">CahnHilliard&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00413">CahnHilliard&lt; dim &gt;::computing_timer</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00421">CahnHilliard&lt; dim &gt;::dof_handler</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00428">CahnHilliard&lt; dim &gt;::face_quadrature</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00424">CahnHilliard&lt; dim &gt;::fe</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00426">CahnHilliard&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00448">CahnHilliard&lt; dim &gt;::previous_solutions</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00455">CahnHilliard&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00415">CahnHilliard&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="cahn__hilliard_8h_source.html#l00453">CahnHilliard&lt; dim &gt;::solution_transfer</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00440">CahnHilliard&lt; dim &gt;::cell_quadrature</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00426">CahnHilliard&lt; dim &gt;::computing_timer</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00434">CahnHilliard&lt; dim &gt;::dof_handler</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00441">CahnHilliard&lt; dim &gt;::face_quadrature</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00437">CahnHilliard&lt; dim &gt;::fe</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00439">CahnHilliard&lt; dim &gt;::mapping</a>, <a class="el" href="bdf_8h_source.html#l00096">maximum_number_of_previous_solutions()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00462">CahnHilliard&lt; dim &gt;::previous_solutions</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00469">CahnHilliard&lt; dim &gt;::previous_solutions_transfer</a>, <a class="el" href="cahn__hilliard_8h_source.html#l00428">CahnHilliard&lt; dim &gt;::simulation_parameters</a>, and <a class="el" href="cahn__hilliard_8h_source.html#l00467">CahnHilliard&lt; dim &gt;::solution_transfer</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0021477a9c06b0c4d1819a5bb7c8b467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0021477a9c06b0c4d1819a5bb7c8b467">&#9670;&nbsp;</a></span>apply_phase_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCahnHilliard.html">CahnHilliard</a>&lt; dim &gt;::apply_phase_filter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies filter on phase fraction values. </p>
+
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01251">1251</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cahn__hilliard__filter_8cc_source.html#l00020">CahnHilliardFilterBase::model_cast()</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
+
+</div>
+</div>
 <a id="af4a9d35de8e0fbbb2386fbbbd986b0c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4a9d35de8e0fbbb2386fbbbd986b0c6">&#9670;&nbsp;</a></span>assemble_local_system_matrix()</h2>
 
@@ -396,9 +433,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00107">107</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00134">134</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00173">CahnHilliardScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00322">CahnHilliardScratchData&lt; dim &gt;::reinit_velocity()</a>, and <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard__scratch__data_8cc_source.html#l00100">CahnHilliardScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00173">CahnHilliardScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00316">CahnHilliardScratchData&lt; dim &gt;::reinit_velocity()</a>, and <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>.</p>
 
 </div>
 </div>
@@ -454,9 +491,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00206">206</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00231">231</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00173">CahnHilliardScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00322">CahnHilliardScratchData&lt; dim &gt;::reinit_velocity()</a>, and <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard__scratch__data_8cc_source.html#l00100">CahnHilliardScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00173">CahnHilliardScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="cahn__hilliard__scratch__data_8h_source.html#l00316">CahnHilliardScratchData&lt; dim &gt;::reinit_velocity()</a>, and <a class="el" href="copy__data_8h_source.html#l00107">StabilizedMethodsCopyData::reset()</a>.</p>
 
 </div>
 </div>
@@ -486,9 +523,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a73215f315918e22864cf04248c583045">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00075">75</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00102">102</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8cc_source.html#l00107">CahnHilliard&lt; dim &gt;::assemble_local_system_matrix()</a>, <a class="el" href="cahn__hilliard_8cc_source.html#l00159">CahnHilliard&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>, and <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8cc_source.html#l00134">CahnHilliard&lt; dim &gt;::assemble_local_system_matrix()</a>, <a class="el" href="cahn__hilliard_8cc_source.html#l00185">CahnHilliard&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>, and <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
 </div>
 </div>
@@ -518,9 +555,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a74110493860247f4ed2da56ef3050f08">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00174">174</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00199">199</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8cc_source.html#l00206">CahnHilliard&lt; dim &gt;::assemble_local_system_rhs()</a>, <a class="el" href="cahn__hilliard_8cc_source.html#l00258">CahnHilliard&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>, and <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8cc_source.html#l00231">CahnHilliard&lt; dim &gt;::assemble_local_system_rhs()</a>, <a class="el" href="cahn__hilliard_8cc_source.html#l00282">CahnHilliard&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>, and <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
 </div>
 </div>
@@ -554,7 +591,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#adf185a85398b75121b700d94b49fac05">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00272">272</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00296">296</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -605,9 +642,9 @@ template&lt;typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01108">1108</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01160">1160</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
+<p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, and <a class="el" href="cahn__hilliard__filter_8cc_source.html#l00020">CahnHilliardFilterBase::model_cast()</a>.</p>
 
 </div>
 </div>
@@ -627,7 +664,7 @@ template&lt;int dim&gt; </div>
 
 <p><a class="el" href="classCalculates.html">Calculates</a> the L2 error of the solution. </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00293">293</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00327">327</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -655,7 +692,7 @@ template&lt;int dim&gt; </div>
 
 <p>Calculate phase order parameter integral for monitoring purposes. </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00367">367</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00401">401</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
@@ -708,7 +745,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00711">711</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00756">756</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcaca680362fee5d2ef1fb4a224fec18cfc36">Parameters::MeshAdaptation::phase_cahn_hilliard</a>.</p>
 
@@ -742,7 +779,7 @@ template&lt;int dim&gt; </div>
 
 <p>Copy local cell information to global matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00159">159</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00185">185</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00119">StabilizedMethodsCopyData::local_matrix</a>.</p>
 
@@ -776,7 +813,7 @@ template&lt;int dim&gt; </div>
 
 <p>Copy local cell rhs information to global rhs. </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00258">258</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00282">282</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00128">StabilizedMethodsCopyData::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00121">StabilizedMethodsCopyData::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00120">StabilizedMethodsCopyData::local_rhs</a>.</p>
 
@@ -808,7 +845,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#aa917fdacf48dbefe7657aa7978edd53a">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00447">447</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00484">484</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a4f997f546b68779b58e9f6f19dc2b9e5">Parameters::SimulationControl::steady</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
@@ -843,9 +880,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#a47bd3339a5b8b1ccdc8fbe25a58c5265">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00233">233</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00240">240</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00421">CahnHilliard&lt; dim &gt;::dof_handler</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00434">CahnHilliard&lt; dim &gt;::dof_handler</a>.</p>
 
 </div>
 </div>
@@ -878,9 +915,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00277">277</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00284">284</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00437">CahnHilliard&lt; dim &gt;::evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00450">CahnHilliard&lt; dim &gt;::evaluation_point</a>.</p>
 
 </div>
 </div>
@@ -911,9 +948,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aef3b890ff2cffc97d546e32583c5ba3a">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00282">282</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00289">289</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00438">CahnHilliard&lt; dim &gt;::local_evaluation_point</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00451">CahnHilliard&lt; dim &gt;::local_evaluation_point</a>.</p>
 
 </div>
 </div>
@@ -944,9 +981,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#abcd8bead5555e17de5c6e20b64cb3ebb">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00287">287</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00294">294</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00439">CahnHilliard&lt; dim &gt;::newton_update</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00452">CahnHilliard&lt; dim &gt;::newton_update</a>.</p>
 
 </div>
 </div>
@@ -977,9 +1014,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#aadfaeda6c524f54395f64cbc100c3003">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00302">302</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00309">309</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00442">CahnHilliard&lt; dim &gt;::nonzero_constraints</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00455">CahnHilliard&lt; dim &gt;::nonzero_constraints</a>.</p>
 
 </div>
 </div>
@@ -1010,9 +1047,9 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a254a20d9cf4297efac822566de52fb83">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00292">292</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00299">299</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00440">CahnHilliard&lt; dim &gt;::present_solution</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00453">CahnHilliard&lt; dim &gt;::present_solution</a>.</p>
 
 </div>
 </div>
@@ -1043,9 +1080,39 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a46683552514c3323218b73817070a95e">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00297">297</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00304">304</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00441">CahnHilliard&lt; dim &gt;::system_rhs</a>.</p>
+<p class="reference">References <a class="el" href="cahn__hilliard_8h_source.html#l00454">CahnHilliard&lt; dim &gt;::system_rhs</a>.</p>
+
+</div>
+</div>
+<a id="a66eb728bcf77d15809adb397558f0681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66eb728bcf77d15809adb397558f0681">&#9670;&nbsp;</a></span>modify_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCahnHilliard.html">CahnHilliard</a>&lt; dim &gt;::modify_solution</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Carry out modifications on the auxiliary physic solution. </p>
+
+<p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#ace42d65b732019925cb4824e9af89f52">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00525">525</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1075,7 +1142,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#a0e74925e0067b4bcf2578f18a2f15204">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00477">477</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00514">514</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1105,7 +1172,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3870a0c5dc427098c9bec1afc9a668c0">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00682">682</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00727">727</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1139,7 +1206,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#a5cddfe1a7224404a899d7564d908d098">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00488">488</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00533">533</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00302">announce_string()</a>, <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">calculate_L2_error()</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, <a class="el" href="utilities_8cc_source.html#l00010">make_table_scalars_tensors()</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>.</p>
 
@@ -1171,7 +1238,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#ae80e26995eb53ee0ea0239a2390d082f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00669">669</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00714">714</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1201,7 +1268,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00780">780</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00825">825</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00334">deserialize_table()</a>.</p>
 
@@ -1233,7 +1300,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00999">999</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01050">1050</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1261,9 +1328,9 @@ template&lt;int dim&gt; </div>
 
 <p>sets up the vector of assembler functions </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00031">31</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00047">47</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>.</p>
+<p class="reference">References <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, and <a class="el" href="namespaceParameters.html#ae03f477a858859a4711ef40159b5912aa3c78b35502b2693fefdfc51cba3a53a5">Parameters::manual</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1360,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00826">826</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00871">871</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>.</p>
 
@@ -1346,7 +1413,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01027">1027</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01079">1079</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -1378,7 +1445,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classAuxiliaryPhysics.html#aa4eb967dee8229dc43ff95182df011fe">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00949">949</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l01000">1000</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8acfe4f2ec5a0912a19c266d141ccf58bf">BoundaryConditions::cahn_hilliard_dirichlet_phase_order</a>.</p>
 
@@ -1410,7 +1477,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classAuxiliaryPhysics.html#aac6b380b7f28d81bef3a7d33eb13ec34">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00747">747</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00792">792</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00319">serialize_table()</a>.</p>
 
@@ -1440,7 +1507,7 @@ template&lt;int dim&gt; </div>
 
 <p>Writes the phase integral to an output file. </p>
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00430">430</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8cc_source.html#l00467">467</a> of file <a class="el" href="cahn__hilliard_8cc_source.html">cahn_hilliard.cc</a>.</p>
 
 </div>
 </div>
@@ -1467,7 +1534,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00458">458</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00472">472</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1493,7 +1560,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00461">461</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00475">475</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1519,7 +1586,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00427">427</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00440">440</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1545,7 +1612,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00413">413</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00426">426</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1638,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00421">421</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00434">434</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1597,7 +1664,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00431">431</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00444">444</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1623,7 +1690,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00437">437</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00450">450</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1649,7 +1716,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00428">428</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00441">441</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1675,7 +1742,59 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00424">424</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00437">437</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+
+</div>
+</div>
+<a id="a9e2957434a60dcf4826776a72628b3c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e2957434a60dcf4826776a72628b3c7">&#9670;&nbsp;</a></span>filter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classCahnHilliardFilterBase.html">CahnHilliardFilterBase</a>&gt; <a class="el" href="classCahnHilliard.html">CahnHilliard</a>&lt; dim &gt;::filter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00481">481</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+
+</div>
+</div>
+<a id="a6e2d2163399e31d369acf27f605de816"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e2d2163399e31d369acf27f605de816">&#9670;&nbsp;</a></span>filtered_solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TrilinosWrappers::MPI::Vector <a class="el" href="classCahnHilliard.html">CahnHilliard</a>&lt; dim &gt;::filtered_solution</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00458">458</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1701,7 +1820,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00438">438</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00451">451</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1727,7 +1846,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00434">434</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00447">447</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1753,7 +1872,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00435">435</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00448">448</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1779,7 +1898,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00426">426</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00439">439</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1805,7 +1924,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00411">411</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00424">424</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1831,7 +1950,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00439">439</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00452">452</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1857,7 +1976,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00442">442</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00455">455</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1883,7 +2002,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00440">440</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00453">453</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1909,7 +2028,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00448">448</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00462">462</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1935,7 +2054,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00455">455</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00469">469</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1961,7 +2080,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00420">420</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00433">433</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -1987,7 +2106,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00415">415</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00428">428</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2013,7 +2132,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00453">453</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00467">467</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2039,7 +2158,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00464">464</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00478">478</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2065,7 +2184,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00444">444</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00457">457</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2091,7 +2210,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00441">441</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00454">454</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2117,7 +2236,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00419">419</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00432">432</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>
@@ -2143,7 +2262,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00443">443</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cahn__hilliard_8h_source.html#l00456">456</a> of file <a class="el" href="cahn__hilliard_8h_source.html">cahn_hilliard.h</a>.</p>
 
 </div>
 </div>

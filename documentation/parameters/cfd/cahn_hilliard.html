@@ -401,23 +401,24 @@
 <p>The equations solved are as follows:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}\partial_t\phi + (\mathbf{a} \cdot \nabla) \phi - \nabla \cdot (M(\phi)\nabla \eta) = 0 \\\end{split}\\ \eta - 4W(\phi^3 - \phi) + \epsilon^2 \Delta \phi = 0\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}\begin{split}\partial_t\phi + (\mathbf{a} \cdot \nabla) \phi - \nabla \cdot (M(\phi)\nabla \eta) = 0 \\\end{split}\\ \eta -  \frac{\lambda}{\epsilon^2}(\phi^3 - \phi) + \lambda \nabla^2 \phi + \xi h^2 \nabla^2 \eta  = 0\end{aligned}\end{align} \]</div>
 </div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{a}\)</span> corresponds to the velocity field; this vector field is used when the problem is driven by convection.</p></li>
 <li><p><span class="math notranslate nohighlight">\(M(\phi)\)</span> is the mobility function; two cases are considered: a constant mobility model, i.e, <span class="math notranslate nohighlight">\(M = D\)</span> with <span class="math notranslate nohighlight">\(D\)</span> the mobility constant, or a quartic mobility model with <span class="math notranslate nohighlight">\(M(\phi) = D(1-\phi^2)^2\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(W\)</span> is the potential well height.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\xi\)</span> is a smoothing coefficient for the chemical potential.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> is a local measure of the cell size. There may be different h in an adapted mesh.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> is a parameter linked to the thickness of the interface.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>At the moment, a maximum of two fluids is supported. By convention, air is usually the <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">0</span></code> and the other fluid of interest is the <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">1</span></code>.    See <a class="reference internal" href="initial_conditions.html"><span class="doc">Initial Conditions</span></a> for the definition of the Cahn-Hilliard initial conditions and <a class="reference internal" href="physical_properties.html#two-phase-simulations"><span class="std std-ref">Physical properties - Two phase simulations</span></a> for the definition of the physical properties of both fluids.  Do not forget to <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">cahn</span> <span class="pre">hilliard</span> <span class="pre">=</span> <span class="pre">true</span></code> in the <a class="reference internal" href="multiphysics.html"><span class="doc">Multiphysics</span></a> subsection of the <code class="docutils literal notranslate"><span class="pre">.prm</span></code> file.</p>
+<p>At the moment, a maximum of two fluids is supported. By convention, air is usually the <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">0</span></code> and the other fluid of interest is the <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">1</span></code>. The fluid 1 (0) corresponds to a value of <span class="math notranslate nohighlight">\(\phi = -1\)</span> (<span class="math notranslate nohighlight">\(\phi = 1\)</span>).    See <a class="reference internal" href="initial_conditions.html"><span class="doc">Initial Conditions</span></a> for the definition of the Cahn-Hilliard initial conditions and <a class="reference internal" href="physical_properties.html#two-phase-simulations"><span class="std std-ref">Physical properties - Two phase simulations</span></a> for the definition of the physical properties of both fluids.  Do not forget to <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">cahn</span> <span class="pre">hilliard</span> <span class="pre">=</span> <span class="pre">true</span></code> in the <a class="reference internal" href="multiphysics.html"><span class="doc">Multiphysics</span></a> subsection of the <code class="docutils literal notranslate"><span class="pre">.prm</span></code> file.</p>
 </div>
 <p>The default values of the Cahn-Hilliard parameters are given in the text box below:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection cahn hilliard
 
-  set well height = 1
+  set potential smoothing coefficient = 1
 
   subsection epsilon
     set method = automatic
@@ -427,8 +428,8 @@ end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">well</span> <span class="pre">height</span></code>: defines the <span class="math notranslate nohighlight">\(W\)</span> parameter in the equations above. Its value should be increased if the solution is excessively diffused.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">epsilon</span></code>: defines the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter. It can either be user-defined or determined automatically for each cell. For the latter, epsilon is equal to two times the characteristic length of the cell. The choices are <code class="docutils literal notranslate"><span class="pre">automatic</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">manual</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">potential</span> <span class="pre">smoothing</span> <span class="pre">coefficient</span></code>: defines the <span class="math notranslate nohighlight">\(\xi\)</span> parameter in the equations above. Its value should be increased if the potential presents excessive oscillations (in advective problems for instance).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epsilon</span></code>: defines the <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter. It can either be user-defined or determined automatically for each cell. For the latter, epsilon is equal to two times the characteristic length of the cell (<span class="math notranslate nohighlight">\(h\)</span>). The choices are <code class="docutils literal notranslate"><span class="pre">automatic</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">manual</span></code>.</p></li>
 </ul>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>

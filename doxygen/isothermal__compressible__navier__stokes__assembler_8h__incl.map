@@ -1,52 +1,52 @@
 <map id="/home/runner/work/lethe/lethe/include/solvers/isothermal_compressible_navier_stokes_assembler.h" name="/home/runner/work/lethe/lethe/include/solvers/isothermal_compressible_navier_stokes_assembler.h">
-<area shape="rect" id="node1" title=" " alt="" coords="296,5,501,76"/>
-<area shape="rect" id="node2" href="$boundary__conditions_8h.html" title=" " alt="" coords="257,795,458,821"/>
-<area shape="rect" id="node7" href="$rheological__model_8h.html" title=" " alt="" coords="1856,399,2043,426"/>
-<area shape="rect" id="node25" href="$simulation__control_8h.html" title=" " alt="" coords="505,571,692,597"/>
-<area shape="rect" id="node28" href="$copy__data_8h.html" title=" " alt="" coords="45,795,197,821"/>
-<area shape="rect" id="node30" href="$navier__stokes__assemblers_8h.html" title=" " alt="" coords="259,124,421,165"/>
-<area shape="rect" id="node32" href="$navier__stokes__scratch__data_8h.html" title=" " alt="" coords="1879,213,2041,255"/>
-<area shape="rect" id="node3" title=" " alt="" coords="611,966,778,993"/>
-<area shape="rect" id="node4" title=" " alt="" coords="783,869,953,911"/>
-<area shape="rect" id="node5" title=" " alt="" coords="1007,869,1153,911"/>
-<area shape="rect" id="node6" title=" " alt="" coords="274,877,441,903"/>
-<area shape="rect" id="node8" href="$parameters_8h.html" title=" " alt="" coords="1203,720,1344,747"/>
-<area shape="rect" id="node24" href="$physical__property__model_8h.html" title=" " alt="" coords="1261,481,1432,523"/>
-<area shape="rect" id="node9" href="$dimensionality_8h.html" title=" " alt="" coords="834,795,995,821"/>
-<area shape="rect" id="node10" href="$ib__particle_8h.html" title=" " alt="" coords="1295,795,1430,821"/>
-<area shape="rect" id="node17" href="$utilities_8h.html" title=" " alt="" coords="1499,966,1613,993"/>
-<area shape="rect" id="node18" title=" " alt="" coords="1528,1048,1701,1089"/>
-<area shape="rect" id="node23" href="$multiphysics_8h.html" title=" " alt="" coords="1071,795,1220,821"/>
-<area shape="rect" id="node11" href="$dem__properties_8h.html" title=" " alt="" coords="2837,877,3005,903"/>
-<area shape="rect" id="node15" title=" " alt="" coords="938,966,1001,993"/>
-<area shape="rect" id="node16" href="$shape_8h.html" title=" " alt="" coords="1302,877,1407,903"/>
-<area shape="rect" id="node20" title=" " alt="" coords="1163,959,1365,1000"/>
-<area shape="rect" id="node22" title=" " alt="" coords="1431,869,1585,911"/>
-<area shape="rect" id="node12" title=" " alt="" coords="2895,966,2975,993"/>
-<area shape="rect" id="node13" title=" " alt="" coords="2999,966,3057,993"/>
-<area shape="rect" id="node14" title=" " alt="" coords="2815,966,2870,993"/>
-<area shape="rect" id="node19" title=" " alt="" coords="1309,1055,1496,1082"/>
-<area shape="rect" id="node21" title=" " alt="" coords="2083,966,2253,993"/>
-<area shape="rect" id="node26" href="$bdf_8h.html" title=" " alt="" coords="555,645,642,672"/>
-<area shape="rect" id="node27" title=" " alt="" coords="516,877,657,903"/>
-<area shape="rect" id="node29" title=" " alt="" coords="26,877,198,903"/>
-<area shape="rect" id="node31" href="$ale_8h.html" title=" " alt="" coords="621,795,707,821"/>
-<area shape="rect" id="node33" href="$density__model_8h.html" title=" " alt="" coords="1453,399,1616,426"/>
-<area shape="rect" id="node34" href="$time__integration__utilities_8h.html" title=" " alt="" coords="1836,481,1999,523"/>
-<area shape="rect" id="node35" href="$physical__properties__manager_8h.html" title=" " alt="" coords="1140,303,1340,344"/>
-<area shape="rect" id="node42" href="$vof__filter_8h.html" title=" " alt="" coords="591,489,734,515"/>
-<area shape="rect" id="node44" title=" " alt="" coords="2048,310,2232,337"/>
-<area shape="rect" id="node45" title=" " alt="" coords="2256,310,2477,337"/>
-<area shape="rect" id="node46" title=" " alt="" coords="2501,310,2624,337"/>
-<area shape="rect" id="node47" title=" " alt="" coords="2648,310,2811,337"/>
-<area shape="rect" id="node48" title=" " alt="" coords="2835,310,2987,337"/>
-<area shape="rect" id="node49" title=" " alt="" coords="3011,303,3181,344"/>
-<area shape="rect" id="node50" title=" " alt="" coords="1646,303,1821,344"/>
-<area shape="rect" id="node36" href="$mobility__cahn__hilliard__model_8h.html" title=" " alt="" coords="891,392,1037,433"/>
-<area shape="rect" id="node37" href="$specific__heat__model_8h.html" title=" " alt="" coords="547,392,685,433"/>
-<area shape="rect" id="node38" href="$surface__tension__model_8h.html" title=" " alt="" coords="709,392,867,433"/>
-<area shape="rect" id="node39" href="$thermal__conductivity__model_8h.html" title=" " alt="" coords="1640,392,1832,433"/>
-<area shape="rect" id="node40" href="$thermal__expansion__model_8h.html" title=" " alt="" coords="1061,392,1240,433"/>
-<area shape="rect" id="node41" href="$tracer__diffusivity__model_8h.html" title=" " alt="" coords="1265,392,1429,433"/>
-<area shape="rect" id="node43" href="$parameters__multiphysics_8h.html" title=" " alt="" coords="681,645,911,672"/>
+<area shape="rect" id="node1" title=" " alt="" coords="600,5,806,76"/>
+<area shape="rect" id="node2" href="$boundary__conditions_8h.html" title=" " alt="" coords="381,795,582,821"/>
+<area shape="rect" id="node7" href="$rheological__model_8h.html" title=" " alt="" coords="2475,399,2662,426"/>
+<area shape="rect" id="node24" href="$simulation__control_8h.html" title=" " alt="" coords="750,571,936,597"/>
+<area shape="rect" id="node27" href="$copy__data_8h.html" title=" " alt="" coords="184,795,336,821"/>
+<area shape="rect" id="node29" href="$navier__stokes__assemblers_8h.html" title=" " alt="" coords="563,124,726,165"/>
+<area shape="rect" id="node31" href="$navier__stokes__scratch__data_8h.html" title=" " alt="" coords="1694,213,1856,255"/>
+<area shape="rect" id="node3" title=" " alt="" coords="678,966,845,993"/>
+<area shape="rect" id="node4" title=" " alt="" coords="1694,869,1864,911"/>
+<area shape="rect" id="node5" title=" " alt="" coords="737,869,882,911"/>
+<area shape="rect" id="node6" title=" " alt="" coords="278,877,445,903"/>
+<area shape="rect" id="node8" href="$parameters_8h.html" title=" " alt="" coords="1927,720,2068,747"/>
+<area shape="rect" id="node23" href="$physical__property__model_8h.html" title=" " alt="" coords="1904,481,2075,523"/>
+<area shape="rect" id="node9" href="$dimensionality_8h.html" title=" " alt="" coords="1918,795,2080,821"/>
+<area shape="rect" id="node10" href="$ib__particle_8h.html" title=" " alt="" coords="1265,795,1400,821"/>
+<area shape="rect" id="node17" href="$utilities_8h.html" title=" " alt="" coords="1608,966,1723,993"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1832,1048,2006,1089"/>
+<area shape="rect" id="node22" href="$multiphysics_8h.html" title=" " alt="" coords="1744,795,1894,821"/>
+<area shape="rect" id="node11" href="$dem__properties_8h.html" title=" " alt="" coords="1008,877,1176,903"/>
+<area shape="rect" id="node15" title=" " alt="" coords="592,966,654,993"/>
+<area shape="rect" id="node16" href="$shape_8h.html" title=" " alt="" coords="1284,877,1389,903"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1382,959,1584,1000"/>
+<area shape="rect" id="node12" title=" " alt="" coords="870,966,950,993"/>
+<area shape="rect" id="node13" title=" " alt="" coords="974,966,1032,993"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1057,966,1112,993"/>
+<area shape="rect" id="node19" title=" " alt="" coords="1251,1055,1438,1082"/>
+<area shape="rect" id="node21" title=" " alt="" coords="1136,966,1307,993"/>
+<area shape="rect" id="node25" href="$bdf_8h.html" title=" " alt="" coords="798,645,885,672"/>
+<area shape="rect" id="node26" title=" " alt="" coords="520,877,662,903"/>
+<area shape="rect" id="node28" title=" " alt="" coords="30,877,202,903"/>
+<area shape="rect" id="node30" href="$ale_8h.html" title=" " alt="" coords="658,795,745,821"/>
+<area shape="rect" id="node32" href="$density__model_8h.html" title=" " alt="" coords="1166,399,1328,426"/>
+<area shape="rect" id="node33" href="$time__integration__utilities_8h.html" title=" " alt="" coords="2702,481,2864,523"/>
+<area shape="rect" id="node34" href="$cahn__hilliard__filter_8h.html" title=" " alt="" coords="2940,481,3096,523"/>
+<area shape="rect" id="node36" href="$physical__properties__manager_8h.html" title=" " alt="" coords="2411,303,2611,344"/>
+<area shape="rect" id="node43" href="$vof__filter_8h.html" title=" " alt="" coords="2806,571,2949,597"/>
+<area shape="rect" id="node44" title=" " alt="" coords="1003,310,1187,337"/>
+<area shape="rect" id="node45" title=" " alt="" coords="1211,310,1432,337"/>
+<area shape="rect" id="node46" title=" " alt="" coords="1456,310,1579,337"/>
+<area shape="rect" id="node47" title=" " alt="" coords="1603,310,1766,337"/>
+<area shape="rect" id="node48" title=" " alt="" coords="1790,310,1942,337"/>
+<area shape="rect" id="node49" title=" " alt="" coords="1966,303,2136,344"/>
+<area shape="rect" id="node50" title=" " alt="" coords="2161,303,2336,344"/>
+<area shape="rect" id="node35" href="$parameters__multiphysics_8h.html" title=" " alt="" coords="2753,645,2984,672"/>
+<area shape="rect" id="node37" href="$mobility__cahn__hilliard__model_8h.html" title=" " alt="" coords="1736,392,1883,433"/>
+<area shape="rect" id="node38" href="$specific__heat__model_8h.html" title=" " alt="" coords="2096,392,2235,433"/>
+<area shape="rect" id="node39" href="$surface__tension__model_8h.html" title=" " alt="" coords="1352,392,1510,433"/>
+<area shape="rect" id="node40" href="$thermal__conductivity__model_8h.html" title=" " alt="" coords="2259,392,2451,433"/>
+<area shape="rect" id="node41" href="$thermal__expansion__model_8h.html" title=" " alt="" coords="1534,392,1712,433"/>
+<area shape="rect" id="node42" href="$tracer__diffusivity__model_8h.html" title=" " alt="" coords="1908,392,2072,433"/>
 </map>
