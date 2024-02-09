@@ -28,11 +28,8 @@
 #  define lethe_vans_assemblers_h
 
 /**
- * @brief A pure virtual class that serves as an interface for all
- * of the assemblers for the particle_fluid interqactions of the
- * VANS equations
- *
- * @tparam dim An integer that denotes the number of spatial dimensions
+ * @brief Interface for all of the assemblers for the particle-fluid 
+ * interactions in the Volume Averaged Navier-Stokes (VANS) equations
  *
  * @ingroup assemblers
  */
@@ -41,11 +38,11 @@ class ParticleFluidAssemblerBase
 {
 public:
   /**
-   * @brief calculate_particle_fluid_interactions calculted the solid_fluid interactions
+   * @brief Calculate particle-fluid interactions
    * @param scratch_data Scratch data containing the Navier-Stokes information.
    * It is important to note that the scratch data has to have been re-inited
    * before calling for matrix assembly.
-   * @param copy_data Destination where the local_rhs and loc
+   * @param copy_data Destination containing the local_matrix and the local_rhs
    */
 
   virtual void
@@ -55,9 +52,7 @@ public:
 
 
 /**
- * @brief Class that assembles the core of Model B of the Volume Averaged Navier-Stokes equations.
- *
- * @tparam dim An integer that denotes the number of spatial dimensions
+ * @brief Assemble the core of Model B of the VANS equations.
  *
  * @ingroup assemblers
  */
@@ -65,6 +60,16 @@ template <int dim>
 class GLSVansAssemblerCoreModelB : public NavierStokesAssemblerBase<dim>
 {
 public:
+
+/**
+ * @brief Constructor for model B of the VANS equations.
+ *
+ * @param simulation_control Simulation_control object from which time-stepping information is extracted.
+ *
+ * @param cfd_dem CFD-DEM parameters.
+ *
+ */
+
   GLSVansAssemblerCoreModelB(
     std::shared_ptr<SimulationControl> simulation_control,
     Parameters::CFDDEM                 cfd_dem)
@@ -73,7 +78,7 @@ public:
   {}
 
   /**
-   * @brief assemble_matrix Assembles the matrix
+   * @brief Assemble the matrix
    * @param scratch_data (see base class)
    * @param copy_data (see base class)
    */
@@ -82,24 +87,34 @@ public:
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
-   * @brief assemble_rhs Assembles the rhs
-   * @param scratch_data (see base class)Particles::ParticleHandler
+   * @brief Assemble the rhs
+   * @param scratch_data (see base class)
    * @param copy_data (see base class)
    */
   virtual void
   assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
+
+  /* 
+   * Enable the use of SUPG stabilization. This parameter is always enabled,
+   * but can be disabled manually for debugging purposes.
+   */
   const bool SUPG = true;
 
+  /* 
+   * Copy of the simulation_control object
+   */
   std::shared_ptr<SimulationControl> simulation_control;
+
+  /* 
+   * CFD-DEM parameters
+   */
   Parameters::CFDDEM                 cfd_dem;
 };
 
 /**
- * @brief Class that assembles the core of Model A of the Volume Averaged Navier-Stokes equations.
- *
- * @tparam dim An integer that denotes the number of spatial dimensions
+ * @brief Assemble the core of Model A of the VANS equations.
  *
  * @ingroup assemblers
  */
@@ -107,6 +122,15 @@ template <int dim>
 class GLSVansAssemblerCoreModelA : public NavierStokesAssemblerBase<dim>
 {
 public:
+
+/**
+ * @brief Constructor for model A of the VANS equations.
+ *
+ * @param simulation_control Simulation_control object from which time-stepping information is extracted.
+ *
+ * @param cfd_dem CFD-DEM parameters.
+ */
+
   GLSVansAssemblerCoreModelA(
     std::shared_ptr<SimulationControl> simulation_control,
     Parameters::CFDDEM                 cfd_dem)
@@ -115,7 +139,7 @@ public:
   {}
 
   /**
-   * @brief assemble_matrix Assembles the matrix
+   * @brief Assemble the matrix
    * @param scratch_data (see base class)
    * @param copy_data (see base class)
    */
@@ -124,7 +148,7 @@ public:
                   StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
   /**
-   * @brief assemble_rhs Assembles the rhs
+   * @brief Assemble the rhs
    * @param scratch_data (see base class)Particles::ParticleHandler
    * @param copy_data (see base class)
    */
@@ -132,20 +156,28 @@ public:
   assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
+  /* 
+   * Enable the use of SUPG stabilization. This parameter is always enabled,
+   * but can be disabled manually for debugging purposes.
+   */
   const bool SUPG = true;
 
+  /* 
+   * Copy of the simulation_control object
+   */
   std::shared_ptr<SimulationControl> simulation_control;
+
+  /* 
+   * CFD-DEM parameters
+   */
   Parameters::CFDDEM                 cfd_dem;
 };
 
 /**
- * @brief Class that assembles the transient time arising from BDF time
- * integration for the Navier-Stokes equation with
- * free surface using VOF modeling.. For example, if a BDF1 scheme is
+ * @brief Assembles the transient time arising from BDF time
+ * integration for the VANS equations. For example, if a BDF1 scheme is
  * chosen, the following is assembled
  * \f$\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}}{\Delta t}\f$
- *
- * @tparam dim An integer that denotes the number of spatial dimensions
  *
  * @ingroup assemblers
  */
@@ -154,6 +186,13 @@ template <int dim>
 class GLSVansAssemblerBDF : public NavierStokesAssemblerBase<dim>
 {
 public:
+/**
+ * @brief Constructor for the BDF time integration of the VANS equations
+ *
+ * @param simulation_control Simulation_control object from which time-stepping information is extracted.
+ *
+ * @param cfd_dem CFD-DEM parameters.
+ */
   GLSVansAssemblerBDF(std::shared_ptr<SimulationControl> simulation_control,
                       Parameters::CFDDEM                 cfd_dem)
     : simulation_control(simulation_control)
@@ -178,19 +217,23 @@ public:
   assemble_rhs(NavierStokesScratchData<dim>         &scratch_data,
                StabilizedMethodsTensorCopyData<dim> &copy_data) override;
 
+  /* 
+   * Copy of the simulation_control object
+   */
   std::shared_ptr<SimulationControl> simulation_control;
 
-  Parameters::CFDDEM cfd_dem;
+  /* 
+   * CFD-DEM parameters
+   */
+  Parameters::CFDDEM                 cfd_dem;
 };
 
 
 /**
  * @brief Class that assembles the drag force using DiFelice model for the
- * VANS equations where the drag coefficient c_d = pow((0.63 + 4.8 / sqrt(re)),
- 2) * pow(cell_void_fraction,
-                -(3.7 - 0.65 * exp(-pow((1.5 - log10(re)), 2) / 2)))
+ * VANS equations where the drag coefficient \f$C_D = (0.63 + \frac{4.8}  {\sqrt{Re}})^2 (\epsilon_f)^{-(3.7 - 0.65 \Lambda)} \f$ with \f$\Lambda=e^{(-\frac{(1.5 - log_{10}(Re))^2}{2}))}\f$
  *  and the momentum exchange coefficient
- *  beta =(0.5 * c_d * M_PI *
+ *  \f$ \beta =(0.5 * C_D * M_PI *
          pow(particle_properties[DEM::PropertiesIndex::dp], 2) / 4) *
         relative_velocity.norm()
  * @tparam dim An integer that denotes the number of spatial dimensions
