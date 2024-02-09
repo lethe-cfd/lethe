@@ -469,20 +469,45 @@ namespace Parameters
 
 
   /**
-   * @brief Isothermal ideal gas model to solve for isothermal weakly
-   * compressible fluid flows.
+   * @brief Defines the parameters for the isothermal ideal gas model to solve 
+   * isothermal weakly compressible fluid flows.
+   *
+   * Units are described in terms of fundamental dimensions: length \f$L\f$, 
+   * time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
    */
   struct IsothermalIdealGasDensityParameters
   {
-    // Reference state density of the gas in Pa
+    /**
+     * @brief Reference state density of the gas in /f$M L^{-1} T^{-2}/f$
+     */
     double density_ref;
-    // Specific gas constant in J/kg/K
+
+    /**
+     * @brief Specific gas constant in /f$L^2 T^{-2}\Theta^{-1} /f$
+     */
     double R;
-    // Absolute temperature of the ideal gas in K
+
+    /**
+     * @brief Absolute temperature of the ideal gas in /f$\Theta/f$
+     */
     double T;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     static void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */    
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
