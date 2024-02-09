@@ -565,16 +565,30 @@ namespace Parameters
   };
 
   /**
-   * @brief MobilityCahnHilliardParameters - Defines parameters for the mobility
-   * models used in the Cahn-Hilliard equations.
+   * @brief Defines the parameters for the mobility models used in the 
+   * Cahn-Hilliard equations.
    */
   struct MobilityCahnHilliardParameters
   {
-    // Mobility constant (M) in m^2/s
-    double mobility_cahn_hilliard_constant;
 
+    /**
+     * @brief Mobility constant (M) in \f$\text{m}^2 \text{s}^{-1}\f$
+     */
+    double mobility_cahn_hilliard_constant;
+    
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     void
     parse_parameters(ParameterHandler &prm);
   };
