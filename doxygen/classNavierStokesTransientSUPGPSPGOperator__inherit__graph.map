@@ -1,5 +1,5 @@
 <map id="NavierStokesTransientSUPGPSPGOperator&lt; dim, number &gt;" name="NavierStokesTransientSUPGPSPGOperator&lt; dim, number &gt;">
-<area shape="rect" id="node1" title="Class in charge of implementing the main function required to solve the transient Navier&#45;Stokes equat..." alt="" coords="5,169,300,211"/>
+<area shape="rect" id="node1" title="Implements the matrix&#45;free operator to solve transient Navier&#45;Stokes equations using SUPG/PSPG stabil..." alt="" coords="5,169,300,211"/>
 <area shape="rect" id="node2" href="$classNavierStokesOperatorBase.html" title="A class that serves as base for all the matrix&#45;free Navier&#45;Stokes operators." alt="" coords="54,80,251,121"/>
 <area shape="rect" id="node3" title=" " alt="" coords="105,5,200,32"/>
 </map>

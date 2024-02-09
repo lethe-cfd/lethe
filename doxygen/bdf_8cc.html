@@ -125,15 +125,13 @@ Include dependency graph for bdf.cc:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a387624b2a04946958112c52f1bf549a6"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a> (const unsigned int p, const std::vector&lt; double &gt; dt)</td></tr>
-<tr class="memdesc:a387624b2a04946958112c52f1bf549a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for BDF integration of order n. The coefficients are determined through a recursion algorithm. The algorithm is taken from : Hay, Alexander, et al. "hp-Adaptive time
-integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.  <a href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">More...</a><br /></td></tr>
+<tr class="memdesc:a387624b2a04946958112c52f1bf549a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\).  <a href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">More...</a><br /></td></tr>
 <tr class="separator:a387624b2a04946958112c52f1bf549a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a0eec8ad86be9038d15efe2d15f5cedf3">bdf_coefficients</a> (const <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method, const std::vector&lt; double &gt; dt)</td></tr>
-<tr class="memdesc:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for BDF integration of order n. The coefficients are determined through a recursion algorithm. The algorithm is taken from : Hay, Alexander, et al. "hp-Adaptive time
-integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.  <a href="bdf_8cc.html#a0eec8ad86be9038d15efe2d15f5cedf3">More...</a><br /></td></tr>
+<tr class="memdesc:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\).  <a href="bdf_8cc.html#a0eec8ad86be9038d15efe2d15f5cedf3">More...</a><br /></td></tr>
 <tr class="separator:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cee6a4b9491650075dcc7a610f99bf2"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a> (const unsigned int p, const unsigned int n, const unsigned int j, const Vector&lt; double &gt; times)</td></tr>
-<tr class="memdesc:a2cee6a4b9491650075dcc7a610f99bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursion function to calculate the bdf coefficient.  <a href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">More...</a><br /></td></tr>
+<tr class="memdesc:a2cee6a4b9491650075dcc7a610f99bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive function for calculating the \(j^{th}\) order divided differences ( \(\delta^j\)) that is used for calculating backward differentiation formula (BDF) coefficients.  <a href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">More...</a><br /></td></tr>
 <tr class="separator:a2cee6a4b9491650075dcc7a610f99bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -163,15 +161,20 @@ integration based on the BDF for viscous flows." Journal of Computational Physic
       </table>
 </div><div class="memdoc">
 
-<p>Calculate the coefficients required for BDF integration of order n. The coefficients are determined through a recursion algorithm. The algorithm is taken from : Hay, Alexander, et al. "hp-Adaptive time
-integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176. </p>
+<p>Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\). </p>
+<p>The coefficients are determined through a recursion algorithm. The algorithm is taken from: Hay, Alexander, et al. "hp-Adaptive time
+integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.</p>
+<p>For example, if the method is a BDF2, it uses three values for the time : \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\). Thus the <code>time_steps</code> vector should contain \(\Delta t_1\) and \(\Delta t_2\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">method</td><td>The time stepping method</td></tr>
-    <tr><td class="paramname">time_steps</td><td>a vector containing all the time steps. The time steps should be in reverse order. For example, if the method is a BDF2, it uses three values for the time : (t) (t-dt_1) and (t-dt_2). Thus the time step vector should contain dt_1 and dt_2. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">method</td><td>Time stepping method.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">time_steps</td><td>Vector containing all the time steps. The time steps should be in decreasing order.</td></tr>
   </table>
   </dd>
 </dl>
+<p>For example, if the method is a BDF2 ( \(n=2\)), it uses three values for the time: \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\). Thus the <code>time_steps</code> vector should contain \(\Delta t_1\) and \(\Delta t_2\).</p>
+<dl class="section return"><dt>Returns</dt><dd>Vector containing BDF integration coefficient values.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>At the moment, the highest implemented scheme is <code>bdf3</code> (<code>order=3</code>). </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00055">55</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
 
@@ -205,15 +208,19 @@ integration based on the BDF for viscous flows." Journal of Computational Physic
       </table>
 </div><div class="memdoc">
 
-<p>Calculate the coefficients required for BDF integration of order n. The coefficients are determined through a recursion algorithm. The algorithm is taken from : Hay, Alexander, et al. "hp-Adaptive time
-integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176. </p>
+<p>Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\). </p>
+<p>The coefficients are determined through a recursion algorithm. The algorithm is taken from: Hay, Alexander, et al. "hp-Adaptive time
+integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">order</td><td>The order of the BDF method. The BDF method of order n requires n+1 arrays</td></tr>
-    <tr><td class="paramname">time_steps</td><td>a vector containing all the time steps. The time steps should be in reverse order. For example, if the method is a BDF2, it uses three values for the time : (t) (t-dt_1) and (t-dt_2). Thus the time step vector should contain dt_1 and dt_2. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">order</td><td>Order of the BDF method. The BDF method of <code>order</code> \(n\) requires \(n+1\) coefficients.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">time_steps</td><td>Vector containing all the time steps. The time steps should be in decreasing order.</td></tr>
   </table>
   </dd>
 </dl>
+<p>For example, if the method is a BDF2 ( \(n=2\)), it uses three values for the time: \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\). Thus the <code>time_steps</code> vector should contain \(\Delta t_1\) and \(\Delta t_2\).</p>
+<dl class="section return"><dt>Returns</dt><dd>Vector containing BDF integration coefficient values.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>At the moment, the highest implemented scheme is <code>bdf3</code> (<code>order=3</code>). </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00023">23</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
 
@@ -259,16 +266,20 @@ integration based on the BDF for viscous flows." Journal of Computational Physic
       </table>
 </div><div class="memdoc">
 
-<p>Recursion function to calculate the bdf coefficient. </p>
+<p>Recursive function for calculating the \(j^{th}\) order divided differences ( \(\delta^j\)) that is used for calculating backward differentiation formula (BDF) coefficients. </p>
+<p>The algorithm is taken from: Hay, Alexander, et al. "hp-Adaptive time
+integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">order</td><td>Order of the bdf method</td></tr>
-    <tr><td class="paramname">n</td><td>Integer required for the recursive function calculation</td></tr>
-    <tr><td class="paramname">j</td><td>Integer required for the recursive function calculation</td></tr>
-    <tr><td class="paramname">times</td><td>Vector of the times corresponding to the various iteration in reverse order. For example in a BDF2 method, three values of the time must be in the array : t, t-dt_1 and t-dt_2. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">order</td><td>Order of the BDF method.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>Integer required for the recursive function calculation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">j</td><td>Order of the divided difference of the value of interest.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">times</td><td>Vector of times values corresponding to the various iteration in decreasing order.</td></tr>
   </table>
   </dd>
 </dl>
+<p>For example, if the method is a BDF2 ( \(n=2\)), three values of the time must be in the array: \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\).</p>
+<dl class="section return"><dt>Returns</dt><dd>Vector of \(n\) divided differences ( \(\delta^j\)) used in the calculation of BDF coefficients. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00076">76</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
 

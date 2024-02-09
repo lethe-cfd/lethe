@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A solver class for the Navier-Stokes equation that uses the matrix free approach.  
+<p>A solver for the incompressible Navier-Stokes equations implemented in a matrix-free fashion.  
  <a href="classMFNavierStokesSolver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>&gt;</code></p>
@@ -91,7 +91,7 @@ Inheritance diagram for MFNavierStokesSolver&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMFNavierStokesSolver__inherit__graph.png" border="0" usemap="#aMFNavierStokesSolver_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aMFNavierStokesSolver_3_01dim_01_4_inherit__map" id="aMFNavierStokesSolver_3_01dim_01_4_inherit__map">
-<area shape="rect" title="A solver class for the Navier&#45;Stokes equation that uses the matrix free approach." alt="" coords="33,184,203,225"/>
+<area shape="rect" title="A solver for the incompressible Navier&#45;Stokes equations implemented in a matrix&#45;free fashion." alt="" coords="33,184,203,225"/>
 <area shape="rect" href="classNavierStokesBase.html" title=" " alt="" coords="5,80,231,136"/>
 <area shape="rect" href="classPhysicsSolver.html" title="Class that has all the common elements of a physics solver. It creates the nonlinear solver as specif..." alt="" coords="11,5,225,32"/>
 </map>
@@ -100,13 +100,13 @@ Inheritance diagram for MFNavierStokesSolver&lt; dim &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a969b7f3f6eaafd22e3b990da526f0335"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a969b7f3f6eaafd22e3b990da526f0335">MFNavierStokesSolver</a> (<a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;nsparam)</td></tr>
-<tr class="memdesc:a969b7f3f6eaafd22e3b990da526f0335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classMFNavierStokesSolver.html" title="A solver class for the Navier-Stokes equation that uses the matrix free approach.">MFNavierStokesSolver</a> object.  <a href="classMFNavierStokesSolver.html#a969b7f3f6eaafd22e3b990da526f0335">More...</a><br /></td></tr>
+<tr class="memdesc:a969b7f3f6eaafd22e3b990da526f0335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that sets the finite element degree and system operator according to simulation parameters.  <a href="classMFNavierStokesSolver.html#a969b7f3f6eaafd22e3b990da526f0335">More...</a><br /></td></tr>
 <tr class="separator:a969b7f3f6eaafd22e3b990da526f0335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9559907cbea42874378d74a8b7af9198"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a9559907cbea42874378d74a8b7af9198">~MFNavierStokesSolver</a> ()</td></tr>
-<tr class="memdesc:a9559907cbea42874378d74a8b7af9198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classMFNavierStokesSolver.html" title="A solver class for the Navier-Stokes equation that uses the matrix free approach.">MFNavierStokesSolver</a> object.  <a href="classMFNavierStokesSolver.html#a9559907cbea42874378d74a8b7af9198">More...</a><br /></td></tr>
+<tr class="memdesc:a9559907cbea42874378d74a8b7af9198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classMFNavierStokesSolver.html#a9559907cbea42874378d74a8b7af9198">More...</a><br /></td></tr>
 <tr class="separator:a9559907cbea42874378d74a8b7af9198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55acf78ca6480efcbc6bcc259b451d7b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a55acf78ca6480efcbc6bcc259b451d7b">solve</a> ()</td></tr>
-<tr class="memdesc:a55acf78ca6480efcbc6bcc259b451d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the Navier-Stokes problem.  <a href="classMFNavierStokesSolver.html#a55acf78ca6480efcbc6bcc259b451d7b">More...</a><br /></td></tr>
+<tr class="memdesc:a55acf78ca6480efcbc6bcc259b451d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the problem defined by simulation parameters by iterating through time or through the mesh refinements.  <a href="classMFNavierStokesSolver.html#a55acf78ca6480efcbc6bcc259b451d7b">More...</a><br /></td></tr>
 <tr class="separator:a55acf78ca6480efcbc6bcc259b451d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classPhysicsSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPhysicsSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPhysicsSolver.html">PhysicsSolver&lt; VectorType &gt;</a></td></tr>
 <tr class="memitem:a1b5dd7b4e42a885ef133816445eb3a15 inherit pub_methods_classPhysicsSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a1b5dd7b4e42a885ef133816445eb3a15">PhysicsSolver</a> (const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> non_linear_solver_parameters)</td></tr>
@@ -129,22 +129,22 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8ee03cdf7aa3477bbbf0fc53a22c39a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a8ee03cdf7aa3477bbbf0fc53a22c39a3">setup_dofs_fd</a> () override</td></tr>
-<tr class="memdesc:a8ee03cdf7aa3477bbbf0fc53a22c39a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the DoFs, system operator and solution vectors.  <a href="classMFNavierStokesSolver.html#a8ee03cdf7aa3477bbbf0fc53a22c39a3">More...</a><br /></td></tr>
+<tr class="memdesc:a8ee03cdf7aa3477bbbf0fc53a22c39a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the degrees of freedom, system constraints, system operator and solution vectors.  <a href="classMFNavierStokesSolver.html#a8ee03cdf7aa3477bbbf0fc53a22c39a3">More...</a><br /></td></tr>
 <tr class="separator:a8ee03cdf7aa3477bbbf0fc53a22c39a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af98460272fc891dec419ddcfff04b572"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#af98460272fc891dec419ddcfff04b572">update_boundary_conditions</a> ()</td></tr>
 <tr class="memdesc:af98460272fc891dec419ddcfff04b572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update non zero constraints if the boundary is time dependent.  <a href="classMFNavierStokesSolver.html#af98460272fc891dec419ddcfff04b572">More...</a><br /></td></tr>
 <tr class="separator:af98460272fc891dec419ddcfff04b572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27d01dc2a0d3ab3b3acaa7e9adbc341b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a27d01dc2a0d3ab3b3acaa7e9adbc341b">set_initial_condition_fd</a> (<a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525">Parameters::InitialConditionType</a> initial_condition_type, bool restart=false) override</td></tr>
-<tr class="memdesc:a27d01dc2a0d3ab3b3acaa7e9adbc341b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the initial conditions for the solver.  <a href="classMFNavierStokesSolver.html#a27d01dc2a0d3ab3b3acaa7e9adbc341b">More...</a><br /></td></tr>
+<tr class="memdesc:a27d01dc2a0d3ab3b3acaa7e9adbc341b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the initial conditions for the solver. If the simulation is restarted from a checkpoint, the initial solution setting is bypassed and the checkpoint is instead read.  <a href="classMFNavierStokesSolver.html#a27d01dc2a0d3ab3b3acaa7e9adbc341b">More...</a><br /></td></tr>
 <tr class="separator:a27d01dc2a0d3ab3b3acaa7e9adbc341b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45124230d0118b793fb32e6f868b1f96"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a45124230d0118b793fb32e6f868b1f96">assemble_system_matrix</a> () override</td></tr>
-<tr class="memdesc:a45124230d0118b793fb32e6f868b1f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the matrix associated with the solver. <a class="el" href="classThis.html">This</a> function is only required for compilation and it is not used for matrix free solvers.  <a href="classMFNavierStokesSolver.html#a45124230d0118b793fb32e6f868b1f96">More...</a><br /></td></tr>
+<tr class="memdesc:a45124230d0118b793fb32e6f868b1f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the matrix associated with the solver. Only required for compilation and it is not used for the matrix free solver.  <a href="classMFNavierStokesSolver.html#a45124230d0118b793fb32e6f868b1f96">More...</a><br /></td></tr>
 <tr class="separator:a45124230d0118b793fb32e6f868b1f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3205570022a7b4155cc04feb4490821"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#aa3205570022a7b4155cc04feb4490821">assemble_system_rhs</a> () override</td></tr>
-<tr class="memdesc:aa3205570022a7b4155cc04feb4490821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the system rhs associated with the solver.  <a href="classMFNavierStokesSolver.html#aa3205570022a7b4155cc04feb4490821">More...</a><br /></td></tr>
+<tr class="memdesc:aa3205570022a7b4155cc04feb4490821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the system right hand side associated with the solver.  <a href="classMFNavierStokesSolver.html#aa3205570022a7b4155cc04feb4490821">More...</a><br /></td></tr>
 <tr class="separator:aa3205570022a7b4155cc04feb4490821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7988c83c902aa9d7c187d5e6c6b1fd5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ac7988c83c902aa9d7c187d5e6c6b1fd5">update_multiphysics_time_average_solution</a> () override</td></tr>
-<tr class="memdesc:ac7988c83c902aa9d7c187d5e6c6b1fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the average velocity field solution in the multiphyscics interface.  <a href="classMFNavierStokesSolver.html#ac7988c83c902aa9d7c187d5e6c6b1fd5">More...</a><br /></td></tr>
+<tr class="memdesc:ac7988c83c902aa9d7c187d5e6c6b1fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the average velocity field solution in the multiphyscics interface. Currently not implemented for this solver but required for compilation.  <a href="classMFNavierStokesSolver.html#ac7988c83c902aa9d7c187d5e6c6b1fd5">More...</a><br /></td></tr>
 <tr class="separator:ac7988c83c902aa9d7c187d5e6c6b1fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b5a5db326b972b6952e4de504b37c3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a6b5a5db326b972b6952e4de504b37c3a">calculate_time_derivative_previous_solutions</a> ()</td></tr>
 <tr class="memdesc:a6b5a5db326b972b6952e4de504b37c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate and store time derivatives of previous solutions according to time-stepping scheme to use them in the operator.  <a href="classMFNavierStokesSolver.html#a6b5a5db326b972b6952e4de504b37c3a">More...</a><br /></td></tr>
@@ -156,7 +156,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a7819d7e88ae634babd18975e2dfc6531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the zero constraints used to solve the problem.  <a href="classMFNavierStokesSolver.html#a7819d7e88ae634babd18975e2dfc6531">More...</a><br /></td></tr>
 <tr class="separator:a7819d7e88ae634babd18975e2dfc6531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa38bbad875b3be70f5b17b085423335"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#aaa38bbad875b3be70f5b17b085423335">solve_linear_system</a> (const bool initial_step, const bool renewed_matrix=true) override</td></tr>
-<tr class="memdesc:aaa38bbad875b3be70f5b17b085423335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call for the assembly of the linear system of equations.  <a href="classMFNavierStokesSolver.html#aaa38bbad875b3be70f5b17b085423335">More...</a><br /></td></tr>
+<tr class="memdesc:aaa38bbad875b3be70f5b17b085423335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the linear system of equations using the method specified in the simulation parameters.  <a href="classMFNavierStokesSolver.html#aaa38bbad875b3be70f5b17b085423335">More...</a><br /></td></tr>
 <tr class="separator:aaa38bbad875b3be70f5b17b085423335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classNavierStokesBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classNavierStokesBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classNavierStokesBase.html">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;</a></td></tr>
 <tr class="memitem:a32a985422800ef01885690e3f73b84a4 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a32a985422800ef01885690e3f73b84a4">NavierStokesBase</a> (<a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;nsparam)</td></tr>
@@ -261,16 +261,22 @@ Protected Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ab4ba4ab507512c88af8dd28705ca8323"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classNavierStokesOperatorBase.html">NavierStokesOperatorBase</a>&lt; dim, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ab4ba4ab507512c88af8dd28705ca8323">system_operator</a></td></tr>
+<tr class="memdesc:ab4ba4ab507512c88af8dd28705ca8323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matrix-free operator in used for all the matrix-vector multiplications calls (vmult).  <a href="classMFNavierStokesSolver.html#ab4ba4ab507512c88af8dd28705ca8323">More...</a><br /></td></tr>
 <tr class="separator:ab4ba4ab507512c88af8dd28705ca8323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1335e4874da4efff5dbdd3908239b5b7"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; PreconditionMG&lt; dim, <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a>, <a class="el" href="classMFNavierStokesSolver.html#a7590b310c9a4b2cb5ee8e5712dc84889">LSTransferType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a1335e4874da4efff5dbdd3908239b5b7">ls_multigrid_preconditioner</a></td></tr>
+<tr class="memdesc:a1335e4874da4efff5dbdd3908239b5b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geometric local smoothing multigrid preconditioner.  <a href="classMFNavierStokesSolver.html#a1335e4874da4efff5dbdd3908239b5b7">More...</a><br /></td></tr>
 <tr class="separator:a1335e4874da4efff5dbdd3908239b5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a230bc9a19aded528b61c704cba054694"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; PreconditionMG&lt; dim, <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a>, <a class="el" href="classMFNavierStokesSolver.html#ac75aa49660cb3ca173acbb97b5980e62">GCTransferType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a230bc9a19aded528b61c704cba054694">gc_multigrid_preconditioner</a></td></tr>
+<tr class="memdesc:a230bc9a19aded528b61c704cba054694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geometric global coarsening multigrid preconditioner.  <a href="classMFNavierStokesSolver.html#a230bc9a19aded528b61c704cba054694">More...</a><br /></td></tr>
 <tr class="separator:a230bc9a19aded528b61c704cba054694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac18339346c8aa010a603562dcecdb836"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; TrilinosWrappers::PreconditionILU &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ac18339346c8aa010a603562dcecdb836">ilu_preconditioner</a></td></tr>
+<tr class="memdesc:ac18339346c8aa010a603562dcecdb836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implicit LU preconditioner.  <a href="classMFNavierStokesSolver.html#ac18339346c8aa010a603562dcecdb836">More...</a><br /></td></tr>
 <tr class="separator:ac18339346c8aa010a603562dcecdb836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b6cceacb17fd93b7718ae5b98da291d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a4b6cceacb17fd93b7718ae5b98da291d">time_derivative_previous_solutions</a></td></tr>
+<tr class="memdesc:a4b6cceacb17fd93b7718ae5b98da291d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector to store the time derivatives of the previous solutions at the end of each time step for time-dependent simulations.  <a href="classMFNavierStokesSolver.html#a4b6cceacb17fd93b7718ae5b98da291d">More...</a><br /></td></tr>
 <tr class="separator:a4b6cceacb17fd93b7718ae5b98da291d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8962feeca1b55725c2dac833bebaaa93"><td class="memItemLeft" align="right" valign="top">TimerOutput&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a8962feeca1b55725c2dac833bebaaa93">mg_computing_timer</a></td></tr>
+<tr class="memdesc:a8962feeca1b55725c2dac833bebaaa93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer for specific geometric multigrid components.  <a href="classMFNavierStokesSolver.html#a8962feeca1b55725c2dac833bebaaa93">More...</a><br /></td></tr>
 <tr class="separator:a8962feeca1b55725c2dac833bebaaa93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classNavierStokesBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNavierStokesBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNavierStokesBase.html">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;</a></td></tr>
 <tr class="memitem:a29a0b9e949fe037c3e7fc9d98b9764de inherit pro_attribs_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">IndexSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a29a0b9e949fe037c3e7fc9d98b9764de">locally_owned_dofs</a></td></tr>
@@ -374,22 +380,22 @@ Private Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a65880d1eefb2ddd76b9786fe21155370"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a65880d1eefb2ddd76b9786fe21155370">assemble_L2_projection</a> ()</td></tr>
-<tr class="memdesc:a65880d1eefb2ddd76b9786fe21155370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles an L2_projection matrix for the velocity and the pressure. <a class="el" href="classThis.html">This</a> L2 projection matrix can be used to set the initial condition for the Navier-Stokes problem.  <a href="classMFNavierStokesSolver.html#a65880d1eefb2ddd76b9786fe21155370">More...</a><br /></td></tr>
+<tr class="memdesc:a65880d1eefb2ddd76b9786fe21155370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble a L2 projection matrix for the velocity and the pressure, which can be used to set the initial condition for the Navier-Stokes problem. Currently not implemented for this solver.  <a href="classMFNavierStokesSolver.html#a65880d1eefb2ddd76b9786fe21155370">More...</a><br /></td></tr>
 <tr class="separator:a65880d1eefb2ddd76b9786fe21155370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0230071d873c750a689746b9ac776166"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a0230071d873c750a689746b9ac776166">solve_system_GMRES</a> (const bool initial_step, const double absolute_residual, const double relative_residual)</td></tr>
 <tr class="memdesc:a0230071d873c750a689746b9ac776166"><td class="mdescLeft">&#160;</td><td class="mdescRight">GMRES solver with preconditioning.  <a href="classMFNavierStokesSolver.html#a0230071d873c750a689746b9ac776166">More...</a><br /></td></tr>
 <tr class="separator:a0230071d873c750a689746b9ac776166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bd8d73ded922b6616f909d5991ddbf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#a6bd8d73ded922b6616f909d5991ddbf2">solve_with_LSMG</a> (SolverGMRES&lt; <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a> &gt; &amp;solver)</td></tr>
-<tr class="memdesc:a6bd8d73ded922b6616f909d5991ddbf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set-up local smoothing MG preconditioner.  <a href="classMFNavierStokesSolver.html#a6bd8d73ded922b6616f909d5991ddbf2">More...</a><br /></td></tr>
+<tr class="memdesc:a6bd8d73ded922b6616f909d5991ddbf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the local smoothing multigrid preconditioner and call the solve function of the linear solver.  <a href="classMFNavierStokesSolver.html#a6bd8d73ded922b6616f909d5991ddbf2">More...</a><br /></td></tr>
 <tr class="separator:a6bd8d73ded922b6616f909d5991ddbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6c7376c7eba32e504941a26a1a10511"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ad6c7376c7eba32e504941a26a1a10511">solve_with_GCMG</a> (SolverGMRES&lt; <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a> &gt; &amp;solver)</td></tr>
-<tr class="memdesc:ad6c7376c7eba32e504941a26a1a10511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set-up global coarsening MG preconditioner.  <a href="classMFNavierStokesSolver.html#ad6c7376c7eba32e504941a26a1a10511">More...</a><br /></td></tr>
+<tr class="memdesc:ad6c7376c7eba32e504941a26a1a10511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the global coarsening multigrid preconditioner and call the solve function of the linear solver.  <a href="classMFNavierStokesSolver.html#ad6c7376c7eba32e504941a26a1a10511">More...</a><br /></td></tr>
 <tr class="separator:ad6c7376c7eba32e504941a26a1a10511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab62df740512f34c0d7a4dfe0f1d2f294"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ab62df740512f34c0d7a4dfe0f1d2f294">solve_with_ILU</a> (SolverGMRES&lt; <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a> &gt; &amp;solver)</td></tr>
-<tr class="memdesc:ab62df740512f34c0d7a4dfe0f1d2f294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set-up ILU preconditioner.  <a href="classMFNavierStokesSolver.html#ab62df740512f34c0d7a4dfe0f1d2f294">More...</a><br /></td></tr>
+<tr class="memdesc:ab62df740512f34c0d7a4dfe0f1d2f294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the implicit LU preconditioner and call the solve function of the linear solver. Attention: an actual matrix needs to be constructed using the matrix-free operator.  <a href="classMFNavierStokesSolver.html#ab62df740512f34c0d7a4dfe0f1d2f294">More...</a><br /></td></tr>
 <tr class="separator:ab62df740512f34c0d7a4dfe0f1d2f294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ea8cc85bc51ff8d8aa749f3bc84ace"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesSolver.html#ad9ea8cc85bc51ff8d8aa749f3bc84ace">estimate_omega</a> (std::shared_ptr&lt; <a class="el" href="classNavierStokesOperatorBase.html">NavierStokesOperatorBase</a>&lt; dim, double &gt;&gt; &amp;mg_operator, const unsigned int &amp;level, const <a class="el" href="classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7">VectorType</a> &amp;diagonal)</td></tr>
-<tr class="memdesc:ad9ea8cc85bc51ff8d8aa749f3bc84ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the eigenvalues to obtain a relaxation parameter for the MG smoother.  <a href="classMFNavierStokesSolver.html#ad9ea8cc85bc51ff8d8aa749f3bc84ace">More...</a><br /></td></tr>
+<tr class="memdesc:ad9ea8cc85bc51ff8d8aa749f3bc84ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the eigenvalues to obtain a relaxation parameter for the smoother used in all multigrid preconditioners.  <a href="classMFNavierStokesSolver.html#ad9ea8cc85bc51ff8d8aa749f3bc84ace">More...</a><br /></td></tr>
 <tr class="separator:ad9ea8cc85bc51ff8d8aa749f3bc84ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -404,7 +410,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class MFNavierStokesSolver&lt; dim &gt;</h3>
 
-<p>A solver class for the Navier-Stokes equation that uses the matrix free approach. </p>
+<p>A solver for the incompressible Navier-Stokes equations implemented in a matrix-free fashion. </p>
+<p>A matrix-free stabilized solver for the incompressible Navier-Stokes equations implemented in a matrix-free fashion with a sum-factorization approach. It uses a continuous Galerkin discretization and solves the fully-coupled discretized problem in a monolithic way using multigrid preconditioners.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">dim</td><td>An integer that denotes the dimension of the space in which the flow is solved. </td></tr>
@@ -412,7 +419,7 @@ class MFNavierStokesSolver&lt; dim &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00042">42</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00048">48</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ac75aa49660cb3ca173acbb97b5980e62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac75aa49660cb3ca173acbb97b5980e62">&#9670;&nbsp;</a></span>GCTransferType</h2>
@@ -436,7 +443,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00049">49</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00055">55</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -462,7 +469,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00048">48</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00054">54</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -488,7 +495,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00047">47</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00053">53</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -511,17 +518,17 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Construct a new <a class="el" href="classMFNavierStokesSolver.html" title="A solver class for the Navier-Stokes equation that uses the matrix free approach.">MFNavierStokesSolver</a> object. </p>
+<p>Constructor that sets the finite element degree and system operator according to simulation parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nsparam</td><td>Relevant parameters for the solver. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nsparam</td><td>Relevant parameters for the solver. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00048">48</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="navier__stokes__base_8h_source.html#l00419">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;::fe</a>, <a class="el" href="simulation__parameters_8h_source.html#l00051">SimulationParameters&lt; dim &gt;::fem_parameters</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, <a class="el" href="parameters_8h_source.html#l00844">Parameters::FEM::pressure_order</a>, <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaae21e5838883a96aab921c84e14383bb">Parameters::Stabilization::pspg_supg</a>, <a class="el" href="navier__stokes__base_8h_source.html#l00464">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;::simulation_control</a>, <a class="el" href="structParameters_1_1Stabilization.html#ae7aa4d80ac010b83de1242172de802ef">Parameters::Stabilization::stabilization</a>, <a class="el" href="simulation__parameters_8h_source.html#l00070">SimulationParameters&lt; dim &gt;::stabilization</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00215">MFNavierStokesSolver&lt; dim &gt;::system_operator</a>, <a class="el" href="parameters_8h_source.html#l00527">Parameters::Stabilization::use_default_stabilization</a>, and <a class="el" href="parameters_8h_source.html#l00841">Parameters::FEM::velocity_order</a>.</p>
+<p class="reference">References <a class="el" href="navier__stokes__base_8h_source.html#l00419">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;::fe</a>, <a class="el" href="simulation__parameters_8h_source.html#l00051">SimulationParameters&lt; dim &gt;::fem_parameters</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, <a class="el" href="parameters_8h_source.html#l00844">Parameters::FEM::pressure_order</a>, <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaae21e5838883a96aab921c84e14383bb">Parameters::Stabilization::pspg_supg</a>, <a class="el" href="navier__stokes__base_8h_source.html#l00464">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;::simulation_control</a>, <a class="el" href="structParameters_1_1Stabilization.html#ae7aa4d80ac010b83de1242172de802ef">Parameters::Stabilization::stabilization</a>, <a class="el" href="simulation__parameters_8h_source.html#l00070">SimulationParameters&lt; dim &gt;::stabilization</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00240">MFNavierStokesSolver&lt; dim &gt;::system_operator</a>, <a class="el" href="parameters_8h_source.html#l00527">Parameters::Stabilization::use_default_stabilization</a>, and <a class="el" href="parameters_8h_source.html#l00841">Parameters::FEM::velocity_order</a>.</p>
 
 </div>
 </div>
@@ -539,7 +546,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Destroy the <a class="el" href="classMFNavierStokesSolver.html" title="A solver class for the Navier-Stokes equation that uses the matrix free approach.">MFNavierStokesSolver</a> object. </p>
+<p>Destructor. </p>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00081">81</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -568,7 +575,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Assembles an L2_projection matrix for the velocity and the pressure. <a class="el" href="classThis.html">This</a> L2 projection matrix can be used to set the initial condition for the Navier-Stokes problem. </p>
+<p>Assemble a L2 projection matrix for the velocity and the pressure, which can be used to set the initial condition for the Navier-Stokes problem. Currently not implemented for this solver. </p>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01686">1686</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -596,7 +603,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Assemble the matrix associated with the solver. <a class="el" href="classThis.html">This</a> function is only required for compilation and it is not used for matrix free solvers. </p>
+<p>Assemble the matrix associated with the solver. Only required for compilation and it is not used for the matrix free solver. </p>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a73215f315918e22864cf04248c583045">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
@@ -626,7 +633,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Assemble the system rhs associated with the solver. </p>
+<p>Assemble the system right hand side associated with the solver. </p>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a74110493860247f4ed2da56ef3050f08">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
@@ -660,7 +667,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00443">443</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00023">bdf_coefficients()</a>, and <a class="el" href="bdf_8h_source.html#l00106">number_of_previous_solutions()</a>.</p>
+<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00023">bdf_coefficients()</a>, and <a class="el" href="bdf_8h_source.html#l00145">number_of_previous_solutions()</a>.</p>
 
 </div>
 </div>
@@ -766,16 +773,16 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Estimate the eigenvalues to obtain a relaxation parameter for the MG smoother. </p>
+<p>Estimate the eigenvalues to obtain a relaxation parameter for the smoother used in all multigrid preconditioners. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">operator</td><td>Operator for which the estimation needs to be done</td></tr>
-    <tr><td class="paramname">level</td><td>Corresponding MG level</td></tr>
-    <tr><td class="paramname">diagonal</td><td>Pre-computed diagonal of level operator</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">operator</td><td>Operator for which the estimation needs to be done.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">level</td><td>Corresponding multigrid level.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">diagonal</td><td>Pre-computed diagonal of level operator.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>double Omega relaxation parameter </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Relaxation parameter omega. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00461">461</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -819,12 +826,11 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set the initial conditions for the solver. </p>
-<p>If the simulation is restarted from a checkpoint, the initial solution setting is bypassed and the checkpoint is instead read.</p>
+<p>Set the initial conditions for the solver. If the simulation is restarted from a checkpoint, the initial solution setting is bypassed and the checkpoint is instead read. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">initial_condition_type</td><td>The type of initial condition to be set.</td></tr>
-    <tr><td class="paramname">restart</td><td>A boolean that indicates if the simulation is being restarted. If set to true, the initial conditions are never set, but are instead overriden by the read_checkpoint functionality. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">initial_condition_type</td><td>The type of initial condition to be set.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">restart</td><td>A boolean that indicates if the simulation is being restarted. If set to true, the initial conditions are never set, but are instead overriden by the read_checkpoint functionality. </td></tr>
   </table>
   </dd>
 </dl>
@@ -859,7 +865,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Setup the DoFs, system operator and solution vectors. </p>
+<p>Setup the degrees of freedom, system constraints, system operator and solution vectors. </p>
 
 <p>Implements <a class="el" href="classNavierStokesBase.html#a34c629a49de72b06c8ff30192dd843af">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;</a>.</p>
 
@@ -891,8 +897,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Solves the Navier-Stokes problem. </p>
-<p><a class="el" href="classThis.html">This</a> functions solves the problem defined by the Navier-Stokes parameter file by iterating through time or through the mesh refinements. </p>
+<p>Solve the problem defined by simulation parameters by iterating through time or through the mesh refinements. </p>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00088">88</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -936,15 +941,14 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Call for the assembly of the linear system of equations. </p>
+<p>Solve the linear system of equations using the method specified in the simulation parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">initial_step</td><td>Indicates if this is the first solution of the linear system. If this is the case, the non_zero version of the constraints are used for the Dirichlet boundary conditions.</td></tr>
-    <tr><td class="paramname">renewed_matrix</td><td>Indicates if the matrix has been reassembled, and thus the preconditioner needs to be reassmbled.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">initial_step</td><td>Indicates if this is the first solution of the linear system. If this is the case, the non_zero version of the constraints are used for the Dirichlet boundary conditions.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">renewed_matrix</td><td>Indicates if the matrix has been reassembled, and thus the preconditioner needs to be reassembled. </td></tr>
   </table>
   </dd>
 </dl>
-<p>TODO: the renewed_matrix parameter needs to be deprecated. </p>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
@@ -997,6 +1001,14 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p>GMRES solver with preconditioning. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">initial_step</td><td>Indicates if this is the first solution of the linear system. If this is the case, the non_zero version of the constraints are used for the Dirichlet boundary conditions</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">absolute_residual</td><td>Used to define the linear solver tolerance.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">relative_residual</td><td>Used to define the linear solver tolerance. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01693">1693</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -1030,7 +1042,13 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set-up global coarsening MG preconditioner. </p>
+<p>Setup the global coarsening multigrid preconditioner and call the solve function of the linear solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">solver</td><td>Linear solver object that needs the multigrid preconditioner. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00996">996</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -1064,7 +1082,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set-up ILU preconditioner. </p>
+<p>Setup the implicit LU preconditioner and call the solve function of the linear solver. Attention: an actual matrix needs to be constructed using the matrix-free operator. </p>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01464">1464</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -1098,7 +1116,13 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set-up local smoothing MG preconditioner. </p>
+<p>Setup the local smoothing multigrid preconditioner and call the solve function of the linear solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">solver</td><td>Linear solver object that needs the multigrid preconditioner. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00529">529</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
@@ -1156,7 +1180,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Update the average velocity field solution in the multiphyscics interface. </p>
+<p>Update the average velocity field solution in the multiphyscics interface. Currently not implemented for this solver but required for compilation. </p>
 
 <p>Implements <a class="el" href="classNavierStokesBase.html#a85802a4d64ad89f9ff6593a1fab22b4f">NavierStokesBase&lt; dim, LinearAlgebra::distributed::Vector&lt; double &gt;, IndexSet &gt;</a>.</p>
 
@@ -1187,7 +1211,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00220">220</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Geometric global coarsening multigrid preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00254">254</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1213,7 +1239,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00221">221</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Implicit LU preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00260">260</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1267,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00218">218</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Geometric local smoothing multigrid preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00247">247</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1265,7 +1295,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00226">226</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Timer for specific geometric multigrid components. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00273">273</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1291,7 +1323,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00215">215</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Matrix-free operator in used for all the matrix-vector multiplications calls (vmult). </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00240">240</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1317,7 +1351,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00224">224</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p>Vector to store the time derivatives of the previous solutions at the end of each time step for time-dependent simulations. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00267">267</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
