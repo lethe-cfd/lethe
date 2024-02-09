@@ -79,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Filters phase fraction according to the selected filtering method.  
+<p>Filter phase fraction according to the selected filtering method.  
  <a href="classCahnHilliardFilterBase.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cahn__hilliard__filter_8h_source.html">cahn_hilliard_filter.h</a>&gt;</code></p>
@@ -88,10 +88,10 @@ Inheritance diagram for CahnHilliardFilterBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCahnHilliardFilterBase__inherit__graph.png" border="0" usemap="#aCahnHilliardFilterBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="aCahnHilliardFilterBase_inherit__map" id="aCahnHilliardFilterBase_inherit__map">
-<area shape="rect" title="Filters phase fraction according to the selected filtering method." alt="" coords="183,5,350,32"/>
-<area shape="rect" href="classCahnHilliardClipFilter.html" title="Calculates a filtered phase fraction for Cahn&#45;Hilliard simulations. In this case, a simple clamping i..." alt="" coords="5,80,165,107"/>
+<area shape="rect" title="Filter phase fraction according to the selected filtering method." alt="" coords="183,5,350,32"/>
+<area shape="rect" href="classCahnHilliardClipFilter.html" title="Calculate a filtered phase fraction for Cahn&#45;Hilliard simulations. In this case, a simple clamping is..." alt="" coords="5,80,165,107"/>
 <area shape="rect" href="classCahnHilliardNoFilter.html" title="Used as a default when no filter is applied to the phase fraction." alt="" coords="190,80,343,107"/>
-<area shape="rect" href="classCahnHilliardTanhFilter.html" title="Calculates a filtered phase fraction for Cahn&#45;Hilliard simulations. The filtered phase is defined as ..." alt="" coords="368,80,533,107"/>
+<area shape="rect" href="classCahnHilliardTanhFilter.html" title="Calculate a filtered phase fraction for Cahn&#45;Hilliard simulations." alt="" coords="368,80,533,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -100,17 +100,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad2f2bcdd6044afc4e546844cc23e4ba7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliardFilterBase.html#ad2f2bcdd6044afc4e546844cc23e4ba7">CahnHilliardFilterBase</a> ()</td></tr>
 <tr class="separator:ad2f2bcdd6044afc4e546844cc23e4ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f54247e036dc7c33e3ff08cf411a11a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliardFilterBase.html#a1f54247e036dc7c33e3ff08cf411a11a">filter_phase</a> (const double &amp;unfiltered_phase)=0</td></tr>
-<tr class="memdesc:a1f54247e036dc7c33e3ff08cf411a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the value of the filtered phase fraction.  <a href="classCahnHilliardFilterBase.html#a1f54247e036dc7c33e3ff08cf411a11a">More...</a><br /></td></tr>
+<tr class="memdesc:a1f54247e036dc7c33e3ff08cf411a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the value of the filtered phase fraction.  <a href="classCahnHilliardFilterBase.html#a1f54247e036dc7c33e3ff08cf411a11a">More...</a><br /></td></tr>
 <tr class="separator:a1f54247e036dc7c33e3ff08cf411a11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3768b77608aa7e5f45fe38efdc5827f4"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classCahnHilliardFilterBase.html">CahnHilliardFilterBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCahnHilliardFilterBase.html#a3768b77608aa7e5f45fe38efdc5827f4">model_cast</a> (const <a class="el" href="structParameters_1_1CahnHilliard.html">Parameters::CahnHilliard</a> &amp;cahn_hilliard_parameters)</td></tr>
-<tr class="memdesc:a3768b77608aa7e5f45fe38efdc5827f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates and returns a pointer to a <a class="el" href="classCahnHilliardFilterBase.html" title="Filters phase fraction according to the selected filtering method.">CahnHilliardFilterBase</a> object by casting it to the proper child class.  <a href="classCahnHilliardFilterBase.html#a3768b77608aa7e5f45fe38efdc5827f4">More...</a><br /></td></tr>
+<tr class="memdesc:a3768b77608aa7e5f45fe38efdc5827f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiate and return a pointer to a <a class="el" href="classCahnHilliardFilterBase.html" title="Filter phase fraction according to the selected filtering method.">CahnHilliardFilterBase</a> object by casting it to the proper child class.  <a href="classCahnHilliardFilterBase.html#a3768b77608aa7e5f45fe38efdc5827f4">More...</a><br /></td></tr>
 <tr class="separator:a3768b77608aa7e5f45fe38efdc5827f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Filters phase fraction according to the selected filtering method. </p>
+<div class="textblock"><p>Filter phase fraction according to the selected filtering method. </p>
 
 <p class="definition">Definition at line <a class="el" href="cahn__hilliard__filter_8h_source.html#l00026">26</a> of file <a class="el" href="cahn__hilliard__filter_8h_source.html">cahn_hilliard_filter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -166,14 +166,14 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classCalculates.html">Calculates</a> the value of the filtered phase fraction. </p>
+<p>Calculate the value of the filtered phase fraction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">unfiltered_phase</td><td>Value of the phase fraction before applying the filter </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">unfiltered_phase</td><td>Value of the phase fraction before applying the filter. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Value of the phase fraction after applying the filter </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of the phase fraction after applying the filter. </dd></dl>
 
 <p>Implemented in <a class="el" href="classCahnHilliardTanhFilter.html#aee65f1104c1fd3e795d54c000dab8958">CahnHilliardTanhFilter</a>, <a class="el" href="classCahnHilliardClipFilter.html#a858f9b26e701e3d222815bba4779f06c">CahnHilliardClipFilter</a>, and <a class="el" href="classCahnHilliardNoFilter.html#a9c3ff62c7b4fc63d85a1493a010bb101">CahnHilliardNoFilter</a>.</p>
 
@@ -203,10 +203,10 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Instantiates and returns a pointer to a <a class="el" href="classCahnHilliardFilterBase.html" title="Filters phase fraction according to the selected filtering method.">CahnHilliardFilterBase</a> object by casting it to the proper child class. </p>
+<p>Instantiate and return a pointer to a <a class="el" href="classCahnHilliardFilterBase.html" title="Filter phase fraction according to the selected filtering method.">CahnHilliardFilterBase</a> object by casting it to the proper child class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cahn_hilliard_parameters</td><td><a class="el" href="classCahnHilliard.html">CahnHilliard</a> model parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cahn_hilliard_parameters</td><td><a class="el" href="classCahnHilliard.html">CahnHilliard</a> model parameters. </td></tr>
   </table>
   </dd>
 </dl>
