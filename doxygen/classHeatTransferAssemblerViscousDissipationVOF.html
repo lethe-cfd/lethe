@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: HeatTransferAssemblerViscousDissipationVOF&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: HeatTransferAssemblerViscousDissipationVOF&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that assembles the viscous dissipation for the heat transfer solver, for the specific case of VOF simulations. The only difference compared to the regular one is that the viscous dissipation can be applied in one of the fluids rather than both, through the viscous_dissipative_fluid parameter.  
- <a href="classHeatTransferAssemblerViscousDissipationVOF.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="heat__transfer__assemblers_8h_source.html">heat_transfer_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for HeatTransferAssemblerViscousDissipationVOF&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a09815019b8cf4b5b77f50deadfbc7257"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerViscousDissipationVOF.html#a09815019b8cf4b5b77f50deadfbc7257">HeatTransferAssemblerViscousDissipationVOF</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classHeatTransferAssemblerBase.html#a45b9b1596df94830638abaebd296d719">simulation_control</a>, <a class="el" href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1">Parameters::FluidIndicator</a> p_viscous_dissipative_fluid)</td></tr>
 <tr class="separator:a09815019b8cf4b5b77f50deadfbc7257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a197a64d033cfeaa4830c49b71bb0f1c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerViscousDissipationVOF.html#a197a64d033cfeaa4830c49b71bb0f1c2">assemble_matrix</a> (<a class="el" href="classHeatTransferScratchData.html">HeatTransferScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a> &amp;copy_data) override</td></tr>
-<tr class="memdesc:a197a64d033cfeaa4830c49b71bb0f1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Interface for the call to matrix assembly  <a href="classHeatTransferAssemblerViscousDissipationVOF.html#a197a64d033cfeaa4830c49b71bb0f1c2">More...</a><br /></td></tr>
 <tr class="separator:a197a64d033cfeaa4830c49b71bb0f1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d9970dfd617284060704d7257f51684"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerViscousDissipationVOF.html#a2d9970dfd617284060704d7257f51684">assemble_rhs</a> (<a class="el" href="classHeatTransferScratchData.html">HeatTransferScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a> &amp;copy_data) override</td></tr>
-<tr class="memdesc:a2d9970dfd617284060704d7257f51684"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classHeatTransferAssemblerViscousDissipationVOF.html#a2d9970dfd617284060704d7257f51684">More...</a><br /></td></tr>
 <tr class="separator:a2d9970dfd617284060704d7257f51684"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classHeatTransferAssemblerBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classHeatTransferAssemblerBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classHeatTransferAssemblerBase.html">HeatTransferAssemblerBase&lt; dim &gt;</a></td></tr>
 <tr class="memitem:ae9e2da98a83917e10bf8d7432daeb0fd inherit pub_methods_classHeatTransferAssemblerBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerBase.html#ae9e2da98a83917e10bf8d7432daeb0fd">HeatTransferAssemblerBase</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; p_simulation_control)</td></tr>

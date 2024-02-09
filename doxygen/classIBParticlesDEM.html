@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: IBParticlesDEM&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: IBParticlesDEM&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -82,9 +83,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A solver class for the <a class="el" href="namespaceDEM.html">DEM</a> used in conjunction with IB particles and gls_sharp_navier_stokes. <a class="el" href="classThis.html">This</a> class defines and uses some functions of the <a class="el" href="namespaceDEM.html">DEM</a> class that have been modified and simplified to be compatible with IB_particles.  
- <a href="classIBParticlesDEM.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="ib__particles__dem_8h_source.html">ib_particles_dem.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -92,47 +90,35 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIBParticlesDEM_1_1BoundaryCellsInfo.html">BoundaryCellsInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIBParticlesDEM_1_1ContactInfo.html">ContactInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that contains history of the contact between two objects. <a class="el" href="classThis.html">This</a> is the commonly used constructor since it houses all the information required to perform the contact calculation.  <a href="structIBParticlesDEM_1_1ContactInfo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIBParticlesDEM_1_1DefaultDBL__MAX.html">DefaultDBL_MAX</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIBParticlesDEM_1_1DefaultUINT__MAX.html">DefaultUINT_MAX</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIBParticlesDEM_1_1ObjectProperties.html">ObjectProperties</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct is used to reduce the number of parameters passed in the function calculate_force_model.  <a href="structIBParticlesDEM_1_1ObjectProperties.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a873aba46d57c5317f4ee5841c7c5fdfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a873aba46d57c5317f4ee5841c7c5fdfd">initialize</a> (const std::shared_ptr&lt; <a class="el" href="classParameters_1_1IBParticles.html">Parameters::IBParticles</a>&lt; dim &gt;&gt; &amp;p_nsparam, const std::shared_ptr&lt; <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt;&gt; <a class="el" href="classIBParticlesDEM.html#a7c87d9b0d197e1085826b0f2da52a711">floating_walls_parameters</a>, const MPI_Comm &amp;mpi_communicator_input, const std::vector&lt; <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;&gt; &amp;particles)</td></tr>
-<tr class="memdesc:a873aba46d57c5317f4ee5841c7c5fdfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classIBParticlesDEM.html" title="A solver class for the DEM used in conjunction with IB particles and gls_sharp_navier_stokes....">IBParticlesDEM</a> object with the parameters, the mpi communicator and the particles.  <a href="classIBParticlesDEM.html#a873aba46d57c5317f4ee5841c7c5fdfd">More...</a><br /></td></tr>
 <tr class="separator:a873aba46d57c5317f4ee5841c7c5fdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c796faed17940415d192d25ac0a7c3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a5c796faed17940415d192d25ac0a7c3d">update_particles</a> (const std::vector&lt; <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;&gt; &amp;particles, double time)</td></tr>
-<tr class="memdesc:a5c796faed17940415d192d25ac0a7c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the boundary cells that are contact candidates for each of the particles.  <a href="classIBParticlesDEM.html#a5c796faed17940415d192d25ac0a7c3d">More...</a><br /></td></tr>
 <tr class="separator:a5c796faed17940415d192d25ac0a7c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ea098fee4287bd0b878b32fbf311a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#ae3ea098fee4287bd0b878b32fbf311a0">integrate_particles_motion</a> (const double dt, const double h_max, const double h_min, const double rho, const double mu)</td></tr>
-<tr class="memdesc:ae3ea098fee4287bd0b878b32fbf311a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrates the dynamics of the IB_particle taking into account the contact between particles and between particles and walls.  <a href="classIBParticlesDEM.html#ae3ea098fee4287bd0b878b32fbf311a0">More...</a><br /></td></tr>
 <tr class="separator:ae3ea098fee4287bd0b878b32fbf311a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59ed24d4a7426bcb27569f304c280fcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a59ed24d4a7426bcb27569f304c280fcb">calculate_pp_contact_force</a> (const double dt_dem, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;contact_force, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;contact_torque)</td></tr>
-<tr class="memdesc:a59ed24d4a7426bcb27569f304c280fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> non-linear (Hertzian) particle-particle contact force.  <a href="classIBParticlesDEM.html#a59ed24d4a7426bcb27569f304c280fcb">More...</a><br /></td></tr>
 <tr class="separator:a59ed24d4a7426bcb27569f304c280fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94948aeb5710db80ae523ef1cd93aa88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a94948aeb5710db80ae523ef1cd93aa88">update_contact_candidates</a> ()</td></tr>
-<tr class="memdesc:a94948aeb5710db80ae523ef1cd93aa88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the contact candidates of all the particles.  <a href="classIBParticlesDEM.html#a94948aeb5710db80ae523ef1cd93aa88">More...</a><br /></td></tr>
 <tr class="separator:a94948aeb5710db80ae523ef1cd93aa88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a586cbf20ceb3b3ef1838fa7a19358552"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a586cbf20ceb3b3ef1838fa7a19358552">calculate_pw_contact_force</a> (const double dt_dem, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;contact_force, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;contact_torque)</td></tr>
-<tr class="memdesc:a586cbf20ceb3b3ef1838fa7a19358552"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> non-linear (Hertzian) particle-wall contact force.  <a href="classIBParticlesDEM.html#a586cbf20ceb3b3ef1838fa7a19358552">More...</a><br /></td></tr>
 <tr class="separator:a586cbf20ceb3b3ef1838fa7a19358552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63c2a432df105b069d81a49bdde615d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a63c2a432df105b069d81a49bdde615d0">calculate_force_model</a> (const double normal_overlap, <a class="el" href="structIBParticlesDEM_1_1ContactInfo.html">ContactInfo</a> &amp;contact_info, Point&lt; 3 &gt; &amp;contact_point, Tensor&lt; 1, 3 &gt; &amp;contact_normal, Tensor&lt; 1, 3 &gt; &amp;normal_force, Tensor&lt; 1, 3 &gt; &amp;tangential_force, Tensor&lt; 1, 3 &gt; &amp;rolling_resistance_torque, Point&lt; dim &gt; &amp;particle_one_position, Tensor&lt; 1, 3 &gt; &amp;particle_one_velocity, Tensor&lt; 1, 3 &gt; &amp;particle_one_omega, const <a class="el" href="structIBParticlesDEM_1_1ObjectProperties.html">ObjectProperties</a> particle_one_properties, Point&lt; dim &gt; &amp;particle_two_position, Tensor&lt; 1, 3 &gt; &amp;particle_two_velocity, Tensor&lt; 1, 3 &gt; &amp;particle_two_omega, const <a class="el" href="structIBParticlesDEM_1_1ObjectProperties.html">ObjectProperties</a> particle_two_properties, const double dt)</td></tr>
-<tr class="memdesc:a63c2a432df105b069d81a49bdde615d0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> non-linear (Hertzian) force between two objects. Take into input the physical properties and contact state of the two objects.  <a href="classIBParticlesDEM.html#a63c2a432df105b069d81a49bdde615d0">More...</a><br /></td></tr>
 <tr class="separator:a63c2a432df105b069d81a49bdde615d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13ce1893b39a4b16c85acb39fea6c78a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a13ce1893b39a4b16c85acb39fea6c78a">calculate_pp_lubrication_force</a> (const double dt_dem, const double h_max, const double h_min, const double mu, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;lubrication_force, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;lubrication_torque)</td></tr>
-<tr class="memdesc:a13ce1893b39a4b16c85acb39fea6c78a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> particle-particle lubrication force. The force is based on the formula from Microhydrodynamics: Principles and Selected Applications by Kim, Sangtae; Karrila, Seppo J. ISBN 13: 9780750691734.  <a href="classIBParticlesDEM.html#a13ce1893b39a4b16c85acb39fea6c78a">More...</a><br /></td></tr>
 <tr class="separator:a13ce1893b39a4b16c85acb39fea6c78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b572da5331f9e55d6aece70aab662c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#a0b572da5331f9e55d6aece70aab662c0">calculate_pw_lubrication_force</a> (const double dt_dem, const double h_max, const double h_min, const double mu, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;lubrication_force, std::vector&lt; Tensor&lt; 1, 3 &gt;&gt; &amp;lubrication_torque)</td></tr>
-<tr class="memdesc:a0b572da5331f9e55d6aece70aab662c0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> particle-wall lubrication force.  <a href="classIBParticlesDEM.html#a0b572da5331f9e55d6aece70aab662c0">More...</a><br /></td></tr>
 <tr class="separator:a0b572da5331f9e55d6aece70aab662c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3c2e75d847ed58fa56ff3a9c4beeb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticlesDEM.html#af3c2e75d847ed58fa56ff3a9c4beeb62">update_particles_boundary_contact</a> (std::vector&lt; <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;&gt; &amp;particles, const DoFHandler&lt; dim &gt; &amp;dof_handler, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
-<tr class="memdesc:af3c2e75d847ed58fa56ff3a9c4beeb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the boundary cells that are contact candidates for each of the particles.The force is based on the formula from Microhydrodynamics: Principles and Selected Applications by Kim, Sangtae; Karrila, Seppo J. ISBN 13: 9780750691734.  <a href="classIBParticlesDEM.html#af3c2e75d847ed58fa56ff3a9c4beeb62">More...</a><br /></td></tr>
 <tr class="separator:af3c2e75d847ed58fa56ff3a9c4beeb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

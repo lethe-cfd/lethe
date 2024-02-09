@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/solvers/navier_stokes_vof_assemblers.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/solvers/navier_stokes_vof_assemblers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -161,25 +162,18 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerCore.html">GLSNavierStokesVOFAssemblerCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the core of the Navier-Stokes equation with free surface using VOF modeling. According to the following weak form: \( \nabla \cdot \mathbf{u} + \rho \mathbf{u} \cdot \nabla \mathbf{u} + \nabla p - \mu \nabla\cdot (\nabla \mathbf{u} + (\nabla \mathbf{u})^T) = 0 \) with an SUPG and PSPG stabilization.  <a href="classGLSNavierStokesVOFAssemblerCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerBDF.html">GLSNavierStokesVOFAssemblerBDF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the transient time arising from BDF time integration for the Navier-Stokes equation with free surface using VOF modeling. For example, if a BDF1 scheme is chosen, the following is assembled \(\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}}{\Delta t} \).  <a href="classGLSNavierStokesVOFAssemblerBDF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseChangeDarcyVOFAssembler.html">PhaseChangeDarcyVOFAssembler&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a phase change Darcy forcing term for a VOF two-fluid simulation. The term \(-\phi \beta_D \mathbf{u} \) is added to the right hand-side of the Navier-Stokes equations to prohibit the motion of a material. In the phase change model, the value of the \( \beta_D \) coefficient depends on the temperature field and the material (fluid) properties. Generally, this is used to impose the stasis in the solid phase. <a class="el" href="classThis.html">This</a> generally leads to a better conditioning of the linear system than increasing the viscosity of the solid phase.  <a href="classPhaseChangeDarcyVOFAssembler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerSTF.html">GLSNavierStokesVOFAssemblerSTF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Surface Tension Force (STF) for the Navier-Stokes equations according to the following equation:  <a href="classGLSNavierStokesVOFAssemblerSTF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerMarangoni.html">GLSNavierStokesVOFAssemblerMarangoni&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Marangoni effect for the Navier-Stokes equations according to the following equation:  <a href="classGLSNavierStokesVOFAssemblerMarangoni.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesVOFAssemblerEvaporation.html">NavierStokesVOFAssemblerEvaporation&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the momentum source due to evaporation for the Navier-Stokes equations.  <a href="classNavierStokesVOFAssemblerEvaporation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerNonNewtonianCore.html">GLSNavierStokesVOFAssemblerNonNewtonianCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the core of the Navier-Stokes equation using a Rheological model to predict non-Newtonian behaviors.  <a href="classGLSNavierStokesVOFAssemblerNonNewtonianCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

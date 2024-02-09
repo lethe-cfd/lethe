@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: DEMContactManager&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: DEMContactManager&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -80,41 +81,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Manage the numerous of contact detection search operations in the <a class="el" href="namespaceDEM.html">DEM</a>.  
- <a href="classDEMContactManager.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afac6797f57fd9c3dca66f650b25d77d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">execute_cell_neighbors_search</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
-<tr class="memdesc:afac6797f57fd9c3dca66f650b25d77d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to find the lists of cell neighbors of the active cells in the triangulation.  <a href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">More...</a><br /></td></tr>
 <tr class="separator:afac6797f57fd9c3dca66f650b25d77d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a1aeddb251441a9e3c88afd4fbfe2d080">update_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
-<tr class="memdesc:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to clear and update the neighbor lists of all the active cells in the triangulation.  <a href="classDEMContactManager.html#a1aeddb251441a9e3c88afd4fbfe2d080">More...</a><br /></td></tr>
 <tr class="separator:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5046aa427efefdbd11ed784ecfa45476"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a5046aa427efefdbd11ed784ecfa45476">update_contacts</a> (const bool has_periodic_boundaries=false)</td></tr>
-<tr class="memdesc:a5046aa427efefdbd11ed784ecfa45476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute functions to update the contact data containers with the new contact pairs.  <a href="classDEMContactManager.html#a5046aa427efefdbd11ed784ecfa45476">More...</a><br /></td></tr>
 <tr class="separator:a5046aa427efefdbd11ed784ecfa45476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca1028317167181db0ebce3715fb002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a9ca1028317167181db0ebce3715fb002">update_local_particles_in_cells</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const bool clear_contact_structures, const bool has_periodic_boundaries=false)</td></tr>
 <tr class="separator:a9ca1028317167181db0ebce3715fb002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2826508b4e77362e1c47bc3f21ea4b09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">execute_particle_particle_broad_search</a> (dealii::Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const bool has_periodic_boundaries=false)</td></tr>
-<tr class="memdesc:a2826508b4e77362e1c47bc3f21ea4b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particle broad searches.  <a href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">More...</a><br /></td></tr>
 <tr class="separator:a2826508b4e77362e1c47bc3f21ea4b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ae1ea4915f1dff277aa1cece1baeaea0f">execute_particle_particle_broad_search</a> (dealii::Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;disable_particle_contact_object, const bool has_periodic_boundaries=false)</td></tr>
-<tr class="memdesc:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particle broad searches with disabling of contacts.  <a href="classDEMContactManager.html#ae1ea4915f1dff277aa1cece1baeaea0f">More...</a><br /></td></tr>
 <tr class="separator:ae1ea4915f1dff277aa1cece1baeaea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab89bc870e9adbde380738c2f9b52ca08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const bool has_floating_mesh=false)</td></tr>
-<tr class="memdesc:ab89bc870e9adbde380738c2f9b52ca08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall broad searches.  <a href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">More...</a><br /></td></tr>
 <tr class="separator:ab89bc870e9adbde380738c2f9b52ca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a220f38991c445ac3635630f0af2c20a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a220f38991c445ac3635630f0af2c20a6">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;disable_particle_contact_object, const bool has_floating_mesh=false)</td></tr>
-<tr class="memdesc:a220f38991c445ac3635630f0af2c20a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall broad searches with disabling of contacts.  <a href="classDEMContactManager.html#a220f38991c445ac3635630f0af2c20a6">More...</a><br /></td></tr>
 <tr class="separator:a220f38991c445ac3635630f0af2c20a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab16dee556cdd33cd8307ee63cd9bb82f">execute_particle_particle_fine_search</a> (const double neighborhood_threshold, const bool has_periodic_boundaries=false, const Tensor&lt; 1, dim &gt; periodic_offset=Tensor&lt; 1, dim &gt;())</td></tr>
-<tr class="memdesc:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-particles fine searches.  <a href="classDEMContactManager.html#ab16dee556cdd33cd8307ee63cd9bb82f">More...</a><br /></td></tr>
 <tr class="separator:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb698d9ff443e1ca02793b449da55fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">execute_particle_wall_fine_search</a> (const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const double neighborhood_threshold, const bool has_floating_mesh=false)</td></tr>
-<tr class="memdesc:acb698d9ff443e1ca02793b449da55fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the particle-wall fine searches.  <a href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">More...</a><br /></td></tr>
 <tr class="separator:acb698d9ff443e1ca02793b449da55fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

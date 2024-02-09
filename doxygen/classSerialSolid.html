@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: SerialSolid&lt; dim, spacedim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: SerialSolid&lt; dim, spacedim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -87,70 +88,49 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc151490486adb2a1e06d2b3af30cf5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#afc151490486adb2a1e06d2b3af30cf5f">SerialSolid</a> (std::shared_ptr&lt; <a class="el" href="classParameters_1_1RigidSolidObject.html">Parameters::RigidSolidObject</a>&lt; spacedim &gt;&gt; &amp;<a class="el" href="classSerialSolid.html#a76b6e66c124b143416ed743cbb35c3d7">param</a>, unsigned int <a class="el" href="classSerialSolid.html#a108709db5f2eca7699fc3b51d60f0f70">id</a>)</td></tr>
 <tr class="separator:afc151490486adb2a1e06d2b3af30cf5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8ad4d1cd9fc4e30cb6559111919e4c4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; typename Triangulation&lt; spacedim &gt;::active_cell_iterator, typename Triangulation&lt; dim, spacedim &gt;::active_cell_iterator &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#ab8ad4d1cd9fc4e30cb6559111919e4c4">map_solid_in_background_triangulation</a> (const parallel::TriangulationBase&lt; spacedim &gt; &amp;background_tr)</td></tr>
-<tr class="memdesc:ab8ad4d1cd9fc4e30cb6559111919e4c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps the solid object in the background triangulation.  <a href="classSerialSolid.html#ab8ad4d1cd9fc4e30cb6559111919e4c4">More...</a><br /></td></tr>
 <tr class="separator:ab8ad4d1cd9fc4e30cb6559111919e4c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a638e083c3505ef7729194357add903a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a638e083c3505ef7729194357add903a7">initial_setup</a> ()</td></tr>
-<tr class="memdesc:a638e083c3505ef7729194357add903a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages solid triangulation setup.  <a href="classSerialSolid.html#a638e083c3505ef7729194357add903a7">More...</a><br /></td></tr>
 <tr class="separator:a638e083c3505ef7729194357add903a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea81ad3be95913c3112f40291761a53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#aeea81ad3be95913c3112f40291761a53">setup_triangulation</a> (const bool restart)</td></tr>
-<tr class="memdesc:aeea81ad3be95913c3112f40291761a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a solid triangulation from a dealii or gmsh mesh.  <a href="classSerialSolid.html#aeea81ad3be95913c3112f40291761a53">More...</a><br /></td></tr>
 <tr class="separator:aeea81ad3be95913c3112f40291761a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e1e63989dd2a3a462f58972ff096f55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a2e1e63989dd2a3a462f58972ff096f55">setup_dof_handler</a> ()</td></tr>
-<tr class="memdesc:a2e1e63989dd2a3a462f58972ff096f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set-ups the displacement vector to store the motion of the triangulation.  <a href="classSerialSolid.html#a2e1e63989dd2a3a462f58972ff096f55">More...</a><br /></td></tr>
 <tr class="separator:a2e1e63989dd2a3a462f58972ff096f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cc11ff813d55f4cab58685e3c87a26c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Triangulation&lt; dim, spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a4cc11ff813d55f4cab58685e3c87a26c">get_triangulation</a> ()</td></tr>
-<tr class="memdesc:a4cc11ff813d55f4cab58685e3c87a26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shared pointer to the solid object triangulation.  <a href="classSerialSolid.html#a4cc11ff813d55f4cab58685e3c87a26c">More...</a><br /></td></tr>
 <tr class="separator:a4cc11ff813d55f4cab58685e3c87a26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8442bda162e551585b8f1e921b46d41"><td class="memItemLeft" align="right" valign="top">DoFHandler&lt; dim, spacedim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#aa8442bda162e551585b8f1e921b46d41">get_dof_handler</a> ()</td></tr>
-<tr class="memdesc:aa8442bda162e551585b8f1e921b46d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dof_handler associated with the displacement of the solid object.  <a href="classSerialSolid.html#aa8442bda162e551585b8f1e921b46d41">More...</a><br /></td></tr>
 <tr class="separator:aa8442bda162e551585b8f1e921b46d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7becb8ea517716b098d57a8b3a1b605"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#af7becb8ea517716b098d57a8b3a1b605">get_displacement_vector</a> ()</td></tr>
-<tr class="memdesc:af7becb8ea517716b098d57a8b3a1b605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the displacement vector of all the vertices of the solid object.  <a href="classSerialSolid.html#af7becb8ea517716b098d57a8b3a1b605">More...</a><br /></td></tr>
 <tr class="separator:af7becb8ea517716b098d57a8b3a1b605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a193745cce84cb1bd27ac415e953c77e2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a193745cce84cb1bd27ac415e953c77e2">get_max_displacement_since_mapped</a> ()</td></tr>
-<tr class="memdesc:a193745cce84cb1bd27ac415e953c77e2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the max displacement of the solid object. The max displacement is defined as the L^\infty norm of the displacement components. <a class="el" href="classThis.html">This</a> is a measure of the maximal displacement in any direction.  <a href="classSerialSolid.html#a193745cce84cb1bd27ac415e953c77e2">More...</a><br /></td></tr>
 <tr class="separator:a193745cce84cb1bd27ac415e953c77e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a281fa1ca724482b62b07fc498c5e3924"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a281fa1ca724482b62b07fc498c5e3924">get_translational_velocity</a> () const</td></tr>
-<tr class="memdesc:a281fa1ca724482b62b07fc498c5e3924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns translational velocity of the center of mass of the solid object.  <a href="classSerialSolid.html#a281fa1ca724482b62b07fc498c5e3924">More...</a><br /></td></tr>
 <tr class="separator:a281fa1ca724482b62b07fc498c5e3924"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a400b26e628f5e371b49a29ce14ed8637"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a400b26e628f5e371b49a29ce14ed8637">get_angular_velocity</a> () const</td></tr>
-<tr class="memdesc:a400b26e628f5e371b49a29ce14ed8637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the angular velocity of the center of mass of the solid object.  <a href="classSerialSolid.html#a400b26e628f5e371b49a29ce14ed8637">More...</a><br /></td></tr>
 <tr class="separator:a400b26e628f5e371b49a29ce14ed8637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26ebeeb366a6f155635a550a1edcc9cc"><td class="memItemLeft" align="right" valign="top">Point&lt; 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a26ebeeb366a6f155635a550a1edcc9cc">get_center_of_rotation</a> () const</td></tr>
-<tr class="memdesc:a26ebeeb366a6f155635a550a1edcc9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the center of rotation of the center of mass of the solid object.  <a href="classSerialSolid.html#a26ebeeb366a6f155635a550a1edcc9cc">More...</a><br /></td></tr>
 <tr class="separator:a26ebeeb366a6f155635a550a1edcc9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf604cde75503b2cf2d0e242bfed040d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#acf604cde75503b2cf2d0e242bfed040d">get_solid_id</a> () const</td></tr>
-<tr class="memdesc:acf604cde75503b2cf2d0e242bfed040d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solid id of the solid object. <a class="el" href="classThis.html">This</a> ID is an unsigned integer which is given to the solid object at compile time and is mostly used when writing files.  <a href="classSerialSolid.html#acf604cde75503b2cf2d0e242bfed040d">More...</a><br /></td></tr>
 <tr class="separator:acf604cde75503b2cf2d0e242bfed040d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61418fd2272a22899c3fc0bfbe948cd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a61418fd2272a22899c3fc0bfbe948cd0">move_solid_triangulation</a> (double time_step, double initial_time)</td></tr>
-<tr class="memdesc:a61418fd2272a22899c3fc0bfbe948cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the vertices of the solid triangulation. <a class="el" href="classThis.html">This</a> function uses explicitEuler scheme time integrator to displace the vertices of the solid triangulation and stores the displacement in an array in order to allow correct checkpointing of the triangulation.  <a href="classSerialSolid.html#a61418fd2272a22899c3fc0bfbe948cd0">More...</a><br /></td></tr>
 <tr class="separator:a61418fd2272a22899c3fc0bfbe948cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e372a6a88cb56bfe7de2fecee214c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a59e372a6a88cb56bfe7de2fecee214c4">write_output_results</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; simulation_control)</td></tr>
-<tr class="memdesc:a59e372a6a88cb56bfe7de2fecee214c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the output file of the solid object triangulation.  <a href="classSerialSolid.html#a59e372a6a88cb56bfe7de2fecee214c4">More...</a><br /></td></tr>
 <tr class="separator:a59e372a6a88cb56bfe7de2fecee214c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a842a54f912a268373e43c120471685e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a842a54f912a268373e43c120471685e2">read_checkpoint</a> (std::string prefix_name)</td></tr>
-<tr class="memdesc:a842a54f912a268373e43c120471685e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">read solid base triangulation checkpoint and replaces the triangulation at the location where it was when it was checkpointed  <a href="classSerialSolid.html#a842a54f912a268373e43c120471685e2">More...</a><br /></td></tr>
 <tr class="separator:a842a54f912a268373e43c120471685e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a996b1aaaa71f3242d925d0794644d495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a996b1aaaa71f3242d925d0794644d495">write_checkpoint</a> (std::string prefix_name)</td></tr>
-<tr class="memdesc:a996b1aaaa71f3242d925d0794644d495"><td class="mdescLeft">&#160;</td><td class="mdescRight">write solid base triangulation checkpoint  <a href="classSerialSolid.html#a996b1aaaa71f3242d925d0794644d495">More...</a><br /></td></tr>
 <tr class="separator:a996b1aaaa71f3242d925d0794644d495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ae65af976c4cb15ba3916588312922b64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#ae65af976c4cb15ba3916588312922b64">displace_solid_triangulation</a> ()</td></tr>
-<tr class="memdesc:ae65af976c4cb15ba3916588312922b64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the dofs of the solid_triangulation by using the displacement vector. <a class="el" href="classThis.html">This</a> is only used to move the solid triangulation at the correct location when the simulation is restarted.  <a href="classSerialSolid.html#ae65af976c4cb15ba3916588312922b64">More...</a><br /></td></tr>
 <tr class="separator:ae65af976c4cb15ba3916588312922b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a641d4246069103564995b55b8d630de8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#a641d4246069103564995b55b8d630de8">reset_displacement_monitoring</a> ()</td></tr>
-<tr class="memdesc:a641d4246069103564995b55b8d630de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset displacements since intersection for contact detection.  <a href="classSerialSolid.html#a641d4246069103564995b55b8d630de8">More...</a><br /></td></tr>
 <tr class="separator:a641d4246069103564995b55b8d630de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5bc1623235411e6761d5b7f4cd450ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#ae5bc1623235411e6761d5b7f4cd450ff">move_solid_triangulation_with_displacement</a> ()</td></tr>
-<tr class="memdesc:ae5bc1623235411e6761d5b7f4cd450ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the vertices of the solid triangulation using the displacement vector. <a class="el" href="classThis.html">This</a> is mostly used when restarting simulations which contain a serial solid in order to replace it at the position it was when the simulation finished.  <a href="classSerialSolid.html#ae5bc1623235411e6761d5b7f4cd450ff">More...</a><br /></td></tr>
 <tr class="separator:ae5bc1623235411e6761d5b7f4cd450ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacd53d2b3425e246f90c148f678fa1de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#aacd53d2b3425e246f90c148f678fa1de">rotate_grid</a> (const double angle, const Tensor&lt; 1, 3 &gt; axis)</td></tr>
-<tr class="memdesc:aacd53d2b3425e246f90c148f678fa1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the grid by a given angle around an axis.  <a href="classSerialSolid.html#aacd53d2b3425e246f90c148f678fa1de">More...</a><br /></td></tr>
 <tr class="separator:aacd53d2b3425e246f90c148f678fa1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab16fab6a30698ac3b1f98f83e43beeaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#ab16fab6a30698ac3b1f98f83e43beeaa">translate_grid</a> (const Tensor&lt; 1, 3 &gt; translate)</td></tr>
-<tr class="memdesc:ab16fab6a30698ac3b1f98f83e43beeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate the grid. In spacedim=2, the third component is ignore.  <a href="classSerialSolid.html#ab16fab6a30698ac3b1f98f83e43beeaa">More...</a><br /></td></tr>
 <tr class="separator:ab16fab6a30698ac3b1f98f83e43beeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf9f74ed42c60c0eb7da7ece6f0da51e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSerialSolid.html#aaf9f74ed42c60c0eb7da7ece6f0da51e">rotate_grid</a> (const double angle, const Tensor&lt; 1, 3 &gt;)</td></tr>
 <tr class="separator:aaf9f74ed42c60c0eb7da7ece6f0da51e"><td class="memSeparator" colspan="2">&#160;</td></tr>

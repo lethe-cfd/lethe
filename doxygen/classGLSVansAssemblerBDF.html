@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: GLSVansAssemblerBDF&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: GLSVansAssemblerBDF&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that assembles the transient time arising from BDF time integration for the Navier-Stokes equation with free surface using VOF modeling.. For example, if a BDF1 scheme is chosen, the following is assembled \(\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}}{\Delta t}\).  
- <a href="classGLSVansAssemblerBDF.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="vans__assemblers_8h_source.html">vans_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GLSVansAssemblerBDF&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac847697824f8b7fb2bb1e9b9d0ec76ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBDF.html#ac847697824f8b7fb2bb1e9b9d0ec76ea">GLSVansAssemblerBDF</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classGLSVansAssemblerBDF.html#ad89dd1cbe29edee61a296ffbf31c116c">simulation_control</a>, <a class="el" href="structParameters_1_1CFDDEM.html">Parameters::CFDDEM</a> <a class="el" href="classGLSVansAssemblerBDF.html#a5a642731af2c91e1384a77d910d5a370">cfd_dem</a>)</td></tr>
 <tr class="separator:ac847697824f8b7fb2bb1e9b9d0ec76ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bc83f7cae122d07ce446cc8e9d6cbe7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBDF.html#a6bc83f7cae122d07ce446cc8e9d6cbe7">assemble_matrix</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:a6bc83f7cae122d07ce446cc8e9d6cbe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix  <a href="classGLSVansAssemblerBDF.html#a6bc83f7cae122d07ce446cc8e9d6cbe7">More...</a><br /></td></tr>
 <tr class="separator:a6bc83f7cae122d07ce446cc8e9d6cbe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddd6e306fc88b24b186d8c9758351f3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBDF.html#a0ddd6e306fc88b24b186d8c9758351f3">assemble_rhs</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:a0ddd6e306fc88b24b186d8c9758351f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classGLSVansAssemblerBDF.html#a0ddd6e306fc88b24b186d8c9758351f3">More...</a><br /></td></tr>
 <tr class="separator:a0ddd6e306fc88b24b186d8c9758351f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

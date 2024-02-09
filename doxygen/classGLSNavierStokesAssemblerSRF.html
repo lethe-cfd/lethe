@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: GLSNavierStokesAssemblerSRF&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: GLSNavierStokesAssemblerSRF&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that assembles the coriolis and the centrifugal if a simulation is carried out in a rotating frame of reference according to the following term: \(2\mathbf{\omega} \times \mathbf{u} + \mathbf{\omega}\times (\mathbf{\omega} \times \mathbf{r})\) Where $\mathbf{\omega}$ is the rotation vector of the frame of reference and $\mathbf{r}$ is the position vector (e.g. a vector between a point on the rotation axis and the gauss point) By default, it is assumed that the rotation vector passes through the point (0,0) in 2D or (0,0,0) in 3D.  
- <a href="classGLSNavierStokesAssemblerSRF.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="navier__stokes__assemblers_8h_source.html">navier_stokes_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GLSNavierStokesAssemblerSRF&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a097038b646d7dc4ae6dbb810fdc0064b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerSRF.html#a097038b646d7dc4ae6dbb810fdc0064b">GLSNavierStokesAssemblerSRF</a> (<a class="el" href="structParameters_1_1VelocitySource.html">Parameters::VelocitySource</a> <a class="el" href="classGLSNavierStokesAssemblerSRF.html#aaca9aa36fd74234f53b09565dbf33929">velocity_sources</a>)</td></tr>
 <tr class="separator:a097038b646d7dc4ae6dbb810fdc0064b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbec6e49e4e7ba6983f27469ee67bb0b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerSRF.html#abbec6e49e4e7ba6983f27469ee67bb0b">assemble_matrix</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:abbec6e49e4e7ba6983f27469ee67bb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix  <a href="classGLSNavierStokesAssemblerSRF.html#abbec6e49e4e7ba6983f27469ee67bb0b">More...</a><br /></td></tr>
 <tr class="separator:abbec6e49e4e7ba6983f27469ee67bb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4619e26359d7c263eae5cf7842a68b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerSRF.html#ad4619e26359d7c263eae5cf7842a68b1">assemble_rhs</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:ad4619e26359d7c263eae5cf7842a68b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classGLSNavierStokesAssemblerSRF.html#ad4619e26359d7c263eae5cf7842a68b1">More...</a><br /></td></tr>
 <tr class="separator:ad4619e26359d7c263eae5cf7842a68b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

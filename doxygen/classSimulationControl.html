@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: SimulationControl Class Reference</title>
+<title>Lethe Open-Source Library: SimulationControl Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -80,9 +81,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classSimulationControl.html" title="The SimulationControl class is responsible for the control of steady-state and transient simulations ...">SimulationControl</a> class is responsible for the control of steady-state and transient simulations carried out with Lethe. <a class="el" href="classThis.html">This</a> base class is a pure virtual class and cannot be instantiated. However, it stores the core variables which are necessary for its serialization (write and read)  
- <a href="classSimulationControl.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="simulation__control_8h_source.html">simulation_control.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SimulationControl:</div>
@@ -101,58 +99,40 @@ Inheritance diagram for SimulationControl:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a754e6fb2ea3eab2af63d0f7ef4f52685"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a754e6fb2ea3eab2af63d0f7ef4f52685">SimulationControl</a> (const <a class="el" href="structParameters_1_1SimulationControl.html">Parameters::SimulationControl</a> param)</td></tr>
-<tr class="memdesc:a754e6fb2ea3eab2af63d0f7ef4f52685"><td class="mdescLeft">&#160;</td><td class="mdescRight">The simulation control class is constructed by a simple parameter structure from which it draws it's arguments. <a class="el" href="classThis.html">This</a> structure is not kept internally. <a class="el" href="classThis.html">This</a> means that require information is copied from the struct to the class.  <a href="classSimulationControl.html#a754e6fb2ea3eab2af63d0f7ef4f52685">More...</a><br /></td></tr>
 <tr class="separator:a754e6fb2ea3eab2af63d0f7ef4f52685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67aa726e7105dd0af92f47dac688e001"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a67aa726e7105dd0af92f47dac688e001">integrate</a> ()=0</td></tr>
-<tr class="memdesc:a67aa726e7105dd0af92f47dac688e001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function to control the progression of the simulation. As long as integrate returns true, a simulation should proceed. The criteria used to stop/continue the simulation in iterate is a property of each individual time stepping control. For example, steady-state simulation will proceed until the number of required mesh adaptation has been performed.  <a href="classSimulationControl.html#a67aa726e7105dd0af92f47dac688e001">More...</a><br /></td></tr>
 <tr class="separator:a67aa726e7105dd0af92f47dac688e001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace7a05ca520659fb2178d26a536b07f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#ace7a05ca520659fb2178d26a536b07f4">is_at_end</a> ()=0</td></tr>
-<tr class="memdesc:ace7a05ca520659fb2178d26a536b07f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establishes if a simulation has reached it's end or not. The concrete implementation of the class decides what is the stopping criteria (iteration number, time_end reached, etc.)  <a href="classSimulationControl.html#ace7a05ca520659fb2178d26a536b07f4">More...</a><br /></td></tr>
 <tr class="separator:ace7a05ca520659fb2178d26a536b07f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42cbd4f9cfd5ce83560d7179ed269b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a42cbd4f9cfd5ce83560d7179ed269b59">add_time_step</a> (double p_timestep)</td></tr>
-<tr class="memdesc:a42cbd4f9cfd5ce83560d7179ed269b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a time step and stores the previous one in a list.  <a href="classSimulationControl.html#a42cbd4f9cfd5ce83560d7179ed269b59">More...</a><br /></td></tr>
 <tr class="separator:a42cbd4f9cfd5ce83560d7179ed269b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a566e0413e49cdea412ad307783a170aa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a566e0413e49cdea412ad307783a170aa">is_at_start</a> ()</td></tr>
-<tr class="memdesc:a566e0413e49cdea412ad307783a170aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish if the iteration is the first iteration or if the simulation has not begun.  <a href="classSimulationControl.html#a566e0413e49cdea412ad307783a170aa">More...</a><br /></td></tr>
 <tr class="separator:a566e0413e49cdea412ad307783a170aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa84426cbfcb0ba22e12e6f79e6c3ccc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#aa84426cbfcb0ba22e12e6f79e6c3ccc4">is_steady</a> ()</td></tr>
-<tr class="memdesc:aa84426cbfcb0ba22e12e6f79e6c3ccc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish if the simulation is a steady-state simulation or no.  <a href="classSimulationControl.html#aa84426cbfcb0ba22e12e6f79e6c3ccc4">More...</a><br /></td></tr>
 <tr class="separator:aa84426cbfcb0ba22e12e6f79e6c3ccc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a096e10bf3a464ae70f3e77c33e7f027d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a096e10bf3a464ae70f3e77c33e7f027d">calculate_time_step</a> ()</td></tr>
-<tr class="memdesc:a096e10bf3a464ae70f3e77c33e7f027d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the next value of the time step. The base function returns the value of the time step, but derived class may implement adaptative time stepping.  <a href="classSimulationControl.html#a096e10bf3a464ae70f3e77c33e7f027d">More...</a><br /></td></tr>
 <tr class="separator:a096e10bf3a464ae70f3e77c33e7f027d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad36188d4b8b60828b33284ca0858211"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#aad36188d4b8b60828b33284ca0858211">print_progression</a> (const ConditionalOStream &amp;pcout)=0</td></tr>
-<tr class="memdesc:aad36188d4b8b60828b33284ca0858211"><td class="mdescLeft">&#160;</td><td class="mdescRight">print_progress Function that prints the current progress status of the simulation  <a href="classSimulationControl.html#aad36188d4b8b60828b33284ca0858211">More...</a><br /></td></tr>
 <tr class="separator:aad36188d4b8b60828b33284ca0858211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3322c6b5a41b5418901963b6477ba5d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a3322c6b5a41b5418901963b6477ba5d8">output_enabled</a> () const</td></tr>
-<tr class="memdesc:a3322c6b5a41b5418901963b6477ba5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if VTU/PVTU/PVD outputs are disabled.  <a href="classSimulationControl.html#a3322c6b5a41b5418901963b6477ba5d8">More...</a><br /></td></tr>
 <tr class="separator:a3322c6b5a41b5418901963b6477ba5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a037f676d4e45242bb481e0a4a71e2dc9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a037f676d4e45242bb481e0a4a71e2dc9">is_output_iteration</a> ()</td></tr>
-<tr class="memdesc:a037f676d4e45242bb481e0a4a71e2dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the present iteration is an output iteration depending on the output control chosen.  <a href="classSimulationControl.html#a037f676d4e45242bb481e0a4a71e2dc9">More...</a><br /></td></tr>
 <tr class="separator:a037f676d4e45242bb481e0a4a71e2dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e60fa77d72080449081694665442c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a02e60fa77d72080449081694665442c6">get_output_boundaries</a> ()</td></tr>
-<tr class="memdesc:a02e60fa77d72080449081694665442c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the boundaries of the domain should be outputted when writing results.  <a href="classSimulationControl.html#a02e60fa77d72080449081694665442c6">More...</a><br /></td></tr>
 <tr class="separator:a02e60fa77d72080449081694665442c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d7540a21443e8833003fb39da2a2f4d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a0d7540a21443e8833003fb39da2a2f4d">is_verbose_iteration</a> ()</td></tr>
-<tr class="memdesc:a0d7540a21443e8833003fb39da2a2f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the present iteration is a verbose iteration where output should be written to the terminal.  <a href="classSimulationControl.html#a0d7540a21443e8833003fb39da2a2f4d">More...</a><br /></td></tr>
 <tr class="separator:a0d7540a21443e8833003fb39da2a2f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1db26e3807f434640a574d8d164fb276"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a1db26e3807f434640a574d8d164fb276">is_first_assembly</a> ()</td></tr>
-<tr class="memdesc:a1db26e3807f434640a574d8d164fb276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this is the first assembly of the present iteration. If it indeed is the first assembly, then the first_assembly is set to false.  <a href="classSimulationControl.html#a1db26e3807f434640a574d8d164fb276">More...</a><br /></td></tr>
 <tr class="separator:a1db26e3807f434640a574d8d164fb276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ee7510a3551d8f668986d070e7987e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a5ee7510a3551d8f668986d070e7987e0">update_assembly_method</a> ()</td></tr>
-<tr class="memdesc:a5ee7510a3551d8f668986d070e7987e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the assembly method to use while integrating. Use to start bdf 2 and bdf 3 scheme.  <a href="classSimulationControl.html#a5ee7510a3551d8f668986d070e7987e0">More...</a><br /></td></tr>
 <tr class="separator:a5ee7510a3551d8f668986d070e7987e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e331c2c77dae4d02e9e749f980124fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a1e331c2c77dae4d02e9e749f980124fc">set_CFL</a> (const double p_CFL)</td></tr>
-<tr class="memdesc:a1e331c2c77dae4d02e9e749f980124fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of the CFL condition.  <a href="classSimulationControl.html#a1e331c2c77dae4d02e9e749f980124fc">More...</a><br /></td></tr>
 <tr class="separator:a1e331c2c77dae4d02e9e749f980124fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0eca88ca928d9f463b2051c394ad0c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#aa0eca88ca928d9f463b2051c394ad0c2">set_current_time_step</a> (const double new_time_step)</td></tr>
-<tr class="memdesc:aa0eca88ca928d9f463b2051c394ad0c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually force the value of the time step for the present iteration.  <a href="classSimulationControl.html#aa0eca88ca928d9f463b2051c394ad0c2">More...</a><br /></td></tr>
 <tr class="separator:aa0eca88ca928d9f463b2051c394ad0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6a38ec53bec29f7d4a57142988c981d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#aa6a38ec53bec29f7d4a57142988c981d">set_suggested_time_step</a> (const double new_time_step)</td></tr>
-<tr class="memdesc:aa6a38ec53bec29f7d4a57142988c981d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suggest the value of the time step for the next iteration. Note that for adaptative simulations this time step may be altered.  <a href="classSimulationControl.html#aa6a38ec53bec29f7d4a57142988c981d">More...</a><br /></td></tr>
 <tr class="separator:aa6a38ec53bec29f7d4a57142988c981d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a703ebae3866b52ac64946bad2bdb4285"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a703ebae3866b52ac64946bad2bdb4285">provide_residual</a> (const double new_residual)</td></tr>
-<tr class="memdesc:a703ebae3866b52ac64946bad2bdb4285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the value of the residual at the beginning of the iteration to the simulation controller.  <a href="classSimulationControl.html#a703ebae3866b52ac64946bad2bdb4285">More...</a><br /></td></tr>
 <tr class="separator:a703ebae3866b52ac64946bad2bdb4285"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a923c5436f30291a20f0518fd6a066991"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulationControl.html#a923c5436f30291a20f0518fd6a066991">get_time_step</a> () const</td></tr>
 <tr class="separator:a923c5436f30291a20f0518fd6a066991"><td class="memSeparator" colspan="2">&#160;</td></tr>

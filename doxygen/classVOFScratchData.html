@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: VOFScratchData&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: VOFScratchData&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,29 +80,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that stores the information required by the assembly procedure for a VOF free surface equation. Consequently, this class calculates the phase values (values, gradients, laplacians) and the shape method (values, gradients, laplacians) at all the gauss points for all degrees of freedom and stores it into arrays. <a class="el" href="classThis.html">This</a> class serves as a separation between the evaluation at the gauss point of the variables of interest and their use in the assembly, which is carried out by the assembler methods.  
- <a href="classVOFScratchData.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="vof__scratch__data_8h_source.html">vof_scratch_data.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#ab928fd8cbae1c8954cc81d8a6c33fa7b">VOFScratchData</a> (const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; &amp;<a class="el" href="classVOFScratchData.html#a6aeaed7557d30524cd6abe6de54477f8">simulation_control</a>, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;<a class="el" href="classVOFScratchData.html#a14fc695a065e52b6581d99c2e86d9258">properties_manager</a>, const FiniteElement&lt; dim &gt; &amp;fe_vof, const Quadrature&lt; dim &gt; &amp;quadrature, const Mapping&lt; dim &gt; &amp;mapping, const FiniteElement&lt; dim &gt; &amp;fe_fd)</td></tr>
-<tr class="memdesc:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. The constructor creates the fe_values that will be used to fill the member variables of the scratch. It also allocated the necessary memory for all member variables. However, it does not do any evaluation, since this needs to be done at the cell level.  <a href="classVOFScratchData.html#ab928fd8cbae1c8954cc81d8a6c33fa7b">More...</a><br /></td></tr>
 <tr class="separator:ab928fd8cbae1c8954cc81d8a6c33fa7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa11c28e251a7bcecebd335518eff9bc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#aa11c28e251a7bcecebd335518eff9bc2">VOFScratchData</a> (const <a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt; &amp;sd)</td></tr>
-<tr class="memdesc:aa11c28e251a7bcecebd335518eff9bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Same as the main constructor. <a class="el" href="classThis.html">This</a> constructor only uses the other scratch to build the FeValues, it does not copy the content of the other scratch into itself since, by definition of the WorkStream mechanism it is assumed that the content of the scratch will be reset on a cell basis.  <a href="classVOFScratchData.html#aa11c28e251a7bcecebd335518eff9bc2">More...</a><br /></td></tr>
 <tr class="separator:aa11c28e251a7bcecebd335518eff9bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01178f2337f8e0e13884942c8d93731b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a01178f2337f8e0e13884942c8d93731b">allocate</a> ()</td></tr>
-<tr class="memdesc:a01178f2337f8e0e13884942c8d93731b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the memory for the scratch.  <a href="classVOFScratchData.html#a01178f2337f8e0e13884942c8d93731b">More...</a><br /></td></tr>
 <tr class="separator:a01178f2337f8e0e13884942c8d93731b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c7a04cc24d358123c2ce8183f2fedbc"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
 <tr class="memitem:a4c7a04cc24d358123c2ce8183f2fedbc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a4c7a04cc24d358123c2ce8183f2fedbc">reinit</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, const VectorType &amp;current_solution, const std::vector&lt; VectorType &gt; &amp;previous_solutions)</td></tr>
-<tr class="memdesc:a4c7a04cc24d358123c2ce8183f2fedbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the content of the scratch.  <a href="classVOFScratchData.html#a4c7a04cc24d358123c2ce8183f2fedbc">More...</a><br /></td></tr>
 <tr class="separator:a4c7a04cc24d358123c2ce8183f2fedbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0125d9d9ed2713c0705bc8013d42381b"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
 <tr class="memitem:a0125d9d9ed2713c0705bc8013d42381b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classVOFScratchData.html#a0125d9d9ed2713c0705bc8013d42381b">reinit_velocity</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, const VectorType &amp;current_solution, const std::vector&lt; VectorType &gt; &amp;previous_solutions, const <a class="el" href="classParameters_1_1ALE.html">Parameters::ALE</a>&lt; dim &gt; &amp;ale)</td></tr>
-<tr class="memdesc:a0125d9d9ed2713c0705bc8013d42381b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinitialize the velocity, calculated by the Fluid Dynamics.  <a href="classVOFScratchData.html#a0125d9d9ed2713c0705bc8013d42381b">More...</a><br /></td></tr>
 <tr class="separator:a0125d9d9ed2713c0705bc8013d42381b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

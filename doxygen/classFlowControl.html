@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: FlowControl&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: FlowControl&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class allows to dynamically control the flow with a beta coefficient calculated at each step time.  
- <a href="classFlowControl.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="flow__control_8h_source.html">flow_control.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -89,19 +87,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeab13df0da2212c7c37408b69e131f30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#aeab13df0da2212c7c37408b69e131f30">FlowControl</a> (const <a class="el" href="structParameters_1_1DynamicFlowControl.html">Parameters::DynamicFlowControl</a> &amp;flow_control)</td></tr>
 <tr class="separator:aeab13df0da2212c7c37408b69e131f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e8755cf979872c69e4fc4501f9d3b69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#a5e8755cf979872c69e4fc4501f9d3b69">calculate_beta</a> (const double &amp;average_velocity, const double &amp;dt, const unsigned int &amp;step_number)</td></tr>
-<tr class="memdesc:a5e8755cf979872c69e4fc4501f9d3b69"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate_beta. <a class="el" href="classThis.html">This</a> function calculates a beta coefficient which applies a force to the flow in order to adjust the flow rate to a desired average velocity through the previous flow rate. Once the flow rate is reached, the algorithm calculates a new beta to keep a constant flow rate.  <a href="classFlowControl.html#a5e8755cf979872c69e4fc4501f9d3b69">More...</a><br /></td></tr>
 <tr class="separator:a5e8755cf979872c69e4fc4501f9d3b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7d056138ae4650a3a826912549dfb0b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#af7d056138ae4650a3a826912549dfb0b">proportional_flow_controller</a> (const double &amp;average_velocity_n, const double &amp;dt)</td></tr>
-<tr class="memdesc:af7d056138ae4650a3a826912549dfb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">proportional_flow_controller. <a class="el" href="classThis.html">This</a> function calculates a beta only with the last step average velocity. It is used to initialize the beta if there's no initial beta value at 1st time step and the 2nd time step.  <a href="classFlowControl.html#af7d056138ae4650a3a826912549dfb0b">More...</a><br /></td></tr>
 <tr class="separator:af7d056138ae4650a3a826912549dfb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f8d388638224072acc18b94f0c11f9e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#a3f8d388638224072acc18b94f0c11f9e">main_flow_controller</a> (const double &amp;average_velocity_n, const double &amp;dt)</td></tr>
-<tr class="memdesc:a3f8d388638224072acc18b94f0c11f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">main_flow_controller. <a class="el" href="classThis.html">This</a> function calculates a beta coefficient based on a formula described by Wang, 2009 in "A non-body conformal grid method for simulations of laminar and turbulent flows with a compressible large eddy simulation solver"  <a href="classFlowControl.html#a3f8d388638224072acc18b94f0c11f9e">More...</a><br /></td></tr>
 <tr class="separator:a3f8d388638224072acc18b94f0c11f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1079527c5c8ef81b000a5cb375056e39"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#a1079527c5c8ef81b000a5cb375056e39">get_beta</a> ()</td></tr>
-<tr class="memdesc:a1079527c5c8ef81b000a5cb375056e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_beta. <a class="el" href="classThis.html">This</a> function gives the beta force of the step time  <a href="classFlowControl.html#a1079527c5c8ef81b000a5cb375056e39">More...</a><br /></td></tr>
 <tr class="separator:a1079527c5c8ef81b000a5cb375056e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acabda2bdcaca0c1bf51f4016faa8c213"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#acabda2bdcaca0c1bf51f4016faa8c213">get_beta_particles</a> (const double &amp;fluid_density, const double &amp;particle_density)</td></tr>
-<tr class="memdesc:acabda2bdcaca0c1bf51f4016faa8c213"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_beta_particle. <a class="el" href="classThis.html">This</a> function gives the beta force of the CFD time step scaled for particles.  <a href="classFlowControl.html#acabda2bdcaca0c1bf51f4016faa8c213">More...</a><br /></td></tr>
 <tr class="separator:acabda2bdcaca0c1bf51f4016faa8c213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7aad205f0c46e1c0ba32f5a9d3bbf93f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlowControl.html#a7aad205f0c46e1c0ba32f5a9d3bbf93f">save</a> (std::string prefix)</td></tr>
 <tr class="separator:a7aad205f0c46e1c0ba32f5a9d3bbf93f"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: RPTFEMReconstruction&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: RPTFEMReconstruction&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -85,43 +86,31 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4537b755971729a4d4c609887e56d47d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a4537b755971729a4d4c609887e56d47d">RPTFEMReconstruction</a> (<a class="el" href="structParameters_1_1RPTParameters.html">Parameters::RPTParameters</a> &amp;<a class="el" href="classRPTFEMReconstruction.html#a40a5a8175803e43d0b74f8b3af379a93">rpt_parameters</a>, <a class="el" href="structParameters_1_1RPTFEMReconstructionParameters.html">Parameters::RPTFEMReconstructionParameters</a> &amp;rpt_fem_reconstruction_parameters, <a class="el" href="structParameters_1_1DetectorParameters.html">Parameters::DetectorParameters</a> &amp;rpt_detector_parameters)</td></tr>
-<tr class="memdesc:a4537b755971729a4d4c609887e56d47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRPTFEMReconstruction.html">RPTFEMReconstruction</a>.  <a href="classRPTFEMReconstruction.html#a4537b755971729a4d4c609887e56d47d">More...</a><br /></td></tr>
 <tr class="separator:a4537b755971729a4d4c609887e56d47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27e68ca4559f0462bfb9a8844d6adc1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a27e68ca4559f0462bfb9a8844d6adc1c">rpt_fem_reconstruct</a> ()</td></tr>
-<tr class="memdesc:a27e68ca4559f0462bfb9a8844d6adc1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstruction of the particle positions with the counts from the detectors.  <a href="classRPTFEMReconstruction.html#a27e68ca4559f0462bfb9a8844d6adc1c">More...</a><br /></td></tr>
 <tr class="separator:a27e68ca4559f0462bfb9a8844d6adc1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a74a63405936947f10c65a27a9845a663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a74a63405936947f10c65a27a9845a663">setup_triangulation</a> ()</td></tr>
-<tr class="memdesc:a74a63405936947f10c65a27a9845a663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the triangulation that covers the domain of the reactor.  <a href="classRPTFEMReconstruction.html#a74a63405936947f10c65a27a9845a663">More...</a><br /></td></tr>
 <tr class="separator:a74a63405936947f10c65a27a9845a663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade4f6ef522bae6daecaefcbc5d1dd670"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#ade4f6ef522bae6daecaefcbc5d1dd670">calculate_cost</a> (const TriaActiveIterator&lt; DoFCellAccessor&lt; dim, dim, false &gt;&gt; &amp;cell, Vector&lt; double &gt; &amp;reference_location, const double &amp;last_constraint, std::vector&lt; double &gt; &amp;experimental_count)</td></tr>
-<tr class="memdesc:ade4f6ef522bae6daecaefcbc5d1dd670"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCalculates.html">Calculates</a> the cost with the selected cost function of the found position and returns it.  <a href="classRPTFEMReconstruction.html#ade4f6ef522bae6daecaefcbc5d1dd670">More...</a><br /></td></tr>
 <tr class="separator:ade4f6ef522bae6daecaefcbc5d1dd670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae749c990e7192f2fc54d5e95ef5cd6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a3ae749c990e7192f2fc54d5e95ef5cd6">calculate_reference_location_error</a> (Vector&lt; double &gt; &amp;reference_location, const double &amp;last_constraint)</td></tr>
-<tr class="memdesc:a3ae749c990e7192f2fc54d5e95ef5cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the error vector of the found location in reference coordinates and returns the error vector's L2 norm.  <a href="classRPTFEMReconstruction.html#a3ae749c990e7192f2fc54d5e95ef5cd6">More...</a><br /></td></tr>
 <tr class="separator:a3ae749c990e7192f2fc54d5e95ef5cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc843de82dd9efe3d38ac9954608b96a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#acc843de82dd9efe3d38ac9954608b96a">search_position_in_reference_space</a> (std::vector&lt; std::vector&lt; double &gt;&gt; &amp;count_from_all_detectors, std::vector&lt; double &gt; &amp;experimental_count, const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, const double &amp;tol_reference_location, double &amp;max_cost, Vector&lt; double &gt; &amp;reference_location, bool &amp;position_found, Point&lt; dim &gt; &amp;real_location)</td></tr>
-<tr class="memdesc:acc843de82dd9efe3d38ac9954608b96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches in the reference space the position of the particle. If the found position respects the set tolerance, and the calculated cost is minimal it calculates and stores the position of the particle in system coordinates.  <a href="classRPTFEMReconstruction.html#acc843de82dd9efe3d38ac9954608b96a">More...</a><br /></td></tr>
 <tr class="separator:acc843de82dd9efe3d38ac9954608b96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac947f049656b55297a91f0892abbf329"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#ac947f049656b55297a91f0892abbf329">find_position_global_search</a> (std::vector&lt; double &gt; &amp;experimental_counts, const double tol_reference_location)</td></tr>
-<tr class="memdesc:ac947f049656b55297a91f0892abbf329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and saves the position of the particle in system coordinates.  <a href="classRPTFEMReconstruction.html#ac947f049656b55297a91f0892abbf329">More...</a><br /></td></tr>
 <tr class="separator:ac947f049656b55297a91f0892abbf329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1faf73d16d0046f1301a0dee8c412ecd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a1faf73d16d0046f1301a0dee8c412ecd">find_position_local_search</a> (std::vector&lt; double &gt; &amp;experimental_counts, const double tol_reference_location)</td></tr>
-<tr class="memdesc:a1faf73d16d0046f1301a0dee8c412ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and saves the position of the particle in system coordinates by doing a local search around the previously found position's cell's neighbors.  <a href="classRPTFEMReconstruction.html#a1faf73d16d0046f1301a0dee8c412ecd">More...</a><br /></td></tr>
 <tr class="separator:a1faf73d16d0046f1301a0dee8c412ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99178d8622638caddf6aab84235d18c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#ac99178d8622638caddf6aab84235d18c">trajectory</a> ()</td></tr>
-<tr class="memdesc:ac99178d8622638caddf6aab84235d18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the file with the experimental counts and finds the particles' positions by calling the "find_cell" function.  <a href="classRPTFEMReconstruction.html#ac99178d8622638caddf6aab84235d18c">More...</a><br /></td></tr>
 <tr class="separator:ac99178d8622638caddf6aab84235d18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af07e200f2c4ff4d334d39983b3e71393"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#af07e200f2c4ff4d334d39983b3e71393">checkpoint</a> ()</td></tr>
-<tr class="memdesc:af07e200f2c4ff4d334d39983b3e71393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the built dictionary so it may be used later for the 3D particle position reconstruction.  <a href="classRPTFEMReconstruction.html#af07e200f2c4ff4d334d39983b3e71393">More...</a><br /></td></tr>
 <tr class="separator:af07e200f2c4ff4d334d39983b3e71393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a759c869440052daf0ff3b5362842c4e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a759c869440052daf0ff3b5362842c4e6">load_from_checkpoint</a> ()</td></tr>
-<tr class="memdesc:a759c869440052daf0ff3b5362842c4e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the previously built dictionary for the 3D particle position reconstruction.  <a href="classRPTFEMReconstruction.html#a759c869440052daf0ff3b5362842c4e6">More...</a><br /></td></tr>
 <tr class="separator:a759c869440052daf0ff3b5362842c4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a999512e6144962f6a9ab779c6240daf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTFEMReconstruction.html#a999512e6144962f6a9ab779c6240daf6">export_found_positions</a> ()</td></tr>
-<tr class="memdesc:a999512e6144962f6a9ab779c6240daf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports found particle positions in a the specified file format. If not specified, it will be exported in a ".csv" file format.  <a href="classRPTFEMReconstruction.html#a999512e6144962f6a9ab779c6240daf6">More...</a><br /></td></tr>
 <tr class="separator:a999512e6144962f6a9ab779c6240daf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

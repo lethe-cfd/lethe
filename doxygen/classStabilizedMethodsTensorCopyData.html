@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: StabilizedMethodsTensorCopyData&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: StabilizedMethodsTensorCopyData&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,18 +80,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class responsible for storing the information calculated using the assembly of stabilized Tensor&lt;1,dim&gt; equations. Like the <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class is used to initialize, zero (reset) and store the cell_matrix and the cell_rhs. Contrary to the regular <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class also stores the strong_residual and the strong_jacobian of the equation being assembled. <a class="el" href="classThis.html">This</a> is useful for equations that implement residual-based stabilization such as SUPG. <a class="el" href="classThis.html">This</a> class is specialized for Tensor&lt;1,dim&gt; equations because the strong jacobian is stored using a Tensor&lt;1,dim&gt;  
- <a href="classStabilizedMethodsTensorCopyData.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="copy__data_8h_source.html">copy_data.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f1050cb1eb751d2b5000b1032e5b577"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStabilizedMethodsTensorCopyData.html#a5f1050cb1eb751d2b5000b1032e5b577">StabilizedMethodsTensorCopyData</a> (const unsigned int n_dofs, const unsigned int n_q_points)</td></tr>
-<tr class="memdesc:a5f1050cb1eb751d2b5000b1032e5b577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Allocates the memory for the cell_matrix and cell_rhs using the number of dofs and the strong_residual using the number of quadrature points and, the strong_jacobian using both.  <a href="classStabilizedMethodsTensorCopyData.html#a5f1050cb1eb751d2b5000b1032e5b577">More...</a><br /></td></tr>
 <tr class="separator:a5f1050cb1eb751d2b5000b1032e5b577"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d3c9dccbfe58e7340ef203b4a8868dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStabilizedMethodsTensorCopyData.html#a6d3c9dccbfe58e7340ef203b4a8868dc">reset</a> ()</td></tr>
-<tr class="memdesc:a6d3c9dccbfe58e7340ef203b4a8868dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the cell_matrix, cell_rhs, strong_residual and strong_jacobian to zero.  <a href="classStabilizedMethodsTensorCopyData.html#a6d3c9dccbfe58e7340ef203b4a8868dc">More...</a><br /></td></tr>
 <tr class="separator:a6d3c9dccbfe58e7340ef203b4a8868dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

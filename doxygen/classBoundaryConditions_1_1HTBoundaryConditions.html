@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: BoundaryConditions::HTBoundaryConditions&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: BoundaryConditions::HTBoundaryConditions&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -83,9 +84,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classThis.html">This</a> class manages the boundary conditions for Heat-Transfer solver It introduces the boundary functions and declares the boundary conditions coherently. The members "value", "h" and "Tinf" contain double used for bc calculation:  
- <a href="classBoundaryConditions_1_1HTBoundaryConditions.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BoundaryConditions::HTBoundaryConditions&lt; dim &gt;:</div>
@@ -100,16 +98,12 @@ Inheritance diagram for BoundaryConditions::HTBoundaryConditions&lt; dim &gt;:</
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aacfb0e1f63801c64a5c8c214981ec6f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#aacfb0e1f63801c64a5c8c214981ec6f8">declareDefaultEntry</a> (ParameterHandler &amp;prm, const unsigned int i_bc)</td></tr>
-<tr class="memdesc:aacfb0e1f63801c64a5c8c214981ec6f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares the default parameters for a boundary condition id i_bc.  <a href="classBoundaryConditions_1_1HTBoundaryConditions.html#aacfb0e1f63801c64a5c8c214981ec6f8">More...</a><br /></td></tr>
 <tr class="separator:aacfb0e1f63801c64a5c8c214981ec6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4d11829a7b0fd07ee2888db05a349b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#a6a4d11829a7b0fd07ee2888db05a349b">declare_parameters</a> (ParameterHandler &amp;prm, const unsigned int number_of_boundary_conditions)</td></tr>
-<tr class="memdesc:a6a4d11829a7b0fd07ee2888db05a349b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare the boundary conditions default parameters Calls declareDefaultEntry method for each boundary (max 14 boundaries)  <a href="classBoundaryConditions_1_1HTBoundaryConditions.html#a6a4d11829a7b0fd07ee2888db05a349b">More...</a><br /></td></tr>
 <tr class="separator:a6a4d11829a7b0fd07ee2888db05a349b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e62aa594392eb82fe0d98145867985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#a48e62aa594392eb82fe0d98145867985">parse_boundary</a> (ParameterHandler &amp;prm, const unsigned int i_bc)</td></tr>
-<tr class="memdesc:a48e62aa594392eb82fe0d98145867985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the information for a boundary condition.  <a href="classBoundaryConditions_1_1HTBoundaryConditions.html#a48e62aa594392eb82fe0d98145867985">More...</a><br /></td></tr>
 <tr class="separator:a48e62aa594392eb82fe0d98145867985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a658f30d829d3a25dcaea493f2573fb60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1HTBoundaryConditions.html#a658f30d829d3a25dcaea493f2573fb60">parse_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:a658f30d829d3a25dcaea493f2573fb60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the boundary conditions Calls parse_boundary method for each boundary (max 14 boundaries)  <a href="classBoundaryConditions_1_1HTBoundaryConditions.html#a658f30d829d3a25dcaea493f2573fb60">More...</a><br /></td></tr>
 <tr class="separator:a658f30d829d3a25dcaea493f2573fb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

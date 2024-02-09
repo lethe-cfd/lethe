@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: HeatFluxPostprocessor&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: HeatFluxPostprocessor&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -96,13 +97,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a741e8d98fa8231e8d79eebc4581f4c31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatFluxPostprocessor.html#a741e8d98fa8231e8d79eebc4581f4c31">HeatFluxPostprocessor</a> (const std::shared_ptr&lt; <a class="el" href="classThermalConductivityModel.html">ThermalConductivityModel</a> &gt; &amp;p_thermal_conductivity_model, const std::string &amp;p_material_string=&quot;f&quot;, const unsigned int &amp;p_id=0, const unsigned int &amp;p_mesh_material_id=0, const bool &amp;p_solid_phase_present=false)</td></tr>
 <tr class="separator:a741e8d98fa8231e8d79eebc4581f4c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3bd282a4c79280533a3ab9b298d514b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatFluxPostprocessor.html#ae3bd282a4c79280533a3ab9b298d514b">evaluate_scalar_field</a> (const DataPostprocessorInputs::Scalar&lt; dim &gt; &amp;inputs, std::vector&lt; Vector&lt; double &gt;&gt; &amp;computed_quantities) const override</td></tr>
-<tr class="memdesc:ae3bd282a4c79280533a3ab9b298d514b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes local heat flux quantities from temperature field and material properties.  <a href="classHeatFluxPostprocessor.html#ae3bd282a4c79280533a3ab9b298d514b">More...</a><br /></td></tr>
 <tr class="separator:ae3bd282a4c79280533a3ab9b298d514b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a303c6024a7361aea60cc47cc59828302"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatFluxPostprocessor.html#a303c6024a7361aea60cc47cc59828302">compute_quantities</a> (const DataPostprocessorInputs::Scalar&lt; dim &gt; &amp;inputs, std::vector&lt; Vector&lt; double &gt;&gt; &amp;computed_quantities) const</td></tr>
-<tr class="memdesc:a303c6024a7361aea60cc47cc59828302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes local heat flux quantities. <a class="el" href="classThis.html">This</a> function is used to improve readability of the <a class="el" href="classHeatFluxPostprocessor.html#ae3bd282a4c79280533a3ab9b298d514b" title="Computes local heat flux quantities from temperature field and material properties.">HeatFluxPostprocessor::evaluate_scalar_field</a> function and avoid repeated lines.  <a href="classHeatFluxPostprocessor.html#a303c6024a7361aea60cc47cc59828302">More...</a><br /></td></tr>
 <tr class="separator:a303c6024a7361aea60cc47cc59828302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

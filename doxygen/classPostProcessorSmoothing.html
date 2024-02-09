@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PostProcessorSmoothing&lt; dim, VectorType &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PostProcessorSmoothing&lt; dim, VectorType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -96,19 +97,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad8f7fc312f7f8e604e19c3d6e9000fbf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#ad8f7fc312f7f8e604e19c3d6e9000fbf">PostProcessorSmoothing</a> (const parallel::DistributedTriangulationBase&lt; dim &gt; &amp;triangulation, const <a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;<a class="el" href="classPostProcessorSmoothing.html#ac1c3216aeaea6f74ebe28960f2ec2725">simulation_parameters</a>, const unsigned int &amp;<a class="el" href="classPostProcessorSmoothing.html#a231a2ab87650e5c58c975f7c312a8a06">number_quadrature_points</a>)</td></tr>
 <tr class="separator:ad8f7fc312f7f8e604e19c3d6e9000fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab92e81ec91a66d0d9b8a2cf95fe51869"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#ab92e81ec91a66d0d9b8a2cf95fe51869">generate_mass_matrix</a> ()</td></tr>
-<tr class="memdesc:ab92e81ec91a66d0d9b8a2cf95fe51869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the mass matrix, that is independent of the physics.  <a href="classPostProcessorSmoothing.html#ab92e81ec91a66d0d9b8a2cf95fe51869">More...</a><br /></td></tr>
 <tr class="separator:ab92e81ec91a66d0d9b8a2cf95fe51869"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07df5166b6045604996f4a4181198706"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a07df5166b6045604996f4a4181198706">generate_rhs</a> (const VectorType &amp;, const DoFHandler&lt; dim &gt; &amp;, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt;)</td></tr>
-<tr class="memdesc:a07df5166b6045604996f4a4181198706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the right hand side based on the fluid's solution.  <a href="classPostProcessorSmoothing.html#a07df5166b6045604996f4a4181198706">More...</a><br /></td></tr>
 <tr class="separator:a07df5166b6045604996f4a4181198706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef38dde9b3f7a208b052e96dca7c36ea"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#aef38dde9b3f7a208b052e96dca7c36ea">solve_L2_projection</a> ()</td></tr>
-<tr class="memdesc:aef38dde9b3f7a208b052e96dca7c36ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the matrix system and outputs the smoothed field solution.  <a href="classPostProcessorSmoothing.html#aef38dde9b3f7a208b052e96dca7c36ea">More...</a><br /></td></tr>
 <tr class="separator:aef38dde9b3f7a208b052e96dca7c36ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d70d2243924667dffd1b738dabe7360"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#a9d70d2243924667dffd1b738dabe7360">calculate_smoothed_field</a> (const VectorType &amp;solution, const DoFHandler&lt; dim &gt; &amp;dof_handler_velocity, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; mapping_velocity)</td></tr>
-<tr class="memdesc:a9d70d2243924667dffd1b738dabe7360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the smoothed field solution.  <a href="classPostProcessorSmoothing.html#a9d70d2243924667dffd1b738dabe7360">More...</a><br /></td></tr>
 <tr class="separator:a9d70d2243924667dffd1b738dabe7360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa14eb3b82900d49dcad89de88c0b58d3"><td class="memItemLeft" align="right" valign="top">const DoFHandler&lt; dim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessorSmoothing.html#aa14eb3b82900d49dcad89de88c0b58d3">get_dof_handler</a> () const</td></tr>
-<tr class="memdesc:aa14eb3b82900d49dcad89de88c0b58d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a constant reference to the dof_handler.  <a href="classPostProcessorSmoothing.html#aa14eb3b82900d49dcad89de88c0b58d3">More...</a><br /></td></tr>
 <tr class="separator:aa14eb3b82900d49dcad89de88c0b58d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>

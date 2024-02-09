@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/solvers/heat_transfer_assemblers.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/solvers/heat_transfer_assemblers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -161,40 +162,28 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerBase.html">HeatTransferAssemblerBase&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual class that serves as an interface for all of the assemblers for heat transfer.  <a href="classHeatTransferAssemblerBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerCore.html">HeatTransferAssemblerCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of the heat transfer equation. <a class="el" href="classThis.html">This</a> class assembles the weak form of: \( - k * \nabla^2 T + \rho * cp * \mathbf{u} * \nabla T - f - \tau : \nabla \mathbf{u} =0 \).  <a href="classHeatTransferAssemblerCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerBDF.html">HeatTransferAssemblerBDF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the transient time arising from BDF time integration for the heat transfer solver.  <a href="classHeatTransferAssemblerBDF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerRobinBC.html">HeatTransferAssemblerRobinBC&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Robin boundary condition for the heat transfer solver.  <a href="classHeatTransferAssemblerRobinBC.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerViscousDissipation.html">HeatTransferAssemblerViscousDissipation&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the viscous dissipation for the heat transfer solver.  <a href="classHeatTransferAssemblerViscousDissipation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerViscousDissipationVOF.html">HeatTransferAssemblerViscousDissipationVOF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the viscous dissipation for the heat transfer solver, for the specific case of VOF simulations. The only difference compared to the regular one is that the viscous dissipation can be applied in one of the fluids rather than both, through the viscous_dissipative_fluid parameter.  <a href="classHeatTransferAssemblerViscousDissipationVOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerLaserExponentialDecay.html">HeatTransferAssemblerLaserExponentialDecay&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the laser heating as a volumetric source for the heat transfer solver. Exponentially decaying model is used to simulate the laser heat source: "Liu, S., Zhu, H., Peng, G., Yin, J. and Zeng, X.,.  <a href="classHeatTransferAssemblerLaserExponentialDecay.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerLaserGaussianHeatFluxVOFInterface.html">HeatTransferAssemblerLaserGaussianHeatFluxVOFInterface&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the laser heating as a surface flux for the heat transfer solver when VOF is enabled. The laser heat flux is applied at the VOF interface (where the phase gradient is non-null).  <a href="classHeatTransferAssemblerLaserGaussianHeatFluxVOFInterface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerLaserUniformHeatFluxVOFInterface.html">HeatTransferAssemblerLaserUniformHeatFluxVOFInterface&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the laser heating as a uniform surface flux for the heat transfer solver when VOF is enabled. The laser heat flux is applied at the VOF interface (where the phase gradient is non-null).  <a href="classHeatTransferAssemblerLaserUniformHeatFluxVOFInterface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerLaserExponentialDecayVOF.html">HeatTransferAssemblerLaserExponentialDecayVOF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the laser heating as a volumetric source for the heat transfer solver when VOF is enabled. Exponentially decaying model is used to simulate the laser heat source: "Liu, S., Zhu, H., Peng, G., Yin, J. and Zeng, X., 2018. Microstructure prediction of selective laser melting AlSi10Mg using finite element analysis. Materials &amp; Design, 142, pp.319-328." The laser heat source is only applied in the metal (when phase value is non-null) using the phase value alpha as a multiplying factor on the laser heat source.  <a href="classHeatTransferAssemblerLaserExponentialDecayVOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerFreeSurfaceRadiationVOF.html">HeatTransferAssemblerFreeSurfaceRadiationVOF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the radiation sink for the heat transfer solver at the free surface (air/metal interface) when VOF and the laser are active. The phase gradient of the VOF solver is used to transform radiative boundary condition at free surface into a volumetric sink at the air/metal interface: "Tao Yu, Jidong Zhao,Semi-coupled resolved CFD–DEM simulation of powder-based selective laser melting for additive manufacturing, Computer Methods in Applied Mechanics and Engineering, Volume 377, 2021, 113707, ISSN 0045-7825, <a href="https://doi.org/10.1016/j.cma.2021.113707">https://doi.org/10.1016/j.cma.2021.113707</a>.".  <a href="classHeatTransferAssemblerFreeSurfaceRadiationVOF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransferAssemblerVOFEvaporation.html">HeatTransferAssemblerVOFEvaporation&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the evaporation sink for the heat transfer solver at the free surface (air/metal interface) when VOF is enabled.  <a href="classHeatTransferAssemblerVOFEvaporation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

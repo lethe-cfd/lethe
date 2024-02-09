@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/fem-dem/vans_assemblers.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/fem-dem/vans_assemblers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -163,58 +164,40 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleFluidAssemblerBase.html">ParticleFluidAssemblerBase&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual class that serves as an interface for all of the assemblers for the particle_fluid interqactions of the VANS equations.  <a href="classParticleFluidAssemblerBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerCoreModelB.html">GLSVansAssemblerCoreModelB&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of Model B of the Volume Averaged Navier-Stokes equations.  <a href="classGLSVansAssemblerCoreModelB.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerCoreModelA.html">GLSVansAssemblerCoreModelA&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of Model A of the Volume Averaged Navier-Stokes equations.  <a href="classGLSVansAssemblerCoreModelA.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBDF.html">GLSVansAssemblerBDF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the transient time arising from BDF time integration for the Navier-Stokes equation with free surface using VOF modeling.. For example, if a BDF1 scheme is chosen, the following is assembled \(\frac{(\rho \mathbf{u})^{t+\Delta t}-(\rho \mathbf{u})^{t}}{\Delta t}\).  <a href="classGLSVansAssemblerBDF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerDiFelice.html">GLSVansAssemblerDiFelice&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using DiFelice model for the VANS equations where the drag coefficient c_d = pow((0.63 + 4.8 / sqrt(re)), 2) * pow(cell_void_fraction, -(3.7 - 0.65 * exp(-pow((1.5 - log10(re)), 2) / 2))) and the momentum exchange coefficient beta =(0.5 * c_d * M_PI * pow(particle_properties[DEM::PropertiesIndex::dp], 2) / 4) * relative_velocity.norm()  <a href="classGLSVansAssemblerDiFelice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerRong.html">GLSVansAssemblerRong&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using Rong model for the VANS equations where the drag coefficient c_d = pow((0.63 + 4.8 / sqrt(re)), 2) * pow(cell_void_fraction, -(2.65 * (cell_void_fraction + 1) - (5.3 - (3.5 * cell_void_fraction)) * pow(cell_void_fraction, 2) * exp(-pow(1.5 - log10(re), 2) / 2))) and the momentum exchange coefficient beta =(0.5 * c_d * M_PI * pow(particle_properties[DEM::PropertiesIndex::dp], 2) / 4) * relative_velocity.norm()  <a href="classGLSVansAssemblerRong.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerDallavalle.html">GLSVansAssemblerDallavalle&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using Dallavalle model for the VANS equations where the drag coefficient c_d = pow((0.63 + 4.8 / sqrt(re)), 2) and the momentum exchange coefficient beta =(0.5 * c_d * M_PI * pow(particle_properties[DEM::PropertiesIndex::dp], 2) / 4) * relative_velocity.norm()  <a href="classGLSVansAssemblerDallavalle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerKochHill.html">GLSVansAssemblerKochHill&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using the Koch and Hill drag model for the VANS equations where the momentum exchange coefficient beta = ((18 * mu * cell_void_fraction^2 * (1 - cell_void_fraction)) / pow(dp, 2)) * (f0 + 0.5 * f3 * cell_void_fraction * re) * Vp /(1 - cell_void_fraction) where f0 and f3 are functions given by: if ((1 - cell_void_fraction) &lt; 0.4) { f0 = (1 + 3 * sqrt((1 - cell_void_fraction) / 2) + (135.0 / 64) * (1 - cell_void_fraction) * log(1 - cell_void_fraction) + 16.14 * (1 - cell_void_fraction)) / (1 + 0.681 * (1 - cell_void_fraction) - 8.48 * (1 - cell_void_fraction)^2 + 8.14 * (1 - cell_void_fraction)^3); } else if ((1 - cell_void_fraction) &gt;= 0.4) { f0 = 10 * (1 - cell_void_fraction) / cell_void_fraction^3; }.  <a href="classGLSVansAssemblerKochHill.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBeetstra.html">GLSVansAssemblerBeetstra&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using Beetstra model for the VANS equations where the normalized drag force = 10 * (1 - cell_void_fraction) / (pow(cell_void_fraction, 2)) + pow(cell_void_fraction, 2) * (1 + 1.5 * pow((1 - cell_void_fraction), 0.5)) + 0.413 * re / (24 * pow(cell_void_fraction, 2)) * ((1 / cell_void_fraction) + 3 * (1 - cell_void_fraction) * cell_void_fraction.  <a href="classGLSVansAssemblerBeetstra.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerGidaspow.html">GLSVansAssemblerGidaspow&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the drag force using Gidaspow model for the VANS equations where the momentum_transfer_coefficient is calculated according to the following Marchelli et al. (2020): if (cell_void_fraction &gt; 0.8) { momentum_transfer_coefficient = (18 * pow(cell_void_fraction, -3.65) * (1 + 0.15 * pow(Re_p[particle_number], 0.687))) * (particle_properties[DEM::PropertiesIndex::mass] * viscosity / (pow(particle_properties[DEM::PropertiesIndex::dp], 2) * particle_density)); } else { Assuming the sphericity of particles = 1 momentum_transfer_coefficient = (150 * (1 - cell_void_fraction) / pow(cell_void_fraction, 2) + 1.75 * Re_p[particle_number] / pow(cell_void_fraction, 2)) * (particle_properties[DEM::PropertiesIndex::mass] * viscosity / (pow(particle_properties[DEM::PropertiesIndex::dp], 2) * particle_density)); }.  <a href="classGLSVansAssemblerGidaspow.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerSaffmanMei.html">GLSVansAssemblerSaffmanMei&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Lift force using Saffman-Mei model.  <a href="classGLSVansAssemblerSaffmanMei.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerMagnus.html">GLSVansAssemblerMagnus&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Lift force using Magnus model.  <a href="classGLSVansAssemblerMagnus.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerViscousTorque.html">GLSVansAssemblerViscousTorque&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Viscous dissipative torque due to particle's rotation as defined by Derksen (2004). M_viscous_rotation = pi * pow(dp, 3) * mu * (- omega_p)  <a href="classGLSVansAssemblerViscousTorque.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerVorticalTorque.html">GLSVansAssemblerVorticalTorque&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Viscous dissipative torque due to fluid vorticity as defined by Derksen (2004). M_viscous_vorticity = pi * pow(dp, 3) * mu * (0.5 * vorticity)  <a href="classGLSVansAssemblerVorticalTorque.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerBuoyancy.html">GLSVansAssemblerBuoyancy&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the Buoyancy force for the VANS equations whe F_b = -g * density * (4.0 / 3) * M_PI * pow((dp /2.0),3)  <a href="classGLSVansAssemblerBuoyancy.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerPressureForce.html">GLSVansAssemblerPressureForce&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the particle pressure force that will then be added to particle_fluid_interactions.  <a href="classGLSVansAssemblerPressureForce.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerShearForce.html">GLSVansAssemblerShearForce&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the particle shear force that will then be added to particle_fluid_interactions.  <a href="classGLSVansAssemblerShearForce.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSVansAssemblerFPI.html">GLSVansAssemblerFPI&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the fluid_particle interactions (FPI) for the VANS equations such as the drag force.  <a href="classGLSVansAssemblerFPI.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PeriodicHillsPushForward&lt; dim, spacedim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PeriodicHillsPushForward&lt; dim, spacedim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The push_forward &amp; the pull_back classes create the vector_value functions gradient function and because it inherits from Function&lt;spacedim&gt;. (formula is currently Euler and can be changed. See AutoDerivativeFunction documentation)  
- <a href="classPeriodicHillsPushForward.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="periodic__hills__grid_8h_source.html">periodic_hills_grid.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PeriodicHillsPushForward&lt; dim, spacedim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae2fbc10f7c31913bf0b241f04a9614fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPushForward.html#ae2fbc10f7c31913bf0b241f04a9614fe">PeriodicHillsPushForward</a> (double <a class="el" href="classPeriodicHillsPushForward.html#afbbc794ca004c79a7cd12e5b5d20584a">spacing_y</a>, double <a class="el" href="classPeriodicHillsPushForward.html#a860432d5d9838c325488c4be31f35505">alpha</a>)</td></tr>
 <tr class="separator:ae2fbc10f7c31913bf0b241f04a9614fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0a1379800ef6ee128730d1a842acc52"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPushForward.html#aa0a1379800ef6ee128730d1a842acc52">vector_value</a> (const Point&lt; spacedim &gt; &amp;p, Vector&lt; double &gt; &amp;values) const override</td></tr>
-<tr class="memdesc:aa0a1379800ef6ee128730d1a842acc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector_value. <a class="el" href="classThis.html">This</a> function is used to construct the geometry manifold. It changes the original point (op) of the transformed hyper_rectangle with hill_geometry to a new point (np) of the hill grid with per_hills_grid function.  <a href="classPeriodicHillsPushForward.html#aa0a1379800ef6ee128730d1a842acc52">More...</a><br /></td></tr>
 <tr class="separator:aa0a1379800ef6ee128730d1a842acc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aecc7d5d6af888f184a4bf236074680"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPushForward.html#a6aecc7d5d6af888f184a4bf236074680">value</a> (const Point&lt; spacedim &gt; &amp;p, const unsigned int component) const override</td></tr>
-<tr class="memdesc:a6aecc7d5d6af888f184a4bf236074680"><td class="mdescLeft">&#160;</td><td class="mdescRight">value. The value function does the same thing than vector_value for one component. <a class="el" href="classThis.html">This</a> implementation is needed to use the gradient function inherited by AutoDerivativeFunction.  <a href="classPeriodicHillsPushForward.html#a6aecc7d5d6af888f184a4bf236074680">More...</a><br /></td></tr>
 <tr class="separator:a6aecc7d5d6af888f184a4bf236074680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

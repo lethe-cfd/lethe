@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PhaseChangeDarcyVOFAssembler&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PhaseChangeDarcyVOFAssembler&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Assembles a phase change Darcy forcing term for a VOF two-fluid simulation. The term \(-\phi \beta_D \mathbf{u} \) is added to the right hand-side of the Navier-Stokes equations to prohibit the motion of a material. In the phase change model, the value of the \( \beta_D \) coefficient depends on the temperature field and the material (fluid) properties. Generally, this is used to impose the stasis in the solid phase. <a class="el" href="classThis.html">This</a> generally leads to a better conditioning of the linear system than increasing the viscosity of the solid phase.  
- <a href="classPhaseChangeDarcyVOFAssembler.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="navier__stokes__vof__assemblers_8h_source.html">navier_stokes_vof_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PhaseChangeDarcyVOFAssembler&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad8ad4118e5d498bf0423659899492a08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseChangeDarcyVOFAssembler.html#ad8ad4118e5d498bf0423659899492a08">PhaseChangeDarcyVOFAssembler</a> (const std::vector&lt; <a class="el" href="structParameters_1_1PhaseChange.html">Parameters::PhaseChange</a> &gt; &amp;<a class="el" href="classPhaseChangeDarcyVOFAssembler.html#afcd64b20c2dfb837744092918e2ff82d">phase_change_parameters_vector</a>)</td></tr>
 <tr class="separator:ad8ad4118e5d498bf0423659899492a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe50a93c4c42a1da93217fb4294f0c54"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseChangeDarcyVOFAssembler.html#afe50a93c4c42a1da93217fb4294f0c54">assemble_matrix</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:afe50a93c4c42a1da93217fb4294f0c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix of: \(-\beta_D \mathbf{u}\).  <a href="classPhaseChangeDarcyVOFAssembler.html#afe50a93c4c42a1da93217fb4294f0c54">More...</a><br /></td></tr>
 <tr class="separator:afe50a93c4c42a1da93217fb4294f0c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a9f9c917236f2e0747b5c962f4bf15e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhaseChangeDarcyVOFAssembler.html#a1a9f9c917236f2e0747b5c962f4bf15e">assemble_rhs</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:a1a9f9c917236f2e0747b5c962f4bf15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the weak form of: \(-\beta_D \mathbf{u} \)  <a href="classPhaseChangeDarcyVOFAssembler.html#a1a9f9c917236f2e0747b5c962f4bf15e">More...</a><br /></td></tr>
 <tr class="separator:a1a9f9c917236f2e0747b5c962f4bf15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

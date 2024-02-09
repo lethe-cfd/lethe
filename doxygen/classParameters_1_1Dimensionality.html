@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: Parameters::Dimensionality Class Reference</title>
+<title>Lethe Open-Source Library: Parameters::Dimensionality Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -83,24 +84,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class used to rescale physical properties for cases where the main dimensions of the problems (Length, Mass, Time and Temperature) are not expressed in SI, but are expressed in another set of units. For example, this can be used to carry out a simulation where the mesh is expressed in millimeters instead of meters. <a class="el" href="classThis.html">This</a> class is currently only used to rescale the physical properties in the FEM-based physics (e.g. all of those that are solvers). Support for <a class="el" href="namespaceDEM.html">DEM</a>, CFD-DEM and rescaling of boundary conditions is planned in the mid-term.  
- <a href="classParameters_1_1Dimensionality.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="dimensionality_8h_source.html">dimensionality.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6235741682a482cf5113e4f5497c9168"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1Dimensionality.html#a6235741682a482cf5113e4f5497c9168">Dimensionality</a> ()</td></tr>
-<tr class="memdesc:a6235741682a482cf5113e4f5497c9168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor that assumes that the units used in the simulation are consistent.  <a href="classParameters_1_1Dimensionality.html#a6235741682a482cf5113e4f5497c9168">More...</a><br /></td></tr>
 <tr class="separator:a6235741682a482cf5113e4f5497c9168"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af95e1c486549b73779eee55fde43b696"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1Dimensionality.html#af95e1c486549b73779eee55fde43b696">define_all_scales</a> ()</td></tr>
-<tr class="memdesc:af95e1c486549b73779eee55fde43b696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines all the sub scales that are relevant to simulations. <a class="el" href="classThis.html">This</a> is used to define scaling laws for kinematic viscosity or other quantities which appear multiple times in the simulation. <a class="el" href="classThis.html">This</a> prevents the recalculation of these scales (and thus, human errors).  <a href="classParameters_1_1Dimensionality.html#af95e1c486549b73779eee55fde43b696">More...</a><br /></td></tr>
 <tr class="separator:af95e1c486549b73779eee55fde43b696"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad312cee4b1fab271b691c94bc302fbd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1Dimensionality.html#ad312cee4b1fab271b691c94bc302fbd5">declare_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:ad312cee4b1fab271b691c94bc302fbd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares the fundamental dimensions of the parameter file.  <a href="classParameters_1_1Dimensionality.html#ad312cee4b1fab271b691c94bc302fbd5">More...</a><br /></td></tr>
 <tr class="separator:ad312cee4b1fab271b691c94bc302fbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae06179d1575260448053b506733bc578"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1Dimensionality.html#ae06179d1575260448053b506733bc578">parse_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:ae06179d1575260448053b506733bc578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the fundamental dimensions from the parameter file.  <a href="classParameters_1_1Dimensionality.html#ae06179d1575260448053b506733bc578">More...</a><br /></td></tr>
 <tr class="separator:ae06179d1575260448053b506733bc578"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

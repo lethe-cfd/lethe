@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PeriodicHillsPullBack&lt; dim, spacedim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PeriodicHillsPullBack&lt; dim, spacedim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -95,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e84fe1af4ee59a4e0761280c04edcea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPullBack.html#a4e84fe1af4ee59a4e0761280c04edcea">PeriodicHillsPullBack</a> (double <a class="el" href="classPeriodicHillsPullBack.html#a39c1232c5bc7c5a3d440c668fb924556">spacing_y</a>, double <a class="el" href="classPeriodicHillsPullBack.html#ab7cc7a88ebdee6d6a4b74ed77783326d">alpha</a>)</td></tr>
 <tr class="separator:a4e84fe1af4ee59a4e0761280c04edcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af352f14b47afe32d9345fd09fd601fcb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPullBack.html#af352f14b47afe32d9345fd09fd601fcb">vector_value</a> (const Point&lt; spacedim &gt; &amp;np, Vector&lt; double &gt; &amp;values) const override</td></tr>
-<tr class="memdesc:af352f14b47afe32d9345fd09fd601fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector_value. <a class="el" href="classThis.html">This</a> vector_value function is used to construct the geometry manifold. It changes the new point (np) of the hill grid to the original point (op) of the transformed hyper_rectangle grid. <a class="el" href="classThis.html">This</a> function is mandatory to use FunctionManifold. First, it finds the minimum value of y depending the x position and then calculates the op with the inverse of the transformation done by hill_geometry function.  <a href="classPeriodicHillsPullBack.html#af352f14b47afe32d9345fd09fd601fcb">More...</a><br /></td></tr>
 <tr class="separator:af352f14b47afe32d9345fd09fd601fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96e25a0a2a75e4de565935112b2f8629"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsPullBack.html#a96e25a0a2a75e4de565935112b2f8629">value</a> (const Point&lt; spacedim &gt; &amp;np, const unsigned int component) const override</td></tr>
-<tr class="memdesc:a96e25a0a2a75e4de565935112b2f8629"><td class="mdescLeft">&#160;</td><td class="mdescRight">value. The value function does the same thing than vector_value for one component. <a class="el" href="classThis.html">This</a> implementation is needed to use the gradient function inherited by AutoDerivativeFunction.  <a href="classPeriodicHillsPullBack.html#a96e25a0a2a75e4de565935112b2f8629">More...</a><br /></td></tr>
 <tr class="separator:a96e25a0a2a75e4de565935112b2f8629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

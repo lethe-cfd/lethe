@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/core/manifolds.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/core/manifolds.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -161,10 +162,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParameters_1_1Manifolds.html">Parameters::Manifolds</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classParameters_1_1Manifolds.html" title="Manifolds - This class manages attaching manifolds to faces when a manual attachment is required (for...">Manifolds</a> - <a class="el" href="classThis.html">This</a> class manages attaching manifolds to faces when a manual attachment is required (for example if the mesh is coming from a GMSH file)  <a href="classParameters_1_1Manifolds.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryPostprocessor.html">BoundaryPostprocessor&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">BounearyPostprocessor Post-processor class used to attach the boundary id to the faces when outputting the surfaces within the domain.  <a href="classBoundaryPostprocessor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -176,10 +175,8 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a6cf3a8fabce0608b5487c5c517fbd1d8"><td class="memTemplParams" colspan="2">template&lt;int dim, int spacedim = dim&gt; </td></tr>
 <tr class="memitem:a6cf3a8fabce0608b5487c5c517fbd1d8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="manifolds_8h.html#a6cf3a8fabce0608b5487c5c517fbd1d8">attach_manifolds_to_triangulation</a> (parallel::DistributedTriangulationBase&lt; dim, spacedim &gt; &amp;triangulation, const <a class="el" href="classParameters_1_1Manifolds.html">Parameters::Manifolds</a> manifolds)</td></tr>
-<tr class="memdesc:a6cf3a8fabce0608b5487c5c517fbd1d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches manifold to boundaries of the triangulation.  <a href="manifolds_8h.html#a6cf3a8fabce0608b5487c5c517fbd1d8">More...</a><br /></td></tr>
 <tr class="separator:a6cf3a8fabce0608b5487c5c517fbd1d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f5f220c4b61859f1d6686b5421ffe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="manifolds_8h.html#a92f5f220c4b61859f1d6686b5421ffe5">attach_cad_to_manifold</a> (parallel::DistributedTriangulationBase&lt; 2 &gt; &amp;triangulation, std::string cad_name, unsigned int manifold_id)</td></tr>
-<tr class="memdesc:a92f5f220c4b61859f1d6686b5421ffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches CAD manifolds using IGES files to boundaries of the triangulation <a class="el" href="classThis.html">This</a> function attaches a CAD manifold to the faces of a triangulation. Note that this only works in 3D.  <a href="manifolds_8h.html#a92f5f220c4b61859f1d6686b5421ffe5">More...</a><br /></td></tr>
 <tr class="separator:a92f5f220c4b61859f1d6686b5421ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e5d58167bf285ec3e5c19346634c856"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="manifolds_8h.html#a4e5d58167bf285ec3e5c19346634c856">attach_cad_to_manifold</a> (parallel::DistributedTriangulationBase&lt; 2, 3 &gt; &amp;triangulation, std::string cad_name, unsigned int manifold_id)</td></tr>
 <tr class="separator:a4e5d58167bf285ec3e5c19346634c856"><td class="memSeparator" colspan="2">&#160;</td></tr>

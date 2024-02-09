@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/core/bdf.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/core/bdf.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -187,23 +188,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8819b8d37da17f777876c7bb3404f0ad"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a8819b8d37da17f777876c7bb3404f0ad">bdf_coefficients</a> (unsigned int order, const std::vector&lt; double &gt; time_steps)</td></tr>
-<tr class="memdesc:a8819b8d37da17f777876c7bb3404f0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\).  <a href="bdf_8h.html#a8819b8d37da17f777876c7bb3404f0ad">More...</a><br /></td></tr>
 <tr class="separator:a8819b8d37da17f777876c7bb3404f0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73dd486d8835174570f0d79591a4cb70"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a73dd486d8835174570f0d79591a4cb70">bdf_coefficients</a> (const <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method, const std::vector&lt; double &gt; time_steps)</td></tr>
-<tr class="memdesc:a73dd486d8835174570f0d79591a4cb70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\).  <a href="bdf_8h.html#a73dd486d8835174570f0d79591a4cb70">More...</a><br /></td></tr>
 <tr class="separator:a73dd486d8835174570f0d79591a4cb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a031702a84563b27e14b0d85d361ab08f"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a031702a84563b27e14b0d85d361ab08f">delta</a> (const unsigned int order, const unsigned int n, const unsigned int j, const Vector&lt; double &gt; times)</td></tr>
-<tr class="memdesc:a031702a84563b27e14b0d85d361ab08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive function for calculating the \(j^{th}\) order divided differences ( \(\delta^j\)) that is used for calculating backward differentiation formula (BDF) coefficients.  <a href="bdf_8h.html#a031702a84563b27e14b0d85d361ab08f">More...</a><br /></td></tr>
 <tr class="separator:a031702a84563b27e14b0d85d361ab08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20abc47ca7441007f8923c529000ace5"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a20abc47ca7441007f8923c529000ace5">maximum_number_of_previous_solutions</a> ()</td></tr>
-<tr class="memdesc:a20abc47ca7441007f8923c529000ace5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the maximum number of previous time steps supposed by the BDF schemes implemented in Lethe.  <a href="bdf_8h.html#a20abc47ca7441007f8923c529000ace5">More...</a><br /></td></tr>
 <tr class="separator:a20abc47ca7441007f8923c529000ace5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b5d2bb44cdac716464d7e779fa14c4c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a> (<a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method)</td></tr>
-<tr class="memdesc:a8b5d2bb44cdac716464d7e779fa14c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of previous time steps for a specific BDF scheme.  <a href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">More...</a><br /></td></tr>
 <tr class="separator:a8b5d2bb44cdac716464d7e779fa14c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a730c40ff7789476c2dbbdd3158b928a6"><td class="memTemplParams" colspan="2">template&lt;typename DataType &gt; </td></tr>
 <tr class="memitem:a730c40ff7789476c2dbbdd3158b928a6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="bdf_8h.html#a730c40ff7789476c2dbbdd3158b928a6">bdf_extrapolate</a> (const std::vector&lt; double &gt; &amp;time_vector, const std::vector&lt; std::vector&lt; DataType &gt;&gt; &amp;solution_vector, const unsigned int <a class="el" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>, std::vector&lt; DataType &gt; &amp;extrapolated_solution)</td></tr>
-<tr class="memdesc:a730c40ff7789476c2dbbdd3158b928a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extrapolate vector of solution to time_vector[0] using previous solution times and previous solution.  <a href="bdf_8h.html#a730c40ff7789476c2dbbdd3158b928a6">More...</a><br /></td></tr>
 <tr class="separator:a730c40ff7789476c2dbbdd3158b928a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: EvaporationModel Class Reference</title>
+<title>Lethe Open-Source Library: EvaporationModel Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -80,9 +81,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classEvaporationModel.html" title="EvaporationModel. Abstract class that allows to calculate the evaporation mass, heat and momentum flu...">EvaporationModel</a>. Abstract class that allows to calculate the evaporation mass, heat and momentum fluxes. <a class="el" href="classThis.html">This</a> model computes all the terms required for the assembly of the governing equations, i.e., Navier-Stokes momentum and energy, when evaporation is considered. The former terms are the momentum flux (i.e., pressure) acting on the evaporative front in the normal direction, the heat flux, acting at the same location as a cooling term, and the fluxes' jacobian, if required.  
- <a href="classEvaporationModel.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="evaporation__model_8h_source.html">evaporation_model.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for EvaporationModel:</div>
@@ -100,43 +98,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a487277401c1e24e6de30784ed1627f9d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a487277401c1e24e6de30784ed1627f9d">EvaporationModel</a> ()</td></tr>
 <tr class="separator:a487277401c1e24e6de30784ed1627f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a293f41a2841af8d6cf13ae07a02f249b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a293f41a2841af8d6cf13ae07a02f249b">depends_on</a> (const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> &amp;id)</td></tr>
-<tr class="memdesc:a293f41a2841af8d6cf13ae07a02f249b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="classEvaporationModel.html" title="EvaporationModel. Abstract class that allows to calculate the evaporation mass, heat and momentum flu...">EvaporationModel</a> depends on a field, false if not.  <a href="classEvaporationModel.html#a293f41a2841af8d6cf13ae07a02f249b">More...</a><br /></td></tr>
 <tr class="separator:a293f41a2841af8d6cf13ae07a02f249b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a160196770f256f261bd931fca4015033"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a160196770f256f261bd931fca4015033">mass_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values)=0</td></tr>
-<tr class="memdesc:a160196770f256f261bd931fca4015033"><td class="mdescLeft">&#160;</td><td class="mdescRight">mass_flux <a class="el" href="classCalculates.html">Calculates</a> the value of the evaporation mass flux.  <a href="classEvaporationModel.html#a160196770f256f261bd931fca4015033">More...</a><br /></td></tr>
 <tr class="separator:a160196770f256f261bd931fca4015033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6efe91fef298bc877c0068fd592c437b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a6efe91fef298bc877c0068fd592c437b">mass_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;mass_flux_vector)=0</td></tr>
-<tr class="memdesc:a6efe91fef298bc877c0068fd592c437b"><td class="mdescLeft">&#160;</td><td class="mdescRight">mass_flux <a class="el" href="classCalculates.html">Calculates</a> the values of the evaporation mass flux for multiple points.  <a href="classEvaporationModel.html#a6efe91fef298bc877c0068fd592c437b">More...</a><br /></td></tr>
 <tr class="separator:a6efe91fef298bc877c0068fd592c437b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afac59c43eeabd35bc6c6e54379281dda"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#afac59c43eeabd35bc6c6e54379281dda">heat_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values)=0</td></tr>
-<tr class="memdesc:afac59c43eeabd35bc6c6e54379281dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat_flux <a class="el" href="classCalculates.html">Calculates</a> the value of the evaporation heat flux.  <a href="classEvaporationModel.html#afac59c43eeabd35bc6c6e54379281dda">More...</a><br /></td></tr>
 <tr class="separator:afac59c43eeabd35bc6c6e54379281dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8c8cac82eef941caf6ba77e1b75b832"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#ad8c8cac82eef941caf6ba77e1b75b832">heat_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;heat_flux_vector)=0</td></tr>
-<tr class="memdesc:ad8c8cac82eef941caf6ba77e1b75b832"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat_flux <a class="el" href="classCalculates.html">Calculates</a> the values of the evaporation heat flux for multiple points.  <a href="classEvaporationModel.html#ad8c8cac82eef941caf6ba77e1b75b832">More...</a><br /></td></tr>
 <tr class="separator:ad8c8cac82eef941caf6ba77e1b75b832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d85dfa122533dbb2a74dc928ce5ff6f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a2d85dfa122533dbb2a74dc928ce5ff6f">heat_flux_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id)=0</td></tr>
-<tr class="memdesc:a2d85dfa122533dbb2a74dc928ce5ff6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat_flux_jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian (the partial derivative) of the evaporation heat flux with respect to a field.  <a href="classEvaporationModel.html#a2d85dfa122533dbb2a74dc928ce5ff6f">More...</a><br /></td></tr>
 <tr class="separator:a2d85dfa122533dbb2a74dc928ce5ff6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d537739b55f13ee15be976e7ca3e983"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a6d537739b55f13ee15be976e7ca3e983">heat_flux_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id, std::vector&lt; double &gt; &amp;jacobian_vector)=0</td></tr>
-<tr class="memdesc:a6d537739b55f13ee15be976e7ca3e983"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat_flux_jacobian <a class="el" href="classCalculates.html">Calculates</a> the derivative of the evaporation heat flux with respect to a field for multiple points.  <a href="classEvaporationModel.html#a6d537739b55f13ee15be976e7ca3e983">More...</a><br /></td></tr>
 <tr class="separator:a6d537739b55f13ee15be976e7ca3e983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47be0272cdef51c598387125bc4d8071"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a47be0272cdef51c598387125bc4d8071">momentum_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values)=0</td></tr>
-<tr class="memdesc:a47be0272cdef51c598387125bc4d8071"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum_flux <a class="el" href="classCalculates.html">Calculates</a> the value of the evaporation momentum flux.  <a href="classEvaporationModel.html#a47be0272cdef51c598387125bc4d8071">More...</a><br /></td></tr>
 <tr class="separator:a47be0272cdef51c598387125bc4d8071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5abb4c748700b76eeca288f3e9009e16"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a5abb4c748700b76eeca288f3e9009e16">momentum_flux</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;momentum_flux_vector)=0</td></tr>
-<tr class="memdesc:a5abb4c748700b76eeca288f3e9009e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum_flux <a class="el" href="classCalculates.html">Calculates</a> the values of the evaporation momentum flux for multiple points.  <a href="classEvaporationModel.html#a5abb4c748700b76eeca288f3e9009e16">More...</a><br /></td></tr>
 <tr class="separator:a5abb4c748700b76eeca288f3e9009e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d108efeb02e7c59d9e4d104f0ae1a32"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a6d108efeb02e7c59d9e4d104f0ae1a32">momentum_flux_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id)=0</td></tr>
-<tr class="memdesc:a6d108efeb02e7c59d9e4d104f0ae1a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum_flux_jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian (the partial derivative) of the evaporation momentum flux with respect to a field.  <a href="classEvaporationModel.html#a6d108efeb02e7c59d9e4d104f0ae1a32">More...</a><br /></td></tr>
 <tr class="separator:a6d108efeb02e7c59d9e4d104f0ae1a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7eaee7fdba5079e6f1b5d0d845f2590"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#ab7eaee7fdba5079e6f1b5d0d845f2590">momentum_flux_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id, std::vector&lt; double &gt; &amp;jacobian_vector)=0</td></tr>
-<tr class="memdesc:ab7eaee7fdba5079e6f1b5d0d845f2590"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum_flux_jacobian <a class="el" href="classCalculates.html">Calculates</a> the derivative of the evaporation momentum flux with respect to a field for multiple points.  <a href="classEvaporationModel.html#ab7eaee7fdba5079e6f1b5d0d845f2590">More...</a><br /></td></tr>
 <tr class="separator:ab7eaee7fdba5079e6f1b5d0d845f2590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8584ac33f510a3999d15d1367132c1e5"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classEvaporationModel.html">EvaporationModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvaporationModel.html#a8584ac33f510a3999d15d1367132c1e5">model_cast</a> (const <a class="el" href="structParameters_1_1Evaporation.html">Parameters::Evaporation</a> &amp;evaporation_parameters)</td></tr>
-<tr class="memdesc:a8584ac33f510a3999d15d1367132c1e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates and returns a pointer to an <a class="el" href="classEvaporationModel.html" title="EvaporationModel. Abstract class that allows to calculate the evaporation mass, heat and momentum flu...">EvaporationModel</a> object by casting it to the proper child class.  <a href="classEvaporationModel.html#a8584ac33f510a3999d15d1367132c1e5">More...</a><br /></td></tr>
 <tr class="separator:a8584ac33f510a3999d15d1367132c1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>

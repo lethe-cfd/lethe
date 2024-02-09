@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: BoundaryConditions::VOFBoundaryConditions&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: BoundaryConditions::VOFBoundaryConditions&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -83,9 +84,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classThis.html">This</a> class manages the boundary conditions for VOF solver It introduces the boundary functions and declares the boundary conditions coherently.  
- <a href="classBoundaryConditions_1_1VOFBoundaryConditions.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BoundaryConditions::VOFBoundaryConditions&lt; dim &gt;:</div>
@@ -100,16 +98,12 @@ Inheritance diagram for BoundaryConditions::VOFBoundaryConditions&lt; dim &gt;:<
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aed2025ab2d51e36f4cb1e19d286bf1d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1VOFBoundaryConditions.html#aed2025ab2d51e36f4cb1e19d286bf1d4">declareDefaultEntry</a> (ParameterHandler &amp;prm, const unsigned int i_bc)</td></tr>
-<tr class="memdesc:aed2025ab2d51e36f4cb1e19d286bf1d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares the default parameters for a boundary condition id i_bc.  <a href="classBoundaryConditions_1_1VOFBoundaryConditions.html#aed2025ab2d51e36f4cb1e19d286bf1d4">More...</a><br /></td></tr>
 <tr class="separator:aed2025ab2d51e36f4cb1e19d286bf1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8563ef51be4405b8b43b20c1e314bd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1VOFBoundaryConditions.html#ac8563ef51be4405b8b43b20c1e314bd9">declare_parameters</a> (ParameterHandler &amp;prm, const unsigned int number_of_boundary_conditions)</td></tr>
-<tr class="memdesc:ac8563ef51be4405b8b43b20c1e314bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declare the boundary conditions default parameters Calls declareDefaultEntry method for each boundary (max 14 boundaries)  <a href="classBoundaryConditions_1_1VOFBoundaryConditions.html#ac8563ef51be4405b8b43b20c1e314bd9">More...</a><br /></td></tr>
 <tr class="separator:ac8563ef51be4405b8b43b20c1e314bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4bdd4a566c2b26ddfdcb8395a73f6a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1VOFBoundaryConditions.html#ac4bdd4a566c2b26ddfdcb8395a73f6a7">parse_boundary</a> (ParameterHandler &amp;prm, const unsigned int i_bc)</td></tr>
-<tr class="memdesc:ac4bdd4a566c2b26ddfdcb8395a73f6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the information for a boundary condition.  <a href="classBoundaryConditions_1_1VOFBoundaryConditions.html#ac4bdd4a566c2b26ddfdcb8395a73f6a7">More...</a><br /></td></tr>
 <tr class="separator:ac4bdd4a566c2b26ddfdcb8395a73f6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74210c57cd2d9146c2ca7d5cdbed747e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1VOFBoundaryConditions.html#a74210c57cd2d9146c2ca7d5cdbed747e">parse_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:a74210c57cd2d9146c2ca7d5cdbed747e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the boundary conditions Calls parse_boundary method for each boundary (max 14 boundaries)  <a href="classBoundaryConditions_1_1VOFBoundaryConditions.html#a74210c57cd2d9146c2ca7d5cdbed747e">More...</a><br /></td></tr>
 <tr class="separator:a74210c57cd2d9146c2ca7d5cdbed747e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

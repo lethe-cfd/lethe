@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/core/solutions_output.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/core/solutions_output.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -145,11 +146,9 @@ This graph shows which files directly or indirectly include this file:</div>
 Functions</h2></td></tr>
 <tr class="memitem:a5f2efa78963f4a5e095c5dd6f1db241d"><td class="memTemplParams" colspan="2">template&lt;int dim, int spacedim = dim&gt; </td></tr>
 <tr class="memitem:a5f2efa78963f4a5e095c5dd6f1db241d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="solutions__output_8h.html#a5f2efa78963f4a5e095c5dd6f1db241d">write_vtu_and_pvd</a> (<a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;pvd_handler, const DataOutInterface&lt; dim, spacedim &gt; &amp;data_out, const std::string folder, const std::string file_prefix, const double time, const unsigned int iter, const unsigned int group_files, const MPI_Comm &amp;mpi_communicator, const unsigned int digits=5)</td></tr>
-<tr class="memdesc:a5f2efa78963f4a5e095c5dd6f1db241d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the data out to "group_files" vtu files, with a pvtu file and a pvd to store the timing <a class="el" href="classThis.html">This</a> function outputs the data out to "group_files" vtu file that are orchestrated by a .pvtu file. An additional pvd file takes care of storing the time associated with each .pvtu file.  <a href="solutions__output_8h.html#a5f2efa78963f4a5e095c5dd6f1db241d">More...</a><br /></td></tr>
 <tr class="separator:a5f2efa78963f4a5e095c5dd6f1db241d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dd643edfd9d1b7fa5c46dfa3c6e6bf1"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
 <tr class="memitem:a4dd643edfd9d1b7fa5c46dfa3c6e6bf1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="solutions__output_8h.html#a4dd643edfd9d1b7fa5c46dfa3c6e6bf1">write_boundaries_vtu</a> (const DataOutFaces&lt; dim &gt; &amp;data_out, const std::string folder, const double time, const unsigned int iter, const MPI_Comm &amp;mpi_communicator, const std::string file_prefix=std::string(&quot;boundaries&quot;), const unsigned int digits=5)</td></tr>
-<tr class="memdesc:a4dd643edfd9d1b7fa5c46dfa3c6e6bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the Data Out Faces to a single vtu file <a class="el" href="classThis.html">This</a> function outputs the DataOutFaces to a vtu file.  <a href="solutions__output_8h.html#a4dd643edfd9d1b7fa5c46dfa3c6e6bf1">More...</a><br /></td></tr>
 <tr class="separator:a4dd643edfd9d1b7fa5c46dfa3c6e6bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>

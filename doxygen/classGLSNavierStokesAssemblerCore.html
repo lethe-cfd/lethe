@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: GLSNavierStokesAssemblerCore&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: GLSNavierStokesAssemblerCore&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that assembles the core of the Navier-Stokes equation. According to the following weak form: \(\mathbf{u} \cdot \nabla \mathbf{u} - \nabla p - \nu \nabla^2 \mathbf{u} =0 \) with a full GLS stabilization including the laplacian of the test function.  
- <a href="classGLSNavierStokesAssemblerCore.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="navier__stokes__assemblers_8h_source.html">navier_stokes_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GLSNavierStokesAssemblerCore&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a09d780788d1738f69a8bd145c6795240"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerCore.html#a09d780788d1738f69a8bd145c6795240">GLSNavierStokesAssemblerCore</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classGLSNavierStokesAssemblerCore.html#a9205ffe1f9c79dffb6799bf0c65d00fd">simulation_control</a>)</td></tr>
 <tr class="separator:a09d780788d1738f69a8bd145c6795240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac766c83a6a233271d0eb0b1b0731404c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerCore.html#ac766c83a6a233271d0eb0b1b0731404c">assemble_matrix</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:ac766c83a6a233271d0eb0b1b0731404c"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix  <a href="classGLSNavierStokesAssemblerCore.html#ac766c83a6a233271d0eb0b1b0731404c">More...</a><br /></td></tr>
 <tr class="separator:ac766c83a6a233271d0eb0b1b0731404c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66cb9ba4034f3a09aacf8b0a87e4cd3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerCore.html#ae66cb9ba4034f3a09aacf8b0a87e4cd3">assemble_rhs</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:ae66cb9ba4034f3a09aacf8b0a87e4cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classGLSNavierStokesAssemblerCore.html#ae66cb9ba4034f3a09aacf8b0a87e4cd3">More...</a><br /></td></tr>
 <tr class="separator:ae66cb9ba4034f3a09aacf8b0a87e4cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

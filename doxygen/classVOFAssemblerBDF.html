@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: VOFAssemblerBDF&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: VOFAssemblerBDF&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that assembles the transient time arising from BDF time integration for the VOF equations. For example, if a BDF1 scheme is chosen, the following is assembled \(\frac{\mathbf{T}^{t+\Delta t}-\mathbf{T}^{t}}{\Delta t}\).  
- <a href="classVOFAssemblerBDF.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="vof__assemblers_8h_source.html">vof_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VOFAssemblerBDF&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27cd3513288f3706dfc2c18bb15d33f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFAssemblerBDF.html#a27cd3513288f3706dfc2c18bb15d33f2">VOFAssemblerBDF</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classVOFAssemblerBDF.html#a517691a4d41071ddd4f1de2617d1526a">simulation_control</a>)</td></tr>
 <tr class="separator:a27cd3513288f3706dfc2c18bb15d33f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb31504dee264b6f7beb2dcc8a952bcd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFAssemblerBDF.html#abb31504dee264b6f7beb2dcc8a952bcd">assemble_matrix</a> (<a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a> &amp;copy_data) override</td></tr>
-<tr class="memdesc:abb31504dee264b6f7beb2dcc8a952bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix  <a href="classVOFAssemblerBDF.html#abb31504dee264b6f7beb2dcc8a952bcd">More...</a><br /></td></tr>
 <tr class="separator:abb31504dee264b6f7beb2dcc8a952bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213bafd94c5199426a0f39b23f7af8f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVOFAssemblerBDF.html#a213bafd94c5199426a0f39b23f7af8f5">assemble_rhs</a> (<a class="el" href="classVOFScratchData.html">VOFScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a> &amp;copy_data) override</td></tr>
-<tr class="memdesc:a213bafd94c5199426a0f39b23f7af8f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classVOFAssemblerBDF.html#a213bafd94c5199426a0f39b23f7af8f5">More...</a><br /></td></tr>
 <tr class="separator:a213bafd94c5199426a0f39b23f7af8f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

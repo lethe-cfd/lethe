@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: DisableContacts&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: DisableContacts&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -97,19 +98,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae40b02afe4b33cf89297372703fe56d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#ae40b02afe4b33cf89297372703fe56d0">DisableContacts</a> ()</td></tr>
 <tr class="separator:ae40b02afe4b33cf89297372703fe56d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51fa7b1453c88c2cfb41a7af46902363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a51fa7b1453c88c2cfb41a7af46902363">update_local_and_ghost_cell_set</a> (const DoFHandler&lt; dim &gt; &amp;background_dh)</td></tr>
-<tr class="memdesc:a51fa7b1453c88c2cfb41a7af46902363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create or update a set of the active and ghost cells so that we don't have to loop over all the cells in the triangulation for the granular temperature and solid fraction calculation, and during the identification of the mobility status. <a class="el" href="classThis.html">This</a> set prevent 4 iteration steps over all the cells + the verification if the cell is locally owned, ghost or not. <a class="el" href="classThis.html">This</a> set is updated at every load balance step since cells are redistributed among processors.  <a href="classDisableContacts.html#a51fa7b1453c88c2cfb41a7af46902363">More...</a><br /></td></tr>
 <tr class="separator:a51fa7b1453c88c2cfb41a7af46902363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b7dfee81da1ae8a4d3aec86092f883"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#aa1b7dfee81da1ae8a4d3aec86092f883">identify_mobility_status</a> (const DoFHandler&lt; dim &gt; &amp;background_dh, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const unsigned int n_active_cells, MPI_Comm mpi_communicator)</td></tr>
-<tr class="memdesc:aa1b7dfee81da1ae8a4d3aec86092f883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the identification of the mobility status of each cell through a node-based identification and check. Only the active and ghost cells are processed.  <a href="classDisableContacts.html#aa1b7dfee81da1ae8a4d3aec86092f883">More...</a><br /></td></tr>
 <tr class="separator:aa1b7dfee81da1ae8a4d3aec86092f883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cf8368bfc4c6568c0f88c4ce07b06de"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">check_cell_mobility</a> (const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell) const</td></tr>
-<tr class="memdesc:a4cf8368bfc4c6568c0f88c4ce07b06de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the mobility status of a cell.  <a href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">More...</a><br /></td></tr>
 <tr class="separator:a4cf8368bfc4c6568c0f88c4ce07b06de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad36a9809f7e46e4c0ae7cc22a1050523"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">set_threshold_values</a> (const double granular_temperature, const double solid_fraction)</td></tr>
-<tr class="memdesc:ad36a9809f7e46e4c0ae7cc22a1050523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the threshold values for the mobile status criteria (granular temperature and solid fraction)  <a href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">More...</a><br /></td></tr>
 <tr class="separator:ad36a9809f7e46e4c0ae7cc22a1050523"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af63e1e48e35b6cac7eadf1246af22603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">get_mobility_status_vector</a> (Vector&lt; float &gt; &amp;status)</td></tr>
-<tr class="memdesc:af63e1e48e35b6cac7eadf1246af22603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the map of mobility status to a vector of mobility status because map can't be used as is in the pvd post-processing or any data out, it needs to be converted to a vector of mobility status by active cell index.  <a href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">More...</a><br /></td></tr>
 <tr class="separator:af63e1e48e35b6cac7eadf1246af22603"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad923eda4cebe4a7ba332cb57f308fd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cell_index_int_map &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">get_mobility_status</a> ()</td></tr>
 <tr class="separator:aad923eda4cebe4a7ba332cb57f308fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,7 +113,6 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a9997435cd13f73e0f3e75d591bff16c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a9997435cd13f73e0f3e75d591bff16c1">calculate_granular_temperature_and_solid_fraction</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const std::set&lt; typename DoFHandler&lt; dim &gt;::active_cell_iterator &gt; &amp;local_and_ghost_cells_with_particles, Vector&lt; double &gt; &amp;cell_granular_temperature, Vector&lt; double &gt; &amp;cell_solid_fraction)</td></tr>
-<tr class="memdesc:a9997435cd13f73e0f3e75d591bff16c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carries out the calculation of the granular temperature and solid fraction approximation (pcm method) in each active cell. Those values are criteria for cell mobility.  <a href="classDisableContacts.html#a9997435cd13f73e0f3e75d591bff16c1">More...</a><br /></td></tr>
 <tr class="separator:a9997435cd13f73e0f3e75d591bff16c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

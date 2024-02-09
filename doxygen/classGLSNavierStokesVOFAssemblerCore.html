@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: GLSNavierStokesVOFAssemblerCore&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: GLSNavierStokesVOFAssemblerCore&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Assembles the core of the Navier-Stokes equation with free surface using VOF modeling. According to the following weak form: \( \nabla \cdot \mathbf{u} + \rho \mathbf{u} \cdot \nabla \mathbf{u} + \nabla p - \mu \nabla\cdot (\nabla \mathbf{u} + (\nabla \mathbf{u})^T) = 0 \) with an SUPG and PSPG stabilization.  
- <a href="classGLSNavierStokesVOFAssemblerCore.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="navier__stokes__vof__assemblers_8h_source.html">navier_stokes_vof_assemblers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GLSNavierStokesVOFAssemblerCore&lt; dim &gt;:</div>
@@ -98,10 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab158c57291156968962d30fecad32ac2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerCore.html#ab158c57291156968962d30fecad32ac2">GLSNavierStokesVOFAssemblerCore</a> (std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classGLSNavierStokesVOFAssemblerCore.html#a4d0481bcc3720db8b33be579b118dc18">simulation_control</a>, const <a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;nsparam)</td></tr>
 <tr class="separator:ab158c57291156968962d30fecad32ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67dbc6ee67d80d452cde5c03c2d2c8f8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerCore.html#a67dbc6ee67d80d452cde5c03c2d2c8f8">assemble_matrix</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:a67dbc6ee67d80d452cde5c03c2d2c8f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_matrix Assembles the matrix  <a href="classGLSNavierStokesVOFAssemblerCore.html#a67dbc6ee67d80d452cde5c03c2d2c8f8">More...</a><br /></td></tr>
 <tr class="separator:a67dbc6ee67d80d452cde5c03c2d2c8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9888ee56e8f5ced342c17d642d8bc45"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesVOFAssemblerCore.html#ad9888ee56e8f5ced342c17d642d8bc45">assemble_rhs</a> (<a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data) override</td></tr>
-<tr class="memdesc:ad9888ee56e8f5ced342c17d642d8bc45"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_rhs Assembles the rhs  <a href="classGLSNavierStokesVOFAssemblerCore.html#ad9888ee56e8f5ced342c17d642d8bc45">More...</a><br /></td></tr>
 <tr class="separator:ad9888ee56e8f5ced342c17d642d8bc45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

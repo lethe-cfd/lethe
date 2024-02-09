@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: FindCellNeighbors&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: FindCellNeighbors&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -86,10 +87,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a925aa84e12f4ff25f6feef0881ea4276"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFindCellNeighbors.html#a925aa84e12f4ff25f6feef0881ea4276">FindCellNeighbors</a> ()</td></tr>
 <tr class="separator:a925aa84e12f4ff25f6feef0881ea4276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c6568ad14815794636715a834599def"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFindCellNeighbors.html#a8c6568ad14815794636715a834599def">find_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_neighbor_list &amp;cells_local_neighbor_list, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_neighbor_list)</td></tr>
-<tr class="memdesc:a8c6568ad14815794636715a834599def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the neighbor list (without repetition) of all the active cells in the triangulation. It gets the vertices of the cells to get lists of the neighbor for each cells. There is some check to prevent repetition of a cell in a list (up to 4 vertices can have the same cell in common in 3D). 2 types of container are used for cell neighbors : local-local cells and local-ghost cells.  <a href="classFindCellNeighbors.html#a8c6568ad14815794636715a834599def">More...</a><br /></td></tr>
 <tr class="separator:a8c6568ad14815794636715a834599def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a478a3d5f0ef2fd9804610a2a34e19732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFindCellNeighbors.html#a478a3d5f0ef2fd9804610a2a34e19732">find_cell_periodic_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info &amp;periodic_boundaries_cells_information, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_neighbor_list &amp;cells_local_periodic_neighbor_list, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_periodic_neighbor_list, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_neighbor_list &amp;cells_ghost_local_periodic_neighbor_list)</td></tr>
-<tr class="memdesc:a478a3d5f0ef2fd9804610a2a34e19732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the periodic neighbor list (without repetition) of all the active cells in the triangulation. It gets the coinciding vertices of the cells at the periodic boundary 0 to get lists of the periodic neighbor cells on the periodic boundary 1 for each cells. There is some check to prevent repetition of a cell in a list (up to 4 vertices can have the same cell in common in 3D). Also, 3 types of container are used for periodic mapping of cell neighbors : local-local cells, local-ghost cells and ghost-local cells. The last container is necessary since the mapping are only from periodic boundary 0 to periodic boundary 1 and the ghost-local particle pairs need distinction for proper handling of search of particle pairs and contact forces.  <a href="classFindCellNeighbors.html#a478a3d5f0ef2fd9804610a2a34e19732">More...</a><br /></td></tr>
 <tr class="separator:a478a3d5f0ef2fd9804610a2a34e19732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a797a7daf8c996f6879cf21adfe4ddc3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFindCellNeighbors.html#a797a7daf8c996f6879cf21adfe4ddc3b">find_full_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cells_total_neighbor_list &amp;cells_total_neighbor_list)</td></tr>
 <tr class="separator:a797a7daf8c996f6879cf21adfe4ddc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,7 +96,6 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a41e3ff222b168f36c6853fbbdc2c00dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">get_periodic_neighbor_list</a> (const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell, const std::map&lt; unsigned int, std::vector&lt; unsigned int &gt;&gt; &amp;coinciding_vertex_groups, const std::map&lt; unsigned int, unsigned int &gt; &amp;vertex_to_coinciding_vertex_group, const std::vector&lt; std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt;&gt; &amp;v_to_c, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::cell_vector &amp;periodic_neighbor_list)</td></tr>
-<tr class="memdesc:a41e3ff222b168f36c6853fbbdc2c00dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a periodic neighbor cells list of the cell. With the coinciding_vertex_groups and the vertex_to_coinciding_vertex_group, we can get the coinciding vertices on a periodic boundary and with v_to_c we can get the list of the periodic neighbor cells to the main cell.  <a href="classFindCellNeighbors.html#a41e3ff222b168f36c6853fbbdc2c00dc">More...</a><br /></td></tr>
 <tr class="separator:a41e3ff222b168f36c6853fbbdc2c00dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/source/core/solutions_output.cc File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/source/core/solutions_output.cc File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -136,11 +137,9 @@ Include dependency graph for solutions_output.cc:</div>
 Functions</h2></td></tr>
 <tr class="memitem:a9cb139445715deb3f8336c4e867370d3"><td class="memTemplParams" colspan="2">template&lt;int dim, int spacedim&gt; </td></tr>
 <tr class="memitem:a9cb139445715deb3f8336c4e867370d3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="solutions__output_8cc.html#a9cb139445715deb3f8336c4e867370d3">write_vtu_and_pvd</a> (<a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;pvd_handler, const DataOutInterface&lt; dim, spacedim &gt; &amp;data_out, const std::string folder, const std::string file_prefix, const double time, const unsigned int iter, const unsigned int group_files, const MPI_Comm &amp;mpi_communicator, const unsigned int digits)</td></tr>
-<tr class="memdesc:a9cb139445715deb3f8336c4e867370d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the data out to "group_files" vtu files, with a pvtu file and a pvd to store the timing <a class="el" href="classThis.html">This</a> function outputs the data out to "group_files" vtu file that are orchestrated by a .pvtu file. An additional pvd file takes care of storing the time associated with each .pvtu file.  <a href="solutions__output_8cc.html#a9cb139445715deb3f8336c4e867370d3">More...</a><br /></td></tr>
 <tr class="separator:a9cb139445715deb3f8336c4e867370d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc701424f51ccd875621de8077bb29e6"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
 <tr class="memitem:acc701424f51ccd875621de8077bb29e6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="solutions__output_8cc.html#acc701424f51ccd875621de8077bb29e6">write_boundaries_vtu</a> (const DataOutFaces&lt; dim &gt; &amp;data_out_faces, const std::string folder, const double, const unsigned int iter, const MPI_Comm &amp;mpi_communicator, const std::string file_prefix, const unsigned int digits)</td></tr>
-<tr class="memdesc:acc701424f51ccd875621de8077bb29e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the Data Out Faces to a single vtu file <a class="el" href="classThis.html">This</a> function outputs the DataOutFaces to a vtu file.  <a href="solutions__output_8cc.html#acc701424f51ccd875621de8077bb29e6">More...</a><br /></td></tr>
 <tr class="separator:acc701424f51ccd875621de8077bb29e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf52b013b06836bf75073e061d07abc1"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solutions__output_8cc.html#acf52b013b06836bf75073e061d07abc1">write_vtu_and_pvd</a> (<a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;pvd_handler, const DataOutInterface&lt; 1, 2 &gt; &amp;data_out, const std::string folder, const std::string file_prefix, const double time, const unsigned int iter, const unsigned int group_files, const MPI_Comm &amp;mpi_communicator, const unsigned int digits)</td></tr>
 <tr class="separator:acf52b013b06836bf75073e061d07abc1"><td class="memSeparator" colspan="2">&#160;</td></tr>

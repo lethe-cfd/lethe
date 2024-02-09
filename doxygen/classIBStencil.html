@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: IBStencil&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: IBStencil&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -85,23 +86,18 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af81d22f6ee5c9960571d8a1089364645"><td class="memItemLeft" align="right" valign="top">virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#af81d22f6ee5c9960571d8a1089364645">number_of_interpolation_support_points</a> (const unsigned int order)</td></tr>
-<tr class="memdesc:af81d22f6ee5c9960571d8a1089364645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of points used by the interpolation stencil excluding the dof itself for a stencil of a given order.  <a href="classIBStencil.html#af81d22f6ee5c9960571d8a1089364645">More...</a><br /></td></tr>
 <tr class="separator:af81d22f6ee5c9960571d8a1089364645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31fd1094a2784cb2426e8c706e1b727a"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; Point&lt; dim &gt;, std::vector&lt; Point&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#a31fd1094a2784cb2426e8c706e1b727a">support_points_for_interpolation</a> (const unsigned int order, const double length_ratio, <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point, const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell_guess)</td></tr>
-<tr class="memdesc:a31fd1094a2784cb2426e8c706e1b727a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the points for the IB stencil, based on the order and the particle position as well as the DOF position Depending on the order, the output variable "point" change definition. In the case of stencil orders 1 to 4 the variable point returns the position of the DOF directly. In the case of high order stencil, it returns the position of the point that is on the IB. The variable "interpolation points" return the points used to define the cell used for the stencil definition and the locations of the points use in the stencil calculation.  <a href="classIBStencil.html#a31fd1094a2784cb2426e8c706e1b727a">More...</a><br /></td></tr>
 <tr class="separator:a31fd1094a2784cb2426e8c706e1b727a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a324229e68b620d47159860faebde4f1f"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; Point&lt; dim &gt;, std::vector&lt; Point&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#a324229e68b620d47159860faebde4f1f">support_points_for_interpolation</a> (const unsigned int order, const double length_ratio, <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point)</td></tr>
 <tr class="separator:a324229e68b620d47159860faebde4f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95fbd2907ff93a3e86216593288e9a71"><td class="memItemLeft" align="right" valign="top">virtual Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#a95fbd2907ff93a3e86216593288e9a71">point_for_cell_detection</a> (<a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point, const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell_guess)</td></tr>
-<tr class="memdesc:a95fbd2907ff93a3e86216593288e9a71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the point used to define the cell used for the stencil calculation.  <a href="classIBStencil.html#a95fbd2907ff93a3e86216593288e9a71">More...</a><br /></td></tr>
 <tr class="separator:a95fbd2907ff93a3e86216593288e9a71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47366b73f82eaf599630ee923c8fb8a1"><td class="memItemLeft" align="right" valign="top">virtual Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#a47366b73f82eaf599630ee923c8fb8a1">point_for_cell_detection</a> (<a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point)</td></tr>
 <tr class="separator:a47366b73f82eaf599630ee923c8fb8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad705d9acd85e0a48ea58af13ea81a5be"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#ad705d9acd85e0a48ea58af13ea81a5be">coefficients</a> (const unsigned int order, const double length_ratio)</td></tr>
-<tr class="memdesc:ad705d9acd85e0a48ea58af13ea81a5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the coefficient of the stencil based on the order. The coefficients of the IB stencil assume a ratio of length between the distance of the farthest interpolation point and the DOF and the distance between the IB and the DOF of 1/8. The coefficient order goes from the coefficient of the DOF to the coefficient of the farthest interpolation point.  <a href="classIBStencil.html#ad705d9acd85e0a48ea58af13ea81a5be">More...</a><br /></td></tr>
 <tr class="separator:ad705d9acd85e0a48ea58af13ea81a5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8964a6702b2e5e9bcf6b15a979f20b93"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#a8964a6702b2e5e9bcf6b15a979f20b93">ib_velocity</a> (<a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point, const unsigned int component, const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell_guess)</td></tr>
-<tr class="memdesc:a8964a6702b2e5e9bcf6b15a979f20b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the velocity of the IB used in the RHS of the equation.  <a href="classIBStencil.html#a8964a6702b2e5e9bcf6b15a979f20b93">More...</a><br /></td></tr>
 <tr class="separator:a8964a6702b2e5e9bcf6b15a979f20b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aede5a0adadb55c7342aa8c7fb171aaa1"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#aede5a0adadb55c7342aa8c7fb171aaa1">ib_velocity</a> (<a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt; &amp;p, const Point&lt; dim &gt; &amp;dof_point, const unsigned int component)</td></tr>
 <tr class="separator:aede5a0adadb55c7342aa8c7fb171aaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,7 +105,6 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:aa6f749a2bfdd70a84548f5568919ada3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBStencil.html#aa6f749a2bfdd70a84548f5568919ada3">p_base</a> (unsigned int order)</td></tr>
-<tr class="memdesc:aa6f749a2bfdd70a84548f5568919ada3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the points on the reference 1D element for the polynomial base.  <a href="classIBStencil.html#aa6f749a2bfdd70a84548f5568919ada3">More...</a><br /></td></tr>
 <tr class="separator:aa6f749a2bfdd70a84548f5568919ada3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

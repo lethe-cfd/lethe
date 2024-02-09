@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/solvers/navier_stokes_assemblers.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/solvers/navier_stokes_assemblers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -185,19 +186,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesAssemblerBase.html">NavierStokesAssemblerBase&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual class that serves as an interface for all of the assemblers for the Navier-Stokes Equations.  <a href="classNavierStokesAssemblerBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPSPGSUPGNavierStokesAssemblerCore.html">PSPGSUPGNavierStokesAssemblerCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of the Navier-Stokes equation. According to the following weak form: \(\mathbf{u} \cdot \nabla \mathbf{u} - \nabla p - \nu \nabla^2 \mathbf{u} =0 \) with an SUPG and PSPG stabilization.  <a href="classPSPGSUPGNavierStokesAssemblerCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerCore.html">GLSNavierStokesAssemblerCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of the Navier-Stokes equation. According to the following weak form: \(\mathbf{u} \cdot \nabla \mathbf{u} - \nabla p - \nu \nabla^2 \mathbf{u} =0 \) with a full GLS stabilization including the laplacian of the test function.  <a href="classGLSNavierStokesAssemblerCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerSRF.html">GLSNavierStokesAssemblerSRF&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the coriolis and the centrifugal if a simulation is carried out in a rotating frame of reference according to the following term: \(2\mathbf{\omega} \times \mathbf{u} + \mathbf{\omega}\times (\mathbf{\omega} \times \mathbf{r})\) Where $\mathbf{\omega}$ is the rotation vector of the frame of reference and $\mathbf{r}$ is the position vector (e.g. a vector between a point on the rotation axis and the gauss point) By default, it is assumed that the rotation vector passes through the point (0,0) in 2D or (0,0,0) in 3D.  <a href="classGLSNavierStokesAssemblerSRF.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesAssemblerNonNewtonianCore.html">GLSNavierStokesAssemblerNonNewtonianCore&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that assembles the core of the Navier-Stokes equation using a Rheological model to predict non-Newtonian behaviors.  <a href="classGLSNavierStokesAssemblerNonNewtonianCore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>

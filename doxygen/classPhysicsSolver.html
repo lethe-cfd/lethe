@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PhysicsSolver&lt; VectorType &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PhysicsSolver&lt; VectorType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -80,9 +81,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that has all the common elements of a physics solver. It creates the nonlinear solver as specified by the user using the parameters file and provides all the necessary elements needed by the solver to solve a physics problem.  
- <a href="classPhysicsSolver.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="physics__solver_8h_source.html">physics_solver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PhysicsSolver&lt; VectorType &gt;:</div>
@@ -117,22 +115,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af58e44ac26b7968b5aa943d30732086b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#af58e44ac26b7968b5aa943d30732086b">~PhysicsSolver</a> ()</td></tr>
 <tr class="separator:af58e44ac26b7968b5aa943d30732086b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73215f315918e22864cf04248c583045"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a73215f315918e22864cf04248c583045">assemble_system_matrix</a> ()=0</td></tr>
-<tr class="memdesc:a73215f315918e22864cf04248c583045"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_system_matrix Assembles the matrix  <a href="classPhysicsSolver.html#a73215f315918e22864cf04248c583045">More...</a><br /></td></tr>
 <tr class="separator:a73215f315918e22864cf04248c583045"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74110493860247f4ed2da56ef3050f08"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a74110493860247f4ed2da56ef3050f08">assemble_system_rhs</a> ()=0</td></tr>
-<tr class="memdesc:a74110493860247f4ed2da56ef3050f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble_system_rhs Assembles the rhs  <a href="classPhysicsSolver.html#a74110493860247f4ed2da56ef3050f08">More...</a><br /></td></tr>
 <tr class="separator:a74110493860247f4ed2da56ef3050f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a210eb1a42329bbc5b66e0d449bd815b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">solve_linear_system</a> (const bool initial_step, const bool renewed_matrix=true)=0</td></tr>
-<tr class="memdesc:a210eb1a42329bbc5b66e0d449bd815b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">solve_linear_system Solves the linear system of equations  <a href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">More...</a><br /></td></tr>
 <tr class="separator:a210eb1a42329bbc5b66e0d449bd815b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae98422d82284b2d4d55d42ca454a300a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#ae98422d82284b2d4d55d42ca454a300a">solve_non_linear_system</a> (const bool first_iteration)</td></tr>
-<tr class="memdesc:ae98422d82284b2d4d55d42ca454a300a"><td class="mdescLeft">&#160;</td><td class="mdescRight">solve_non_linear_system Solves the non linear system of equations  <a href="classPhysicsSolver.html#ae98422d82284b2d4d55d42ca454a300a">More...</a><br /></td></tr>
 <tr class="separator:ae98422d82284b2d4d55d42ca454a300a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcbaa24bbccef95e74f88926d5d3e7eb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#afcbaa24bbccef95e74f88926d5d3e7eb">apply_constraints</a> ()</td></tr>
-<tr class="memdesc:afcbaa24bbccef95e74f88926d5d3e7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies constraints to a local_evaluation_point.  <a href="classPhysicsSolver.html#afcbaa24bbccef95e74f88926d5d3e7eb">More...</a><br /></td></tr>
 <tr class="separator:afcbaa24bbccef95e74f88926d5d3e7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a313727ad7574c4d4fb744f667f733508"><td class="memItemLeft" align="right" valign="top">virtual VectorType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">get_evaluation_point</a> ()=0</td></tr>
-<tr class="memdesc:a313727ad7574c4d4fb744f667f733508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter methods that give access to the private attributes of the physics being solved. These methods must be provided by the physics as they are the key to solve a problem using Lethe.  <a href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">More...</a><br /></td></tr>
 <tr class="separator:a313727ad7574c4d4fb744f667f733508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef3b890ff2cffc97d546e32583c5ba3a"><td class="memItemLeft" align="right" valign="top">virtual VectorType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#aef3b890ff2cffc97d546e32583c5ba3a">get_local_evaluation_point</a> ()=0</td></tr>
 <tr class="separator:aef3b890ff2cffc97d546e32583c5ba3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,10 +137,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aadfaeda6c524f54395f64cbc100c3003"><td class="memItemLeft" align="right" valign="top">virtual AffineConstraints&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#aadfaeda6c524f54395f64cbc100c3003">get_nonzero_constraints</a> ()=0</td></tr>
 <tr class="separator:aadfaeda6c524f54395f64cbc100c3003"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a890a9818cde0d3b89e38ece859b7733e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">get_current_residual</a> ()</td></tr>
-<tr class="memdesc:a890a9818cde0d3b89e38ece859b7733e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default way to evaluate the residual for the nonlinear solver. Some application may use more complex evaluation of the residual and override this method.  <a href="classPhysicsSolver.html#a890a9818cde0d3b89e38ece859b7733e">More...</a><br /></td></tr>
 <tr class="separator:a890a9818cde0d3b89e38ece859b7733e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a556929601fd0996edf883aaab9cd4e16"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">get_current_newton_iteration</a> () const</td></tr>
-<tr class="memdesc:a556929601fd0996edf883aaab9cd4e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current newton iteration of this physics solver.  <a href="classPhysicsSolver.html#a556929601fd0996edf883aaab9cd4e16">More...</a><br /></td></tr>
 <tr class="separator:a556929601fd0996edf883aaab9cd4e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

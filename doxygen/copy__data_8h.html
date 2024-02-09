@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: /home/runner/work/lethe/lethe/include/solvers/copy_data.h File Reference</title>
+<title>Lethe Open-Source Library: /home/runner/work/lethe/lethe/include/solvers/copy_data.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -155,13 +156,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCopyData.html">CopyData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class responsible for storing the information calculated using the assembly of regular (meaning non-stabilized) equations. It is also used to initialize, zero (reset) and store the cell_matrix, the cell_rhs and the dof indices associated with the dofs of the cell.  <a href="classCopyData.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class responsible for storing the information calculated using the assembly of stabilized scalar equations. Like the <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class is used to initialize, zero (reset) and store the cell_matrix and the cell_rhs. Contrary to the regular <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class also stores the strong_residual and the strong_jacobian of the equation being assembled. <a class="el" href="classThis.html">This</a> is useful for equations that implement residual-based stabilization such as SUPG. <a class="el" href="classThis.html">This</a> class is specialized for single component equations because the strong jacobian is stored using a Vector&lt;double&gt;  <a href="classStabilizedMethodsCopyData.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData&lt; dim &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class responsible for storing the information calculated using the assembly of stabilized Tensor&lt;1,dim&gt; equations. Like the <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class is used to initialize, zero (reset) and store the cell_matrix and the cell_rhs. Contrary to the regular <a class="el" href="classCopyData.html" title="Class responsible for storing the information calculated using the assembly of regular (meaning non-s...">CopyData</a> class, this class also stores the strong_residual and the strong_jacobian of the equation being assembled. <a class="el" href="classThis.html">This</a> is useful for equations that implement residual-based stabilization such as SUPG. <a class="el" href="classThis.html">This</a> class is specialized for Tensor&lt;1,dim&gt; equations because the strong jacobian is stored using a Tensor&lt;1,dim&gt;  <a href="classStabilizedMethodsTensorCopyData.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

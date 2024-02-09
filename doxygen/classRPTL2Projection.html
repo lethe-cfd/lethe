@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: RPTL2Projection&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: RPTL2Projection&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -84,31 +85,22 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a35120f9ed67e6863e87428c3e8fad22f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a35120f9ed67e6863e87428c3e8fad22f">RPTL2Projection</a> (<a class="el" href="structParameters_1_1RPTParameters.html">Parameters::RPTParameters</a> &amp;rpt_parameters, <a class="el" href="structParameters_1_1RPTFEMReconstructionParameters.html">Parameters::RPTFEMReconstructionParameters</a> &amp;rpt_fem_reconstruction_parameters, <a class="el" href="structParameters_1_1DetectorParameters.html">Parameters::DetectorParameters</a> &amp;rpt_detector_parameters)</td></tr>
-<tr class="memdesc:a35120f9ed67e6863e87428c3e8fad22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRPTL2Projection.html">RPTL2Projection</a>.  <a href="classRPTL2Projection.html#a35120f9ed67e6863e87428c3e8fad22f">More...</a><br /></td></tr>
 <tr class="separator:a35120f9ed67e6863e87428c3e8fad22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32b491255556fd332d12bb510096316b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a32b491255556fd332d12bb510096316b">L2_project</a> ()</td></tr>
-<tr class="memdesc:a32b491255556fd332d12bb510096316b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Using the L2 projection, builds a dictionary of photon counts with respect to a detector for given positions inside a reactor.  <a href="classRPTL2Projection.html#a32b491255556fd332d12bb510096316b">More...</a><br /></td></tr>
 <tr class="separator:a32b491255556fd332d12bb510096316b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99a8e68a2e3cf00eabb289c92476d7da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a99a8e68a2e3cf00eabb289c92476d7da">setup_triangulation</a> ()</td></tr>
-<tr class="memdesc:a99a8e68a2e3cf00eabb289c92476d7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the triangulation that covers the domain of the reactor.  <a href="classRPTL2Projection.html#a99a8e68a2e3cf00eabb289c92476d7da">More...</a><br /></td></tr>
 <tr class="separator:a99a8e68a2e3cf00eabb289c92476d7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66232600a29707d4b81a13b84c70af73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a66232600a29707d4b81a13b84c70af73">setup_system</a> ()</td></tr>
-<tr class="memdesc:a66232600a29707d4b81a13b84c70af73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the system to be solved by enumerating the degrees of freedom and set up the matrix and vector objects to hold the system data.  <a href="classRPTL2Projection.html#a66232600a29707d4b81a13b84c70af73">More...</a><br /></td></tr>
 <tr class="separator:a66232600a29707d4b81a13b84c70af73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9a895f1d90542786f9154ff7e93bd4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#ad9a895f1d90542786f9154ff7e93bd4d">assemble_system</a> (unsigned detector_no)</td></tr>
-<tr class="memdesc:ad9a895f1d90542786f9154ff7e93bd4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble matrix and right hand side that form the linear system that need to be solved for a given detector.  <a href="classRPTL2Projection.html#ad9a895f1d90542786f9154ff7e93bd4d">More...</a><br /></td></tr>
 <tr class="separator:ad9a895f1d90542786f9154ff7e93bd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c1daf71fda03c4499943e2f147d01a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a2c1daf71fda03c4499943e2f147d01a8">solve_linear_system</a> (unsigned detector_no)</td></tr>
-<tr class="memdesc:a2c1daf71fda03c4499943e2f147d01a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the linear system for a given detector to get the nodal counts.  <a href="classRPTL2Projection.html#a2c1daf71fda03c4499943e2f147d01a8">More...</a><br /></td></tr>
 <tr class="separator:a2c1daf71fda03c4499943e2f147d01a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44a049043eb4480605f55d4e97a3d1c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a44a049043eb4480605f55d4e97a3d1c6">output_results</a> ()</td></tr>
-<tr class="memdesc:a44a049043eb4480605f55d4e97a3d1c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the solution of the linear system (nodal counts) in a ".vtk" file format.  <a href="classRPTL2Projection.html#a44a049043eb4480605f55d4e97a3d1c6">More...</a><br /></td></tr>
 <tr class="separator:a44a049043eb4480605f55d4e97a3d1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a539ce753322ef01f780d25f5942f98d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a539ce753322ef01f780d25f5942f98d5">output_raw_results</a> ()</td></tr>
-<tr class="memdesc:a539ce753322ef01f780d25f5942f98d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the position of each vertex of every cell of the grid and the photon count at that position for every detector in a ".dat" file format.  <a href="classRPTL2Projection.html#a539ce753322ef01f780d25f5942f98d5">More...</a><br /></td></tr>
 <tr class="separator:a539ce753322ef01f780d25f5942f98d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a924a1ea8ca5a6c21d5db530fa92cb97a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRPTL2Projection.html#a924a1ea8ca5a6c21d5db530fa92cb97a">checkpoint</a> ()</td></tr>
-<tr class="memdesc:a924a1ea8ca5a6c21d5db530fa92cb97a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the built dictionary which will be used later for the 3D FEM reconstruction.  <a href="classRPTL2Projection.html#a924a1ea8ca5a6c21d5db530fa92cb97a">More...</a><br /></td></tr>
 <tr class="separator:a924a1ea8ca5a6c21d5db530fa92cb97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

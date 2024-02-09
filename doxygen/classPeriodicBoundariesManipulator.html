@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PeriodicBoundariesManipulator&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PeriodicBoundariesManipulator&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -87,25 +88,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3af23a12e5a5fde913de8e983fd9398a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a3af23a12e5a5fde913de8e983fd9398a">PeriodicBoundariesManipulator</a> ()</td></tr>
 <tr class="separator:a3af23a12e5a5fde913de8e983fd9398a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb01e3789834388ab0745d2575248ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a4bb01e3789834388ab0745d2575248ab">set_periodic_boundaries_information</a> (const types::boundary_id periodic_boundary_id_0, const types::boundary_id periodic_boundary_id_1, const unsigned int periodic_direction)</td></tr>
-<tr class="memdesc:a4bb01e3789834388ab0745d2575248ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the periodic boundaries parameters.  <a href="classPeriodicBoundariesManipulator.html#a4bb01e3789834388ab0745d2575248ab">More...</a><br /></td></tr>
 <tr class="separator:a4bb01e3789834388ab0745d2575248ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f9ac1843d0beb0dea34a5beadd4120a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a7f9ac1843d0beb0dea34a5beadd4120a">map_periodic_cells</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info &amp;periodic_boundaries_cells_information)</td></tr>
-<tr class="memdesc:a7f9ac1843d0beb0dea34a5beadd4120a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the mapping of the cells on periodic boundaries and store information in periodic_boundaries_cells_information.  <a href="classPeriodicBoundariesManipulator.html#a7f9ac1843d0beb0dea34a5beadd4120a">More...</a><br /></td></tr>
 <tr class="separator:a7f9ac1843d0beb0dea34a5beadd4120a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe915039a1af61d5d9fcca9da05a8e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a4fe915039a1af61d5d9fcca9da05a8e6">execute_particles_displacement</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info &amp;periodic_boundaries_cells_information)</td></tr>
-<tr class="memdesc:a4fe915039a1af61d5d9fcca9da05a8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves particles crossing periodic boundaries (any side) particle_handle doesn't allow automated particle displacement since it is not linked to triangulation and its periodic mapping.  <a href="classPeriodicBoundariesManipulator.html#a4fe915039a1af61d5d9fcca9da05a8e6">More...</a><br /></td></tr>
 <tr class="separator:a4fe915039a1af61d5d9fcca9da05a8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2667afdbff088ad9d1930dc90f82ab25"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 1, dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a2667afdbff088ad9d1930dc90f82ab25">get_periodic_offset_distance</a> ()</td></tr>
-<tr class="memdesc:a2667afdbff088ad9d1930dc90f82ab25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the periodic offset distance, it is calculated from the first pair of cells on periodic boundaries, all pair of cells are assumed to have the same offset.  <a href="classPeriodicBoundariesManipulator.html#a2667afdbff088ad9d1930dc90f82ab25">More...</a><br /></td></tr>
 <tr class="separator:a2667afdbff088ad9d1930dc90f82ab25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a6dfded44117aa19d2aa08224c4cf15e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a6dfded44117aa19d2aa08224c4cf15e8">get_periodic_boundaries_info</a> (typename Triangulation&lt; dim &gt;::cell_iterator cell, const unsigned int face_id, <a class="el" href="structperiodic__boundaries__cells__info__struct.html">periodic_boundaries_cells_info_struct</a>&lt; dim &gt; &amp;boundaries_information)</td></tr>
-<tr class="memdesc:a6dfded44117aa19d2aa08224c4cf15e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets boundaries information related to the face at periodic boundaries 0 and 1 and stores in <a class="el" href="structperiodic__boundaries__cells__info__struct.html">periodic_boundaries_cells_info_struct</a> object.  <a href="classPeriodicBoundariesManipulator.html#a6dfded44117aa19d2aa08224c4cf15e8">More...</a><br /></td></tr>
 <tr class="separator:a6dfded44117aa19d2aa08224c4cf15e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dbd030e0bd79f7ba5dbb1fdc2b11893"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicBoundariesManipulator.html#a0dbd030e0bd79f7ba5dbb1fdc2b11893">check_and_move_particles</a> (const <a class="el" href="structperiodic__boundaries__cells__info__struct.html">periodic_boundaries_cells_info_struct</a>&lt; dim &gt; &amp;boundaries_cells_content, typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range &amp;particles_in_cell, const bool particles_in_pb0_cell)</td></tr>
-<tr class="memdesc:a0dbd030e0bd79f7ba5dbb1fdc2b11893"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if particle is outside of the cell, if so, modifies the location of the particle with the distance (offset) between the periodic faces.  <a href="classPeriodicBoundariesManipulator.html#a0dbd030e0bd79f7ba5dbb1fdc2b11893">More...</a><br /></td></tr>
 <tr class="separator:a0dbd030e0bd79f7ba5dbb1fdc2b11893"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: SolidBase&lt; dim, spacedim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: SolidBase&lt; dim, spacedim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -86,25 +87,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f4dc8deca9f9a243067db8dd4f0492a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a9f4dc8deca9f9a243067db8dd4f0492a">SolidBase</a> (std::shared_ptr&lt; <a class="el" href="classParameters_1_1NitscheObject.html">Parameters::NitscheObject</a>&lt; spacedim &gt;&gt; &amp;<a class="el" href="classSolidBase.html#a9c6307f13534cbff5a31109c5915bcc7">param</a>, std::shared_ptr&lt; parallel::DistributedTriangulationBase&lt; spacedim &gt;&gt; <a class="el" href="classSolidBase.html#aa9660d32f7027f1e4da1d6a0dfc0b992">fluid_tria</a>, std::shared_ptr&lt; Mapping&lt; spacedim &gt;&gt; <a class="el" href="classSolidBase.html#a8854df1daf4ffc7765b14b7172a5872b">fluid_mapping</a>)</td></tr>
 <tr class="separator:a9f4dc8deca9f9a243067db8dd4f0492a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92aea3e357d30cf2cb021cac7c3a8ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a92aea3e357d30cf2cb021cac7c3a8ffa">initial_setup</a> ()</td></tr>
-<tr class="memdesc:a92aea3e357d30cf2cb021cac7c3a8ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages solid triangulation and particles setup.  <a href="classSolidBase.html#a92aea3e357d30cf2cb021cac7c3a8ffa">More...</a><br /></td></tr>
 <tr class="separator:a92aea3e357d30cf2cb021cac7c3a8ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f7dc77812dcd58d7e749b48b29516c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a7f7dc77812dcd58d7e749b48b29516c4">setup_triangulation</a> (const bool restart)</td></tr>
-<tr class="memdesc:a7f7dc77812dcd58d7e749b48b29516c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a solid triangulation from a dealii or gmsh mesh.  <a href="classSolidBase.html#a7f7dc77812dcd58d7e749b48b29516c4">More...</a><br /></td></tr>
 <tr class="separator:a7f7dc77812dcd58d7e749b48b29516c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bd2ffa327601876162a5d44d0b4d5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#ac8bd2ffa327601876162a5d44d0b4d5b">setup_displacement</a> ()</td></tr>
-<tr class="memdesc:ac8bd2ffa327601876162a5d44d0b4d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets-up particles with particle handler, in the fluid triangulation domain that holds the particles of the solid according to a specific quadrature.  <a href="classSolidBase.html#ac8bd2ffa327601876162a5d44d0b4d5b">More...</a><br /></td></tr>
 <tr class="separator:ac8bd2ffa327601876162a5d44d0b4d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1f24708bcc550b4dda791eefdd913c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#af1f24708bcc550b4dda791eefdd913c6">setup_particles_handler</a> ()</td></tr>
-<tr class="memdesc:af1f24708bcc550b4dda791eefdd913c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a particle handler in the fluid triangulation domain.  <a href="classSolidBase.html#af1f24708bcc550b4dda791eefdd913c6">More...</a><br /></td></tr>
 <tr class="separator:af1f24708bcc550b4dda791eefdd913c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea5ba1e94c9d54c1f7d0c7dd81dd1dd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#aea5ba1e94c9d54c1f7d0c7dd81dd1dd0">setup_particles</a> ()</td></tr>
-<tr class="memdesc:aea5ba1e94c9d54c1f7d0c7dd81dd1dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets-up particles with particle handler, in the fluid triangulation domain that holds the particles of the solid according to a specific quadrature.  <a href="classSolidBase.html#aea5ba1e94c9d54c1f7d0c7dd81dd1dd0">More...</a><br /></td></tr>
 <tr class="separator:aea5ba1e94c9d54c1f7d0c7dd81dd1dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ab0a3288b041264cb8074cbb9713f3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a9ab0a3288b041264cb8074cbb9713f3c">load_triangulation</a> (const std::string filename_tria)</td></tr>
-<tr class="memdesc:a9ab0a3288b041264cb8074cbb9713f3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a solid triangulation from a restart file.  <a href="classSolidBase.html#a9ab0a3288b041264cb8074cbb9713f3c">More...</a><br /></td></tr>
 <tr class="separator:a9ab0a3288b041264cb8074cbb9713f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8c08d6c4700089c55a19f7c15ef26d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#ac8c08d6c4700089c55a19f7c15ef26d4">load_particles</a> (const std::string filename_part)</td></tr>
-<tr class="memdesc:ac8c08d6c4700089c55a19f7c15ef26d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a particle handler in the fluid triangulation domain that holds the particles of the solid according to a specific quadrature, and sets up dofs.  <a href="classSolidBase.html#ac8c08d6c4700089c55a19f7c15ef26d4">More...</a><br /></td></tr>
 <tr class="separator:ac8c08d6c4700089c55a19f7c15ef26d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1529113b1b385784b7fe404f0849fe04"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Particles::ParticleHandler&lt; spacedim &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a1529113b1b385784b7fe404f0849fe04">get_solid_particle_handler</a> ()</td></tr>
 <tr class="separator:a1529113b1b385784b7fe404f0849fe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,31 +115,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acddeeba8d853c9649a77590efdbea715"><td class="memItemLeft" align="right" valign="top">Function&lt; spacedim &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#acddeeba8d853c9649a77590efdbea715">get_solid_temperature</a> ()</td></tr>
 <tr class="separator:acddeeba8d853c9649a77590efdbea715"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5eaf06fd116ba6d89bf04661e6e1289"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#af5eaf06fd116ba6d89bf04661e6e1289">integrate_velocity</a> (double time_step, double initial_time)</td></tr>
-<tr class="memdesc:af5eaf06fd116ba6d89bf04661e6e1289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates particle positions in solid_particle_handler by integrating velocity using an explicit Runge-Kutta 4 method.  <a href="classSolidBase.html#af5eaf06fd116ba6d89bf04661e6e1289">More...</a><br /></td></tr>
 <tr class="separator:af5eaf06fd116ba6d89bf04661e6e1289"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c767cc5b7c391f820dfe881eec58e28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a4c767cc5b7c391f820dfe881eec58e28">move_solid_triangulation</a> (double time_step, double initial_time)</td></tr>
-<tr class="memdesc:a4c767cc5b7c391f820dfe881eec58e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the vertices of the solid triangulation. <a class="el" href="classThis.html">This</a> function uses an Runge-Kutta 4 explicit time integrator to displace the vertices of the solid triangulation and stores the displacement in an array in order to allow correct checkpointing of the triangulation. See <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods</a> for more details.  <a href="classSolidBase.html#a4c767cc5b7c391f820dfe881eec58e28">More...</a><br /></td></tr>
 <tr class="separator:a4c767cc5b7c391f820dfe881eec58e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ebae14d0b18ffddedab124a4619e172"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a9ebae14d0b18ffddedab124a4619e172">move_solid_triangulation_with_displacement</a> ()</td></tr>
-<tr class="memdesc:a9ebae14d0b18ffddedab124a4619e172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the dofs of the solid_triangulation by using the displacement vector. <a class="el" href="classThis.html">This</a> is only use to move the solid triangulation at the correct location when the simulation is restarted.  <a href="classSolidBase.html#a9ebae14d0b18ffddedab124a4619e172">More...</a><br /></td></tr>
 <tr class="separator:a9ebae14d0b18ffddedab124a4619e172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6a7c8178927f2581d5530856a1d0c0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#af6a7c8178927f2581d5530856a1d0c0b">print_particle_positions</a> ()</td></tr>
-<tr class="memdesc:af6a7c8178927f2581d5530856a1d0c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the positions of the particles  <a href="classSolidBase.html#af6a7c8178927f2581d5530856a1d0c0b">More...</a><br /></td></tr>
 <tr class="separator:af6a7c8178927f2581d5530856a1d0c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e83d98f02c979151c56429d8eee162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a74e83d98f02c979151c56429d8eee162">rotate_grid</a> (const double angle, const Tensor&lt; 1, 3 &gt; axis)</td></tr>
-<tr class="memdesc:a74e83d98f02c979151c56429d8eee162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the grid by a given angle around an axis.  <a href="classSolidBase.html#a74e83d98f02c979151c56429d8eee162">More...</a><br /></td></tr>
 <tr class="separator:a74e83d98f02c979151c56429d8eee162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa287aebb7afed84a74093eb454a33ca8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#aa287aebb7afed84a74093eb454a33ca8">translate_grid</a> (const Tensor&lt; 1, 3 &gt; translate)</td></tr>
-<tr class="memdesc:aa287aebb7afed84a74093eb454a33ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate the grid. In spacedim=2, the third component is ignore.  <a href="classSolidBase.html#aa287aebb7afed84a74093eb454a33ca8">More...</a><br /></td></tr>
 <tr class="separator:aa287aebb7afed84a74093eb454a33ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a761e2ca79e01c421e94595c64c7fefa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a761e2ca79e01c421e94595c64c7fefa5">update_temperature_time</a> (double time)</td></tr>
-<tr class="memdesc:a761e2ca79e01c421e94595c64c7fefa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the time in the function used to describe the solid temperature.  <a href="classSolidBase.html#a761e2ca79e01c421e94595c64c7fefa5">More...</a><br /></td></tr>
 <tr class="separator:a761e2ca79e01c421e94595c64c7fefa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b7cc0d95af40cb2e1148cf37d40e7a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a7b7cc0d95af40cb2e1148cf37d40e7a9">read_checkpoint</a> (std::string prefix_name)</td></tr>
-<tr class="memdesc:a7b7cc0d95af40cb2e1148cf37d40e7a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">read solid base triangulation checkpoint  <a href="classSolidBase.html#a7b7cc0d95af40cb2e1148cf37d40e7a9">More...</a><br /></td></tr>
 <tr class="separator:a7b7cc0d95af40cb2e1148cf37d40e7a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76e8a2bbcc379ab82b12932eae9baf0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a76e8a2bbcc379ab82b12932eae9baf0a">write_checkpoint</a> (std::string prefix_name)</td></tr>
-<tr class="memdesc:a76e8a2bbcc379ab82b12932eae9baf0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">write solid base triangulation checkpoint  <a href="classSolidBase.html#a76e8a2bbcc379ab82b12932eae9baf0a">More...</a><br /></td></tr>
 <tr class="separator:a76e8a2bbcc379ab82b12932eae9baf0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad5b00d8ca482825d834fbd6c4fe5f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSolidBase.html#a3ad5b00d8ca482825d834fbd6c4fe5f8">rotate_grid</a> (const double angle, const Tensor&lt; 1, 3 &gt;)</td></tr>
 <tr class="separator:a3ad5b00d8ca482825d834fbd6c4fe5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>

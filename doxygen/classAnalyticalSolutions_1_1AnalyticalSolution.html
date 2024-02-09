@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: AnalyticalSolutions::AnalyticalSolution&lt; dim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: AnalyticalSolutions::AnalyticalSolution&lt; dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -84,30 +85,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implements analytical solutions for the Navier-Stokes equations and the other physics supported by lethe.  
- <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="analytical__solutions_8h_source.html">analytical_solutions.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aca6eea7e4b34a56a65c4035f8cfbcefb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#aca6eea7e4b34a56a65c4035f8cfbcefb">AnalyticalSolution</a> ()</td></tr>
-<tr class="memdesc:aca6eea7e4b34a56a65c4035f8cfbcefb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html" title="Implements analytical solutions for the Navier-Stokes equations and the other physics supported by le...">AnalyticalSolution</a> object.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#aca6eea7e4b34a56a65c4035f8cfbcefb">More...</a><br /></td></tr>
 <tr class="separator:aca6eea7e4b34a56a65c4035f8cfbcefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a309d34b3b98a5c8d9975ae0dbd4816a8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a309d34b3b98a5c8d9975ae0dbd4816a8">declare_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:a309d34b3b98a5c8d9975ae0dbd4816a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares the parameters required by the analytical solution within a parameter file.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a309d34b3b98a5c8d9975ae0dbd4816a8">More...</a><br /></td></tr>
 <tr class="separator:a309d34b3b98a5c8d9975ae0dbd4816a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9861ba108a631a5a47778b7aad05d62c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a9861ba108a631a5a47778b7aad05d62c">parse_parameters</a> (ParameterHandler &amp;prm)</td></tr>
-<tr class="memdesc:a9861ba108a631a5a47778b7aad05d62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the parameters required by the analytical solution within a parameter file.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a9861ba108a631a5a47778b7aad05d62c">More...</a><br /></td></tr>
 <tr class="separator:a9861ba108a631a5a47778b7aad05d62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb4aa87710f9b4d188366c5e34b19dc0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#abb4aa87710f9b4d188366c5e34b19dc0">calculate_error</a> ()</td></tr>
-<tr class="memdesc:abb4aa87710f9b4d188366c5e34b19dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the calculation of the error using the analytical solution is enabled. <a class="el" href="classThis.html">This</a> option is there to prevent unnecessary calculations when no analytical solutions are required.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#abb4aa87710f9b4d188366c5e34b19dc0">More...</a><br /></td></tr>
 <tr class="separator:abb4aa87710f9b4d188366c5e34b19dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a346d45102e39e357280fa8283c79d61e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a346d45102e39e357280fa8283c79d61e">set_enable</a> (bool is_enable)</td></tr>
-<tr class="memdesc:a346d45102e39e357280fa8283c79d61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the usage of the analytical solution.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a346d45102e39e357280fa8283c79d61e">More...</a><br /></td></tr>
 <tr class="separator:a346d45102e39e357280fa8283c79d61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78fe3527d5b28736a0a779cfecb74770"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a78fe3527d5b28736a0a779cfecb74770">get_filename</a> ()</td></tr>
-<tr class="memdesc:a78fe3527d5b28736a0a779cfecb74770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the file name associated with the output of the L2 norm of the error calculated using the analytical solution.  <a href="classAnalyticalSolutions_1_1AnalyticalSolution.html#a78fe3527d5b28736a0a779cfecb74770">More...</a><br /></td></tr>
 <tr class="separator:a78fe3527d5b28736a0a779cfecb74770"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>

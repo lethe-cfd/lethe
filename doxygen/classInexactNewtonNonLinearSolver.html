@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: InexactNewtonNonLinearSolver&lt; VectorType &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: InexactNewtonNonLinearSolver&lt; VectorType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -79,9 +80,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>InexactNewtonIterationNonLinearSolver. Non-linear solver for non-linear systems of equations which uses a Newton method with \alpha relaxation to ensure that the residual is monotonically decreasing.  
- <a href="classInexactNewtonNonLinearSolver.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="inexact__newton__non__linear__solver_8h_source.html">inexact_newton_non_linear_solver.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for InexactNewtonNonLinearSolver&lt; VectorType &gt;:</div>
@@ -96,19 +94,15 @@ Inheritance diagram for InexactNewtonNonLinearSolver&lt; VectorType &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ffed3df0985d28a1eed051c982e0727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInexactNewtonNonLinearSolver.html#a6ffed3df0985d28a1eed051c982e0727">InexactNewtonNonLinearSolver</a> (<a class="el" href="classPhysicsSolver.html">PhysicsSolver</a>&lt; VectorType &gt; *<a class="el" href="classNonLinearSolver.html#a576cc5a7bb280c055ac7b1d1a83a38c6">physics_solver</a>, const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> &amp;param)</td></tr>
-<tr class="memdesc:a6ffed3df0985d28a1eed051c982e0727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the InexactNewtonIterationNonLinearSolver.  <a href="classInexactNewtonNonLinearSolver.html#a6ffed3df0985d28a1eed051c982e0727">More...</a><br /></td></tr>
 <tr class="separator:a6ffed3df0985d28a1eed051c982e0727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60831c74a53644aaae2d2fc55482e851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInexactNewtonNonLinearSolver.html#a60831c74a53644aaae2d2fc55482e851">solve</a> (const bool is_initial_step) override</td></tr>
-<tr class="memdesc:a60831c74a53644aaae2d2fc55482e851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the non-linear system of equation.  <a href="classInexactNewtonNonLinearSolver.html#a60831c74a53644aaae2d2fc55482e851">More...</a><br /></td></tr>
 <tr class="separator:a60831c74a53644aaae2d2fc55482e851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNonLinearSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNonLinearSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNonLinearSolver.html">NonLinearSolver&lt; VectorType &gt;</a></td></tr>
 <tr class="memitem:a64cc52ea704a9407555ec08f6a262294 inherit pub_methods_classNonLinearSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonLinearSolver.html#a64cc52ea704a9407555ec08f6a262294">NonLinearSolver</a> (<a class="el" href="classPhysicsSolver.html">PhysicsSolver</a>&lt; VectorType &gt; *<a class="el" href="classNonLinearSolver.html#a576cc5a7bb280c055ac7b1d1a83a38c6">physics_solver</a>, const <a class="el" href="structParameters_1_1NonLinearSolver.html">Parameters::NonLinearSolver</a> &amp;<a class="el" href="classNonLinearSolver.html#ae8ddaed15b75b69610049bb2dd137e7d">params</a>)</td></tr>
-<tr class="memdesc:a64cc52ea704a9407555ec08f6a262294 inherit pub_methods_classNonLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classNonLinearSolver.html" title="NonlinearSolver. Base class for all non-linear solver for non-linear systems of equations....">NonLinearSolver</a>.  <a href="classNonLinearSolver.html#a64cc52ea704a9407555ec08f6a262294">More...</a><br /></td></tr>
 <tr class="separator:a64cc52ea704a9407555ec08f6a262294 inherit pub_methods_classNonLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a711a5f38c728ef9025dc3ae46368209e inherit pub_methods_classNonLinearSolver"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonLinearSolver.html#a711a5f38c728ef9025dc3ae46368209e">~NonLinearSolver</a> ()</td></tr>
 <tr class="separator:a711a5f38c728ef9025dc3ae46368209e inherit pub_methods_classNonLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad43a0c8cd50744caf83bd37bc86580d4 inherit pub_methods_classNonLinearSolver"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNonLinearSolver.html#ad43a0c8cd50744caf83bd37bc86580d4">get_current_newton_iteration</a> () const</td></tr>
-<tr class="memdesc:ad43a0c8cd50744caf83bd37bc86580d4 inherit pub_methods_classNonLinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current newton iteration.  <a href="classNonLinearSolver.html#ad43a0c8cd50744caf83bd37bc86580d4">More...</a><br /></td></tr>
 <tr class="separator:ad43a0c8cd50744caf83bd37bc86580d4 inherit pub_methods_classNonLinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>

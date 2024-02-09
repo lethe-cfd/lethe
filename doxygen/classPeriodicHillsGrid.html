@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Developer documentation for the Lethe open-source library: PeriodicHillsGrid&lt; dim, spacedim &gt; Class Template Reference</title>
+<title>Lethe Open-Source Library: PeriodicHillsGrid&lt; dim, spacedim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,9 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Developer documentation for the Lethe open-source library
+   <div id="projectname">Lethe Open-Source Library
    </div>
+   <div id="projectbrief">Developer Guide</div>
   </td>
  </tr>
  </tbody>
@@ -80,24 +81,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Class that creates a hyper_rectangle and transforms it to obtain the hill geometry with the hill_geometry function. It also attaches a manifold to the geometry.  
- <a href="classPeriodicHillsGrid.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="periodic__hills__grid_8h_source.html">periodic_hills_grid.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ceb4f1b6c86a2b25c243e35fb5beb1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsGrid.html#a6ceb4f1b6c86a2b25c243e35fb5beb1d">PeriodicHillsGrid</a> (const std::string &amp;<a class="el" href="classPeriodicHillsGrid.html#a30da6c29ca885ec6d53d532e63846d7f">grid_arguments</a>)</td></tr>
-<tr class="memdesc:a6ceb4f1b6c86a2b25c243e35fb5beb1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classPeriodicHillsGrid.html" title="Class that creates a hyper_rectangle and transforms it to obtain the hill geometry with the hill_geom...">PeriodicHillsGrid</a>.  <a href="classPeriodicHillsGrid.html#a6ceb4f1b6c86a2b25c243e35fb5beb1d">More...</a><br /></td></tr>
 <tr class="separator:a6ceb4f1b6c86a2b25c243e35fb5beb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4b24f516396fc735795fabc8eee7ddd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsGrid.html#ab4b24f516396fc735795fabc8eee7ddd">make_grid</a> (Triangulation&lt; dim, spacedim &gt; &amp;triangulation)</td></tr>
-<tr class="memdesc:ab4b24f516396fc735795fabc8eee7ddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">make_grid. The make_grid function generates a hyper rectangle of the size of the domain and then transforms it to the hill geometry. It also constructs the geometry manifold with FunctionManifold and finally sets the manifold.  <a href="classPeriodicHillsGrid.html#ab4b24f516396fc735795fabc8eee7ddd">More...</a><br /></td></tr>
 <tr class="separator:ab4b24f516396fc735795fabc8eee7ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac2ebbe3b29d8072ec2c43f0b95cfe4b6"><td class="memItemLeft" align="right" valign="top">static Point&lt; spacedim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeriodicHillsGrid.html#ac2ebbe3b29d8072ec2c43f0b95cfe4b6">hill_geometry</a> (const Point&lt; spacedim &gt; &amp;p, double <a class="el" href="classPeriodicHillsGrid.html#ae91c98809946fdbc43197f419632fdb5">spacing_y</a>, double <a class="el" href="classPeriodicHillsGrid.html#ab8742e5c3021f9a894e63fdcb6b587a1">alpha</a>)</td></tr>
-<tr class="memdesc:ac2ebbe3b29d8072ec2c43f0b95cfe4b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The hill_geometry function calculates all the domain of the geometry with 6 polynomials depending the x position. (See Hill Geometry Definition file : <a href="https://turbmodels.larc.nasa.gov/Other_LES_Data/2dhill_periodic.html">https://turbmodels.larc.nasa.gov/Other_LES_Data/2dhill_periodic.html</a>) <a class="el" href="classThis.html">This</a> code has nondimensionalized geometry, but the coefficients provided need a hill height of 28. <a class="el" href="classThis.html">This</a> function also does a gradual shifting of the horizontal lines prior to have smaller element on the bottom of the geometry where results are more important.  <a href="classPeriodicHillsGrid.html#ac2ebbe3b29d8072ec2c43f0b95cfe4b6">More...</a><br /></td></tr>
 <tr class="separator:ac2ebbe3b29d8072ec2c43f0b95cfe4b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
