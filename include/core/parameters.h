@@ -325,72 +325,144 @@ namespace Parameters
     declare_parameters(ParameterHandler &prm);
     
     /**
-     * @brief Declare the parameters.
+     * @brief Parse the parameters.
      *
      * @param[in,out] prm The ParameterHandler.
      *
      * @param[in] dimensions The Dimensionality object controling the 
-    * fundamental dimensions (length, time, mass, temperature) of the problem.
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
      */
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
 
   /**
-   * @brief Power-law rheological model to solve for non Newtonian
-   * flows.
+   * @brief Defines the Power-law rheological model parameters to solve 
+   * non-Newtonian flows.
    */
   struct PowerLawParameters
   {
-    // Fluid consistency index
+    /**
+     * @brief Fluid consistency index
+     */
     double K;
-    // Flow behavior index"
+    
+    /**
+     * @brief Flow behavior index
+     */
     double n;
-    // Minimal shear rate magnitude for which we calculate kinematic viscosity,
-    // since power-law does not allow for minimal kinematic viscosity
+
+    /**
+     * @brief Minimal shear rate magnitude for which we calculate kinematic viscosity,
+     * since power-law does not allow for minimal kinematic viscosity
+     */
     double shear_rate_min;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     static void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
 
   /**
-   * @brief Carreau rheological model to solve for non Newtonian
-   * flows.
+   * @brief Defines the Carreau rheological model parameters to solve for
+   * non-Newtonian flows.
    */
   struct CarreauParameters
   {
-    // Kinematic viscosity of the flow when the shear rate tends to 0
+    /**
+     * @brief Kinematic viscosity of the flow when the shear rate tends to 0
+     */
     double kinematic_viscosity_0;
-    // Hypothetical kinematic viscosity of the flow when the shear rate is very
-    // high
+
+    /**
+     * @brief Hypothetical kinematic viscosity of the flow when the shear rate 
+     * is very high
+     */
     double kinematic_viscosity_inf;
-    // Relaxation time
+
+    /**
+     * @brief Relaxation time
+     */
     double lambda;
-    // Carreau parameter
+
+    /**
+     * @brief Carreau parameter
+     */
     double a;
-    // Power parameter
+
+    /**
+     * @brief Power parameter
+     */
     double n;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     static void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
 
   /**
-   * @brief Non Newtonian - Defines the parameters for non newtonian flows
-   * according to the chosen rheological model.
+   * @brief Defines the parameters for non-newtonian flows according to the 
+   * chosen rheological model.
    */
   struct NonNewtonian
   {
+    
+    /**
+     * @brief Carreau rheological model parameters
+     */
     CarreauParameters  carreau_parameters;
+    
+    /**
+     * @brief Power law rheological model parameters
+     */
     PowerLawParameters powerlaw_parameters;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
