@@ -17,15 +17,6 @@
  * Author: Simon Gauvin, Bruno Blais, Polytechnique Montreal, 2019-
  */
 
-/*
- * This file defines the parameter namespace. This namespace
- * contains the classical structures which are used to structure
- * the various simulations that can be carried out using Lethe.
- * The parameters structures are constructed in logical building
- * blocks so that a solver can adequately choose which blocks
- * are required.
- */
-
 #ifndef lethe_parameters_h
 #define lethe_parameters_h
 
@@ -41,6 +32,15 @@
 
 using namespace dealii;
 
+/**
+ * @brief Contains the main structures used to store the various simulation
+ * parameters defined by the user.
+ *
+ * The parameters structures are constructed in logical building
+ * blocks so that a solver can adequately choose which blocks
+ * are required.
+ */
+ 
 namespace Parameters
 {
   struct SizeOfSubsections
