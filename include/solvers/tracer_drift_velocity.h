@@ -28,10 +28,6 @@
 #include <memory>
 
 using namespace dealii;
-/**
- * Drift velocity that is added to the tracer velocity to account for simplified
- *multiphase simulations using drift-flux modeling.
- **/
 
 namespace Parameters
 {
@@ -43,6 +39,9 @@ namespace Parameters
 
   * The drift velocity provides a simple way to model dilute disperse multiphase
 flow through the tracer physics.
+
+* Drift velocity that is added to the tracer velocity to account for simplified
+*multiphase simulations using drift-flux modeling.
   **/
 
   template <int dim>

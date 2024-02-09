@@ -43,6 +43,10 @@ using namespace dealii;
  
 namespace Parameters
 {
+  /**
+   * @brief Store the maximum size of all variable size sections within the 
+   * parameter file.
+   */
   struct SizeOfSubsections
   {
     int boundary_conditions;
@@ -50,182 +54,284 @@ namespace Parameters
 
 
   /**
-   * @brief Extract the maximum number of all variable size sections within the parameter file
+   * @brief Extract the maximum size of all variable size sections within the 
+   * parameter file.
    *
-   * @param file_name Name of the parameter file from which the size are parsed
+   * @param file_name Name of the parameter file from which the size are parsed.
    */
   SizeOfSubsections
   get_size_of_subsections(const std::string &file_name);
 
+  /**
+   * @brief Enumerate verbosity types.
+   */
   enum class Verbosity
   {
+     /// 
     quiet,
+     /// 
     verbose,
+     ///
     extra_verbose
   };
 
-  /** @brief Class to account for different fluid indicator:
-   *  - fluid0: fluid 0 only,
-   *  - fluid1: fluid 1 only,
-   *  - both: both fluids
-   * This is used for multiphase simulations, in PostProcessing and in
-   * VOF (see parameter_multiphysics.h)
+  /** @brief Enumerate different fluid indicators.
+   *
+   * This is used for multiphase simulations, in PostProcessing and VOF.
    */
   enum class FluidIndicator
   {
+    /// fluid 0 only
     fluid0,
+    /// fluid 1 only
     fluid1,
+    /// both fluids
     both
   };
 
   /**
-   * @brief SimulationControl - Defines the parameter that control the flow of the simulation
-   * as well as the frequency of the output of the solutions.
+   * @brief Defines the general parameters that control the workflow of the 
+   * simulation and output of the solutions.
    */
-
   struct SimulationControl
   {
-    // Method used for time progression of eulerian solvers (steady, unsteady)
+    /** 
+     * @brief Method used for time integration of Eulerian solvers (i.e. other 
+     * than DEM solvers).
+     */
     enum class TimeSteppingMethod
     {
+      /// Steady-state simulation
       steady,
+      /// Steady-state simulation using adjoint time stepping with a bdf1 scheme
       steady_bdf,
+      /// 1st order backward differentiation
       bdf1,
+      /// 2nd order backward differentiation
       bdf2,
+      /// 3rd order backward differentiation
       bdf3
     } method;
 
-    // Method used for time progression (steady, unsteady)
-    enum class LagrangianTimeSteppingMethod
-    {
-      explicit_euler,
-      velocity_verlet,
-      gear3
-    } lagrangian_method;
-
-    // Initial time step
+    /**
+     * @brief Initial time step
+     */
     double dt;
 
-    // End time
+    /**
+     * @brief Simulation end time
+     */
     double timeEnd;
 
-    // Adaptative time stepping
+    /**
+     * @brief Adaptative time stepping
+     */
     bool adapt;
 
-    // Max CFL
+    /**
+     * @brief Max CFL
+     */
     double maxCFL;
 
-    // Aimed tolerance at which simulation is stopped
+    /**
+     * @brief Aimed tolerance at which simulation is stopped
+     */
     double stop_tolerance;
 
-    // Max CFL
+    /**
+     * @brief Scaling factor for adaptative time stepping method
+     */
     double adaptative_time_step_scaling;
 
-    // BDF startup time scaling
+    /**
+     * @brief BDF startup time scaling
+     */
     double startup_timestep_scaling;
 
-    // Number of mesh adaptation (steady simulations)
+    /**
+     * @brief Number of mesh adaptations for steady simulations
+     */
     unsigned int number_mesh_adaptation;
 
-    // Folder for simulation output
+    /**
+     * @brief Folder name for simulation output
+     */
     std::string output_folder;
 
-    // Prefix for simulation output
+    /**
+     * @brief Prefix for simulation output
+     */
     std::string output_name;
 
+    /**
+     * @brief Enumerate the control methods for the simulation output
+     */
     enum class OutputControl
     {
+      /// Results are outputted at constant iteration frequency
       iteration,
+      /// Results are outputted at constant time
       time
     } output_control;
-
+    
+    /**
+     * @brief Enumerate the methods available to start a high order BDF schemes
+     */
     enum class BDFStartupMethods
     {
+      ///
       initial_solution,
+      ///
       multiple_step_bdf,
     } bdf_startup_method;
 
-
-    // Frequency of the output
+    /**
+     * @brief Number of iterations at which the solution is outputted
+     */
     unsigned int output_frequency;
 
-    // Frequency of the output
+    /**
+     * @brief Time interval at which the solution is outputted
+     */
     double output_time;
 
-    // Enable output of the boundaries
+    /**
+     * @brief Flag to enable or disable the output of the boundaries
+     */
     bool output_boundaries;
 
-    // Frequency of the log output to the terminal
+    /**
+     * @brief Frequency of the log output to the terminal
+     */
     unsigned int log_frequency;
 
-    // Display precision of the log output to the terminal
+    /**
+     * @brief Display precision of the log output to the terminal
+     */
     unsigned int log_precision;
 
-    // Subdivisions of the results in the output
+    /**
+     * @brief Subdivisions of the results in the output
+     */
     unsigned int subdivision;
 
-    // Subdivisions of the results in the output
+    /**
+     * @brief Number of .vtu files generated in a parallel simulation
+     */
     unsigned int group_files;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     static void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */    
     void
     parse_parameters(ParameterHandler &prm);
+    
   };
 
-
-
   /**
-   * @brief Phase change model for melting/freezing liquids
+   * @brief Defines the phase change model parameters for melting/freezing simulations.
+   * 
    * The model assumes that the phase change occurs between
    * a solidus and liquidus temperature. This defines a solidification
    * interval which is used to smooth the non-linearity of the melting problem
    * or to fit the real thermodynamics of the melting process.
    *
+   * Units are described in terms of fundamental dimensions: length \f$L\f$, 
+   * time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
    */
   struct PhaseChange
   {
-    // Solidus temperature - Units in K
+    /** 
+     * @brief Solidus temperature in \f$\Theta\f$
+     */
     double T_solidus;
 
-    // Liquidus temperature - Units in K
+    /** 
+     * @brief Liquidus temperature in \f$\Theta\f$
+     */
     double T_liquidus;
 
-    // Latent enthalpy for the phase change - Units in J/kg
+    /** 
+     * @brief Latent enthalpy for the phase change \f$L^2 T^{-2}\f$
+     */
     double latent_enthalpy;
 
-    // Specific heat of liquid - Units in J/(kg*K)
+    /** 
+     * @brief Specific heat of liquid in \f$L^2\Theta^{-1}T^{-2}\f$
+     */
     double cp_l;
 
-    // Specific heat of solid - Units in J/(kg*K)
+    /** 
+     * @brief Specific heat of solid in \f$L^2\Theta^{-1}T^{-2}\f$
+     */
     double cp_s;
 
-    // Thermal conductivity of liquid - Units in W/(m*K)
+    /** 
+     * @brief Thermal conductivity of liquid in \f$MLT^{-3}\Theta^{-1}\f$
+     */
     double thermal_conductivity_l;
 
-    // Thermal conductivity of solid - Units in W/(m*K)
+    /** 
+     * @brief Thermal conductivity of solid in \f$MLT^{-3}\Theta^{-1}\f$
+     */
     double thermal_conductivity_s;
 
-    // Thermal expansion coefficient of liquid - Units in 1/K
+    /** 
+     * @brief Thermal expansion coefficient of liquid in \f$\Theta^{-1}\f$
+     */
     double thermal_expansion_l;
 
-    // Thermal expansion coefficient of solid - Units in 1/K
+    /** 
+     * @brief Thermal expansion coefficient of solid in \f$\Theta^{-1}\f$
+     */
     double thermal_expansion_s;
 
-    // kinematic viscosity of liquid - Units in m^2/(s)
+    /** 
+     * @brief Kinematic viscosity of liquid in \f$L^{2}T^{-1}\f$
+     */
     double kinematic_viscosity_l;
 
-    // kinematic viscosity of solid - Units in m^2/(s)
+    /** 
+     * @brief Kinematic viscosity of solid in \f$L^{2}T^{-1}\f$
+     */
     double kinematic_viscosity_s;
 
-    // Darcy penalty of liquid - Units in 1/(s)
+    /** 
+     * @brief Darcy penalty of liquid in \f$T^{-1}\f$
+     */
     double penalty_l;
 
-    // Darcy penalty of solid - Units in 1/(s)
+    /** 
+     * @brief Darcy penalty of solid in \f$T^{-1}\f$
+     */
     double penalty_s;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     static void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+    * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */
     void
     parse_parameters(ParameterHandler &prm, const Dimensionality dimensions);
   };
