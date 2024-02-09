@@ -246,8 +246,8 @@ namespace Parameters
    * interval which is used to smooth the non-linearity of the melting problem
    * or to fit the real thermodynamics of the melting process.
    *
-   * Units are described in terms of fundamental dimensions: length \f$L\f$, 
-   * time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
+   * Units for the members are described in terms of fundamental dimensions: 
+   * length \f$L\f$, time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
    */
   struct PhaseChange
   {
@@ -472,23 +472,23 @@ namespace Parameters
    * @brief Defines the parameters for the isothermal ideal gas model to solve 
    * isothermal weakly compressible fluid flows.
    *
-   * Units are described in terms of fundamental dimensions: length \f$L\f$, 
-   * time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
+   * Units for the members are described in terms of fundamental dimensions: 
+   * length \f$L\f$, time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.
    */
   struct IsothermalIdealGasDensityParameters
   {
     /**
-     * @brief Reference state density of the gas in /f$M L^{-1} T^{-2}/f$
+     * @brief Reference state density of the gas in \f$M L^{-1} T^{-2}\f$
      */
     double density_ref;
 
     /**
-     * @brief Specific gas constant in /f$L^2 T^{-2}\Theta^{-1} /f$
+     * @brief Specific gas constant in \f$L^2 T^{-2}\Theta^{-1} \f$
      */
     double R;
 
     /**
-     * @brief Absolute temperature of the ideal gas in /f$\Theta/f$
+     * @brief Absolute temperature of the ideal gas in \f$\Theta\f$
      */
     double T;
 
@@ -513,28 +513,53 @@ namespace Parameters
   };
 
   /**
-   * @brief SurfaceTensionParameters - Defines parameters for surface tension
-   * models
+   * @brief Defines the parameters for surface tension models
+   *
+   * Units for the members are described in terms of fundamental dimensions: 
+   * length \f$L\f$, time \f$T\f$, mass \f$M\f$, and temperature  \f$\Theta\f$.   
    */
   struct SurfaceTensionParameters
   {
-    // Surface tension coefficient (sigma or sigma_0) in N/m
+    /**
+     * @brief Surface tension coefficient (\f$\sigma\f$ or \f$\sigma_0\f$) in \f$M T^{-2}\f$
+     */
     double surface_tension_coefficient;
-    // Temperature of the reference state corresponding to the surface tension
-    // coefficient (T_0) in K
+
+    /**
+     * @brief Temperature \f$T_0\f$ of the reference state at which the 
+     * reference surface tension coefficient \f$\sigma_0\f$ is taken in \f$\Theta\f$
+     */
     double T_0;
-    // Surface tension gradient with respect to the temperature (dsigma/dT) in
-    // N/(m*K)
+
+    /**
+     * @brief Surface tension gradient with respect to the temperature 
+     * \f$\displaystyle\frac{\partial \sigma}{\partial T}\f$ in \f$M T^{-2}\Theta^{-1}\f$
+     */
     double surface_tension_gradient;
 
-    // Solidus temperature - Units in K
+    /** 
+     * @brief Solidus temperature in \f$\Theta\f$
+     */
     double T_solidus;
 
-    // Liquidus temperature - Units in K
+    /** 
+     * @brief Liquidus temperature in \f$\Theta\f$
+     */
     double T_liquidus;
 
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     void
     declare_parameters(ParameterHandler &prm);
+    
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     */
     void
     parse_parameters(ParameterHandler &prm);
   };
