@@ -1,12 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi..." alt="" coords="5,385,176,412"/>
-<area shape="rect" id="node2" href="$classDensityModel.html" title="Abstract class that allows to calculate the density." alt="" coords="267,56,379,83"/>
+<area shape="rect" id="node2" href="$classDensityModel.html" title="Abstract class for calculating the density of materials." alt="" coords="267,56,379,83"/>
 <area shape="rect" id="node5" href="$classRheologicalModel.html" title="Abstract class that allows to calculate the non&#45;newtonian viscosity on each quadrature point and the ..." alt="" coords="254,208,393,235"/>
 <area shape="rect" id="node10" href="$classSpecificHeatModel.html" title="Abstract class that allows to calculate the specific heat on each quadrature point using the temperat..." alt="" coords="252,360,395,387"/>
 <area shape="rect" id="node13" href="$classThermalConductivityModel.html" title="Abstract class that allows to calculate the thermal conductivity on each quadrature point using the t..." alt="" coords="224,436,423,463"/>
 <area shape="rect" id="node17" href="$classThermalExpansionModel.html" title="Abstract class that allows to calculate the thermal expansion coefficient (with unit of inverse tempe..." alt="" coords="232,579,415,605"/>
 <area shape="rect" id="node20" href="$classTracerDiffusivityModel.html" title="Abstract class that allows to calculates the tracer diffusivity." alt="" coords="239,655,407,681"/>
-<area shape="rect" id="node3" href="$classDensityConstant.html" title="Constant density." alt="" coords="521,5,651,32"/>
+<area shape="rect" id="node3" href="$classDensityConstant.html" title="Constant density model." alt="" coords="521,5,651,32"/>
 <area shape="rect" id="node4" href="$classDensityIsothermalIdealGas.html" title="Isothermal ideal gas density." alt="" coords="487,56,685,83"/>
 <area shape="rect" id="node6" href="$classCarreau.html" title=" " alt="" coords="549,107,623,133"/>
 <area shape="rect" id="node7" href="$classNewtonian.html" title=" " alt="" coords="540,157,632,184"/>

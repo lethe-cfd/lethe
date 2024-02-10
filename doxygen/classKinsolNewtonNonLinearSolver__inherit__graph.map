@@ -1,4 +1,4 @@
 <map id="KinsolNewtonNonLinearSolver&lt; VectorType &gt;" name="KinsolNewtonNonLinearSolver&lt; VectorType &gt;">
-<area shape="rect" id="node1" title="KinsolNonlinearSolver. Interface to the non&#45;linear newton solver for non&#45;linear systems of equations ..." alt="" coords="11,80,230,121"/>
-<area shape="rect" id="node2" href="$classNonLinearSolver.html" title="NonlinearSolver. Base class for all non&#45;linear solver for non&#45;linear systems of equations...." alt="" coords="5,5,236,32"/>
+<area shape="rect" id="node1" title="Non&#45;linear Newton solver for non&#45;linear systems of equations implemented in the SUNDIALS suite,..." alt="" coords="11,80,230,121"/>
+<area shape="rect" id="node2" href="$classNonLinearSolver.html" title="Base class that works as an interface for all non&#45;linear solvers for all non&#45;linear systems of equati..." alt="" coords="5,5,236,32"/>
 </map>

@@ -85,8 +85,8 @@ Inheritance diagram for NewtonNonLinearSolver&lt; VectorType &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNewtonNonLinearSolver__inherit__graph.png" border="0" usemap="#aNewtonNonLinearSolver_3_01VectorType_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNewtonNonLinearSolver_3_01VectorType_01_4_inherit__map" id="aNewtonNonLinearSolver_3_01VectorType_01_4_inherit__map">
-<area shape="rect" title="Non&#45;linear solver for non&#45;linear systems of equations which uses a Newton method with \alpha relaxati..." alt="" coords="31,80,210,121"/>
-<area shape="rect" href="classNonLinearSolver.html" title="NonlinearSolver. Base class for all non&#45;linear solver for non&#45;linear systems of equations...." alt="" coords="5,5,236,32"/>
+<area shape="rect" title="Non&#45;linear solver for non&#45;linear systems of equations which uses a Newton method with &#160;relaxation to ..." alt="" coords="31,80,210,121"/>
+<area shape="rect" href="classNonLinearSolver.html" title="Base class that works as an interface for all non&#45;linear solvers for all non&#45;linear systems of equati..." alt="" coords="5,5,236,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -118,7 +118,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename VectorType&gt;<br />
 class NewtonNonLinearSolver&lt; VectorType &gt;</h3>
 
-<p>Non-linear solver for non-linear systems of equations which uses a Newton method with \alpha relaxation to ensure that the residual is monotonically decreasing. </p>
+<p>Non-linear solver for non-linear systems of equations which uses a Newton method with \(\alpha\) relaxation to ensure that the residual is monotonically decreasing. </p>
 
 <p class="definition">Definition at line <a class="el" href="newton__non__linear__solver_8h_source.html#l00031">31</a> of file <a class="el" href="newton__non__linear__solver_8h_source.html">newton_non_linear_solver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -150,16 +150,16 @@ template&lt;typename VectorType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for the <a class="el" href="classNewtonNonLinearSolver.html" title="Non-linear solver for non-linear systems of equations which uses a Newton method with \alpha relaxati...">NewtonNonLinearSolver</a>. </p>
+<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">physics_solver</td><td>A pointer to the physics solver to which the non-linear solver is attached</td></tr>
-    <tr><td class="paramname">param</td><td>Non-linear solver parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">physics_solver</td><td>A pointer to the physics solver to which the non-linear solver is attached.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">param</td><td>Non-linear solver parameters as specified in the simulation parameter file. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="newton__non__linear__solver_8h_source.html#l00057">57</a> of file <a class="el" href="newton__non__linear__solver_8h_source.html">newton_non_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="newton__non__linear__solver_8h_source.html#l00060">60</a> of file <a class="el" href="newton__non__linear__solver_8h_source.html">newton_non_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -190,17 +190,17 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Solve the non-linear system of equation. </p>
+<p>Solve the non-linear system of equations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">is_initial_step</td><td>Boolean variable that controls which constraints are going to be applied to the equations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is_initial_step</td><td>Boolean variable that controls which constraints are going to be applied to the equations depending on the time step. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implements <a class="el" href="classNonLinearSolver.html#abb030d08140fe6f2ecd6d8b73491bac7">NonLinearSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="newton__non__linear__solver_8h_source.html#l00065">65</a> of file <a class="el" href="newton__non__linear__solver_8h_source.html">newton_non_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="newton__non__linear__solver_8h_source.html#l00068">68</a> of file <a class="el" href="newton__non__linear__solver_8h_source.html">newton_non_linear_solver.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physics__solver_8h_source.html#l00083">PhysicsSolver&lt; VectorType &gt;::apply_constraints()</a>, <a class="el" href="classPhysicsSolver.html#a73215f315918e22864cf04248c583045">PhysicsSolver&lt; VectorType &gt;::assemble_system_matrix()</a>, <a class="el" href="classPhysicsSolver.html#a74110493860247f4ed2da56ef3050f08">PhysicsSolver&lt; VectorType &gt;::assemble_system_rhs()</a>, <a class="el" href="physics__solver_8h_source.html#l00114">PhysicsSolver&lt; VectorType &gt;::get_current_residual()</a>, <a class="el" href="classPhysicsSolver.html#a313727ad7574c4d4fb744f667f733508">PhysicsSolver&lt; VectorType &gt;::get_evaluation_point()</a>, <a class="el" href="classPhysicsSolver.html#aef3b890ff2cffc97d546e32583c5ba3a">PhysicsSolver&lt; VectorType &gt;::get_local_evaluation_point()</a>, <a class="el" href="classPhysicsSolver.html#abcd8bead5555e17de5c6e20b64cb3ebb">PhysicsSolver&lt; VectorType &gt;::get_newton_update()</a>, <a class="el" href="classPhysicsSolver.html#a254a20d9cf4297efac822566de52fb83">PhysicsSolver&lt; VectorType &gt;::get_present_solution()</a>, <a class="el" href="classPhysicsSolver.html#a46683552514c3323218b73817070a95e">PhysicsSolver&lt; VectorType &gt;::get_system_rhs()</a>, <a class="el" href="physics__solver_8h_source.html#l00129">PhysicsSolver&lt; VectorType &gt;::pcout</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, and <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;::solve_linear_system()</a>.</p>
 

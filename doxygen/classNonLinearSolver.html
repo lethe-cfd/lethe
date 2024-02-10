@@ -86,10 +86,10 @@ Inheritance diagram for NonLinearSolver&lt; VectorType &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNonLinearSolver__inherit__graph.png" border="0" usemap="#aNonLinearSolver_3_01VectorType_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNonLinearSolver_3_01VectorType_01_4_inherit__map" id="aNonLinearSolver_3_01VectorType_01_4_inherit__map">
-<area shape="rect" title="NonlinearSolver. Base class for all non&#45;linear solver for non&#45;linear systems of equations...." alt="" coords="5,78,236,105"/>
-<area shape="rect" href="classInexactNewtonNonLinearSolver.html" title="InexactNewtonIterationNonLinearSolver. Non&#45;linear solver for non&#45;linear systems of equations which us..." alt="" coords="284,5,511,47"/>
-<area shape="rect" href="classKinsolNewtonNonLinearSolver.html" title="KinsolNonlinearSolver. Interface to the non&#45;linear newton solver for non&#45;linear systems of equations ..." alt="" coords="288,71,507,112"/>
-<area shape="rect" href="classNewtonNonLinearSolver.html" title="Non&#45;linear solver for non&#45;linear systems of equations which uses a Newton method with \alpha relaxati..." alt="" coords="308,136,487,177"/>
+<area shape="rect" title="Base class that works as an interface for all non&#45;linear solvers for all non&#45;linear systems of equati..." alt="" coords="5,78,236,105"/>
+<area shape="rect" href="classInexactNewtonNonLinearSolver.html" title="Non&#45;linear solver for non&#45;linear systems of equations which uses an inexact Newton method with &#160;relax..." alt="" coords="284,5,511,47"/>
+<area shape="rect" href="classKinsolNewtonNonLinearSolver.html" title="Non&#45;linear Newton solver for non&#45;linear systems of equations implemented in the SUNDIALS suite,..." alt="" coords="288,71,507,112"/>
+<area shape="rect" href="classNewtonNonLinearSolver.html" title="Non&#45;linear solver for non&#45;linear systems of equations which uses a Newton method with &#160;relaxation to ..." alt="" coords="308,136,487,177"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -117,7 +117,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename VectorType&gt;<br />
 class NonLinearSolver&lt; VectorType &gt;</h3>
 
-<p>NonlinearSolver. Base class for all non-linear solver for non-linear systems of equations. <a class="el" href="classThis.html">This</a> class is an interface. </p>
+<p>Base class that works as an interface for all non-linear solvers for all non-linear systems of equations. </p>
 
 <p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00031">31</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -149,16 +149,16 @@ template&lt;typename VectorType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for the <a class="el" href="classNonLinearSolver.html" title="NonlinearSolver. Base class for all non-linear solver for non-linear systems of equations....">NonLinearSolver</a>. </p>
+<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">physics_solver</td><td>A pointer to the physics solver to which the non-linear solver is attached</td></tr>
-    <tr><td class="paramname">param</td><td>Non-linear solver parameters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">physics_solver</td><td>A pointer to the physics solver to which the non-linear solver is attached.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">param</td><td>Non-linear solver parameters as specified in the simulation parameter file. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00074">74</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00098">98</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +187,9 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00045">45</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00051">51</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -217,11 +219,12 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return the current newton iteration. </p>
+<p>Get the current newton iteration. </p>
+<dl class="section return"><dt>Returns</dt><dd>Iteration number. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00062">62</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00072">72</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="non__linear__solver_8h_source.html#l00070">NonLinearSolver&lt; VectorType &gt;::outer_iteration</a>.</p>
+<p class="reference">References <a class="el" href="non__linear__solver_8h_source.html#l00094">NonLinearSolver&lt; VectorType &gt;::outer_iteration</a>.</p>
 
 </div>
 </div>
@@ -251,10 +254,10 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Solve the non-linear system of equation. </p>
+<p>Solve the non-linear system of equations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">is_initial_step</td><td>Boolean variable that controls which constraints are going to be applied to the equations </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is_initial_step</td><td>Boolean variable that controls which constraints are going to be applied to the equations depending on the time step. </td></tr>
   </table>
   </dd>
 </dl>
@@ -286,7 +289,9 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00070">70</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p>Number of current Newton iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00094">94</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -312,7 +317,9 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00069">69</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p>Non linear solver parameters. </p>
+
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00088">88</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
 </div>
 </div>
@@ -338,7 +345,9 @@ template&lt;typename VectorType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00068">68</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
+<p>Physics solver for which we need a non-linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="non__linear__solver_8h_source.html#l00082">82</a> of file <a class="el" href="non__linear__solver_8h_source.html">non_linear_solver.h</a>.</p>
 
 </div>
 </div>

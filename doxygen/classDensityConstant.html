@@ -86,8 +86,8 @@ Inheritance diagram for DensityConstant:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDensityConstant__inherit__graph.png" border="0" usemap="#aDensityConstant_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDensityConstant_inherit__map" id="aDensityConstant_inherit__map">
-<area shape="rect" title="Constant density." alt="" coords="25,155,156,181"/>
-<area shape="rect" href="classDensityModel.html" title="Abstract class that allows to calculate the density." alt="" coords="35,80,147,107"/>
+<area shape="rect" title="Constant density model." alt="" coords="25,155,156,181"/>
+<area shape="rect" href="classDensityModel.html" title="Abstract class for calculating the density of materials." alt="" coords="35,80,147,107"/>
 <area shape="rect" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi..." alt="" coords="5,5,176,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -96,14 +96,14 @@ Inheritance diagram for DensityConstant:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8260fc4b836e19dc9f2bb690c89f0319"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a8260fc4b836e19dc9f2bb690c89f0319">DensityConstant</a> (const double p_density)</td></tr>
 <tr class="separator:a8260fc4b836e19dc9f2bb690c89f0319"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb52f34cac2de675f6b12730cbbe705a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#adb52f34cac2de675f6b12730cbbe705a">value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;) override</td></tr>
-<tr class="separator:adb52f34cac2de675f6b12730cbbe705a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39f306435b766e15a7266a0ee096b1be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a39f306435b766e15a7266a0ee096b1be">vector_value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;, std::vector&lt; double &gt; &amp;property_vector) override</td></tr>
-<tr class="separator:a39f306435b766e15a7266a0ee096b1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e79ac1b724a4f1db7e12ed23082133e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a4e79ac1b724a4f1db7e12ed23082133e">jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;, <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>) override</td></tr>
-<tr class="separator:a4e79ac1b724a4f1db7e12ed23082133e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a717e1f77400c99d78d163aa77cda909e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a717e1f77400c99d78d163aa77cda909e">vector_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt; &amp;jacobian_vector) override</td></tr>
-<tr class="separator:a717e1f77400c99d78d163aa77cda909e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bec373fd2908cda81b8354e458825cd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a5bec373fd2908cda81b8354e458825cd">value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;fields_value) override</td></tr>
+<tr class="separator:a5bec373fd2908cda81b8354e458825cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab75a46531c72187fdff67b193b38d26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#aab75a46531c72187fdff67b193b38d26">vector_value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;property_vector) override</td></tr>
+<tr class="separator:aab75a46531c72187fdff67b193b38d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c79b36252ad2735ca79cb6830cfd029"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a2c79b36252ad2735ca79cb6830cfd029">jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id) override</td></tr>
+<tr class="separator:a2c79b36252ad2735ca79cb6830cfd029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af298d4a8865e34d50157a049830f7d78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#af298d4a8865e34d50157a049830f7d78">vector_jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id, std::vector&lt; double &gt; &amp;jacobian_vector) override</td></tr>
+<tr class="separator:af298d4a8865e34d50157a049830f7d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0e0a9cc67796ad1dff84cc5d8fd72e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a7a0e0a9cc67796ad1dff84cc5d8fd72e">get_psi</a> () const override</td></tr>
 <tr class="separator:a7a0e0a9cc67796ad1dff84cc5d8fd72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace38eb4f4b05c660ae28e01b299cd620"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#ace38eb4f4b05c660ae28e01b299cd620">get_density_ref</a> () const override</td></tr>
@@ -144,9 +144,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Constant density. </p>
+<div class="textblock"><p>Constant density model. </p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00075">75</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00080">80</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8260fc4b836e19dc9f2bb690c89f0319"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8260fc4b836e19dc9f2bb690c89f0319">&#9670;&nbsp;</a></span>DensityConstant()</h2>
@@ -172,11 +172,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default constructor. </p>
+<p>Constructor of the constant density model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_density</td><td>Constant density value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00081">81</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00088">88</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="density__model_8h_source.html#l00068">DensityModel::constant_density_model</a>.</p>
+<p class="reference">References <a class="el" href="density__model_8h_source.html#l00073">DensityModel::constant_density_model</a>.</p>
 
 </div>
 </div>
@@ -204,14 +210,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>get_density_ref Returns the value of the reference state density used in the density model. In the case of a constant density, like here, this remains the constant value of density. </p>
-<dl class="section return"><dt>Returns</dt><dd>reference state density, here the constant density value </dd></dl>
+<p>Get the value of the reference state density used in the density model. </p>
+<dl class="section return"><dt>Returns</dt><dd>Value of the reference state density, here the constant density value. </dd></dl>
 
 <p>Implements <a class="el" href="classDensityModel.html#a845641eca7b01b68c5973e61d558eeba">DensityModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00165">165</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00204">204</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="density__model_8h_source.html#l00171">density</a>.</p>
+<p class="reference">References <a class="el" href="density__model_8h_source.html#l00211">density</a>.</p>
 
 </div>
 </div>
@@ -238,17 +244,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>get_psi Returns the value of the compressibility factor used in the density model </p>
-<dl class="section return"><dt>Returns</dt><dd>compressibility factor which in this case is null </dd></dl>
+<p>Get the value of the compressibility factor used in the density model. </p>
+<dl class="section return"><dt>Returns</dt><dd>Value of the compressibility factor which in this case is null. </dd></dl>
 
 <p>Implements <a class="el" href="classDensityModel.html#a8c2d5a30784dfbd1f8f0e0166510e2d3">DensityModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00153">153</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00191">191</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
 </div>
 </div>
-<a id="a4e79ac1b724a4f1db7e12ed23082133e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e79ac1b724a4f1db7e12ed23082133e">&#9670;&nbsp;</a></span>jacobian()</h2>
+<a id="a2c79b36252ad2735ca79cb6830cfd029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c79b36252ad2735ca79cb6830cfd029">&#9670;&nbsp;</a></span>jacobian()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,13 +266,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">double DensityConstant::jacobian </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramname"><em>field_values</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -281,24 +287,25 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>jacobian <a class="el" href="classCalculates.html">Calculates</a> the jacobian (the partial derivative) of the density with respect to a field. </p>
+<p>Compute the jacobian (the partial derivative) of the density with respect to a specified field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field_values</td><td>Value of the various fields on which the property may depend. </td></tr>
-    <tr><td class="paramname">id</td><td>Indicator of the field with respect to which the jacobian should be calculated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Values of the various fields on which the density may depend.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>Indicator of the field with respect to which the jacobian should be computed.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>value of the partial derivative of the density with respect to the field. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_values</code> and <code>id</code> parameters are ignored since the density remains constant.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of the derivative of the density with respect to the specified field. Since the density remains constant, this function returns zero. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a3fc51243a48832ed3c6e3b4ee797c6b2">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00122">122</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00149">149</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
 </div>
 </div>
-<a id="adb52f34cac2de675f6b12730cbbe705a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb52f34cac2de675f6b12730cbbe705a">&#9670;&nbsp;</a></span>value()</h2>
+<a id="a5bec373fd2908cda81b8354e458825cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bec373fd2908cda81b8354e458825cd">&#9670;&nbsp;</a></span>value()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +317,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">double DensityConstant::value </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>fields_value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -321,25 +328,26 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>value <a class="el" href="classCalculates.html">Calculates</a> the density </p>
+<p>Compute density value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fields_value</td><td>Value of the various field on which the property may depend. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fields_value</td><td>Value of the various fields on which the property may depend.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>value of the physical property calculated with the fields_value </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>fields_value</code> parameter is ignored since the density remains constant.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Density value. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a23d2b90f4f05ee9de4be96f6f9989a37">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00094">94</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00106">106</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="density__model_8h_source.html#l00171">density</a>.</p>
+<p class="reference">References <a class="el" href="density__model_8h_source.html#l00211">density</a>.</p>
 
 </div>
 </div>
-<a id="a717e1f77400c99d78d163aa77cda909e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a717e1f77400c99d78d163aa77cda909e">&#9670;&nbsp;</a></span>vector_jacobian()</h2>
+<a id="af298d4a8865e34d50157a049830f7d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af298d4a8865e34d50157a049830f7d78">&#9670;&nbsp;</a></span>vector_jacobian()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -351,13 +359,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">void DensityConstant::vector_jacobian </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramname"><em>field_vectors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const&#160;</td>
-          <td class="paramname"><em>field</em>, </td>
+          <td class="paramtype">const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -378,24 +386,25 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>vector_jacobian <a class="el" href="classCalculates.html">Calculates</a> the derivative of the density with respect to a field. </p>
+<p>Computes the derivative of the density with respect to specified fields. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field_vectors</td><td>Vector for the values of the fields used to evaluate the property. </td></tr>
-    <tr><td class="paramname">id</td><td>Identifier of the field with respect to which a derivative should be calculated. </td></tr>
-    <tr><td class="paramname">jacobian</td><td>vector of the value of the derivative of the density with respect to the field id. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vector of values of the fields used to evaluate the density.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>Identifier of the field with respect to which a derivative should be computed.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">jacobian</td><td>Vector of computed derivative values of the density with respect to the field of the specified <code>id</code>. In this case, it returns a vector of zeros since the density remains constant.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_values</code> and <code>id</code> parameters are ignored since the density remains constant. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#ae71d2dd28b12d69622987bced8c0c661">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00139">139</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00175">175</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
 </div>
 </div>
-<a id="a39f306435b766e15a7266a0ee096b1be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39f306435b766e15a7266a0ee096b1be">&#9670;&nbsp;</a></span>vector_value()</h2>
+<a id="aab75a46531c72187fdff67b193b38d26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab75a46531c72187fdff67b193b38d26">&#9670;&nbsp;</a></span>vector_value()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -407,7 +416,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">void DensityConstant::vector_value </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramname"><em>field_vectors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -428,20 +437,21 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>vector_value <a class="el" href="classCalculates.html">Calculates</a> the vector of density. </p>
+<p>Compute a vector of density values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field_vectors</td><td>Vectors of the fields on which the density may depend. </td></tr>
-    <tr><td class="paramname">property_vector</td><td>Vectors of the density values </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vectors of the fields on which the density may depend.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">property_vector</td><td>Vector of computed density values.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_vectors</code> parameter is ignored since the density remains constant. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a93dd785206d0e4e6659ca03f7f10ddec">PhysicalPropertyModel</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00105">105</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00124">124</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
-<p class="reference">References <a class="el" href="density__model_8h_source.html#l00171">density</a>.</p>
+<p class="reference">References <a class="el" href="density__model_8h_source.html#l00211">density</a>.</p>
 
 </div>
 </div>
@@ -466,7 +476,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00171">171</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
+<p>Density of the material. </p>
+
+<p class="definition">Definition at line <a class="el" href="density__model_8h_source.html#l00211">211</a> of file <a class="el" href="density__model_8h_source.html">density_model.h</a>.</p>
 
 </div>
 </div>
