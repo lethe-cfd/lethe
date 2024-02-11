@@ -86,8 +86,8 @@ Inheritance diagram for VolumeOfFluidTanhFilter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classVolumeOfFluidTanhFilter__inherit__graph.png" border="0" usemap="#aVolumeOfFluidTanhFilter_inherit__map" alt="Inheritance graph"/></div>
 <map name="aVolumeOfFluidTanhFilter_inherit__map" id="aVolumeOfFluidTanhFilter_inherit__map">
-<area shape="rect" title="Class used to calculate a filtered phase for VOF simulations. The filtered phase is defined as ." alt="" coords="6,80,187,107"/>
-<area shape="rect" href="classVolumeOfFluidFilterBase.html" title="Class that allows phase fraction filtering." alt="" coords="5,5,188,32"/>
+<area shape="rect" title="Filter phase fraction with a hyperbolic tangent function for VOF simulations." alt="" coords="6,80,187,107"/>
+<area shape="rect" href="classVolumeOfFluidFilterBase.html" title="Abstract class for filtering phase fraction in volume of fluid (VOF) simulations." alt="" coords="5,5,188,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -97,9 +97,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aac0927cf8cfabf02f2a08114eb5fe1eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75c6d88403324724d5145ce27fa31755"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluidTanhFilter.html#a75c6d88403324724d5145ce27fa31755">filter_phase</a> (const double &amp;unfiltered_phase) override</td></tr>
 <tr class="separator:a75c6d88403324724d5145ce27fa31755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classVolumeOfFluidFilterBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classVolumeOfFluidFilterBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classVolumeOfFluidFilterBase.html">VolumeOfFluidFilterBase</a></td></tr>
-<tr class="memitem:aabb897196522e954249510c58aaa5b7a inherit pub_methods_classVolumeOfFluidFilterBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVolumeOfFluidFilterBase.html#aabb897196522e954249510c58aaa5b7a">VolumeOfFluidFilterBase</a> ()</td></tr>
-<tr class="separator:aabb897196522e954249510c58aaa5b7a inherit pub_methods_classVolumeOfFluidFilterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -113,9 +110,13 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a87286b158579e34a40627510e9824536 inherit pub_static_methods_classVolumeOfFluidFilterBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class used to calculate a filtered phase for VOF simulations. The filtered phase is defined as \(\phi_f = 0.5 \tanh(\beta(\phi-0.5)) + 0.5\). </p>
+<div class="textblock"><p>Filter phase fraction with a hyperbolic tangent function for VOF simulations. </p>
+<p>The filtered phase is defined as:</p>
+<p>\(\phi&#39; = 0.5 \tanh(\beta(\phi-0.5)) + 0.5\)</p>
+<p>where \(\phi&#39;\) is the filtered phase fraction value and \(\beta\) is a model parameter that enables sharper definition when increased.</p>
+<p>The filter allows a sharper definition of the interface and clamps the value of the phase fraction between 0 and 1. </p>
 
-<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00077">77</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00101">101</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aac0927cf8cfabf02f2a08114eb5fe1eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac0927cf8cfabf02f2a08114eb5fe1eb">&#9670;&nbsp;</a></span>VolumeOfFluidTanhFilter()</h2>
@@ -141,7 +142,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00080">80</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
+<p>Constructor of the hyperbolic tangent phase fraction filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">beta</td><td>Value of the \(\beta\) parameter modulating the interface sharpness. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00110">110</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
 
 </div>
 </div>
@@ -170,20 +179,20 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>filter_phase calculates the value of the filtered phase fraction </p>
+<p>Computes the value of the filtered phase fraction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">unfiltered_phase</td><td>Value of the phase fraction before applying the filter </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">unfiltered_phase</td><td>Value of the phase fraction before applying the filter.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Value of the phase fraction after applying the tanh filter </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of the computed phase fraction after applying the filter. </dd></dl>
 
 <p>Implements <a class="el" href="classVolumeOfFluidFilterBase.html#af1568c1acd6c380e70c704b6825cb03e">VolumeOfFluidFilterBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00090">90</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00123">123</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="vof__filter_8h_source.html#l00097">beta</a>.</p>
+<p class="reference">References <a class="el" href="vof__filter_8h_source.html#l00134">beta</a>.</p>
 
 </div>
 </div>
@@ -207,8 +216,9 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>User-defined parameter that influences the sharpness of the interface between fluids. A greater value leads to a sharper interface. The recommended value is \(\beta=20\). </p>
 
-<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00097">97</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vof__filter_8h_source.html#l00134">134</a> of file <a class="el" href="vof__filter_8h_source.html">vof_filter.h</a>.</p>
 
 </div>
 </div>
