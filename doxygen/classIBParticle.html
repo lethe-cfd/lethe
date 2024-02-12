@@ -217,6 +217,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a2b6babaf1f62c9ed1f8d82ea6790d4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae197e52181968546f838e42737a43a81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#ae197e52181968546f838e42737a43a81">mesh_based_precalculations</a></td></tr>
 <tr class="separator:ae197e52181968546f838e42737a43a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cda7f56516676e7f3dc9ef2a6cbd676"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#a9cda7f56516676e7f3dc9ef2a6cbd676">residual_velocity</a></td></tr>
+<tr class="separator:a9cda7f56516676e7f3dc9ef2a6cbd676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12df621208693c6b1ac11d63697c3bf3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#a12df621208693c6b1ac11d63697c3bf3">residual_omega</a></td></tr>
+<tr class="separator:a12df621208693c6b1ac11d63697c3bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10cfac9fba82bf8df40459883382f425"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#a10cfac9fba82bf8df40459883382f425">previous_local_alpha_velocity</a></td></tr>
+<tr class="separator:a10cfac9fba82bf8df40459883382f425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a956ef73b875943011c466aa48bd27d03"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#a956ef73b875943011c466aa48bd27d03">previous_local_alpha_omega</a></td></tr>
+<tr class="separator:a956ef73b875943011c466aa48bd27d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5b93cc65a5fb4d0c7cb0613b566fa8a"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#ac5b93cc65a5fb4d0c7cb0613b566fa8a">pressure_location</a></td></tr>
 <tr class="separator:ac5b93cc65a5fb4d0c7cb0613b566fa8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60c2787b635b03e99b0cd8d0bd450ca5"><td class="memItemLeft" align="right" valign="top">Tensor&lt; 2, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIBParticle.html#a60c2787b635b03e99b0cd8d0bd450ca5">rotation_matrix</a></td></tr>
@@ -226,15 +234,16 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class IBParticle&lt; dim &gt;</h3>
 
-<p><a class="el" href="classThis.html">This</a> class defines values related to a particle used in the sharp interface IB. These values are used in the solver. </p>
+<p>Define the behavior of a specific particle for the sharp interface IB solver. </p>
+<p>Each particle defined will have these values used in the solver.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">dim</td><td>An integer that denotes the number of spatial dimensions </td></tr>
+    <tr><td class="paramname">dim</td><td>An integer that denotes the number of spatial dimensions. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00041">41</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00043">43</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a45da6cdb769a95e3fb1924ebb40e31a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45da6cdb769a95e3fb1924ebb40e31a6">&#9670;&nbsp;</a></span>clear_shape_cache()</h2>
@@ -250,7 +259,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Clear the cache used to evaluate the value and vector defining the sign distance function of the shape. </p>
+<p>Clear the cache used to evaluate the value and vector defining the signed distance function. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00166">166</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -283,7 +292,8 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>See overloaded function </p>
+
+<p>See overloaded function. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00205">205</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -323,12 +333,13 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the closest_point parameter to be the point on the surface of the shape which has the minimal distance from the given point p. </p>
+<p>Find the closest surface point on the shape. </p>
+<p><a class="el" href="classThis.html">This</a> point has the minimal absolute distance from the given point p.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The point at which the evaluation is performed </td></tr>
-    <tr><td class="paramname">closest_point</td><td>The reference to the closest point. <a class="el" href="classThis.html">This</a> point will be modified by the function. </td></tr>
-    <tr><td class="paramname">cell_guess</td><td>A guess of the cell containing the evaluation point, which is useful to reduce computation time </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>Point at which the evaluation is performed.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">closest_point</td><td>Reference to the closest point. <a class="el" href="classThis.html">This</a> point will be modified by the function.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cell_guess</td><td>A guess of the cell containing the evaluation point, which is useful to reduce computation time. </td></tr>
   </table>
   </dd>
 </dl>
@@ -362,9 +373,10 @@ template&lt;int dim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See overloaded function </p>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00097">97</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>See overloaded function. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00103">103</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -404,7 +416,18 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00087">87</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Compute the evaluation of the signed distance function of this shape. </p>
+<p>Most levelset functions used here come from Inigo Quilez: iquilezles.org/articles/distfunctions</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>Point at which the evaluation is performed.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cell_guess</td><td>Guess of the cell containing the evaluation point, which is useful to reduce computation time.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Signed distance function at evaluation point. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00093">93</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -433,9 +456,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return the number of properties of the particle for visualisation. </p>
+<p>Return the number of <a class="el" href="namespaceDEM.html">DEM</a> properties, for visualization. </p>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00072">72</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00074">74</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00056">DEM::n_properties</a>.</p>
 
@@ -455,7 +478,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Return the value of the properties of the particle for visualisation. </p>
+<p>Return the value of the <a class="el" href="namespaceDEM.html">DEM</a> properties, for visualization. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00133">133</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -477,7 +500,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Return the names of properties of the IB_particle for visualisation. </p>
+<p>Return the names of the <a class="el" href="namespaceDEM.html">DEM</a> properties, for visualization. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00119">119</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -499,7 +522,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classThis.html">This</a> class defines values related to a particle used in the sharp interface IB. Each particle defined will have these value used in the solver. </p>
+<p>Initialize all particles. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00011">11</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -519,7 +542,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>initialize the value of the last state of the particle </p>
+<p>Initialize the value of the last state of the particle. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00099">99</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -553,11 +576,12 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Sets up a shape in accordance with the given type and file name. </p>
+<p>Set up a shape in accordance with the given type and raw text argument. </p>
+<p>The raw text argument is typically a file name.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>The type of shape to be initialized: sphere, cone, ellipsoid, rectangle, death star, cut hollow sphere, torus, or rbf </td></tr>
-    <tr><td class="paramname">raw_arguments</td><td>The untreated arguments of the shape </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>Type of shape to be initialized.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">raw_arguments</td><td>Untreated arguments of the shape. </td></tr>
   </table>
   </dd>
 </dl>
@@ -596,11 +620,11 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Sets up a shape in accordance with the given type and arguments. </p>
+<p>Set up a shape in accordance with the given type and arguments. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>The type of shape to be initialized: sphere, cone, ellipsoid, rectangle, death star, cut hollow sphere, torus, or rbf </td></tr>
-    <tr><td class="paramname">shape_arguments</td><td>The dimensions to be used for shape initialization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>Type of the shape to be initialized.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shape_arguments</td><td>Arguments to be used for shape initialization. </td></tr>
   </table>
   </dd>
 </dl>
@@ -650,7 +674,8 @@ template&lt;int dim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>See overloaded function </p>
+
+<p>See overloaded function. </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00241">241</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -702,17 +727,18 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Returns true if the given point is inside the crown for which the limits are defined by inner and outer radius factors. An effective radius is used for non spherical shapes. </p>
+<p>Determine if the given point is inside the crown for which the limits are defined by inner and outer radius factors. An effective radius is used for non spherical shapes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">evaluation_point</td><td>The point at which the evaluation is performed </td></tr>
-    <tr><td class="paramname">outer_radius</td><td>The factor to be multiplied by the effective radius to check if the evaluation point is inside the outer limits </td></tr>
-    <tr><td class="paramname">inside_radius</td><td>The factor to be multiplied by the effective radius to check if the evaluation point is outside the inner limits </td></tr>
-    <tr><td class="paramname">absolute_distance</td><td>Whether the distance is defined as absolute or relative to radius </td></tr>
-    <tr><td class="paramname">cell_guess</td><td>A guess of the cell containing the evaluation point, which is useful to reduce computation time </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluation_point</td><td>Point at which the evaluation is performed.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">outer_radius</td><td>Relative or absolute distance to check if the evaluation point is inside the outer limits.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inside_radius</td><td>Relative or absolute distance to check if the evaluation point is outside the inner limits.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">absolute_distance</td><td>Boolean for whether the radii are defined as absolute or relative to radius. If the value is false, the outer and inner radii are multiplied by the effective radius to construct the absolute distances to be used.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cell_guess</td><td>Guess of the cell containing the evaluation point, which is useful to reduce computation time.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the evaluation point is inside the crown. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00213">213</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -732,7 +758,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Loads data from the files for file-based Shapes (<a class="el" href="classRBF.html">RBF</a> at the moment) </p>
+<p>Load data from the files (for file-based Shapes). </p>
 
 <p class="definition">Definition at line <a class="el" href="ib__particle_8cc_source.html#l00312">312</a> of file <a class="el" href="ib__particle_8cc_source.html">ib_particle.cc</a>.</p>
 
@@ -766,11 +792,11 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Updates precalculations if needed, then computes and removes superfluous data. </p>
+<p>Update precalculations if needed, then compute and remove superfluous data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">updated_dof_handler</td><td>the reference to the new dof_handler </td></tr>
-    <tr><td class="paramname">mesh_based_precalculations</td><td>mesh-based precalculations that can lead to slight shape misrepresentation (if type=<a class="el" href="classRBF.html">RBF</a>) </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">updated_dof_handler</td><td>Reference to the new dof_handler.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_based_precalculations</td><td>Define if mesh-based precalculations are used (if type=<a class="el" href="classRBF.html">RBF</a>). </td></tr>
   </table>
   </dd>
 </dl>
@@ -805,15 +831,15 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the layer thickening value (positive or negative) of the particle's shape. </p>
+<p>Set the layer thickening value (positive or negative) of the shape. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">layer_thickening</td><td>Thickness to be artificially added to the particle. A negative value will decrease the particle's thickness by subtracting a layer of specified width. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">layer_thickening</td><td>Thickness to be artificially added to the particle. A negative value will decrease the particle's thickness by subtracting a layer of specified width. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00233">233</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00250">250</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -835,10 +861,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the orientation of the particle and dependent members to the argument <a class="el" href="classThis.html">This</a> include the shape and the rotation matrix that describes the orientation. </p>
+<p>Set the orientation and dependent members to the given orientation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">orientation</td><td>The new orientation to set the particle at </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">orientation</td><td>New orientation to set the particle at. </td></tr>
   </table>
   </dd>
 </dl>
@@ -883,16 +909,16 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the position of the particle and dependent members to the argument for one component. </p>
+<p>Set the position and dependent members to the position for one component only. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position_component</td><td>The component of the new position to set the particle at </td></tr>
-    <tr><td class="paramname">component</td><td>The component index for which the position will be updated </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">position_component</td><td>Component of the new position to set the particle at.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">component</td><td>Component index for which the position will be updated. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00205">205</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00227">227</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -922,15 +948,15 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the position of the particle and dependent members to the argument. </p>
+<p>Set the position and dependent members to the argument. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>The new position to set the particle at </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">position</td><td>New position to use. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00161">161</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00179">179</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -962,11 +988,11 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the proper dof handler, then computes/updates the map of cells and their likely non-null nodes. </p>
+<p>Set the proper DOF handler, then compute/update the map of cells and their likely non-null nodes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">updated_dof_handler</td><td>the reference to the new dof_handler </td></tr>
-    <tr><td class="paramname">mesh_based_precalculations</td><td>mesh-based precalculations that can lead to slight shape misrepresentation (if type=<a class="el" href="classRBF.html">RBF</a>) </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">updated_dof_handler</td><td>Reference to the new dof_handler.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mesh_based_precalculations</td><td>Define if mesh-based precalculations are used (if type=<a class="el" href="classRBF.html">RBF</a>). </td></tr>
   </table>
   </dd>
 </dl>
@@ -990,7 +1016,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00334">334</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Contact-generated impulsion felt by the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00454">454</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1036,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00357">357</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Function that determines the angular velocity. </p>
+<p>If the particle dynamics is solved, this function determines the value only at the initial state. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00498">498</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1026,7 +1057,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00361">361</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Function that determines the orientation. </p>
+<p>If the particle dynamics is solved, this function determines the value only at the initial state. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00506">506</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1044,7 +1078,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00353">353</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Function that determines the position. </p>
+<p>If the particle dynamics is solved, this function determines the value only at the initial state. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00490">490</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1062,7 +1099,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00349">349</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Function that determines the velocity. </p>
+<p>If the particle dynamics is solved, this function determines the value only at the initial state. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00482">482</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1080,7 +1120,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00295">295</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Total fluid force applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00359">359</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1140,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00297">297</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Pressure contribution to the fluid force applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00369">369</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1116,7 +1160,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00303">303</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Fluid torque applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00390">390</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1134,7 +1180,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00296">296</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Viscous contribution to the fluid force applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00364">364</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1152,7 +1200,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00279">279</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Friction coefficient used for contact force calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00319">319</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1170,7 +1220,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00332">332</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Total impulsion felt by the particle during the current time step. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00449">449</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1240,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00336">336</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear iteration's total impulsion on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00459">459</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1206,7 +1260,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00289">289</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Inertia matrix in the particle frame of reference. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00344">344</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1280,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00368">368</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Indicate if the particle dynamics are solved. </p>
+<p>If not, functions are used to define position, velocity, orientation and angular velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00514">514</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1242,7 +1301,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00283">283</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Particle's mass. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00329">329</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1260,7 +1321,10 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00373">373</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Indicate if mesh-based precalculations are performed. </p>
+<p>For <a class="el" href="classRBF.html">RBF</a> shapes with nodes outside the background mesh, slight deformations can happen near the boundary when mesh-based precalculations are enabled (due to the <a class="el" href="classRBF.html">RBF</a> nodes partitioning algorithm). </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00523">523</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1278,7 +1342,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00323">323</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Angular velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00429">429</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1296,7 +1362,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00341">341</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Contact-generated angular impulsion felt by the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00469">469</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1314,7 +1382,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00339">339</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Total angular impulsion felt by the particle during the current time step. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00464">464</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1332,7 +1402,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00344">344</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear iteration's total angular impulsion on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00474">474</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1350,7 +1422,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00327">327</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear iteration's angular velocity for CFD-DEM coupling. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00439">439</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1368,7 +1442,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00319">319</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Orientation, with 0 angular position by default on every axis. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00419">419</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1386,7 +1462,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00265">265</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Unique identification number. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00289">289</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1404,7 +1482,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00277">277</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Poisson's ratio used for contact force calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00314">314</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1422,7 +1502,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00291">291</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Position, which corresponds to the centroid for most implemented shapes. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00349">349</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1440,7 +1522,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00377">377</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Position of the pressure reference point in the particle's referential. <a class="el" href="classThis.html">This</a> point is used to define a constant on the pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00551">551</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1458,7 +1542,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00299">299</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's total fluid force applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00374">374</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1476,7 +1562,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00301">301</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's pressure contribution to the fluid force. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00385">385</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1494,7 +1582,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00306">306</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's fluid torque applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00395">395</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1512,7 +1602,49 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00300">300</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's viscous contribution to the fluid force applied on the particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00380">380</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+
+</div>
+</div>
+<a id="a956ef73b875943011c466aa48bd27d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956ef73b875943011c466aa48bd27d03">&#9670;&nbsp;</a></span>previous_local_alpha_omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;::previous_local_alpha_omega</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Previous iteration's relaxation parameter used for the angular velocity iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00545">545</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+
+</div>
+</div>
+<a id="a10cfac9fba82bf8df40459883382f425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10cfac9fba82bf8df40459883382f425">&#9670;&nbsp;</a></span>previous_local_alpha_velocity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;::previous_local_alpha_velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Previous iteration's relaxation parameter used for the translational velocity iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00539">539</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1530,7 +1662,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00325">325</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's angular velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00434">434</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1548,7 +1682,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00329">329</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear correction (without relaxation) to the angular velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00444">444</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1566,7 +1702,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00321">321</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's orientation. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00424">424</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1584,7 +1722,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00293">293</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Positions at the last n time steps. n depends on the time integration scheme. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00354">354</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1602,7 +1742,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00311">311</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Previous time step's translational velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00404">404</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1620,7 +1762,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00315">315</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear correction (without relaxation) to the velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00414">414</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1638,7 +1782,49 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00271">271</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Effective radius, which is the actual radius for spheres. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00299">299</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+
+</div>
+</div>
+<a id="a12df621208693c6b1ac11d63697c3bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12df621208693c6b1ac11d63697c3bf3">&#9670;&nbsp;</a></span>residual_omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;::residual_omega</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Current residual of the particle angular velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00533">533</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+
+</div>
+</div>
+<a id="a9cda7f56516676e7f3dc9ef2a6cbd676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cda7f56516676e7f3dc9ef2a6cbd676">&#9670;&nbsp;</a></span>residual_velocity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classIBParticle.html">IBParticle</a>&lt; dim &gt;::residual_velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Current residual of the particle velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00528">528</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1656,7 +1842,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00275">275</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Restitution coefficient used for contact force calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00309">309</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1674,7 +1862,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00281">281</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Rolling friction coefficient used for contact force calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00324">324</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1692,7 +1882,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00380">380</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Rotation matrix in the global space. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00556">556</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1710,7 +1902,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00268">268</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Geometrical information for IB application. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00294">294</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1728,7 +1922,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00287">287</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Surface energy. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00339">339</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1746,7 +1942,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00308">308</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Translational velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00399">399</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1764,7 +1962,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00313">313</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Last non-linear iteration's velocity for CFD-DEM coupling. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00409">409</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1782,7 +1982,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00285">285</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Particle's volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00334">334</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
@@ -1800,7 +2002,9 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00273">273</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
+<p>Young's modulus used for contact force calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="ib__particle_8h_source.html#l00304">304</a> of file <a class="el" href="ib__particle_8h_source.html">ib_particle.h</a>.</p>
 
 </div>
 </div>
