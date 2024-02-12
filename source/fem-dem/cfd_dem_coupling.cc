@@ -35,9 +35,10 @@ check_contact_detection_method(
   else if (param.dem_parameters.model_parameters.contact_detection_method ==
            Parameters::Lagrangian::ModelParameters::ContactDetectionMethod::
              dynamic)
-    { // The sorting into subdomain step checks whether or not the current time
-      // step
-      // is a step that requires sorting particles into subdomains and cells.
+    {
+      // The sorting into subdomain step checks whether or not the current time
+      // step is a step that requires sorting particles into subdomains and
+      // cells.
       // This is applicable if any of the following three conditions apply:if
       // its a load balancing step, a restart simulation step, or a contact
       // detection tsep.
@@ -915,7 +916,7 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
         }
     }
 
-  // If simulation has periodic boundaries, the particles are sorted into
+  /*// If simulation has periodic boundaries, the particles are sorted into
   // subdomains and cells at the last DEM coupled time step otherwise the
   // particles will not match the cells that they are in when void fraction is
   // calculated with the qcm method. The flag is kept so the next DEM time step
@@ -941,7 +942,7 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
               this->particle_handler.exchange_ghost_particles(true);
             }
         }
-    }
+    }*/
 }
 
 template <int dim>
@@ -965,7 +966,7 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
   if (contact_search_step(counter))
     {
       this->pcout << "DEM contact search at dem step " << counter << std::endl;
-      contact_build_number++;
+      contact_build_counter++;
 
       periodic_boundaries_object.execute_particles_displacement(
         this->particle_handler, periodic_boundaries_cells_information);
@@ -1067,16 +1068,6 @@ CFDDEMSolver<dim>::dem_contact_build(unsigned int counter)
   else
     {
       this->particle_handler.update_ghost_particles();
-
-      if (has_disabled_contacts && counter == 1)
-        {
-          disable_contacts_object.identify_mobility_status(
-            this->void_fraction_dof_handler,
-            this->particle_handler,
-            (*this->triangulation).n_active_cells(),
-            this->mpi_communicator,
-            counter);
-        }
     }
   // TODO add DEM post-processing
 }
@@ -1675,6 +1666,7 @@ CFDDEMSolver<dim>::solve()
         announce_string(this->pcout, "DEM");
         TimerOutput::Scope t(this->computing_timer, "DEM_Iterator");
 
+        contact_build_counter = 0;
         for (unsigned int dem_counter = 0; dem_counter < coupling_frequency;
              ++dem_counter)
           {
@@ -1684,6 +1676,7 @@ CFDDEMSolver<dim>::solve()
             dem_iterator(dem_counter);
           }
       }
+      contact_build_number += contact_build_counter;
 
       this->pcout << "Finished " << coupling_frequency << " DEM iterations "
                   << std::endl;

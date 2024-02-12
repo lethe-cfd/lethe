@@ -262,6 +262,21 @@ private:
         // Contact search step according to the contact detection method
         return true;
       }
+    else if (counter == (coupling_frequency - 1) &&
+             (contact_build_counter == 0))
+      {
+        // Ensure that the contact search is executed at least once per CFD time
+        // step.
+        return true;
+      }
+    else if (has_disabled_contacts && (counter == 1))
+      {
+        // First mobility status identification of the CFD time step (from the
+        // velocity computed at the first DEM time step (counter = 0) of the CFD
+        // time step) The contact search is executed to make sure the mobility
+        // status of cell match the particles that are in.
+        return true;
+      }
     else if (load_balance_step)
       {
         // Needs to update contacts since particles/cells may have been
@@ -330,7 +345,9 @@ private:
 
   DisableContacts<dim> disable_contacts_object;
   bool                 has_disabled_contacts;
-  unsigned int         contact_build_number;
+  unsigned int         contact_build_counter;
+
+  unsigned int contact_build_number;
 
   // Storage of statistics about time and contact lists
   statistics contact_list;
