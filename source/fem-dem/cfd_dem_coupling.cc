@@ -853,11 +853,6 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
     ->calculate_particle_particle_contact_force(
       contact_manager, dem_time_step, torque, force, periodic_offset);
 
-  if (has_disabled_contacts)
-    {
-      disable_contacts_object.copy_particle_particle_contact_force(force);
-    }
-
   // Particles-walls contact force:
   particle_wall_contact_force();
 
@@ -910,8 +905,7 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
               // the fluid may have significantly changed the particulate
               // agitation.
 
-              // Update the cell average velocities and accelerations (before the
-              // integration step since the forces are cleared)
+              // Update the cell average velocities and accelerations
               disable_contacts_object.update_average_velocities_acceleration(
                 this->particle_handler, g, force, dem_time_step);
 
