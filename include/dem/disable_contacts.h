@@ -339,9 +339,6 @@ public:
     const double                     dt)
   {
     cell_velocities_accelerations.clear();
-    std::map<typename Triangulation<dim>::active_cell_iterator,
-             std::pair<Tensor<1, 3>, Tensor<1, 3>>>
-      raw_cell_velocities_accelerations;
 
     // Tensor for velocity and acceleration * dt computation
     Tensor<1, 3> velocity_cell_average;
@@ -378,7 +375,9 @@ public:
                     // Calculate the acceleration of the particle times the time
                     // step
                     Tensor<1, 3> acc_dt_particle =
-                      dt_g + force[particle_id] * dt_mass_inverse;
+                      dt_g + (force[particle_id] -
+                              particle_particle_force[particle_id]) *
+                               dt_mass_inverse;
                     acc_dt_cell_average += acc_dt_particle;
 
                     for (int d = 0; d < dim; ++d)
@@ -395,189 +394,15 @@ public:
                 // value is used
                 velocity_cell_average /= n_particles_in_cell;
                 acc_dt_cell_average /= n_particles_in_cell;
-
-                // Update acceleration for particles in cell
-                raw_cell_velocities_accelerations.insert(std::make_pair(
-                  cell,
-                  std::make_pair(velocity_cell_average, acc_dt_cell_average)));
-              }
-          }
-      }
-
-    smooth_average_velocities_acceleration(particle_handler,
-                                           raw_cell_velocities_accelerations);
-  }
-
-  void
-  smooth_average_velocities_acceleration(
-    Particles::ParticleHandler<dim> &particle_handler,
-    std::map<typename Triangulation<dim>::active_cell_iterator,
-             std::pair<Tensor<1, 3>, Tensor<1, 3>>>
-      &raw_cell_velocities_accelerations)
-  {
-    for (const auto &raw_values : raw_cell_velocities_accelerations)
-      {
-        auto  cell = raw_values.first;
-        auto &cell_neighbor =
-          cell_neighbor_list[cell->global_active_cell_index()];
-
-        // Set that the max number of cell and neighbors for a cell if 2^dim
-        // (9 for 2D and 27 for 3D). It helps to increase the factor of the
-        // current cell in the average velocity. In non-structured mesh, it
-        // is possible to have more than 2^dim neighbors for a cell. The value
-        // is changed for this case. Also, it only takes into account the cells
-        // that have particles.
-        unsigned int n_max   = Utilities::fixed_power<dim>(2);
-        unsigned int n_cells = 1;
-
-        // Factor of current cell is (n_max + 1)/(n_cells + n_max) and factor
-        // of neighbors is 1/(n_cells + n_max)
-        Tensor<1, 3> velocity;
-        Tensor<1, 3> acc_dt;
-
-        for (auto neighbor = ++cell_neighbor.begin();
-             neighbor != cell_neighbor.end();
-             ++neighbor)
-          {
-            if (particle_handler.n_particles_in_cell(*neighbor) > 0)
-              {
-                auto neighbor_raw_values =
-                  raw_cell_velocities_accelerations.find(*neighbor);
-                velocity += neighbor_raw_values->second.first;
-                acc_dt += neighbor_raw_values->second.second;
-                n_cells++;
-              }
-          }
-
-        // Factor of current cell is (n_max + 1)/(n_cells + n_max) and factor
-        // of neighbors is 1/(n_cells + n_max)
-        n_max = std::max(n_max, n_cells);
-        velocity += (n_max + 1) * raw_values.second.first;
-        acc_dt += (n_max + 1) * raw_values.second.second;
-
-        velocity /= (n_cells + n_max);
-        acc_dt /= (n_cells + n_max);
-
-        cell_velocities_accelerations.insert(
-          std::make_pair(cell, std::make_pair(velocity, acc_dt)));
-      }
-  }
-
-  void
-  update_smooth_average_velocities_acceleration(
-    Particles::ParticleHandler<dim> &particle_handler,
-    std::map<typename Triangulation<dim>::active_cell_iterator,
-             std::pair<Tensor<1, 3>, Tensor<1, 3>>>
-      &new_raw_cell_velocities_accelerations)
-  {
-    for (const auto &new_raw_values : new_raw_cell_velocities_accelerations)
-      {
-        auto cell = new_raw_values.first;
-        auto cell_neighbor =
-          cell_neighbor_list[cell->global_active_cell_index()];
-
-        // Set that the max number of cell and neighbors for a cell if 2^dim
-        // (9 for 2D and 27 for 3D). It helps to increase the factor of the
-        // current cell in the average velocity. In non-structured mesh, it
-        // is possible to have more than 2^dim neighbors for a cell. The value
-        // is changed for this case.
-        unsigned int n_max   = Utilities::fixed_power<dim>(2);
-        unsigned int n_cells = 1;
-
-        // Factor of current cell is (n_max + 1)/(n_cells + n_max) and factor
-        // of neighbors is 1/(n_cells + n_max)
-        Tensor<1, 3> velocity;
-        Tensor<1, 3> acc_dt;
-
-        for (auto neighbor = ++cell_neighbor.begin();
-             neighbor != cell_neighbor.end();
-             ++neighbor)
-          {
-            if (particle_handler.n_particles_in_cell(*neighbor) > 0)
-              {
-                auto neighbor_raw_values =
-                  new_raw_cell_velocities_accelerations.find(*neighbor);
-                if (neighbor_raw_values !=
-                    new_raw_cell_velocities_accelerations.end())
-                  {
-                    velocity += neighbor_raw_values->second.first;
-                    acc_dt += neighbor_raw_values->second.second;
-                  }
-                else // Cell not mobile, therefore no updated value
-                  {
-                    auto neighbor_values =
-                      cell_velocities_accelerations.find(*neighbor);
-                    velocity += neighbor_values->second.first;
-                    acc_dt += neighbor_values->second.second;
-                  }
-              }
-          }
-
-
-        // Factor of current cell is (n_max + 1)/(n_cells + n_max) and factor
-        // of neighbors is 1/(n_cells + n_max)
-        n_max = std::max(n_max, n_cells);
-        velocity += (n_max + 1) * new_raw_values.second.first;
-        acc_dt += (n_max + 1) * new_raw_values.second.second;
-
-        velocity /= (n_cells + n_max);
-        acc_dt /= (n_cells + n_max);
-
-        // Update the average velocity and acceleration (only mobile are
-        // updated)
-        cell_velocities_accelerations[cell] = std::make_pair(velocity, acc_dt);
-      }
-
-    for (auto &values : cell_velocities_accelerations)
-      {
-        auto cell = values.first;
-
-        if (check_cell_mobility(cell) == mobility_status::advected_active)
-          {
-            auto cell_neighbor =
-              cell_neighbor_list[cell->global_active_cell_index()];
-
-            // Set that the max number of cell and neighbors for a cell if 2^dim
-            // (9 for 2D and 27 for 3D). It helps to increase the factor of the
-            // current cell in the average velocity. In non-structured mesh, it
-            // is possible to have more than 2^dim neighbors for a cell. The
-            // value is changed for this case.
-            unsigned int n_max   = Utilities::fixed_power<dim>(2);
-            unsigned int n_cells = 1;
-
-            // Factor of current cell is (n_max + 1)/(n_cells + n_max) and
-            // factor of neighbors is 1/(n_cells + n_max)
-            Tensor<1, 3> velocity;
-            Tensor<1, 3> acc_dt;
-
-            for (auto neighbor = ++cell_neighbor.begin();
-                 neighbor != cell_neighbor.end();
-                 ++neighbor)
-              {
-                if (particle_handler.n_particles_in_cell(*neighbor) > 0)
-                  {
-                    auto neighbor_values =
-                      cell_velocities_accelerations.find(*neighbor);
-                    velocity += neighbor_values->second.first;
-                    acc_dt += neighbor_values->second.second;
-                    n_cells++;
-                  }
               }
 
-            // Factor of current cell is (n_max + 1)/(n_cells + n_max) and
-            // factor of neighbors is 1/(n_cells + n_max)
-            n_max = std::max(n_max, n_cells);
-            velocity += (n_max + 1) * values.second.first;
-            acc_dt += (n_max + 1) * values.second.second;
-
-            velocity /= (n_cells + n_max);
-            acc_dt /= (n_cells + n_max);
-
-            // Update the average velocity and acceleration (only mobile are
-            // updated)
-            values.second = std::make_pair(velocity, acc_dt);
+            // Update acceleration for particles in cell
+            cell_velocities_accelerations.insert(std::make_pair(
+              cell,
+              std::make_pair(velocity_cell_average, acc_dt_cell_average)));
           }
       }
+    particle_particle_force.clear();
   }
 
   typename DEM::dem_data_structures<dim>::cell_index_int_map &
@@ -600,11 +425,15 @@ public:
   }
 
   void
-  set_neighbor_list(
-    const typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
-      &neighbor_list)
+  copy_particle_particle_contact_force(std::vector<Tensor<1, 3>> force)
   {
-    cell_neighbor_list = neighbor_list;
+    particle_particle_force = force;
+  }
+
+  std::vector<Tensor<1, 3>>
+  get_particle_particle_contact_force() &
+  {
+    return particle_particle_force;
   }
 
 private:
@@ -718,9 +547,7 @@ private:
            std::pair<Tensor<1, 3>, Tensor<1, 3>>>
     cell_velocities_accelerations;
 
-  // Neighbor list
-  typename DEM::dem_data_structures<dim>::cells_total_neighbor_list
-    cell_neighbor_list;
+  std::vector<Tensor<1, 3>> particle_particle_force;
 };
 
 #endif // lethe_disable_contacts_h

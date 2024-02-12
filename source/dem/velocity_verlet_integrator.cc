@@ -280,12 +280,12 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
   auto cell_velocities_accelerations_map =
     disable_contacts_object.get_velocities_accelerations();
 
+  std::vector<Tensor<1, 3>> pp_force =
+    disable_contacts_object
+      .get_particle_particle_contact_force();
+
   // Get the map of mobility status of cells
   auto cell_mobility_status_map = disable_contacts_object.get_mobility_status();
-
-  std::map<typename Triangulation<dim>::active_cell_iterator,
-           std::pair<Tensor<1, 3>, Tensor<1, 3>>>
-    new_raw_cell_velocities_accelerations;
 
   for (auto &cell : triangulation.active_cell_iterators())
     {
@@ -294,6 +294,10 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
           // Get the mobility status of the cell
           unsigned int mobility_status =
             cell_mobility_status_map.at(cell->active_cell_index());
+
+          // Get the average velocity and acceleration * dt of the cell
+          auto &[velocity_cell_average, acc_dt_cell_average] =
+            cell_velocities_accelerations_map[cell];
 
           // We loop over the particles, even if cell is not mobile, to reset
           // the force and torques value of the particle with the particle id
@@ -308,8 +312,8 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
                   // When mobile, the average velocity of the cell and the
                   // acceleration is updated at the same step that the particles
                   // are integrated of performance reasons
-                  Tensor<1, 3> new_velocity_cell_average;
-                  Tensor<1, 3> new_acc_dt_cell_average;
+                  velocity_cell_average.clear();
+                  acc_dt_cell_average.clear();
 
                   for (auto &particle : particles_in_cell)
                     {
@@ -337,19 +341,13 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
 
                       // Calculate acceleration * dt and add velocity value for
                       // average acceleration computation
-                      Tensor<1, 3> acc_dt_particle =
-                        dt_g + particle_force * dt_mass_inverse;
-                      new_acc_dt_cell_average += acc_dt_particle;
+                      Tensor<1, 3> acc_dt_particle;
 
                       for (unsigned int d = 0; d < 3; ++d)
                         {
                           // Particle velocity integration
                           particle_properties[PropertiesIndex::v_x + d] +=
-                            acc_dt_particle[d];
-
-                          // Add velocity value for average velocity computation
-                          new_velocity_cell_average[d] +=
-                            particle_properties[PropertiesIndex::v_x + d];
+                            dt_g[d] + particle_force[d] * dt_mass_inverse;
 
                           // Particle location integration
                           particle_position[d] +=
@@ -358,6 +356,18 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
                           // Updating angular velocity
                           particle_properties[PropertiesIndex::omega_x + d] +=
                             particle_torque[d] * dt_MOI_inverse;
+
+                          // Add velocity value for average velocity computation
+                          velocity_cell_average[d] +=
+                            particle_properties[PropertiesIndex::v_x + d];
+
+                          // Calculate the average acceleration of the cell with
+                          // the hydrodynamic forces, pw forces, and external
+                          // forces (gravity)
+                          acc_dt_particle =
+                            dt_g + (particle_force - pp_force[particle_id]) *
+                                     dt_mass_inverse;
+                          acc_dt_cell_average += acc_dt_particle;
                         }
 
                       // Reinitialize force and torque of particle
@@ -378,20 +388,14 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
                     }
 
                   // Compute average velocity and acceleration
-                  new_acc_dt_cell_average /= n_particles_in_cell;
-                  new_velocity_cell_average /= n_particles_in_cell;
-                  new_raw_cell_velocities_accelerations.insert(
-                    std::make_pair(cell,
-                                   std::make_pair(new_velocity_cell_average,
-                                                  new_acc_dt_cell_average)));
+                  acc_dt_cell_average /= n_particles_in_cell;
+                  velocity_cell_average /= n_particles_in_cell;
+
+                  pp_force.clear();
                 }
               else if (mobility_status == DisableContacts<dim>::advected ||
                        mobility_status == DisableContacts<dim>::advected_active)
                 {
-                  // Get the average velocity and acceleration * dt of the cell
-                  auto &[velocity_cell_average, acc_dt_cell_average] =
-                    cell_velocities_accelerations_map[cell];
-
                   for (auto &particle : particles_in_cell)
                     {
                       types::particle_index particle_id =
@@ -450,9 +454,6 @@ VelocityVerletIntegrator<dim>::integrate_with_advected_particles(
             }
         }
     }
-
-  disable_contacts_object.update_smooth_average_velocities_acceleration(
-    particle_handler, new_raw_cell_velocities_accelerations);
 }
 
 

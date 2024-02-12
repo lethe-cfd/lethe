@@ -700,12 +700,20 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
       particle_displaced_in_pbc = false;
     }
 
+  if (dem_parameters.model_parameters.disable_particle_contacts)
+    {
+      has_disabled_contacts = true;
+      disable_contacts_object.set_threshold_values(
+        dem_parameters.model_parameters.granular_temperature_threshold,
+        dem_parameters.model_parameters.solid_fraction_threshold,
+        dem_parameters.model_parameters.advect_particles);
+    }
+
   // Finding cell neighbors
   contact_manager.execute_cell_neighbors_search(
     *parallel_triangulation,
     periodic_boundaries_cells_information,
-    has_periodic_boundaries,
-    true);
+    has_periodic_boundaries);
 
   // Finding boundary cells with faces
   boundary_cell_object.build(
@@ -726,20 +734,6 @@ CFDDEMSolver<dim>::initialize_dem_parameters()
   particle_wall_contact_force_object = set_particle_wall_contact_force_model(
     this->cfd_dem_simulation_parameters.dem_parameters,
     *parallel_triangulation);
-
-  if (dem_parameters.model_parameters.disable_particle_contacts)
-    {
-      has_disabled_contacts = true;
-      disable_contacts_object.set_threshold_values(
-        dem_parameters.model_parameters.granular_temperature_threshold,
-        dem_parameters.model_parameters.solid_fraction_threshold,
-        dem_parameters.model_parameters.advect_particles);
-
-
-      disable_contacts_object.set_neighbor_list(
-        contact_manager.total_neighbor_list);
-    }
-
 
   this->particle_handler.sort_particles_into_subdomains_and_cells();
 
@@ -859,6 +853,11 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
     ->calculate_particle_particle_contact_force(
       contact_manager, dem_time_step, torque, force, periodic_offset);
 
+  if (has_disabled_contacts)
+    {
+      disable_contacts_object.copy_particle_particle_contact_force(force);
+    }
+
   // Particles-walls contact force:
   particle_wall_contact_force();
 
@@ -911,8 +910,8 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
               // the fluid may have significantly changed the particulate
               // agitation.
 
-              // Update the cell average velocities and accelerations (before
-              // the integration step since the forces are cleared)
+              // Update the cell average velocities and accelerations (before the
+              // integration step since the forces are cleared)
               disable_contacts_object.update_average_velocities_acceleration(
                 this->particle_handler, g, force, dem_time_step);
 
