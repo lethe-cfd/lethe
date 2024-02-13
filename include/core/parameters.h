@@ -595,7 +595,8 @@ namespace Parameters
 
 
   /**
-   * @brief Material - Class that defines the physical property of a material.
+   * @brief Defines the parameters for the physical property of a material.
+   *
    * Generally a material will be a fluid, but for conjugated heat transfer,
    * this may also be a solid.
    */
@@ -604,34 +605,77 @@ namespace Parameters
   public:
     Material()
     {}
-
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] material_prefix The material prefix (solid or liquid).
+     *
+     * @param[in] id The material id.
+     */
     void
     declare_parameters(ParameterHandler &prm,
                        std::string       material_prefix,
                        unsigned int      id);
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in,out] prm The ParameterHandler.
+     *
+     * @param[in] material_prefix The material prefix (solid or liquid).
+     *
+     * @param[in] id The material id.
+     *
+     * @param[in] dimensions The Dimensionality object controling the 
+     * fundamental dimensions (length, time, mass, temperature) of the problem.
+     */
     void
     parse_parameters(ParameterHandler    &prm,
                      std::string          material_prefix,
                      const unsigned int   id,
                      const Dimensionality dimensions);
 
-    // Kinematic viscosity (nu = mu/rho) in units of L^2/s
+    /**
+     * @brief Kinematic viscosity (\f$\nu = \mu/\rho\f$) in \f$L^2/T\f$
+     */
     double kinematic_viscosity;
-    // volumetric mass density (rho) in units of kg/m^3
+    
+    /**
+     * @brief Volumetric mass density (\f$\rho\f$) in \f$M/L^3\f$
+     */
     double density;
-    // specific heat capacity (cp) in J/K/kg
+    
+    /** 
+     * @brief Specific heat in \f$L^2\Theta^{-1}T^{-2}\f$
+     */
     double specific_heat;
-    // thermal conductivity (k) in W/m/K
+    
+    /** 
+     * @brief Thermal conductivity in \f$MLT^{-3}\Theta^{-1}\f$
+     */
     double thermal_conductivity;
-    // thermal expansion coefficient (alpha) in 1/K
+    
+    /** 
+     * @brief Thermal expansion coefficient in \f$\Theta^{-1}\f$
+     */
     double thermal_expansion;
-    // tracer diffusivity in L^2/s
+    
+    /** 
+     * @brief Tracer diffusivity in \f$L^2/s\f$
+     */
     double tracer_diffusivity;
 
     // Phase change parameters
+    /** 
+     * @brief PhaseChange parameters
+     */
     PhaseChange phase_change_parameters;
 
-    // Non Newtonian model parameters
+
+    /** 
+     * @brief Enumerate the rheological models
+     */
     enum class RheologicalModel
     {
       powerlaw,
@@ -639,21 +683,32 @@ namespace Parameters
       newtonian,
       phase_change
     } rheological_model;
+    
     NonNewtonian non_newtonian_parameters;
 
+    /** 
+     * @brief Enumerate the density models
+     */
     enum class DensityModel
     {
       constant,
       isothermal_ideal_gas
     } density_model;
+    
     IsothermalIdealGasDensityParameters isothermal_ideal_gas_density_parameters;
 
+    /** 
+     * @brief Enumerate the specific heat capacity models
+     */
     enum class SpecificHeatModel
     {
       constant,
       phase_change
     } specific_heat_model;
 
+    /** 
+     * @brief Enumerate the thermal conductivity models
+     */
     enum class ThermalConductivityModel
     {
       constant,
@@ -661,14 +716,24 @@ namespace Parameters
       phase_change
     } thermal_conductivity_model;
 
+    /** 
+     * @brief Enumerate the thermal expansion models
+     */
     enum class ThermalExpansionModel
     {
       constant,
       phase_change
     } thermal_expansion_model;
 
-    // Linear thermal conductivity parameters: k = k_A0 + k_A1 * T
+
+    /** 
+     * @brief Linear thermal conductivity parameters: \f$k = k_\mathrm{A0} + k_\mathrm{A1} T\f$
+     */
     double k_A0;
+    
+    /** 
+     * @brief Linear thermal conductivity parameters: \f$k = k_\mathrm{A0} + k_\mathrm{A1} T\f$
+     */
     double k_A1;
   };
 
