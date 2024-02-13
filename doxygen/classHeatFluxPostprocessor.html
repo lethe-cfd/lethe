@@ -87,7 +87,7 @@ Inheritance diagram for HeatFluxPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classHeatFluxPostprocessor__inherit__graph.png" border="0" usemap="#aHeatFluxPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aHeatFluxPostprocessor_3_01dim_01_4_inherit__map" id="aHeatFluxPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="12,95,184,136"/>
+<area shape="rect" title="Compute the local heat flux vector field within a domain." alt="" coords="12,95,184,136"/>
 <area shape="rect" title=" " alt="" coords="5,5,191,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -117,8 +117,10 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class HeatFluxPostprocessor&lt; dim &gt;</h3>
 
+<p>Compute the local heat flux vector field within a domain. </p>
+<p>The local heat flux is defined as \(\mathbf{q} = -k \nabla T\) where \(k\) is the thermal conductivity of the material and \(\nabla T\) the temperature gradient. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00530">530</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00738">738</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a741e8d98fa8231e8d79eebc4581f4c31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a741e8d98fa8231e8d79eebc4581f4c31">&#9670;&nbsp;</a></span>HeatFluxPostprocessor()</h2>
@@ -174,7 +176,19 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00533">533</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Constructor of the heat flux postprocessor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_thermal_conductivity_model</td><td>Thermal conductivity model of the material</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_material_string</td><td>Type of material: "f" (fluid) or "s" (solid)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_id</td><td>Either fluid ID or solid ID (as initialized in the physical properties). It is used to name the postprocessed variable vector.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_mesh_material_id</td><td>Identifier corresponding to the material as identified in the mesh. By convention, fluids are given the material_id 0 and solids follow with ids 1, 2, etc. <a class="el" href="classThis.html">This</a> is used to identify which cell lies in which material.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_solid_phase_present</td><td>Boolean indicating if the simulation has solids. If there is no solid, the <code>material_id</code> of cells is not checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00760">760</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -215,16 +229,17 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Computes local heat flux quantities. <a class="el" href="classThis.html">This</a> function is used to improve readability of the <a class="el" href="classHeatFluxPostprocessor.html#ae3bd282a4c79280533a3ab9b298d514b" title="Computes local heat flux quantities from temperature field and material properties.">HeatFluxPostprocessor::evaluate_scalar_field</a> function and avoid repeated lines. </p>
+<p>Computes local heat flux vectors. </p>
+<dl class="section note"><dt>Note</dt><dd>The function is used to improve readability of the <a class="el" href="classHeatFluxPostprocessor.html#ae3bd282a4c79280533a3ab9b298d514b" title="Compute local heat fluxes from temperature gradient vector field and thermal conductivity at given ev...">HeatFluxPostprocessor::evaluate_scalar_field</a> function and avoid repeated lines.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputs</td><td>Structure that contains all temperature information needed to evaluate local heat fluxes. </td></tr>
-    <tr><td class="paramname">computed_quantities</td><td>Vector field containing local heat flux vectors evaluated at evaluation points. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputs</td><td>Temperature information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed local heat flux vectors at evaluation points. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00603">603</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00832">832</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
 
@@ -266,16 +281,16 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Computes local heat flux quantities from temperature field and material properties. </p>
+<p>Compute local heat fluxes from temperature gradient vector field and thermal conductivity at given evaluation points. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputs</td><td>Structure that contains all temperature information needed to evaluate local heat fluxes. </td></tr>
-    <tr><td class="paramname">computed_quantities</td><td>Vector field containing local heat flux vectors evaluated at evaluation points. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputs</td><td>Temperature information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed local heat flux vectors at evaluation points. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00557">557</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00784">784</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -302,7 +317,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00622">622</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Identifier corresponding to the material as identified in the mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00853">853</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -328,7 +345,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00623">623</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Boolean indicating if the simulation has solids. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00855">855</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -354,7 +373,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00621">621</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Model describing of thermal conductivity of the material. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00851">851</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>

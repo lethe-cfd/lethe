@@ -86,7 +86,7 @@ Inheritance diagram for LevelsetGradientPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLevelsetGradientPostprocessor__inherit__graph.png" border="0" usemap="#aLevelsetGradientPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aLevelsetGradientPostprocessor_3_01dim_01_4_inherit__map" id="aLevelsetGradientPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title="Postprocessor for levelset gradient of a shape used to calculate the levelset gradient field for a gi..." alt="" coords="5,95,229,136"/>
+<area shape="rect" title="Compute a levelset gradient vector field for a given shape within a domain." alt="" coords="5,95,229,136"/>
 <area shape="rect" title=" " alt="" coords="25,5,210,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -107,9 +107,9 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class LevelsetGradientPostprocessor&lt; dim &gt;</h3>
 
-<p><a class="el" href="classPostprocessor.html">Postprocessor</a> for levelset gradient of a shape used to calculate the levelset gradient field for a given shape within the domain. </p>
+<p>Compute a levelset gradient vector field for a given shape within a domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00427">427</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00614">614</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad61408e2bb1579494ef14d69986145b6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad61408e2bb1579494ef14d69986145b6">&#9670;&nbsp;</a></span>LevelsetGradientPostprocessor()</h2>
@@ -136,14 +136,16 @@ template&lt;int dim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Constructor for the postprocessor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Constructor for the levelset gradient postprocessor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td>the shape for which the levelset gradient field will be computed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shape</td><td>Geometrical entity. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00435">435</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00622">622</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -184,16 +186,17 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>function that computes the gradient at each point associated to the computed_quantities vector and fills that vector accordingly. </p>
+<p>Compute signed distance gradient of evaluation points with respect to the specified shape. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputs</td><td>the arguments used as basis for the postprocessing </td></tr>
-    <tr><td class="paramname">computed_quantities</td><td>the variable to fill with levelset gradient information </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_data</td><td>Fluid dynamics velocity and pressure information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed signed distance value at evaluation points.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd><code>input_data</code> contains both velocity and pressure data since fluid dynamics in Lethe is solved in a monolithic way, but here only the positions of evaluation points are used. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00449">449</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00642">642</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +223,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00470">470</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Geometrical entity. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00664">664</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>

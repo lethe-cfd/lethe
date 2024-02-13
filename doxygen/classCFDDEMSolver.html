@@ -106,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaebd11ac00952aaaa99ebd66c43f7d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18ebde479bb197807dcdc334fcb06636"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a18ebde479bb197807dcdc334fcb06636">cell_weight</a> (const typename parallel::distributed::Triangulation&lt; dim &gt;::cell_iterator &amp;cell, const typename parallel::distributed::Triangulation&lt; dim &gt;::CellStatus status) const</td></tr>
 <tr class="separator:a18ebde479bb197807dcdc334fcb06636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d8462e3f4644b034d2d963b5e72f1c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a94d8462e3f4644b034d2d963b5e72f1c">cell_weight</a> (const typename parallel::distributed::Triangulation&lt; dim &gt;::cell_iterator &amp;cell, const CellStatus status) const</td></tr>
+<tr class="separator:a94d8462e3f4644b034d2d963b5e72f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2891dbda975ae4c070cafc3a7cca99ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a2891dbda975ae4c070cafc3a7cca99ce">load_balance</a> ()</td></tr>
 <tr class="separator:a2891dbda975ae4c070cafc3a7cca99ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classGLSVANSSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classGLSVANSSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classGLSVANSSolver.html">GLSVANSSolver&lt; dim &gt;</a></td></tr>
@@ -676,8 +678,38 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
+<a id="a94d8462e3f4644b034d2d963b5e72f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94d8462e3f4644b034d2d963b5e72f1c">&#9670;&nbsp;</a></span>cell_weight() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="classCFDDEMSolver.html">CFDDEMSolver</a>&lt; dim &gt;::cell_weight </td>
+          <td>(</td>
+          <td class="paramtype">const typename parallel::distributed::Triangulation&lt; dim &gt;::cell_iterator &amp;&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const CellStatus&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a18ebde479bb197807dcdc334fcb06636"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18ebde479bb197807dcdc334fcb06636">&#9670;&nbsp;</a></span>cell_weight()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a18ebde479bb197807dcdc334fcb06636">&#9670;&nbsp;</a></span>cell_weight() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1003,7 +1035,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classCalculates.html">Calculates</a> particles-wall contact forces. </p>
+<p>Calculates particles-wall contact forces. </p>
 
 <p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8cc_source.html#l01051">1051</a> of file <a class="el" href="cfd__dem__coupling_8cc_source.html">cfd_dem_coupling.cc</a>.</p>
 

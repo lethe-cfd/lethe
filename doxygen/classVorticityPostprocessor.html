@@ -85,7 +85,7 @@ Inheritance diagram for VorticityPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classVorticityPostprocessor__inherit__graph.png" border="0" usemap="#aVorticityPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aVorticityPostprocessor_3_01dim_01_4_inherit__map" id="aVorticityPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="15,95,181,136"/>
+<area shape="rect" title="Compute the vorticity vector field within a domain." alt="" coords="15,95,181,136"/>
 <area shape="rect" title=" " alt="" coords="5,5,191,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -101,9 +101,10 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class VorticityPostprocessor&lt; dim &gt;</h3>
 
-<p>used to calculate the vorticity field within the domain. The vorticity is defined as $\mathbf{\omega} = \nabla \times \mathbf{u}$ or, in other notation, $\mathbf{\omega} = rot(\mathbf{u})$. </p>
+<p>Compute the vorticity vector field within a domain. </p>
+<p>The vorticity is defined as \(\mathbf{\omega} = \nabla \times \mathbf{u} = \mathrm{rot}(\mathbf{u})\) where \(\mathbf{u}\) is the velocity vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00028">28</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00022">22</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a50d813e22a0358f35a9112ccc7c1da11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50d813e22a0358f35a9112ccc7c1da11">&#9670;&nbsp;</a></span>VorticityPostprocessor()</h2>
@@ -130,7 +131,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00031">31</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Constructor of the vorticity postprocessor. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00028">28</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -171,7 +174,17 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00035">35</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Compute the vorticity vector from the velocity vector at given evaluation points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_data</td><td>Fluid dynamics velocity and pressure information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed vorticity vector at evaluation points.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><code>input_data</code> contains both velocity and pressure data since fluid dynamics in Lethe is solved in a monolithic way, but only the velocity gradient is used to compute the vorticity. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00046">46</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>

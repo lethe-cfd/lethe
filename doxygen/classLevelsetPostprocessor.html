@@ -86,7 +86,7 @@ Inheritance diagram for LevelsetPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classLevelsetPostprocessor__inherit__graph.png" border="0" usemap="#aLevelsetPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aLevelsetPostprocessor_3_01dim_01_4_inherit__map" id="aLevelsetPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="13,95,181,136"/>
+<area shape="rect" title="Compute levelset field for a given shape within a domain." alt="" coords="13,95,181,136"/>
 <area shape="rect" title=" " alt="" coords="5,5,189,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -107,9 +107,9 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class LevelsetPostprocessor&lt; dim &gt;</h3>
 
-<p>used to calculate the levelset field for a given shape within the domain. </p>
+<p>Compute levelset field for a given shape within a domain. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00390">390</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00559">559</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa77f0813f05df71b35e48c0f004786af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa77f0813f05df71b35e48c0f004786af">&#9670;&nbsp;</a></span>LevelsetPostprocessor()</h2>
@@ -137,7 +137,15 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00393">393</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Constuctor of the levelset postprocessor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">shape</td><td>Geometrical entity. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00567">567</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -178,7 +186,17 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00399">399</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Compute signed distance value of evaluation points with respect to the specified shape. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_data</td><td>Fluid dynamics velocity and pressure information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed signed distance value at evaluation points.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><code>input_data</code> contains both velocity and pressure data since fluid dynamics in Lethe is solved in a monolithic way, but here only the positions of evaluation points are used. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00586">586</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -205,7 +223,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00418">418</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Geometrical entity. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00606">606</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>

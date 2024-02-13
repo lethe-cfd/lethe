@@ -86,7 +86,7 @@ Inheritance diagram for DensityPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDensityPostprocessor__inherit__graph.png" border="0" usemap="#aDensityPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDensityPostprocessor_3_01dim_01_4_inherit__map" id="aDensityPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="16,95,179,136"/>
+<area shape="rect" title="Compute the density scalar field of a material within a domain." alt="" coords="16,95,179,136"/>
 <area shape="rect" title=" " alt="" coords="5,5,189,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -107,8 +107,18 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class DensityPostprocessor&lt; dim &gt;</h3>
 
+<p>Compute the density scalar field of a material within a domain. </p>
+<p>The expression for the density depends on the density model of the material. See <a href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/
+physical_properties.html#density-models" target="_blank">documentation on density models</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_density_model</td><td>Density model of the material </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">[]in</td><td>material_id ID corresponding to the material (fluid or solid) </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00481">481</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00680">680</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a81a2f7495e0a3c94caa240d0bdc42b42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81a2f7495e0a3c94caa240d0bdc42b42">&#9670;&nbsp;</a></span>DensityPostprocessor()</h2>
@@ -146,7 +156,16 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00484">484</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Constructor for the density postprocessor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_density_model</td><td>Density model of the material.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">material_id</td><td>Identifier corresponding to the material (fluid or solid). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00691">691</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +206,16 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00492">492</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Compute the density of a material at given evaluation points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputs</td><td>Fluid dynamics velocity and pressure information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed density value at evaluation points. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00708">708</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00049">pressure</a>.</p>
 
@@ -216,7 +244,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00509">509</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00726">726</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>

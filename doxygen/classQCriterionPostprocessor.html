@@ -85,7 +85,7 @@ Inheritance diagram for QCriterionPostprocessor&lt; dim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classQCriterionPostprocessor__inherit__graph.png" border="0" usemap="#aQCriterionPostprocessor_3_01dim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aQCriterionPostprocessor_3_01dim_01_4_inherit__map" id="aQCriterionPostprocessor_3_01dim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="8,95,187,136"/>
+<area shape="rect" title="Compute the Q&#45;criterion scalar field within a domain." alt="" coords="8,95,187,136"/>
 <area shape="rect" title=" " alt="" coords="5,5,189,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -101,9 +101,10 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
 class QCriterionPostprocessor&lt; dim &gt;</h3>
 
-<p>used to calculate the QCriterion field within the domain. The Q Criterion is defined as as $Q = ||\Omega||^2 -||S||^2$ where $S$ is the symmetric deformation tensor </p>
+<p>Compute the Q-criterion scalar field within a domain. </p>
+<p>The Q-criterion is defined as \(Q = 0.5 (||\mathbf{\omega}||^2 - ||\mathbf{S}||^2)\) where \(\mathbf{S}\) is the symmetric deformation tensor. </p>
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00072">72</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00085">85</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab4d4ef4ff1d3c00e1c585229e2d8b541"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab4d4ef4ff1d3c00e1c585229e2d8b541">&#9670;&nbsp;</a></span>QCriterionPostprocessor()</h2>
@@ -130,7 +131,9 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00075">75</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Constructor of the Q-criterion postprocessor. </p>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00091">91</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
@@ -171,7 +174,17 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00079">79</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
+<p>Computes the Q-criterion from the velocity vector at given evaluation points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_data</td><td>Fluid dynamics velocity and pressure information.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">computed_quantities</td><td>Computed Q-criterion value at evaluation points.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><code>input_data</code> contains both velocity and pressure data since fluid dynamics in Lethe is solved in a monolithic way, but only the velocity gradient is used to compute the Q-criterion. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessors_8h_source.html#l00109">109</a> of file <a class="el" href="postprocessors_8h_source.html">postprocessors.h</a>.</p>
 
 </div>
 </div>
