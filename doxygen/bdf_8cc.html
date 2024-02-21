@@ -127,20 +127,52 @@ Include dependency graph for bdf.cc:</div>
 Functions</h2></td></tr>
 <tr class="memitem:a387624b2a04946958112c52f1bf549a6"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a> (const unsigned int p, const std::vector&lt; double &gt; dt)</td></tr>
 <tr class="separator:a387624b2a04946958112c52f1bf549a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a0eec8ad86be9038d15efe2d15f5cedf3">bdf_coefficients</a> (const <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method, const std::vector&lt; double &gt; dt)</td></tr>
-<tr class="separator:a0eec8ad86be9038d15efe2d15f5cedf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73840c3a9e2fc8b4d7f74b618c22325f"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a73840c3a9e2fc8b4d7f74b618c22325f">calculate_bdf_coefficients</a> (const <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method, const std::vector&lt; double &gt; time_steps)</td></tr>
+<tr class="separator:a73840c3a9e2fc8b4d7f74b618c22325f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cee6a4b9491650075dcc7a610f99bf2"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a> (const unsigned int p, const unsigned int n, const unsigned int j, const Vector&lt; double &gt; times)</td></tr>
 <tr class="separator:a2cee6a4b9491650075dcc7a610f99bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0eec8ad86be9038d15efe2d15f5cedf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0eec8ad86be9038d15efe2d15f5cedf3">&#9670;&nbsp;</a></span>bdf_coefficients() <span class="overload">[1/2]</span></h2>
+<a id="a387624b2a04946958112c52f1bf549a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387624b2a04946958112c52f1bf549a6">&#9670;&nbsp;</a></span>bdf_coefficients()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Vector&lt;double&gt; bdf_coefficients </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00023">23</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00077">delta()</a>.</p>
+
+</div>
+</div>
+<a id="a73840c3a9e2fc8b4d7f74b618c22325f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73840c3a9e2fc8b4d7f74b618c22325f">&#9670;&nbsp;</a></span>calculate_bdf_coefficients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; calculate_bdf_coefficients </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a>&#160;</td>
           <td class="paramname"><em>method</em>, </td>
@@ -162,7 +194,6 @@ Functions</h2></td></tr>
 <p>Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\). </p>
 <p>The coefficients are determined through a recursion algorithm. The algorithm is taken from: Hay, Alexander, et al. "hp-Adaptive time
 integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.</p>
-<p>For example, if the method is a BDF2, it uses three values for the time : \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\). Thus the <code>time_steps</code> vector should contain \(\Delta t_1\) and \(\Delta t_2\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">method</td><td>Time stepping method.</td></tr>
@@ -177,52 +208,6 @@ integration based on the BDF for viscous flows." Journal of Computational Physic
 <p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00055">55</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::bdf1</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::bdf2</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a62fd133dd9c35c94e867fc65606aeffe">Parameters::SimulationControl::bdf3</a>, <a class="el" href="bdf_8cc_source.html#l00023">bdf_coefficients()</a>, and <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9ace68ebd29c010930ed70df3b718e02b9">Parameters::SimulationControl::steady_bdf</a>.</p>
-
-</div>
-</div>
-<a id="a387624b2a04946958112c52f1bf549a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a387624b2a04946958112c52f1bf549a6">&#9670;&nbsp;</a></span>bdf_coefficients() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Vector&lt;double&gt; bdf_coefficients </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>order</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; double &gt;&#160;</td>
-          <td class="paramname"><em>time_steps</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate the coefficients required for backward differentiation formula (BDF) integration of <code>order</code> \(n\). </p>
-<p>The coefficients are determined through a recursion algorithm. The algorithm is taken from: Hay, Alexander, et al. "hp-Adaptive time
-integration based on the BDF for viscous flows." Journal of Computational Physics 291 (2015): 151-176.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">order</td><td>Order of the BDF method. The BDF method of <code>order</code> \(n\) requires \(n+1\) coefficients.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">time_steps</td><td>Vector containing all the time steps. The time steps should be in decreasing order.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>For example, if the method is a BDF2 ( \(n=2\)), it uses three values for the time: \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\). Thus the <code>time_steps</code> vector should contain \(\Delta t_1\) and \(\Delta t_2\).</p>
-<dl class="section return"><dt>Returns</dt><dd>Vector containing BDF integration coefficient values.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>At the moment, the highest implemented scheme is <code>bdf3</code> (<code>order=3</code>). </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00023">23</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
-
-<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00076">delta()</a>.</p>
 
 </div>
 </div>
@@ -279,9 +264,9 @@ integration based on the BDF for viscous flows." Journal of Computational Physic
 <p>For example, if the method is a BDF2 ( \(n=2\)), three values of the time must be in the array: \(t\), \(t-\Delta t_1\) and \(t-\Delta t_2\).</p>
 <dl class="section return"><dt>Returns</dt><dd>Vector of \(n\) divided differences ( \(\delta^j\)) used in the calculation of BDF coefficients. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00076">76</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bdf_8cc_source.html#l00077">77</a> of file <a class="el" href="bdf_8cc_source.html">bdf.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00076">delta()</a>.</p>
+<p class="reference">References <a class="el" href="bdf_8cc_source.html#l00077">delta()</a>.</p>
 
 </div>
 </div>

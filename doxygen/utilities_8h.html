@@ -190,6 +190,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1ab31b90bc584c635ec159468ceed9b2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1ab31b90bc584c635ec159468ceed9b2"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a1ab31b90bc584c635ec159468ceed9b2">sgn</a> (T val)</td></tr>
 <tr class="separator:a1ab31b90bc584c635ec159468ceed9b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aaa34d570ccff65aa586904187cfff5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9aaa34d570ccff65aa586904187cfff5"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a9aaa34d570ccff65aa586904187cfff5">clip</a> (const T &amp;n, const T &amp;lower, const T &amp;upper)</td></tr>
+<tr class="separator:a9aaa34d570ccff65aa586904187cfff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2174ef369010698c8197b717864e4a3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8h.html#ac2174ef369010698c8197b717864e4a3">calculate_point_property_cahn_hilliard</a> (const double phase_cahn_hilliard, const double property0, const double property1)</td></tr>
 <tr class="separator:ac2174ef369010698c8197b717864e4a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a120afbe974701b97039517c195e18416"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a120afbe974701b97039517c195e18416">fill_table_from_file</a> (TableHandler &amp;table, const std::string file_name, const std::string delimiter=&quot; &quot;)</td></tr>
@@ -316,7 +319,7 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00302">302</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00318">318</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -424,9 +427,63 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00220">220</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00236">236</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00205">sgn()</a>.</p>
+
+</div>
+</div>
+<a id="a9aaa34d570ccff65aa586904187cfff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aaa34d570ccff65aa586904187cfff5">&#9670;&nbsp;</a></span>clip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T clip </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>lower</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>upper</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clip a properties between a lower and a higher value. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>argument's type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">lower</td><td>Lower admissible value </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">upper</td><td>Upper admissible value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Clipped variable that is not below the lower limit and not above the upper limit </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00221">221</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -504,7 +561,7 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00334">334</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00350">350</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -1033,7 +1090,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00319">319</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00335">335</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>

@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;Vector&lt;double&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="bdf_8h.html#a8819b8d37da17f777876c7bb3404f0ad">   23</a></span>&#160;<a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p, <span class="keyword">const</span> std::vector&lt;double&gt; dt)</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">   23</a></span>&#160;<a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p, <span class="keyword">const</span> std::vector&lt;double&gt; dt)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">// There should be at least p time steps</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  assert(dt.size() &gt;= p);</div>
@@ -133,52 +133,54 @@ $(function() {
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;Vector&lt;double&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="bdf_8h.html#a73dd486d8835174570f0d79591a4cb70">   55</a></span>&#160;<a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(<span class="keyword">const</span> <a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                 <span class="keyword">const</span> std::vector&lt;double&gt;                               dt)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">switch</span> (method)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::TimeSteppingMethod::bdf1</a>):</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(1, dt);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9ace68ebd29c010930ed70df3b718e02b9">Parameters::SimulationControl::TimeSteppingMethod::steady_bdf</a>):</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(1, dt);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::TimeSteppingMethod::bdf2</a>):</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(2, dt);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a62fd133dd9c35c94e867fc65606aeffe">Parameters::SimulationControl::TimeSteppingMethod::bdf3</a>):</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(3, dt);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">throw</span>(std::runtime_error(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;          <span class="stringliteral">&quot;BDF coefficients were requested without a BDF method&quot;</span>));</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;Vector&lt;double&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="bdf_8h.html#a031702a84563b27e14b0d85d361ab08f">   76</a></span>&#160;<a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   p,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   n,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   j,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keyword">const</span> Vector&lt;double&gt; times)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordflow">if</span> (j == 0)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      Vector&lt;double&gt; arr(p + 1);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      arr    = 0.;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      arr[n] = 1;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">return</span> arr;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      Vector&lt;double&gt; delta_1 = <a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(p, n, j - 1, times);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      Vector&lt;double&gt; delta_2 = <a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(p, n + 1, j - 1, times);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      Vector&lt;double&gt; delta_sol(p + 1);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i_del = 0; i_del &lt; p + 1; ++i_del)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        delta_sol[i_del] =</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;          (delta_1[i_del] - delta_2[i_del]) / (times[n] - times[n + j]);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keywordflow">return</span> delta_sol;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="ttc" id="abdf_8cc_html_a2cee6a4b9491650075dcc7a610f99bf2"><div class="ttname"><a href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a></div><div class="ttdeci">Vector&lt; double &gt; delta(const unsigned int p, const unsigned int n, const unsigned int j, const Vector&lt; double &gt; times)</div><div class="ttdoc">Recursive function for calculating the  order divided differences ( ) that is used for calculating ba...</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8cc_source.html#l00076">bdf.cc:76</a></div></div>
-<div class="ttc" id="abdf_8cc_html_a387624b2a04946958112c52f1bf549a6"><div class="ttname"><a href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a></div><div class="ttdeci">Vector&lt; double &gt; bdf_coefficients(const unsigned int p, const std::vector&lt; double &gt; dt)</div><div class="ttdoc">Calculate the coefficients required for backward differentiation formula (BDF) integration of order .</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8cc_source.html#l00023">bdf.cc:23</a></div></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="bdf_8h.html#a73840c3a9e2fc8b4d7f74b618c22325f">   55</a></span>&#160;<a class="code" href="bdf_8cc.html#a73840c3a9e2fc8b4d7f74b618c22325f">calculate_bdf_coefficients</a>(</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">const</span> <a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a> method,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">const</span> std::vector&lt;double&gt;                               time_steps)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">switch</span> (method)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::TimeSteppingMethod::bdf1</a>):</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(1, time_steps);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9ace68ebd29c010930ed70df3b718e02b9">Parameters::SimulationControl::TimeSteppingMethod::steady_bdf</a>):</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(1, time_steps);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::TimeSteppingMethod::bdf2</a>):</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(2, time_steps);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keywordflow">case</span> (<a class="code" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a62fd133dd9c35c94e867fc65606aeffe">Parameters::SimulationControl::TimeSteppingMethod::bdf3</a>):</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a>(3, time_steps);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">throw</span>(std::runtime_error(</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;          <span class="stringliteral">&quot;BDF coefficients were requested without a BDF method&quot;</span>));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;Vector&lt;double&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="bdf_8h.html#a031702a84563b27e14b0d85d361ab08f">   77</a></span>&#160;<a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   p,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   n,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>   j,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keyword">const</span> Vector&lt;double&gt; times)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">if</span> (j == 0)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      Vector&lt;double&gt; arr(p + 1);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      arr    = 0.;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      arr[n] = 1;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">return</span> arr;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      Vector&lt;double&gt; delta_1 = <a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(p, n, j - 1, times);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      Vector&lt;double&gt; delta_2 = <a class="code" href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a>(p, n + 1, j - 1, times);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      Vector&lt;double&gt; delta_sol(p + 1);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i_del = 0; i_del &lt; p + 1; ++i_del)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        delta_sol[i_del] =</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;          (delta_1[i_del] - delta_2[i_del]) / (times[n] - times[n + j]);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">return</span> delta_sol;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="ttc" id="abdf_8cc_html_a2cee6a4b9491650075dcc7a610f99bf2"><div class="ttname"><a href="bdf_8cc.html#a2cee6a4b9491650075dcc7a610f99bf2">delta</a></div><div class="ttdeci">Vector&lt; double &gt; delta(const unsigned int p, const unsigned int n, const unsigned int j, const Vector&lt; double &gt; times)</div><div class="ttdoc">Recursive function for calculating the  order divided differences ( ) that is used for calculating ba...</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8cc_source.html#l00077">bdf.cc:77</a></div></div>
+<div class="ttc" id="abdf_8cc_html_a387624b2a04946958112c52f1bf549a6"><div class="ttname"><a href="bdf_8cc.html#a387624b2a04946958112c52f1bf549a6">bdf_coefficients</a></div><div class="ttdeci">Vector&lt; double &gt; bdf_coefficients(const unsigned int p, const std::vector&lt; double &gt; dt)</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8cc_source.html#l00023">bdf.cc:23</a></div></div>
+<div class="ttc" id="abdf_8cc_html_a73840c3a9e2fc8b4d7f74b618c22325f"><div class="ttname"><a href="bdf_8cc.html#a73840c3a9e2fc8b4d7f74b618c22325f">calculate_bdf_coefficients</a></div><div class="ttdeci">Vector&lt; double &gt; calculate_bdf_coefficients(const Parameters::SimulationControl::TimeSteppingMethod method, const std::vector&lt; double &gt; time_steps)</div><div class="ttdoc">Calculate the coefficients required for backward differentiation formula (BDF) integration of order .</div><div class="ttdef"><b>Definition:</b> <a href="bdf_8cc_source.html#l00055">bdf.cc:55</a></div></div>
 <div class="ttc" id="abdf_8h_html"><div class="ttname"><a href="bdf_8h.html">bdf.h</a></div></div>
 <div class="ttc" id="astructParameters_1_1SimulationControl_html_a75b33ae454da14bc72dbe078c121d7e9"><div class="ttname"><a href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9">Parameters::SimulationControl::TimeSteppingMethod</a></div><div class="ttdeci">TimeSteppingMethod</div><div class="ttdef"><b>Definition:</b> <a href="parameters_8h_source.html#l00089">parameters.h:90</a></div></div>
 <div class="ttc" id="astructParameters_1_1SimulationControl_html_a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843"><div class="ttname"><a href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::TimeSteppingMethod::bdf1</a></div><div class="ttdeci">@ bdf1</div></div>
