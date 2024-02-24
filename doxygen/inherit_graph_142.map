@@ -7,7 +7,7 @@
 <area shape="rect" id="node17" href="$classAuxiliaryPhysics.html" title=" " alt="" coords="293,431,466,473"/>
 <area shape="rect" id="node18" href="$classNavierStokesBase.html" title=" " alt="" coords="287,497,471,538"/>
 <area shape="rect" id="node3" href="$classCahnHilliard.html" title=" " alt="" coords="549,5,706,32"/>
-<area shape="rect" id="node4" href="$classHeatTransfer.html" title=" " alt="" coords="547,56,707,83"/>
+<area shape="rect" id="node4" href="$classHeatTransfer.html" title="Implementation of heat transfer as an auxiliary physics. The heat equation is weakly coupled to the v..." alt="" coords="547,56,707,83"/>
 <area shape="rect" id="node5" href="$classTracer.html" title=" " alt="" coords="569,107,685,133"/>
 <area shape="rect" id="node6" href="$classVolumeOfFluid.html" title=" " alt="" coords="541,157,714,184"/>
 <area shape="rect" id="node8" href="$classGLSNavierStokesSolver.html" title="A solver class for the Navier&#45;Stokes equation using GLS stabilization." alt="" coords="540,209,715,250"/>
