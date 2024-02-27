@@ -588,7 +588,7 @@ end
 </section>
 <section id="vof">
 <h3>VOF<a class="headerlink" href="#vof" title="Link to this heading">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">VOF</span></code> subsection, we enable <code class="docutils literal notranslate"><span class="pre">interface</span> <span class="pre">sharpening</span></code> to reconstruct the interface and keep it sharp during the simulation. Note that here we use the <code class="docutils literal notranslate"><span class="pre">constant</span></code> and <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> methods for interface sharpening. The <code class="docutils literal notranslate"><span class="pre">mass</span> <span class="pre">conservation</span></code> results show that choosing a <code class="docutils literal notranslate"><span class="pre">constant</span></code> method does not affect the mass conservation significantly. Hence, the results of both methods are almost identical. For the <code class="docutils literal notranslate"><span class="pre">constant</span></code> sharpening we use</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">VOF</span></code> subsection, we enable <code class="docutils literal notranslate"><span class="pre">interface</span> <span class="pre">sharpening</span></code> to reconstruct the interface and keep it sharp during the simulation. Note that here, we use the <code class="docutils literal notranslate"><span class="pre">constant</span></code> and <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> methods for interface sharpening. Mass conservation results show that choosing a <code class="docutils literal notranslate"><span class="pre">constant</span></code> method does not affect the mass conservation significantly. Hence, the results of both methods are almost identical. For the <code class="docutils literal notranslate"><span class="pre">constant</span></code> sharpening we use:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection VOF
   subsection interface sharpening
     set enable              = true
@@ -596,11 +596,6 @@ end
     set interface sharpness = 1.5
     set frequency           = 25
     set type                = constant
-  end
-  subsection mass conservation
-    set monitoring      = true
-    set monitored fluid = fluid 1
-    set verbosity       = extra verbose
   end
   subsection phase filtration
     set type      = tanh
@@ -610,7 +605,7 @@ end
 end
 </pre></div>
 </div>
-<p>and for the <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> sharpening</p>
+<p>and for the <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> sharpening:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection VOF
   subsection interface sharpening
     set enable                  = true
@@ -620,12 +615,8 @@ end
     set type                    = adaptive
     set threshold max deviation = 0.2
     set max iterations          = 50
-  end
-  subsection mass conservation
-    set monitoring      = true
-    set monitored fluid = fluid 1
-    set tolerance       = 1e-2
-    set verbosity       = extra verbose
+    set monitored fluid         = fluid 1
+    set tolerance               = 1e-2
   end
   subsection phase filtration
     set type  = tanh
@@ -637,6 +628,16 @@ end
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">filtration</span></code> is enabled in this example.
 We refer the reader to the <a class="reference internal" href="../../../parameters/cfd/volume_of_fluid.html"><span class="doc">Volume of Fluid (Multiphase Flow)</span></a> documentation for more explanation on the phase filtration.</p>
+</section>
+<section id="post-processing">
+<h3>Post-processing<a class="headerlink" href="#post-processing" title="Link to this heading">#</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">post-processing</span></code> subsection, the output of the mass of each fluid is enabled and allows to track to mass conservation throughout the simulation.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection post-processing
+  set verbosity                   = verbose
+  set calculate mass conservation = true
+end
+</pre></div>
+</div>
 </section>
 </section>
 <section id="running-the-simulation">
@@ -782,6 +783,7 @@ run in parallel using mpirun. On <span class="math notranslate nohighlight">\(8\
 <li><a class="reference internal" href="#mesh-adaptation">Mesh Adaptation</a></li>
 <li><a class="reference internal" href="#boundary-conditions">Boundary Conditions</a></li>
 <li><a class="reference internal" href="#vof">VOF</a></li>
+<li><a class="reference internal" href="#post-processing">Post-processing</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#running-the-simulation">Running the Simulation</a></li>

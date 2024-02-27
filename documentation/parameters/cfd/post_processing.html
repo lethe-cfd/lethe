@@ -449,6 +449,8 @@
   # Multiphase postprocessing
   set calculate barycenter             = false
   set barycenter name                  = barycenter_information
+  set calculate mass conservation      = true
+  set mass conservation name           = mass_conservation_information
 
   # Other Cahn-Hilliard postprocessing
   set calculate phase statistics       = false
@@ -621,6 +623,8 @@ end
 <p>where <span class="math notranslate nohighlight">\(\phi\)</span> is the phase order parameter.</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">barycenter</span> <span class="pre">name</span></code>: name of the output file containing the position and velocity of the barycenter for VOF and Cahn-Hilliard simulations. The default file name is <code class="docutils literal notranslate"><span class="pre">barycenter_information</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">mass</span> <span class="pre">conservation</span></code>: calculates the mass of both fluids for VOF simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mass</span> <span class="pre">conservation</span> <span class="pre">name</span></code>: name of the output file containing the mass of both fluids for VOF simulations. The default file name is <code class="docutils literal notranslate"><span class="pre">mass_conservation_information</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">phase</span> <span class="pre">statistics</span></code>: outputs phase statistics from the solution of the Cahn-Hilliard equations, including minimum, maximum, average, and standard deviation of the phase order parameter. This works only with the <a class="reference internal" href="cahn_hilliard.html"><span class="doc">Cahn-Hilliard</span></a> solver.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">statistics</span> <span class="pre">name</span></code>: name of the output file containing phase order parameter statistics from Cahn-Hilliard simulations. The default file name is <code class="docutils literal notranslate"><span class="pre">phase_statistics</span></code>.</p></li>
 </ul>

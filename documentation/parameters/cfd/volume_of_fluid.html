@@ -408,6 +408,7 @@
 
   subsection interface sharpening
     set enable                  = false
+    set verbosity               = quiet
     set frequency               = 10
     set interface sharpness     = 2
     set type                    = constant
@@ -418,8 +419,8 @@
     # parameters for adaptive sharpening
     set threshold max deviation = 0.20
     set max iterations          = 20
-
-    set verbosity               = quiet
+    set tolerance               = 1e-6
+    set monitored fluid         = fluid 1
   end
 
   subsection phase filtration
@@ -439,14 +440,6 @@
     set enable marangoni effect               = false
   end
 
-  subsection mass conservation
-    set monitoring         = false
-    set monitored fluid    = fluid 1
-
-    # parameters used with adaptive sharpening
-    set tolerance          = 1e-6
-    set verbosity          = quiet
-  end
 end
 </pre></div>
 </div>
@@ -467,17 +460,14 @@ end
 <li><p><code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">interface</span> <span class="pre">sharpening</span></code>: defines parameters to counter numerical diffusion of the VOF method and to avoid the interface between the two fluids becoming more and more blurry after each time step. The reader is refered to the Interface sharpening section of <a class="reference internal" href="../../theory/multiphysics/vof.html"><span class="doc">The Volume of Fluid (VOF) Method</span></a> theory guide for additional details on this sharpening method.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">enable</span></code>: controls if interface sharpening is enabled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbosity</span></code>: enables the display of the residual at each non-linear iteration, to monitor the progress of the linear iterations, similarly to the <code class="docutils literal notranslate"><span class="pre">verbosity</span></code> option in <a class="reference internal" href="linear_solver_control.html"><span class="doc">Linear Solver</span></a>. Choices are: <code class="docutils literal notranslate"><span class="pre">quiet</span></code> (default, no output), <code class="docutils literal notranslate"><span class="pre">verbose</span></code> (indicates sharpening steps) and <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">verbose</span></code> (details of the linear iterations).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">frequency</span></code>: sets the frequency (in number of iterations) for the interface sharpening computation.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">interface</span> <span class="pre">sharpness</span></code>: sharpness of the moving interface (parameter <span class="math notranslate nohighlight">\(a\)</span> in the <a class="reference external" href="https://www.researchgate.net/publication/287118331_Development_of_efficient_interface_sharpening_procedure_for_viscous_incompressible_flows">interface sharpening model</a>). This parameter must be larger than 1 for interface sharpening. Choosing values less than 1 leads to interface smoothing instead of sharpening. A good value would be around 1.5.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: defines the interface sharpening type, either <code class="docutils literal notranslate"><span class="pre">constant</span></code> or <code class="docutils literal notranslate"><span class="pre">adaptive</span></code></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">constant</span></code>: the sharpening <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is the same throughout the simulation. This <code class="docutils literal notranslate"><span class="pre">threshold</span></code>, between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> (<code class="docutils literal notranslate"><span class="pre">0.5</span></code> by default), corresponds to the phase fraction at which the interface is located.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">adaptive</span></code>: the sharpening threshold is searched in the range <span class="math notranslate nohighlight">\(\left[0.5-c_\text{dev} \; ; 0.5+c_\text{dev}\right]\)</span>, with <span class="math notranslate nohighlight">\(c_\text{dev}\)</span> the <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">max</span> <span class="pre">deviation</span></code> (<code class="docutils literal notranslate"><span class="pre">0.2</span></code> by default), to ensure mass conservation. The search algorithm will stop either if the mass conservation <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> is reached (see <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">mass</span> <span class="pre">conservation</span></code>), or if the number of search steps reach the number of <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">iterations</span></code>. If the <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> is not reached, a warning message will be printed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">adaptive</span></code>: the sharpening threshold is searched in the range <span class="math notranslate nohighlight">\(\left[0.5-c_\text{dev} \; ; 0.5+c_\text{dev}\right]\)</span>, with <span class="math notranslate nohighlight">\(c_\text{dev}\)</span> the <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">max</span> <span class="pre">deviation</span></code> (<code class="docutils literal notranslate"><span class="pre">0.2</span></code> by default), to ensure mass conservation. The search algorithm will stop either if the mass conservation <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> is reached, or if the number of search steps reaches the number of <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">iterations</span></code>. If the <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> is not reached, a warning message will be printed.</p></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In case of adaptive interface sharpening (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">adaptive</span></code>), mass conservation must be monitored (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">monitoring</span> <span class="pre">=</span> <span class="pre">true</span></code> in <code class="docutils literal notranslate"><span class="pre">mass</span> <span class="pre">conservation</span></code> subsection).</p>
-</div>
 <div class="admonition-example-of-a-warning-message-if-sharpening-is-adaptive-but-the-mass-conservation-tolerance-is-not-reached admonition">
 <p class="admonition-title">Example of a warning message if sharpening is adaptive but the mass conservation tolerance is not reached:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>WARNING: Maximum number of iterations (5) reached in the
@@ -494,7 +484,10 @@ number of iterations to reach the mass conservation tolerance.
 <p>As most of the other iterations converge in only one step (corresponding to a final threshold of <span class="math notranslate nohighlight">\(0.5\)</span>), increasing the sharpening search range through a higher <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">max</span> <span class="pre">deviation</span></code> will relax the condition on the first iterations with a limited impact on the computational cost.</p>
 </div>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbosity</span></code>: enables the display of the residual at each non-linear iteration, to monitor the progress of the linear iterations, similarly to the <code class="docutils literal notranslate"><span class="pre">verbosity</span></code> option in <a class="reference internal" href="linear_solver_control.html"><span class="doc">Linear Solver</span></a>. Choices are: <code class="docutils literal notranslate"><span class="pre">quiet</span></code> (default, no output), <code class="docutils literal notranslate"><span class="pre">verbose</span></code> (indicates sharpening steps) and <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">verbose</span></code> (details of the linear iterations).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code>: Fluid in which the mass conservation is monitored to find the adaptive sharpening threshold. The choices are <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">1</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance</span></code>: Value of the tolerance on the mass conservation of the monitored fluid.</p>
+<p>For instance, with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">tolerance</span> <span class="pre">=</span> <span class="pre">0.02</span></code> the sharpening threshold will be adapted so that the mass of the <code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code> varies less than <span class="math notranslate nohighlight">\(\pm 2\%\)</span> from the initial mass (at <span class="math notranslate nohighlight">\(t = 0.0\)</span> sec).</p>
+</li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -569,43 +562,6 @@ number of iterations to reach the mass conservation tolerance.
 </ol>
 </section>
 </section>
-<section id="mass-conservation">
-<span id="id3"></span><h2>Mass Conservation<a class="headerlink" href="#mass-conservation" title="Link to this heading">#</a></h2>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">mass</span> <span class="pre">conservation</span></code>: By default, mass conservation (continuity) equations are solved on the whole domain, i.e. on both fluids. This subsection defines parameters that are used to solve mass conservation in both fluids, and to monitor the surface/volume (2D/3D) occupied by the fluid of interest (<code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code>).</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">monitoring</span></code>: controls if conservation is monitored at each iteration, through the volume (3D) or surface (2D) computation of the fluid given as <code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code> (<code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">1</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">0</span></code>). Results are outputted in a data table (<cite>VOF_monitoring_fluid_0.dat</cite> or <cite>VOF_monitoring_fluid_1.dat</cite>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>In 2D, the mass returned is in the dimension of <span class="math notranslate nohighlight">\(\left[\text{mass}/\text{length}\right]\)</span>: multiply this value by the depth of your system to get the <code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code> mass (in <span class="math notranslate nohighlight">\(\text{kg}\)</span> if using SI units).</p>
-</div>
-<div class="admonition-example-of-file-output-vof-monitoring-fluid-1-dat admonition">
-<p class="admonition-title">Example of file output, <cite>VOF_monitoring_fluid_1.dat</cite>:</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">volume_fluid_1</span></code> column gives the volume occupied by the fluid with index 1, its total mass, and the sharpening threshold used for this iteration.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>time  volume_fluid_1 mass_fluid_1 sharpening_threshold
-0.0000     4.9067e-01   3.8125e+02               0.5000
-0.0050     4.9297e-01   3.8304e+02               0.5000
-0.0100     4.9150e-01   3.8189e+02               0.5000
-0.0150     4.9001e-01   3.8074e+02               0.5000
-0.0200     4.8844e-01   3.7952e+02               0.5000
-0.0250     4.9762e-01   3.8665e+02               0.5000
-0.0300     4.9588e-01   3.8530e+02               0.5000
-0.0350     4.9437e-01   3.8413e+02               0.5000
-0.0400     4.9294e-01   3.8302e+02               0.5000
-0.0450     4.9144e-01   3.8185e+02               0.5000
-0.0500     5.0639e-01   3.9346e+02               0.5000
-</pre></div>
-</div>
-</div>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance</span></code>: value for the tolerance on the mass conservation of the monitored fluid, used with adaptive sharpening (see the <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">sharpening</span></code>).</p>
-<p>For instance, with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">tolerance</span> <span class="pre">=</span> <span class="pre">0.02</span></code> the sharpening threshold will be adapted so that the mass of the <code class="docutils literal notranslate"><span class="pre">monitored</span> <span class="pre">fluid</span></code> varies less than <span class="math notranslate nohighlight">\(\pm 2\%\)</span> from the initial mass (at <span class="math notranslate nohighlight">\(t = 0.0\)</span> sec).</p>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbosity</span></code>: states whether from the mass conservation data should be printed. Choices are quiet (no output), verbose (output information from the <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> sharpening threshold) and extra verbose (output of the monitoring table in the terminal at the end of the simulation).</p></li>
-</ul>
-</li>
-</ul>
-</section>
 </section>
 
         </article>
@@ -670,7 +626,6 @@ number of iterations to reach the mass conservation tolerance.
 <li><a class="reference internal" href="#choosing-values-for-the-surface-tension-force-filters">Choosing Values for the Surface Tension Force Filters</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mass-conservation">Mass Conservation</a></li>
 </ul>
 </li>
 </ul>
