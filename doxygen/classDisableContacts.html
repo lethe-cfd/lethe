@@ -101,6 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a51fa7b1453c88c2cfb41a7af46902363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b7dfee81da1ae8a4d3aec86092f883"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#aa1b7dfee81da1ae8a4d3aec86092f883">identify_mobility_status</a> (const DoFHandler&lt; dim &gt; &amp;background_dh, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const unsigned int n_active_cells, MPI_Comm mpi_communicator)</td></tr>
 <tr class="separator:aa1b7dfee81da1ae8a4d3aec86092f883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af704a43f86d8eb029206592ecd71f339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#af704a43f86d8eb029206592ecd71f339">map_periodic_nodes</a> (const AffineConstraints&lt; double &gt; &amp;constraints)</td></tr>
+<tr class="separator:af704a43f86d8eb029206592ecd71f339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cf8368bfc4c6568c0f88c4ce07b06de"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">check_cell_mobility</a> (const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell) const</td></tr>
 <tr class="separator:a4cf8368bfc4c6568c0f88c4ce07b06de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad36a9809f7e46e4c0ae7cc22a1050523"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">set_threshold_values</a> (const double granular_temperature, const double solid_fraction)</td></tr>
@@ -114,6 +116,12 @@ Public Member Functions</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a9997435cd13f73e0f3e75d591bff16c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a9997435cd13f73e0f3e75d591bff16c1">calculate_granular_temperature_and_solid_fraction</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const std::set&lt; typename DoFHandler&lt; dim &gt;::active_cell_iterator &gt; &amp;local_and_ghost_cells_with_particles, Vector&lt; double &gt; &amp;cell_granular_temperature, Vector&lt; double &gt; &amp;cell_solid_fraction)</td></tr>
 <tr class="separator:a9997435cd13f73e0f3e75d591bff16c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3b8bcf46271c8e02cb947687b01de05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#ac3b8bcf46271c8e02cb947687b01de05">assign_node_status</a> (const unsigned int node_id, const int <a class="el" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">mobility_status</a>)</td></tr>
+<tr class="separator:ac3b8bcf46271c8e02cb947687b01de05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e680605bdba3fb98749b084d9f2440b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a8e680605bdba3fb98749b084d9f2440b">assign_mobility_status</a> (unsigned int cell_id, std::vector&lt; types::global_dof_index &gt; dof_indices, const int cell_status, const int node_status)</td></tr>
+<tr class="separator:a8e680605bdba3fb98749b084d9f2440b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0772283d24be2dcb8fe761605ec834d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a0772283d24be2dcb8fe761605ec834d9">assign_mobility_status</a> (unsigned int cell_id, const int cell_status)</td></tr>
+<tr class="separator:a0772283d24be2dcb8fe761605ec834d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -123,6 +131,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:adc3624d4787f7078ca508fe594f97910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4208535a4406b99833ae8b1ab8081e5a"><td class="memItemLeft" align="right" valign="top">LinearAlgebra::distributed::Vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">mobility_at_nodes</a></td></tr>
 <tr class="separator:a4208535a4406b99833ae8b1ab8081e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10da157daa3b15179d8cbda0cecc3962"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; unsigned int, unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#a10da157daa3b15179d8cbda0cecc3962">periodic_node_ids</a></td></tr>
+<tr class="separator:a10da157daa3b15179d8cbda0cecc3962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa137a91e76ca97665123aaaa1b90e8cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">granular_temperature_threshold</a></td></tr>
 <tr class="separator:aa137a91e76ca97665123aaaa1b90e8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca9875d4c4afb450d0a45703b6b251b6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">solid_fraction_threshold</a></td></tr>
@@ -146,7 +156,7 @@ class DisableContacts&lt; dim &gt;</h3>
 <li>The cell has cell neighbors which is flagged as mobile from the previous criterion (additional layer of mobile cells): this is again to allow the propagation of motion, but only the particles in contact with particles from the mobile cells are considered for the contact force calculation but their position is not computed at the integration step. Those cells are flagged as active cells. It works with the assignment and verification of the mobility status at nodes to check the status of the neighboring cells. </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00086">86</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00087">87</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a6a5eede6395adcd9f9b0c06e3905ab81"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a5eede6395adcd9f9b0c06e3905ab81">&#9670;&nbsp;</a></span>mobility_status</h2>
@@ -173,7 +183,7 @@ template&lt;int dim&gt; </div>
 <tr><td class="fieldname"><a id="a6a5eede6395adcd9f9b0c06e3905ab81ae41c22c26ab3e611ac6bec6dbc042df9"></a>empty&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00122">122</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00123">123</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -197,6 +207,147 @@ template&lt;int dim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0772283d24be2dcb8fe761605ec834d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0772283d24be2dcb8fe761605ec834d9">&#9670;&nbsp;</a></span>assign_mobility_status() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;::assign_mobility_status </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>cell_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>cell_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00358">358</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+
+</div>
+</div>
+<a id="a8e680605bdba3fb98749b084d9f2440b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e680605bdba3fb98749b084d9f2440b">&#9670;&nbsp;</a></span>assign_mobility_status() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;::assign_mobility_status </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>cell_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; types::global_dof_index &gt;&#160;</td>
+          <td class="paramname"><em>dof_indices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>cell_status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>node_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00331">331</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+
+</div>
+</div>
+<a id="ac3b8bcf46271c8e02cb947687b01de05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3b8bcf46271c8e02cb947687b01de05">&#9670;&nbsp;</a></span>assign_node_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;::assign_node_status </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>node_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>mobility_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assigns the mobility status to node and the periodic coinciding node from the periodic nodes map. If required, this will prevent overwriting a node status prevailing over the initial one. For instance, empty status must not be overwritten by mobile status because all cells with this node will be part of the additional mobile layer and will propagate wrong mobility status to the next cells. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>The current node index (periodic or not)</td></tr>
+    <tr><td class="paramname">mobility_status</td><td>The mobility status to assign to the periodic node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00308">308</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+
+</div>
+</div>
 <a id="a9997435cd13f73e0f3e75d591bff16c1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9997435cd13f73e0f3e75d591bff16c1">&#9670;&nbsp;</a></span>calculate_granular_temperature_and_solid_fraction()</h2>
 
@@ -255,7 +406,7 @@ template&lt;int dim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">particle_handler</td><td>The particle handler that contains all the particles</td></tr>
-    <tr><td class="paramname">current_local_and_ghost_cells</td><td>The set of locally owned and ghost cells that empty cells are removed from</td></tr>
+    <tr><td class="paramname">local_and_ghost_cells_with_particles</td><td>The set of locally owned and ghost cells that empty cells are removed from</td></tr>
     <tr><td class="paramname">cell_granular_temperature</td><td>The empty vector of granular temperature</td></tr>
     <tr><td class="paramname">cell_solid_fraction</td><td>The empty vector of solid fraction </td></tr>
   </table>
@@ -302,7 +453,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00187">187</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00214">214</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -331,7 +482,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00228">228</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00255">255</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -369,7 +520,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00219">219</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00246">246</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -426,12 +577,51 @@ template&lt;int dim&gt; </div>
   <table class="params">
     <tr><td class="paramname">background_dh</td><td>The dof handler of the background grid</td></tr>
     <tr><td class="paramname">particle_handler</td><td>The particle handler that contains all the particles</td></tr>
+    <tr><td class="paramname">n_active_cells</td><td>The number of active cells in triangulation</td></tr>
     <tr><td class="paramname">mpi_communicator</td><td>The MPI communicator </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="disable__contacts_8cc_source.html#l00138">138</a> of file <a class="el" href="disable__contacts_8cc_source.html">disable_contacts.cc</a>.</p>
+
+</div>
+</div>
+<a id="af704a43f86d8eb029206592ecd71f339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af704a43f86d8eb029206592ecd71f339">&#9670;&nbsp;</a></span>map_periodic_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;::map_periodic_nodes </td>
+          <td>(</td>
+          <td class="paramtype">const AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Map the periodic nodes pairs of the triangulation using the constraints. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constraints</td><td>The background constraints of triangulation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00190">190</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -480,7 +670,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00203">203</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00230">230</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -537,7 +727,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00269">269</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00366">366</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -563,7 +753,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00283">283</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00384">384</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -589,7 +779,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00275">275</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00372">372</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -615,7 +805,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00280">280</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00377">377</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+
+</div>
+</div>
+<a id="a10da157daa3b15179d8cbda0cecc3962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10da157daa3b15179d8cbda0cecc3962">&#9670;&nbsp;</a></span>periodic_node_ids</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;unsigned int, unsigned int&gt; <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;::periodic_node_ids</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00381">381</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>
@@ -641,7 +857,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00284">284</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="disable__contacts_8h_source.html#l00385">385</a> of file <a class="el" href="disable__contacts_8h_source.html">disable_contacts.h</a>.</p>
 
 </div>
 </div>

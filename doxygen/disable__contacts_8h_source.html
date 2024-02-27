@@ -106,277 +106,383 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;deal.II/dofs/dof_handler.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;deal.II/lac/la_parallel_vector.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;deal.II/lac/la_parallel_vector.templates.h&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;deal.II/particles/particle_handler.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using namespace </span>dealii;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifndef lethe_disable_contacts_h</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#  define lethe_disable_contacts_h</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// Special template instance for this class.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Unsigned integer would have been a better choice, but is not working</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// with the Vector class (error because of calling of abs() function)</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span>LinearAlgebra::distributed::Vector&lt;int&gt;;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * The general idea behind the algorithm:</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * It uses the granular temperature to determinate if particles in a cell are</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * mobile enough that the contact forces are worth computation. A cell having a</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * granular temperature under a value (default is 1e-4) will have an inactive</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * status which makes them rejected in the broad search step. This results in no</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * contact forces or velocity integration in future steps for those particles,</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * which make less computation cost for the simulation.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * Cells may be flagged as that called mobility status:</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * - mobile (everything is calculated as if feature is not enabled)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * - active (particles with low motion next to mobile particles)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * - inactive (particles are not in a neighbor’s candidate list of cells around)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * There are some edge cases that need some attention. In these cases, particles</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> * in cells can&#39;t be deactivated:</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * 1. The solid fraction of the cell is under a value (default = 40%): particles</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * in the cell may have other forces that can move them and it is supposed that</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * with this fraction, there is not enough particles around to hold them in</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * their position.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * 2. Cells having empty cell neighbors: it means that particles are next to a</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * floating wall/mesh and they may have a change of contact forces from it if</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * the wall disappears or is moving.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * 3. The cell has cell neighbors which is flagged as mobile from the 3 criteria</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * mentioned above (granular temperature, solid fractions or floating walls):</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * this is because motion is badly propagated to particles to the cell around</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * without this additional &quot;layer&quot; of mobile cells.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * 4. The cell has cell neighbors which is flagged as mobile from the previous</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * criterion (additional layer of mobile cells): this is again to allow the</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> * propagation of motion, but only the particles in contact with particles</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * from the mobile cells are considered for the contact force calculation but</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * their position is not computed at the integration step. Those cells are</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * flagged as active cells. It works with the assignment and verification of the</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * mobility status at nodes to check the status of the neighboring cells.</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classDisableContacts.html">   86</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDisableContacts.html">DisableContacts</a></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="classDisableContacts.html">DisableContacts</a>();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">   * Mobility status flag used to identify the status at nodes and the status</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">   * of the cell:</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">   * inactive (0)</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">   * The movement of particles in the cell is considered as negligible,</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">   * particles within this cell are not considered in the contact detection</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">   * (rejected at the broad search step), so no force calculation or</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">   * integration is applied</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">   * active (1)</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">   * The movement of particles in the cell is considered as negligible, but</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">   * there&#39;s at least one neighbor cell that is flagged as mobile, meaning that</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">   * particles need to be in contact candidates lists at the broad search step,</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">   * particles directly in contact with the mobile cell are also considered in</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">   * force calculation, but none of the particles in the cell are integrated.</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">   * mobile (2)</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">   * The movement of particles in the cell is significant or there is at least</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   * one neighbor cell that is mobile by criteria (see the</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">   * identify_mobility_status() description), particles need to be in contact</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">   * candidates lists at the broad search step and particles are treated as</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">   * usual (force calculation and integration)</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">   * empty (3)</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">   * This status is only used for the node-based mobility status identification,</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">   * no cells are flagged as empty, only node can by identify as empty. Without</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">   * this identification of the empty cells, we can&#39;t identify the cell that</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">   * have a empty neighbor cell, which is critical for simulationd using</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">   * floating walls or mesh</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">  122</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">mobility_status</a> : <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  {</div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81ae94519a7191fcc98769dc95a1b84aa47">  124</a></span>&#160;    inactive = 0, <span class="comment">// used for cells and nodes</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81a099fcb56d879cd214833de782687c718">  125</a></span>&#160;    active   = 1, <span class="comment">// used for cells and nodes</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81a4afce95fbdea4e993953ac73339e2036">  126</a></span>&#160;    mobile   = 2, <span class="comment">// used for cells and nodes</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    empty    = 3  <span class="comment">// used for nodes only</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81ae41c22c26ab3e611ac6bec6dbc042df9">  128</a></span>&#160;  };</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">   * @brief Create or update a set of the active and ghost cells so that we don&#39;t</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">   * have to loop over all the cells in the triangulation for the granular</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">   * temperature and solid fraction calculation, and during the identification</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">   * of the mobility status. This set prevent 4 iteration steps over all the</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">   * cells  + the verification if the cell is locally owned, ghost or not.</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">   * This set is updated at every load balance step since cells are</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">   * redistributed among processors.</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">   * @param background_dh The DoFHandler of the background grid</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  update_local_and_ghost_cell_set(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;background_dh);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">   * @brief Carries out the identification of the mobility status of each cell</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">   * through a node-based identification and check. Only the active and ghost</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">   * cells are processed.</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">   * The following 4 checks (search loops) are done:</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">   * 1. Check if the cell is empty (n_particle = 0), if so, nodes and cells are</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">   * flagged as empty mobility status (3)</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">   * 2. Check if the cell is mobile by criteria (average granular temperature &gt;</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">   * threshold, solid fraction &lt; threshold or has at least one empty node from</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">   * previous check), if so, nodes are flagged and cells are stored with mobile</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">   * mobility status (2)</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">   * 3. Check if the cell is mobile by neighbor (at least a node is flagged as</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">   * mobile from previous check), if so, cells are stored in map as mobile</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">   * status (2) and nodes that are not mobile are flagged as active (1)</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">   * 4. Check if the cell is active (at least a node is flagged as active from</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">   * previous check), if so, cells are stored with active status in the map (1)</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">   * The remaining cells are inactive (0)</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">   * @param background_dh The dof handler of the background grid</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">   * @param particle_handler The particle handler that contains all the particles</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">   * @param mpi_communicator The MPI communicator</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  identify_mobility_status(</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keyword">const</span> DoFHandler&lt;dim&gt;                 &amp;background_dh,</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keyword">const</span> Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                     n_active_cells,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    MPI_Comm                               mpi_communicator);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">   * @brief Find the mobility status of a cell</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">   * @param cell The iterator of the cell that needs mobility evaluation</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">  187</a></span>&#160;  <a class="code" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">check_cell_mobility</a>(</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">const</span> <span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator &amp;cell)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">return</span> cell_mobility_status.at(cell-&gt;active_cell_index());</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  }</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">   * @brief Set the threshold values for the mobile status criteria (granular</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">   * temperature and solid fraction)</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">   * @param granular_temperature The threshold value for the granular temperature</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">   * @param solid_fraction The threshold value for the solid fraction (volume of</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">   * particles in the cell)</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">  203</a></span>&#160;  <a class="code" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">set_threshold_values</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> granular_temperature,</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">double</span> solid_fraction)</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    granular_temperature_threshold = granular_temperature;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    solid_fraction_threshold       = solid_fraction;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">   * @brief Convert the map of mobility status to a vector of mobility status</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">   * because map can&#39;t be used as is in the pvd post-processing or any data out,</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">   * it needs to be converted to a vector of mobility status by active cell</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">   * index</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">   * @param status The initiated vector for the conversion</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">  219</a></span>&#160;  <a class="code" href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">get_mobility_status_vector</a>(Vector&lt;float&gt; &amp;status)</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cell_to_status : cell_mobility_status)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      {</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        status[cell_to_status.first] = cell_to_status.second;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;      }</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  };</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ea058b1bbaa4410157a55760587c854">DEM::dem_data_structures&lt;dim&gt;::cell_index_int_map</a> &amp;</div>
-<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">  228</a></span>&#160;  <a class="code" href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">get_mobility_status</a>()</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> cell_mobility_status;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">  /**</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">   * @brief Carries out the calculation of the granular temperature and solid</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">   * fraction approximation (pcm method) in each active cell. Those values are</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">   * criteria for cell mobility</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">   * solid fraction = n particles * particle volume / cell volume</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">   * Granular temperature:</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">   * 1. average velocity of cell = sum of particle velocity /</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">   * n_particles</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">   * 2. average of cell velocity fluctuation squared = sum of particle velocity</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">   * fluctuation squared / n_particles</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">   * 3. granular temperature = sum of average of cell velocity fluctuation</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">   * squared / dim</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">   * @param particle_handler The particle handler that contains all the particles</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">   * @param current_local_and_ghost_cells The set of locally owned and ghost</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">   * cells that empty cells are removed from</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">   * @param cell_granular_temperature The empty vector of granular temperature</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">   *</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">   * @param cell_solid_fraction The empty vector of solid fraction</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordtype">void</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  calculate_granular_temperature_and_solid_fraction(</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">const</span> Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keyword">const</span> std::set&lt;<span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&gt;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                   &amp;local_and_ghost_cells_with_particles,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    Vector&lt;double&gt; &amp;cell_granular_temperature,</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    Vector&lt;double&gt; &amp;cell_solid_fraction);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="comment">// Map of cell mobility status, the key is the active cell index and the value</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="comment">// is the mobility status</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ea058b1bbaa4410157a55760587c854">DEM::dem_data_structures&lt;dim&gt;::cell_index_int_map</a></div>
-<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">  269</a></span>&#160;    <a class="code" href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">cell_mobility_status</a>;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="comment">// Set of locally owned and ghost cells, used to loop over only the locally</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="comment">// owned and ghost cells without looping over all the cells in the</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="comment">// triangulation many times</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  std::set&lt;typename DoFHandler&lt;dim&gt;::active_cell_iterator&gt;</div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">  275</a></span>&#160;    <a class="code" href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">local_and_ghost_cells</a>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="comment">// Vector of mobility status at nodes, used to check the value at node to</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="comment">// determine the mobility status of the cell, this type of vector is used</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="comment">// to allow update values in parallel</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">  280</a></span>&#160;  LinearAlgebra::distributed::Vector&lt;int&gt; <a class="code" href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">mobility_at_nodes</a>;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="comment">// Threshold values for granular temperature and solid fraction</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">  283</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">granular_temperature_threshold</a>;</div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">  284</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">solid_fraction_threshold</a>;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;};</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// lethe_disable_contacts_h</span></div>
-<div class="ttc" id="aclassDisableContacts_html"><div class="ttname"><a href="classDisableContacts.html">DisableContacts</a></div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00086">disable_contacts.h:87</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_a067034921ded9d88e81a405244324fce"><div class="ttname"><a href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">DisableContacts::cell_mobility_status</a></div><div class="ttdeci">DEM::dem_data_structures&lt; dim &gt;::cell_index_int_map cell_mobility_status</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00269">disable_contacts.h:269</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_a4208535a4406b99833ae8b1ab8081e5a"><div class="ttname"><a href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">DisableContacts::mobility_at_nodes</a></div><div class="ttdeci">LinearAlgebra::distributed::Vector&lt; int &gt; mobility_at_nodes</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00280">disable_contacts.h:280</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_a4cf8368bfc4c6568c0f88c4ce07b06de"><div class="ttname"><a href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">DisableContacts::check_cell_mobility</a></div><div class="ttdeci">unsigned int check_cell_mobility(const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell) const</div><div class="ttdoc">Find the mobility status of a cell.</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00187">disable_contacts.h:187</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_a6a5eede6395adcd9f9b0c06e3905ab81"><div class="ttname"><a href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">DisableContacts::mobility_status</a></div><div class="ttdeci">mobility_status</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00122">disable_contacts.h:123</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_aa137a91e76ca97665123aaaa1b90e8cf"><div class="ttname"><a href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">DisableContacts::granular_temperature_threshold</a></div><div class="ttdeci">double granular_temperature_threshold</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00283">disable_contacts.h:283</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_aad923eda4cebe4a7ba332cb57f308fd9"><div class="ttname"><a href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">DisableContacts::get_mobility_status</a></div><div class="ttdeci">DEM::dem_data_structures&lt; dim &gt;::cell_index_int_map &amp; get_mobility_status()</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00228">disable_contacts.h:228</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_aca9875d4c4afb450d0a45703b6b251b6"><div class="ttname"><a href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">DisableContacts::solid_fraction_threshold</a></div><div class="ttdeci">double solid_fraction_threshold</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00284">disable_contacts.h:284</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_ad36a9809f7e46e4c0ae7cc22a1050523"><div class="ttname"><a href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">DisableContacts::set_threshold_values</a></div><div class="ttdeci">void set_threshold_values(const double granular_temperature, const double solid_fraction)</div><div class="ttdoc">Set the threshold values for the mobile status criteria (granular temperature and solid fraction)</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00203">disable_contacts.h:203</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_adc3624d4787f7078ca508fe594f97910"><div class="ttname"><a href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">DisableContacts::local_and_ghost_cells</a></div><div class="ttdeci">std::set&lt; typename DoFHandler&lt; dim &gt;::active_cell_iterator &gt; local_and_ghost_cells</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00275">disable_contacts.h:275</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html_af63e1e48e35b6cac7eadf1246af22603"><div class="ttname"><a href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">DisableContacts::get_mobility_status_vector</a></div><div class="ttdeci">void get_mobility_status_vector(Vector&lt; float &gt; &amp;status)</div><div class="ttdoc">Convert the map of mobility status to a vector of mobility status because map can't be used as is in ...</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00219">disable_contacts.h:219</a></div></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;deal.II/lac/affine_constraints.h&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;deal.II/lac/la_parallel_vector.h&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;deal.II/lac/la_parallel_vector.templates.h&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;deal.II/particles/particle_handler.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using namespace </span>dealii;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef lethe_disable_contacts_h</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#  define lethe_disable_contacts_h</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Special template instance for this class.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// Unsigned integer would have been a better choice, but is not working</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// with the Vector class (error because of calling of abs() function)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span>LinearAlgebra::distributed::Vector&lt;int&gt;;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * The general idea behind the algorithm:</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * It uses the granular temperature to determinate if particles in a cell are</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * mobile enough that the contact forces are worth computation. A cell having a</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * granular temperature under a value (default is 1e-4) will have an inactive</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * status which makes them rejected in the broad search step. This results in no</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * contact forces or velocity integration in future steps for those particles,</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * which make less computation cost for the simulation.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * Cells may be flagged as that called mobility status:</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * - mobile (everything is calculated as if feature is not enabled)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * - active (particles with low motion next to mobile particles)</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * - inactive (particles are not in a neighbor’s candidate list of cells around)</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> * There are some edge cases that need some attention. In these cases, particles</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * in cells can&#39;t be deactivated:</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * 1. The solid fraction of the cell is under a value (default = 40%): particles</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * in the cell may have other forces that can move them and it is supposed that</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * with this fraction, there is not enough particles around to hold them in</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * their position.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * 2. Cells having empty cell neighbors: it means that particles are next to a</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * floating wall/mesh and they may have a change of contact forces from it if</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> * the wall disappears or is moving.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * 3. The cell has cell neighbors which is flagged as mobile from the 3 criteria</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * mentioned above (granular temperature, solid fractions or floating walls):</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * this is because motion is badly propagated to particles to the cell around</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * without this additional &quot;layer&quot; of mobile cells.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * 4. The cell has cell neighbors which is flagged as mobile from the previous</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> * criterion (additional layer of mobile cells): this is again to allow the</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * propagation of motion, but only the particles in contact with particles</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * from the mobile cells are considered for the contact force calculation but</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * their position is not computed at the integration step. Those cells are</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * flagged as active cells. It works with the assignment and verification of the</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * mobility status at nodes to check the status of the neighboring cells.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classDisableContacts.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDisableContacts.html">DisableContacts</a></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="classDisableContacts.html">DisableContacts</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">   * Mobility status flag used to identify the status at nodes and the status</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">   * of the cell:</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">   * inactive (0)</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">   * The movement of particles in the cell is considered as negligible,</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">   * particles within this cell are not considered in the contact detection</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">   * (rejected at the broad search step), so no force calculation or</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">   * integration is applied</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">   * active (1)</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">   * The movement of particles in the cell is considered as negligible, but</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">   * there&#39;s at least one neighbor cell that is flagged as mobile, meaning that</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">   * particles need to be in contact candidates lists at the broad search step,</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">   * particles directly in contact with the mobile cell are also considered in</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">   * force calculation, but none of the particles in the cell are integrated.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">   * mobile (2)</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   * The movement of particles in the cell is significant or there is at least</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">   * one neighbor cell that is mobile by criteria (see the</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">   * identify_mobility_status() description), particles need to be in contact</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">   * candidates lists at the broad search step and particles are treated as</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">   * usual (force calculation and integration)</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">   * empty (3)</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">   * This status is only used for the node-based mobility status identification,</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">   * no cells are flagged as empty, only node can by identify as empty. Without</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">   * this identification of the empty cells, we can&#39;t identify the cell that</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">   * have a empty neighbor cell, which is critical for simulationd using</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">   * floating walls or mesh</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">  123</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">mobility_status</a> : <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  {</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81ae94519a7191fcc98769dc95a1b84aa47">  125</a></span>&#160;    inactive = 0, <span class="comment">// used for cells and nodes</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81a099fcb56d879cd214833de782687c718">  126</a></span>&#160;    active   = 1, <span class="comment">// used for cells and nodes</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81a4afce95fbdea4e993953ac73339e2036">  127</a></span>&#160;    mobile   = 2, <span class="comment">// used for cells and nodes</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    empty    = 3  <span class="comment">// used for nodes only</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81ae41c22c26ab3e611ac6bec6dbc042df9">  129</a></span>&#160;  };</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">   * @brief Create or update a set of the active and ghost cells so that we don&#39;t</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">   * have to loop over all the cells in the triangulation for the granular</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">   * temperature and solid fraction calculation, and during the identification</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">   * of the mobility status. This set prevent 4 iteration steps over all the</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">   * cells  + the verification if the cell is locally owned, ghost or not.</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">   * This set is updated at every load balance step since cells are</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">   * redistributed among processors.</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">   * @param background_dh The DoFHandler of the background grid</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  update_local_and_ghost_cell_set(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;background_dh);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">   * @brief Carries out the identification of the mobility status of each cell</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">   * through a node-based identification and check. Only the active and ghost</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">   * cells are processed.</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">   * The following 4 checks (search loops) are done:</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">   * 1. Check if the cell is empty (n_particle = 0), if so, nodes and cells are</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">   * flagged as empty mobility status (3)</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">   * 2. Check if the cell is mobile by criteria (average granular temperature &gt;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">   * threshold, solid fraction &lt; threshold or has at least one empty node from</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">   * previous check), if so, nodes are flagged and cells are stored with mobile</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">   * mobility status (2)</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">   * 3. Check if the cell is mobile by neighbor (at least a node is flagged as</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">   * mobile from previous check), if so, cells are stored in map as mobile</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">   * status (2) and nodes that are not mobile are flagged as active (1)</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">   * 4. Check if the cell is active (at least a node is flagged as active from</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">   * previous check), if so, cells are stored with active status in the map (1)</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">   * The remaining cells are inactive (0)</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">   * @param background_dh The dof handler of the background grid</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">   * @param particle_handler The particle handler that contains all the particles</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">   * @param n_active_cells The number of active cells in triangulation</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">   * @param mpi_communicator The MPI communicator</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  identify_mobility_status(</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">const</span> DoFHandler&lt;dim&gt;                 &amp;background_dh,</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">const</span> Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                     n_active_cells,</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    MPI_Comm                               mpi_communicator);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">   * @brief Map the periodic nodes pairs of the triangulation using the constraints</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">   * @param constraints The background constraints of triangulation</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classDisableContacts.html#af704a43f86d8eb029206592ecd71f339">  190</a></span>&#160;  <a class="code" href="classDisableContacts.html#af704a43f86d8eb029206592ecd71f339">map_periodic_nodes</a>(<span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;constraints)</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    periodic_node_ids.clear();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    IndexSet local_lines = constraints.get_local_lines();</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i : local_lines)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> j : local_lines)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;          {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            <span class="comment">// Map the values of the periodic nodes (with repetition)</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keywordflow">if</span> (constraints.are_identity_constrained(i, j))</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;              {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                periodic_node_ids.insert(std::make_pair(i, j));</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;              }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;          }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">   * @brief Find the mobility status of a cell</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">   * @param cell The iterator of the cell that needs mobility evaluation</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">  214</a></span>&#160;  <a class="code" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">check_cell_mobility</a>(</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">const</span> <span class="keyword">typename</span> Triangulation&lt;dim&gt;::active_cell_iterator &amp;cell)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">return</span> cell_mobility_status.at(cell-&gt;active_cell_index());</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  }</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">   * @brief Set the threshold values for the mobile status criteria (granular</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">   * temperature and solid fraction)</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">   * @param granular_temperature The threshold value for the granular temperature</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">   * @param solid_fraction The threshold value for the solid fraction (volume of</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">   * particles in the cell)</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">  230</a></span>&#160;  <a class="code" href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">set_threshold_values</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> granular_temperature,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">double</span> solid_fraction)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    granular_temperature_threshold = granular_temperature;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    solid_fraction_threshold       = solid_fraction;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  }</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">   * @brief Convert the map of mobility status to a vector of mobility status</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">   * because map can&#39;t be used as is in the pvd post-processing or any data out,</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">   * it needs to be converted to a vector of mobility status by active cell</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">   * index</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">   * @param status The initiated vector for the conversion</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">  246</a></span>&#160;  <a class="code" href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">get_mobility_status_vector</a>(Vector&lt;float&gt; &amp;status)</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cell_to_status : cell_mobility_status)</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;      {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        status[cell_to_status.first] = cell_to_status.second;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  };</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ea058b1bbaa4410157a55760587c854">DEM::dem_data_structures&lt;dim&gt;::cell_index_int_map</a> &amp;</div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">  255</a></span>&#160;  <a class="code" href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">get_mobility_status</a>()</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">return</span> cell_mobility_status;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  }</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">   * @brief Carries out the calculation of the granular temperature and solid</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">   * fraction approximation (pcm method) in each active cell. Those values are</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">   * criteria for cell mobility</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">   * solid fraction = n particles * particle volume / cell volume</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">   * Granular temperature:</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">   * 1. average velocity of cell = sum of particle velocity /</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">   * n_particles</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">   * 2. average of cell velocity fluctuation squared = sum of particle velocity</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">   * fluctuation squared / n_particles</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">   * 3. granular temperature = sum of average of cell velocity fluctuation</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">   * squared / dim</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">   * @param particle_handler The particle handler that contains all the particles</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">   * @param local_and_ghost_cells_with_particles The set of locally owned and ghost</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">   * cells that empty cells are removed from</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">   * @param cell_granular_temperature The empty vector of granular temperature</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">   * @param cell_solid_fraction The empty vector of solid fraction</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  calculate_granular_temperature_and_solid_fraction(</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">const</span> Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">const</span> std::set&lt;<span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&gt;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                   &amp;local_and_ghost_cells_with_particles,</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    Vector&lt;double&gt; &amp;cell_granular_temperature,</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    Vector&lt;double&gt; &amp;cell_solid_fraction);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">   * @brief Assigns the mobility status to node and the periodic coinciding node from the</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">   * periodic nodes map. If required, this will prevent overwriting a node</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">   * status prevailing over the initial one. For instance, empty status must not</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">   * be overwritten by mobile status because all cells with this node will be</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">   * part of the additional mobile layer and will propagate wrong mobility</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">   * status to the next cells.</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">   * @param node_id The current node index (periodic or not)</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">   * @param mobility_status The mobility status to assign to the periodic node</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="classDisableContacts.html#ac3b8bcf46271c8e02cb947687b01de05">  308</a></span>&#160;  <a class="code" href="classDisableContacts.html#ac3b8bcf46271c8e02cb947687b01de05">assign_node_status</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> node_id, <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">mobility_status</a>)</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="comment">// Prevailing mobility status of the node and assignation</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordtype">int</span> mobility_status_assigned =</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      std::max(<a class="code" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">mobility_status</a>, mobility_at_nodes(node_id));</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    mobility_at_nodes(node_id) = mobility_status_assigned;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="comment">// Check if node has a periodic node and assign the same mobility status if</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="comment">// prevailing on the one on the periodic node</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">auto</span> it = periodic_node_ids.find(node_id);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">if</span> (it != periodic_node_ids.end())</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        mobility_at_nodes(it-&gt;second) =</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;          std::max(mobility_status_assigned, mobility_at_nodes(it-&gt;second));</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      }</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  }</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="comment">// Assign active status to nodes except mobile because</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="comment">// this will cause to propagate the mobile status to the</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="comment">// neighbors in this loop since the mobility check at node</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  <span class="comment">// is executed in the same container that we are assigning new</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  <span class="comment">// mobility status</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a8e680605bdba3fb98749b084d9f2440b">  331</a></span>&#160;  <a class="code" href="classDisableContacts.html#a8e680605bdba3fb98749b084d9f2440b">assign_mobility_status</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                         cell_id,</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                         std::vector&lt;types::global_dof_index&gt; dof_indices,</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">int</span>                            cell_status,</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">int</span>                            node_status)</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    cell_mobility_status.insert({cell_id, cell_status});</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="comment">// Assign mobility status to nodes but don&#39;t overwrite empty or mobile nodes</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="comment">// in regards of the case.</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> node_id : dof_indices)</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;      {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="comment">// Prevailing mobility status of the node and assignation</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordtype">int</span> status_assigned = std::max(node_status, mobility_at_nodes(node_id));</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        mobility_at_nodes(node_id) = status_assigned;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="comment">// Check if node has a periodic node and assign the same mobility status</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="comment">// if prevailing on the one on the periodic node</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keyword">auto</span> it = periodic_node_ids.find(node_id);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">if</span> (it != periodic_node_ids.end())</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;          {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            mobility_at_nodes(it-&gt;second) =</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;              std::max(status_assigned, mobility_at_nodes(it-&gt;second));</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;          }</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;      }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a0772283d24be2dcb8fe761605ec834d9">  358</a></span>&#160;  <a class="code" href="classDisableContacts.html#a0772283d24be2dcb8fe761605ec834d9">assign_mobility_status</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cell_id, <span class="keyword">const</span> <span class="keywordtype">int</span> cell_status)</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  {</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    cell_mobility_status.insert({cell_id, cell_status});</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  <span class="comment">// Map of cell mobility status, the key is the active cell index and the value</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="comment">// is the mobility status</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#a1ea058b1bbaa4410157a55760587c854">DEM::dem_data_structures&lt;dim&gt;::cell_index_int_map</a></div>
+<div class="line"><a name="l00366"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">  366</a></span>&#160;    <a class="code" href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">cell_mobility_status</a>;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="comment">// Set of locally owned and ghost cells, used to loop over only the locally</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  <span class="comment">// owned and ghost cells without looping over all the cells in the</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  <span class="comment">// triangulation many times</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  std::set&lt;typename DoFHandler&lt;dim&gt;::active_cell_iterator&gt;</div>
+<div class="line"><a name="l00372"></a><span class="lineno"><a class="line" href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">  372</a></span>&#160;    <a class="code" href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">local_and_ghost_cells</a>;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  <span class="comment">// Vector of mobility status at nodes, used to check the value at node to</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  <span class="comment">// determine the mobility status of the cell, this type of vector is used</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;  <span class="comment">// to allow update values in parallel</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">  377</a></span>&#160;  LinearAlgebra::distributed::Vector&lt;int&gt; <a class="code" href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">mobility_at_nodes</a>;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  <span class="comment">// Map of periodic nodes, the key is the periodic node index and the value is</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="comment">// the coinciding node index</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno"><a class="line" href="classDisableContacts.html#a10da157daa3b15179d8cbda0cecc3962">  381</a></span>&#160;  std::unordered_map&lt;unsigned int, unsigned int&gt; <a class="code" href="classDisableContacts.html#a10da157daa3b15179d8cbda0cecc3962">periodic_node_ids</a>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;  <span class="comment">// Threshold values for granular temperature and solid fraction</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">  384</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">granular_temperature_threshold</a>;</div>
+<div class="line"><a name="l00385"></a><span class="lineno"><a class="line" href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">  385</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">solid_fraction_threshold</a>;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;};</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// lethe_disable_contacts_h</span></div>
+<div class="ttc" id="aclassDisableContacts_html"><div class="ttname"><a href="classDisableContacts.html">DisableContacts</a></div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00087">disable_contacts.h:88</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a067034921ded9d88e81a405244324fce"><div class="ttname"><a href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">DisableContacts::cell_mobility_status</a></div><div class="ttdeci">DEM::dem_data_structures&lt; dim &gt;::cell_index_int_map cell_mobility_status</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00366">disable_contacts.h:366</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a0772283d24be2dcb8fe761605ec834d9"><div class="ttname"><a href="classDisableContacts.html#a0772283d24be2dcb8fe761605ec834d9">DisableContacts::assign_mobility_status</a></div><div class="ttdeci">void assign_mobility_status(unsigned int cell_id, const int cell_status)</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00358">disable_contacts.h:358</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a10da157daa3b15179d8cbda0cecc3962"><div class="ttname"><a href="classDisableContacts.html#a10da157daa3b15179d8cbda0cecc3962">DisableContacts::periodic_node_ids</a></div><div class="ttdeci">std::unordered_map&lt; unsigned int, unsigned int &gt; periodic_node_ids</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00381">disable_contacts.h:381</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a4208535a4406b99833ae8b1ab8081e5a"><div class="ttname"><a href="classDisableContacts.html#a4208535a4406b99833ae8b1ab8081e5a">DisableContacts::mobility_at_nodes</a></div><div class="ttdeci">LinearAlgebra::distributed::Vector&lt; int &gt; mobility_at_nodes</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00377">disable_contacts.h:377</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a4cf8368bfc4c6568c0f88c4ce07b06de"><div class="ttname"><a href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">DisableContacts::check_cell_mobility</a></div><div class="ttdeci">unsigned int check_cell_mobility(const typename Triangulation&lt; dim &gt;::active_cell_iterator &amp;cell) const</div><div class="ttdoc">Find the mobility status of a cell.</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00214">disable_contacts.h:214</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a6a5eede6395adcd9f9b0c06e3905ab81"><div class="ttname"><a href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81">DisableContacts::mobility_status</a></div><div class="ttdeci">mobility_status</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00123">disable_contacts.h:124</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_a8e680605bdba3fb98749b084d9f2440b"><div class="ttname"><a href="classDisableContacts.html#a8e680605bdba3fb98749b084d9f2440b">DisableContacts::assign_mobility_status</a></div><div class="ttdeci">void assign_mobility_status(unsigned int cell_id, std::vector&lt; types::global_dof_index &gt; dof_indices, const int cell_status, const int node_status)</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00331">disable_contacts.h:331</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_aa137a91e76ca97665123aaaa1b90e8cf"><div class="ttname"><a href="classDisableContacts.html#aa137a91e76ca97665123aaaa1b90e8cf">DisableContacts::granular_temperature_threshold</a></div><div class="ttdeci">double granular_temperature_threshold</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00384">disable_contacts.h:384</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_aad923eda4cebe4a7ba332cb57f308fd9"><div class="ttname"><a href="classDisableContacts.html#aad923eda4cebe4a7ba332cb57f308fd9">DisableContacts::get_mobility_status</a></div><div class="ttdeci">DEM::dem_data_structures&lt; dim &gt;::cell_index_int_map &amp; get_mobility_status()</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00255">disable_contacts.h:255</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_ac3b8bcf46271c8e02cb947687b01de05"><div class="ttname"><a href="classDisableContacts.html#ac3b8bcf46271c8e02cb947687b01de05">DisableContacts::assign_node_status</a></div><div class="ttdeci">void assign_node_status(const unsigned int node_id, const int mobility_status)</div><div class="ttdoc">Assigns the mobility status to node and the periodic coinciding node from the periodic nodes map....</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00308">disable_contacts.h:308</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_aca9875d4c4afb450d0a45703b6b251b6"><div class="ttname"><a href="classDisableContacts.html#aca9875d4c4afb450d0a45703b6b251b6">DisableContacts::solid_fraction_threshold</a></div><div class="ttdeci">double solid_fraction_threshold</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00385">disable_contacts.h:385</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_ad36a9809f7e46e4c0ae7cc22a1050523"><div class="ttname"><a href="classDisableContacts.html#ad36a9809f7e46e4c0ae7cc22a1050523">DisableContacts::set_threshold_values</a></div><div class="ttdeci">void set_threshold_values(const double granular_temperature, const double solid_fraction)</div><div class="ttdoc">Set the threshold values for the mobile status criteria (granular temperature and solid fraction)</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00230">disable_contacts.h:230</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_adc3624d4787f7078ca508fe594f97910"><div class="ttname"><a href="classDisableContacts.html#adc3624d4787f7078ca508fe594f97910">DisableContacts::local_and_ghost_cells</a></div><div class="ttdeci">std::set&lt; typename DoFHandler&lt; dim &gt;::active_cell_iterator &gt; local_and_ghost_cells</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00372">disable_contacts.h:372</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_af63e1e48e35b6cac7eadf1246af22603"><div class="ttname"><a href="classDisableContacts.html#af63e1e48e35b6cac7eadf1246af22603">DisableContacts::get_mobility_status_vector</a></div><div class="ttdeci">void get_mobility_status_vector(Vector&lt; float &gt; &amp;status)</div><div class="ttdoc">Convert the map of mobility status to a vector of mobility status because map can't be used as is in ...</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00246">disable_contacts.h:246</a></div></div>
+<div class="ttc" id="aclassDisableContacts_html_af704a43f86d8eb029206592ecd71f339"><div class="ttname"><a href="classDisableContacts.html#af704a43f86d8eb029206592ecd71f339">DisableContacts::map_periodic_nodes</a></div><div class="ttdeci">void map_periodic_nodes(const AffineConstraints&lt; double &gt; &amp;constraints)</div><div class="ttdoc">Map the periodic nodes pairs of the triangulation using the constraints.</div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00190">disable_contacts.h:190</a></div></div>
 <div class="ttc" id="adata__containers_8h_html"><div class="ttname"><a href="data__containers_8h.html">data_containers.h</a></div></div>
 <div class="ttc" id="adem__properties_8h_html"><div class="ttname"><a href="dem__properties_8h.html">dem_properties.h</a></div></div>
 <div class="ttc" id="astructDEM_1_1dem__data__structures_html_a1ea058b1bbaa4410157a55760587c854"><div class="ttname"><a href="structDEM_1_1dem__data__structures.html#a1ea058b1bbaa4410157a55760587c854">DEM::dem_data_structures::cell_index_int_map</a></div><div class="ttdeci">ankerl::unordered_dense::map&lt; types::global_cell_index, unsigned int &gt; cell_index_int_map</div><div class="ttdef"><b>Definition:</b> <a href="data__containers_8h_source.html#l00242">data_containers.h:242</a></div></div>

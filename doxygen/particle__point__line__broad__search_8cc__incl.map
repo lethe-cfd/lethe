@@ -1,26 +1,27 @@
 <map id="/home/runner/work/lethe/lethe/source/dem/particle_point_line_broad_search.cc" name="/home/runner/work/lethe/lethe/source/dem/particle_point_line_broad_search.cc">
-<area shape="rect" id="node1" title=" " alt="" coords="905,5,1110,61"/>
-<area shape="rect" id="node2" href="$particle__point__line__broad__search_8h.html" title=" " alt="" coords="928,109,1087,151"/>
-<area shape="rect" id="node3" href="$data__containers_8h.html" title=" " alt="" coords="922,281,1093,307"/>
-<area shape="rect" id="node7" title=" " alt="" coords="238,452,374,493"/>
-<area shape="rect" id="node9" title=" " alt="" coords="1831,452,2005,493"/>
-<area shape="rect" id="node17" href="$disable__contacts_8h.html" title=" " alt="" coords="582,199,758,225"/>
-<area shape="rect" id="node24" title=" " alt="" coords="1117,273,1292,315"/>
-<area shape="rect" id="node4" href="$boundary__cells__info__struct_8h.html" title=" " alt="" coords="1045,363,1199,404"/>
-<area shape="rect" id="node6" title=" " alt="" coords="1056,459,1209,486"/>
-<area shape="rect" id="node8" href="$particle__particle__contact__info_8h.html" title=" " alt="" coords="1838,363,1998,404"/>
-<area shape="rect" id="node10" href="$particle__point__line__contact__info__struct_8h.html" title=" " alt="" coords="1440,363,1636,404"/>
-<area shape="rect" id="node11" href="$particle__wall__contact__info_8h.html" title=" " alt="" coords="1223,363,1416,404"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1660,363,1813,404"/>
-<area shape="rect" id="node13" href="$unordered__dense_8h.html" title=" " alt="" coords="631,370,821,397"/>
-<area shape="rect" id="node14" title=" " alt="" coords="475,370,555,397"/>
-<area shape="rect" id="node15" title=" " alt="" coords="845,370,969,397"/>
-<area shape="rect" id="node16" title=" " alt="" coords="388,370,451,397"/>
-<area shape="rect" id="node5" title=" " alt="" coords="1246,459,1393,486"/>
-<area shape="rect" id="node18" href="$dem__properties_8h.html" title=" " alt="" coords="679,281,847,307"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1057,5,1262,61"/>
+<area shape="rect" id="node2" href="$particle__point__line__broad__search_8h.html" title=" " alt="" coords="1080,109,1239,151"/>
+<area shape="rect" id="node3" href="$data__containers_8h.html" title=" " alt="" coords="1074,281,1245,307"/>
+<area shape="rect" id="node7" title=" " alt="" coords="314,452,450,493"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1983,452,2158,493"/>
+<area shape="rect" id="node17" href="$disable__contacts_8h.html" title=" " alt="" coords="641,199,817,225"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1270,273,1444,315"/>
+<area shape="rect" id="node4" href="$boundary__cells__info__struct_8h.html" title=" " alt="" coords="1198,363,1351,404"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1208,459,1362,486"/>
+<area shape="rect" id="node8" href="$particle__particle__contact__info_8h.html" title=" " alt="" coords="1990,363,2150,404"/>
+<area shape="rect" id="node10" href="$particle__point__line__contact__info__struct_8h.html" title=" " alt="" coords="1592,363,1788,404"/>
+<area shape="rect" id="node11" href="$particle__wall__contact__info_8h.html" title=" " alt="" coords="1375,363,1568,404"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1812,363,1966,404"/>
+<area shape="rect" id="node13" href="$unordered__dense_8h.html" title=" " alt="" coords="783,370,974,397"/>
+<area shape="rect" id="node14" title=" " alt="" coords="628,370,708,397"/>
+<area shape="rect" id="node15" title=" " alt="" coords="998,370,1122,397"/>
+<area shape="rect" id="node16" title=" " alt="" coords="540,370,603,397"/>
+<area shape="rect" id="node5" title=" " alt="" coords="1398,459,1545,486"/>
+<area shape="rect" id="node18" href="$dem__properties_8h.html" title=" " alt="" coords="832,281,1000,307"/>
 <area shape="rect" id="node21" title=" " alt="" coords="106,281,293,307"/>
-<area shape="rect" id="node22" title=" " alt="" coords="317,273,474,315"/>
-<area shape="rect" id="node23" title=" " alt="" coords="498,273,655,315"/>
-<area shape="rect" id="node19" title=" " alt="" coords="226,370,285,397"/>
-<area shape="rect" id="node20" title=" " alt="" coords="309,370,364,397"/>
+<area shape="rect" id="node22" title=" " alt="" coords="318,273,444,315"/>
+<area shape="rect" id="node23" title=" " alt="" coords="469,273,626,315"/>
+<area shape="rect" id="node24" title=" " alt="" coords="650,273,808,315"/>
+<area shape="rect" id="node19" title=" " alt="" coords="378,370,437,397"/>
+<area shape="rect" id="node20" title=" " alt="" coords="462,370,516,397"/>
 </map>
