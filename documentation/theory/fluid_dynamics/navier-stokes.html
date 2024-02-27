@@ -176,6 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/boundary_conditions_multiphysics.html">Boundary Conditions - Multiphysics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/box_refinement.html">Box Refinement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/cahn_hilliard.html">Cahn-Hilliard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/constrain_solid_domain.html">Constrain Solid Domain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/dimensionality.html">Dimensionality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/dynamic_flow_control.html">Dynamic Flow Control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../parameters/cfd/fem.html">Finite Element Interpolation (FEM)</a></li>
@@ -418,7 +419,7 @@
 <p class="admonition-title">Note</p>
 <p>The choice to use <span class="math notranslate nohighlight">\(p^*\)</span> for the pressure and <span class="math notranslate nohighlight">\(p\)</span> for the reduced pressure was made to lighten the writing throughout the documentation.</p>
 </div>
-<p>By default, Lethe does not use any units for Length (<span class="math notranslate nohighlight">\(L\)</span>), Time (<span class="math notranslate nohighlight">\(T\)</span>), Mass (<span class="math notranslate nohighlight">\(M\)</span>) and Temperature (<span class="math notranslate nohighlight">\(T\)</span>). Although this may seem confusing at first, this is relatively easy to work with. By default, most cases can be formulated using SI units (meters, seconds, kilograms and Celsius or Kelvin). However, in some cases, this may lead to a large imbalance in the scaling of different variables (e.g. the numerical value being 1000x that of the velocity). In these cases, the user must manually rescale the problem to a better balanced set of units (i.e. by using centimeter units instead of meters).</p>
+<p>By default, Lethe does not use any units for Length (<span class="math notranslate nohighlight">\(L\)</span>), Time (<span class="math notranslate nohighlight">\(T\)</span>), Mass (<span class="math notranslate nohighlight">\(M\)</span>) and Temperature (<span class="math notranslate nohighlight">\(\Theta\)</span>). Although this may seem confusing at first, this is relatively easy to work with. By default, most cases can be formulated using SI units (meters, seconds, kilograms and Celsius or Kelvin). However, in some cases, this may lead to a large imbalance in the scaling of different variables (e.g. the numerical value of pressure being 1000x that of the velocity). In these cases, the user must manually rescale the problem to a better balanced set of units (i.e. by using centimeter units instead of meters).</p>
 </section>
 
         </article>

@@ -137,7 +137,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                     update_normal_vectors | update_JxW_values);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Vector velocities(0);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>(dim);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> face_n_q_points = face_quadrature_formula.size();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
@@ -176,7 +176,7 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                  fe_face_values.reinit(cell, face_id);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                  fe_face_values[velocities].get_function_values(</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    evaluation_point, velocity_values);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                  fe_face_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(evaluation_point,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                  fe_face_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(evaluation_point,</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                                               pressure_values);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                  temp_surface                      = 0.;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                  temp_static_pressure_at_boundary  = 0.;</div>
@@ -760,7 +760,7 @@ $(function() {
 <div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160; </div>
 <div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>               n_q_points = face_quadrature_formula.size();</div>
 <div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Vector velocities(0);</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>(dim);</div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;  std::vector&lt;double&gt;              pressure_values(n_q_points);</div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;  std::vector&lt;Tensor&lt;2, dim&gt;&gt;      velocity_gradients(n_q_points);</div>
 <div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;  Tensor&lt;1, dim&gt;                   normal_vector;</div>
@@ -808,7 +808,7 @@ $(function() {
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;                            fe_face_values.get_quadrature_points();</div>
 <div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;                          fe_face_values[velocities].get_function_gradients(</div>
 <div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;                            evaluation_point, velocity_gradients);</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;                          fe_face_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;                          fe_face_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(</div>
 <div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;                            evaluation_point, pressure_values);</div>
 <div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; q++)</div>
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;                            {</div>
@@ -940,7 +940,7 @@ $(function() {
 <div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160; </div>
 <div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>               n_q_points = face_quadrature_formula.size();</div>
 <div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Vector velocities(0);</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>(dim);</div>
 <div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;  std::vector&lt;double&gt;              pressure_values(n_q_points);</div>
 <div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;  std::vector&lt;Tensor&lt;2, dim&gt;&gt;      velocity_gradients(n_q_points);</div>
 <div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;  Tensor&lt;1, dim&gt;                   normal_vector;</div>
@@ -980,7 +980,7 @@ $(function() {
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;                            fe_face_values.get_quadrature_points();</div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;                          fe_face_values[velocities].get_function_gradients(</div>
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;                            evaluation_point, velocity_gradients);</div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                          fe_face_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(</div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                          fe_face_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(</div>
 <div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;                            evaluation_point, pressure_values);</div>
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;                          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; q++)</div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;                            {</div>
@@ -1108,7 +1108,7 @@ $(function() {
 <div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;                            update_quadrature_points | update_JxW_values);</div>
 <div class="line"><a name="l01028"></a><span class="lineno"> 1028</span>&#160; </div>
 <div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Vector velocities(0);</div>
-<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(dim);</div>
+<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;  <span class="keyword">const</span> FEValuesExtractors::Scalar <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>(dim);</div>
 <div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>               n_q_points = quadrature_formula.size();</div>
 <div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160; </div>
 <div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;  std::vector&lt;Vector&lt;double&gt;&gt; q_exactSol(n_q_points, Vector&lt;double&gt;(dim + 1));</div>
@@ -1126,7 +1126,7 @@ $(function() {
 <div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;        {</div>
 <div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;          fe_values.reinit(cell);</div>
 <div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160; </div>
-<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;          fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(evaluation_point,</div>
+<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;          fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(evaluation_point,</div>
 <div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160;                                                  local_pressure_values);</div>
 <div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;          <span class="comment">// Get the exact solution at all gauss points</span></div>
 <div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;          exact_solution-&gt;vector_value_list(fe_values.get_quadrature_points(),</div>
@@ -1162,7 +1162,7 @@ $(function() {
 <div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;          fe_values.reinit(cell);</div>
 <div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;          fe_values[velocities].get_function_values(evaluation_point,</div>
 <div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;                                                    local_velocity_values);</div>
-<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;          fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(evaluation_point,</div>
+<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;          fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(evaluation_point,</div>
 <div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;                                                  local_pressure_values);</div>
 <div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160; </div>
 <div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;          <span class="comment">// Get the exact solution at all gauss points</span></div>
@@ -1529,8 +1529,8 @@ $(function() {
 <div class="ttc" id="aclassBoundaryConditions_1_1NSBoundaryConditions_html_a67b323a489e69bed8e64797b075d4542"><div class="ttname"><a href="classBoundaryConditions_1_1NSBoundaryConditions.html#a67b323a489e69bed8e64797b075d4542">BoundaryConditions::NSBoundaryConditions::bcFunctions</a></div><div class="ttdeci">NSBoundaryFunctions&lt; dim &gt; * bcFunctions</div><div class="ttdef"><b>Definition:</b> <a href="boundary__conditions_8h_source.html#l00159">boundary_conditions.h:159</a></div></div>
 <div class="ttc" id="aclassPhysicalPropertiesManager_html"><div class="ttname"><a href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a></div><div class="ttdoc">Class that manages the physical properties model which are required to calculate the various physical...</div><div class="ttdef"><b>Definition:</b> <a href="physical__properties__manager_8h_source.html#l00071">physical_properties_manager.h:72</a></div></div>
 <div class="ttc" id="aclassPhysicalPropertiesManager_html_a4039c3749e16f10ca7b2df52014bf8ed"><div class="ttname"><a href="classPhysicalPropertiesManager.html#a4039c3749e16f10ca7b2df52014bf8ed">PhysicalPropertiesManager::get_rheology</a></div><div class="ttdeci">std::shared_ptr&lt; RheologicalModel &gt; get_rheology(const unsigned int fluid_id=0, const unsigned int material_id=0) const</div><div class="ttdef"><b>Definition:</b> <a href="physical__properties__manager_8h_source.html#l00151">physical_properties_manager.h:151</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">Variable::pressure</a></div><div class="ttdeci">@ pressure</div><div class="ttdoc">Pressure scalar field from fluid dynamics.</div></div>
 <div class="ttc" id="aparameters_8h_html"><div class="ttname"><a href="parameters_8h.html">parameters.h</a></div></div>
-<div class="ttc" id="aphysical__property__model_8h_html_a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a"><div class="ttname"><a href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a></div><div class="ttdeci">@ pressure</div><div class="ttdef"><b>Definition:</b> <a href="physical__property__model_8h_source.html#l00049">physical_property_model.h:49</a></div></div>
 <div class="ttc" id="aphysical__property__model_8h_html_a0b2c854385812ebfac83689a5c3ead58a9c093e9ca22af8657a0bf5280a298a55"><div class="ttname"><a href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a9c093e9ca22af8657a0bf5280a298a55">shear_rate</a></div><div class="ttdeci">@ shear_rate</div><div class="ttdef"><b>Definition:</b> <a href="physical__property__model_8h_source.html#l00045">physical_property_model.h:45</a></div></div>
 <div class="ttc" id="apostprocessing__cfd_8cc_html_a02e5072b6f6abdda7c5ef07e0b866f19"><div class="ttname"><a href="postprocessing__cfd_8cc.html#a02e5072b6f6abdda7c5ef07e0b866f19">calculate_L2_error</a></div><div class="ttdeci">std::pair&lt; double, double &gt; calculate_L2_error(const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Function&lt; dim &gt; *exact_solution, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</div><div class="ttdoc">Calculates the L2 norm of the error on velocity and pressure.</div><div class="ttdef"><b>Definition:</b> <a href="postprocessing__cfd_8cc_source.html#l01016">postprocessing_cfd.cc:1016</a></div></div>
 <div class="ttc" id="apostprocessing__cfd_8cc_html_a06f23ab46da48ae0b24aa2870ee6b77b"><div class="ttname"><a href="postprocessing__cfd_8cc.html#a06f23ab46da48ae0b24aa2870ee6b77b">calculate_CFL&lt; 3, GlobalVectorType &gt;</a></div><div class="ttdeci">template double calculate_CFL&lt; 3, GlobalVectorType &gt;(const DoFHandler&lt; 3 &gt; &amp;dof_handler, const GlobalVectorType &amp;evaluation_point, const double time_step, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</div></div>

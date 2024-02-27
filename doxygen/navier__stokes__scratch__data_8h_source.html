@@ -374,9 +374,9 @@ $(function() {
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;      }</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="comment">// Gather pressure (values, gradient)</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(current_solution,</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(current_solution,</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                                            this-&gt;pressure_values);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_gradients(current_solution,</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_gradients(current_solution,</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                                               this-&gt;pressure_gradients);</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    this-&gt;pressure_scaling_factor = pressure_scaling_factor;</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
@@ -391,7 +391,7 @@ $(function() {
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span> (!this-&gt;properties_manager.density_is_constant())</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; previous_solutions.size(); ++p)</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        {</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;          this-&gt;fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;          this-&gt;fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            previous_solutions[p], previous_pressure_values[p]);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        }</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
@@ -409,8 +409,8 @@ $(function() {
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> d = 0; d &lt; dim; ++d)</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;              this-&gt;laplacian_phi_u[q][k][d] = trace(this-&gt;hess_phi_u[q][k][d]);</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            <span class="comment">// Pressure</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            this-&gt;phi_p[q][k]      = this-&gt;fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].value(k, q);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            this-&gt;grad_phi_p[q][k] = this-&gt;fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].gradient(k, q);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            this-&gt;phi_p[q][k]      = this-&gt;fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].value(k, q);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            this-&gt;grad_phi_p[q][k] = this-&gt;fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].gradient(k, q);</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;          }</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      }</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
@@ -515,9 +515,9 @@ $(function() {
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                  current_solution, this-&gt;face_velocity_laplacians[face]);</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
 <div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                <span class="comment">// Gather pressure (values, gradient)</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                this-&gt;fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_values(</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                this-&gt;fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_values(</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                  current_solution, this-&gt;face_pressure_values[face]);</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                this-&gt;fe_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_gradients(</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                this-&gt;fe_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_gradients(</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                  current_solution, this-&gt;face_pressure_gradients[face]);</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_faces_q_points; ++q)</div>
@@ -543,9 +543,9 @@ $(function() {
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;                            trace(this-&gt;face_hess_phi_u[face][q][k][d]);</div>
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;                        <span class="comment">// Pressure</span></div>
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                        this-&gt;face_phi_p[face][q][k] =</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                          this-&gt;fe_face_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].value(k, q);</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                          this-&gt;fe_face_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].value(k, q);</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                        this-&gt;face_grad_phi_p[face][q][k] =</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                          this-&gt;fe_face_values[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].gradient(k, q);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                          this-&gt;fe_face_values[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].gradient(k, q);</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                      }</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                  }</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;              }</div>
@@ -953,7 +953,7 @@ $(function() {
 <div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;          previous_solution, fluid_velocity_curls_at_particle_location_3d);</div>
 <div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;      }</div>
 <div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160; </div>
-<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    fe_values_local_particles[<a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>].get_function_gradients(</div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    fe_values_local_particles[<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>].get_function_gradients(</div>
 <div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;      previous_solution, fluid_pressure_gradients_at_particle_location);</div>
 <div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;  }</div>
 <div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160; </div>
@@ -1483,6 +1483,7 @@ $(function() {
 <div class="ttc" id="aclassPhysicalPropertiesManager_html_a62c83e5e2c38c581718752435b46e0f1"><div class="ttname"><a href="classPhysicalPropertiesManager.html#a62c83e5e2c38c581718752435b46e0f1">PhysicalPropertiesManager::is_non_newtonian</a></div><div class="ttdeci">bool is_non_newtonian() const</div><div class="ttdef"><b>Definition:</b> <a href="physical__properties__manager_8h_source.html#l00271">physical_properties_manager.h:271</a></div></div>
 <div class="ttc" id="adem__properties_8h_html"><div class="ttname"><a href="dem__properties_8h.html">dem_properties.h</a></div></div>
 <div class="ttc" id="adensity__model_8h_html"><div class="ttname"><a href="density__model_8h.html">density_model.h</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">Variable::pressure</a></div><div class="ttdeci">@ pressure</div><div class="ttdoc">Pressure scalar field from fluid dynamics.</div></div>
 <div class="ttc" id="anamespaceDEM_html_ae6292a647794105882a3dcd6b8c941aca0bd015690e666a6f4cd57b8767f61070"><div class="ttname"><a href="namespaceDEM.html#ae6292a647794105882a3dcd6b8c941aca0bd015690e666a6f4cd57b8767f61070">DEM::dp</a></div><div class="ttdeci">@ dp</div><div class="ttdef"><b>Definition:</b> <a href="dem__properties_8h_source.html#l00041">dem_properties.h:41</a></div></div>
 <div class="ttc" id="anamespaceDEM_html_ae6292a647794105882a3dcd6b8c941aca402b46384e92c48fa81c13738e011228"><div class="ttname"><a href="namespaceDEM.html#ae6292a647794105882a3dcd6b8c941aca402b46384e92c48fa81c13738e011228">DEM::fem_torque_x</a></div><div class="ttdeci">@ fem_torque_x</div><div class="ttdef"><b>Definition:</b> <a href="dem__properties_8h_source.html#l00051">dem_properties.h:51</a></div></div>
 <div class="ttc" id="anamespaceDEM_html_ae6292a647794105882a3dcd6b8c941aca43afebfbb655ae91cbc6af475c510965"><div class="ttname"><a href="namespaceDEM.html#ae6292a647794105882a3dcd6b8c941aca43afebfbb655ae91cbc6af475c510965">DEM::fem_force_x</a></div><div class="ttdeci">@ fem_force_x</div><div class="ttdef"><b>Definition:</b> <a href="dem__properties_8h_source.html#l00048">dem_properties.h:48</a></div></div>
@@ -1492,7 +1493,6 @@ $(function() {
 <div class="ttc" id="aparameters_8h_html"><div class="ttname"><a href="parameters_8h.html">parameters.h</a></div></div>
 <div class="ttc" id="aphysical__properties__manager_8h_html"><div class="ttname"><a href="physical__properties__manager_8h.html">physical_properties_manager.h</a></div></div>
 <div class="ttc" id="aphysical__property__model_8h_html"><div class="ttname"><a href="physical__property__model_8h.html">physical_property_model.h</a></div></div>
-<div class="ttc" id="aphysical__property__model_8h_html_a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a"><div class="ttname"><a href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a></div><div class="ttdeci">@ pressure</div><div class="ttdef"><b>Definition:</b> <a href="physical__property__model_8h_source.html#l00049">physical_property_model.h:49</a></div></div>
 <div class="ttc" id="arheological__model_8h_html"><div class="ttname"><a href="rheological__model_8h.html">rheological_model.h</a></div></div>
 <div class="ttc" id="astructParameters_1_1CahnHilliard_html"><div class="ttname"><a href="structParameters_1_1CahnHilliard.html">Parameters::CahnHilliard</a></div><div class="ttdef"><b>Definition:</b> <a href="parameters__multiphysics_8h_source.html#l00204">parameters_multiphysics.h:205</a></div></div>
 <div class="ttc" id="astructParameters_1_1VOF__PhaseFilter_html"><div class="ttname"><a href="structParameters_1_1VOF__PhaseFilter.html">Parameters::VOF_PhaseFilter</a></div><div class="ttdoc">VOF_PhaseFilter - Defines the parameters for the phase filtration.</div><div class="ttdef"><b>Definition:</b> <a href="parameters__multiphysics_8h_source.html#l00159">parameters_multiphysics.h:160</a></div></div>

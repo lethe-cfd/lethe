@@ -143,6 +143,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ab20a1ccb538de83f0185cb413a8b93f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59661e99b54af30b1cb5c599857bf59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ac59661e99b54af30b1cb5c599857bf59">define_zero_constraints</a> ()</td></tr>
 <tr class="separator:ac59661e99b54af30b1cb5c599857bf59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9718e11a1de78907fcd5806d261818c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#a9718e11a1de78907fcd5806d261818c6">define_dynamic_zero_constraints</a> ()</td></tr>
+<tr class="separator:a9718e11a1de78907fcd5806d261818c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2c126900448ce8b14051d5adffffba3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ac2c126900448ce8b14051d5adffffba3">assemble_local_system_matrix</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, <a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data)</td></tr>
 <tr class="separator:ac2c126900448ce8b14051d5adffffba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae59ef66f7b2e6201684e737cd4ac1d5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ae59ef66f7b2e6201684e737cd4ac1d5d">assemble_local_system_rhs</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, <a class="el" href="classNavierStokesScratchData.html">NavierStokesScratchData</a>&lt; dim &gt; &amp;scratch_data, <a class="el" href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a>&lt; dim &gt; &amp;copy_data)</td></tr>
@@ -196,6 +198,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a81907d370a2824fdd1ca042e63601208 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98a7f846709b83df0ea64c361fee192c inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a98a7f846709b83df0ea64c361fee192c">iterate</a> ()</td></tr>
 <tr class="separator:a98a7f846709b83df0ea64c361fee192c inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cb26099e84a166b982c052ffa9c43a8 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a5cb26099e84a166b982c052ffa9c43a8">enable_dynamic_zero_constraints_fd</a> ()</td></tr>
+<tr class="separator:a5cb26099e84a166b982c052ffa9c43a8 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ae507879c1f61a95b7ff255ebcfff58 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a0ae507879c1f61a95b7ff255ebcfff58">box_refine_mesh</a> ()</td></tr>
 <tr class="separator:a0ae507879c1f61a95b7ff255ebcfff58 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57ffa198f9fabb15e3af4c9fa2921e18 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a57ffa198f9fabb15e3af4c9fa2921e18">refine_mesh</a> ()</td></tr>
@@ -212,6 +216,20 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a117c51c5894f115d42bdbd6e4ae78320 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#aab5e1ddc5b125318c547187f880e5fad">establish_solid_domain</a> (const bool non_zero_constraints)</td></tr>
 <tr class="separator:aab5e1ddc5b125318c547187f880e5fad inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab68cac0c814ef26ab6413a9aa19a5cf7 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#ab68cac0c814ef26ab6413a9aa19a5cf7">constrain_solid_cell_velocity_dofs</a> (const bool &amp;non_zero_constraints, const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices, AffineConstraints&lt; double &gt; &amp;<a class="el" href="classNavierStokesBase.html#ad84ef5b823440dbbdd65779d60a07788">zero_constraints</a>)</td></tr>
+<tr class="separator:ab68cac0c814ef26ab6413a9aa19a5cf7 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738ba84c2eb3afb7fd8a0074bd403f92 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a738ba84c2eb3afb7fd8a0074bd403f92">flag_dofs_in_solid</a> (std::unordered_set&lt; types::global_dof_index &gt; &amp;dofs_are_in_solid, const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices)</td></tr>
+<tr class="separator:a738ba84c2eb3afb7fd8a0074bd403f92 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4f95f61278309cc5a5f7975ed6ade7 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a1d4f95f61278309cc5a5f7975ed6ade7">check_cell_is_in_solid</a> (const std::unordered_set&lt; types::global_dof_index &gt; &amp;dofs_are_in_solid, const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices)</td></tr>
+<tr class="separator:a1d4f95f61278309cc5a5f7975ed6ade7 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a625f286aafd1c4ff0ec6f796985fa316 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a625f286aafd1c4ff0ec6f796985fa316">flag_dofs_connected_to_fluid</a> (const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices, std::unordered_set&lt; types::global_dof_index &gt; &amp;dofs_are_connected_to_fluid)</td></tr>
+<tr class="separator:a625f286aafd1c4ff0ec6f796985fa316 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f7059bc37e23e4ed073847455f678e8 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a2f7059bc37e23e4ed073847455f678e8">check_cell_is_connected_to_fluid</a> (const std::unordered_set&lt; types::global_dof_index &gt; &amp;dofs_are_connected_to_fluid, const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices)</td></tr>
+<tr class="separator:a2f7059bc37e23e4ed073847455f678e8 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd397a2570b707a33ee849957c3e93a1 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#afd397a2570b707a33ee849957c3e93a1">constrain_pressure</a> (const bool &amp;non_zero_constraints, const std::vector&lt; types::global_dof_index &gt; &amp;local_dof_indices, AffineConstraints&lt; double &gt; &amp;<a class="el" href="classNavierStokesBase.html#ad84ef5b823440dbbdd65779d60a07788">zero_constraints</a>)</td></tr>
+<tr class="separator:afd397a2570b707a33ee849957c3e93a1 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a43475c61c49b0a1f53681bc787b953 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a0a43475c61c49b0a1f53681bc787b953">constrain_solid_domain</a> (const DoFHandler&lt; dim &gt; *dof_handler_ht)</td></tr>
+<tr class="separator:a0a43475c61c49b0a1f53681bc787b953 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af311920c0b819b973d410db4fa5e8924 inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#af311920c0b819b973d410db4fa5e8924">write_checkpoint</a> ()</td></tr>
 <tr class="separator:af311920c0b819b973d410db4fa5e8924 inherit pro_methods_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18c2b29088f98ef45c04212bc5f2d33c inherit pro_methods_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a18c2b29088f98ef45c04212bc5f2d33c">write_output_results</a> (const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;solution)</td></tr>
@@ -320,6 +338,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7936e0a3f1c8a135db879b62be0cbe5b inherit pro_attribs_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1aafc2801e35f5162f0b9e1d7c0add2 inherit pro_attribs_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">std::vector&lt; TableHandler &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#ab1aafc2801e35f5162f0b9e1d7c0add2">torques_tables</a></td></tr>
 <tr class="separator:ab1aafc2801e35f5162f0b9e1d7c0add2 inherit pro_attribs_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a038d7a2c60dc6d466149984e126ec inherit pro_attribs_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; FEValues&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a70a038d7a2c60dc6d466149984e126ec">fe_values_temperature</a></td></tr>
+<tr class="separator:a70a038d7a2c60dc6d466149984e126ec inherit pro_attribs_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a3f683e37a5a3b4344a398690b6d22 inherit pro_attribs_classNavierStokesBase"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesBase.html#a73a3f683e37a5a3b4344a398690b6d22">dynamic_zero_constraints</a></td></tr>
+<tr class="separator:a73a3f683e37a5a3b4344a398690b6d22 inherit pro_attribs_classNavierStokesBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -391,7 +413,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00053">53</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a0b65af7f2357d3fa0ee8d8972d7e0646">Parameters::LinearSolver::amg</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="gls__navier__stokes_8h_source.html#l00277">GLSNavierStokesSolver&lt; dim &gt;::initial_preconditioner_fill_level</a>, and <a class="el" href="navier__stokes__base_8h_source.html#l00423">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;::simulation_parameters</a>.</p>
+<p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a0b65af7f2357d3fa0ee8d8972d7e0646">Parameters::LinearSolver::amg</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="gls__navier__stokes_8h_source.html#l00287">GLSNavierStokesSolver&lt; dim &gt;::initial_preconditioner_fill_level</a>, and <a class="el" href="navier__stokes__base_8h_source.html#l00647">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;::simulation_parameters</a>.</p>
 
 </div>
 </div>
@@ -438,7 +460,7 @@ template&lt;int dim&gt; </div>
 
 <p>Assembles an L2_projection matrix for the velocity and the pressure. <a class="el" href="classThis.html">This</a> L2 projection matrix can be used to set the initial condition for the Navier-Stokes problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01228">1228</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01257">1257</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00049">pressure</a>.</p>
 
@@ -499,7 +521,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSVANSSolver.html#ada835d24411685c11b63bd747e46652f">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a4e091421604ec020c69c7ad92c844b46">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00736">736</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00759">759</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="navier__stokes__scratch__data_8cc_source.html#l00365">NavierStokesScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00236">NavierStokesScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l01001">NavierStokesScratchData&lt; dim &gt;::reinit_cahn_hilliard()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00583">NavierStokesScratchData&lt; dim &gt;::reinit_curvature()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00914">NavierStokesScratchData&lt; dim &gt;::reinit_heat_transfer()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00566">NavierStokesScratchData&lt; dim &gt;::reinit_projected_phase_fraction_gradient()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00540">NavierStokesScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00169">StabilizedMethodsTensorCopyData&lt; dim &gt;::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -559,7 +581,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSVANSSolver.html#add754da7bbd3e5ce3a107d9aeb695778">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a4066d5bb5c04b3c40e36fecb5de0b20a">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00950">950</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00976">976</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="navier__stokes__scratch__data_8cc_source.html#l00365">NavierStokesScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00236">NavierStokesScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l01001">NavierStokesScratchData&lt; dim &gt;::reinit_cahn_hilliard()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00583">NavierStokesScratchData&lt; dim &gt;::reinit_curvature()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00914">NavierStokesScratchData&lt; dim &gt;::reinit_heat_transfer()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00566">NavierStokesScratchData&lt; dim &gt;::reinit_projected_phase_fraction_gradient()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00540">NavierStokesScratchData&lt; dim &gt;::reinit_vof()</a>, <a class="el" href="copy__data_8h_source.html#l00169">StabilizedMethodsTensorCopyData&lt; dim &gt;::reset()</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
@@ -593,7 +615,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSNitscheNavierStokesSolver.html#acd0e5d1440fce356191c71832a2e90f3">GLSNitscheNavierStokesSolver&lt; dim, spacedim &gt;</a>, <a class="el" href="classGLSVANSSolver.html#a2f2f0f5f6d13c4534ff75c971d3fe493">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a974ecf952de2c591b36555d005cf57e6">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00646">646</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00669">669</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 </div>
 </div>
@@ -621,9 +643,9 @@ template&lt;int dim&gt; </div>
 
 <p>Assembles the matrix associated with the solver without computing the preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00659">659</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00682">682</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="gls__navier__stokes_8cc_source.html#l00736">GLSNavierStokesSolver&lt; dim &gt;::assemble_local_system_matrix()</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="gls__navier__stokes_8cc_source.html#l00852">GLSNavierStokesSolver&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
+<p class="reference">References <a class="el" href="gls__navier__stokes_8cc_source.html#l00759">GLSNavierStokesSolver&lt; dim &gt;::assemble_local_system_matrix()</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="gls__navier__stokes_8cc_source.html#l00875">GLSNavierStokesSolver&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
 </div>
 </div>
@@ -655,9 +677,9 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSNitscheNavierStokesSolver.html#adc2f133cbe8624efa07b77cacc9d41ae">GLSNitscheNavierStokesSolver&lt; dim, spacedim &gt;</a>, <a class="el" href="classGLSVANSSolver.html#aea4c6b244e80c3240524b10a0a5e20bd">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a9b222ec9a849417ff21f0555ee578921">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00867">867</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00893">893</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="gls__navier__stokes_8cc_source.html#l00950">GLSNavierStokesSolver&lt; dim &gt;::assemble_local_system_rhs()</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="gls__navier__stokes_8cc_source.html#l01066">GLSNavierStokesSolver&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
+<p class="reference">References <a class="el" href="gls__navier__stokes_8cc_source.html#l00976">GLSNavierStokesSolver&lt; dim &gt;::assemble_local_system_rhs()</a>, <a class="el" href="multiphysics_8h_source.html#l00035">cahn_hilliard</a>, <a class="el" href="gls__navier__stokes_8cc_source.html#l01092">GLSNavierStokesSolver&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>, <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>, and <a class="el" href="multiphysics_8h_source.html#l00034">VOF</a>.</p>
 
 </div>
 </div>
@@ -691,7 +713,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSVANSSolver.html#aabebc5551e84da895defd633e4714853">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a07a909f33cfafb3f7295accb10342f25">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00852">852</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00875">875</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00183">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_matrix</a>.</p>
 
@@ -727,9 +749,40 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSVANSSolver.html#a00a4c7f06d0f1e07d352c3c7bbee4383">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#aa2754225d44ada77a44110d96433c585">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01066">1066</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01092">1092</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00184">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_rhs</a>.</p>
+
+</div>
+</div>
+<a id="a9718e11a1de78907fcd5806d261818c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9718e11a1de78907fcd5806d261818c6">&#9670;&nbsp;</a></span>define_dynamic_zero_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver</a>&lt; dim &gt;::define_dynamic_zero_constraints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Define the zero constraints used to solved the problem that change with other physics' solutions. </p>
+<p>It differs from <a class="el" href="classGLSNavierStokesSolver.html#ac59661e99b54af30b1cb5c599857bf59" title="Define the zero constraints used to solve the problem.">GLSNavierStokesSolver::define_zero_constraints</a> as it changes in time depending on the physics' solutions. Currently, it is only used to constraint solid with the temperature's evolution. </p>
+
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00387">387</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00032">heat_transfer</a>.</p>
 
 </div>
 </div>
@@ -755,7 +808,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>defined the non zero constraints used to solve the problem. </p>
+<p>Define the non-zero constraints used to solve the problem. </p>
 
 <p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00220">220</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
@@ -785,7 +838,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>defined the zero_constraints used to solved the problem. </p>
+<p>Define the zero constraints used to solve the problem. </p>
 
 <p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00308">308</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
@@ -842,7 +895,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classNavierStokesBase.html#a8a98e105ef265cdb3e16fd6778ef2a0a">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01083">1083</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01112">1112</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a7ece063bedde5ef9c3897750dd272114ad43c33b8e3d5435d9cbe65c156887a02">Parameters::LinearSolver::gmres</a>, <a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525a1dbb598cb79bfd4936b225bb4caa77ee">Parameters::L2projection</a>, <a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525a2e69977b7c3df8d5c77016255b4006f2">Parameters::nodal</a>, <a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525a93939238f5427e2d2d2b1365d18483f9">Parameters::ramp</a>, <a class="el" href="read__checkpoint_8cc_source.html#l00007">read_checkpoint()</a>, <a class="el" href="physics__solver_8h_source.html#l00163">PhysicsSolver&lt; VectorType &gt;::solve_non_linear_system()</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a4f997f546b68779b58e9f6f19dc2b9e5">Parameters::SimulationControl::steady</a>, and <a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525a2ac1ff5ff990bc0a4b3afa2286b9e55f">Parameters::viscous</a>.</p>
 
@@ -872,7 +925,7 @@ template&lt;int dim&gt; </div>
 
 <p>Set-up AMG preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01393">1393</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01422">1422</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
@@ -904,7 +957,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSVANSSolver.html#a6109b3ee8f15dd62364109e82d7ac2ca">GLSVANSSolver&lt; dim &gt;</a>, and <a class="el" href="classGLSSharpNavierStokesSolver.html#a6c0a5c3dcfbc9e79e54359e53131afc4">GLSSharpNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00388">388</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l00411">411</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8add95ffdcea64b1eaaa9244611678ed38">BoundaryConditions::function_weak</a>, <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaca6efd547a7b6d9885402b9544f941d5">Parameters::Stabilization::gls</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ab0ba1623558e169131cb513037504286">BoundaryConditions::outlet</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ac6bda74f8a2d6e410535eaa3dca28e9d">BoundaryConditions::partial_slip</a>, <a class="el" href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069">Parameters::VelocitySource::phase_change</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ad99fad96a5d0a7cb2eb41341ea556093">BoundaryConditions::pressure</a>, <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaae21e5838883a96aab921c84e14383bb">Parameters::Stabilization::pspg_supg</a>, and <a class="el" href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92">Parameters::VelocitySource::srf</a>.</p>
 
@@ -966,7 +1019,7 @@ template&lt;int dim&gt; </div>
 
 <p>Set-up ILU preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01373">1373</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01402">1402</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
@@ -996,7 +1049,7 @@ template&lt;int dim&gt; </div>
 
 <p>Set-up the appropriate preconditioner. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01348">1348</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01377">1377</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a0b65af7f2357d3fa0ee8d8972d7e0646">Parameters::LinearSolver::amg</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, and <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::ilu</a>.</p>
 
@@ -1029,9 +1082,9 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classGLSNitscheNavierStokesSolver.html#a70f7a56a430f8a306fddee4404b81d9a">GLSNitscheNavierStokesSolver&lt; dim, spacedim &gt;</a>, <a class="el" href="classGLSVANSSolver.html#ad653b63b635c56db2ddfa51522d2ef32">GLSVANSSolver&lt; dim &gt;</a>, <a class="el" href="classGLSSharpNavierStokesSolver.html#ae34cb3b31e3196c91b2840505440a3db">GLSSharpNavierStokesSolver&lt; dim &gt;</a>, and <a class="el" href="classCFDDEMSolver.html#aaebd11ac00952aaaa99ebd66c43f7d87">CFDDEMSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01729">1729</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01773">1773</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="structParameters_1_1MeshAdaptation.html#a20a32a04c8c684495ff2d3c7be73c5a2a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::MeshAdaptation::none</a>, <a class="el" href="grids_8cc_source.html#l00413">read_mesh_and_manifolds()</a>, and <a class="el" href="navier__stokes__base_8cc_source.html#l00621">NavierStokesBase&lt; dim, VectorType, DofsType &gt;::refine_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="structParameters_1_1MeshAdaptation.html#a20a32a04c8c684495ff2d3c7be73c5a2a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::MeshAdaptation::none</a>, <a class="el" href="grids_8cc_source.html#l00413">read_mesh_and_manifolds()</a>, and <a class="el" href="navier__stokes__base_8cc_source.html#l00638">NavierStokesBase&lt; dim, VectorType, DofsType &gt;::refine_mesh()</a>.</p>
 
 </div>
 </div>
@@ -1083,7 +1136,7 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classPhysicsSolver.html#a210eb1a42329bbc5b66e0d449bd815b1">PhysicsSolver&lt; VectorType &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01311">1311</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01340">1340</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a7ece063bedde5ef9c3897750dd272114ae123b37d2b5fd373237e049a1e68ca13">Parameters::LinearSolver::bicgstab</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a7ece063bedde5ef9c3897750dd272114a7caa701b2bd5a182b80c72b9bdf88e2d">Parameters::LinearSolver::direct</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, and <a class="el" href="structParameters_1_1LinearSolver.html#a7ece063bedde5ef9c3897750dd272114ad43c33b8e3d5435d9cbe65c156887a02">Parameters::LinearSolver::gmres</a>.</p>
 
@@ -1133,7 +1186,7 @@ template&lt;int dim&gt; </div>
 
 <p>BiCGStab solver with ILU(N) preconditioning. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01596">1596</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01630">1630</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52">Parameters::extra_verbose</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::ilu</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -1183,7 +1236,7 @@ template&lt;int dim&gt; </div>
 
 <p>Direct solver using TrilinosWrappers::SolverDirect The use of this solver should be avoided for 3D problems. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01697">1697</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01736">1736</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>.</p>
 
@@ -1233,7 +1286,7 @@ template&lt;int dim&gt; </div>
 
 <p>GMRES solver with ILU(N) preconditioning or AMG preconditioning. </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01466">1466</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8cc_source.html#l01495">1495</a> of file <a class="el" href="gls__navier__stokes_8cc_source.html">gls_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a0b65af7f2357d3fa0ee8d8972d7e0646">Parameters::LinearSolver::amg</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52">Parameters::extra_verbose</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::ilu</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -1322,7 +1375,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00275">275</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00285">285</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1348,7 +1401,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00276">276</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00286">286</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1374,7 +1427,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00274">274</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00284">284</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1400,7 +1453,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00277">277</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00287">287</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1426,7 +1479,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00273">273</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00283">283</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1453,7 +1506,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>Members </p>
 
-<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00270">270</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__navier__stokes_8h_source.html#l00280">280</a> of file <a class="el" href="gls__navier__stokes_8h_source.html">gls_navier_stokes.h</a>.</p>
 
 </div>
 </div>

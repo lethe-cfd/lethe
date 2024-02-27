@@ -125,7 +125,7 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> density           = density_vector[q];</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> dynamic_viscosity = dynamic_viscosity_vector[q];</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keyword">const</span> Tensor&lt;1, dim&gt; &amp;velocity = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keyword">const</span> Tensor&lt;1, dim&gt; &amp;<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keyword">const</span> Tensor&lt;2, dim&gt; &amp;velocity_gradient =</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        scratch_data.<a class="code" href="classNavierStokesScratchData.html#a566544b2f37645bd28a94073e42caf94">velocity_gradients</a>[q];</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keyword">const</span> Tensor&lt;1, dim&gt; &amp;velocity_laplacian =</div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="comment">// Calculation of the magnitude of the velocity for the</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="comment">// stabilization parameter</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(velocity.norm(), 1e-12);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.norm(), 1e-12);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="comment">// Store JxW in local variable for faster access;</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> JxW = JxW_vec[q];</div>
@@ -161,10 +161,10 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                                    sdt);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="comment">// Calculate the strong residual for GLS stabilization</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keyword">auto</span> strong_residual = density * velocity_gradient * velocity +</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keyword">auto</span> strong_residual = density * velocity_gradient * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> +</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                             pressure_gradient -</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                             dynamic_viscosity * velocity_laplacian - force +</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                             mass_source * velocity + strong_residual_vec[q];</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                             mass_source * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> + strong_residual_vec[q];</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      std::vector&lt;Tensor&lt;1, dim&gt;&gt; grad_phi_u_j_x_velocity(n_dofs);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      std::vector&lt;Tensor&lt;1, dim&gt;&gt; velocity_gradient_x_phi_u_j(n_dofs);</div>
@@ -181,12 +181,12 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            pressure_scaling_factor * scratch_data.<a class="code" href="classNavierStokesScratchData.html#a6960a212f41712ec9eba3091d9191a18">grad_phi_p</a>[q][j];</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          strong_jacobian_vec[q][j] +=</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            (density * velocity_gradient * phi_u_j + grad_phi_u_j * velocity +</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            (density * velocity_gradient * phi_u_j + grad_phi_u_j * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> +</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;             grad_phi_p_j - dynamic_viscosity * laplacian_phi_u_j +</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;             mass_source * phi_u_j);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;          <span class="comment">// Store these temporary products in auxiliary variables for speed</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;          grad_phi_u_j_x_velocity[j]     = grad_phi_u_j * velocity;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;          grad_phi_u_j_x_velocity[j]     = grad_phi_u_j * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;          velocity_gradient_x_phi_u_j[j] = velocity_gradient * phi_u_j;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
@@ -201,7 +201,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> &amp;grad_phi_p_i = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a6960a212f41712ec9eba3091d9191a18">grad_phi_p</a>[q][i];</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;          <span class="comment">// Store these temporary products in auxiliary variables for speed</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> grad_phi_u_i_x_velocity = grad_phi_u_i * velocity;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> grad_phi_u_i_x_velocity = grad_phi_u_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> strong_residual_x_grad_phi_u_i =</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            strong_residual * grad_phi_u_i;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
@@ -230,7 +230,7 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                  local_matrix_ij +=</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    <span class="comment">// $$\psi \mathbf{u} \nabla p$$</span></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    phi_p_i * density_psi * phi_u_j * pressure_gradient +</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                    phi_p_i * density_psi * velocity * grad_phi_p_j +</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                    phi_p_i * density_psi * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * grad_phi_p_j +</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    <span class="comment">// $$\rho \nabla \cdot \mathbf{u}$$</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                    phi_p_i * density * div_phi_u_j;</div>
@@ -312,7 +312,7 @@ $(function() {
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> dynamic_viscosity = dynamic_viscosity_vector[q];</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      <span class="comment">// Velocity</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      <span class="keyword">const</span> Tensor&lt;1, dim&gt; &amp;velocity   = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      <span class="keyword">const</span> Tensor&lt;1, dim&gt; &amp;<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>   = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> velocity_divergence = scratch_data.<a class="code" href="classNavierStokesScratchData.html#adc5876c2ab3a6358caac55eacd49b6df">velocity_divergences</a>[q];</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      <span class="keyword">const</span> Tensor&lt;2, dim&gt; &amp;velocity_gradient =</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        scratch_data.<a class="code" href="classNavierStokesScratchData.html#a566544b2f37645bd28a94073e42caf94">velocity_gradients</a>[q];</div>
@@ -329,7 +329,7 @@ $(function() {
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      <span class="keywordtype">double</span>                mass_source = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a0c71709046272d72203fbe735e40e0f4">mass_source</a>[q];</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;      <span class="comment">// Calculation of the magnitude of the</span></div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      <span class="comment">// velocity for the stabilization parameter</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(velocity.norm(), 1e-12);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.norm(), 1e-12);</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      <span class="comment">// Store JxW in local variable for faster access;</span></div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> JxW = JxW_vec[q];</div>
@@ -350,10 +350,10 @@ $(function() {
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                                                    sdt);</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      <span class="comment">// Calculate the strong residual for GLS stabilization</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      <span class="keyword">auto</span> strong_residual = density * velocity_gradient * velocity +</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      <span class="keyword">auto</span> strong_residual = density * velocity_gradient * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> +</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                             pressure_gradient -</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                             dynamic_viscosity * velocity_laplacian - force +</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                             mass_source * velocity + strong_residual_vec[q];</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                             mass_source * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> + strong_residual_vec[q];</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      <span class="comment">// Assembly of the right-hand side</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; n_dofs; ++i)</div>
@@ -370,14 +370,14 @@ $(function() {
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;          local_rhs_i +=</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            (</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;              <span class="comment">// Continuity</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;              -phi_p_i * density_psi * velocity * pressure_gradient -</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;              -phi_p_i * density_psi * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * pressure_gradient -</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;              phi_p_i * density * velocity_divergence - phi_p_i * mass_source -</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;              <span class="comment">// Momentum</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;              phi_u_i * density * velocity_gradient * velocity +</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;              phi_u_i * density * velocity_gradient * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> +</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;              div_phi_u_i * <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a> -</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;              dynamic_viscosity *</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                scalar_product(velocity_gradient, grad_phi_u_i) +</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;              phi_u_i * force - mass_source * velocity * phi_u_i) *</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;              phi_u_i * force - mass_source * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * phi_u_i) *</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            JxW;</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;          <span class="comment">// PSPG GLS term</span></div>
@@ -386,7 +386,7 @@ $(function() {
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;          <span class="comment">// SUPG GLS term</span></div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;          local_rhs_i +=</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            -tau * (strong_residual * (grad_phi_u_i * velocity)) * JxW;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            -tau * (strong_residual * (grad_phi_u_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>)) * JxW;</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          local_rhs(i) += local_rhs_i;</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        }</div>
@@ -422,7 +422,7 @@ $(function() {
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <span class="keyword">const</span> Vector&lt;double&gt; &amp;bdf_coefs =</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    this-&gt;simulation_control-&gt;get_bdf_coefficients();</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  std::vector&lt;double&gt; <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(1 + <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method));</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  std::vector&lt;Tensor&lt;1, dim&gt;&gt; velocity(1 +</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  std::vector&lt;Tensor&lt;1, dim&gt;&gt; <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>(1 +</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                                       <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method));</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  <span class="comment">// Loop over the quadrature points</span></div>
@@ -431,13 +431,13 @@ $(function() {
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      <span class="comment">// Physical properties</span></div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> density = density_vector[q];</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;      velocity[0] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;      <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[0] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method); ++p)</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        velocity[p + 1] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a35e6cecb73b9e5a9d2576b8208c77da8">previous_velocity_values</a>[p][q];</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[p + 1] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a35e6cecb73b9e5a9d2576b8208c77da8">previous_velocity_values</a>[p][q];</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      for (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method) + 1;</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;           ++p)</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        strong_residual[q] += bdf_coefs[p] * density * velocity[p];</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        strong_residual[q] += bdf_coefs[p] * density * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[p];</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; n_dofs; ++j)</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        strong_jacobian[q][j] +=</div>
@@ -486,7 +486,7 @@ $(function() {
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;  <span class="keyword">const</span> Vector&lt;double&gt; &amp;bdf_coefs =</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    this-&gt;simulation_control-&gt;get_bdf_coefficients();</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  std::vector&lt;double&gt; <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>(1 + <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method));</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  std::vector&lt;Tensor&lt;1, dim&gt;&gt; velocity(1 +</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  std::vector&lt;Tensor&lt;1, dim&gt;&gt; <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>(1 +</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                                       <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method));</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  <span class="comment">// Loop over the quadrature points</span></div>
@@ -496,16 +496,16 @@ $(function() {
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> density = density_vector[q];</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;      <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>[0] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a0d32755f9533006a0c28c61b594f4b0f">pressure_values</a>[q];</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;      velocity[0] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;      <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[0] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a8a93306de6e1cd56c819318e8253f2a5">velocity_values</a>[q];</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method); ++p)</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        {</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;          <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>[p + 1] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a425e384b23005541ab442a50b49560f4">previous_pressure_values</a>[p][q];</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;          velocity[p + 1] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a35e6cecb73b9e5a9d2576b8208c77da8">previous_velocity_values</a>[p][q];</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;          <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[p + 1] = scratch_data.<a class="code" href="classNavierStokesScratchData.html#a35e6cecb73b9e5a9d2576b8208c77da8">previous_velocity_values</a>[p][q];</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        }</div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; <a class="code" href="bdf_8h.html#a8b5d2bb44cdac716464d7e779fa14c4c">number_of_previous_solutions</a>(method) + 1;</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;           ++p)</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        strong_residual[q] += (bdf_coefs[p] * density * velocity[p]);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        strong_residual[q] += (bdf_coefs[p] * density * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[p]);</div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; n_dofs; ++i)</div>
@@ -518,7 +518,7 @@ $(function() {
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            {</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;              local_rhs_i -=</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                bdf_coefs[p] * (phi_p_i * density_psi * <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a>[p] +</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                                phi_u_i * density * velocity[p]);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                                phi_u_i * density * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>[p]);</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;            }</div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;          local_rhs(i) += local_rhs_i * JxW[q];</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        }</div>
@@ -567,6 +567,7 @@ $(function() {
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html_aea8bef63eb86faec6537c26700557121"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html#aea8bef63eb86faec6537c26700557121">StabilizedMethodsTensorCopyData::strong_residual</a></div><div class="ttdeci">std::vector&lt; Tensor&lt; 1, dim &gt; &gt; strong_residual</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00186">copy_data.h:186</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html_af24c3fb2e5c1de2ba6d53355aeba646a"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html#af24c3fb2e5c1de2ba6d53355aeba646a">StabilizedMethodsTensorCopyData::strong_jacobian</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; Tensor&lt; 1, dim &gt; &gt; &gt; strong_jacobian</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00187">copy_data.h:187</a></div></div>
 <div class="ttc" id="aisothermal__compressible__navier__stokes__assembler_8h_html"><div class="ttname"><a href="isothermal__compressible__navier__stokes__assembler_8h.html">isothermal_compressible_navier_stokes_assembler.h</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">Variable::velocity</a></div><div class="ttdeci">@ velocity</div><div class="ttdoc">Velocity vector field from fluid dynamics.</div></div>
 <div class="ttc" id="aphysical__property__model_8h_html_a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a"><div class="ttname"><a href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a8e7f8389b914e827058d694b31468b3a">pressure</a></div><div class="ttdeci">@ pressure</div><div class="ttdef"><b>Definition:</b> <a href="physical__property__model_8h_source.html#l00049">physical_property_model.h:49</a></div></div>
 <div class="ttc" id="asimulation__control_8h_html"><div class="ttname"><a href="simulation__control_8h.html">simulation_control.h</a></div></div>
 <div class="ttc" id="astabilization_8h_html"><div class="ttname"><a href="stabilization_8h.html">stabilization.h</a></div></div>

@@ -142,7 +142,7 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  , fluid_tria(fluid_tria)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  , fluid_mapping(fluid_mapping)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  , param(param)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  , velocity(&amp;param-&gt;solid_velocity)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  , <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>(&amp;param-&gt;solid_velocity)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  , <a class="code" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a9922a43d37bee3212593f77ce4ec82f3">temperature</a>(&amp;param-&gt;solid_temperature)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classSolidBase.html#a9c6307f13534cbff5a31109c5915bcc7">param</a>-&gt;solid_mesh.simplex)</div>
@@ -552,7 +552,7 @@ $(function() {
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;Function&lt;spacedim&gt; *</div>
 <div class="line"><a name="l00472"></a><span class="lineno"><a class="line" href="classSolidBase.html#ac11318594a4f5f71f515549866869b78">  472</a></span>&#160;<a class="code" href="classSolidBase.html#ac11318594a4f5f71f515549866869b78">SolidBase&lt;dim, spacedim&gt;::get_solid_velocity</a>()</div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;{</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  <span class="keywordflow">return</span> velocity;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>;</div>
 <div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;}</div>
 <div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> spacedim&gt;</div>
 <div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;Function&lt;spacedim&gt; *</div>
@@ -609,26 +609,26 @@ $(function() {
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;          Point&lt;spacedim&gt; particle_location = particle-&gt;get_location();</div>
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160; </div>
 <div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;          Tensor&lt;1, spacedim&gt; k1;</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;          velocity-&gt;set_time(initial_time);</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;          <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time);</div>
 <div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;            k1[comp_i] = velocity-&gt;value(particle_location, comp_i);</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;            k1[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(particle_location, comp_i);</div>
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;          Point&lt;spacedim&gt;     p1 = particle_location + time_step / 2 * k1;</div>
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;          Tensor&lt;1, spacedim&gt; k2;</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;          velocity-&gt;set_time(initial_time + time_step / 2);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;          <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time + time_step / 2);</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            k2[comp_i] = velocity-&gt;value(p1, comp_i);</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            k2[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p1, comp_i);</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
 <div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;          Point&lt;spacedim&gt;     p2 = particle_location + time_step / 2 * k2;</div>
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;          Tensor&lt;1, spacedim&gt; k3;</div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;            k3[comp_i] = velocity-&gt;value(p2, comp_i);</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;            k3[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p2, comp_i);</div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; </div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;          Point&lt;spacedim&gt;     p3 = particle_location + time_step * k3;</div>
 <div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;          Tensor&lt;1, spacedim&gt; k4;</div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;          velocity-&gt;set_time(initial_time + time_step);</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;          <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time + time_step);</div>
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;            k4[comp_i] = velocity-&gt;value(p3, comp_i);</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;            k4[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p3, comp_i);</div>
 <div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160; </div>
 <div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;          particle_location += time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4);</div>
 <div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;          particle-&gt;set_location(particle_location);</div>
@@ -718,26 +718,26 @@ $(function() {
 <div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                <span class="keywordflow">continue</span>;</div>
 <div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160; </div>
 <div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;              Tensor&lt;1, spacedim&gt; k1;</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;              velocity-&gt;set_time(initial_time);</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;              <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time);</div>
 <div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                k1[comp_i] = velocity-&gt;value(vertex_position, comp_i);</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                k1[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(vertex_position, comp_i);</div>
 <div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160; </div>
 <div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;              Point&lt;spacedim&gt;     p1 = vertex_position + time_step / 2 * k1;</div>
 <div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;              Tensor&lt;1, spacedim&gt; k2;</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;              velocity-&gt;set_time(initial_time + time_step / 2);</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;              <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time + time_step / 2);</div>
 <div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;                k2[comp_i] = velocity-&gt;value(p1, comp_i);</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;                k2[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p1, comp_i);</div>
 <div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160; </div>
 <div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;              Point&lt;spacedim&gt;     p2 = vertex_position + time_step / 2 * k2;</div>
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;              Tensor&lt;1, spacedim&gt; k3;</div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                k3[comp_i] = velocity-&gt;value(p2, comp_i);</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                k3[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p2, comp_i);</div>
 <div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160; </div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;              Point&lt;spacedim&gt;     p3 = vertex_position + time_step * k3;</div>
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;              Tensor&lt;1, spacedim&gt; k4;</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;              velocity-&gt;set_time(initial_time + time_step);</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;              <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;set_time(initial_time + time_step);</div>
 <div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> comp_i = 0; comp_i &lt; spacedim; ++comp_i)</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                k4[comp_i] = velocity-&gt;value(p3, comp_i);</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                k4[comp_i] = <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>-&gt;value(p3, comp_i);</div>
 <div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
 <div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;              <span class="keyword">auto</span> vertex_displacement =</div>
 <div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;                time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4);</div>
@@ -959,6 +959,7 @@ $(function() {
 <div class="ttc" id="aclassSolidBase_html_af1f24708bcc550b4dda791eefdd913c6"><div class="ttname"><a href="classSolidBase.html#af1f24708bcc550b4dda791eefdd913c6">SolidBase::setup_particles_handler</a></div><div class="ttdeci">void setup_particles_handler()</div><div class="ttdoc">Creates a particle handler in the fluid triangulation domain.</div><div class="ttdef"><b>Definition:</b> <a href="solid__base_8cc_source.html#l00319">solid_base.cc:319</a></div></div>
 <div class="ttc" id="aclassSolidBase_html_af5eaf06fd116ba6d89bf04661e6e1289"><div class="ttname"><a href="classSolidBase.html#af5eaf06fd116ba6d89bf04661e6e1289">SolidBase::integrate_velocity</a></div><div class="ttdeci">void integrate_velocity(double time_step, double initial_time)</div><div class="ttdoc">Updates particle positions in solid_particle_handler by integrating velocity using an explicit Runge-...</div><div class="ttdef"><b>Definition:</b> <a href="solid__base_8cc_source.html#l00492">solid_base.cc:492</a></div></div>
 <div class="ttc" id="aclassSolidBase_html_af6a7c8178927f2581d5530856a1d0c0b"><div class="ttname"><a href="classSolidBase.html#af6a7c8178927f2581d5530856a1d0c0b">SolidBase::print_particle_positions</a></div><div class="ttdeci">void print_particle_positions()</div><div class="ttdoc">prints the positions of the particles</div><div class="ttdef"><b>Definition:</b> <a href="solid__base_8cc_source.html#l00714">solid_base.cc:714</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">Variable::velocity</a></div><div class="ttdeci">@ velocity</div><div class="ttdoc">Velocity vector field from fluid dynamics.</div></div>
 <div class="ttc" id="anamespaceDEM_html_ae6292a647794105882a3dcd6b8c941acabaffc8ebf87651f5827fba4e03e3fa51"><div class="ttname"><a href="namespaceDEM.html#ae6292a647794105882a3dcd6b8c941acabaffc8ebf87651f5827fba4e03e3fa51">DEM::n_properties</a></div><div class="ttdeci">@ n_properties</div><div class="ttdef"><b>Definition:</b> <a href="dem__properties_8h_source.html#l00056">dem_properties.h:56</a></div></div>
 <div class="ttc" id="aphysical__property__model_8h_html_a0b2c854385812ebfac83689a5c3ead58a9922a43d37bee3212593f77ce4ec82f3"><div class="ttname"><a href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58a9922a43d37bee3212593f77ce4ec82f3">temperature</a></div><div class="ttdeci">@ temperature</div><div class="ttdef"><b>Definition:</b> <a href="physical__property__model_8h_source.html#l00046">physical_property_model.h:46</a></div></div>
 <div class="ttc" id="asolid__base_8h_html"><div class="ttname"><a href="solid__base_8h.html">solid_base.h</a></div></div>

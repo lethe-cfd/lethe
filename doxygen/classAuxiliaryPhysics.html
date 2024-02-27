@@ -118,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aac6b380b7f28d81bef3a7d33eb13ec34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68fa8d211549189803ddd8ba1fcc4ff"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#ab68fa8d211549189803ddd8ba1fcc4ff">read_checkpoint</a> ()=0</td></tr>
 <tr class="separator:ab68fa8d211549189803ddd8ba1fcc4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa1089ed3df1b8da2d441632d3aa134f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">compute_kelly</a> (const std::pair&lt; const <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcac">Parameters::MeshAdaptation::Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;ivar, dealii::Vector&lt; float &gt; &amp;estimated_error_per_cell)=0</td></tr>
-<tr class="separator:aaa1089ed3df1b8da2d441632d3aa134f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f6a9984eba0d0dcf53468843eb39e45"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#a8f6a9984eba0d0dcf53468843eb39e45">compute_kelly</a> (const std::pair&lt; const <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdd">Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;ivar, dealii::Vector&lt; float &gt; &amp;estimated_error_per_cell)=0</td></tr>
+<tr class="separator:a8f6a9984eba0d0dcf53468843eb39e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d0c0d037152ce2e8552227c3dda383e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#a3d0c0d037152ce2e8552227c3dda383e">setup_dofs</a> ()=0</td></tr>
 <tr class="separator:a3d0c0d037152ce2e8552227c3dda383e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeecb470de43133aa878a5e9499509b31"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAuxiliaryPhysics.html#aeecb470de43133aa878a5e9499509b31">set_initial_conditions</a> ()=0</td></tr>
@@ -277,8 +277,8 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="aaa1089ed3df1b8da2d441632d3aa134f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa1089ed3df1b8da2d441632d3aa134f">&#9670;&nbsp;</a></span>compute_kelly()</h2>
+<a id="a8f6a9984eba0d0dcf53468843eb39e45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f6a9984eba0d0dcf53468843eb39e45">&#9670;&nbsp;</a></span>compute_kelly()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +291,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="memname">virtual void <a class="el" href="classAuxiliaryPhysics.html">AuxiliaryPhysics</a>&lt; dim, VectorType &gt;::compute_kelly </td>
           <td>(</td>
-          <td class="paramtype">const std::pair&lt; const <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcac">Parameters::MeshAdaptation::Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::pair&lt; const <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdd">Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>ivar</em>, </td>
         </tr>
         <tr>
@@ -322,7 +322,7 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classVolumeOfFluid.html#a6cfed70792e4d0f1634f5dbaa4080ddd">VolumeOfFluid&lt; dim &gt;</a>, <a class="el" href="classHeatTransfer.html#a512b942270797927e7a2785156712f64">HeatTransfer&lt; dim &gt;</a>, <a class="el" href="classCahnHilliard.html#a9bd9b1270fcf9b6c28a0937023607d53">CahnHilliard&lt; dim &gt;</a>, and <a class="el" href="classTracer.html#a4f382c43f0c2ff3133a1c857958888e8">Tracer&lt; dim &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classVolumeOfFluid.html#ad4bf3d39a169ad2406ddabed0d2a63bf">VolumeOfFluid&lt; dim &gt;</a>, <a class="el" href="classHeatTransfer.html#a17ef0b6ef66ea797dec821c826e06fa1">HeatTransfer&lt; dim &gt;</a>, <a class="el" href="classCahnHilliard.html#a7256cf0d8415b8a20750fa7895940d1c">CahnHilliard&lt; dim &gt;</a>, and <a class="el" href="classTracer.html#af44423d3b5d981cb228b400767a141da">Tracer&lt; dim &gt;</a>.</p>
 
 </div>
 </div>

@@ -791,7 +791,7 @@ $(function() {
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;                <span class="keywordtype">double</span> <span class="comment">/*h*/</span>,</div>
 <div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;                <span class="keywordtype">double</span> c_star)</div>
 <div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;{</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;  <span class="keywordflow">return</span> kinematic_viscosity + c_star * velocity;</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;  <span class="keywordflow">return</span> kinematic_viscosity + c_star * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>;</div>
 <div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;}</div>
 <div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160; </div>
 <div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -879,6 +879,7 @@ $(function() {
 <div class="ttc" id="aclassParticleFluidAssemblerBase_html_a273a79d7265d8eaf8af65287186f4fea"><div class="ttname"><a href="classParticleFluidAssemblerBase.html#a273a79d7265d8eaf8af65287186f4fea">ParticleFluidAssemblerBase::calculate_particle_fluid_interactions</a></div><div class="ttdeci">virtual void calculate_particle_fluid_interactions(NavierStokesScratchData&lt; dim &gt; &amp;scratch_data)=0</div><div class="ttdoc">calculate_particle_fluid_interactions calculted the solid_fluid interactions</div></div>
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a></div><div class="ttdoc">Class responsible for storing the information calculated using the assembly of stabilized Tensor&lt;1,...</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00144">copy_data.h:145</a></div></div>
 <div class="ttc" id="acopy__data_8h_html"><div class="ttname"><a href="copy__data_8h.html">copy_data.h</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">Variable::velocity</a></div><div class="ttdeci">@ velocity</div><div class="ttdoc">Velocity vector field from fluid dynamics.</div></div>
 <div class="ttc" id="anavier__stokes__assemblers_8h_html"><div class="ttname"><a href="navier__stokes__assemblers_8h.html">navier_stokes_assemblers.h</a></div></div>
 <div class="ttc" id="anavier__stokes__scratch__data_8h_html"><div class="ttname"><a href="navier__stokes__scratch__data_8h.html">navier_stokes_scratch_data.h</a></div></div>
 <div class="ttc" id="asimulation__control_8h_html"><div class="ttname"><a href="simulation__control_8h.html">simulation_control.h</a></div></div>

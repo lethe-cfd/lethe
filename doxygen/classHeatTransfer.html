@@ -117,8 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9424b244231895ee5b12f1fd16c6a09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647057ca3043ee2d38e880e1366be62d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a647057ca3043ee2d38e880e1366be62d">post_mesh_adaptation</a> () override</td></tr>
 <tr class="separator:a647057ca3043ee2d38e880e1366be62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a512b942270797927e7a2785156712f64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a512b942270797927e7a2785156712f64">compute_kelly</a> (const std::pair&lt; const <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcac">Parameters::MeshAdaptation::Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;ivar, dealii::Vector&lt; float &gt; &amp;estimated_error_per_cell) override</td></tr>
-<tr class="separator:a512b942270797927e7a2785156712f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ef0b6ef66ea797dec821c826e06fa1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a17ef0b6ef66ea797dec821c826e06fa1">compute_kelly</a> (const std::pair&lt; const <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdd">Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;ivar, dealii::Vector&lt; float &gt; &amp;estimated_error_per_cell) override</td></tr>
+<tr class="separator:a17ef0b6ef66ea797dec821c826e06fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57220cba37f8342ad6941e3188ff8971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a57220cba37f8342ad6941e3188ff8971">write_checkpoint</a> () override</td></tr>
 <tr class="separator:a57220cba37f8342ad6941e3188ff8971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4d76beacb77c787c9079c5a0ca7c55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeatTransfer.html#a8e4d76beacb77c787c9079c5a0ca7c55">read_checkpoint</a> () override</td></tr>
@@ -664,8 +664,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a512b942270797927e7a2785156712f64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a512b942270797927e7a2785156712f64">&#9670;&nbsp;</a></span>compute_kelly()</h2>
+<a id="a17ef0b6ef66ea797dec821c826e06fa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17ef0b6ef66ea797dec821c826e06fa1">&#9670;&nbsp;</a></span>compute_kelly()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -678,7 +678,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classHeatTransfer.html">HeatTransfer</a>&lt; dim &gt;::compute_kelly </td>
           <td>(</td>
-          <td class="paramtype">const std::pair&lt; const <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcac">Parameters::MeshAdaptation::Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::pair&lt; const <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdd">Variable</a>, <a class="el" href="structParameters_1_1MultipleAdaptationParameters.html">Parameters::MultipleAdaptationParameters</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>ivar</em>, </td>
         </tr>
         <tr>
@@ -709,11 +709,11 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classAuxiliaryPhysics.html#aaa1089ed3df1b8da2d441632d3aa134f">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
+<p>Implements <a class="el" href="classAuxiliaryPhysics.html#a8f6a9984eba0d0dcf53468843eb39e45">AuxiliaryPhysics&lt; dim, GlobalVectorType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="heat__transfer_8cc_source.html#l01008">1008</a> of file <a class="el" href="heat__transfer_8cc_source.html">heat_transfer.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="structParameters_1_1MeshAdaptation.html#ade190298530737aef74ebca4dbb1bcacaeef438f7e448aa48c1f8db568d27b591">Parameters::MeshAdaptation::temperature</a>, and <a class="el" href="physical__property__model_8h_source.html#l00046">temperature</a>.</p>
+<p class="reference">References <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaeef438f7e448aa48c1f8db568d27b591">temperature</a>.</p>
 
 </div>
 </div>

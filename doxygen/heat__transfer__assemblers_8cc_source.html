@@ -135,11 +135,11 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="comment">// Store JxW in local variable for faster access</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> JxW = JxW_vec[q];</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> velocity = scratch_data.<a class="code" href="classHeatTransferScratchData.html#ad2ad4946c4342df944930de7b4a1eaa3">velocity_values</a>[q];</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> = scratch_data.<a class="code" href="classHeatTransferScratchData.html#ad2ad4946c4342df944930de7b4a1eaa3">velocity_values</a>[q];</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="comment">// Calculation of the magnitude of the velocity for the</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="comment">// stabilization parameter</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(velocity.norm(), 1e-12);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.norm(), 1e-12);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="comment">// Calculation of the GLS stabilization parameter. The</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="comment">// stabilization parameter used is different if the simulation is</span></div>
@@ -155,7 +155,7 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; n_dofs; ++j)</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          strong_jacobian_vec[q][j] +=</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            rho_cp * velocity * scratch_data.<a class="code" href="classHeatTransferScratchData.html#acbfd82eb92e46fd1f687d59c88d6d5f8">grad_phi_T</a>[q][j] -</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            rho_cp * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * scratch_data.<a class="code" href="classHeatTransferScratchData.html#acbfd82eb92e46fd1f687d59c88d6d5f8">grad_phi_T</a>[q][j] -</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            thermal_conductivity[q] * scratch_data.<a class="code" href="classHeatTransferScratchData.html#aa367fb0f0ba2a0b891bc5659d2cea582">laplacian_phi_T</a>[q][j];</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
@@ -178,11 +178,11 @@ $(function() {
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;              <span class="comment">// mu*(grad(u)+transpose(grad(u)).transpose(grad(u))</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;              local_matrix(i, j) +=</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                (thermal_conductivity[q] * grad_phi_T_i * grad_phi_T_j +</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                 rho_cp * phi_T_i * velocity * grad_phi_T_j) *</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                 rho_cp * phi_T_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * grad_phi_T_j) *</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                JxW;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;              local_matrix(i, j) += tau * strong_jacobian_vec[q][j] *</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                                    (grad_phi_T_i * velocity) * JxW;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                                    (grad_phi_T_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>) * JxW;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
@@ -232,11 +232,11 @@ $(function() {
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      <span class="comment">// Store JxW in local variable for faster access</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> JxW = scratch_data.<a class="code" href="classHeatTransferScratchData.html#a5cc5ecf06bb85a11c5b1722d72a3d847">fe_values_T</a>.JxW(q);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> velocity = scratch_data.<a class="code" href="classHeatTransferScratchData.html#ad2ad4946c4342df944930de7b4a1eaa3">velocity_values</a>[q];</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> = scratch_data.<a class="code" href="classHeatTransferScratchData.html#ad2ad4946c4342df944930de7b4a1eaa3">velocity_values</a>[q];</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;      <span class="comment">// Calculation of the magnitude of the velocity for the</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;      <span class="comment">// stabilization parameter</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(velocity.norm(), 1e-12);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">double</span> u_mag = std::max(<a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.norm(), 1e-12);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      <span class="comment">// Calculation of the GLS stabilization parameter. The</span></div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      <span class="comment">// stabilization parameter used is different if the simulation is</span></div>
@@ -251,7 +251,7 @@ $(function() {
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      <span class="comment">// Calculate the strong residual for GLS stabilization</span></div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      strong_residual_vec[q] +=</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        rho_cp * velocity * temperature_gradient -</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        rho_cp * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * temperature_gradient -</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        thermal_conductivity[q] * temperature_laplacian -</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        scratch_data.<a class="code" href="classHeatTransferScratchData.html#ac7c4982bea5f0167756af75c11b4a8e1">source</a>[q];</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
@@ -264,12 +264,12 @@ $(function() {
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;          <span class="comment">// -grad(u)*grad(u) = 0</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;          local_rhs(i) -=</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            (thermal_conductivity[q] * grad_phi_T_i * temperature_gradient +</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;             rho_cp * phi_T_i * velocity * temperature_gradient -</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;             rho_cp * phi_T_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a> * temperature_gradient -</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;             scratch_data.<a class="code" href="classHeatTransferScratchData.html#ac7c4982bea5f0167756af75c11b4a8e1">source</a>[q] * phi_T_i) *</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            JxW;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;          local_rhs(i) -=</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            tau * (strong_residual_vec[q] * (grad_phi_T_i * velocity)) * JxW;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            tau * (strong_residual_vec[q] * (grad_phi_T_i * <a class="code" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>)) * JxW;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        }</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    } <span class="comment">// end loop on quadrature points</span></div>
@@ -1535,6 +1535,7 @@ $(function() {
 <div class="ttc" id="acopy__data_8h_html"><div class="ttname"><a href="copy__data_8h.html">copy_data.h</a></div></div>
 <div class="ttc" id="aheat__transfer_8h_html"><div class="ttname"><a href="heat__transfer_8h.html">heat_transfer.h</a></div></div>
 <div class="ttc" id="aheat__transfer__assemblers_8h_html"><div class="ttname"><a href="heat__transfer__assemblers_8h.html">heat_transfer_assemblers.h</a></div></div>
+<div class="ttc" id="amultiphysics_8h_html_a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c"><div class="ttname"><a href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">Variable::velocity</a></div><div class="ttdeci">@ velocity</div><div class="ttdoc">Velocity vector field from fluid dynamics.</div></div>
 <div class="ttc" id="anamespaceBoundaryConditions_html_a07df76d63cde5cb5bcbea0d9c25a54b8aa4ce007979d6464c66498b96d4ce5b74"><div class="ttname"><a href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8aa4ce007979d6464c66498b96d4ce5b74">BoundaryConditions::BoundaryType::convection_radiation</a></div><div class="ttdeci">@ convection_radiation</div></div>
 <div class="ttc" id="anamespaceParameters_html_a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13"><div class="ttname"><a href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e04d9b58aa70e6fb6501fde7608fd13">Parameters::FluidIndicator::fluid1</a></div><div class="ttdeci">@ fluid1</div></div>
 <div class="ttc" id="anamespaceParameters_html_a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c"><div class="ttname"><a href="namespaceParameters.html#a978815f8cf26f3c77304639e1786aec1a1e86df18a83727e4a5dc8dc2859a097c">Parameters::FluidIndicator::fluid0</a></div><div class="ttdeci">@ fluid0</div></div>
