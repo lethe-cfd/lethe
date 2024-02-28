@@ -460,46 +460,51 @@
 end
 </pre></div>
 </div>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">verbosity</span></code>: enables the display of the post-processing values in the terminal. This does not affect the printing of output files. Choices are: <code class="docutils literal notranslate"><span class="pre">quiet</span></code> (default, no output) or <code class="docutils literal notranslate"><span class="pre">verbose</span></code> (output at every iteration).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">frequency</span></code>: frequency at which the enabled post-processing is outputted in the respective file. For <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">frequency</span> <span class="pre">=</span> <span class="pre">1</span></code> (default value), results are outputted at each iteration.</p></li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">kinetic</span> <span class="pre">energy</span></code>: controls if calculation of total kinetic energy is enabled.</dt><dd><ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">kinetic</span> <span class="pre">energy</span></code>: controls if calculation of kinetic energy is enabled.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">kinetic</span> <span class="pre">energy</span> <span class="pre">name</span></code>: output filename for kinetic energy calculations.</p></li>
+<li><p>The kinetic energy <span class="math notranslate nohighlight">\({E}_k\)</span> is calculated as</p></li>
 </ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[{E}_k =  \frac{1}{2 \Omega} \int_{\Omega} \mathbf{u} \cdot \mathbf{u} \ \mathrm{d} \Omega\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\Omega\)</span> representing the volume of the domain and <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">average</span> <span class="pre">velocities</span></code>: controls if calculation of time-averaged velocities is enabled.</dt><dd><ul>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">average</span> <span class="pre">velocities</span></code>: controls if calculation of time-averaged velocities is enabled.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">time</span></code>: initial time used for the average velocities calculations.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">pressure</span> <span class="pre">drop</span></code>: controls if calculation of the pressure drop from the inlet boundary to the outlet boundary is enabled.</dt><dd><ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">pressure</span> <span class="pre">drop</span></code>: controls if calculation of the pressure drop from the inlet boundary to the outlet boundary is enabled.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">inlet</span> <span class="pre">boundary</span> <span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">outlet</span> <span class="pre">boundary</span> <span class="pre">id</span></code>: define the IDs for inlet and outlet boundaries, respectively.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">drop</span> <span class="pre">name</span></code>: output filename for pressure drop calculations.</p></li>
-<li><p>The pressure drop <span class="math notranslate nohighlight">\(\Delta P\)</span> and total pressure drop <span class="math notranslate nohighlight">\(\Delta P_\text{total}\)</span> are calculated as such, with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\pmb{u}\)</span> the velocity  and <span class="math notranslate nohighlight">\(P\)</span> the pressure:</p></li>
+<li><p>The pressure drop <span class="math notranslate nohighlight">\(\Delta P\)</span> and total pressure drop <span class="math notranslate nohighlight">\(\Delta P_\text{total}\)</span> are calculated as:</p></li>
 </ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta P =  \frac{ \int_{\Gamma_\text{inlet}} P \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} 1 \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} P \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} 1 \mathrm{d} \Gamma}\]</div>
+</div>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\Delta P_\text{total} =  \frac{ \int_{\Gamma_\text{inlet}} (P + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} (P + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} \mathrm{d} \Gamma}\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity  and <span class="math notranslate nohighlight">\(P\)</span> the pressure.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<div class="math-wrapper docutils container">
-<div class="math notranslate nohighlight">
-\[\Delta P =  \frac{ \int_{\Gamma_\text{inlet}} P d \Gamma}{\int_{\Gamma_\text{inlet}} 1 d \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} P d \Gamma}{\int_{\Gamma_\text{outlet}} 1 d \Gamma}\]</div>
-</div>
-<div class="math-wrapper docutils container">
-<div class="math notranslate nohighlight">
-\[\Delta P_\text{total} =  \frac{ \int_{\Gamma_\text{inlet}} (P + \frac{1}{2} \pmb{u} \cdot \pmb{u}) d \Gamma}{\int_{\Gamma_\text{inlet}} d \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} (P + \frac{1}{2} \pmb{u} \cdot \pmb{u}) d \Gamma}{\int_{\Gamma_\text{outlet}} d \Gamma}\]</div>
-</div>
-<ul class="simple">
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">flow</span> <span class="pre">rate</span></code>: controls if calculation of the volumetric flow rates at every boundary is enabled.</dt><dd><ul>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">flow</span> <span class="pre">rate</span></code>: controls if calculation of the volumetric flow rates at every boundary is enabled.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">flow</span> <span class="pre">rate</span> <span class="pre">name</span></code>: output filename for flow rate calculations.</p></li>
-<li><p>The flow rate <span class="math notranslate nohighlight">\(Q\)</span> is calculated as such, with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\pmb{u}\)</span> the velocity and <span class="math notranslate nohighlight">\(\pmb{n}\)</span> the vector normal to the surface:</p></li>
+<li><p>The flow rate <span class="math notranslate nohighlight">\(Q\)</span> is calculated as such, with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity and <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> the vector normal to the surface:</p></li>
 </ul>
 </dd>
 </dl>
@@ -507,13 +512,19 @@ end
 </ul>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[Q =  \int_{\Gamma} \pmb{n} \cdot \pmb{u} d \Gamma\]</div>
+\[Q =  \int_{\Gamma} \mathbf{n} \cdot \mathbf{u} d \Gamma\]</div>
 </div>
 <ul>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">enstrophy</span></code>: controls if calculation of total enstrophy, which corresponds to dissipation effects in the fluid, is enabled.</dt><dd><ul class="simple">
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">enstrophy</span></code>: controls if the volume-averaged enstrophy is calculated.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">enstrophy</span> <span class="pre">name</span></code>: output filename for enstrophy calculations.</p></li>
+<li><p>The enstrophy <span class="math notranslate nohighlight">\(\mathcal{E}\)</span> is calculated as</p></li>
 </ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\mathcal{E} =  \frac{1}{2 \Omega} \int_{\Omega} \mathbf{\omega} \cdot \mathbf{\omega} \mathrm{d} \Omega\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\Omega\)</span> representing the volume of the domain and <span class="math notranslate nohighlight">\(\mathbf{\omega}\)</span> the vorticity.</p>
 </dd>
 </dl>
 </li>
