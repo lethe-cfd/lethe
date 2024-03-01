@@ -1,0 +1,5 @@
+<map id="NavierStokesTransientGLSOperator&lt; dim, number &gt;" name="NavierStokesTransientGLSOperator&lt; dim, number &gt;">
+<area shape="rect" id="node1" title="Implements the matrix&#45;free operator to solve transient Navier&#45;Stokes equations using GLS stabilizatio..." alt="" coords="5,169,255,211"/>
+<area shape="rect" id="node2" href="$classNavierStokesOperatorBase.html" title="A class that serves as base for all the matrix&#45;free Navier&#45;Stokes operators." alt="" coords="31,80,229,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="83,5,177,32"/>
+</map>

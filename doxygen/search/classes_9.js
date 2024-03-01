@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['kinematicviscositypostprocessor_3379',['KinematicViscosityPostprocessor',['../classKinematicViscosityPostprocessor.html',1,'']]],
-  ['kinsolnewtonnonlinearsolver_3380',['KinsolNewtonNonLinearSolver',['../classKinsolNewtonNonLinearSolver.html',1,'']]]
+  ['kinematicviscositypostprocessor_3380',['KinematicViscosityPostprocessor',['../classKinematicViscosityPostprocessor.html',1,'']]],
+  ['kinsolnewtonnonlinearsolver_3381',['KinsolNewtonNonLinearSolver',['../classKinsolNewtonNonLinearSolver.html',1,'']]]
 ];

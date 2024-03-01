@@ -1,0 +1,5 @@
+<map id="NavierStokesGLSOperator&lt; dim, number &gt;" name="NavierStokesGLSOperator&lt; dim, number &gt;">
+<area shape="rect" id="node1" title="Class in charge of implementing the main function required to solve the Navier&#45;Stokes equations using..." alt="" coords="9,169,199,211"/>
+<area shape="rect" id="node2" href="$classNavierStokesOperatorBase.html" title="A class that serves as base for all the matrix&#45;free Navier&#45;Stokes operators." alt="" coords="5,80,203,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="57,5,151,32"/>
+</map>
