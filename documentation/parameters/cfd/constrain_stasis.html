@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Dimensionality" href="dimensionality.html" /><link rel="prev" title="Cahn-Hilliard" href="cahn_hilliard.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Constrain Solid Domain - Lethe documentation</title>
+        <title>Constrain Stasis - Lethe documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -176,7 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="boundary_conditions_multiphysics.html">Boundary Conditions - Multiphysics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="box_refinement.html">Box Refinement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cahn_hilliard.html">Cahn-Hilliard</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Constrain Solid Domain</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Constrain Stasis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dimensionality.html">Dimensionality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dynamic_flow_control.html">Dynamic Flow Control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fem.html">Finite Element Interpolation (FEM)</a></li>
@@ -392,35 +392,33 @@
           </label>
         </div>
         <article role="main">
-          <section id="constrain-solid-domain">
-<h1>Constrain Solid Domain<a class="headerlink" href="#constrain-solid-domain" title="Link to this heading">#</a></h1>
-<p>This subsection is used to define temperature-dependant solid domains within a defined fluid.
+          <section id="constrain-stasis">
+<h1>Constrain Stasis<a class="headerlink" href="#constrain-stasis" title="Link to this heading">#</a></h1>
+<p>This subsection is used to define temperature-dependent solid domains within a defined fluid.
 Homogenous constraints are applied on velocity and pressure degrees of freedom of cells found within the prescribed temperature range to mimic a solid.</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>In order to use this feature, the <code class="docutils literal notranslate"><span class="pre">heat</span> <span class="pre">transfer</span></code> physic must be enabled (<code class="docutils literal notranslate"><span class="pre">true</span></code>) in the <a class="reference internal" href="multiphysics.html"><span class="doc">Multiphysics</span></a> subsection.</p>
 </div>
 <p>The subsection with default parameters goes as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection constrain solid domain
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection constrain stasis
   set enable                = false
-  set number of constraints = 1
+  set number of constraints = 0
   subsection constraint 0
-    set fluid id        = 0
-    set min temperature = -999.0
-    set max temperature = 0.0
+    set fluid id                 = 0
+    set phase fraction tolerance = 1e-4
+    set min temperature          = -999.0
+    set max temperature          = 0.0
   end
 end
 </pre></div>
 </div>
-<ul>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">enable</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> when at least one temperature-dependant solid domain constraint should be applied.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">constraints</span></code> parameter is an integer representing the number of constraints that will be applied. It is used in multiphase (VOF) simulations to apply different constraints to each fluid. Only one constraint per fluid can be imposed. Each constraint comes with its own subsection (starting with number <code class="docutils literal notranslate"><span class="pre">0</span></code>) containing its own set of parameters as detailed below.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Currently, only single fluid simulations can handle this feature. Consequently, only one constraint should be defined.</p>
-</div>
 <ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">enable</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> when at least one temperature-dependent stasis constraint should be applied.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">constraints</span></code> parameter is an integer representing the number of constraints that will be applied. It is used in multiphase (VOF) simulations to apply different constraints to each fluid. Only one constraint per fluid can be imposed. Each constraint comes with its own subsection (starting with number <code class="docutils literal notranslate"><span class="pre">0</span></code>) containing its own set of parameters as detailed below.</p>
+<ul>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">id</span></code> parameter is an integer representing the fluid on which the current constraint should be applied.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">fraction</span> <span class="pre">tolerance</span></code> parameter is an absolute tolerance on the filtered phase fraction <span class="math notranslate nohighlight">\((\phi')\)</span> used in conjunction with VOF simulations (see <a class="reference internal" href="volume_of_fluid.html"><span class="doc">Volume of Fluid (Multiphase Flow)</span></a> subsection) to select the cells on which the constraint is applied. For example, if a <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">fraction</span> <span class="pre">tolerance</span></code> of <span class="math notranslate nohighlight">\(10^{-4}\)</span> is specified for a constraint on a fluid of <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">id</span> <span class="pre">=</span> <span class="pre">1</span></code>, cells with <span class="math notranslate nohighlight">\(\phi' \in [0.9999,1.0001]\)</span> are considered as the cells of interest. Note that if the phase fraction filter is disabled, the tolerance will be applied on the solved phase fraction field <span class="math notranslate nohighlight">\((\phi)\)</span>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">temperature</span></code> parameter is a double representing the minimum temperature value for a cell to be considered a solid <span class="math notranslate nohighlight">\([\Theta]\)</span>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">temperature</span></code> parameter is a double representing the maximum temperature value for a cell to be considered a solid <span class="math notranslate nohighlight">\([\Theta]\)</span>.</p></li>
 </ul>

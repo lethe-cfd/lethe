@@ -15,9 +15,9 @@
 <area shape="rect" id="node11" href="$classConstantSpecificHeat.html" title="Constant specific heat. Returns a constant specific heat for a fluid." alt="" coords="505,309,667,336"/>
 <area shape="rect" id="node12" href="$classPhaseChangeSpecificHeat.html" title="This model takes into account the phase change of a material by considering the latent heat into the ..." alt="" coords="491,360,681,387"/>
 <area shape="rect" id="node14" href="$classConstantThermalConductivity.html" title="Constant thermal conductivity." alt="" coords="478,411,694,437"/>
-<area shape="rect" id="node15" href="$classThermalConductivityLinear.html" title="Implements a linear temperature&#45;dependant thermal conductivity of the form k = A + BT." alt="" coords="487,461,685,488"/>
-<area shape="rect" id="node16" href="$classThermalConductivityPhaseChange.html" title="Implements a phase&#45;dependant thermal conductivity." alt="" coords="487,513,685,554"/>
+<area shape="rect" id="node15" href="$classThermalConductivityLinear.html" title="Implements a linear temperature&#45;dependent thermal conductivity of the form k = A + BT." alt="" coords="487,461,685,488"/>
+<area shape="rect" id="node16" href="$classThermalConductivityPhaseChange.html" title="Implements a phase&#45;dependent thermal conductivity." alt="" coords="487,513,685,554"/>
 <area shape="rect" id="node18" href="$classConstantThermalExpansion.html" title="Constant thermal expansion coefficient." alt="" coords="485,579,687,605"/>
-<area shape="rect" id="node19" href="$classThermalExpansionPhaseChange.html" title="Implements a phase&#45;dependant thermal expansion coefficient." alt="" coords="471,629,701,656"/>
+<area shape="rect" id="node19" href="$classThermalExpansionPhaseChange.html" title="Implements a phase&#45;dependent thermal expansion coefficient." alt="" coords="471,629,701,656"/>
 <area shape="rect" id="node21" href="$classConstantTracerDiffusivity.html" title="Constant tracer diffusivity." alt="" coords="493,680,679,707"/>
 </map>

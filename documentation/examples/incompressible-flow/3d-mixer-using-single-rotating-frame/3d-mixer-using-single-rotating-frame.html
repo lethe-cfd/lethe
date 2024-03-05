@@ -176,7 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/boundary_conditions_multiphysics.html">Boundary Conditions - Multiphysics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/box_refinement.html">Box Refinement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/cahn_hilliard.html">Cahn-Hilliard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/constrain_solid_domain.html">Constrain Solid Domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/constrain_stasis.html">Constrain Stasis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/dimensionality.html">Dimensionality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/dynamic_flow_control.html">Dynamic Flow Control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/cfd/fem.html">Finite Element Interpolation (FEM)</a></li>
@@ -474,7 +474,7 @@
 \[\begin{split}\nabla \cdot \mathbf{u} &amp;= 0   \\
 \frac{\partial \mathbf{u}}{\partial t}  + \mathbf{u} \cdot \nabla \mathbf{u} &amp;= -\frac{1}{\rho} \nabla p  + \nu \nabla^2 \mathbf{u} +\mathbf{f} - \underbrace{\Omega \times \mathbf{u}}_{Coriolis} - \underbrace{\Omega \times (\mathbf{q} \times \mathbf{u})}_{Centrifugal}\end{split}\]</div>
 </div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is the position in the fluid with respect to the center of rotation and <span class="math notranslate nohighlight">\(\mathbf{\Omega}\)</span> is the angular velocity of the rotating reference frame. The Coriolis force adds a velocity dependant force to the Navier-Stokes equations whereas the centrifugal forces is independent of the flow and only modifies the pressure field.</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is the position in the fluid with respect to the center of rotation and <span class="math notranslate nohighlight">\(\mathbf{\Omega}\)</span> is the angular velocity of the rotating reference frame. The Coriolis force adds a velocity dependent force to the Navier-Stokes equations whereas the centrifugal forces is independent of the flow and only modifies the pressure field.</p>
 <p>In this example, we will start by simulating the case when <span class="math notranslate nohighlight">\(Re = 1\)</span> and then follow with simulations for <span class="math notranslate nohighlight">\(Re\)</span> values ranging from <span class="math notranslate nohighlight">\(0.1\)</span> to <span class="math notranslate nohighlight">\(100\)</span> to generate <span class="math notranslate nohighlight">\(N_p\)</span> vs <span class="math notranslate nohighlight">\(Re\)</span> curves.</p>
 <p>The Reynolds number for our system is defined as follows:</p>
 <div class="math-wrapper docutils container">
