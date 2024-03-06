@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uniformdistribution_3558',['UniformDistribution',['../classUniformDistribution.html',1,'']]],
-  ['uniforminsertion_3559',['UniformInsertion',['../classUniformInsertion.html',1,'']]]
+  ['uniformdistribution_3556',['UniformDistribution',['../classUniformDistribution.html',1,'']]],
+  ['uniforminsertion_3557',['UniformInsertion',['../classUniformInsertion.html',1,'']]]
 ];

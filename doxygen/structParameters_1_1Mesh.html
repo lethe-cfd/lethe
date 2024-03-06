@@ -123,6 +123,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aa9a2d0cb4ead32b4c3c234f3584703db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69eb54011736d460a431639ed9c55ab5"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1Mesh.html#a69eb54011736d460a431639ed9c55ab5">initial_refinement</a></td></tr>
 <tr class="separator:a69eb54011736d460a431639ed9c55ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6bf5c3fb5f59c2f1bae7c6e01cbe34"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1Mesh.html#adc6bf5c3fb5f59c2f1bae7c6e01cbe34">initial_refinement_at_boundaries</a></td></tr>
+<tr class="separator:adc6bf5c3fb5f59c2f1bae7c6e01cbe34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88553c9d1dd7239a33d0c53b7d0bcae9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1Mesh.html#a88553c9d1dd7239a33d0c53b7d0bcae9">boundaries_to_refine</a></td></tr>
+<tr class="separator:a88553c9d1dd7239a33d0c53b7d0bcae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afab6627aa65eb4296cf15d2c4c3c124a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1Mesh.html#afab6627aa65eb4296cf15d2c4c3c124a">refine_until_target_size</a></td></tr>
 <tr class="separator:afab6627aa65eb4296cf15d2c4c3c124a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b779f12eeef85cc05d44f048eff0c2f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1Mesh.html#a3b779f12eeef85cc05d44f048eff0c2f">simplex</a></td></tr>
@@ -221,13 +225,31 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02132">2132</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02144">2144</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="parameters_8h_source.html#l01196">check_for_diamond_cells</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca873f963042fcbc7753841af174674e3c">colorized_cylinder_shell</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca9c7cd9fc9aa15fae1e37885314637c36">cylinder</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca3c4b939087811f328575e358443a5880">dealii</a>, <a class="el" href="parameters_8cc_source.html#l03631">Parameters::entry_string_to_tensor3()</a>, <a class="el" href="parameters_8h_source.html#l01204">expand_particle_wall_contact_search</a>, <a class="el" href="parameters_8h_source.html#l01175">file_name</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864cab7c7797f3a0a1098b484e5e3a780e025">gmsh</a>, <a class="el" href="parameters_8h_source.html#l01181">grid_arguments</a>, <a class="el" href="parameters_8h_source.html#l01178">grid_type</a>, <a class="el" href="parameters_8h_source.html#l01184">initial_refinement</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca8b6e7e08f9b5c2b02a4d5065cb5b69ce">periodic_hills</a>, <a class="el" href="parameters_8h_source.html#l01187">refine_until_target_size</a>, <a class="el" href="parameters_8h_source.html#l01211">rotation_angle</a>, <a class="el" href="parameters_8h_source.html#l01210">rotation_axis</a>, <a class="el" href="parameters_8h_source.html#l01190">simplex</a>, <a class="el" href="parameters_8h_source.html#l01193">target_size</a>, <a class="el" href="parameters_8h_source.html#l01207">translation</a>, and <a class="el" href="parameters_8h_source.html#l01172">type</a>.</p>
+<p class="reference">References <a class="el" href="parameters_8h_source.html#l01191">boundaries_to_refine</a>, <a class="el" href="parameters_8h_source.html#l01203">check_for_diamond_cells</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca873f963042fcbc7753841af174674e3c">colorized_cylinder_shell</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca9c7cd9fc9aa15fae1e37885314637c36">cylinder</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca3c4b939087811f328575e358443a5880">dealii</a>, <a class="el" href="parameters_8cc_source.html#l03648">Parameters::entry_string_to_tensor3()</a>, <a class="el" href="parameters_8h_source.html#l01211">expand_particle_wall_contact_search</a>, <a class="el" href="parameters_8h_source.html#l01175">file_name</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864cab7c7797f3a0a1098b484e5e3a780e025">gmsh</a>, <a class="el" href="parameters_8h_source.html#l01181">grid_arguments</a>, <a class="el" href="parameters_8h_source.html#l01178">grid_type</a>, <a class="el" href="parameters_8h_source.html#l01184">initial_refinement</a>, <a class="el" href="parameters_8h_source.html#l01188">initial_refinement_at_boundaries</a>, <a class="el" href="structParameters_1_1Mesh.html#a9be2ccd9771c7cc7df861429a0c7864ca8b6e7e08f9b5c2b02a4d5065cb5b69ce">periodic_hills</a>, <a class="el" href="parameters_8h_source.html#l01194">refine_until_target_size</a>, <a class="el" href="parameters_8h_source.html#l01218">rotation_angle</a>, <a class="el" href="parameters_8h_source.html#l01217">rotation_axis</a>, <a class="el" href="parameters_8h_source.html#l01197">simplex</a>, <a class="el" href="parameters_8h_source.html#l01200">target_size</a>, <a class="el" href="parameters_8h_source.html#l01214">translation</a>, and <a class="el" href="parameters_8h_source.html#l01172">type</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a88553c9d1dd7239a33d0c53b7d0bcae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88553c9d1dd7239a33d0c53b7d0bcae9">&#9670;&nbsp;</a></span>boundaries_to_refine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;int&gt; Parameters::Mesh::boundaries_to_refine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List of boundary ids to refine. </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01191">1191</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+
+</div>
+</div>
 <a id="ac814f076b58498e7063a570ee1955f06"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac814f076b58498e7063a570ee1955f06">&#9670;&nbsp;</a></span>check_for_diamond_cells</h2>
 
@@ -240,7 +262,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01196">1196</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p>Enable checking the input grid for diamond-shaped cells. </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01203">1203</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +280,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01204">1204</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01211">1211</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -271,6 +295,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>File name of the mesh. </p>
 
 <p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01175">1175</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
@@ -288,6 +314,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Arguments of the GridTools. </p>
+
 <p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01181">1181</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
@@ -303,6 +331,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Name of the grid in GridTools. </p>
 
 <p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01178">1178</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
@@ -320,7 +350,26 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initial refinement level of primitive mesh. </p>
+
 <p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01184">1184</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+
+</div>
+</div>
+<a id="adc6bf5c3fb5f59c2f1bae7c6e01cbe34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc6bf5c3fb5f59c2f1bae7c6e01cbe34">&#9670;&nbsp;</a></span>initial_refinement_at_boundaries</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Parameters::Mesh::initial_refinement_at_boundaries</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initial refinement level of primitive mesh near user-defined boundary conditions </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01188">1188</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -336,7 +385,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01187">1187</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p>Enable fixing initial refinement from a target size. </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01194">1194</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -352,7 +403,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01211">1211</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01218">1218</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -368,7 +419,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01210">1210</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01217">1217</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -384,7 +435,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01190">1190</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p>Allow the use of a simplex mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01197">1197</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -400,7 +453,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01193">1193</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p>Target size when automatically refining initial mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01200">1200</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -416,7 +471,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01207">1207</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01214">1214</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>

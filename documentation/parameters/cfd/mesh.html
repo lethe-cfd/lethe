@@ -409,6 +409,12 @@
   # Initial refinement of the mesh
   set initial refinement = 0
 
+  # Initial refinement of the mesh near user-specified boundaries
+  set initial boundary refinement = 0
+
+  # Lists of boundaries next to which the mesh should be refined. The list must contain integers separated by commas.
+  set boundaries refined = 0, 1
+
   # Indicates that the mesh is a simplex mesh
   set simplex            = false
 end
@@ -435,6 +441,7 @@ This type of mesh is available, but its usage is not recommended.</p>
 <a class="reference internal image-reference" href="../../_images/cylindrical_meshes.png"><img alt="../../_images/cylindrical_meshes.png" class="align-center" src="../../_images/cylindrical_meshes.png" style="width: 600px;" /></a>
 <ul class="simple">
 <li><p>The initial refinement number determines the number of refinements the grid will undergo in the simulation before the simulation is run. This allows one to refine a coarse grid automatically. By default, most deal.II grids will be as coarse as possible and need to be refined. This is a desirable behavior for parallel simulations, since for quad/hex meshes, the coarsest level of the grid is shared amongst all cores. Consequently, using a coarse grid with too many cells will lead to a prohibitive memory consumption.</p></li>
+<li><p>The initial boundary refinement determines the number of refinements the grid will undergo in the simulation in the vicinities of the boundary specified by the <code class="docutils literal notranslate"><span class="pre">boundaries</span> <span class="pre">refined</span></code> parameter.</p></li>
 <li><p><cite>simplex</cite>. If simplex is set to true, it indicates that the mesh being read is made of only simplex elements. If the mesh is of <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">dealii</span></code> it will be converted from a quad/hex mesh to a simplex mesh. If the mesh is of <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">gsmh</span></code>, it will be read from a file as long as it is only made of simplices.</p></li>
 </ul>
 </section>
