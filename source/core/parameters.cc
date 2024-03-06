@@ -109,6 +109,10 @@ namespace Parameters
                         "1",
                         Patterns::Double(),
                         "Maximum CFL value");
+      prm.declare_entry("max time step",
+                        "1e6",
+                        Patterns::Double(),
+                        "Maximum time step value");
       prm.declare_entry("stop tolerance",
                         "1e-10",
                         Patterns::Double(),
@@ -216,6 +220,7 @@ namespace Parameters
       timeEnd        = prm.get_double("time end");
       adapt          = prm.get_bool("adapt");
       maxCFL         = prm.get_double("max cfl");
+      max_dt         = prm.get_double("max time step");
       stop_tolerance = prm.get_double("stop tolerance");
       adaptative_time_step_scaling =
         prm.get_double("adaptative time step scaling");
@@ -482,7 +487,7 @@ namespace Parameters
   {
     prm.declare_entry(
       "cahn hilliard mobility constant",
-      "1",
+      "1e-7",
       Patterns::Double(),
       "Cahn-Hilliard mobility constant for the corresponding pair of fluids");
   }
@@ -492,6 +497,110 @@ namespace Parameters
   {
     mobility_cahn_hilliard_constant =
       prm.get_double("cahn hilliard mobility constant");
+  }
+
+  void
+  ConstrainSolidDomain::declare_parameters(
+    dealii::ParameterHandler &prm,
+    const unsigned int        number_of_constraints)
+  {
+    prm.enter_subsection("constrain stasis");
+    {
+      prm.declare_entry(
+        "enable",
+        "false",
+        Patterns::Bool(),
+        "Enable/disable (true/false) the solid domain constraining feature.");
+      prm.declare_entry(
+        "number of constraints",
+        "0",
+        Patterns::Integer(),
+        "Number of solid constraints (maximum of 1 per fluid).");
+      // Resize vectors
+      this->fluid_ids.resize(number_of_constraints);
+      this->filtered_phase_fraction_tolerance.resize(number_of_constraints);
+      this->temperature_min_values.resize(number_of_constraints);
+      this->temperature_max_values.resize(number_of_constraints);
+
+      // Declare default entries
+      for (unsigned int c_id = 0; c_id < number_of_constraints; ++c_id)
+        {
+          prm.enter_subsection("constraint " + std::to_string(c_id));
+          {
+            declare_default_entries(prm);
+          }
+          prm.leave_subsection();
+        }
+    }
+
+    prm.leave_subsection();
+  }
+
+  void
+  ConstrainSolidDomain::declare_default_entries(dealii::ParameterHandler &prm)
+  {
+    prm.declare_entry("fluid id",
+                      "0",
+                      Patterns::Integer(),
+                      "Identifier of the fluid material that is constrained.");
+    prm.declare_entry("phase fraction tolerance",
+                      "1e-4",
+                      Patterns::Double(),
+                      "Absolute filtered phase fraction tolerance used in "
+                      "conjunction with VOF simulations to select the cells "
+                      "on which the constraint is applied.");
+    prm.declare_entry("min temperature",
+                      "-999",
+                      Patterns::Double(),
+                      "Minimum temperature value of the fluid for it be "
+                      "considered as a solid.");
+    prm.declare_entry("max temperature",
+                      "0",
+                      Patterns::Double(),
+                      "Maximum temperature value of the fluid for it be "
+                      "considered as a solid.");
+  }
+
+  void
+  ConstrainSolidDomain::parse_parameters(dealii::ParameterHandler &prm)
+  {
+    prm.enter_subsection("constrain stasis");
+    {
+      this->enable                = prm.get_bool("enable");
+      this->number_of_constraints = prm.get_integer("number of constraints");
+
+      // Resize vectors
+      this->fluid_ids.resize(number_of_constraints);
+      this->filtered_phase_fraction_tolerance.resize(number_of_constraints);
+      this->temperature_min_values.resize(number_of_constraints);
+      this->temperature_max_values.resize(number_of_constraints);
+
+      // Parse parameters for each constraint
+      for (unsigned int c_id = 0; c_id < number_of_constraints; ++c_id)
+        {
+          prm.enter_subsection("constraint " + std::to_string(c_id));
+          {
+            parse_constraint_parameters(prm, c_id);
+          }
+          prm.leave_subsection();
+        }
+      prm.leave_subsection();
+    }
+  }
+
+
+  void
+  ConstrainSolidDomain::parse_constraint_parameters(
+    dealii::ParameterHandler &prm,
+    const unsigned int        constraint_id)
+  {
+    this->fluid_ids[constraint_id] = prm.get_integer("fluid id");
+    this->filtered_phase_fraction_tolerance[constraint_id] =
+      prm.get_double("phase fraction tolerance");
+    this->temperature_min_values[constraint_id] =
+      prm.get_double("min temperature");
+    this->temperature_max_values[constraint_id] =
+      prm.get_double("max temperature");
   }
 
   void
@@ -829,11 +938,6 @@ namespace Parameters
         "Tracer diffusivity for the fluid corresponding to Phase = " +
           Utilities::int_to_string(id, 1));
 
-      prm.declare_entry("mobility constant",
-                        "1",
-                        Patterns::Double(),
-                        "Mobility constant for the Cahn-Hilliard equations");
-
       prm.declare_entry(
         "rheological model",
         "newtonian",
@@ -1051,7 +1155,8 @@ namespace Parameters
           "cahn hilliard mobility model",
           "constant",
           Patterns::Selection("constant|quartic"),
-          "Model used for the calculation of the mobility in the Cahn-Hilliard equations\n"
+          "Model used for the calculation of the mobility in the Cahn-Hilliard equations"
+          "\n"
           "The choices are <constant|quartic>.");
         mobility_cahn_hilliard_parameters.declare_parameters(prm);
       }
@@ -1077,6 +1182,16 @@ namespace Parameters
           "Model used for the calculation of the surface tension coefficient\n"
           "The choices are <constant|linear|phase change>.");
         surface_tension_parameters.declare_parameters(prm);
+
+        // Cahn-Hilliard mobility
+        prm.declare_entry(
+          "cahn hilliard mobility model",
+          "constant",
+          Patterns::Selection("constant|quartic"),
+          "Model used for the calculation of the mobility in the Cahn-Hilliard equations"
+          "\n"
+          "The choices are <constant|quartic>.");
+        mobility_cahn_hilliard_parameters.declare_parameters(prm);
       }
       prm.leave_subsection();
     }
@@ -1102,55 +1217,57 @@ namespace Parameters
       if (material_interaction_type == MaterialInteractionsType::fluid_fluid)
         {
           prm.enter_subsection("fluid-fluid interaction");
-          std::pair<unsigned int, unsigned int> fluid_fluid_interaction;
-          fluid_fluid_interaction.first  = prm.get_integer("first fluid id");
-          fluid_fluid_interaction.second = prm.get_integer("second fluid id");
-          AssertThrow(fluid_fluid_interaction.first <=
-                        fluid_fluid_interaction.second,
-                      OrderOfFluidIDsError(fluid_fluid_interaction.first,
-                                           fluid_fluid_interaction.second));
-          fluid_fluid_interaction_with_material_interaction_id.first =
-            fluid_fluid_interaction;
-          fluid_fluid_interaction_with_material_interaction_id.second = id;
+          {
+            std::pair<unsigned int, unsigned int> fluid_fluid_interaction;
+            fluid_fluid_interaction.first  = prm.get_integer("first fluid id");
+            fluid_fluid_interaction.second = prm.get_integer("second fluid id");
+            AssertThrow(fluid_fluid_interaction.first <=
+                          fluid_fluid_interaction.second,
+                        OrderOfFluidIDsError(fluid_fluid_interaction.first,
+                                             fluid_fluid_interaction.second));
+            fluid_fluid_interaction_with_material_interaction_id.first =
+              fluid_fluid_interaction;
+            fluid_fluid_interaction_with_material_interaction_id.second = id;
 
-          // Surface tension
-          op = prm.get("surface tension model");
-          if (op == "constant")
-            {
-              surface_tension_model = SurfaceTensionModel::constant;
-              surface_tension_parameters.parse_parameters(prm);
-            }
-          else if (op == "linear")
-            {
-              surface_tension_model = SurfaceTensionModel::linear;
-              surface_tension_parameters.parse_parameters(prm);
-            }
-          else if (op == "phase change")
-            {
-              surface_tension_model = SurfaceTensionModel::phase_change;
-              surface_tension_parameters.parse_parameters(prm);
-            }
-          else
-            throw(std::runtime_error(
-              "Invalid surface tension model. The choices are <constant|linear|phase change>."));
+            // Surface tension
+            op = prm.get("surface tension model");
+            if (op == "constant")
+              {
+                surface_tension_model = SurfaceTensionModel::constant;
+                surface_tension_parameters.parse_parameters(prm);
+              }
+            else if (op == "linear")
+              {
+                surface_tension_model = SurfaceTensionModel::linear;
+                surface_tension_parameters.parse_parameters(prm);
+              }
+            else if (op == "phase change")
+              {
+                surface_tension_model = SurfaceTensionModel::phase_change;
+                surface_tension_parameters.parse_parameters(prm);
+              }
+            else
+              throw(std::runtime_error(
+                "Invalid surface tension model. The choices are <constant|linear|phase change>."));
 
-          // Cahn-Hilliard mobility
-          op = prm.get("cahn hilliard mobility model");
-          if (op == "constant")
-            {
-              mobility_cahn_hilliard_model =
-                MobilityCahnHilliardModel::constant;
-              mobility_cahn_hilliard_parameters.parse_parameters(prm);
-            }
-          else if (op == "quartic")
-            {
-              mobility_cahn_hilliard_model = MobilityCahnHilliardModel::quartic;
-              mobility_cahn_hilliard_parameters.parse_parameters(prm);
-            }
-          else
-            throw(std::runtime_error(
-              "Invalid mobility model. The choices are <constant|quartic>."));
-
+            // Cahn-Hilliard mobility
+            op = prm.get("cahn hilliard mobility model");
+            if (op == "constant")
+              {
+                mobility_cahn_hilliard_model =
+                  MobilityCahnHilliardModel::constant;
+                mobility_cahn_hilliard_parameters.parse_parameters(prm);
+              }
+            else if (op == "quartic")
+              {
+                mobility_cahn_hilliard_model =
+                  MobilityCahnHilliardModel::quartic;
+                mobility_cahn_hilliard_parameters.parse_parameters(prm);
+              }
+            else
+              throw(std::runtime_error(
+                "Invalid mobility model. The choices are <constant|quartic>."));
+          }
           prm.leave_subsection();
         }
       else // Solid-fluid interactions
@@ -1704,6 +1821,18 @@ namespace Parameters
         "barycenter_information",
         Patterns::FileName(),
         "Name of barycenter information output file in VOF or Cahn-Hilliard simulations");
+
+      prm.declare_entry(
+        "calculate mass conservation",
+        "true",
+        Patterns::Bool(),
+        "Enable calculation of the mass of both fluids in VOF simualtions.");
+
+      prm.declare_entry(
+        "mass conservation name",
+        "mass_conservation_information",
+        Patterns::FileName(),
+        "Name of mass conservation output file in VOF simulations");
     }
     prm.leave_subsection();
   }
@@ -1749,7 +1878,8 @@ namespace Parameters
       heat_flux_output_name       = prm.get("heat flux name");
       calculate_barycenter        = prm.get_bool("calculate barycenter");
       barycenter_output_name      = prm.get("barycenter name");
-
+      calculate_mass_conservation = prm.get_bool("calculate mass conservation");
+      mass_conservation_output_name = prm.get("mass conservation name");
 
       // Viscous dissipative fluid
       const std::string op_fluid = prm.get("postprocessed fluid");
@@ -1913,12 +2043,13 @@ namespace Parameters
   {
     prm.enter_subsection("mesh");
     {
-      prm.declare_entry("type",
-                        "dealii",
-                        Patterns::Selection(
-                          "gmsh|dealii|periodic_hills|cylinder"),
-                        "Type of mesh "
-                        "Choices are <gmsh|dealii|periodic_hills|cylinder>.");
+      prm.declare_entry(
+        "type",
+        "dealii",
+        Patterns::Selection(
+          "gmsh|dealii|periodic_hills|cylinder|colorized_cylinder_shell"),
+        "Type of mesh "
+        "Choices are <gmsh|dealii|periodic_hills|cylinder|colorized_cylinder_shell>.");
 
       prm.declare_entry("file name",
                         "none",
@@ -1929,6 +2060,18 @@ namespace Parameters
                         "0",
                         Patterns::Integer(),
                         "Initial refinement of the mesh");
+
+      prm.declare_entry(
+        "initial boundary refinement",
+        "0",
+        Patterns::Integer(),
+        "Initial refinement of the mesh at the boundaries specified by the user");
+
+      prm.declare_entry(
+        "boundaries refined",
+        "",
+        Patterns::List(Patterns::Integer()),
+        "Boundary ids of the boundaries to be initially refined");
 
       if (prm.get("type") == "periodic_hills")
         {
@@ -2012,6 +2155,8 @@ namespace Parameters
           type = Type::periodic_hills;
         else if (op == "cylinder")
           type = Type::cylinder;
+        else if (op == "colorized_cylinder_shell")
+          type = Type::colorized_cylinder_shell;
         else
           throw std::logic_error(
             "Error, invalid mesh type. Choices are gmsh and dealii");
@@ -2020,6 +2165,11 @@ namespace Parameters
       file_name = prm.get("file name");
 
       initial_refinement = prm.get_integer("initial refinement");
+      initial_refinement_at_boundaries =
+        prm.get_integer("initial boundary refinement");
+
+      boundaries_to_refine =
+        convert_string_to_vector<int>(prm, "boundaries refined");
 
       grid_type      = prm.get("grid type");
       grid_arguments = prm.get("grid arguments");
@@ -2729,7 +2879,7 @@ namespace Parameters
       "type",
       "sphere",
       Patterns::Selection(
-        "sphere|hyper rectangle|ellipsoid|torus|cone|cylinder|cylindrical tube|cylindrical helix|cut hollow sphere|death star|superquadric|rbf|opencascade|composite"),
+        "sphere|hyper rectangle|ellipsoid|torus|cone|cylinder|cylindrical tube|cylindrical helix|cut hollow sphere|death star|superquadric|rbf|opencascade|plane|composite"),
       "The type of shape considered."
       "Choices are <sphere|hyper rectangle|ellipsoid|torus|cone|cylinder|cylindrical tube|cylindrical helix|cut hollow sphere|death star|superquadric|rbf|opencascade|composite>."
       "The parameter for a sphere is: radius. "
@@ -2778,16 +2928,32 @@ namespace Parameters
       Patterns::Anything(),
       "position relative to the center of the particle for the location of the point where the pressure is imposed inside the particle");
 
+
+
     prm.enter_subsection("physical properties");
     {
       prm.declare_entry("density",
                         "1",
                         Patterns::Double(),
                         "density of the particle ");
-      prm.declare_entry("inertia",
-                        "1",
-                        Patterns::Double(),
-                        "uniform rotational moment of inertia");
+      // The implementation is postponed since it makes the evaluation of the
+      // levelset more complex.
+      /*prm.declare_entry(
+        "center of mass location",
+        "0; 0; 0",
+        Patterns::Anything(),
+        "position of the center of mass relative to the frame of reference of
+        the particule");*/
+      prm.declare_entry(
+        "volume",
+        "0",
+        Patterns::Double(),
+        "The volume occupied by the particle. If it is left empty, the volume is automatically calculated if possible otherwise the volume of a sphere is used instead");
+      prm.declare_entry(
+        "inertia",
+        "1 ;0 ;0 ;0 ;1 ;0 ;0 ;0 ;1",
+        Patterns::Anything(),
+        "Moments of inertia of the particle in the reference frame of the fluid. The entry sequence corresponds to : I_xx ;I_xy ;I_xz ;I_yx ;I_yy ;I_yz ;I_zx ;I_zy ;I_zz");
       prm.declare_entry("youngs modulus",
                         "100000000",
                         Patterns::Double(),
@@ -2966,6 +3132,26 @@ namespace Parameters
           Patterns::Double(),
           "Smallest gap considered for the lubrification force calculation. This value is multiplied by the smallest cell size");
 
+        prm.declare_entry(
+          "explicit contact impulsion",
+          "false",
+          Patterns::Bool(),
+          "Bool to enable or disable the use of explicit contact impulsion evaluation in the resolution of the coupling of the particle. When it is set to true, this parameter results in the code only performing the DEM calculation once per CFD time step and using the resulting contact impulsion to evaluate all the other Newton's iterations. This reduces the number of times the DEM calculation is made.");
+
+        prm.declare_entry(
+          "explicit position integration",
+          "false",
+          Patterns::Bool(),
+          "Bool to enable or disable the explicit position integration. This means that the particle position is obtained directly by the integration of the previous velocities only. This avoids multiple cut cell mapping for each newton iteration. Note that this limits the order of convergence in time to one.");
+
+        prm.declare_entry(
+          "approximate radius for contact",
+          "false",
+          Patterns::Bool(),
+          "Bool to turn on or off using the approximate radius of the particles during contact. If activated, the radius used in the contact calculation is constant and fixed to the effective radius of the shape. If not, the radius of curvature of the shape at the contact point is evaluated. For some shapes, this can be numerically expensive to evaluate.");
+
+
+
         prm.enter_subsection("wall physical properties");
         {
           prm.declare_entry(
@@ -3067,6 +3253,7 @@ namespace Parameters
       prm.enter_subsection("DEM");
       {
         alpha = prm.get_double("alpha");
+
         contact_search_radius_factor =
           prm.get_double("contact search radius factor");
         if (contact_search_radius_factor < 1.)
@@ -3079,6 +3266,13 @@ namespace Parameters
         enable_lubrication_force = prm.get_bool("enable lubrication force");
         lubrication_range_max    = prm.get_double("lubrication range max");
         lubrication_range_min    = prm.get_double("lubrication range min");
+        explicit_contact_impulsion_calculation =
+          prm.get_bool("explicit contact impulsion");
+        explicit_position_integration_calculation =
+          prm.get_bool("explicit position integration");
+        approximate_radius_for_contact =
+          prm.get_bool("approximate radius for contact");
+
         prm.enter_subsection("wall physical properties");
         {
           wall_youngs_modulus = prm.get_double("wall youngs modulus");
@@ -3098,13 +3292,13 @@ namespace Parameters
         prm.leave_subsection();
       }
 
-      nb = prm.get_integer("number of particles");
+      nb_particles = prm.get_integer("number of particles");
 
       assemble_navier_stokes_inside =
         prm.get_bool("assemble Navier-Stokes inside particles");
 
-      particles.resize(nb);
-      for (unsigned int i = 0; i < nb; ++i)
+      particles.resize(nb_particles);
+      for (unsigned int i = 0; i < nb_particles; ++i)
         {
           particles[i].initialize_all();
           std::string section = "particle info " + std::to_string(i);
@@ -3161,6 +3355,8 @@ namespace Parameters
             Utilities::string_to_double(pressure_location_str_list);
           particles[i].pressure_location[0] = pressure_list[0];
           particles[i].pressure_location[1] = pressure_list[1];
+
+
           if (dim == 3)
             {
               particles[i].position[2] =
@@ -3169,6 +3365,7 @@ namespace Parameters
                 particles[i].f_velocity->value(particles[i].position, 2);
               particles[i].pressure_location[2] = pressure_list[2];
             }
+
           std::string shape_type          = prm.get("type");
           std::string shape_arguments_str = prm.get("shape arguments");
           particles[i].initialize_shape(shape_type, shape_arguments_str);
@@ -3178,9 +3375,46 @@ namespace Parameters
           particles[i].radius = particles[i].shape->effective_radius;
           prm.enter_subsection("physical properties");
           {
-            particles[i].inertia[0][0] = prm.get_double("inertia");
-            particles[i].inertia[1][1] = prm.get_double("inertia");
-            particles[i].inertia[2][2] = prm.get_double("inertia");
+            std::string              inertia_str = prm.get("inertia");
+            std::vector<std::string> inertia_str_list(
+              Utilities::split_string_list(inertia_str, ";"));
+            std::vector<double> inertia_list =
+              Utilities::string_to_double(inertia_str_list);
+            if (inertia_str_list.size() == 9)
+              {
+                std::vector<double> inertia_list =
+                  Utilities::string_to_double(inertia_str_list);
+                particles[i].inertia[0][0] = inertia_list[0];
+                particles[i].inertia[0][1] = inertia_list[1];
+                particles[i].inertia[0][2] = inertia_list[2];
+                particles[i].inertia[1][0] = inertia_list[3];
+                particles[i].inertia[1][1] = inertia_list[4];
+                particles[i].inertia[1][2] = inertia_list[5];
+                particles[i].inertia[2][0] = inertia_list[6];
+                particles[i].inertia[2][1] = inertia_list[7];
+                particles[i].inertia[2][2] = inertia_list[8];
+              }
+            else if (inertia_str_list.size() == 1)
+              {
+                // If only one inertia value is given, we assume that the
+                // inertia is uniform in all axes.
+                std::vector<double> inertia_list =
+                  Utilities::string_to_double(inertia_str_list);
+                particles[i].inertia[0][0] = inertia_list[0];
+                particles[i].inertia[0][1] = 0;
+                particles[i].inertia[0][2] = 0;
+                particles[i].inertia[1][0] = 0;
+                particles[i].inertia[1][1] = inertia_list[0];
+                particles[i].inertia[1][2] = 0;
+                particles[i].inertia[2][0] = 0;
+                particles[i].inertia[2][1] = 0;
+                particles[i].inertia[2][2] = inertia_list[0];
+              }
+            else
+              {
+                throw(std::runtime_error(
+                  " Invalid inertia matrix. The inertia is given as a 3 by 3 matrix or a single value if the inertia is uniform around each axis."));
+              }
 
             particles[i].youngs_modulus = prm.get_double("youngs modulus");
             particles[i].restitution_coefficient =
@@ -3191,20 +3425,31 @@ namespace Parameters
             particles[i].rolling_friction_coefficient =
               prm.get_double("rolling friction coefficient");
 
+            double volume = prm.get_double("volume");
+            if (volume == 0)
+              {
+                // value is automatically defined.
+                volume = particles[i].shape->displaced_volume();
+                if (volume == 0)
+                  {
+                    if (dim == 2)
+                      {
+                        volume = PI * particles[i].radius * particles[i].radius;
+                      }
+                    else if (dim == 3)
+                      {
+                        volume = 4.0 / 3.0 * PI * particles[i].radius *
+                                 particles[i].radius * particles[i].radius;
+                      }
+                  }
+              }
+            particles[i].volume = volume;
+            particles[i].mass = particles[i].volume * prm.get_double("density");
 
-            if (dim == 2)
-              {
-                particles[i].mass = PI * particles[i].radius *
-                                    particles[i].radius *
-                                    prm.get_double("density");
-              }
-            else if (dim == 3)
-              {
-                particles[i].mass = 4.0 / 3.0 * PI * particles[i].radius *
-                                    particles[i].radius * particles[i].radius *
-                                    prm.get_double("density");
-              }
             particles[i].initialize_previous_solution();
+            particles[i].set_position(particles[i].position);
+            particles[i].set_orientation(particles[i].orientation);
+
             prm.leave_subsection();
           }
           prm.leave_subsection();
@@ -3419,20 +3664,6 @@ namespace Parameters
       output_tensor[i] = vector_of_double[i];
 
     return output_tensor;
-  }
-
-  std::vector<double>
-  convert_string_to_vector(ParameterHandler  &prm,
-                           const std::string &entry_string)
-  {
-    std::string              full_str = prm.get(entry_string);
-    std::vector<std::string> vector_of_string(
-      Utilities::split_string_list(full_str));
-
-    std::vector<double> vector_of_double =
-      Utilities::string_to_double(vector_of_string);
-
-    return vector_of_double;
   }
 
   template class Laser<2>;

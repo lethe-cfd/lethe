@@ -445,9 +445,10 @@ public:
   }
 
   /**
-   * @brief Request the present filtered solution of a given physics (used in VOF physics for STF calculation)
-   *
-   * @param physics_id The physics of the solution being requested
+   * @brief Request the present filtered solution of a given physics (used in
+   * VOF or CahnHilliard physics for STF calculation)
+   * @param physics_id ID of the physics for which the solution is being
+   * requested
    */
   GlobalVectorType *
   get_filtered_solution(const PhysicsID physics_id)
@@ -538,7 +539,6 @@ public:
     (void)(number_solids);
     return solids;
   }
-
 
   /**
    * @brief Request the present solution of the projected phase fraction gradient (PFG)
@@ -642,12 +642,15 @@ public:
   }
 
   /**
-   * @brief Sets the reference to the filtered solution of the physics in the multiphysics interface (used in VOF physics for STF calculation)
+   * @brief Sets the reference to the filtered solution of the physics in the
+   * multiphysics interface (used in VOF or CahnHilliard physics for STF
+   * calculation)
+   * @param physics_id ID of the physics for which the DOF handler is being
+   * requested
    *
-   * @param physics_id The physics of the DOF handler being requested
-   *
-   * @param filtered_solution_vector The reference to the filtered solution vector of the physics; this was
-   * specifically implemented for VOF
+   * @param filtered_solution_vector The reference to the filtered solution
+   * vector of the physics; this was implemented for VOF and CahnHilliard
+   * physics
    */
   void
   set_filtered_solution(const PhysicsID   physics_id,
@@ -802,7 +805,7 @@ public:
    * @param estimated_error_per_cell The deal.II vector of estimated_error_per_cell
    */
   virtual void
-  compute_kelly(const std::pair<const Parameters::MeshAdaptation::Variable,
+  compute_kelly(const std::pair<const Variable,
                                 Parameters::MultipleAdaptationParameters> &ivar,
                 dealii::Vector<float> &estimated_error_per_cell)
   {

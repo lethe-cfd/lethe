@@ -716,12 +716,10 @@ GLSVansAssemblerBDF<dim>::assemble_matrix(
   auto &local_matrix    = copy_data.local_matrix;
 
   // Time stepping information
-  const auto          method = this->simulation_control->get_assembly_method();
-  std::vector<double> time_steps_vector =
-    this->simulation_control->get_time_steps_vector();
-
+  const auto method = this->simulation_control->get_assembly_method();
   // Vector for the BDF coefficients
-  Vector<double> bdf_coefs = bdf_coefficients(method, time_steps_vector);
+  const Vector<double> &bdf_coefs =
+    this->simulation_control->get_bdf_coefficients();
   std::vector<Tensor<1, dim>> velocity(1 +
                                        number_of_previous_solutions(method));
 
@@ -782,12 +780,10 @@ GLSVansAssemblerBDF<dim>::assemble_rhs(
   auto &local_rhs       = copy_data.local_rhs;
 
   // Time stepping information
-  const auto          method = this->simulation_control->get_assembly_method();
-  std::vector<double> time_steps_vector =
-    this->simulation_control->get_time_steps_vector();
-
+  const auto method = this->simulation_control->get_assembly_method();
   // Vector for the BDF coefficients
-  Vector<double> bdf_coefs = bdf_coefficients(method, time_steps_vector);
+  const Vector<double> &bdf_coefs =
+    this->simulation_control->get_bdf_coefficients();
   std::vector<Tensor<1, dim>> velocity(1 +
                                        number_of_previous_solutions(method));
   std::vector<double> void_fraction(1 + number_of_previous_solutions(method));
@@ -832,6 +828,7 @@ GLSVansAssemblerBDF<dim>::assemble_rhs(
           const auto phi_u_i     = scratch_data.phi_u[q][i];
           const auto div_phi_u_i = scratch_data.div_phi_u[q][i];
           double     local_rhs_i = 0;
+
           for (unsigned int p = 0; p < number_of_previous_solutions(method) + 1;
                ++p)
             {

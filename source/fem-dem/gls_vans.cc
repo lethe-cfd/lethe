@@ -207,6 +207,9 @@ GLSVANSSolver<dim>::read_dem()
       try
         {
           parallel_triangulation->load(filename.c_str());
+
+          // Deserialize particles have the triangulation has been read
+          particle_handler.deserialize();
         }
       catch (...)
         {
@@ -221,9 +224,6 @@ GLSVANSSolver<dim>::read_dem()
         "VANS equations currently do not support "
         "triangulations other than parallel::distributed");
     }
-
-  // Deserialize particles have the triangulation has been read
-  particle_handler.deserialize();
 }
 
 template <int dim>
@@ -1519,7 +1519,7 @@ GLSVANSSolver<dim>::setup_assemblers()
 
   if (this->cfd_dem_simulation_parameters.cfd_dem.vortical_viscous_torque ==
       true)
-    // Viscous Torque Assembler
+    // Vortical Torque Assembler
     particle_fluid_assemblers.push_back(
       std::make_shared<GLSVansAssemblerVorticalTorque<dim>>(
         this->cfd_dem_simulation_parameters.dem_parameters
@@ -1838,20 +1838,12 @@ GLSVANSSolver<dim>::monitor_mass_conservation()
   double max_local_continuity = 0;
   double local_mass_source    = 0;
 
-  Vector<double>      bdf_coefs;
   std::vector<double> time_steps_vector =
     this->simulation_control->get_time_steps_vector();
 
   const auto scheme = this->simulation_control->get_assembly_method();
-
-  if (scheme == Parameters::SimulationControl::TimeSteppingMethod::bdf1)
-    bdf_coefs = bdf_coefficients(1, time_steps_vector);
-
-  if (scheme == Parameters::SimulationControl::TimeSteppingMethod::bdf2)
-    bdf_coefs = bdf_coefficients(2, time_steps_vector);
-
-  if (scheme == Parameters::SimulationControl::TimeSteppingMethod::bdf3)
-    bdf_coefs = bdf_coefficients(3, time_steps_vector);
+  const Vector<double> &bdf_coefs =
+    this->simulation_control->get_bdf_coefficients();
 
   for (const auto &cell : this->dof_handler.active_cell_iterators())
     {
@@ -1995,7 +1987,7 @@ GLSVANSSolver<dim>::solve()
           .restart == false)
     read_dem();
 
-  setup_dofs();
+  this->setup_dofs();
 
   this->set_initial_condition(
     this->cfd_dem_simulation_parameters.cfd_parameters.initial_condition->type,

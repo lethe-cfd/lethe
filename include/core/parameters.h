@@ -115,10 +115,13 @@ namespace Parameters
     // Max CFL
     double maxCFL;
 
+    // Max time step
+    double max_dt;
+
     // Aimed tolerance at which simulation is stopped
     double stop_tolerance;
 
-    // Max CFL
+    // Rate of increase of the time step value
     double adaptative_time_step_scaling;
 
     // BDF startup time scaling
@@ -454,7 +457,7 @@ namespace Parameters
     } surface_tension_model;
     SurfaceTensionParameters surface_tension_parameters;
 
-    // Mobility CH models
+    // Cahn-Hilliard mobility models
     enum class MobilityCahnHilliardModel
     {
       constant,
@@ -508,7 +511,7 @@ namespace Parameters
 
     /*
      * Reference Temperature for all physical properties of fluids and solids.
-     * Currently this is only used by the thermal expansion models
+     * Currently, this is only used by the thermal expansion models.
      */
     double reference_temperature;
 
@@ -517,6 +520,81 @@ namespace Parameters
     void
     parse_parameters(ParameterHandler    &prm,
                      const Dimensionality dimensions = Dimensionality());
+  };
+
+  /**
+   * @brief Set of parameters constraining a certain portion of a fluid domain
+   * to null velocity and pressure fields to mimic a solid subdomain.
+   *
+   * @remark Pressure DOFs in "solid" cells that are next to "fluid" cells are
+   * not constrained.
+   *
+   * @note At the moment, only the temperature field is used to constrain the
+   * "solid" domain.
+   */
+  struct ConstrainSolidDomain
+  {
+    /// Enable/disable (@p true/false) the solid domain constraining feature.
+    bool enable;
+
+    /// Total number of constraints (maximum of 1 per fluid)
+    unsigned int number_of_constraints;
+
+    /// Identifiers of fluids that are constrained
+    std::vector<unsigned int> fluid_ids;
+
+    /// Absolute tolerance applied on filtered phase fraction for
+    /// constrained cell selection
+    std::vector<double> filtered_phase_fraction_tolerance;
+
+    /// Lower threshold values of the constraining field (temperature)
+    std::vector<double> temperature_min_values;
+
+    /// Upper threshold values of the constraining field (temperature)
+    std::vector<double> temperature_max_values;
+
+    /**
+     * @brief Declare the parameters.
+     *
+     * @param[in,out] prm ParameterHandler object.
+     *
+     * @param[in] max_number_of_constraints Maximum number of zero velocity
+     * constraints applied to the domain.
+     */
+    void
+    declare_parameters(ParameterHandler  &prm,
+                       const unsigned int max_number_of_constraints);
+
+    /**
+     * @brief Parse the parameters.
+     *
+     * @param[in] prm ParameterHandler object.
+     */
+    void
+    parse_parameters(ParameterHandler &prm);
+
+    /**
+     *
+     * @brief Declare the default parameters for each constraint.
+     *
+     * @param[in,out] prm ParameterHandler object.
+     *
+     */
+    void
+    declare_default_entries(ParameterHandler &prm);
+
+    /**
+     *
+     * @brief Parse parameters for each constraint.
+     *
+     * @param[in] prm ParameterHandler object.
+     *
+     * @param[in] constraint_id Identifiers of the constraint (1 per fluid). The
+     * numbering starts at 0.
+     */
+    void
+    parse_constraint_parameters(ParameterHandler  &prm,
+                                const unsigned int constraint_id);
   };
 
   /**
@@ -823,6 +901,12 @@ namespace Parameters
     // Prefix for the phase output
     std::string phase_output_name;
 
+    /// Enable mass conservation calculation for both fluids in VOF simulations
+    bool calculate_mass_conservation;
+
+    /// Prefix for the VOF mass conservation output
+    std::string mass_conservation_output_name;
+
     static void
     declare_parameters(ParameterHandler &prm);
     void
@@ -832,7 +916,7 @@ namespace Parameters
   /**
    * @brief FEM - The finite element section
    * controls the properties of the finite element method. This section
-   * constrols the order of polynomial integration and the number of quadrature
+   * controls the order of polynomial integration and the number of quadrature
    * points within the cells.
    */
   struct FEM
@@ -1082,40 +1166,48 @@ namespace Parameters
       gmsh,
       dealii,
       periodic_hills,
-      cylinder
+      cylinder,
+      colorized_cylinder_shell
     };
     Type type;
 
-    // File name of the mesh
+    /// File name of the mesh
     std::string file_name;
 
-    // Name of the grid in GridTools
+    /// Name of the grid in GridTools
     std::string grid_type;
 
-    // Arguments of the GridTools
+    /// Arguments of the GridTools
     std::string grid_arguments;
 
-    // Initial refinement level of primitive mesh
+    /// Initial refinement level of primitive mesh
     unsigned int initial_refinement;
 
-    // Enabling fixing initial refinement from a target size
+    /// Initial refinement level of primitive mesh near user-defined boundary
+    /// conditions
+    unsigned int initial_refinement_at_boundaries;
+
+    /// List of boundary ids to refine
+    std::vector<int> boundaries_to_refine;
+
+    /// Enable fixing initial refinement from a target size
     bool refine_until_target_size;
 
-    // Allowing the use of a simplex mesh
+    /// Allow the use of a simplex mesh
     bool simplex;
 
-    // Target size when automatically refining initial mesh
+    /// Target size when automatically refining initial mesh
     double target_size;
 
-    // Enables checking the input grid for diamond-shaped cells
+    /// Enable checking the input grid for diamond-shaped cells
     bool check_for_diamond_cells;
 
-    // A boolean parameter which enables adding the neighbor boundary cells of
-    // boundary cells in DEM simulations. This parameter should only be enabled
-    // for simulations with concave geometries (for instance particles inside a
-    // drum). In simulations with convex geometries, it must not be enabled.
-    // This is also reported to users in a warning in
-    // find_boundary_cells_information.
+    /* A boolean parameter which enables adding the neighbor boundary cells of
+    * boundary cells in DEM simulations. This parameter should only be enabled
+    * for simulations with concave geometries (for instance particles inside a
+    * drum). In simulations with convex geometries, it must not be enabled.
+    * This is also reported to users in a warning in
+     find_boundary_cells_information.*/
     bool expand_particle_wall_contact_search;
 
     // Grid displacement at initiation
@@ -1161,15 +1253,8 @@ namespace Parameters
       kelly
     } type;
 
-    enum class Variable
-    {
-      velocity,
-      pressure,
-      phase,
-      temperature,
-      phase_cahn_hilliard,
-      chemical_potential_cahn_hilliard
-    } variable;
+    /// Fields on which the mesh adaptation can be based
+    Variable variable;
 
     // Map containing the refinement variables
     std::map<Variable, MultipleAdaptationParameters> variables;
@@ -1312,42 +1397,99 @@ namespace Parameters
     declare_default_entry(ParameterHandler &prm, unsigned int index);
     void
     parse_parameters(ParameterHandler &prm);
-
-    unsigned int                 nb;
-    unsigned int                 order;
-    unsigned int                 initial_refinement;
-    double                       inside_radius;
-    double                       outside_radius;
-    bool                         time_extrapolation_of_refinement_zone;
+    // Vector of particles
     std::vector<IBParticle<dim>> particles;
-    bool                         calculate_force_ib;
-    bool                         assemble_navier_stokes_inside;
-    std::string                  ib_force_output_file;
-    Tensor<1, dim>               gravity;
-    double                       particle_nonlinear_tol;
-    double                       wall_youngs_modulus;
-    double                       wall_poisson_ratio;
-    double                       wall_rolling_friction_coefficient;
-    double                       wall_friction_coefficient;
-    double                       wall_restitution_coefficient;
-    unsigned int                 coupling_frequency;
-    bool                         enable_lubrication_force;
-    double                       lubrication_range_max;
-    double                       lubrication_range_min;
-    double                       contact_search_radius_factor;
-    int                          contact_search_frequency;
-    bool                         load_particles_from_file;
-    std::string                  particles_file;
-    bool                         enable_extra_sharp_interface_vtu_output_field;
 
-    std::shared_ptr<Functions::ParsedFunction<dim>> f_gravity;
+    // Number of declared IB particles
+    unsigned int nb_particles;
+    // Boolean to determine whether the Navier-Stokes equations are
+    // solved inside the particles.
+    bool assemble_navier_stokes_inside;
 
-    double      particle_nonlinear_tolerance;
-    double      length_ratio;
-    bool        enable_extrapolation;
-    double      alpha;
-    bool        print_dem;
+    // Polynomial order of the IB stencil
+    unsigned int order;
+    // The length ratio used for the stencil calculation of the IB condition.
+    double length_ratio;
+    // Boolean controlling whether extrapolation is used to impose the
+    // immersed boundary condition. If false, the IB condition is directly
+    // imposed using nearest neighbors. the immersed boundary condition or not.
+    // If it is set to false, all cut cells are fully imposed on the IB.
+    bool enable_extrapolation;
+
+    // Boolean for the calculation of the force at the IB
+    bool calculate_force_ib;
+    // Boolean for extra vtu field output
+    bool enable_extra_sharp_interface_vtu_output_field;
+    // The name of the output file for the forces on the IB.
+    std::string ib_force_output_file;
+    // Particles pvd file name
     std::string ib_particles_pvd_file;
+    // Boolean for printing DEM information
+    bool print_dem;
+
+    // Number of initial refinements around each particle
+    unsigned int initial_refinement;
+    // Inner radius factor of the refinement zone
+    double inside_radius;
+    // Outer radius factor of the refinement zone
+    double outside_radius;
+    // Boolean for time-dependent mesh refinement according to the particle's
+    // current position the refinement zone.
+    bool time_extrapolation_of_refinement_zone;
+
+    // Number of DEM time steps per CFD time step.
+    unsigned int coupling_frequency;
+    // Relaxation parameter for the CFD-DEM coupling.
+    double alpha;
+    // Frequency at which the contact search is performed at the CFD time
+    // scale (once every X CFD time steps)
+    int contact_search_frequency;
+    // Particles' radius multiplier used to calculate the effective radius of
+    // contact search
+    double contact_search_radius_factor;
+    // Boolean for lubrication force
+    bool enable_lubrication_force;
+    // The maximal range for which the lubrication force is evaluated. This
+    // variable multiplies the smallest cell diameter to obtain the actual
+    // range.
+    double lubrication_range_max;
+    // The minimal range for which the lubrication force is evaluated. This
+    // variable multiplies the smallest cell diameter to obtain the actual
+    // range.
+    double lubrication_range_min;
+    // Tolerance for the particle dynamics nonlinear solver.
+    double particle_nonlinear_tolerance;
+    // Boolean for the explicit calculation of the contact impulse in the
+    // CFD-DEM coupling impulsion in the CFD-DEM coupling.
+    bool explicit_contact_impulsion_calculation;
+    // Boolean for explicit evaluation of the particle's position in the CFD-DEM
+    // coupling
+    bool explicit_position_integration_calculation;
+    // Boolean for approximation of the contact radius. If true, the effective
+    // radius replaces the actual particle's local curvature radius in the
+    // calculation.
+    bool approximate_radius_for_contact;
+    // Function defining the gravitational acceleration vector used by the
+    // CFD-DEM calculation.
+    std::shared_ptr<Functions::ParsedFunction<dim>> f_gravity;
+    // Young's modulus of the wall
+    double wall_youngs_modulus;
+    // Poisson ratio of the wall
+    double wall_poisson_ratio;
+    // Rolling friction coefficient of the wall
+    double wall_rolling_friction_coefficient;
+    // Sliding friction coefficient of the wall
+    double wall_friction_coefficient;
+    // Coefficient of restitution of the wall
+    double wall_restitution_coefficient;
+
+    // Boolean for loading particles from an independent file. If true, the
+    // definition of the particles in the Particle subsection in the .prm file
+    // is ignored. of the particle subsection.
+    bool load_particles_from_file;
+    // Name of the independent file containing particles' information at
+    // insertion. Only used if load_particles_from_file is true.
+    std::string particles_file;
   };
 
   /**
@@ -1447,14 +1589,32 @@ namespace Parameters
    * the default value is returned. If the entry is not equivalent to a vector,
    * an error will be thrown.
    *
+   * @tparam T The type of vector (int, unsigned int or double)
    * @param prm A parameter handler which is currently used to parse the simulation
    * information.
    * @param entry_string A declare string in the parameter file.
    *
    * @return A std::vector<double> corresponding to the entry_string in the prm file.
    */
-  std::vector<double>
+  template <typename T>
+  std::vector<T>
   convert_string_to_vector(ParameterHandler  &prm,
-                           const std::string &entry_string);
+                           const std::string &entry_string)
+  {
+    std::string              full_str = prm.get(entry_string);
+    std::vector<std::string> vector_of_string(
+      Utilities::split_string_list(full_str));
+    if constexpr (std::is_same<T, int>::value)
+      {
+        std::vector<T> vector = Utilities::string_to_int(vector_of_string);
+        return vector;
+      }
+    if constexpr (std::is_same<T, double>::value)
+      {
+        std::vector<T> vector = Utilities::string_to_double(vector_of_string);
+        return vector;
+      }
+  }
+
 } // namespace Parameters
 #endif

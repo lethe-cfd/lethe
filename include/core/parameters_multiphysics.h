@@ -27,6 +27,7 @@
 #define lethe_parameters_multiphysics_h
 
 #include <core/parameters.h>
+#include <core/utilities.h>
 
 #include <deal.II/base/parameter_handler.h>
 
@@ -54,33 +55,32 @@ namespace Parameters
   enum class FilterType
   {
     none,
+    clip,
     tanh
   };
 
-  enum class EpsilonSetStrategy
+  enum class EpsilonSetMethod
   {
     automatic,
     manual
   };
 
+
   /**
-   * @brief Defines the sub-parameters for free surface mass conservation.
-   * Has to be declared before member creation in VOF structure.
+   * @brief CahnHilliard_PhaseFilter - Defines the parameters for the phase filtration of CahnHilliard physics
    */
-  struct VOF_MassConservation
+  struct CahnHilliard_PhaseFilter
   {
-    bool monitoring;
+    // Type of filter
+    Parameters::FilterType type;
 
-    // Conservation tolerance on the fluid monitored,
-    // used with adaptive Sharpening
-    double tolerance;
+    // \f$beta\f$ value for the tanh filter
+    double beta;
 
-    Parameters::FluidIndicator monitored_fluid;
-
-    // Type of verbosity for the mass conservation algorithm
+    // Type of verbosity for the phase filter
     Parameters::Verbosity verbosity;
 
-    static void
+    void
     declare_parameters(ParameterHandler &prm);
     void
     parse_parameters(ParameterHandler &prm);
@@ -113,6 +113,14 @@ namespace Parameters
 
     // Type of verbosity for the interface sharpening calculation
     Parameters::Verbosity verbosity;
+
+    bool monitoring;
+
+    /// Conservation tolerance on the fluid monitored,
+    /// used with adaptive sharpening
+    double tolerance;
+
+    Parameters::FluidIndicator monitored_fluid;
 
     void
     declare_parameters(ParameterHandler &prm);
@@ -173,7 +181,6 @@ namespace Parameters
    */
   struct VOF
   {
-    Parameters::VOF_MassConservation    conservation;
     Parameters::VOF_InterfaceSharpening sharpening;
     Parameters::VOF_SurfaceTensionForce surface_tension_force;
     Parameters::VOF_PhaseFilter         phase_filter;
@@ -196,14 +203,18 @@ namespace Parameters
 
   struct CahnHilliard
   {
-    // Well height value (W) in the Cahn-Hilliard equations
-    double well_height;
+    // Smoothing parameter \f$\xi\f$ in the Cahn-Hilliard equations (potential
+    // equation)
+    double potential_smoothing_coefficient;
 
     // Epsilon set strategy (automatic|manual)
-    Parameters::EpsilonSetStrategy epsilon_set_method;
+    Parameters::EpsilonSetMethod epsilon_set_method;
 
     // Epsilon value in the Cahn-Hilliard equations
     double epsilon;
+
+    // Phase filtration parameters
+    Parameters::CahnHilliard_PhaseFilter cahn_hilliard_phase_filter;
 
     void
     declare_parameters(ParameterHandler &prm);

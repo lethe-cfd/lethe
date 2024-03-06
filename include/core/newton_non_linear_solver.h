@@ -24,19 +24,21 @@
 
 /**
  * @brief Non-linear solver for non-linear systems of equations which uses a Newton
- * method with \alpha relaxation to ensure that the residual is monotonically
- * decreasing.
+ * method with \f$\alpha\f$ relaxation to ensure that the residual is
+ * monotonically decreasing.
  */
 template <typename VectorType>
 class NewtonNonLinearSolver : public NonLinearSolver<VectorType>
 {
 public:
   /**
-   * @brief Constructor for the NewtonNonLinearSolver.
+   * @brief Constructor.
    *
-   * @param physics_solver A pointer to the physics solver to which the non-linear solver is attached
+   * @param[in] physics_solver A pointer to the physics solver to which the
+   * non-linear solver is attached.
    *
-   * @param param Non-linear solver parameters
+   * @param[in] param Non-linear solver parameters as specified in the
+   * simulation parameter file.
    *
    */
   NewtonNonLinearSolver(PhysicsSolver<VectorType>         *physics_solver,
@@ -44,10 +46,11 @@ public:
 
 
   /**
-   * @brief Solve the non-linear system of equation.
+   * @brief Solve the non-linear system of equations.
    *
-   * @param is_initial_step Boolean variable that controls which constraints are
-   * going to be applied to the equations
+   * @param[in] is_initial_step Boolean variable that controls which constraints
+   * are going to be applied to the equations depending on the time step.
+   *
    */
   void
   solve(const bool is_initial_step) override;
@@ -64,14 +67,14 @@ template <typename VectorType>
 void
 NewtonNonLinearSolver<VectorType>::solve(const bool is_initial_step)
 {
-  double       global_res;
-  double       current_res;
-  double       last_res;
-  bool         first_step      = is_initial_step;
-  unsigned int outer_iteration = 0;
-  last_res                     = 1e6;
-  current_res                  = 1e6;
-  global_res                   = 1e6;
+  double global_res;
+  double current_res;
+  double last_res;
+  bool   first_step     = is_initial_step;
+  this->outer_iteration = 0;
+  last_res              = 1e6;
+  current_res           = 1e6;
+  global_res            = 1e6;
 
   // current_res and global_res are different as one is defined based on the l2
   // norm of the residual vector (current_res) and the other (global_res) is
@@ -87,15 +90,15 @@ NewtonNonLinearSolver<VectorType>::solve(const bool is_initial_step)
   auto &present_solution = solver->get_present_solution();
 
   while ((global_res > this->params.tolerance) &&
-         outer_iteration < this->params.max_iterations)
+         this->outer_iteration < this->params.max_iterations)
     {
       evaluation_point = present_solution;
 
       solver->assemble_system_matrix();
-      if (this->params.force_rhs_calculation || outer_iteration == 0)
+      if (this->params.force_rhs_calculation || this->outer_iteration == 0)
         solver->assemble_system_rhs();
 
-      if (outer_iteration == 0)
+      if (this->outer_iteration == 0)
         {
           auto &system_rhs = solver->get_system_rhs();
           current_res      = system_rhs.l2_norm();
@@ -104,7 +107,7 @@ NewtonNonLinearSolver<VectorType>::solve(const bool is_initial_step)
 
       if (this->params.verbosity != Parameters::Verbosity::quiet)
         {
-          solver->pcout << "Newton iteration: " << outer_iteration
+          solver->pcout << "Newton iteration: " << this->outer_iteration
                         << "  - Residual:  " << current_res << std::endl;
         }
 
@@ -171,13 +174,13 @@ NewtonNonLinearSolver<VectorType>::solve(const bool is_initial_step)
       global_res       = solver->get_current_residual();
       present_solution = evaluation_point;
       last_res         = current_res;
-      ++outer_iteration;
+      ++this->outer_iteration;
     }
 
   // If the non-linear solver has not converged abort simulation if
   // abort_at_convergence_failure=true
   if ((global_res > this->params.tolerance) &&
-      outer_iteration >= this->params.max_iterations &&
+      this->outer_iteration >= this->params.max_iterations &&
       this->params.abort_at_convergence_failure)
     {
       throw(std::runtime_error(

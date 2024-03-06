@@ -72,9 +72,19 @@ MFNavierStokesSolver<dim>::MFNavierStokesSolver(
         system_operator =
           std::make_shared<NavierStokesSUPGPSPGOperator<dim, double>>();
     }
+  else if (nsparam.stabilization.stabilization ==
+           Parameters::Stabilization::NavierStokesStabilization::gls)
+    {
+      if (is_bdf(this->simulation_control->get_assembly_method()))
+        system_operator =
+          std::make_shared<NavierStokesTransientGLSOperator<dim, double>>();
+      else
+        system_operator =
+          std::make_shared<NavierStokesGLSOperator<dim, double>>();
+    }
   else
     throw std::runtime_error(
-      "Only SUPG/PSPG stabilization is supported at the moment.");
+      "Only SUPG/PSPG and GLS stabilization is supported at the moment.");
 }
 
 template <int dim>
@@ -444,10 +454,11 @@ MFNavierStokesSolver<dim>::calculate_time_derivative_previous_solutions()
 {
   this->time_derivative_previous_solutions = 0;
 
-  const auto          method = this->simulation_control->get_assembly_method();
-  std::vector<double> time_steps_vector =
-    this->simulation_control->get_time_steps_vector();
-  Vector<double> bdf_coefs = bdf_coefficients(method, time_steps_vector);
+  // Time stepping information
+  const auto method = this->simulation_control->get_assembly_method();
+  // Vector for the BDF coefficients
+  const Vector<double> &bdf_coefs =
+    this->simulation_control->get_bdf_coefficients();
 
   for (unsigned int p = 0; p < number_of_previous_solutions(method); ++p)
     {

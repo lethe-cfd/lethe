@@ -19,53 +19,51 @@
 
 #include <core/interface_property_model.h>
 
-enum MobilityModel
-{
-  constant,
-  quartic
-};
-
 /**
- * @brief Abstract class that allows to calculate the
- * mobility for the Cahn-Hilliard-Navier-Stokes equations.
+ * @brief Implementation of the computation of the mobility
+ * for Cahn-Hilliard equations.
  */
 class MobilityCahnHilliardModel : public InterfacePropertyModel
 {
 public:
   /**
-   * @brief Instantiates and returns a pointer to a MobilityCahnHilliardModel object by casting it to
-   * the proper child class
+   * @brief Instantiate and return a pointer to a MobilityCahnHilliardModel
+   * object by casting it to the proper child class.
    *
-   * @param material_interaction_parameters Parameters for the mobility calculation
+   * @param[in] material_interaction_parameters Parameters for the mobility
+   * calculation.
    */
   static std::shared_ptr<MobilityCahnHilliardModel>
   model_cast(
     const Parameters::MaterialInteractions &material_interaction_parameters);
 
   /**
-   * @brief Pure virtual method to get the model used for the mobility, must be overriden
-   * @return returns a MobilityModel object
-   */
-  virtual MobilityModel
-  get_model() = 0;
-
-
-  /**
-   * @brief Pure virtual method to access the mobility constant
-   * @return value of the mobility constant
+   * @brief Pure virtual method to access the mobility constant.
+   * @return Value of the mobility constant.
    */
   virtual double
   get_mobility_constant() = 0;
+
+  /**
+   * @brief Definition of a virtual destructor for the class.
+   */
+  virtual ~MobilityCahnHilliardModel() = default;
 };
 
 /**
- * @brief Constant mobility_cahn_hilliard_constant.
+ * @brief Constant mobility model.
+ *
+ * The mobility function is the following : \f$M(\phi) = D \f$ where D is the
+ * mobility constant.
  */
 class MobilityCahnHilliardModelConstant : public MobilityCahnHilliardModel
 {
 public:
   /**
    * @brief Default constructor
+   *
+   * @param[in] p_mobility_cahn_hilliard_constant the user defined mobility
+   * constant.
    */
   MobilityCahnHilliardModelConstant(
     const double p_mobility_cahn_hilliard_constant)
@@ -73,18 +71,15 @@ public:
   {}
 
   /**
-   * @brief Method to get the model used for the mobility
-   * @return returns a MobilityModel object
+   * @brief Destructor of derived class.
    */
-  MobilityModel
-  get_model() override
-  {
-    return model;
-  }
+  ~MobilityCahnHilliardModelConstant() = default;
 
   /**
-   * @brief Method to access the mobility constant, though it returns the same value as the value function, it is implemented here for generality.
-   * @return value of the mobility constant
+   * @brief Return the mobility constant, though it returns the same
+   * value as the value method, it is implemented here for generality.
+   *
+   * @return Value of the mobility constant.
    */
   double
   get_mobility_constant() override
@@ -93,9 +88,10 @@ public:
   }
 
   /**
-   * @brief value Computes mobility_cahn_hilliard.
-   * @param fields_value Value of the various field on which the property may depend.
-   * @return value of the physical property calculated with the fields_value
+   * @brief Compute the mobility.
+   * @param[in] fields_value Value of the various field on which the mobility
+   * may depend.
+   * @return Value of the mobility.
    */
   double
   value(const std::map<field, double> & /*fields_value*/) override
@@ -104,9 +100,10 @@ public:
   }
 
   /**
-   * @brief vector_value Calculates the vector of mobility_cahn_hilliard.
-   * @param field_vectors Vectors of the fields on which the mobility_cahn_hilliard may depend.
-   * @param property_vector Vectors of the mobility_cahn_hilliard values
+   * @brief Calculate the vector of mobility_cahn_hilliard.
+   * @param[in] field_vectors Vectors of the fields on which the mobility
+   * may depend.
+   * @param[out] property_vector Vectors of the mobility values
    */
   void
   vector_value(const std::map<field, std::vector<double>> & /*field_vectors*/,
@@ -118,13 +115,15 @@ public:
   }
 
   /**
-   * @brief jacobian Calculates the jacobian (the partial derivative) of the density with respect to a field
-   * @param field_values Value of the various fields on which the property may depend.
-   * @param id Indicator of the field with respect to which the jacobian
+   * @brief Calculate the jacobian (the partial derivative) of the
+   * mobility with respect to a field.
+   * @param[in] field_values Value of the various fields on which the mobility
+   * may depend.
+   * @param[in] id Indicator of the field with respect to which the jacobian
    * should be calculated.
-   * @return value of the partial derivative of the density with respect to the field.
+   * @return Value of the partial derivative of the mobility with respect to
+   * the field.
    */
-
   double
   jacobian(const std::map<field, double> & /*field_values*/,
            field /*id*/) override
@@ -133,12 +132,14 @@ public:
   }
 
   /**
-   * @brief vector_jacobian Calculates the derivative of the density with respect to a field.
-   * @param field_vectors Vector for the values of the fields used to evaluate the property.
-   * @param id Identifier of the field with respect to which a derivative should be calculated.
-   * @param jacobian vector of the value of the derivative of the density with respect to the field id.
+   * @brief Calculate the derivative of the mobility with respect to a field.
+   * @param[in] field_vectors Vector for the values of the fields used to
+   * evaluate the mobility.
+   * @param[in] id Identifier of the field with respect to which a derivative
+   * should be calculated.
+   * @param[out] jacobian_vector Vector of the value of the derivative of the
+   * mobility with respect to the field id.
    */
-
   void
   vector_jacobian(
     const std::map<field, std::vector<double>> & /*field_vectors*/,
@@ -149,40 +150,39 @@ public:
   }
 
 private:
-  const double        mobility_cahn_hilliard_constant;
-  const MobilityModel model = constant;
+  const double mobility_cahn_hilliard_constant;
 };
 
 /**
- * @brief Quartic mobility_cahn_hilliard.
+ * @brief Quartic mobility model.
+ *
+ * The mobility function is the following : \f$M(\phi) = D(1-\phi^2)^2 \f$
+ * where D is the mobility constant.
  */
 class MobilityCahnHilliardModelQuartic : public MobilityCahnHilliardModel
 {
 public:
   /**
-   * @brief Default constructor
+   * @brief Default constructor.
+   *
+   * @param[in] p_mobility_cahn_hilliard_constant the user defined mobility
+   * constant.
    */
   MobilityCahnHilliardModelQuartic(
     const double p_mobility_cahn_hilliard_constant)
     : mobility_cahn_hilliard_constant(p_mobility_cahn_hilliard_constant)
-    , model(MobilityModel::quartic)
   {
     this->model_depends_on[field::phase_order_cahn_hilliard] = true;
   }
 
   /**
-   * @brief Method to get the model used for the mobility
-   * @return returns a MobilityModel object
+   * @brief Destructor of derived class.
    */
-  MobilityModel
-  get_model() override
-  {
-    return model;
-  }
+  ~MobilityCahnHilliardModelQuartic() = default;
 
   /**
-   * @brief Method to access the mobility constant, though it returns the same value as the value function, it is implemented here for generality
-   * @return value of the mobility constant
+   * @brief Return the mobility constant.
+   * @return Value of the mobility constant.
    */
   double
   get_mobility_constant() override
@@ -191,24 +191,31 @@ public:
   }
 
   /**
-   * @brief value Calculates the mobility_cahn_hilliard.
-   * @param fields_value Value of the various field on which the property may depend.
-   * @return value of the physical property calculated with the fields_value.
+   * @brief Calculate the mobility.
+   * @param[in] fields_value Value of the various fields on which the mobility
+   * may depend.
+   * @return Value of the mobility calculated with the fields_value.
    */
   double
   value(const std::map<field, double> &fields_value) override
   {
     const double &phase_order_cahn_hilliard =
       fields_value.at(field::phase_order_cahn_hilliard);
+
+    // The phase order values are clamped to avoid unphysical mobilities in the
+    // bulk phases.
     return mobility_cahn_hilliard_constant *
-           (1 - phase_order_cahn_hilliard * phase_order_cahn_hilliard) *
-           (1 - phase_order_cahn_hilliard * phase_order_cahn_hilliard);
+           std::pow((1 - std::min(1.0,
+                                  phase_order_cahn_hilliard *
+                                    phase_order_cahn_hilliard)),
+                    2);
   }
 
   /**
-   * @brief vector_value Calculates the vector of mobility_cahn_hilliard_constant.
-   * @param field_vectors Vectors of the fields on which the mobility_cahn_hilliard_constant may depend.
-   * @param property_vector Vectors of the mobility_cahn_hilliard_constant values
+   * @brief Calculate the vector of mobility.
+   * @param[in] field_vectors Vectors of the fields on which the mobility
+   * may depend.
+   * @param[out] property_vector Vector of the mobility values.
    */
   void
   vector_value(const std::map<field, std::vector<double>> &field_vectors,
@@ -217,18 +224,25 @@ public:
     const std::vector<double> &phase_order_cahn_hilliard =
       field_vectors.at(field::phase_order_cahn_hilliard);
     for (unsigned int i = 0; i < property_vector.size(); ++i)
-      property_vector[i] =
-        mobility_cahn_hilliard_constant *
-        (1 - phase_order_cahn_hilliard[i] * phase_order_cahn_hilliard[i]) *
-        (1 - phase_order_cahn_hilliard[i] * phase_order_cahn_hilliard[i]);
+      {
+        property_vector[i] =
+          mobility_cahn_hilliard_constant *
+          std::pow((1 - std::min(1.0,
+                                 phase_order_cahn_hilliard[i] *
+                                   phase_order_cahn_hilliard[i])),
+                   2);
+      }
   }
 
   /**
-   * @brief jacobian Calculates the jacobian (the partial derivative) of the density with respect to a field
-   * @param field_values Value of the various fields on which the property may depend.
-   * @param id Indicator of the field with respect to which the jacobian
+   * @brief Calculate the jacobian (the partial derivative) of the
+   * mobility with respect to a field.
+   * @param[in] field_values Value of the various fields on which the mobility
+   * may depend.
+   * @param[in] id Indicator of the field with respect to which the Jacobian
    * should be calculated.
-   * @return value of the partial derivative of the density with respect to the field.
+   * @return Value of the partial derivative of the mobility with respect to
+   * the field.
    */
 
   double
@@ -236,15 +250,24 @@ public:
   {
     const double &phase_order_cahn_hilliard =
       fields_value.at(field::phase_order_cahn_hilliard);
-    return -4 * phase_order_cahn_hilliard * mobility_cahn_hilliard_constant *
-           (1 - phase_order_cahn_hilliard * phase_order_cahn_hilliard);
+
+    return -4 *
+           (std::max(-1.0, std::min(phase_order_cahn_hilliard, 0.0)) +
+            std::min(1.0, std::max(phase_order_cahn_hilliard, 0.0))) *
+           mobility_cahn_hilliard_constant *
+           (1 -
+            std::min(1.0,
+                     phase_order_cahn_hilliard * phase_order_cahn_hilliard));
   }
 
   /**
-   * @brief vector_jacobian Calculates the derivative of the density with respect to a field.
-   * @param field_vectors Vector for the values of the fields used to evaluate the property.
-   * @param id Identifier of the field with respect to which a derivative should be calculated.
-   * @param jacobian vector of the value of the derivative of the density with respect to the field id.
+   * @brief Calculate the derivative of the mobility with respect to a field.
+   * @param[in] field_vectors Vector for the values of the fields used to
+   * evaluate the mobility.
+   * @param[in] id Identifier of the field with respect to which a derivative
+   * should be calculated.
+   * @param[out] jacobian_vector Vector of the values of the derivatives of the
+   * mobility with respect to the field id.
    */
 
   void
@@ -256,13 +279,17 @@ public:
       field_vectors.at(field::phase_order_cahn_hilliard);
     for (unsigned int i = 0; i < jacobian_vector.size(); ++i)
       jacobian_vector[i] =
-        -mobility_cahn_hilliard_constant * 4 * phase_order_cahn_hilliard[i] *
-        (1 - phase_order_cahn_hilliard[i] * phase_order_cahn_hilliard[i]);
+        -4 *
+        (std::max(-1.0, std::min(phase_order_cahn_hilliard[i], 0.0)) +
+         std::min(1.0, std::max(phase_order_cahn_hilliard[i], 0.0))) *
+        mobility_cahn_hilliard_constant *
+        (1 -
+         std::min(1.0,
+                  phase_order_cahn_hilliard[i] * phase_order_cahn_hilliard[i]));
   }
 
 private:
-  const double        mobility_cahn_hilliard_constant;
-  const MobilityModel model = quartic;
+  const double mobility_cahn_hilliard_constant;
 };
 
 #endif

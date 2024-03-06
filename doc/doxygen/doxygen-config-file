@@ -15,16 +15,16 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "Developer documentation for the Lethe open-source library"
+PROJECT_NAME           = "Lethe Open-Source Library"
 PROJECT_NUMBER         =
-PROJECT_BRIEF          = 
+PROJECT_BRIEF          = "Developer Guide"
 PROJECT_LOGO           = ./logo.png
 OUTPUT_DIRECTORY       =
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
 OUTPUT_TEXT_DIRECTION  = None
-BRIEF_MEMBER_DESC      = YES
+BRIEF_MEMBER_DESC      = NO
 REPEAT_BRIEF           = YES
 ABBREVIATE_BRIEF       = "The $name class" \
                          "The $name widget" \

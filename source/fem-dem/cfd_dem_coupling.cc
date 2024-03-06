@@ -207,10 +207,11 @@ template <int dim>
 void
 CFDDEMSolver<dim>::write_checkpoint()
 {
-  TimerOutput::Scope timer(this->computing_timer, "Write_Checkpoint");
-  this->pcout << "Writing restart file" << std::endl;
+  TimerOutput::Scope timer(this->computing_timer, "write_checkpoint");
 
-  std::string prefix = this->simulation_parameters.restart_parameters.filename;
+  std::string prefix =
+    this->simulation_parameters.simulation_control.output_folder +
+    this->simulation_parameters.restart_parameters.filename;
   std::string prefix_particles = prefix + "_particles";
   std::string prefix_grid      = prefix + "_postprocess_data";
   if (Utilities::MPI::this_mpi_process(this->mpi_communicator) == 0)
@@ -220,9 +221,7 @@ CFDDEMSolver<dim>::write_checkpoint()
       particles_pvdhandler.save(prefix_particles);
 
       if (this->dem_parameters.post_processing.Lagrangian_post_processing)
-        {
-          grid_pvdhandler.save(prefix_grid);
-        }
+        grid_pvdhandler.save(prefix_grid);
 
       if (this->simulation_parameters.flow_control.enable_flow_control)
         this->flow_control.save(prefix);
@@ -271,6 +270,8 @@ CFDDEMSolver<dim>::write_checkpoint()
       vf_set_transfer.push_back(&this->previous_void_fraction[i]);
     }
 
+  this->multiphysics->write_checkpoint();
+
   // Prepare for Serialization
   parallel::distributed::SolutionTransfer<dim, GlobalVectorType>
     vf_system_trans_vectors(this->void_fraction_dof_handler);
@@ -283,8 +284,6 @@ CFDDEMSolver<dim>::write_checkpoint()
       std::string triangulationName = prefix + ".triangulation";
       parallel_triangulation->save(prefix + ".triangulation");
     }
-
-  this->multiphysics->write_checkpoint();
 }
 
 template <int dim>
@@ -292,7 +291,9 @@ void
 CFDDEMSolver<dim>::read_checkpoint()
 {
   TimerOutput::Scope timer(this->computing_timer, "read_checkpoint");
-  std::string prefix = this->simulation_parameters.restart_parameters.filename;
+  std::string        prefix =
+    this->simulation_parameters.simulation_control.output_folder +
+    this->simulation_parameters.restart_parameters.filename;
   std::string prefix_particles = prefix + "_particles";
   std::string prefix_grid      = prefix + "_postprocess_data";
 
@@ -916,11 +917,10 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
         }
     }
 
-  /*// If simulation has periodic boundaries, the particles are sorted into
+  // If simulation has periodic boundaries, the particles are sorted into
   // subdomains and cells at the last DEM coupled time step otherwise the
   // particles will not match the cells that they are in when void fraction is
-  // calculated with the qcm method. The flag is kept so the next DEM time step
-  // has a contact build step
+  // calculated with the qcm method
   if (counter == (coupling_frequency - 1))
     {
       if (has_periodic_boundaries &&
@@ -932,17 +932,17 @@ CFDDEMSolver<dim>::dem_iterator(unsigned int counter)
               this->particle_handler, periodic_boundaries_cells_information);
 
           // Exchange information between processors
-          particle_displaced_in_pbc =
+          particle_has_been_moved =
             Utilities::MPI::logical_or(particle_has_been_moved,
                                        this->mpi_communicator);
 
-          if (particle_displaced_in_pbc)
+          if (particle_has_been_moved)
             {
               this->particle_handler.sort_particles_into_subdomains_and_cells();
               this->particle_handler.exchange_ghost_particles(true);
             }
         }
-    }*/
+    }
 }
 
 template <int dim>
@@ -1332,9 +1332,6 @@ CFDDEMSolver<dim>::print_particles_summary()
       global_particles.insert({current_id, particle});
     }
 
-
-  // Write particle Velocity
-
   for (unsigned int i = 0; i <= id_max; i++)
     {
       for (auto &iterator : global_particles)
@@ -1592,7 +1589,8 @@ CFDDEMSolver<dim>::solve()
 
   // Calculate first instance of void fraction once particles are set-up
   this->vertices_cell_mapping();
-  this->initialize_void_fraction();
+  if (!checkpoint_step)
+    this->initialize_void_fraction();
 
   while (this->simulation_control->integrate())
     {

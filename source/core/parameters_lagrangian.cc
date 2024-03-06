@@ -79,9 +79,9 @@ namespace Parameters
       particle_size_std.at(particle_type) =
         prm.get_double("standard deviation");
       particle_custom_diameter.at(particle_type) =
-        convert_string_to_vector(prm, "custom diameters");
+        convert_string_to_vector<double>(prm, "custom diameters");
       particle_custom_probability.at(particle_type) =
-        convert_string_to_vector(prm, "custom volume fractions");
+        convert_string_to_vector<double>(prm, "custom volume fractions");
       seed_for_distributions.push_back(
         prm.get_integer("random seed distribution"));
 
@@ -383,7 +383,7 @@ namespace Parameters
                           Patterns::List(Patterns::Double()),
                           "List of initial omega z");
         prm.declare_entry("list diameters",
-                          "1.0",
+                          "-1.0",
                           Patterns::List(Patterns::Double()),
                           "List of diameters");
         prm.declare_entry("velocity x",
