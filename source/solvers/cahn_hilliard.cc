@@ -416,6 +416,8 @@ CahnHilliard<dim>::calculate_phase_statistics()
   double integral(0.);
   double max_phase_value(std::numeric_limits<double>::min());
   double min_phase_value(std::numeric_limits<double>::max());
+  double volume_0(0.);
+  double volume_1(0.);
 
   for (const auto &cell : dof_handler.active_cell_iterators())
     {
@@ -432,6 +434,8 @@ CahnHilliard<dim>::calculate_phase_statistics()
                 std::max(local_phase_order_values[q], max_phase_value);
               min_phase_value =
                 std::min(local_phase_order_values[q], min_phase_value);
+              volume_0 += (1 + local_phase_order_values[q])*0.5*fe_values.JxW(q);
+              volume_1 += (1 - local_phase_order_values[q])*0.5*fe_values.JxW(q);
             }
         }
     }
@@ -440,6 +444,8 @@ CahnHilliard<dim>::calculate_phase_statistics()
   max_phase_value = Utilities::MPI::max(max_phase_value, mpi_communicator);
 
   integral             = Utilities::MPI::sum(integral, mpi_communicator);
+  volume_0             = Utilities::MPI::sum(volume_0,mpi_communicator);
+  volume_1             = Utilities::MPI::sum(volume_1,mpi_communicator);
   double global_volume = GridTools::volume(*triangulation, *mapping);
   double phase_average = integral / global_volume;
 
@@ -453,6 +459,8 @@ CahnHilliard<dim>::calculate_phase_statistics()
       this->pcout << "Max: " << max_phase_value << std::endl;
       this->pcout << "Average: " << phase_average << std::endl;
       this->pcout << "Integral: " << integral << std::endl;
+      this->pcout << "Volume phase 0: " << volume_0 << std::endl;
+      this->pcout << "Volume phase 1: " << volume_1 << std::endl;
     }
 
   statistics_table.add_value("time", simulation_control->get_current_time());
@@ -460,6 +468,11 @@ CahnHilliard<dim>::calculate_phase_statistics()
   statistics_table.add_value("max", max_phase_value);
   statistics_table.add_value("average", phase_average);
   statistics_table.add_value("integral", integral);
+  statistics_table.set_scientific("integral",true);
+  statistics_table.add_value("volume_0", volume_0);
+  statistics_table.set_scientific("volume_0",true);
+  statistics_table.add_value("volume_1", volume_1);
+  statistics_table.set_scientific("volume_1",true);
 }
 
 template <int dim>
