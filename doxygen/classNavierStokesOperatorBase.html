@@ -89,12 +89,9 @@ Inheritance diagram for NavierStokesOperatorBase&lt; dim, number &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNavierStokesOperatorBase__inherit__graph.png" border="0" usemap="#aNavierStokesOperatorBase_3_01dim_00_01number_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNavierStokesOperatorBase_3_01dim_00_01number_01_4_inherit__map" id="aNavierStokesOperatorBase_3_01dim_00_01number_01_4_inherit__map">
-<area shape="rect" title="A class that serves as base for all the matrix&#45;free Navier&#45;Stokes operators." alt="" coords="148,104,345,145"/>
-<area shape="rect" href="classNavierStokesGLSOperator.html" title="Class in charge of implementing the main function required to solve the Navier&#45;Stokes equations using..." alt="" coords="445,5,636,47"/>
-<area shape="rect" href="classNavierStokesSUPGPSPGOperator.html" title="Implements the matrix&#45;free operator to solve the Navier&#45;Stokes equations using SUPG/PSPG stabilizatio..." alt="" coords="423,71,658,112"/>
-<area shape="rect" href="classNavierStokesTransientGLSOperator.html" title="Implements the matrix&#45;free operator to solve transient Navier&#45;Stokes equations using GLS stabilizatio..." alt="" coords="416,136,665,177"/>
-<area shape="rect" href="classNavierStokesTransientSUPGPSPGOperator.html" title="Implements the matrix&#45;free operator to solve transient Navier&#45;Stokes equations using SUPG/PSPG stabil..." alt="" coords="393,201,688,243"/>
-<area shape="rect" title=" " alt="" coords="5,111,100,138"/>
+<area shape="rect" title="A class that serves as base for all the matrix&#45;free Navier&#45;Stokes operators." alt="" coords="21,80,219,121"/>
+<area shape="rect" href="classNavierStokesStabilizedOperator.html" title="Implements the matrix&#45;free operator to solve steady/transient Navier&#45;Stokes equations using stabiliza..." alt="" coords="5,169,235,211"/>
+<area shape="rect" title=" " alt="" coords="73,5,167,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -108,15 +105,17 @@ Public Types</h2></td></tr>
 <tr class="separator:a1f5d82523546bcc2e987181745dd7b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0d0fe7fb5be752191599bb308f52df0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#aa0d0fe7fb5be752191599bb308f52df0">size_type</a> = VectorizedArray&lt; number &gt;</td></tr>
 <tr class="separator:aa0d0fe7fb5be752191599bb308f52df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d7db964d971e7232fb70d6fbf0c8b9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a94d7db964d971e7232fb70d6fbf0c8b9">StabilizationType</a> = <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">Parameters::Stabilization::NavierStokesStabilization</a></td></tr>
+<tr class="separator:a94d7db964d971e7232fb70d6fbf0c8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7568c9fc9b3fec66af8d8093ad77222"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#ac7568c9fc9b3fec66af8d8093ad77222">NavierStokesOperatorBase</a> ()</td></tr>
 <tr class="separator:ac7568c9fc9b3fec66af8d8093ad77222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d0b3bddcb49238c1953a6f0b63e67bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a1d0b3bddcb49238c1953a6f0b63e67bb">NavierStokesOperatorBase</a> (const Mapping&lt; dim &gt; &amp;mapping, const DoFHandler&lt; dim &gt; &amp;dof_handler, const AffineConstraints&lt; number &gt; &amp;<a class="el" href="classNavierStokesOperatorBase.html#a4e23aa3b87f060442c860397c6bfad00">constraints</a>, const Quadrature&lt; dim &gt; &amp;quadrature, const Function&lt; dim &gt; *<a class="el" href="classNavierStokesOperatorBase.html#ad2191b8b07616d001aa47ce2cc347fef">forcing_function</a>, const double <a class="el" href="classNavierStokesOperatorBase.html#aaa39b709f4adbfc517d5d57337d8fc48">kinematic_viscosity</a>, const unsigned int mg_level, std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classNavierStokesOperatorBase.html#abb73a9c670b5a5bd743d29d77b5e8b48">simulation_control</a>)</td></tr>
-<tr class="separator:a1d0b3bddcb49238c1953a6f0b63e67bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a42be5b78ecee77e813da05d13e6a49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a2a42be5b78ecee77e813da05d13e6a49">reinit</a> (const Mapping&lt; dim &gt; &amp;mapping, const DoFHandler&lt; dim &gt; &amp;dof_handler, const AffineConstraints&lt; number &gt; &amp;<a class="el" href="classNavierStokesOperatorBase.html#a4e23aa3b87f060442c860397c6bfad00">constraints</a>, const Quadrature&lt; dim &gt; &amp;quadrature, const Function&lt; dim &gt; *<a class="el" href="classNavierStokesOperatorBase.html#ad2191b8b07616d001aa47ce2cc347fef">forcing_function</a>, const double <a class="el" href="classNavierStokesOperatorBase.html#aaa39b709f4adbfc517d5d57337d8fc48">kinematic_viscosity</a>, const unsigned int mg_level, std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classNavierStokesOperatorBase.html#abb73a9c670b5a5bd743d29d77b5e8b48">simulation_control</a>)</td></tr>
-<tr class="separator:a2a42be5b78ecee77e813da05d13e6a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e283ffdc89e0b085f03d8958ae2ccd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a23e283ffdc89e0b085f03d8958ae2ccd">NavierStokesOperatorBase</a> (const Mapping&lt; dim &gt; &amp;mapping, const DoFHandler&lt; dim &gt; &amp;dof_handler, const AffineConstraints&lt; number &gt; &amp;<a class="el" href="classNavierStokesOperatorBase.html#a4e23aa3b87f060442c860397c6bfad00">constraints</a>, const Quadrature&lt; dim &gt; &amp;quadrature, const Function&lt; dim &gt; *<a class="el" href="classNavierStokesOperatorBase.html#ad2191b8b07616d001aa47ce2cc347fef">forcing_function</a>, const double <a class="el" href="classNavierStokesOperatorBase.html#aaa39b709f4adbfc517d5d57337d8fc48">kinematic_viscosity</a>, const <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a> <a class="el" href="classNavierStokesOperatorBase.html#ab9efff8facaebd37096ecd6c38288ef7">stabilization</a>, const unsigned int mg_level, std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classNavierStokesOperatorBase.html#abb73a9c670b5a5bd743d29d77b5e8b48">simulation_control</a>)</td></tr>
+<tr class="separator:a23e283ffdc89e0b085f03d8958ae2ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae083a4141bf4f0f162990960aa66ea9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#ae083a4141bf4f0f162990960aa66ea9f">reinit</a> (const Mapping&lt; dim &gt; &amp;mapping, const DoFHandler&lt; dim &gt; &amp;dof_handler, const AffineConstraints&lt; number &gt; &amp;<a class="el" href="classNavierStokesOperatorBase.html#a4e23aa3b87f060442c860397c6bfad00">constraints</a>, const Quadrature&lt; dim &gt; &amp;quadrature, const Function&lt; dim &gt; *<a class="el" href="classNavierStokesOperatorBase.html#ad2191b8b07616d001aa47ce2cc347fef">forcing_function</a>, const double <a class="el" href="classNavierStokesOperatorBase.html#aaa39b709f4adbfc517d5d57337d8fc48">kinematic_viscosity</a>, const <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a> <a class="el" href="classNavierStokesOperatorBase.html#ab9efff8facaebd37096ecd6c38288ef7">stabilization</a>, const unsigned int mg_level, std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; <a class="el" href="classNavierStokesOperatorBase.html#abb73a9c670b5a5bd743d29d77b5e8b48">simulation_control</a>)</td></tr>
+<tr class="separator:ae083a4141bf4f0f162990960aa66ea9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63547240ab69673bbfc4cff24e1d3a80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a63547240ab69673bbfc4cff24e1d3a80">compute_element_size</a> ()</td></tr>
 <tr class="separator:a63547240ab69673bbfc4cff24e1d3a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f68d00a0e053fad9f4a7fd79690f759"><td class="memItemLeft" align="right" valign="top">types::global_dof_index&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a6f68d00a0e053fad9f4a7fd79690f759">m</a> () const</td></tr>
@@ -179,6 +178,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad2191b8b07616d001aa47ce2cc347fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa39b709f4adbfc517d5d57337d8fc48"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#aaa39b709f4adbfc517d5d57337d8fc48">kinematic_viscosity</a></td></tr>
 <tr class="separator:aaa39b709f4adbfc517d5d57337d8fc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9efff8facaebd37096ecd6c38288ef7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#ab9efff8facaebd37096ecd6c38288ef7">stabilization</a></td></tr>
+<tr class="separator:ab9efff8facaebd37096ecd6c38288ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb73a9c670b5a5bd743d29d77b5e8b48"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#abb73a9c670b5a5bd743d29d77b5e8b48">simulation_control</a></td></tr>
 <tr class="separator:abb73a9c670b5a5bd743d29d77b5e8b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e52b2816bb5034c26c893db2d1f6cac"><td class="memItemLeft" align="right" valign="top">Table&lt; 2, Tensor&lt; 1, dim+1, VectorizedArray&lt; number &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesOperatorBase.html#a2e52b2816bb5034c26c893db2d1f6cac">nonlinear_previous_values</a></td></tr>
@@ -220,7 +221,7 @@ class NavierStokesOperatorBase&lt; dim, number &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00045">45</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00046">46</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a9b317eea5e2ce56464fb7dd2ec7b403e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b317eea5e2ce56464fb7dd2ec7b403e">&#9670;&nbsp;</a></span>FECellIntegrator</h2>
@@ -236,7 +237,7 @@ template&lt;int dim, typename number &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00048">48</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00049">49</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -254,7 +255,25 @@ template&lt;int dim, typename number &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00051">51</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00052">52</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+
+</div>
+</div>
+<a id="a94d7db964d971e7232fb70d6fbf0c8b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94d7db964d971e7232fb70d6fbf0c8b9">&#9670;&nbsp;</a></span>StabilizationType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim, typename number &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classNavierStokesOperatorBase.html">NavierStokesOperatorBase</a>&lt; dim, number &gt;::<a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a> =  <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">Parameters::Stabilization::NavierStokesStabilization</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00053">53</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -272,7 +291,7 @@ template&lt;int dim, typename number &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00050">50</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00051">51</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +309,7 @@ template&lt;int dim, typename number &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00049">49</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00050">50</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -315,8 +334,8 @@ template&lt;int dim, typename number &gt; </div>
 
 </div>
 </div>
-<a id="a1d0b3bddcb49238c1953a6f0b63e67bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d0b3bddcb49238c1953a6f0b63e67bb">&#9670;&nbsp;</a></span>NavierStokesOperatorBase() <span class="overload">[2/2]</span></h2>
+<a id="a23e283ffdc89e0b085f03d8958ae2ccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23e283ffdc89e0b085f03d8958ae2ccd">&#9670;&nbsp;</a></span>NavierStokesOperatorBase() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -362,6 +381,12 @@ template&lt;int dim, typename number &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a>&#160;</td>
+          <td class="paramname"><em>stabilization</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
           <td class="paramname"><em>mg_level</em>, </td>
         </tr>
@@ -388,6 +413,7 @@ template&lt;int dim, typename number &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td>Required for local operations on cells. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">forcing_function</td><td>Function specified in parameter file as source term. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">kinematic_viscosity</td><td>Kinematic viscosity. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stabilization</td><td>Stabilization type specified in parameter file. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mg_level</td><td>Level of the operator in case of MG methods. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_control</td><td>Required to get the time stepping method. </td></tr>
   </table>
@@ -415,7 +441,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Clear the matrix-free object. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00255">255</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00269">269</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -435,7 +461,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Compute the element size h of the cells required to calculate stabilization parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00210">210</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00224">224</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -465,7 +491,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00501">501</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00515">515</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="classNavierStokesOperatorBase.html#a9f3bb8de4716c95844cbdf35272b30a6">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_local()</a>.</p>
 
@@ -505,7 +531,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classNavierStokesTransientGLSOperator.html#a37df4436bc7d43eea832ab5504f3607c">NavierStokesTransientGLSOperator&lt; dim, number &gt;</a>, <a class="el" href="classNavierStokesGLSOperator.html#a74e752dba27822b93c13a37edaea6afd">NavierStokesGLSOperator&lt; dim, number &gt;</a>, <a class="el" href="classNavierStokesTransientSUPGPSPGOperator.html#affc50b9dd8531bfc03b577ed02d1fc5b">NavierStokesTransientSUPGPSPGOperator&lt; dim, number &gt;</a>, and <a class="el" href="classNavierStokesSUPGPSPGOperator.html#a02f6146f9ff36f7685263ea659cc7c17">NavierStokesSUPGPSPGOperator&lt; dim, number &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNavierStokesStabilizedOperator.html#a650885b5c1e60bba9dfc1ac586834323">NavierStokesStabilizedOperator&lt; dim, number &gt;</a>.</p>
 
 </div>
 </div>
@@ -568,7 +594,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00520">520</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00534">534</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -610,7 +636,7 @@ template&lt;int dim, typename number &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00247">247</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00261">261</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -640,7 +666,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00442">442</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00456">456</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -681,7 +707,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00492">492</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00506">506</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="classNavierStokesOperatorBase.html#a1d289e3cf780010e8be1f75d4b027194">NavierStokesOperatorBase&lt; dim, number &gt;::local_evaluate_residual()</a>.</p>
 
@@ -713,7 +739,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00471">471</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00485">485</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -734,7 +760,7 @@ template&lt;int dim, typename number &gt; </div>
 <p>Get the element size object. </p>
 <dl class="section return"><dt>Returns</dt><dd>Aligned vector with the size of all elements. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00435">435</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00449">449</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -773,7 +799,7 @@ template&lt;int dim, typename number &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Set containing the indices of the refinement edges. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00542">542</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00556">556</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -794,7 +820,7 @@ template&lt;int dim, typename number &gt; </div>
 <p>Calculate matrix if needed, e.g., by coarse-grid solver when a multigrid algorithm is used. </p>
 <dl class="section return"><dt>Returns</dt><dd>Trilinos sparse matrix. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00367">367</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00381">381</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="classNavierStokesOperatorBase.html#a9f3bb8de4716c95844cbdf35272b30a6">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_local()</a>.</p>
 
@@ -817,7 +843,7 @@ template&lt;int dim, typename number &gt; </div>
 <p>Get the system matrix free object. </p>
 <dl class="section return"><dt>Returns</dt><dd>Matrix free object. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00428">428</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00442">442</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -838,7 +864,7 @@ template&lt;int dim, typename number &gt; </div>
 <p>Get the vector partitioner object required for local smoothing multigrid preconditioner. </p>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to vector partitioner. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00270">270</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00284">284</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -868,7 +894,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00262">262</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00276">276</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -931,7 +957,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classNavierStokesTransientGLSOperator.html#a2446d699c263faa6d1b82009a1d895b1">NavierStokesTransientGLSOperator&lt; dim, number &gt;</a>, <a class="el" href="classNavierStokesGLSOperator.html#aabb1f0d3d598a72e49904b14d37d538c">NavierStokesGLSOperator&lt; dim, number &gt;</a>, <a class="el" href="classNavierStokesTransientSUPGPSPGOperator.html#a6ee452e640e08545a8a679cdb99359f2">NavierStokesTransientSUPGPSPGOperator&lt; dim, number &gt;</a>, and <a class="el" href="classNavierStokesSUPGPSPGOperator.html#aba61a24e728ace1ee42cb81e4a265c7c">NavierStokesSUPGPSPGOperator&lt; dim, number &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classNavierStokesStabilizedOperator.html#a4b093397b39e8740921fd31a2b48e342">NavierStokesStabilizedOperator&lt; dim, number &gt;</a>.</p>
 
 </div>
 </div>
@@ -952,12 +978,12 @@ template&lt;int dim, typename number &gt; </div>
 <p>Get the total number of DoFs. </p>
 <dl class="section return"><dt>Returns</dt><dd>Total number of degrees of freedom. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00236">236</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00250">250</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
-<a id="a2a42be5b78ecee77e813da05d13e6a49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a42be5b78ecee77e813da05d13e6a49">&#9670;&nbsp;</a></span>reinit()</h2>
+<a id="ae083a4141bf4f0f162990960aa66ea9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae083a4141bf4f0f162990960aa66ea9f">&#9670;&nbsp;</a></span>reinit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1003,6 +1029,12 @@ template&lt;int dim, typename number &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a>&#160;</td>
+          <td class="paramname"><em>stabilization</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
           <td class="paramname"><em>mg_level</em>, </td>
         </tr>
@@ -1029,12 +1061,15 @@ template&lt;int dim, typename number &gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td>Required for local operations on cells. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">forcing_function</td><td>Function specified in parameter file as source term. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">kinematic_viscosity</td><td>Kinematic viscosity. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stabilization</td><td>Stabilization type specified in parameter file. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mg_level</td><td>Level of the operator in case of MG methods. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00097">97</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00099">99</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaca6efd547a7b6d9885402b9544f941d5">Parameters::Stabilization::gls</a>, and <a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaae21e5838883a96aab921c84e14383bb">Parameters::Stabilization::pspg_supg</a>.</p>
 
 </div>
 </div>
@@ -1072,7 +1107,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00265">265</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00272">272</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1113,7 +1148,7 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00312">312</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00326">326</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
 </div>
 </div>
@@ -1154,9 +1189,9 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00277">277</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00291">291</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00520">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
+<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00534">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
 
 </div>
 </div>
@@ -1197,9 +1232,9 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00320">320</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00334">334</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00520">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
+<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00534">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
 
 </div>
 </div>
@@ -1240,9 +1275,9 @@ template&lt;int dim, typename number &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00335">335</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00349">349</a> of file <a class="el" href="mf__navier__stokes__operators_8cc_source.html">mf_navier_stokes_operators.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00520">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
+<p class="reference">References <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00534">NavierStokesOperatorBase&lt; dim, number &gt;::do_cell_integral_range()</a>.</p>
 
 </div>
 </div>
@@ -1271,7 +1306,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Vector with the constrained indices used for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00417">417</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00431">431</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1334,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Vector with the constrained values used for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00423">423</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00437">437</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1327,7 +1362,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Object that stores constraints for the matrix free implementation. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00342">342</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00349">349</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1355,7 +1390,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Vector used to mark edge constrained cells in order to verify constrained indices for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00450">450</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00464">464</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1383,7 +1418,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Vector with the constrained edge indices for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00429">429</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00443">443</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1411,7 +1446,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Vector with edge constrained values used for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00442">442</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00456">456</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1439,7 +1474,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Aligned vector to store the element size of all the elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00355">355</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00362">362</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1467,7 +1502,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Finite element degree for the operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00361">361</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00368">368</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1495,7 +1530,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Force function or source function for the Navier-Stokes equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00367">367</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00374">374</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1523,7 +1558,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Variable to identify whether there are edge constrained indices for the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00436">436</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00450">450</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +1586,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Kinematic viscosity needed for the operator. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00373">373</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00380">380</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1579,7 +1614,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Object storing all the relevant data needed for the matrix free implementation. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00336">336</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00343">343</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1607,7 +1642,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Table with correct alignment for vectorization to store the gradients of the previous newton step. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00395">395</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00409">409</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1635,7 +1670,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Table with correct alignment for vectorization to store the hessian diagonal of the previous newton step. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00403">403</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00417">417</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1663,7 +1698,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Table with correct alignment for vectorization to store the values of the previous newton step. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00387">387</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00401">401</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1691,7 +1726,35 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Object storing the information regarding the time stepping method. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00379">379</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00393">393</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+
+</div>
+</div>
+<a id="ab9efff8facaebd37096ecd6c38288ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9efff8facaebd37096ecd6c38288ef7">&#9670;&nbsp;</a></span>stabilization</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim, typename number &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4ba">StabilizationType</a> <a class="el" href="classNavierStokesOperatorBase.html">NavierStokesOperatorBase</a>&lt; dim, number &gt;::stabilization</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stabilization type needed to add or remove terms from operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00387">387</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1719,7 +1782,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Sparse trilinos matrix used when the matrix of certain level is computed and stored. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00349">349</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00356">356</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
@@ -1747,7 +1810,7 @@ template&lt;int dim, typename number &gt; </div>
 
 <p>Table with correct alignment for vectorization to store the time derivatives of previous solutions. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00411">411</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes__operators_8h_source.html#l00425">425</a> of file <a class="el" href="mf__navier__stokes__operators_8h_source.html">mf_navier_stokes_operators.h</a>.</p>
 
 </div>
 </div>
