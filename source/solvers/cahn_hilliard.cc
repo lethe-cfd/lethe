@@ -464,6 +464,7 @@ CahnHilliard<dim>::calculate_phase_statistics()
     }
 
   statistics_table.add_value("time", simulation_control->get_current_time());
+  statistics_table.set_scientific("time",true);
   statistics_table.add_value("min", min_phase_value);
   statistics_table.add_value("max", max_phase_value);
   statistics_table.add_value("average", phase_average);
