@@ -1,7 +1,8 @@
 <map id="Insertion&lt; dim &gt;" name="Insertion&lt; dim &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="5,81,140,108"/>
-<area shape="rect" id="node2" href="$classListInsertion.html" title=" " alt="" coords="203,5,360,32"/>
-<area shape="rect" id="node3" href="$classPlaneInsertion.html" title=" " alt="" coords="196,56,367,83"/>
-<area shape="rect" id="node4" href="$classUniformInsertion.html" title=" " alt="" coords="188,107,375,133"/>
-<area shape="rect" id="node5" href="$classVolumeInsertion.html" title=" " alt="" coords="190,157,373,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,140,133"/>
+<area shape="rect" id="node2" href="$classFileInsertion.html" title=" " alt="" coords="203,5,360,32"/>
+<area shape="rect" id="node3" href="$classListInsertion.html" title=" " alt="" coords="203,56,360,83"/>
+<area shape="rect" id="node4" href="$classPlaneInsertion.html" title=" " alt="" coords="196,107,367,133"/>
+<area shape="rect" id="node5" href="$classUniformInsertion.html" title=" " alt="" coords="188,157,375,184"/>
+<area shape="rect" id="node6" href="$classVolumeInsertion.html" title=" " alt="" coords="190,208,373,235"/>
 </map>
