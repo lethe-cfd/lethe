@@ -453,12 +453,12 @@ The normal and tangential overlaps are calculated as follow:</p>
 </div>
 <section id="relative-velocities">
 <h3>Relative Velocities<a class="headerlink" href="#relative-velocities" title="Link to this heading">#</a></h3>
-<p>The relative velocities are calculated to update the tangential overlap:</p>
+<p>The relative velocities are calculated to update the tangential overlap and for their contribution in the force models:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{v}_{ij} &amp;= \mathbf{v}_i-\mathbf{v}_j+\left(R_i\mathbf{\omega}_i+R_j\mathbf{\omega}_j\right)\times\mathbf{n}_{ij}
+\[\begin{split}\mathbf{v}_{ij} &amp;= \mathbf{v}_i-\mathbf{v}_j+\left(R_i\mathbf{\omega}_i+R_j\mathbf{\omega}_j\right)\times\mathbf{n}_{ij} \\
 \mathbf{v}_{rn} &amp;= \left(\mathbf{v}_{ij}.\mathbf{n}_{ij}\right)\mathbf{n}_{ij} \\
-\mathbf{v}_{rt} &amp;= \mathbf{v}_{ij}-\mathbf{v}_{rn} \\\end{split}\]</div>
+\mathbf{v}_{rt} &amp;= \mathbf{v}_{ij}-\mathbf{v}_{rn}\end{split}\]</div>
 </div>
 </section>
 <section id="spring-and-damping-constants">
