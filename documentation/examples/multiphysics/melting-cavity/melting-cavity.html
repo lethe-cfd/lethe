@@ -401,6 +401,7 @@
 <li><p>Solver: <code class="docutils literal notranslate"><span class="pre">lethe-fluid</span></code></p></li>
 <li><p>Phase change (solid-liquid)</p></li>
 <li><p>Buoyant force (natural convection)</p></li>
+<li><p>Temperature-dependent stasis constraint</p></li>
 <li><p>Unsteady problem handled by an adaptive BDF2 time-stepping scheme</p></li>
 <li><p>Usage of a python script for post-processing data</p></li>
 </ul>
@@ -409,7 +410,7 @@
 <h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Link to this heading">#</a></h2>
 <p>All files mentioned below are located in the example’s folder (<code class="docutils literal notranslate"><span class="pre">examples/multiphysics/melting-cavity</span></code>).</p>
 <ul class="simple">
-<li><p>Parameter files: <code class="docutils literal notranslate"><span class="pre">melting-cavity.prm</span></code>, <code class="docutils literal notranslate"><span class="pre">melting-cavity-darcy.prm</span></code></p></li>
+<li><p>Parameter files: <code class="docutils literal notranslate"><span class="pre">melting-cavity.prm</span></code>, <code class="docutils literal notranslate"><span class="pre">melting-cavity-stasis-constraint.prm</span></code>, <code class="docutils literal notranslate"><span class="pre">melting-cavity-darcy.prm</span></code></p></li>
 <li><p>Postprocessing Python scripts: <code class="docutils literal notranslate"><span class="pre">melting-cavity.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compare-melting-cavity.py</span></code></p></li>
 <li><p>Python script to calculate the dimensionless numbers: <code class="docutils literal notranslate"><span class="pre">dimensionless_number_calculator.py</span></code></p></li>
 </ul>
@@ -602,17 +603,38 @@ contains the simulation results. In post-processing, the position of the solid-l
 <a class="reference internal image-reference" href="../../../_images/xmax-t1.png"><img alt="bubble_rise_velocity" class="align-center" src="../../../_images/xmax-t1.png" style="width: 500px;" /></a>
 <a class="reference internal image-reference" href="../../../_images/melted-volume-fraction.png"><img alt="ymean_t" class="align-center" src="../../../_images/melted-volume-fraction.png" style="width: 500px;" /></a>
 </section>
+<section id="improving-computational-performances-with-stasis-constraints">
+<h2>Improving Computational Performances with Stasis Constraints<a class="headerlink" href="#improving-computational-performances-with-stasis-constraints" title="Link to this heading">#</a></h2>
+<p>Lethe is able to <a class="reference internal" href="../../../parameters/cfd/constrain_stasis.html"><span class="doc">constrain temperature-dependent stasis</span></a> on fluids.
+To use this feature, the <code class="docutils literal notranslate"><span class="pre">constrain</span> <span class="pre">stasis</span></code> subsection is added to the parameter file (see <code class="docutils literal notranslate"><span class="pre">melting-cavity-stasis-constraint.prm</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection constrain stasis
+  set enable                = true
+  set number of constraints = 1
+  subsection constraint 0
+    set fluid id        = 0
+    set min temperature = 0
+    set max temperature = 28.5
+  end
+end
+</pre></div>
+</div>
+<p>Employing this feature enables a more effective conditioning of the global matrix by imposing homogeneous velocity and pressure constraints on degrees of freedom (DoFs) of cells within the specified temperature range, consequently reducing computation time. For example, running the simulation with 16 CPU cores and the stasis constraint specified above only takes <span class="math notranslate nohighlight">\(\sim 24 \; \mathrm{minutes}\)</span> while the solved quantities of interest remain unchanged.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>When using this feature, ensure that the imposed <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">temperature</span></code> value is lower than the solidus temperature of the material. Additionally, we advise maintaining a buffer zone to prevent disruption to fluid flow resolution near the melting zone.</p>
+</div>
+</section>
 <section id="darcy-penalization-an-alternative-approach">
 <h2>Darcy Penalization: An Alternative Approach<a class="headerlink" href="#darcy-penalization-an-alternative-approach" title="Link to this heading">#</a></h2>
-<p>Lethe supports an alternative strategy to impose statis (no motion) within the solidified material using a Darcy-like penalization. This penalization adds a forcing term to the momentum equation to prohibit the motion of the solid instead of increasing its viscosity. This has the advantage of leading to a better matrix conditioning, at the expense of potentially increased motion within the solid phase. To enable this forcing term, a velocity source term must be specified:</p>
+<p>Lethe supports an alternative strategy to impose stasis (no motion) within the solidified material using a Darcy-like penalization. This penalization adds a forcing term to the momentum equation to prohibit the motion of the solid instead of increasing its viscosity. This has the advantage of leading to a better matrix conditioning, at the expense of potentially increased motion within the solid phase. To enable this forcing term, a velocity source term must be specified:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection velocity source
-set Darcy type          = phase_change
+set Darcy type = phase_change
 end
 </pre></div>
 </div>
 <p>Furthermore, the <code class="docutils literal notranslate"><span class="pre">phase</span> <span class="pre">change</span></code> subsection within the physical properties but also be modified to specify the Darcy penalty of the solid and liquid phase:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection physical properties
-  set number of fluids = 1
+  set number of fluids      = 1
   set reference temperature = 29.8
   subsection fluid 0
     set thermal conductivity model = constant
@@ -649,16 +671,16 @@ end
       set viscosity solid = 0.0007366698558439125
 
       # Thermal expansion of the liquid phase
-      set thermal expansion liquid       = 1
+      set thermal expansion liquid = 1
 
       # Thermal expansion of the solid phase
-      set thermal expansion solid        = 0
+      set thermal expansion solid = 0
 
       # Permeability of the liquid phase
-      set Darcy penalty liquid         = 0
+      set Darcy penalty liquid = 0
 
       # Permeability of the  solid phase
-      set Darcy penalty solid          = 1e4
+      set Darcy penalty solid = 1e4
     end
   end
 end
@@ -744,6 +766,7 @@ end
 </li>
 <li><a class="reference internal" href="#running-the-simulation">Running the Simulation</a></li>
 <li><a class="reference internal" href="#results">Results</a></li>
+<li><a class="reference internal" href="#improving-computational-performances-with-stasis-constraints">Improving Computational Performances with Stasis Constraints</a></li>
 <li><a class="reference internal" href="#darcy-penalization-an-alternative-approach">Darcy Penalization: An Alternative Approach</a></li>
 <li><a class="reference internal" href="#references">References</a></li>
 </ul>
