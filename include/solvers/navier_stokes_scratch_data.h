@@ -1007,7 +1007,7 @@ public:
     this->phase_order.component        = 0;
     this->chemical_potential.component = 1;
 
-    // Gather phase fraction (values, gradients)
+    // Gather phase fraction and chemical potential (values, gradients)
     this->fe_values_cahn_hilliard->operator[](phase_order)
       .get_function_values(current_solution,
                            this->phase_order_cahn_hilliard_values);
@@ -1017,6 +1017,9 @@ public:
     this->fe_values_cahn_hilliard->operator[](phase_order)
       .get_function_gradients(current_solution,
                               this->phase_order_cahn_hilliard_gradients);
+    this->fe_values_cahn_hilliard->operator[](chemical_potential)
+      .get_function_gradients(current_solution,
+                              chemical_potential_cahn_hilliard_gradients);
 
     // Gather filtered phase fraction (values, gradients)
     this->fe_values_cahn_hilliard->operator[](phase_order)
@@ -1068,6 +1071,8 @@ public:
   std::vector<double> thermal_expansion_1;
   std::vector<double> surface_tension;
   std::vector<double> surface_tension_gradient;
+  std::vector<double> cahn_hilliard_mobility;
+
 
   // FEValues for the Navier-Stokes problem
   FEValues<dim>              fe_values;
@@ -1183,12 +1188,14 @@ public:
   /**
    * Scratch component for the CahnHilliard auxiliary physics
    */
+  double                      density_diff;
   bool                        gather_cahn_hilliard;
   unsigned int                n_dofs_cahn_hilliard;
   std::vector<double>         phase_order_cahn_hilliard_values;
   std::vector<double>         filtered_phase_order_cahn_hilliard_values;
   std::vector<Tensor<1, dim>> phase_order_cahn_hilliard_gradients;
   std::vector<double>         chemical_potential_cahn_hilliard_values;
+  std::vector<Tensor<1, dim>> chemical_potential_cahn_hilliard_gradients;
 
   std::shared_ptr<CahnHilliardFilterBase>
     cahn_hilliard_filter; // Phase order fraction filter

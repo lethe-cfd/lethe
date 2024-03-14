@@ -71,7 +71,9 @@ CahnHilliard<dim>::setup_assemblers()
          .epsilon_set_method == Parameters::EpsilonSetMethod::manual) ?
         this->simulation_parameters.multiphysics.cahn_hilliard_parameters
           .epsilon :
-        GridTools::minimal_cell_diameter(*triangulation),
+        GridTools::minimal_cell_diameter(*triangulation) *
+          this->simulation_parameters.dimensionality
+            .cahn_hilliard_epsilon_scaling,
       this->simulation_parameters.boundary_conditions_cahn_hilliard));
 
   // Free angle of contact boundary condition
@@ -83,7 +85,9 @@ CahnHilliard<dim>::setup_assemblers()
          .epsilon_set_method == Parameters::EpsilonSetMethod::manual) ?
         this->simulation_parameters.multiphysics.cahn_hilliard_parameters
           .epsilon :
-        GridTools::minimal_cell_diameter(*triangulation),
+        GridTools::minimal_cell_diameter(*triangulation) *
+          this->simulation_parameters.dimensionality
+            .cahn_hilliard_epsilon_scaling,
       this->simulation_parameters.boundary_conditions_cahn_hilliard));
 
   // Core assembler
@@ -94,7 +98,9 @@ CahnHilliard<dim>::setup_assemblers()
        .epsilon_set_method == Parameters::EpsilonSetMethod::manual) ?
       this->simulation_parameters.multiphysics.cahn_hilliard_parameters
         .epsilon :
-      GridTools::minimal_cell_diameter(*triangulation)));
+      GridTools::minimal_cell_diameter(*triangulation) *
+        this->simulation_parameters.dimensionality
+          .cahn_hilliard_epsilon_scaling));
 }
 
 template <int dim>
@@ -408,6 +414,10 @@ CahnHilliard<dim>::calculate_phase_statistics()
                           update_values | update_gradients |
                             update_quadrature_points | update_JxW_values);
 
+  std::shared_ptr<CahnHilliardFilterBase> filter =
+    CahnHilliardFilterBase::model_cast(
+      this->simulation_parameters.multiphysics.cahn_hilliard_parameters);
+
   const FEValuesExtractors::Scalar phase_order(0);
 
   const unsigned int  n_q_points = cell_quadrature->size();
@@ -429,13 +439,18 @@ CahnHilliard<dim>::calculate_phase_statistics()
 
           for (unsigned int q = 0; q < n_q_points; q++)
             {
-              integral += local_phase_order_values[q] * fe_values.JxW(q);
+              const double filtered_phase_cahn_hilliard_values =
+                filter->filter_phase(local_phase_order_values[q]);
+              integral +=
+                filtered_phase_cahn_hilliard_values * fe_values.JxW(q);
               max_phase_value =
-                std::max(local_phase_order_values[q], max_phase_value);
+                std::max(filtered_phase_cahn_hilliard_values, max_phase_value);
               min_phase_value =
-                std::min(local_phase_order_values[q], min_phase_value);
-              volume_0 += (1 + local_phase_order_values[q])*0.5*fe_values.JxW(q);
-              volume_1 += (1 - local_phase_order_values[q])*0.5*fe_values.JxW(q);
+                std::min(filtered_phase_cahn_hilliard_values, min_phase_value);
+              volume_0 += (1 + filtered_phase_cahn_hilliard_values) * 0.5 *
+                          fe_values.JxW(q);
+              volume_1 += (1 - filtered_phase_cahn_hilliard_values) * 0.5 *
+                          fe_values.JxW(q);
             }
         }
     }
@@ -444,8 +459,8 @@ CahnHilliard<dim>::calculate_phase_statistics()
   max_phase_value = Utilities::MPI::max(max_phase_value, mpi_communicator);
 
   integral             = Utilities::MPI::sum(integral, mpi_communicator);
-  volume_0             = Utilities::MPI::sum(volume_0,mpi_communicator);
-  volume_1             = Utilities::MPI::sum(volume_1,mpi_communicator);
+  volume_0             = Utilities::MPI::sum(volume_0, mpi_communicator);
+  volume_1             = Utilities::MPI::sum(volume_1, mpi_communicator);
   double global_volume = GridTools::volume(*triangulation, *mapping);
   double phase_average = integral / global_volume;
 
@@ -464,16 +479,16 @@ CahnHilliard<dim>::calculate_phase_statistics()
     }
 
   statistics_table.add_value("time", simulation_control->get_current_time());
-  statistics_table.set_scientific("time",true);
+  statistics_table.set_scientific("time", true);
   statistics_table.add_value("min", min_phase_value);
   statistics_table.add_value("max", max_phase_value);
   statistics_table.add_value("average", phase_average);
   statistics_table.add_value("integral", integral);
-  statistics_table.set_scientific("integral",true);
+  statistics_table.set_scientific("integral", true);
   statistics_table.add_value("volume_0", volume_0);
-  statistics_table.set_scientific("volume_0",true);
+  statistics_table.set_scientific("volume_0", true);
   statistics_table.add_value("volume_1", volume_1);
-  statistics_table.set_scientific("volume_1",true);
+  statistics_table.set_scientific("volume_1", true);
 }
 
 template <int dim>
