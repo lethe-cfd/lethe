@@ -96,8 +96,8 @@ Inheritance diagram for DensityConstant:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8260fc4b836e19dc9f2bb690c89f0319"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a8260fc4b836e19dc9f2bb690c89f0319">DensityConstant</a> (const double p_density)</td></tr>
 <tr class="separator:a8260fc4b836e19dc9f2bb690c89f0319"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bec373fd2908cda81b8354e458825cd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a5bec373fd2908cda81b8354e458825cd">value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;fields_value) override</td></tr>
-<tr class="separator:a5bec373fd2908cda81b8354e458825cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b5cd82e16e1f3154258741abe1b471f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a1b5cd82e16e1f3154258741abe1b471f">value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values) override</td></tr>
+<tr class="separator:a1b5cd82e16e1f3154258741abe1b471f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab75a46531c72187fdff67b193b38d26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#aab75a46531c72187fdff67b193b38d26">vector_value</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;property_vector) override</td></tr>
 <tr class="separator:aab75a46531c72187fdff67b193b38d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c79b36252ad2735ca79cb6830cfd029"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDensityConstant.html#a2c79b36252ad2735ca79cb6830cfd029">jacobian</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values, <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> id) override</td></tr>
@@ -290,7 +290,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Compute the jacobian (the partial derivative) of the density with respect to a specified field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Values of the various fields on which the density may depend.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Values of the various fields on which the density may depend. The map stores a single value per field.</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>Indicator of the field with respect to which the jacobian should be computed.</td></tr>
   </table>
   </dd>
@@ -304,8 +304,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a5bec373fd2908cda81b8354e458825cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bec373fd2908cda81b8354e458825cd">&#9670;&nbsp;</a></span>value()</h2>
+<a id="a1b5cd82e16e1f3154258741abe1b471f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b5cd82e16e1f3154258741abe1b471f">&#9670;&nbsp;</a></span>value()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,7 +317,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">double DensityConstant::value </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>fields_value</em></td><td>)</td>
+          <td class="paramname"><em>field_values</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -331,11 +331,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Compute density value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fields_value</td><td>Value of the various fields on which the property may depend.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Value of the various fields on which the property may depend. The map stores a single value per field.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Here, the <code>fields_value</code> parameter is ignored since the density remains constant.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_values</code> parameter is ignored since the density remains constant.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Density value. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#a23d2b90f4f05ee9de4be96f6f9989a37">PhysicalPropertyModel</a>.</p>
@@ -389,13 +389,13 @@ Additional Inherited Members</h2></td></tr>
 <p>Computes the derivative of the density with respect to specified fields. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vector of values of the fields used to evaluate the density.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vector of values of the fields used to evaluate the density. The map stores a vector of values per field.</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>Identifier of the field with respect to which a derivative should be computed.</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">jacobian</td><td>Vector of computed derivative values of the density with respect to the field of the specified <code>id</code>. In this case, it returns a vector of zeros since the density remains constant.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_values</code> and <code>id</code> parameters are ignored since the density remains constant. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Here, the <code>field_vectors</code> and <code>id</code> parameters are ignored since the density remains constant. </dd></dl>
 
 <p>Implements <a class="el" href="classPhysicalPropertyModel.html#ae71d2dd28b12d69622987bced8c0c661">PhysicalPropertyModel</a>.</p>
 
@@ -440,7 +440,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Compute a vector of density values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vectors of the fields on which the density may depend.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Vectors of the fields on which the density may depend. The map stores a vector of values per field.</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">property_vector</td><td>Vector of computed density values.</td></tr>
   </table>
   </dd>

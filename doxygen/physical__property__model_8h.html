@@ -214,6 +214,8 @@ Functions</h2></td></tr>
 <tr class="separator:ae4709394aa65be3853a1d5014379d1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45c394304afd0d30e45a663608950b14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="physical__property__model_8h.html#a45c394304afd0d30e45a663608950b14">DeclException2</a> (SizeOfFields, unsigned int, unsigned int,&lt;&lt; &quot;The number of values for a <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> : &quot;&lt;&lt; arg1&lt;&lt; &quot; is not equal to the number of values for another <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> &quot;&lt;&lt; arg2)</td></tr>
 <tr class="separator:a45c394304afd0d30e45a663608950b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a23b2f44e69744c9dc5f1da1d6c7030"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="physical__property__model_8h.html#a5a23b2f44e69744c9dc5f1da1d6c7030">DeclException2</a> (PhysicialPropertyModelFieldUndefined, std::string, std::string,&lt;&lt; &quot;Error in '&quot;&lt;&lt; arg1&lt;&lt; &quot;' model. \n &quot;&lt;&lt; &quot;The '&quot;&lt;&lt; arg2&lt;&lt; &quot;' field required by the model is not defined.&quot;)</td></tr>
+<tr class="separator:a5a23b2f44e69744c9dc5f1da1d6c7030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a545ac73a2b70d10beade7a2ffe30a970"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="physical__property__model_8h.html#a545ac73a2b70d10beade7a2ffe30a970">set_field_vector</a> (const <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a> &amp;id, const std::vector&lt; double &gt; &amp;data, std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;fields)</td></tr>
 <tr class="separator:a545ac73a2b70d10beade7a2ffe30a970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -239,13 +241,53 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a0b2c854385812ebfac83689a5c3ead58a2d397f452fbf87274e898b191306e373"></a>phase_order_cahn_hilliard_filtered&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00043">43</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00050">50</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a5a23b2f44e69744c9dc5f1da1d6c7030"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a23b2f44e69744c9dc5f1da1d6c7030">&#9670;&nbsp;</a></span>DeclException2() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DeclException2 </td>
+          <td>(</td>
+          <td class="paramtype">PhysicialPropertyModelFieldUndefined&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&lt;&lt; &quot;Error in '&quot;&lt;&lt; arg1&lt;&lt; &quot;' model. \n &quot;&lt;&lt; &quot;The '&quot;&lt;&lt; arg2&lt;&lt; &quot;' field required by the model is not defined.&quot;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a45c394304afd0d30e45a663608950b14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45c394304afd0d30e45a663608950b14">&#9670;&nbsp;</a></span>DeclException2()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c394304afd0d30e45a663608950b14">&#9670;&nbsp;</a></span>DeclException2() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -352,7 +394,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00055">55</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="physical__property__model_8h_source.html#l00062">62</a> of file <a class="el" href="physical__property__model_8h_source.html">physical_property_model.h</a>.</p>
 
 </div>
 </div>

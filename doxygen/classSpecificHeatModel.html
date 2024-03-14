@@ -85,9 +85,9 @@ Inheritance diagram for SpecificHeatModel:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSpecificHeatModel__inherit__graph.png" border="0" usemap="#aSpecificHeatModel_inherit__map" alt="Inheritance graph"/></div>
 <map name="aSpecificHeatModel_inherit__map" id="aSpecificHeatModel_inherit__map">
-<area shape="rect" title="Abstract class that allows to calculate the specific heat on each quadrature point using the temperat..." alt="" coords="115,80,257,107"/>
-<area shape="rect" href="classConstantSpecificHeat.html" title="Constant specific heat. Returns a constant specific heat for a fluid." alt="" coords="5,155,167,181"/>
-<area shape="rect" href="classPhaseChangeSpecificHeat.html" title="This model takes into account the phase change of a material by considering the latent heat into the ..." alt="" coords="191,155,381,181"/>
+<area shape="rect" title="Abstract class for calculating the specific heat of materials on quadrature points using the temperat..." alt="" coords="115,80,257,107"/>
+<area shape="rect" href="classConstantSpecificHeat.html" title="Constant specific heat model." alt="" coords="5,155,167,181"/>
+<area shape="rect" href="classPhaseChangeSpecificHeat.html" title="Phase change specific heat model." alt="" coords="191,155,381,181"/>
 <area shape="rect" href="classPhysicalPropertyModel.html" title="Abstract class that defines the interface for a physical property model Physical property model provi..." alt="" coords="101,5,271,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -126,9 +126,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract class that allows to calculate the specific heat on each quadrature point using the temperature of the fluid. magnitude. SpecficiHeat::get_specific_heat() is a pure virtual method, since it can only be calculated knowing the model for the specific heat that has been specifid. </p>
+<div class="textblock"><p>Abstract class for calculating the specific heat of materials on quadrature points using the temperature of the fluid. </p>
 
-<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00034">34</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="specific__heat__model_8h_source.html#l00031">31</a> of file <a class="el" href="specific__heat__model_8h_source.html">specific_heat_model.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac17fb0fd329a03eaf11fbfeec367c72d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac17fb0fd329a03eaf11fbfeec367c72d">&#9670;&nbsp;</a></span>model_cast()</h2>
@@ -154,13 +154,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Instantiates and returns a pointer to a <a class="el" href="classSpecificHeatModel.html" title="Abstract class that allows to calculate the specific heat on each quadrature point using the temperat...">SpecificHeatModel</a> object by casting it to the proper child class. </p>
+<p>Instantiates and returns a pointer to a <a class="el" href="classSpecificHeatModel.html" title="Abstract class for calculating the specific heat of materials on quadrature points using the temperat...">SpecificHeatModel</a> object by casting it to the proper child class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">material_properties</td><td><a class="el" href="namespaceParameters.html">Parameters</a> for a material </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">material_properties</td><td>Property parameters of a material (fluid or solid).</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Casted <a class="el" href="classSpecificHeatModel.html" title="Abstract class for calculating the specific heat of materials on quadrature points using the temperat...">SpecificHeatModel</a> object. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="specific__heat__model_8cc_source.html#l00020">20</a> of file <a class="el" href="specific__heat__model_8cc_source.html">specific_heat_model.cc</a>.</p>
 
