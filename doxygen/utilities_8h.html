@@ -173,18 +173,21 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a28e3647b49b871d119c8e19d390d6d66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a28e3647b49b871d119c8e19d390d6d66">add_statistics_to_table_handler</a> (const std::string variable, const <a class="el" href="classstatistics.html">statistics</a> stats, TableHandler &amp;table)</td></tr>
 <tr class="separator:a28e3647b49b871d119c8e19d390d6d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43e705fb37095233195a715f6a91fd16"><td class="memTemplParams" colspan="2">template&lt;int dim, typename T &gt; </td></tr>
-<tr class="memitem:a43e705fb37095233195a715f6a91fd16"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a43e705fb37095233195a715f6a91fd16">make_table_scalars_tensors</a> (const std::vector&lt; T &gt; &amp;independent_values, const std::string &amp;independent_column_name, const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_name, const unsigned int display_precision)</td></tr>
-<tr class="separator:a43e705fb37095233195a715f6a91fd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ff68d960ebb7eb6e70768ef25821f3d"><td class="memTemplParams" colspan="2">template&lt;int dim, typename T &gt; </td></tr>
-<tr class="memitem:a3ff68d960ebb7eb6e70768ef25821f3d"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a3ff68d960ebb7eb6e70768ef25821f3d">make_table_scalars_tensors</a> (const std::vector&lt; T &gt; &amp;independent_values, const std::string &amp;independent_column_name, const std::vector&lt; std::vector&lt; Tensor&lt; 1, dim &gt;&gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_name, const unsigned int display_precision)</td></tr>
-<tr class="separator:a3ff68d960ebb7eb6e70768ef25821f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ec85faec7fdcdb73be04ef41794697d"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
-<tr class="memitem:a9ec85faec7fdcdb73be04ef41794697d"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a9ec85faec7fdcdb73be04ef41794697d">make_table_tensors_tensors</a> (const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;independent_vector, const std::vector&lt; std::string &gt; &amp;independent_column_name, const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_name, const unsigned int display_precision)</td></tr>
-<tr class="separator:a9ec85faec7fdcdb73be04ef41794697d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f8be0a4a9bd70e4e18961771885c7af"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
-<tr class="memitem:a4f8be0a4a9bd70e4e18961771885c7af"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a4f8be0a4a9bd70e4e18961771885c7af">make_table_tensors_scalars</a> (const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;independent_vector, const std::vector&lt; std::string &gt; &amp;independent_column_name, const std::vector&lt; double &gt; &amp;dependent_values, const std::string &amp;dependent_column_name, const unsigned int display_precision)</td></tr>
-<tr class="separator:a4f8be0a4a9bd70e4e18961771885c7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab305d2e75368dcfbb1cc79526eb28493"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab305d2e75368dcfbb1cc79526eb28493"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#ab305d2e75368dcfbb1cc79526eb28493">make_table_scalars_vectors</a> (const std::vector&lt; T &gt; &amp;independent_values, const std::string &amp;independent_column_name, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_names, const unsigned int display_precision, const bool display_scientific_notation=false)</td></tr>
+<tr class="separator:ab305d2e75368dcfbb1cc79526eb28493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7935807703948c95807db1f02eca18"><td class="memTemplParams" colspan="2">template&lt;int dim, typename T &gt; </td></tr>
+<tr class="memitem:a7d7935807703948c95807db1f02eca18"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a7d7935807703948c95807db1f02eca18">make_table_scalars_tensors</a> (const std::vector&lt; T &gt; &amp;independent_values, const std::string &amp;independent_column_name, const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_names, const unsigned int display_precision, const bool display_scientific_notation=false)</td></tr>
+<tr class="separator:a7d7935807703948c95807db1f02eca18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac688e968bf36904f56561664a955c99"><td class="memTemplParams" colspan="2">template&lt;int dim, typename T &gt; </td></tr>
+<tr class="memitem:aac688e968bf36904f56561664a955c99"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#aac688e968bf36904f56561664a955c99">make_table_scalars_tensors</a> (const std::vector&lt; T &gt; &amp;independent_values, const std::string &amp;independent_column_name, const std::vector&lt; std::vector&lt; Tensor&lt; 1, dim &gt;&gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_names, const unsigned int display_precision, const bool display_scientific_notation=false)</td></tr>
+<tr class="separator:aac688e968bf36904f56561664a955c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa452d8f946645898ce27929b956067eb"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
+<tr class="memitem:aa452d8f946645898ce27929b956067eb"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#aa452d8f946645898ce27929b956067eb">make_table_tensors_tensors</a> (const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;independent_vector, const std::vector&lt; std::string &gt; &amp;independent_column_names, const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;dependent_vector, const std::vector&lt; std::string &gt; &amp;dependent_column_names, const unsigned int display_precision, const bool display_scientific_notation=false)</td></tr>
+<tr class="separator:aa452d8f946645898ce27929b956067eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1167f0e0a2bb3cc269b124d4b0158a"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
+<tr class="memitem:aaa1167f0e0a2bb3cc269b124d4b0158a"><td class="memTemplItemLeft" align="right" valign="top">TableHandler&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utilities_8h.html#aaa1167f0e0a2bb3cc269b124d4b0158a">make_table_tensors_scalars</a> (const std::vector&lt; Tensor&lt; 1, dim &gt;&gt; &amp;independent_vector, const std::vector&lt; std::string &gt; &amp;independent_column_names, const std::vector&lt; double &gt; &amp;dependent_values, const std::string &amp;dependent_column_name, const unsigned int display_precision, const bool display_scientific_notation=false)</td></tr>
+<tr class="separator:aaa1167f0e0a2bb3cc269b124d4b0158a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a955c2851894d041727c14dff59686f0d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utilities_8h.html#a955c2851894d041727c14dff59686f0d">calculate_point_property</a> (const double phase, const double property0, const double property1)</td></tr>
 <tr class="separator:a955c2851894d041727c14dff59686f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ab31b90bc584c635ec159468ceed9b2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -319,7 +322,7 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00318">318</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00418">418</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -363,7 +366,7 @@ Tracer</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Used in multiphasic simulations to calculates the equivalent properties for a given phase. Method called in quadrature points loop. </p>
+<p>Calculate the equivalent properties for a given phase. Method called in quadrature points loops in VOF simulations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">phase</td><td>Phase value for the given quadrature point</td></tr>
@@ -373,7 +376,7 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00174">174</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00273">273</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 <p class="reference">References <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdda7ee7184c970537ea83afe7f9bae4c61f">phase</a>.</p>
 
@@ -419,7 +422,7 @@ Tracer</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Used in multiphasic simulations to calculates the equivalent properties for a given phase given by the Cahn-Hilliard equations. Method called in quadrature points loop. </p>
+<p>Calculate the equivalent properties for a given phase. Method called in quadrature points loops in Cahn-Hilliard simulations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">phase</td><td>Phase value for the given quadrature point</td></tr>
@@ -429,9 +432,9 @@ Tracer</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00236">236</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00336">336</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
-<p class="reference">References <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdda7ee7184c970537ea83afe7f9bae4c61f">phase</a>, <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdda680362fee5d2ef1fb4a224fec18cfc36">phase_cahn_hilliard</a>, and <a class="el" href="utilities_8h_source.html#l00205">sgn()</a>.</p>
+<p class="reference">References <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdda7ee7184c970537ea83afe7f9bae4c61f">phase</a>, <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fdda680362fee5d2ef1fb4a224fec18cfc36">phase_cahn_hilliard</a>, and <a class="el" href="utilities_8h_source.html#l00304">sgn()</a>.</p>
 
 </div>
 </div>
@@ -485,7 +488,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Clipped variable that is not below the lower limit and not above the upper limit </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00221">221</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00320">320</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -516,7 +519,7 @@ template&lt;typename T &gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00302">302</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00378">378</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -563,7 +566,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00350">350</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00450">450</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -612,7 +615,7 @@ template&lt;typename T &gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00247">247</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00323">323</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -661,7 +664,7 @@ template&lt;typename T &gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00139">139</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00215">215</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -710,7 +713,7 @@ template&lt;typename T &gt; </div>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00189">189</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00265">265</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -738,9 +741,9 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00525">525</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00644">644</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00441">get_last_value_of_parameter()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00560">get_last_value_of_parameter()</a>.</p>
 
 </div>
 </div>
@@ -779,7 +782,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00441">441</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00560">560</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -807,14 +810,14 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00591">591</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00710">710</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00481">get_max_value_of_parameter()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8cc_source.html#l00600">get_max_value_of_parameter()</a>.</p>
 
 </div>
 </div>
-<a id="a3ff68d960ebb7eb6e70768ef25821f3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ff68d960ebb7eb6e70768ef25821f3d">&#9670;&nbsp;</a></span>make_table_scalars_tensors() <span class="overload">[1/2]</span></h2>
+<a id="aac688e968bf36904f56561664a955c99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac688e968bf36904f56561664a955c99">&#9670;&nbsp;</a></span>make_table_scalars_tensors() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -843,13 +846,19 @@ template&lt;int dim, typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dependent_column_name</em>, </td>
+          <td class="paramname"><em>dependent_column_names</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>display_precision</em>&#160;</td>
+          <td class="paramname"><em>display_precision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>display_scientific_notation</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -859,12 +868,33 @@ template&lt;int dim, typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00039">39</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p>Generate a table from a vector of scalar (independent variable) and a vector of vectors of Tensor&lt;1,dim&gt; (dependent variables). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar type of independent variables.</td></tr>
+    <tr><td class="paramname">dim</td><td>Integer that denotes the number of spatial dimensions.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_values</td><td>Vector of scalar values that serve as the independent variable (e.g., time).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_column_name</td><td>Label of the independent variable.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_vector</td><td>Vector of vectors of Tensor&lt;1,dim&gt; containing dependent variables values (e.g., force).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_column_names</td><td>Vector of strings representing the labels of dependent variables.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_precision</td><td>Integer indicating the precision at which the table is written.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_scientific_notation</td><td>Boolean indicating if the values should be displayed in scientific notation (true) or not (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Table with the independent variable values followed by the dependent variables values. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00085">85</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
-<a id="a43e705fb37095233195a715f6a91fd16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43e705fb37095233195a715f6a91fd16">&#9670;&nbsp;</a></span>make_table_scalars_tensors() <span class="overload">[2/2]</span></h2>
+<a id="a7d7935807703948c95807db1f02eca18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7935807703948c95807db1f02eca18">&#9670;&nbsp;</a></span>make_table_scalars_tensors() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -893,13 +923,19 @@ template&lt;int dim, typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dependent_column_name</em>, </td>
+          <td class="paramname"><em>dependent_column_names</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>display_precision</em>&#160;</td>
+          <td class="paramname"><em>display_precision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>display_scientific_notation</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -909,24 +945,109 @@ template&lt;int dim, typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Generate a table from a vector of scalar and a vector of tensor&lt;1,dim&gt; </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">independent_values</td><td>A vector of scalar values that serve as the independent variable. For example time.</td></tr>
-    <tr><td class="paramname">independent_column_name</td><td>The name of the independent variable</td></tr>
-    <tr><td class="paramname">dependent_vector.</td><td>A vector of Tensor&lt;1,dim&gt; which are the dependent variable. For example force.</td></tr>
-    <tr><td class="paramname">dependent_column_names.</td><td>A vector of string which are the label of dependent tensor</td></tr>
-    <tr><td class="paramname">display_precision.</td><td>An integer which indicate the precision at which the tables are written </td></tr>
+<p>Generate a table from a vector of scalars (independent variable) and a vector of Tensor&lt;1,dim&gt; (dependent variables). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar type of independent variables.</td></tr>
+    <tr><td class="paramname">dim</td><td>Integer that denotes the number of spatial dimensions.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_values</td><td>Vector of scalar values that serve as the independent variable (e.g., time).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_column_name</td><td>Label of the independent variable.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_vector</td><td>Vector of Tensor&lt;1,dim&gt; containing dependent variables values (e.g., force).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_column_names</td><td>Vector of strings representing the labels of dependent variables.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_precision</td><td>Integer indicating the precision at which the table is written.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_scientific_notation</td><td>Boolean indicating if the values should be displayed in scientific notation (true) or not (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Table with the independent variable values followed by the dependent variables values. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00047">47</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab305d2e75368dcfbb1cc79526eb28493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab305d2e75368dcfbb1cc79526eb28493">&#9670;&nbsp;</a></span>make_table_scalars_vectors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">TableHandler make_table_scalars_vectors </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>independent_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>independent_column_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>dependent_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dependent_column_names</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>display_precision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>display_scientific_notation</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate a table from a vector of scalars (independent variable) and a vector of vectors of scalars (dependent variables). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Scalar type of independent variables.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_values</td><td>Vector of scalar values that serve as the independent variable (e.g., time).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_column_name</td><td>Label of the independent variable.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_vector</td><td>Vector of vectors of scalar values containing dependant variables values.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_column_names</td><td>Vector of strings representing the labels of dependent variables.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_precision</td><td>Integer indicating the precision at which the table is written.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_scientific_notation</td><td>Boolean indicating if the values should be displayed in scientific notation (true) or not (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Table with the independent variable values followed by the dependent variables values. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00010">10</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
-<a id="a4f8be0a4a9bd70e4e18961771885c7af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f8be0a4a9bd70e4e18961771885c7af">&#9670;&nbsp;</a></span>make_table_tensors_scalars()</h2>
+<a id="aaa1167f0e0a2bb3cc269b124d4b0158a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1167f0e0a2bb3cc269b124d4b0158a">&#9670;&nbsp;</a></span>make_table_tensors_scalars()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -943,7 +1064,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>independent_column_name</em>, </td>
+          <td class="paramname"><em>independent_column_names</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -961,7 +1082,13 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>display_precision</em>&#160;</td>
+          <td class="paramname"><em>display_precision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>display_scientific_notation</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -971,24 +1098,31 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Generate a table from a vector of tensor&lt;1,dim&gt; and a vector of tensor&lt;1,dim&gt;. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">independent_values</td><td>A vector of Tensor&lt;1,dim&gt; that serve as the independent variable. For example position.</td></tr>
-    <tr><td class="paramname">independent_column_name</td><td>The name of the independent variable.</td></tr>
-    <tr><td class="paramname">dependent_vector.</td><td>A vector of scalar which are the dependent variable. For example energy.</td></tr>
-    <tr><td class="paramname">dependent_column_names.</td><td>The label of the dependent scalar.</td></tr>
-    <tr><td class="paramname">display_precision.</td><td>An integer which indicate the precision at which the tables are written. </td></tr>
+<p>Generate a table from a vector of Tensor&lt;1,dim&gt; (independent variables) and a vector of scalars (dependent variable). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">dim</td><td>Integer that denotes the number of spatial dimensions.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_values</td><td>Vector of Tensor&lt;1,dim&gt; that serves as the independent variable (e.g., position).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_column_names</td><td>Vector of strings representing labels of the independent tensor.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_vector</td><td>Vector of scalar that serves as the dependent variable (e.g., energy).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_column_name</td><td>Label of the dependent variable.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_scientific_notation</td><td>Boolean indicating if the values should be displayed in scientific notation (true) or not (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Table with the independent variables values followed by the dependent variable values. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00111">111</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00177">177</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
-<a id="a9ec85faec7fdcdb73be04ef41794697d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ec85faec7fdcdb73be04ef41794697d">&#9670;&nbsp;</a></span>make_table_tensors_tensors()</h2>
+<a id="aa452d8f946645898ce27929b956067eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa452d8f946645898ce27929b956067eb">&#9670;&nbsp;</a></span>make_table_tensors_tensors()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1005,7 +1139,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>independent_column_name</em>, </td>
+          <td class="paramname"><em>independent_column_names</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1017,13 +1151,19 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dependent_column_name</em>, </td>
+          <td class="paramname"><em>dependent_column_names</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>display_precision</em>&#160;</td>
+          <td class="paramname"><em>display_precision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>display_scientific_notation</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1033,19 +1173,27 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Generate a table from a vector of tensor&lt;1,dim&gt; and a vector of tensor&lt;1,dim&gt; </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">independent_values</td><td>A vector of Tensor&lt;1,dim&gt; that serve as the independent variable. For example position.</td></tr>
-    <tr><td class="paramname">independent_column_name</td><td>A vector of string which are the label of the independent tensor.</td></tr>
-    <tr><td class="paramname">dependent_vector.</td><td>A vector of Tensor&lt;1,dim&gt; which are the dependent variable. For example force.</td></tr>
-    <tr><td class="paramname">dependent_column_names.</td><td>A vector of string which are the label of dependent tensor.</td></tr>
-    <tr><td class="paramname">display_precision.</td><td>An integer which indicate the precision at which the tables are written. </td></tr>
+<p>Generate a table from a vector of Tensor&lt;1,dim&gt; (independent variables) and a vector of Tensor&lt;1,dim&gt; (dependent variables). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">dim</td><td>Integer that denotes the number of spatial dimensions.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_values</td><td>Vector of Tensor&lt;1,dim&gt; that serves as the independent variable (e.g., position).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">independent_column_names</td><td>Vector of strings representing labels of the independent tensor.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_vector</td><td>Vector of vectors of Tensor&lt;1,dim&gt; containing dependent variables values (e.g., force).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dependent_column_names</td><td>Vector of strings representing the labels of dependent variables.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_precision</td><td>Integer indicating the precision at which the table is written.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">display_scientific_notation</td><td>Boolean indicating if the values should be displayed in scientific notation (true) or not (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Table with the independent variables values followed by the dependent variables values. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00078">78</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cc_source.html#l00136">136</a> of file <a class="el" href="utilities_8cc_source.html">utilities.cc</a>.</p>
 
 </div>
 </div>
@@ -1092,7 +1240,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00335">335</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00435">435</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
@@ -1129,7 +1277,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an integer -1 or 1 depending of the sign of the phase parameter </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00205">205</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8h_source.html#l00304">304</a> of file <a class="el" href="utilities_8h_source.html">utilities.h</a>.</p>
 
 </div>
 </div>
