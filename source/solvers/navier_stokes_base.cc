@@ -1392,11 +1392,10 @@ NavierStokesBase<dim, VectorType, DofsType>::postprocess_fd(bool firstIter)
 
       TimerOutput::Scope t(this->computing_timer, "flow_rate_calculation");
 
-        if (this->simulation_parameters.post_processing.verbosity ==
-            Parameters::Verbosity::verbose)
+      if (this->simulation_parameters.post_processing.verbosity ==
+          Parameters::Verbosity::verbose)
         {
-
-            announce_string(this->pcout, "Flow rates");
+          announce_string(this->pcout, "Flow rates");
         }
 
       for (unsigned int boundary_id = 0;
@@ -1419,7 +1418,6 @@ NavierStokesBase<dim, VectorType, DofsType>::postprocess_fd(bool firstIter)
           if (this->simulation_parameters.post_processing.verbosity ==
               Parameters::Verbosity::verbose)
             {
-
               this->pcout << "Flow rate at boundary " +
                                std::to_string(boundary_id) + ": "
                           << std::setprecision(
