@@ -408,10 +408,6 @@ CahnHilliard<dim>::calculate_phase_statistics()
                           update_values | update_gradients |
                             update_quadrature_points | update_JxW_values);
 
-  std::shared_ptr<CahnHilliardFilterBase> filter =
-    CahnHilliardFilterBase::model_cast(
-      this->simulation_parameters.multiphysics.cahn_hilliard_parameters);
-
   const FEValuesExtractors::Scalar phase_order(0);
 
   const unsigned int  n_q_points = cell_quadrature->size();
@@ -433,17 +429,15 @@ CahnHilliard<dim>::calculate_phase_statistics()
 
           for (unsigned int q = 0; q < n_q_points; q++)
             {
-              const double filtered_phase_cahn_hilliard_values =
-                filter->filter_phase(local_phase_order_values[q]);
               integral +=
-                filtered_phase_cahn_hilliard_values * fe_values.JxW(q);
+                local_phase_order_values[q] * fe_values.JxW(q);
               max_phase_value =
-                std::max(filtered_phase_cahn_hilliard_values, max_phase_value);
+                std::max(local_phase_order_values[q], max_phase_value);
               min_phase_value =
-                std::min(filtered_phase_cahn_hilliard_values, min_phase_value);
-              volume_0 += (1 + filtered_phase_cahn_hilliard_values) * 0.5 *
+                std::min(local_phase_order_values[q], min_phase_value);
+              volume_0 += (1 + local_phase_order_values[q]) * 0.5 *
                           fe_values.JxW(q);
-              volume_1 += (1 - filtered_phase_cahn_hilliard_values) * 0.5 *
+              volume_1 += (1 - local_phase_order_values[q]) * 0.5 *
                           fe_values.JxW(q);
             }
         }
