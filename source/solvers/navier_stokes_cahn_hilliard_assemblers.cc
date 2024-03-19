@@ -12,7 +12,6 @@ GLSNavierStokesCahnHilliardAssemblerCore<dim>::assemble_matrix(
   NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-
   // Loop and quadrature information
   const auto        &JxW_vec    = scratch_data.JxW;
   const unsigned int n_q_points = scratch_data.n_q_points;
@@ -188,7 +187,7 @@ GLSNavierStokesCahnHilliardAssemblerCore<dim>::assemble_rhs(
   NavierStokesScratchData<dim>         &scratch_data,
   StabilizedMethodsTensorCopyData<dim> &copy_data)
 {
-  const double h            = scratch_data.cell_size;
+  const double h = scratch_data.cell_size;
 
   // Loop and quadrature information
   const auto        &JxW_vec    = scratch_data.JxW;

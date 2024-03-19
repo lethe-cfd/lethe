@@ -429,16 +429,15 @@ CahnHilliard<dim>::calculate_phase_statistics()
 
           for (unsigned int q = 0; q < n_q_points; q++)
             {
-              integral +=
-                local_phase_order_values[q] * fe_values.JxW(q);
+              integral += local_phase_order_values[q] * fe_values.JxW(q);
               max_phase_value =
                 std::max(local_phase_order_values[q], max_phase_value);
               min_phase_value =
                 std::min(local_phase_order_values[q], min_phase_value);
-              volume_0 += (1 + local_phase_order_values[q]) * 0.5 *
-                          fe_values.JxW(q);
-              volume_1 += (1 - local_phase_order_values[q]) * 0.5 *
-                          fe_values.JxW(q);
+              volume_0 +=
+                (1 + local_phase_order_values[q]) * 0.5 * fe_values.JxW(q);
+              volume_1 +=
+                (1 - local_phase_order_values[q]) * 0.5 * fe_values.JxW(q);
             }
         }
     }
