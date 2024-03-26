@@ -512,19 +512,14 @@ end
 <h3>Insertion Info<a class="headerlink" href="#insertion-info" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">info</span></code> subsection manages the insertion of particles. It allows us to control the insertion of particles at each time step. This section is already explained in the DEM examples. However, further information regarding the information box will be given. The volume of the insertion box should be large enough to fit all particles. Also, its bounds should be located within the mesh generated in the Mesh subsection.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection insertion info
-  set insertion method                               = volume
-  set inserted number of particles at each time step = 2000
-  set insertion frequency                            = 2000
-  set insertion box minimum x                        = -0.018
-  set insertion box minimum y                        = -0.05
-  set insertion box minimum z                        = -0.018
-  set insertion box maximum x                        = 0.018
-  set insertion box maximum y                        = 0.05
-  set insertion box maximum z                        = 0.018
-  set insertion distance threshold                   = 1.5
-  set insertion maximum offset                       = 0.2
-  set insertion prn seed                             = 19
-end
+    set insertion method                               = volume
+    set inserted number of particles at each time step = 2000
+    set insertion frequency                            = 2000
+    set insertion box points coordinates               = -0.018, -0.05, -0.018 : 0.018, 0.05, 0.018
+    set insertion distance threshold                   = 1.5
+    set insertion maximum offset                       = 0.2
+    set insertion prn seed                             = 19
+  end
 </pre></div>
 </div>
 </section>
