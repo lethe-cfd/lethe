@@ -1692,248 +1692,250 @@ $(function() {
 <div class="line"><a name="l01611"></a><span class="lineno"> 1611</span>&#160;              {</div>
 <div class="line"><a name="l01612"></a><span class="lineno"> 1612</span>&#160;                this-&gt;pcout</div>
 <div class="line"><a name="l01613"></a><span class="lineno"> 1613</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot;  -Iterative solver took : &quot;</span> &lt;&lt; solver_control.last_step()</div>
-<div class="line"><a name="l01614"></a><span class="lineno"> 1614</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01615"></a><span class="lineno"> 1615</span>&#160;              }</div>
-<div class="line"><a name="l01616"></a><span class="lineno"> 1616</span>&#160;          }</div>
-<div class="line"><a name="l01617"></a><span class="lineno"> 1617</span>&#160;          constraints_used.distribute(completely_distributed_solution);</div>
-<div class="line"><a name="l01618"></a><span class="lineno"> 1618</span>&#160;          <span class="keyword">auto</span> &amp;newton_update = this-&gt;newton_update;</div>
-<div class="line"><a name="l01619"></a><span class="lineno"> 1619</span>&#160;          newton_update       = completely_distributed_solution;</div>
-<div class="line"><a name="l01620"></a><span class="lineno"> 1620</span>&#160;          success             = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l01621"></a><span class="lineno"> 1621</span>&#160;        }</div>
-<div class="line"><a name="l01622"></a><span class="lineno"> 1622</span>&#160;      <span class="keywordflow">catch</span> (std::exception &amp;e)</div>
-<div class="line"><a name="l01623"></a><span class="lineno"> 1623</span>&#160;        {</div>
-<div class="line"><a name="l01624"></a><span class="lineno"> 1624</span>&#160;          current_preconditioner_fill_level += 1;</div>
-<div class="line"><a name="l01625"></a><span class="lineno"> 1625</span>&#160;          this-&gt;pcout</div>
-<div class="line"><a name="l01626"></a><span class="lineno"> 1626</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; GMRES solver failed! Trying with a higher preconditioner fill level. New fill = &quot;</span></div>
-<div class="line"><a name="l01627"></a><span class="lineno"> 1627</span>&#160;            &lt;&lt; current_preconditioner_fill_level &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01628"></a><span class="lineno"> 1628</span>&#160;          setup_preconditioner();</div>
-<div class="line"><a name="l01629"></a><span class="lineno"> 1629</span>&#160; </div>
-<div class="line"><a name="l01630"></a><span class="lineno"> 1630</span>&#160;          <span class="keywordflow">if</span> (iter == max_iter - 1 &amp;&amp; !this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01631"></a><span class="lineno"> 1631</span>&#160;                                         .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01632"></a><span class="lineno"> 1632</span>&#160;                                         .force_linear_solver_continuation)</div>
-<div class="line"><a name="l01633"></a><span class="lineno"> 1633</span>&#160;            <span class="keywordflow">throw</span> e;</div>
-<div class="line"><a name="l01634"></a><span class="lineno"> 1634</span>&#160;        }</div>
-<div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;      iter += 1;</div>
-<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;    }</div>
-<div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;  current_preconditioner_fill_level = initial_preconditioner_fill_level;</div>
-<div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;}</div>
-<div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160; </div>
-<div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160;<span class="comment">// The solver starts from the initial fill level provided in the parameter file.</span></div>
-<div class="line"><a name="l01641"></a><span class="lineno"> 1641</span>&#160;<span class="comment">// If for any reason the linear solver crashes, it will restart with a fill</span></div>
-<div class="line"><a name="l01642"></a><span class="lineno"> 1642</span>&#160;<span class="comment">// level increased by 1. This restart happens up to a maximum of 20 times, after</span></div>
-<div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;<span class="comment">// which it will let the solver crash. If a change happened on the fill level,</span></div>
-<div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;<span class="comment">// it will go back to its original value at the end of the restart process.</span></div>
-<div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l01647"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb"> 1647</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb">GLSNavierStokesSolver&lt;dim&gt;::solve_system_BiCGStab</a>(</div>
-<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span>   initial_step,</div>
-<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> absolute_residual,</div>
-<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> relative_residual)</div>
-<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;{</div>
-<div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160;  TimerOutput::Scope t(this-&gt;computing_timer, <span class="stringliteral">&quot;solve&quot;</span>);</div>
-<div class="line"><a name="l01653"></a><span class="lineno"> 1653</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_iter = 3;</div>
-<div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>       iter     = 0;</div>
-<div class="line"><a name="l01655"></a><span class="lineno"> 1655</span>&#160;  <span class="keywordtype">bool</span>               success  = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l01656"></a><span class="lineno"> 1656</span>&#160; </div>
+<div class="line"><a name="l01614"></a><span class="lineno"> 1614</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps to reach a residual norm of &quot;</span></div>
+<div class="line"><a name="l01615"></a><span class="lineno"> 1615</span>&#160;                  &lt;&lt; solver_control.last_value() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01616"></a><span class="lineno"> 1616</span>&#160;              }</div>
+<div class="line"><a name="l01617"></a><span class="lineno"> 1617</span>&#160;          }</div>
+<div class="line"><a name="l01618"></a><span class="lineno"> 1618</span>&#160;          constraints_used.distribute(completely_distributed_solution);</div>
+<div class="line"><a name="l01619"></a><span class="lineno"> 1619</span>&#160;          <span class="keyword">auto</span> &amp;newton_update = this-&gt;newton_update;</div>
+<div class="line"><a name="l01620"></a><span class="lineno"> 1620</span>&#160;          newton_update       = completely_distributed_solution;</div>
+<div class="line"><a name="l01621"></a><span class="lineno"> 1621</span>&#160;          success             = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l01622"></a><span class="lineno"> 1622</span>&#160;        }</div>
+<div class="line"><a name="l01623"></a><span class="lineno"> 1623</span>&#160;      <span class="keywordflow">catch</span> (std::exception &amp;e)</div>
+<div class="line"><a name="l01624"></a><span class="lineno"> 1624</span>&#160;        {</div>
+<div class="line"><a name="l01625"></a><span class="lineno"> 1625</span>&#160;          current_preconditioner_fill_level += 1;</div>
+<div class="line"><a name="l01626"></a><span class="lineno"> 1626</span>&#160;          this-&gt;pcout</div>
+<div class="line"><a name="l01627"></a><span class="lineno"> 1627</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; GMRES solver failed! Trying with a higher preconditioner fill level. New fill = &quot;</span></div>
+<div class="line"><a name="l01628"></a><span class="lineno"> 1628</span>&#160;            &lt;&lt; current_preconditioner_fill_level &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01629"></a><span class="lineno"> 1629</span>&#160;          setup_preconditioner();</div>
+<div class="line"><a name="l01630"></a><span class="lineno"> 1630</span>&#160; </div>
+<div class="line"><a name="l01631"></a><span class="lineno"> 1631</span>&#160;          <span class="keywordflow">if</span> (iter == max_iter - 1 &amp;&amp; !this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01632"></a><span class="lineno"> 1632</span>&#160;                                         .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01633"></a><span class="lineno"> 1633</span>&#160;                                         .force_linear_solver_continuation)</div>
+<div class="line"><a name="l01634"></a><span class="lineno"> 1634</span>&#160;            <span class="keywordflow">throw</span> e;</div>
+<div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;        }</div>
+<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;      iter += 1;</div>
+<div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;    }</div>
+<div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;  current_preconditioner_fill_level = initial_preconditioner_fill_level;</div>
+<div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160;}</div>
+<div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160; </div>
+<div class="line"><a name="l01641"></a><span class="lineno"> 1641</span>&#160;<span class="comment">// The solver starts from the initial fill level provided in the parameter file.</span></div>
+<div class="line"><a name="l01642"></a><span class="lineno"> 1642</span>&#160;<span class="comment">// If for any reason the linear solver crashes, it will restart with a fill</span></div>
+<div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;<span class="comment">// level increased by 1. This restart happens up to a maximum of 20 times, after</span></div>
+<div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;<span class="comment">// which it will let the solver crash. If a change happened on the fill level,</span></div>
+<div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;<span class="comment">// it will go back to its original value at the end of the restart process.</span></div>
+<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l01648"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb"> 1648</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb">GLSNavierStokesSolver&lt;dim&gt;::solve_system_BiCGStab</a>(</div>
+<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span>   initial_step,</div>
+<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> absolute_residual,</div>
+<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> relative_residual)</div>
+<div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160;{</div>
+<div class="line"><a name="l01653"></a><span class="lineno"> 1653</span>&#160;  TimerOutput::Scope t(this-&gt;computing_timer, <span class="stringliteral">&quot;solve&quot;</span>);</div>
+<div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_iter = 3;</div>
+<div class="line"><a name="l01655"></a><span class="lineno"> 1655</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>       iter     = 0;</div>
+<div class="line"><a name="l01656"></a><span class="lineno"> 1656</span>&#160;  <span class="keywordtype">bool</span>               success  = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l01657"></a><span class="lineno"> 1657</span>&#160; </div>
-<div class="line"><a name="l01658"></a><span class="lineno"> 1658</span>&#160;  <span class="keyword">auto</span> &amp;system_rhs          = this-&gt;system_rhs;</div>
-<div class="line"><a name="l01659"></a><span class="lineno"> 1659</span>&#160;  <span class="keyword">auto</span> &amp;nonzero_constraints = this-&gt;nonzero_constraints;</div>
-<div class="line"><a name="l01660"></a><span class="lineno"> 1660</span>&#160; </div>
-<div class="line"><a name="l01661"></a><span class="lineno"> 1661</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;zero_constraints_used =</div>
-<div class="line"><a name="l01662"></a><span class="lineno"> 1662</span>&#160;    (!this-&gt;simulation_parameters.constrain_solid_domain.enable) ?</div>
-<div class="line"><a name="l01663"></a><span class="lineno"> 1663</span>&#160;      this-&gt;zero_constraints :</div>
-<div class="line"><a name="l01664"></a><span class="lineno"> 1664</span>&#160;      this-&gt;dynamic_zero_constraints;</div>
-<div class="line"><a name="l01665"></a><span class="lineno"> 1665</span>&#160; </div>
-<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;constraints_used =</div>
-<div class="line"><a name="l01667"></a><span class="lineno"> 1667</span>&#160;    initial_step ? nonzero_constraints : zero_constraints_used;</div>
-<div class="line"><a name="l01668"></a><span class="lineno"> 1668</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> linear_solver_tolerance =</div>
-<div class="line"><a name="l01669"></a><span class="lineno"> 1669</span>&#160;    std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);</div>
-<div class="line"><a name="l01670"></a><span class="lineno"> 1670</span>&#160;  <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver.at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01671"></a><span class="lineno"> 1671</span>&#160;        .verbosity != <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a>)</div>
-<div class="line"><a name="l01672"></a><span class="lineno"> 1672</span>&#160;    {</div>
-<div class="line"><a name="l01673"></a><span class="lineno"> 1673</span>&#160;      this-&gt;pcout &lt;&lt; <span class="stringliteral">&quot;  -Tolerance of iterative solver is : &quot;</span></div>
-<div class="line"><a name="l01674"></a><span class="lineno"> 1674</span>&#160;                  &lt;&lt; linear_solver_tolerance &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01675"></a><span class="lineno"> 1675</span>&#160;    }</div>
-<div class="line"><a name="l01676"></a><span class="lineno"> 1676</span>&#160;  <a class="code" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> completely_distributed_solution(this-&gt;locally_owned_dofs,</div>
-<div class="line"><a name="l01677"></a><span class="lineno"> 1677</span>&#160;                                                   this-&gt;mpi_communicator);</div>
-<div class="line"><a name="l01678"></a><span class="lineno"> 1678</span>&#160; </div>
-<div class="line"><a name="l01679"></a><span class="lineno"> 1679</span>&#160;  <span class="keywordtype">bool</span> extra_verbose = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l01680"></a><span class="lineno"> 1680</span>&#160;  <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver.at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01681"></a><span class="lineno"> 1681</span>&#160;        .verbosity == <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52">Parameters::Verbosity::extra_verbose</a>)</div>
-<div class="line"><a name="l01682"></a><span class="lineno"> 1682</span>&#160;    extra_verbose = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l01683"></a><span class="lineno"> 1683</span>&#160;  TrilinosWrappers::SolverBicgstab::AdditionalData solver_parameters(</div>
-<div class="line"><a name="l01684"></a><span class="lineno"> 1684</span>&#160;    extra_verbose);</div>
-<div class="line"><a name="l01685"></a><span class="lineno"> 1685</span>&#160; </div>
-<div class="line"><a name="l01686"></a><span class="lineno"> 1686</span>&#160;  SolverControl solver_control(this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01687"></a><span class="lineno"> 1687</span>&#160;                                 .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01688"></a><span class="lineno"> 1688</span>&#160;                                 .max_iterations,</div>
-<div class="line"><a name="l01689"></a><span class="lineno"> 1689</span>&#160;                               linear_solver_tolerance,</div>
-<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160;                               <span class="keyword">true</span>,</div>
-<div class="line"><a name="l01691"></a><span class="lineno"> 1691</span>&#160;                               <span class="keyword">true</span>);</div>
-<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;  TrilinosWrappers::SolverBicgstab solver(solver_control, solver_parameters);</div>
-<div class="line"><a name="l01693"></a><span class="lineno"> 1693</span>&#160;  <span class="keywordflow">while</span> (success == <span class="keyword">false</span> and iter &lt; max_iter)</div>
-<div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160;    {</div>
-<div class="line"><a name="l01695"></a><span class="lineno"> 1695</span>&#160;      <span class="keywordflow">try</span></div>
-<div class="line"><a name="l01696"></a><span class="lineno"> 1696</span>&#160;        {</div>
-<div class="line"><a name="l01697"></a><span class="lineno"> 1697</span>&#160;          <span class="keywordflow">if</span> (!ilu_preconditioner)</div>
-<div class="line"><a name="l01698"></a><span class="lineno"> 1698</span>&#160;            setup_preconditioner();</div>
-<div class="line"><a name="l01699"></a><span class="lineno"> 1699</span>&#160; </div>
-<div class="line"><a name="l01700"></a><span class="lineno"> 1700</span>&#160;          {</div>
-<div class="line"><a name="l01701"></a><span class="lineno"> 1701</span>&#160;            TimerOutput::Scope t(this-&gt;computing_timer, <span class="stringliteral">&quot;Solve linear system&quot;</span>);</div>
-<div class="line"><a name="l01702"></a><span class="lineno"> 1702</span>&#160; </div>
-<div class="line"><a name="l01703"></a><span class="lineno"> 1703</span>&#160;            <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01704"></a><span class="lineno"> 1704</span>&#160;                  .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01705"></a><span class="lineno"> 1705</span>&#160;                  .preconditioner ==</div>
-<div class="line"><a name="l01706"></a><span class="lineno"> 1706</span>&#160;                <a class="code" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::PreconditionerType::ilu</a>)</div>
-<div class="line"><a name="l01707"></a><span class="lineno"> 1707</span>&#160;              solver.solve(system_matrix,</div>
-<div class="line"><a name="l01708"></a><span class="lineno"> 1708</span>&#160;                           completely_distributed_solution,</div>
-<div class="line"><a name="l01709"></a><span class="lineno"> 1709</span>&#160;                           system_rhs,</div>
-<div class="line"><a name="l01710"></a><span class="lineno"> 1710</span>&#160;                           *ilu_preconditioner);</div>
-<div class="line"><a name="l01711"></a><span class="lineno"> 1711</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l01712"></a><span class="lineno"> 1712</span>&#160;              AssertThrow(</div>
-<div class="line"><a name="l01713"></a><span class="lineno"> 1713</span>&#160;                this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01714"></a><span class="lineno"> 1714</span>&#160;                    .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01715"></a><span class="lineno"> 1715</span>&#160;                    .preconditioner ==</div>
-<div class="line"><a name="l01716"></a><span class="lineno"> 1716</span>&#160;                  <a class="code" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::PreconditionerType::ilu</a>,</div>
-<div class="line"><a name="l01717"></a><span class="lineno"> 1717</span>&#160;                ExcMessage(</div>
-<div class="line"><a name="l01718"></a><span class="lineno"> 1718</span>&#160;                  <span class="stringliteral">&quot;This linear solver does not support this preconditioner. Only &lt;ilu&gt; preconditioner is supported.&quot;</span>));</div>
-<div class="line"><a name="l01719"></a><span class="lineno"> 1719</span>&#160; </div>
-<div class="line"><a name="l01720"></a><span class="lineno"> 1720</span>&#160;            <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01721"></a><span class="lineno"> 1721</span>&#160;                  .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01722"></a><span class="lineno"> 1722</span>&#160;                  .verbosity != <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a>)</div>
-<div class="line"><a name="l01723"></a><span class="lineno"> 1723</span>&#160;              {</div>
-<div class="line"><a name="l01724"></a><span class="lineno"> 1724</span>&#160;                this-&gt;pcout</div>
-<div class="line"><a name="l01725"></a><span class="lineno"> 1725</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot;  -Iterative solver took : &quot;</span> &lt;&lt; solver_control.last_step()</div>
-<div class="line"><a name="l01726"></a><span class="lineno"> 1726</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01727"></a><span class="lineno"> 1727</span>&#160;              }</div>
-<div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;            constraints_used.distribute(completely_distributed_solution);</div>
-<div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;            this-&gt;newton_update = completely_distributed_solution;</div>
-<div class="line"><a name="l01730"></a><span class="lineno"> 1730</span>&#160;          }</div>
-<div class="line"><a name="l01731"></a><span class="lineno"> 1731</span>&#160;          success = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160;        }</div>
-<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;      <span class="keywordflow">catch</span> (std::exception &amp;e)</div>
-<div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160;        {</div>
-<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;          current_preconditioner_fill_level += 1;</div>
-<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;          this-&gt;pcout</div>
-<div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; BiCGStab solver failed! Trying with a higher preconditioner fill level. New fill = &quot;</span></div>
-<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;            &lt;&lt; current_preconditioner_fill_level &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160;          setup_preconditioner();</div>
-<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160; </div>
-<div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160;          <span class="keywordflow">if</span> (iter == max_iter - 1 &amp;&amp; !this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160;                                         .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160;                                         .force_linear_solver_continuation)</div>
-<div class="line"><a name="l01744"></a><span class="lineno"> 1744</span>&#160;            <span class="keywordflow">throw</span> e;</div>
-<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160;        }</div>
-<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;      iter += 1;</div>
-<div class="line"><a name="l01747"></a><span class="lineno"> 1747</span>&#160;    }</div>
-<div class="line"><a name="l01748"></a><span class="lineno"> 1748</span>&#160;  current_preconditioner_fill_level = initial_preconditioner_fill_level;</div>
-<div class="line"><a name="l01749"></a><span class="lineno"> 1749</span>&#160;}</div>
-<div class="line"><a name="l01750"></a><span class="lineno"> 1750</span>&#160; </div>
-<div class="line"><a name="l01751"></a><span class="lineno"> 1751</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l01752"></a><span class="lineno"> 1752</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l01753"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078"> 1753</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078">GLSNavierStokesSolver&lt;dim&gt;::solve_system_direct</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>   initial_step,</div>
-<div class="line"><a name="l01754"></a><span class="lineno"> 1754</span>&#160;                                                <span class="keyword">const</span> <span class="keywordtype">double</span> absolute_residual,</div>
-<div class="line"><a name="l01755"></a><span class="lineno"> 1755</span>&#160;                                                <span class="keyword">const</span> <span class="keywordtype">double</span> relative_residual)</div>
-<div class="line"><a name="l01756"></a><span class="lineno"> 1756</span>&#160;{</div>
-<div class="line"><a name="l01757"></a><span class="lineno"> 1757</span>&#160;  <span class="keyword">auto</span> &amp;system_rhs          = this-&gt;system_rhs;</div>
-<div class="line"><a name="l01758"></a><span class="lineno"> 1758</span>&#160;  <span class="keyword">auto</span> &amp;nonzero_constraints = this-&gt;nonzero_constraints;</div>
-<div class="line"><a name="l01759"></a><span class="lineno"> 1759</span>&#160; </div>
-<div class="line"><a name="l01760"></a><span class="lineno"> 1760</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;zero_constraints_used =</div>
-<div class="line"><a name="l01761"></a><span class="lineno"> 1761</span>&#160;    (!this-&gt;simulation_parameters.constrain_solid_domain.enable) ?</div>
-<div class="line"><a name="l01762"></a><span class="lineno"> 1762</span>&#160;      this-&gt;zero_constraints :</div>
-<div class="line"><a name="l01763"></a><span class="lineno"> 1763</span>&#160;      this-&gt;dynamic_zero_constraints;</div>
-<div class="line"><a name="l01764"></a><span class="lineno"> 1764</span>&#160; </div>
-<div class="line"><a name="l01765"></a><span class="lineno"> 1765</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;constraints_used =</div>
-<div class="line"><a name="l01766"></a><span class="lineno"> 1766</span>&#160;    initial_step ? nonzero_constraints : zero_constraints_used;</div>
-<div class="line"><a name="l01767"></a><span class="lineno"> 1767</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> linear_solver_tolerance =</div>
-<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160;    std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);</div>
-<div class="line"><a name="l01769"></a><span class="lineno"> 1769</span>&#160; </div>
-<div class="line"><a name="l01770"></a><span class="lineno"> 1770</span>&#160;  <a class="code" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> completely_distributed_solution(this-&gt;locally_owned_dofs,</div>
-<div class="line"><a name="l01771"></a><span class="lineno"> 1771</span>&#160;                                                   this-&gt;mpi_communicator);</div>
-<div class="line"><a name="l01772"></a><span class="lineno"> 1772</span>&#160; </div>
-<div class="line"><a name="l01773"></a><span class="lineno"> 1773</span>&#160;  SolverControl solver_control(this-&gt;simulation_parameters.linear_solver</div>
-<div class="line"><a name="l01774"></a><span class="lineno"> 1774</span>&#160;                                 .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
-<div class="line"><a name="l01775"></a><span class="lineno"> 1775</span>&#160;                                 .max_iterations,</div>
-<div class="line"><a name="l01776"></a><span class="lineno"> 1776</span>&#160;                               linear_solver_tolerance,</div>
-<div class="line"><a name="l01777"></a><span class="lineno"> 1777</span>&#160;                               <span class="keyword">true</span>,</div>
-<div class="line"><a name="l01778"></a><span class="lineno"> 1778</span>&#160;                               <span class="keyword">true</span>);</div>
-<div class="line"><a name="l01779"></a><span class="lineno"> 1779</span>&#160;  TrilinosWrappers::SolverDirect solver(solver_control);</div>
-<div class="line"><a name="l01780"></a><span class="lineno"> 1780</span>&#160; </div>
-<div class="line"><a name="l01781"></a><span class="lineno"> 1781</span>&#160;  solver.initialize(system_matrix);</div>
-<div class="line"><a name="l01782"></a><span class="lineno"> 1782</span>&#160;  solver.solve(completely_distributed_solution, system_rhs);</div>
-<div class="line"><a name="l01783"></a><span class="lineno"> 1783</span>&#160;  constraints_used.distribute(completely_distributed_solution);</div>
-<div class="line"><a name="l01784"></a><span class="lineno"> 1784</span>&#160;  <span class="keyword">auto</span> &amp;newton_update = this-&gt;newton_update;</div>
-<div class="line"><a name="l01785"></a><span class="lineno"> 1785</span>&#160;  newton_update       = completely_distributed_solution;</div>
-<div class="line"><a name="l01786"></a><span class="lineno"> 1786</span>&#160;}</div>
-<div class="line"><a name="l01787"></a><span class="lineno"> 1787</span>&#160; </div>
-<div class="line"><a name="l01788"></a><span class="lineno"> 1788</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l01789"></a><span class="lineno"> 1789</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l01790"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47"> 1790</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47">GLSNavierStokesSolver&lt;dim&gt;::solve</a>()</div>
-<div class="line"><a name="l01791"></a><span class="lineno"> 1791</span>&#160;{</div>
-<div class="line"><a name="l01792"></a><span class="lineno"> 1792</span>&#160;  <span class="comment">// This is enforced to 1 right now because it does not provide</span></div>
-<div class="line"><a name="l01793"></a><span class="lineno"> 1793</span>&#160;  <span class="comment">// better speed-up than using MPI. This could be eventually changed...</span></div>
-<div class="line"><a name="l01794"></a><span class="lineno"> 1794</span>&#160;  MultithreadInfo::set_thread_limit(1);</div>
-<div class="line"><a name="l01795"></a><span class="lineno"> 1795</span>&#160; </div>
-<div class="line"><a name="l01796"></a><span class="lineno"> 1796</span>&#160;  <a class="code" href="grids_8h.html#a1f27ceafbf8c10616efa13f334641b85">read_mesh_and_manifolds</a>(</div>
-<div class="line"><a name="l01797"></a><span class="lineno"> 1797</span>&#160;    *this-&gt;triangulation,</div>
-<div class="line"><a name="l01798"></a><span class="lineno"> 1798</span>&#160;    this-&gt;simulation_parameters.mesh,</div>
-<div class="line"><a name="l01799"></a><span class="lineno"> 1799</span>&#160;    this-&gt;simulation_parameters.manifolds_parameters,</div>
-<div class="line"><a name="l01800"></a><span class="lineno"> 1800</span>&#160;    this-&gt;simulation_parameters.restart_parameters.restart,</div>
-<div class="line"><a name="l01801"></a><span class="lineno"> 1801</span>&#160;    this-&gt;simulation_parameters.boundary_conditions);</div>
-<div class="line"><a name="l01802"></a><span class="lineno"> 1802</span>&#160; </div>
-<div class="line"><a name="l01803"></a><span class="lineno"> 1803</span>&#160;  this-&gt;setup_dofs();</div>
-<div class="line"><a name="l01804"></a><span class="lineno"> 1804</span>&#160;  this-&gt;enable_dynamic_zero_constraints_fd();</div>
-<div class="line"><a name="l01805"></a><span class="lineno"> 1805</span>&#160;  this-&gt;box_refine_mesh();</div>
-<div class="line"><a name="l01806"></a><span class="lineno"> 1806</span>&#160;  this-&gt;set_initial_condition(</div>
-<div class="line"><a name="l01807"></a><span class="lineno"> 1807</span>&#160;    this-&gt;simulation_parameters.initial_condition-&gt;type,</div>
-<div class="line"><a name="l01808"></a><span class="lineno"> 1808</span>&#160;    this-&gt;simulation_parameters.restart_parameters.restart);</div>
-<div class="line"><a name="l01809"></a><span class="lineno"> 1809</span>&#160;  this-&gt;update_multiphysics_time_average_solution();</div>
-<div class="line"><a name="l01810"></a><span class="lineno"> 1810</span>&#160; </div>
-<div class="line"><a name="l01811"></a><span class="lineno"> 1811</span>&#160;  <span class="keywordflow">while</span> (this-&gt;simulation_control-&gt;integrate())</div>
-<div class="line"><a name="l01812"></a><span class="lineno"> 1812</span>&#160;    {</div>
-<div class="line"><a name="l01813"></a><span class="lineno"> 1813</span>&#160;      this-&gt;forcing_function-&gt;set_time(</div>
-<div class="line"><a name="l01814"></a><span class="lineno"> 1814</span>&#160;        this-&gt;simulation_control-&gt;get_current_time());</div>
-<div class="line"><a name="l01815"></a><span class="lineno"> 1815</span>&#160; </div>
-<div class="line"><a name="l01816"></a><span class="lineno"> 1816</span>&#160;      <span class="keywordtype">bool</span> refinement_step;</div>
-<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160;      <span class="keywordflow">if</span> (this-&gt;simulation_parameters.mesh_adaptation.refinement_at_frequency)</div>
-<div class="line"><a name="l01818"></a><span class="lineno"> 1818</span>&#160;        refinement_step =</div>
-<div class="line"><a name="l01819"></a><span class="lineno"> 1819</span>&#160;          this-&gt;simulation_control-&gt;get_step_number() %</div>
-<div class="line"><a name="l01820"></a><span class="lineno"> 1820</span>&#160;            this-&gt;simulation_parameters.mesh_adaptation.frequency !=</div>
-<div class="line"><a name="l01821"></a><span class="lineno"> 1821</span>&#160;          0;</div>
-<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;      <span class="keywordflow">else</span></div>
-<div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;        refinement_step = this-&gt;simulation_control-&gt;get_step_number() == 0;</div>
-<div class="line"><a name="l01824"></a><span class="lineno"> 1824</span>&#160;      <span class="keywordflow">if</span> (refinement_step ||</div>
-<div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160;          this-&gt;simulation_parameters.mesh_adaptation.type ==</div>
-<div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160;            <a class="code" href="structParameters_1_1MeshAdaptation.html#a20a32a04c8c684495ff2d3c7be73c5a2a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::MeshAdaptation::Type::none</a> ||</div>
-<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;          this-&gt;simulation_control-&gt;is_at_start())</div>
-<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;        {</div>
-<div class="line"><a name="l01829"></a><span class="lineno"> 1829</span>&#160;          <span class="comment">// We allow the physics to update their boundary conditions</span></div>
-<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;          <span class="comment">// according to their own parameters</span></div>
-<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160;          this-&gt;update_boundary_conditions();</div>
-<div class="line"><a name="l01832"></a><span class="lineno"> 1832</span>&#160;          this-&gt;multiphysics-&gt;update_boundary_conditions();</div>
-<div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;        }</div>
-<div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160; </div>
-<div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;      this-&gt;simulation_control-&gt;print_progression(this-&gt;pcout);</div>
-<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;      this-&gt;dynamic_flow_control();</div>
-<div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160; </div>
-<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;      <span class="keywordflow">if</span> (!this-&gt;simulation_control-&gt;is_at_start())</div>
-<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160;        <a class="code" href="classNavierStokesBase.html#a57ffa198f9fabb15e3af4c9fa2921e18">NavierStokesBase&lt;dim, GlobalVectorType, IndexSet&gt;::refine_mesh</a>();</div>
-<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160; </div>
-<div class="line"><a name="l01841"></a><span class="lineno"> 1841</span>&#160;      this-&gt;define_dynamic_zero_constraints();</div>
-<div class="line"><a name="l01842"></a><span class="lineno"> 1842</span>&#160;      this-&gt;iterate();</div>
-<div class="line"><a name="l01843"></a><span class="lineno"> 1843</span>&#160;      this-&gt;postprocess(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l01844"></a><span class="lineno"> 1844</span>&#160;      this-&gt;finish_time_step();</div>
-<div class="line"><a name="l01845"></a><span class="lineno"> 1845</span>&#160;    }</div>
-<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160; </div>
-<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160; </div>
-<div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160;  this-&gt;finish_simulation();</div>
-<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160;}</div>
-<div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160; </div>
-<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160; </div>
-<div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160;<span class="comment">// Pre-compile the 2D and 3D Navier-Stokes solver to ensure that the library is</span></div>
-<div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160;<span class="comment">// valid before we actually compile the solver This greatly helps with debugging</span></div>
-<div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver&lt;2&gt;</a>;</div>
-<div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver&lt;3&gt;</a>;</div>
+<div class="line"><a name="l01658"></a><span class="lineno"> 1658</span>&#160; </div>
+<div class="line"><a name="l01659"></a><span class="lineno"> 1659</span>&#160;  <span class="keyword">auto</span> &amp;system_rhs          = this-&gt;system_rhs;</div>
+<div class="line"><a name="l01660"></a><span class="lineno"> 1660</span>&#160;  <span class="keyword">auto</span> &amp;nonzero_constraints = this-&gt;nonzero_constraints;</div>
+<div class="line"><a name="l01661"></a><span class="lineno"> 1661</span>&#160; </div>
+<div class="line"><a name="l01662"></a><span class="lineno"> 1662</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;zero_constraints_used =</div>
+<div class="line"><a name="l01663"></a><span class="lineno"> 1663</span>&#160;    (!this-&gt;simulation_parameters.constrain_solid_domain.enable) ?</div>
+<div class="line"><a name="l01664"></a><span class="lineno"> 1664</span>&#160;      this-&gt;zero_constraints :</div>
+<div class="line"><a name="l01665"></a><span class="lineno"> 1665</span>&#160;      this-&gt;dynamic_zero_constraints;</div>
+<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160; </div>
+<div class="line"><a name="l01667"></a><span class="lineno"> 1667</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;constraints_used =</div>
+<div class="line"><a name="l01668"></a><span class="lineno"> 1668</span>&#160;    initial_step ? nonzero_constraints : zero_constraints_used;</div>
+<div class="line"><a name="l01669"></a><span class="lineno"> 1669</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> linear_solver_tolerance =</div>
+<div class="line"><a name="l01670"></a><span class="lineno"> 1670</span>&#160;    std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);</div>
+<div class="line"><a name="l01671"></a><span class="lineno"> 1671</span>&#160;  <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver.at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01672"></a><span class="lineno"> 1672</span>&#160;        .verbosity != <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a>)</div>
+<div class="line"><a name="l01673"></a><span class="lineno"> 1673</span>&#160;    {</div>
+<div class="line"><a name="l01674"></a><span class="lineno"> 1674</span>&#160;      this-&gt;pcout &lt;&lt; <span class="stringliteral">&quot;  -Tolerance of iterative solver is : &quot;</span></div>
+<div class="line"><a name="l01675"></a><span class="lineno"> 1675</span>&#160;                  &lt;&lt; linear_solver_tolerance &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01676"></a><span class="lineno"> 1676</span>&#160;    }</div>
+<div class="line"><a name="l01677"></a><span class="lineno"> 1677</span>&#160;  <a class="code" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> completely_distributed_solution(this-&gt;locally_owned_dofs,</div>
+<div class="line"><a name="l01678"></a><span class="lineno"> 1678</span>&#160;                                                   this-&gt;mpi_communicator);</div>
+<div class="line"><a name="l01679"></a><span class="lineno"> 1679</span>&#160; </div>
+<div class="line"><a name="l01680"></a><span class="lineno"> 1680</span>&#160;  <span class="keywordtype">bool</span> extra_verbose = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l01681"></a><span class="lineno"> 1681</span>&#160;  <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver.at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01682"></a><span class="lineno"> 1682</span>&#160;        .verbosity == <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52">Parameters::Verbosity::extra_verbose</a>)</div>
+<div class="line"><a name="l01683"></a><span class="lineno"> 1683</span>&#160;    extra_verbose = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l01684"></a><span class="lineno"> 1684</span>&#160;  TrilinosWrappers::SolverBicgstab::AdditionalData solver_parameters(</div>
+<div class="line"><a name="l01685"></a><span class="lineno"> 1685</span>&#160;    extra_verbose);</div>
+<div class="line"><a name="l01686"></a><span class="lineno"> 1686</span>&#160; </div>
+<div class="line"><a name="l01687"></a><span class="lineno"> 1687</span>&#160;  SolverControl solver_control(this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01688"></a><span class="lineno"> 1688</span>&#160;                                 .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01689"></a><span class="lineno"> 1689</span>&#160;                                 .max_iterations,</div>
+<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160;                               linear_solver_tolerance,</div>
+<div class="line"><a name="l01691"></a><span class="lineno"> 1691</span>&#160;                               <span class="keyword">true</span>,</div>
+<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;                               <span class="keyword">true</span>);</div>
+<div class="line"><a name="l01693"></a><span class="lineno"> 1693</span>&#160;  TrilinosWrappers::SolverBicgstab solver(solver_control, solver_parameters);</div>
+<div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160;  <span class="keywordflow">while</span> (success == <span class="keyword">false</span> and iter &lt; max_iter)</div>
+<div class="line"><a name="l01695"></a><span class="lineno"> 1695</span>&#160;    {</div>
+<div class="line"><a name="l01696"></a><span class="lineno"> 1696</span>&#160;      <span class="keywordflow">try</span></div>
+<div class="line"><a name="l01697"></a><span class="lineno"> 1697</span>&#160;        {</div>
+<div class="line"><a name="l01698"></a><span class="lineno"> 1698</span>&#160;          <span class="keywordflow">if</span> (!ilu_preconditioner)</div>
+<div class="line"><a name="l01699"></a><span class="lineno"> 1699</span>&#160;            setup_preconditioner();</div>
+<div class="line"><a name="l01700"></a><span class="lineno"> 1700</span>&#160; </div>
+<div class="line"><a name="l01701"></a><span class="lineno"> 1701</span>&#160;          {</div>
+<div class="line"><a name="l01702"></a><span class="lineno"> 1702</span>&#160;            TimerOutput::Scope t(this-&gt;computing_timer, <span class="stringliteral">&quot;Solve linear system&quot;</span>);</div>
+<div class="line"><a name="l01703"></a><span class="lineno"> 1703</span>&#160; </div>
+<div class="line"><a name="l01704"></a><span class="lineno"> 1704</span>&#160;            <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01705"></a><span class="lineno"> 1705</span>&#160;                  .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01706"></a><span class="lineno"> 1706</span>&#160;                  .preconditioner ==</div>
+<div class="line"><a name="l01707"></a><span class="lineno"> 1707</span>&#160;                <a class="code" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::PreconditionerType::ilu</a>)</div>
+<div class="line"><a name="l01708"></a><span class="lineno"> 1708</span>&#160;              solver.solve(system_matrix,</div>
+<div class="line"><a name="l01709"></a><span class="lineno"> 1709</span>&#160;                           completely_distributed_solution,</div>
+<div class="line"><a name="l01710"></a><span class="lineno"> 1710</span>&#160;                           system_rhs,</div>
+<div class="line"><a name="l01711"></a><span class="lineno"> 1711</span>&#160;                           *ilu_preconditioner);</div>
+<div class="line"><a name="l01712"></a><span class="lineno"> 1712</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l01713"></a><span class="lineno"> 1713</span>&#160;              AssertThrow(</div>
+<div class="line"><a name="l01714"></a><span class="lineno"> 1714</span>&#160;                this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01715"></a><span class="lineno"> 1715</span>&#160;                    .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01716"></a><span class="lineno"> 1716</span>&#160;                    .preconditioner ==</div>
+<div class="line"><a name="l01717"></a><span class="lineno"> 1717</span>&#160;                  <a class="code" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::PreconditionerType::ilu</a>,</div>
+<div class="line"><a name="l01718"></a><span class="lineno"> 1718</span>&#160;                ExcMessage(</div>
+<div class="line"><a name="l01719"></a><span class="lineno"> 1719</span>&#160;                  <span class="stringliteral">&quot;This linear solver does not support this preconditioner. Only &lt;ilu&gt; preconditioner is supported.&quot;</span>));</div>
+<div class="line"><a name="l01720"></a><span class="lineno"> 1720</span>&#160; </div>
+<div class="line"><a name="l01721"></a><span class="lineno"> 1721</span>&#160;            <span class="keywordflow">if</span> (this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01722"></a><span class="lineno"> 1722</span>&#160;                  .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01723"></a><span class="lineno"> 1723</span>&#160;                  .verbosity != <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a>)</div>
+<div class="line"><a name="l01724"></a><span class="lineno"> 1724</span>&#160;              {</div>
+<div class="line"><a name="l01725"></a><span class="lineno"> 1725</span>&#160;                this-&gt;pcout</div>
+<div class="line"><a name="l01726"></a><span class="lineno"> 1726</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot;  -Iterative solver took : &quot;</span> &lt;&lt; solver_control.last_step()</div>
+<div class="line"><a name="l01727"></a><span class="lineno"> 1727</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps to reach a residual norm of &quot;</span></div>
+<div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;                  &lt;&lt; solver_control.last_value() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;              }</div>
+<div class="line"><a name="l01730"></a><span class="lineno"> 1730</span>&#160;            constraints_used.distribute(completely_distributed_solution);</div>
+<div class="line"><a name="l01731"></a><span class="lineno"> 1731</span>&#160;            this-&gt;newton_update = completely_distributed_solution;</div>
+<div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160;          }</div>
+<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;          success = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160;        }</div>
+<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;      <span class="keywordflow">catch</span> (std::exception &amp;e)</div>
+<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;        {</div>
+<div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;          current_preconditioner_fill_level += 1;</div>
+<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;          this-&gt;pcout</div>
+<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; BiCGStab solver failed! Trying with a higher preconditioner fill level. New fill = &quot;</span></div>
+<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160;            &lt;&lt; current_preconditioner_fill_level &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160;          setup_preconditioner();</div>
+<div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160; </div>
+<div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160;          <span class="keywordflow">if</span> (iter == max_iter - 1 &amp;&amp; !this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01744"></a><span class="lineno"> 1744</span>&#160;                                         .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160;                                         .force_linear_solver_continuation)</div>
+<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;            <span class="keywordflow">throw</span> e;</div>
+<div class="line"><a name="l01747"></a><span class="lineno"> 1747</span>&#160;        }</div>
+<div class="line"><a name="l01748"></a><span class="lineno"> 1748</span>&#160;      iter += 1;</div>
+<div class="line"><a name="l01749"></a><span class="lineno"> 1749</span>&#160;    }</div>
+<div class="line"><a name="l01750"></a><span class="lineno"> 1750</span>&#160;  current_preconditioner_fill_level = initial_preconditioner_fill_level;</div>
+<div class="line"><a name="l01751"></a><span class="lineno"> 1751</span>&#160;}</div>
+<div class="line"><a name="l01752"></a><span class="lineno"> 1752</span>&#160; </div>
+<div class="line"><a name="l01753"></a><span class="lineno"> 1753</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l01754"></a><span class="lineno"> 1754</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l01755"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078"> 1755</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078">GLSNavierStokesSolver&lt;dim&gt;::solve_system_direct</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>   initial_step,</div>
+<div class="line"><a name="l01756"></a><span class="lineno"> 1756</span>&#160;                                                <span class="keyword">const</span> <span class="keywordtype">double</span> absolute_residual,</div>
+<div class="line"><a name="l01757"></a><span class="lineno"> 1757</span>&#160;                                                <span class="keyword">const</span> <span class="keywordtype">double</span> relative_residual)</div>
+<div class="line"><a name="l01758"></a><span class="lineno"> 1758</span>&#160;{</div>
+<div class="line"><a name="l01759"></a><span class="lineno"> 1759</span>&#160;  <span class="keyword">auto</span> &amp;system_rhs          = this-&gt;system_rhs;</div>
+<div class="line"><a name="l01760"></a><span class="lineno"> 1760</span>&#160;  <span class="keyword">auto</span> &amp;nonzero_constraints = this-&gt;nonzero_constraints;</div>
+<div class="line"><a name="l01761"></a><span class="lineno"> 1761</span>&#160; </div>
+<div class="line"><a name="l01762"></a><span class="lineno"> 1762</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;zero_constraints_used =</div>
+<div class="line"><a name="l01763"></a><span class="lineno"> 1763</span>&#160;    (!this-&gt;simulation_parameters.constrain_solid_domain.enable) ?</div>
+<div class="line"><a name="l01764"></a><span class="lineno"> 1764</span>&#160;      this-&gt;zero_constraints :</div>
+<div class="line"><a name="l01765"></a><span class="lineno"> 1765</span>&#160;      this-&gt;dynamic_zero_constraints;</div>
+<div class="line"><a name="l01766"></a><span class="lineno"> 1766</span>&#160; </div>
+<div class="line"><a name="l01767"></a><span class="lineno"> 1767</span>&#160;  <span class="keyword">const</span> AffineConstraints&lt;double&gt; &amp;constraints_used =</div>
+<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160;    initial_step ? nonzero_constraints : zero_constraints_used;</div>
+<div class="line"><a name="l01769"></a><span class="lineno"> 1769</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> linear_solver_tolerance =</div>
+<div class="line"><a name="l01770"></a><span class="lineno"> 1770</span>&#160;    std::max(relative_residual * system_rhs.l2_norm(), absolute_residual);</div>
+<div class="line"><a name="l01771"></a><span class="lineno"> 1771</span>&#160; </div>
+<div class="line"><a name="l01772"></a><span class="lineno"> 1772</span>&#160;  <a class="code" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> completely_distributed_solution(this-&gt;locally_owned_dofs,</div>
+<div class="line"><a name="l01773"></a><span class="lineno"> 1773</span>&#160;                                                   this-&gt;mpi_communicator);</div>
+<div class="line"><a name="l01774"></a><span class="lineno"> 1774</span>&#160; </div>
+<div class="line"><a name="l01775"></a><span class="lineno"> 1775</span>&#160;  SolverControl solver_control(this-&gt;simulation_parameters.linear_solver</div>
+<div class="line"><a name="l01776"></a><span class="lineno"> 1776</span>&#160;                                 .at(<a class="code" href="multiphysics_8h.html#ae14bb720bc9a37edc36fb8d90df712c2a0bb34d58a3e8914bc47bf4b415f206c2">PhysicsID::fluid_dynamics</a>)</div>
+<div class="line"><a name="l01777"></a><span class="lineno"> 1777</span>&#160;                                 .max_iterations,</div>
+<div class="line"><a name="l01778"></a><span class="lineno"> 1778</span>&#160;                               linear_solver_tolerance,</div>
+<div class="line"><a name="l01779"></a><span class="lineno"> 1779</span>&#160;                               <span class="keyword">true</span>,</div>
+<div class="line"><a name="l01780"></a><span class="lineno"> 1780</span>&#160;                               <span class="keyword">true</span>);</div>
+<div class="line"><a name="l01781"></a><span class="lineno"> 1781</span>&#160;  TrilinosWrappers::SolverDirect solver(solver_control);</div>
+<div class="line"><a name="l01782"></a><span class="lineno"> 1782</span>&#160; </div>
+<div class="line"><a name="l01783"></a><span class="lineno"> 1783</span>&#160;  solver.initialize(system_matrix);</div>
+<div class="line"><a name="l01784"></a><span class="lineno"> 1784</span>&#160;  solver.solve(completely_distributed_solution, system_rhs);</div>
+<div class="line"><a name="l01785"></a><span class="lineno"> 1785</span>&#160;  constraints_used.distribute(completely_distributed_solution);</div>
+<div class="line"><a name="l01786"></a><span class="lineno"> 1786</span>&#160;  <span class="keyword">auto</span> &amp;newton_update = this-&gt;newton_update;</div>
+<div class="line"><a name="l01787"></a><span class="lineno"> 1787</span>&#160;  newton_update       = completely_distributed_solution;</div>
+<div class="line"><a name="l01788"></a><span class="lineno"> 1788</span>&#160;}</div>
+<div class="line"><a name="l01789"></a><span class="lineno"> 1789</span>&#160; </div>
+<div class="line"><a name="l01790"></a><span class="lineno"> 1790</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l01791"></a><span class="lineno"> 1791</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l01792"></a><span class="lineno"><a class="line" href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47"> 1792</a></span>&#160;<a class="code" href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47">GLSNavierStokesSolver&lt;dim&gt;::solve</a>()</div>
+<div class="line"><a name="l01793"></a><span class="lineno"> 1793</span>&#160;{</div>
+<div class="line"><a name="l01794"></a><span class="lineno"> 1794</span>&#160;  <span class="comment">// This is enforced to 1 right now because it does not provide</span></div>
+<div class="line"><a name="l01795"></a><span class="lineno"> 1795</span>&#160;  <span class="comment">// better speed-up than using MPI. This could be eventually changed...</span></div>
+<div class="line"><a name="l01796"></a><span class="lineno"> 1796</span>&#160;  MultithreadInfo::set_thread_limit(1);</div>
+<div class="line"><a name="l01797"></a><span class="lineno"> 1797</span>&#160; </div>
+<div class="line"><a name="l01798"></a><span class="lineno"> 1798</span>&#160;  <a class="code" href="grids_8h.html#a1f27ceafbf8c10616efa13f334641b85">read_mesh_and_manifolds</a>(</div>
+<div class="line"><a name="l01799"></a><span class="lineno"> 1799</span>&#160;    *this-&gt;triangulation,</div>
+<div class="line"><a name="l01800"></a><span class="lineno"> 1800</span>&#160;    this-&gt;simulation_parameters.mesh,</div>
+<div class="line"><a name="l01801"></a><span class="lineno"> 1801</span>&#160;    this-&gt;simulation_parameters.manifolds_parameters,</div>
+<div class="line"><a name="l01802"></a><span class="lineno"> 1802</span>&#160;    this-&gt;simulation_parameters.restart_parameters.restart,</div>
+<div class="line"><a name="l01803"></a><span class="lineno"> 1803</span>&#160;    this-&gt;simulation_parameters.boundary_conditions);</div>
+<div class="line"><a name="l01804"></a><span class="lineno"> 1804</span>&#160; </div>
+<div class="line"><a name="l01805"></a><span class="lineno"> 1805</span>&#160;  this-&gt;setup_dofs();</div>
+<div class="line"><a name="l01806"></a><span class="lineno"> 1806</span>&#160;  this-&gt;enable_dynamic_zero_constraints_fd();</div>
+<div class="line"><a name="l01807"></a><span class="lineno"> 1807</span>&#160;  this-&gt;box_refine_mesh();</div>
+<div class="line"><a name="l01808"></a><span class="lineno"> 1808</span>&#160;  this-&gt;set_initial_condition(</div>
+<div class="line"><a name="l01809"></a><span class="lineno"> 1809</span>&#160;    this-&gt;simulation_parameters.initial_condition-&gt;type,</div>
+<div class="line"><a name="l01810"></a><span class="lineno"> 1810</span>&#160;    this-&gt;simulation_parameters.restart_parameters.restart);</div>
+<div class="line"><a name="l01811"></a><span class="lineno"> 1811</span>&#160;  this-&gt;update_multiphysics_time_average_solution();</div>
+<div class="line"><a name="l01812"></a><span class="lineno"> 1812</span>&#160; </div>
+<div class="line"><a name="l01813"></a><span class="lineno"> 1813</span>&#160;  <span class="keywordflow">while</span> (this-&gt;simulation_control-&gt;integrate())</div>
+<div class="line"><a name="l01814"></a><span class="lineno"> 1814</span>&#160;    {</div>
+<div class="line"><a name="l01815"></a><span class="lineno"> 1815</span>&#160;      this-&gt;forcing_function-&gt;set_time(</div>
+<div class="line"><a name="l01816"></a><span class="lineno"> 1816</span>&#160;        this-&gt;simulation_control-&gt;get_current_time());</div>
+<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160; </div>
+<div class="line"><a name="l01818"></a><span class="lineno"> 1818</span>&#160;      <span class="keywordtype">bool</span> refinement_step;</div>
+<div class="line"><a name="l01819"></a><span class="lineno"> 1819</span>&#160;      <span class="keywordflow">if</span> (this-&gt;simulation_parameters.mesh_adaptation.refinement_at_frequency)</div>
+<div class="line"><a name="l01820"></a><span class="lineno"> 1820</span>&#160;        refinement_step =</div>
+<div class="line"><a name="l01821"></a><span class="lineno"> 1821</span>&#160;          this-&gt;simulation_control-&gt;get_step_number() %</div>
+<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;            this-&gt;simulation_parameters.mesh_adaptation.frequency !=</div>
+<div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;          0;</div>
+<div class="line"><a name="l01824"></a><span class="lineno"> 1824</span>&#160;      <span class="keywordflow">else</span></div>
+<div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160;        refinement_step = this-&gt;simulation_control-&gt;get_step_number() == 0;</div>
+<div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160;      <span class="keywordflow">if</span> (refinement_step ||</div>
+<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;          this-&gt;simulation_parameters.mesh_adaptation.type ==</div>
+<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;            <a class="code" href="structParameters_1_1MeshAdaptation.html#a20a32a04c8c684495ff2d3c7be73c5a2a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::MeshAdaptation::Type::none</a> ||</div>
+<div class="line"><a name="l01829"></a><span class="lineno"> 1829</span>&#160;          this-&gt;simulation_control-&gt;is_at_start())</div>
+<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;        {</div>
+<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160;          <span class="comment">// We allow the physics to update their boundary conditions</span></div>
+<div class="line"><a name="l01832"></a><span class="lineno"> 1832</span>&#160;          <span class="comment">// according to their own parameters</span></div>
+<div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;          this-&gt;update_boundary_conditions();</div>
+<div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160;          this-&gt;multiphysics-&gt;update_boundary_conditions();</div>
+<div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;        }</div>
+<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160; </div>
+<div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160;      this-&gt;simulation_control-&gt;print_progression(this-&gt;pcout);</div>
+<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;      this-&gt;dynamic_flow_control();</div>
+<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160; </div>
+<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160;      <span class="keywordflow">if</span> (!this-&gt;simulation_control-&gt;is_at_start())</div>
+<div class="line"><a name="l01841"></a><span class="lineno"> 1841</span>&#160;        <a class="code" href="classNavierStokesBase.html#a57ffa198f9fabb15e3af4c9fa2921e18">NavierStokesBase&lt;dim, GlobalVectorType, IndexSet&gt;::refine_mesh</a>();</div>
+<div class="line"><a name="l01842"></a><span class="lineno"> 1842</span>&#160; </div>
+<div class="line"><a name="l01843"></a><span class="lineno"> 1843</span>&#160;      this-&gt;define_dynamic_zero_constraints();</div>
+<div class="line"><a name="l01844"></a><span class="lineno"> 1844</span>&#160;      this-&gt;iterate();</div>
+<div class="line"><a name="l01845"></a><span class="lineno"> 1845</span>&#160;      this-&gt;postprocess(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160;      this-&gt;finish_time_step();</div>
+<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160;    }</div>
+<div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160; </div>
+<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160; </div>
+<div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160;  this-&gt;finish_simulation();</div>
+<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160;}</div>
+<div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160; </div>
+<div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160; </div>
+<div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;<span class="comment">// Pre-compile the 2D and 3D Navier-Stokes solver to ensure that the library is</span></div>
+<div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;<span class="comment">// valid before we actually compile the solver This greatly helps with debugging</span></div>
+<div class="line"><a name="l01856"></a><span class="lineno"> 1856</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver&lt;2&gt;</a>;</div>
+<div class="line"><a name="l01857"></a><span class="lineno"> 1857</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver&lt;3&gt;</a>;</div>
 <div class="ttc" id="abdf_8h_html"><div class="ttname"><a href="bdf_8h.html">bdf.h</a></div></div>
 <div class="ttc" id="aclassGLSIsothermalCompressibleNavierStokesAssemblerBDF_html"><div class="ttname"><a href="classGLSIsothermalCompressibleNavierStokesAssemblerBDF.html">GLSIsothermalCompressibleNavierStokesAssemblerBDF</a></div><div class="ttdoc">Class that assembles the transient time arising from BDF time integration for the isothermal compress...</div><div class="ttdef"><b>Definition:</b> <a href="isothermal__compressible__navier__stokes__assembler_8h_source.html#l00083">isothermal_compressible_navier_stokes_assembler.h:85</a></div></div>
 <div class="ttc" id="aclassGLSIsothermalCompressibleNavierStokesAssemblerCore_html"><div class="ttname"><a href="classGLSIsothermalCompressibleNavierStokesAssemblerCore.html">GLSIsothermalCompressibleNavierStokesAssemblerCore</a></div><div class="ttdoc">Class that assembles the core of the isothermal compressible Navier-Stokes equations....</div><div class="ttdef"><b>Definition:</b> <a href="isothermal__compressible__navier__stokes__assembler_8h_source.html#l00041">isothermal_compressible_navier_stokes_assembler.h:43</a></div></div>
@@ -1958,7 +1960,7 @@ $(function() {
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_a9718e11a1de78907fcd5806d261818c6"><div class="ttname"><a href="classGLSNavierStokesSolver.html#a9718e11a1de78907fcd5806d261818c6">GLSNavierStokesSolver::define_dynamic_zero_constraints</a></div><div class="ttdeci">void define_dynamic_zero_constraints()</div><div class="ttdoc">Define the zero constraints used to solved the problem that change with other physics' solutions.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00387">gls_navier_stokes.cc:387</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_aa1266bef5027374a8ddecc9a4eb080d3"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aa1266bef5027374a8ddecc9a4eb080d3">GLSNavierStokesSolver::copy_local_matrix_to_global_matrix</a></div><div class="ttdeci">virtual void copy_local_matrix_to_global_matrix(const StabilizedMethodsTensorCopyData&lt; dim &gt; &amp;copy_data)</div><div class="ttdoc">Copy local cell information to global matrix.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00892">gls_navier_stokes.cc:892</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_aaa2c7b20b39211a58417e57d38bb3dd0"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aaa2c7b20b39211a58417e57d38bb3dd0">GLSNavierStokesSolver::setup_AMG</a></div><div class="ttdeci">void setup_AMG()</div><div class="ttdoc">Set-up AMG preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01439">gls_navier_stokes.cc:1439</a></div></div>
-<div class="ttc" id="aclassGLSNavierStokesSolver_html_ab0b0983381a34bf2fa122936db0ebf47"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47">GLSNavierStokesSolver::solve</a></div><div class="ttdeci">virtual void solve()</div><div class="ttdoc">solve Solves the Navier-Stokes problem</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01790">gls_navier_stokes.cc:1790</a></div></div>
+<div class="ttc" id="aclassGLSNavierStokesSolver_html_ab0b0983381a34bf2fa122936db0ebf47"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ab0b0983381a34bf2fa122936db0ebf47">GLSNavierStokesSolver::solve</a></div><div class="ttdeci">virtual void solve()</div><div class="ttdoc">solve Solves the Navier-Stokes problem</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01792">gls_navier_stokes.cc:1792</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_ab20a1ccb538de83f0185cb413a8b93f5"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ab20a1ccb538de83f0185cb413a8b93f5">GLSNavierStokesSolver::define_non_zero_constraints</a></div><div class="ttdeci">void define_non_zero_constraints()</div><div class="ttdoc">Define the non-zero constraints used to solve the problem.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00220">gls_navier_stokes.cc:220</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_ab5be2c153e6a0158ad52cb45b19f4ee8"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ab5be2c153e6a0158ad52cb45b19f4ee8">GLSNavierStokesSolver::assemble_system_matrix</a></div><div class="ttdeci">virtual void assemble_system_matrix() override</div><div class="ttdoc">Assembles the matrix associated with the solver.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00686">gls_navier_stokes.cc:686</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_abc2b110a3ce6bd9cd0112cdd894ee134"><div class="ttname"><a href="classGLSNavierStokesSolver.html#abc2b110a3ce6bd9cd0112cdd894ee134">GLSNavierStokesSolver::initial_preconditioner_fill_level</a></div><div class="ttdeci">int initial_preconditioner_fill_level</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8h_source.html#l00287">gls_navier_stokes.h:287</a></div></div>
@@ -1969,17 +1971,17 @@ $(function() {
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_ad5f4d7b4e5330e9837d08ccb57b4523e"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ad5f4d7b4e5330e9837d08ccb57b4523e">GLSNavierStokesSolver::setup_ILU</a></div><div class="ttdeci">void setup_ILU()</div><div class="ttdoc">Set-up ILU preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01419">gls_navier_stokes.cc:1419</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_ae59ef66f7b2e6201684e737cd4ac1d5d"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ae59ef66f7b2e6201684e737cd4ac1d5d">GLSNavierStokesSolver::assemble_local_system_rhs</a></div><div class="ttdeci">virtual void assemble_local_system_rhs(const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, NavierStokesScratchData&lt; dim &gt; &amp;scratch_data, StabilizedMethodsTensorCopyData&lt; dim &gt; &amp;copy_data)</div><div class="ttdoc">Assemble the local rhs for a given cell.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00993">gls_navier_stokes.cc:993</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_aeabf0ae5e276ad9cf4cd9e62455fe905"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aeabf0ae5e276ad9cf4cd9e62455fe905">GLSNavierStokesSolver::assemble_system_matrix_without_preconditioner</a></div><div class="ttdeci">virtual void assemble_system_matrix_without_preconditioner()</div><div class="ttdoc">Assembles the matrix associated with the solver without computing the preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00699">gls_navier_stokes.cc:699</a></div></div>
-<div class="ttc" id="aclassGLSNavierStokesSolver_html_aeb8bfb55924dec2cc14b3a9282e21078"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078">GLSNavierStokesSolver::solve_system_direct</a></div><div class="ttdeci">void solve_system_direct(const bool initial_step, const double absolute_residual, const double relative_residual)</div><div class="ttdoc">Direct solver using TrilinosWrappers::SolverDirect The use of this solver should be avoided for 3D pr...</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01753">gls_navier_stokes.cc:1753</a></div></div>
+<div class="ttc" id="aclassGLSNavierStokesSolver_html_aeb8bfb55924dec2cc14b3a9282e21078"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aeb8bfb55924dec2cc14b3a9282e21078">GLSNavierStokesSolver::solve_system_direct</a></div><div class="ttdeci">void solve_system_direct(const bool initial_step, const double absolute_residual, const double relative_residual)</div><div class="ttdoc">Direct solver using TrilinosWrappers::SolverDirect The use of this solver should be avoided for 3D pr...</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01755">gls_navier_stokes.cc:1755</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_aeecfa9f77a8647583ca26068ef8f625e"><div class="ttname"><a href="classGLSNavierStokesSolver.html#aeecfa9f77a8647583ca26068ef8f625e">GLSNavierStokesSolver::GLSNavierStokesSolver</a></div><div class="ttdeci">GLSNavierStokesSolver(SimulationParameters&lt; dim &gt; &amp;nsparam)</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00053">gls_navier_stokes.cc:53</a></div></div>
-<div class="ttc" id="aclassGLSNavierStokesSolver_html_afd0db1dcf099ad51d5990cbf1b1ee4cb"><div class="ttname"><a href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb">GLSNavierStokesSolver::solve_system_BiCGStab</a></div><div class="ttdeci">void solve_system_BiCGStab(const bool initial_step, const double absolute_residual, const double relative_residual)</div><div class="ttdoc">BiCGStab solver with ILU(N) preconditioning.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01647">gls_navier_stokes.cc:1647</a></div></div>
+<div class="ttc" id="aclassGLSNavierStokesSolver_html_afd0db1dcf099ad51d5990cbf1b1ee4cb"><div class="ttname"><a href="classGLSNavierStokesSolver.html#afd0db1dcf099ad51d5990cbf1b1ee4cb">GLSNavierStokesSolver::solve_system_BiCGStab</a></div><div class="ttdeci">void solve_system_BiCGStab(const bool initial_step, const double absolute_residual, const double relative_residual)</div><div class="ttdoc">BiCGStab solver with ILU(N) preconditioning.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l01648">gls_navier_stokes.cc:1648</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesVOFAssemblerBDF_html"><div class="ttname"><a href="classGLSNavierStokesVOFAssemblerBDF.html">GLSNavierStokesVOFAssemblerBDF</a></div><div class="ttdoc">Assembles the transient time arising from BDF time integration for the Navier-Stokes equation with fr...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00088">navier_stokes_vof_assemblers.h:89</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesVOFAssemblerCore_html"><div class="ttname"><a href="classGLSNavierStokesVOFAssemblerCore.html">GLSNavierStokesVOFAssemblerCore</a></div><div class="ttdoc">Assembles the core of the Navier-Stokes equation with free surface using VOF modeling....</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00041">navier_stokes_vof_assemblers.h:42</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesVOFAssemblerMarangoni_html"><div class="ttname"><a href="classGLSNavierStokesVOFAssemblerMarangoni.html">GLSNavierStokesVOFAssemblerMarangoni</a></div><div class="ttdoc">Assembles the Marangoni effect for the Navier-Stokes equations according to the following equation:</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00230">navier_stokes_vof_assemblers.h:232</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesVOFAssemblerNonNewtonianCore_html"><div class="ttname"><a href="classGLSNavierStokesVOFAssemblerNonNewtonianCore.html">GLSNavierStokesVOFAssemblerNonNewtonianCore</a></div><div class="ttdoc">Assembles the core of the Navier-Stokes equation using a Rheological model to predict non-Newtonian b...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00327">navier_stokes_vof_assemblers.h:329</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesVOFAssemblerSTF_html"><div class="ttname"><a href="classGLSNavierStokesVOFAssemblerSTF.html">GLSNavierStokesVOFAssemblerSTF</a></div><div class="ttdoc">Assembles the Surface Tension Force (STF) for the Navier-Stokes equations according to the following ...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00181">navier_stokes_vof_assemblers.h:182</a></div></div>
-<div class="ttc" id="aclassNavierStokesBase_html"><div class="ttname"><a href="classNavierStokesBase.html">NavierStokesBase</a></div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00119">navier_stokes_base.h:120</a></div></div>
+<div class="ttc" id="aclassNavierStokesBase_html"><div class="ttname"><a href="classNavierStokesBase.html">NavierStokesBase</a></div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00120">navier_stokes_base.h:121</a></div></div>
 <div class="ttc" id="aclassNavierStokesBase_html_a57ffa198f9fabb15e3af4c9fa2921e18"><div class="ttname"><a href="classNavierStokesBase.html#a57ffa198f9fabb15e3af4c9fa2921e18">NavierStokesBase::refine_mesh</a></div><div class="ttdeci">virtual void refine_mesh()</div><div class="ttdoc">Allow the refinement of the mesh according to one of the 2 methods proposed.</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8cc_source.html#l00668">navier_stokes_base.cc:668</a></div></div>
-<div class="ttc" id="aclassNavierStokesBase_html_a888b30d921a5a6beb3883cbaa3f8fa28"><div class="ttname"><a href="classNavierStokesBase.html#a888b30d921a5a6beb3883cbaa3f8fa28">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;::simulation_parameters</a></div><div class="ttdeci">SimulationParameters&lt; dim &gt; simulation_parameters</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00803">navier_stokes_base.h:803</a></div></div>
+<div class="ttc" id="aclassNavierStokesBase_html_a888b30d921a5a6beb3883cbaa3f8fa28"><div class="ttname"><a href="classNavierStokesBase.html#a888b30d921a5a6beb3883cbaa3f8fa28">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;::simulation_parameters</a></div><div class="ttdeci">SimulationParameters&lt; dim &gt; simulation_parameters</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00812">navier_stokes_base.h:812</a></div></div>
 <div class="ttc" id="aclassNavierStokesFunctionDefined_html"><div class="ttname"><a href="classNavierStokesFunctionDefined.html">NavierStokesFunctionDefined</a></div><div class="ttdoc">This class implements a boundary conditions for the Navier-Stokes equation where the velocity compone...</div><div class="ttdef"><b>Definition:</b> <a href="boundary__conditions_8h_source.html#l01163">boundary_conditions.h:1164</a></div></div>
 <div class="ttc" id="aclassNavierStokesScratchData_html"><div class="ttname"><a href="classNavierStokesScratchData.html">NavierStokesScratchData</a></div><div class="ttdoc">Class that stores the information required by the assembly procedure for a Navier-Stokes equation....</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__scratch__data_8h_source.html#l00072">navier_stokes_scratch_data.h:73</a></div></div>
 <div class="ttc" id="aclassNavierStokesScratchData_html_a0e506238dac667b6c23647eb1b237120"><div class="ttname"><a href="classNavierStokesScratchData.html#a0e506238dac667b6c23647eb1b237120">NavierStokesScratchData::reinit_projected_phase_fraction_gradient</a></div><div class="ttdeci">void reinit_projected_phase_fraction_gradient(const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;projected_phase_fraction_gradient_cell, const VectorType &amp;current_projected_phase_fraction_gradient_solution)</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__scratch__data_8h_source.html#l00566">navier_stokes_scratch_data.h:566</a></div></div>
@@ -1992,7 +1994,7 @@ $(function() {
 <div class="ttc" id="aclassNavierStokesVOFAssemblerEvaporation_html"><div class="ttname"><a href="classNavierStokesVOFAssemblerEvaporation.html">NavierStokesVOFAssemblerEvaporation</a></div><div class="ttdoc">Assembles the momentum source due to evaporation for the Navier-Stokes equations.</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00279">navier_stokes_vof_assemblers.h:281</a></div></div>
 <div class="ttc" id="aclassPSPGSUPGNavierStokesAssemblerCore_html"><div class="ttname"><a href="classPSPGSUPGNavierStokesAssemblerCore.html">PSPGSUPGNavierStokesAssemblerCore</a></div><div class="ttdoc">Class that assembles the core of the Navier-Stokes equation. According to the following weak form:  w...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__assemblers_8h_source.html#l00095">navier_stokes_assemblers.h:96</a></div></div>
 <div class="ttc" id="aclassPhaseChangeDarcyVOFAssembler_html"><div class="ttname"><a href="classPhaseChangeDarcyVOFAssembler.html">PhaseChangeDarcyVOFAssembler</a></div><div class="ttdoc">Assembles a phase change Darcy forcing term for a VOF two-fluid simulation. The term  is added to the...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__vof__assemblers_8h_source.html#l00134">navier_stokes_vof_assemblers.h:135</a></div></div>
-<div class="ttc" id="aclassPhysicsSolver_html_ae98422d82284b2d4d55d42ca454a300a"><div class="ttname"><a href="classPhysicsSolver.html#ae98422d82284b2d4d55d42ca454a300a">PhysicsSolver::solve_non_linear_system</a></div><div class="ttdeci">void solve_non_linear_system(const bool first_iteration)</div><div class="ttdoc">solve_non_linear_system Solves the non linear system of equations</div><div class="ttdef"><b>Definition:</b> <a href="physics__solver_8h_source.html#l00163">physics_solver.h:163</a></div></div>
+<div class="ttc" id="aclassPhysicsSolver_html_ae98422d82284b2d4d55d42ca454a300a"><div class="ttname"><a href="classPhysicsSolver.html#ae98422d82284b2d4d55d42ca454a300a">PhysicsSolver::solve_non_linear_system</a></div><div class="ttdeci">void solve_non_linear_system(const bool first_iteration)</div><div class="ttdoc">solve_non_linear_system Solves the non linear system of equations</div><div class="ttdef"><b>Definition:</b> <a href="physics__solver_8h_source.html#l00171">physics_solver.h:171</a></div></div>
 <div class="ttc" id="aclassSimulationParameters_html"><div class="ttname"><a href="classSimulationParameters.html">SimulationParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="simulation__parameters_8h_source.html#l00038">simulation_parameters.h:39</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a></div><div class="ttdoc">Class responsible for storing the information calculated using the assembly of stabilized Tensor&lt;1,...</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00144">copy_data.h:145</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html_a153703d2fac45c897f515afe21bb4e8b"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html#a153703d2fac45c897f515afe21bb4e8b">StabilizedMethodsTensorCopyData::local_matrix</a></div><div class="ttdeci">FullMatrix&lt; double &gt; local_matrix</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00183">copy_data.h:183</a></div></div>
@@ -2041,7 +2043,7 @@ $(function() {
 <div class="ttc" id="astructParameters_1_1Stabilization_html_aa349ab6e7ab2df88077df91d4707a4baaca6efd547a7b6d9885402b9544f941d5"><div class="ttname"><a href="structParameters_1_1Stabilization.html#aa349ab6e7ab2df88077df91d4707a4baaca6efd547a7b6d9885402b9544f941d5">Parameters::Stabilization::NavierStokesStabilization::gls</a></div><div class="ttdeci">@ gls</div></div>
 <div class="ttc" id="astructParameters_1_1VelocitySource_html_a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92"><div class="ttname"><a href="structParameters_1_1VelocitySource.html#a3d594539cc118d4406cc7bcb298d2ca2a9fa1e546d34dd62a768567052aaa9f92">Parameters::VelocitySource::RotatingFrameType::srf</a></div><div class="ttdeci">@ srf</div></div>
 <div class="ttc" id="astructParameters_1_1VelocitySource_html_a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069"><div class="ttname"><a href="structParameters_1_1VelocitySource.html#a5ae0cc40541a83743f45861578bea031ad0b50e5bdf6e59d6f8ce448465e09069">Parameters::VelocitySource::DarcySourceType::phase_change</a></div><div class="ttdeci">@ phase_change</div></div>
-<div class="ttc" id="astructStasisConstraintWithTemperature_html"><div class="ttname"><a href="structStasisConstraintWithTemperature.html">StasisConstraintWithTemperature</a></div><div class="ttdoc">Struct containing fluid id, temperature and phase fraction range information, and flag containers for...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00076">navier_stokes_base.h:77</a></div></div>
+<div class="ttc" id="astructStasisConstraintWithTemperature_html"><div class="ttname"><a href="structStasisConstraintWithTemperature.html">StasisConstraintWithTemperature</a></div><div class="ttdoc">Struct containing fluid id, temperature and phase fraction range information, and flag containers for...</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__base_8h_source.html#l00077">navier_stokes_base.h:78</a></div></div>
 <div class="ttc" id="atime__integration__utilities_8h_html"><div class="ttname"><a href="time__integration__utilities_8h.html">time_integration_utilities.h</a></div></div>
 <div class="ttc" id="atime__integration__utilities_8h_html_a0a24876ac89130c482872183aaabb619"><div class="ttname"><a href="time__integration__utilities_8h.html#a0a24876ac89130c482872183aaabb619">is_bdf</a></div><div class="ttdeci">bool is_bdf(const Parameters::SimulationControl::TimeSteppingMethod method)</div><div class="ttdoc">Determines if the time integration method is within the bdf family.</div><div class="ttdef"><b>Definition:</b> <a href="time__integration__utilities_8h_source.html#l00037">time_integration_utilities.h:37</a></div></div>
 <div class="ttc" id="autilities_8h_html"><div class="ttname"><a href="utilities_8h.html">utilities.h</a></div></div>

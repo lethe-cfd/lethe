@@ -944,17 +944,18 @@ $(function() {
 <div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;      <a class="code" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a>)</div>
 <div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;    {</div>
 <div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;      this-&gt;pcout &lt;&lt; <span class="stringliteral">&quot;  -Iterative solver took : &quot;</span> &lt;&lt; solver_control.last_step()</div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;    }</div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160; </div>
-<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;  constraints_used.distribute(completely_distributed_solution);</div>
-<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;  newton_update = completely_distributed_solution;</div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;}</div>
-<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160; </div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot; steps to reach a residual norm of &quot;</span></div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;                  &lt;&lt; solver_control.last_value() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;    }</div>
+<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160; </div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;  constraints_used.distribute(completely_distributed_solution);</div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;  newton_update = completely_distributed_solution;</div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;}</div>
 <div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160; </div>
 <div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160; </div>
-<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classTracer.html">Tracer&lt;2&gt;</a>;</div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classTracer.html">Tracer&lt;3&gt;</a>;</div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160; </div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classTracer.html">Tracer&lt;2&gt;</a>;</div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classTracer.html">Tracer&lt;3&gt;</a>;</div>
 <div class="ttc" id="abdf_8h_html"><div class="ttname"><a href="bdf_8h.html">bdf.h</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsCopyData_html"><div class="ttname"><a href="classStabilizedMethodsCopyData.html">StabilizedMethodsCopyData</a></div><div class="ttdoc">Class responsible for storing the information calculated using the assembly of stabilized scalar equa...</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00081">copy_data.h:82</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsCopyData_html_a27d0fd925602c6b173e9acc396a21370"><div class="ttname"><a href="classStabilizedMethodsCopyData.html#a27d0fd925602c6b173e9acc396a21370">StabilizedMethodsCopyData::cell_is_local</a></div><div class="ttdeci">bool cell_is_local</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00128">copy_data.h:128</a></div></div>
