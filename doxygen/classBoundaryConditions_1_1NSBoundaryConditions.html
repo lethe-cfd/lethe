@@ -114,6 +114,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a67b323a489e69bed8e64797b075d4542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a259dac7b8ad04da991df035bd55ecc53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBoundaryConditions_1_1NSPressureBoundaryFunctions.html">NSPressureBoundaryFunctions</a>&lt; dim &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html#a259dac7b8ad04da991df035bd55ecc53">bcPressureFunction</a></td></tr>
 <tr class="separator:a259dac7b8ad04da991df035bd55ecc53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa09ad70979369794f0928490d1cc6964"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html#aa09ad70979369794f0928490d1cc6964">fix_pressure_constant</a></td></tr>
+<tr class="separator:aa09ad70979369794f0928490d1cc6964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classBoundaryConditions_1_1BoundaryConditions')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classBoundaryConditions_1_1BoundaryConditions.html">BoundaryConditions::BoundaryConditions&lt; dim &gt;</a></td></tr>
 <tr class="memitem:a9f0a13fff1090ec20fdebe92e10fb982 inherit pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundaryConditions_1_1BoundaryConditions.html#a9f0a13fff1090ec20fdebe92e10fb982">id</a></td></tr>
 <tr class="separator:a9f0a13fff1090ec20fdebe92e10fb982 inherit pub_attribs_classBoundaryConditions_1_1BoundaryConditions"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,7 +140,7 @@ class BoundaryConditions::NSBoundaryConditions&lt; dim &gt;</h3>
 
 <p><a class="el" href="classThis.html">This</a> class manages the boundary conditions for Navier-Stokes solver It introduces the boundary functions and declares the boundary conditions coherently. </p>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00155">155</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00158">158</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5111373395f857dbf454ec1bd377e141"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5111373395f857dbf454ec1bd377e141">&#9670;&nbsp;</a></span>createNoSlip()</h2>
@@ -156,7 +158,7 @@ template&lt;int dim&gt; </div>
 
 <p>Creates a noslip boundary condition for id=0 Used in tests only. </p>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00195">195</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00201">201</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -199,7 +201,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00363">363</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00369">369</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -242,9 +244,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00216">216</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00222">222</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
-<p class="reference">References <a class="el" href="boundary__conditions_8h_source.html#l00363">BoundaryConditions::NSBoundaryConditions&lt; dim &gt;::declare_parameters()</a>.</p>
+<p class="reference">References <a class="el" href="boundary__conditions_8h_source.html#l00369">BoundaryConditions::NSBoundaryConditions&lt; dim &gt;::declare_parameters()</a>.</p>
 
 </div>
 </div>
@@ -285,7 +287,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00291">291</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00297">297</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00056">pressure</a>, and <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -319,7 +321,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00408">408</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00420">420</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>.</p>
 
@@ -340,7 +342,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00159">159</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00162">162</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>
@@ -358,7 +360,27 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00160">160</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00163">163</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
+
+</div>
+</div>
+<a id="aa09ad70979369794f0928490d1cc6964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09ad70979369794f0928490d1cc6964">&#9670;&nbsp;</a></span>fix_pressure_constant</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; dim &gt;::fix_pressure_constant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fix pressure constant using a node. </p>
+
+<p class="definition">Definition at line <a class="el" href="boundary__conditions_8h_source.html#l00191">191</a> of file <a class="el" href="boundary__conditions_8h_source.html">boundary_conditions.h</a>.</p>
 
 </div>
 </div>

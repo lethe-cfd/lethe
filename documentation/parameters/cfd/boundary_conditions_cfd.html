@@ -423,6 +423,7 @@
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions
   set number         = 2
   set time dependent = false
+  set fix pressure constant = false;
   subsection bc 0
     set id                 = 0
     set type               = function
@@ -468,6 +469,7 @@ end
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">dependent</span></code> specifies if a boundary condition is time-dependent (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or steady (<code class="docutils literal notranslate"><span class="pre">false</span></code>). By default, this parameter is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>. This is here to improve the computational efficiency for transient cases in which the boundary conditions do not change.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fix</span> <span class="pre">pressure</span> <span class="pre">constant</span></code> specifies if a zero pressure constraint should be applied on a single node of the coarse grid solver when using geometric multigrid preconditioning combined with the <strong>lethe-fluid-matrix-free</strong> solver. Essentially, this condition should be set to true whenever a user is using the <strong>lethe-fluid-matrix-free</strong> solver and simulating the flow within a closed domain (that is a domain on which all boundaries are either periodic or Dirichlet boundary conditions).</p></li>
 <li><dl class="simple">
 <dt>Each fluid dynamics boundary condition is stored in a <code class="docutils literal notranslate"><span class="pre">bc</span> <span class="pre">#</span></code> subsection :</dt><dd><ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>  is the number associated with the boundary condition. By default, Lethe assumes that the id is equivalent to the number <code class="docutils literal notranslate"><span class="pre">#</span></code> of the bc.</p></li>
