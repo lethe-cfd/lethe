@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lstransfertype_6471',['LSTransferType',['../classMFNavierStokesSolver.html#a7590b310c9a4b2cb5ee8e5712dc84889',1,'MFNavierStokesSolver']]]
+  ['lstransfertype_6513',['LSTransferType',['../classMFNavierStokesPreconditionGMG.html#ae4f34cbd586410f20b188d2e77d791e5',1,'MFNavierStokesPreconditionGMG']]]
 ];

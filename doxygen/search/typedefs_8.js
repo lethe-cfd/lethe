@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['value_5ftype_6487',['value_type',['../classNavierStokesOperatorBase.html#a1f5d82523546bcc2e987181745dd7b65',1,'NavierStokesOperatorBase']]],
-  ['vector_5fon_5fboundary_6488',['vector_on_boundary',['../structDEM_1_1dem__data__structures.html#ad9e0dd1b9ca1443dfb6eb64aa5fea108',1,'DEM::dem_data_structures']]],
-  ['vectortype_6489',['VectorType',['../classMFNavierStokesSolver.html#a4ea44b5505821708cea9efedd49efae7',1,'MFNavierStokesSolver::VectorType()'],['../classNavierStokesOperatorBase.html#af38ac45042fda00de01ec4f576b62eeb',1,'NavierStokesOperatorBase::VectorType()'],['../classNavierStokesStabilizedOperator.html#a80be9d868b1127a0892de2486a08dc9e',1,'NavierStokesStabilizedOperator::VectorType()']]]
+  ['size_5ftype_6530',['size_type',['../classNavierStokesOperatorBase.html#aa0d0fe7fb5be752191599bb308f52df0',1,'NavierStokesOperatorBase']]],
+  ['smootherpreconditionertype_6531',['SmootherPreconditionerType',['../classMFNavierStokesPreconditionGMG.html#ad9089de0a360d0582652f3a7a35b9890',1,'MFNavierStokesPreconditionGMG']]],
+  ['smoothertype_6532',['SmootherType',['../classMFNavierStokesPreconditionGMG.html#a3efbfecec83714a46bbb229ff8beddef',1,'MFNavierStokesPreconditionGMG']]],
+  ['stabilizationtype_6533',['StabilizationType',['../classNavierStokesOperatorBase.html#a94d7db964d971e7232fb70d6fbf0c8b9',1,'NavierStokesOperatorBase']]]
 ];
