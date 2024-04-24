@@ -164,12 +164,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a5436a88e96be02f684fccb77a94e7778 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0713e51aed5a8c0e6c4c44f0fdda6530 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#a0713e51aed5a8c0e6c4c44f0fdda6530">set_initial_condition_fd</a> (<a class="el" href="namespaceParameters.html#a86eaa101a59015fa52c81783382dd525">Parameters::InitialConditionType</a> initial_condition_type, bool restart=false) override</td></tr>
 <tr class="separator:a0713e51aed5a8c0e6c4c44f0fdda6530 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeabf0ae5e276ad9cf4cd9e62455fe905 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#aeabf0ae5e276ad9cf4cd9e62455fe905">assemble_system_matrix_without_preconditioner</a> ()</td></tr>
-<tr class="separator:aeabf0ae5e276ad9cf4cd9e62455fe905 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f1c98ac40ac82307f28b45d200ddc5 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ac0f1c98ac40ac82307f28b45d200ddc5">update_multiphysics_time_average_solution</a> () override</td></tr>
 <tr class="separator:ac0f1c98ac40ac82307f28b45d200ddc5 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b531d1c4e60595b81cd15b7f3297e98 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#a4b531d1c4e60595b81cd15b7f3297e98">setup_preconditioner</a> ()</td></tr>
-<tr class="separator:a4b531d1c4e60595b81cd15b7f3297e98 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ce5a5f0d3b09bc6953f39a60d4ad51 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ac4ce5a5f0d3b09bc6953f39a60d4ad51">setup_preconditioner</a> () override</td></tr>
+<tr class="separator:ac4ce5a5f0d3b09bc6953f39a60d4ad51 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20a1ccb538de83f0185cb413a8b93f5 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ab20a1ccb538de83f0185cb413a8b93f5">define_non_zero_constraints</a> ()</td></tr>
 <tr class="separator:ab20a1ccb538de83f0185cb413a8b93f5 inherit pro_methods_classGLSNavierStokesSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59661e99b54af30b1cb5c599857bf59 inherit pro_methods_classGLSNavierStokesSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGLSNavierStokesSolver.html#ac59661e99b54af30b1cb5c599857bf59">define_zero_constraints</a> ()</td></tr>
@@ -573,7 +571,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#ac2c126900448ce8b14051d5adffffba3">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01589">1589</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01588">1588</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="navier__stokes__scratch__data_8cc_source.html#l00365">NavierStokesScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00236">NavierStokesScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00676">NavierStokesScratchData&lt; dim &gt;::reinit_particle_fluid_interactions()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00624">NavierStokesScratchData&lt; dim &gt;::reinit_void_fraction()</a>, and <a class="el" href="copy__data_8h_source.html#l00169">StabilizedMethodsTensorCopyData&lt; dim &gt;::reset()</a>.</p>
 
@@ -633,7 +631,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#ae59ef66f7b2e6201684e737cd4ac1d5d">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01697">1697</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01696">1696</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="navier__stokes__scratch__data_8cc_source.html#l00365">NavierStokesScratchData&lt; dim &gt;::calculate_physical_properties()</a>, <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00236">NavierStokesScratchData&lt; dim &gt;::reinit()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00676">NavierStokesScratchData&lt; dim &gt;::reinit_particle_fluid_interactions()</a>, <a class="el" href="navier__stokes__scratch__data_8h_source.html#l00624">NavierStokesScratchData&lt; dim &gt;::reinit_void_fraction()</a>, and <a class="el" href="copy__data_8h_source.html#l00169">StabilizedMethodsTensorCopyData&lt; dim &gt;::reset()</a>.</p>
 
@@ -697,7 +695,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01549">1549</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="gls__vans_8cc_source.html#l01589">GLSVANSSolver&lt; dim &gt;::assemble_local_system_matrix()</a>, and <a class="el" href="gls__vans_8cc_source.html#l01641">GLSVANSSolver&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>.</p>
+<p class="reference">References <a class="el" href="gls__vans_8cc_source.html#l01588">GLSVANSSolver&lt; dim &gt;::assemble_local_system_matrix()</a>, and <a class="el" href="gls__vans_8cc_source.html#l01640">GLSVANSSolver&lt; dim &gt;::copy_local_matrix_to_global_matrix()</a>.</p>
 
 </div>
 </div>
@@ -727,9 +725,9 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#a77a043e1f19097afeca90c1abaa1b60a">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01655">1655</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01654">1654</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="gls__vans_8cc_source.html#l01697">GLSVANSSolver&lt; dim &gt;::assemble_local_system_rhs()</a>, and <a class="el" href="gls__vans_8cc_source.html#l01750">GLSVANSSolver&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>.</p>
+<p class="reference">References <a class="el" href="gls__vans_8cc_source.html#l01696">GLSVANSSolver&lt; dim &gt;::assemble_local_system_rhs()</a>, and <a class="el" href="gls__vans_8cc_source.html#l01749">GLSVANSSolver&lt; dim &gt;::copy_local_rhs_to_global_rhs()</a>.</p>
 
 </div>
 </div>
@@ -805,7 +803,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#aa1266bef5027374a8ddecc9a4eb080d3">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01641">1641</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01640">1640</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00183">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_matrix</a>.</p>
 
@@ -841,7 +839,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classGLSNavierStokesSolver.html#a173f622ae3b3bfa73f68d2d17081ad7d">GLSNavierStokesSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01750">1750</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01749">1749</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="copy__data_8h_source.html#l00193">StabilizedMethodsTensorCopyData&lt; dim &gt;::cell_is_local</a>, <a class="el" href="copy__data_8h_source.html#l00185">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_dof_indices</a>, and <a class="el" href="copy__data_8h_source.html#l00184">StabilizedMethodsTensorCopyData&lt; dim &gt;::local_rhs</a>.</p>
 
@@ -970,7 +968,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01366">1366</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00418">announce_string()</a>, and <a class="el" href="physics__solver_8h_source.html#l00171">PhysicsSolver&lt; VectorType &gt;::solve_non_linear_system()</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00418">announce_string()</a>, and <a class="el" href="physics__solver_8h_source.html#l00177">PhysicsSolver&lt; VectorType &gt;::solve_non_linear_system()</a>.</p>
 
 </div>
 </div>
@@ -996,7 +994,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01773">1773</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01772">1772</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a0267dc6b1db4ed7cf48c60fa776c8843">Parameters::SimulationControl::bdf1</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a7e23e875a6c062a276f90cb43a6280c0">Parameters::SimulationControl::bdf2</a>, <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a62fd133dd9c35c94e867fc65606aeffe">Parameters::SimulationControl::bdf3</a>, and <a class="el" href="structParameters_1_1SimulationControl.html#a75b33ae454da14bc72dbe078c121d7e9a4f997f546b68779b58e9f6f19dc2b9e5">Parameters::SimulationControl::steady</a>.</p>
 
@@ -1032,7 +1030,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented from <a class="el" href="classNavierStokesBase.html#a964e80e99870334447ac9859c4f1980d">NavierStokesBase&lt; dim, GlobalVectorType, IndexSet &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01764">1764</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01763">1763</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 </div>
 </div>
@@ -1269,7 +1267,7 @@ template&lt;int dim&gt; </div>
 
 <p>Reimplemented in <a class="el" href="classCFDDEMSolver.html#aaebd11ac00952aaaa99ebd66c43f7d87">CFDDEMSolver&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01943">1943</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gls__vans_8cc_source.html#l01942">1942</a> of file <a class="el" href="gls__vans_8cc_source.html">gls_vans.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1MeshAdaptation.html#a20a32a04c8c684495ff2d3c7be73c5a2a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::MeshAdaptation::none</a>, <a class="el" href="grids_8cc_source.html#l00413">read_mesh_and_manifolds()</a>, <a class="el" href="navier__stokes__base_8cc_source.html#l00668">NavierStokesBase&lt; dim, VectorType, DofsType &gt;::refine_mesh()</a>, and <a class="el" href="lethe__grid__tools_8cc_source.html#l00016">LetheGridTools::vertices_cell_mapping()</a>.</p>
 

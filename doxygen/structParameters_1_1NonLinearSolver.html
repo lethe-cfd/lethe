@@ -133,6 +133,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a44afa72ed9739f2aed52c0b5476ea2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e62541b1d14a6036963903045ef8aaf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1NonLinearSolver.html#a4e62541b1d14a6036963903045ef8aaf">reuse_matrix</a></td></tr>
 <tr class="separator:a4e62541b1d14a6036963903045ef8aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884bf5ef41cc91fb4a5e66e25ef3e267"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1NonLinearSolver.html#a884bf5ef41cc91fb4a5e66e25ef3e267">reuse_preconditioner</a></td></tr>
+<tr class="separator:a884bf5ef41cc91fb4a5e66e25ef3e267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a491f1c3c8f1c66e2ee84e42fd23be06e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structParameters_1_1NonLinearSolver.html#a491f1c3c8f1c66e2ee84e42fd23be06e">abort_at_convergence_failure</a></td></tr>
 <tr class="separator:a491f1c3c8f1c66e2ee84e42fd23be06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -264,9 +266,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02000">2000</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8cc_source.html#l02006">2006</a> of file <a class="el" href="parameters_8cc_source.html">parameters.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="parameters_8h_source.html#l01020">abort_at_convergence_failure</a>, <a class="el" href="parameters_8h_source.html#l00996">display_precision</a>, <a class="el" href="parameters_8h_source.html#l01004">force_rhs_calculation</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66bafd664c4aab2a1842f691c6c005c63ce0">inexact_newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66ba8b8658b5ecaa6986a18b5fbba6a8230f">kinsol_newton</a>, <a class="el" href="parameters_8h_source.html#l00987">kinsol_strategy</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762da39bf3e3e4797748428e97c07863059cd">line_search</a>, <a class="el" href="parameters_8h_source.html#l01011">matrix_tolerance</a>, <a class="el" href="parameters_8h_source.html#l00993">max_iterations</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66bada6fa909f1c0188c539feb08d4496eb7">newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762da848ab1d6d2e577e49380e63ec45e0220">normal_newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762dae24fa5f1901c2c38540e9adef2e3b0a1">picard</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="parameters_8h_source.html#l01017">reuse_matrix</a>, <a class="el" href="parameters_8h_source.html#l00984">solver</a>, <a class="el" href="parameters_8h_source.html#l01014">step_tolerance</a>, <a class="el" href="parameters_8h_source.html#l00990">tolerance</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="parameters_8h_source.html#l00981">verbosity</a>.</p>
+<p class="reference">References <a class="el" href="parameters_8h_source.html#l01023">abort_at_convergence_failure</a>, <a class="el" href="parameters_8h_source.html#l00996">display_precision</a>, <a class="el" href="parameters_8h_source.html#l01004">force_rhs_calculation</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66bafd664c4aab2a1842f691c6c005c63ce0">inexact_newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66ba8b8658b5ecaa6986a18b5fbba6a8230f">kinsol_newton</a>, <a class="el" href="parameters_8h_source.html#l00987">kinsol_strategy</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762da39bf3e3e4797748428e97c07863059cd">line_search</a>, <a class="el" href="parameters_8h_source.html#l01011">matrix_tolerance</a>, <a class="el" href="parameters_8h_source.html#l00993">max_iterations</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a6b197a386b6e99895ef3f26218c7f66bada6fa909f1c0188c539feb08d4496eb7">newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762da848ab1d6d2e577e49380e63ec45e0220">normal_newton</a>, <a class="el" href="structParameters_1_1NonLinearSolver.html#a5bd5867af15f5377ea3dfaf7ec0b762dae24fa5f1901c2c38540e9adef2e3b0a1">picard</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="parameters_8h_source.html#l01017">reuse_matrix</a>, <a class="el" href="parameters_8h_source.html#l01020">reuse_preconditioner</a>, <a class="el" href="parameters_8h_source.html#l00984">solver</a>, <a class="el" href="parameters_8h_source.html#l01014">step_tolerance</a>, <a class="el" href="parameters_8h_source.html#l00990">tolerance</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, and <a class="el" href="parameters_8h_source.html#l00981">verbosity</a>.</p>
 
 </div>
 </div>
@@ -283,7 +285,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01020">1020</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01023">1023</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>
@@ -380,6 +382,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01017">1017</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
+
+</div>
+</div>
+<a id="a884bf5ef41cc91fb4a5e66e25ef3e267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884bf5ef41cc91fb4a5e66e25ef3e267">&#9670;&nbsp;</a></span>reuse_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Parameters::NonLinearSolver::reuse_preconditioner</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parameters_8h_source.html#l01020">1020</a> of file <a class="el" href="parameters_8h_source.html">parameters.h</a>.</p>
 
 </div>
 </div>

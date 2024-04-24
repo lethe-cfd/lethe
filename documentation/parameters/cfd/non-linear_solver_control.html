@@ -396,7 +396,7 @@
         <article role="main">
           <section id="non-linear-solver">
 <h1>Non-linear Solver<a class="headerlink" href="#non-linear-solver" title="Link to this heading">#</a></h1>
-<p>The Navier-Stokes equations (and other) are non-linear equations. The parameters in <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">non-linear</span> <span class="pre">solver</span></code>, whose default values are given in the text block below, control the non-linear solver used within Lethe. Lethe supports different physics (<code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">dynamics</span></code>, <code class="docutils literal notranslate"><span class="pre">VOF</span></code>, <code class="docutils literal notranslate"><span class="pre">heat</span> <span class="pre">transfer</span></code>, <code class="docutils literal notranslate"><span class="pre">cahn</span> <span class="pre">hilliard</span></code> and <code class="docutils literal notranslate"><span class="pre">tracer</span></code>) and it is possible to specify non-linear solver parameters for each of them. In the example below, only <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">dynamics</span></code> is used but the same block can be used for other physics.</p>
+<p>The Navier-Stokes equations (and others) are non-linear equations. The parameters in <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">non-linear</span> <span class="pre">solver</span></code>, whose default values are given in the text block below, control the non-linear solver used within Lethe. Lethe supports different physics (<code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">dynamics</span></code>, <code class="docutils literal notranslate"><span class="pre">VOF</span></code>, <code class="docutils literal notranslate"><span class="pre">heat</span> <span class="pre">transfer</span></code>, <code class="docutils literal notranslate"><span class="pre">cahn</span> <span class="pre">hilliard</span></code> and <code class="docutils literal notranslate"><span class="pre">tracer</span></code>) and it is possible to specify non-linear solver parameters for each of them. In the example below, only <code class="docutils literal notranslate"><span class="pre">fluid</span> <span class="pre">dynamics</span></code> is shown but the same block can be used for other physics.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection non-linear solver
   subsection fluid dynamics
     # Non-linear solver that will be used
@@ -411,7 +411,10 @@
     # For the inexact_newton solver, carry jacobian matrix over to the new non-linear problem
     set reuse matrix                 = false
 
-    # For the kinsol_newton solver,
+    # For the newton solver, it allows to reuse the preconditioner for the non linear iterations
+    set reuse preconditioner         = false
+
+    # For the kinsol_newton solver
     set kinsol_strategy              = line_search
 
     # Newton solver tolerance
@@ -501,6 +504,7 @@ Newton iteration: 3  - Residual:  1.12e-08
 <li><p>The <code class="docutils literal notranslate"><span class="pre">residual</span> <span class="pre">precision</span></code> parameter enables to change the number of digits displayed when showing residuals (with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">verbosity</span> <span class="pre">=</span> <span class="pre">verbose</span></code>).</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">force_rhs_calculation</span></code>: Force RHS recalculation at the beginning of every non-linear steps, This is required if there is a fixed point component to the non-linear solver that is changed at the beginning of every newton iteration. This is notably the case of the sharp edge method. The default value of this parameter is false.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">abort</span> <span class="pre">at</span> <span class="pre">convergence</span> <span class="pre">failure</span></code> allows the user to stop the simulation and throw an error if the non-linear solver has failed to converge. Setting <code class="docutils literal notranslate"><span class="pre">abort</span> <span class="pre">at</span> <span class="pre">convergence</span> <span class="pre">failure</span> <span class="pre">=</span> <span class="pre">true</span></code> will enable this feature. This is generally useful when launching a large batch of simulation to quickly identify which one have failed.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">preconditioner</span> <span class="pre">=</span> <span class="pre">true</span></code> allows the simulation to use the same preconditioner between Newton iterations when using the Newton solver. This can reduce the overall time depending on the problem, and it is especially useful for the <code class="docutils literal notranslate"><span class="pre">lethe-fluid-matrix-free</span></code> application.</p></li>
 </ul>
 </section>
 
