@@ -434,7 +434,7 @@ module load opencascade/7.5.2
 </pre></div>
 </div>
 <p>Then, we can clone and compile <code class="docutils literal notranslate"><span class="pre">dealii</span></code>. Although Lethe always supports the master branch of deal.II, we maintain an identical deal.II fork on the lethe repository. This fork is always tested to make sure it works with lethe. To clone the deal.II fork github repository, execute in <code class="docutils literal notranslate"><span class="pre">$HOME/dealii</span></code> directory:</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lethe-cfd/dealii.git
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/chaos-polymtl/dealii.git
 </pre></div>
 </div>
 <p>We can compile <code class="docutils literal notranslate"><span class="pre">dealii</span></code> in the <code class="docutils literal notranslate"><span class="pre">$HOME/dealii/build</span></code> folder, by defining the paths to installation folders of <code class="docutils literal notranslate"><span class="pre">Trilinos</span></code>, <code class="docutils literal notranslate"><span class="pre">Parmetis</span></code> and <code class="docutils literal notranslate"><span class="pre">P4est</span></code>. To increase the speed of this step, we skip <code class="docutils literal notranslate"><span class="pre">dealii</span></code> tests and compile in release mode only.</p>
@@ -453,7 +453,7 @@ module load opencascade/7.5.2
 <h2>Installing Lethe<a class="headerlink" href="#installing-lethe" title="Link to this heading">#</a></h2>
 <p>After installing deal.II, compiling Lethe is relatively straightforward, especially since all of these clusters share a very similar environment. To compile Lethe, the <code class="docutils literal notranslate"><span class="pre">Trilinos</span></code>, <code class="docutils literal notranslate"><span class="pre">Parmetis</span></code> and <code class="docutils literal notranslate"><span class="pre">P4est</span></code> modules should be loaded.</p>
 <p>In the <code class="docutils literal notranslate"><span class="pre">$HOME/lethe</span></code> directory, download Lethe:</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lethe-cfd/lethe.git
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/chaos-polymtl/lethe.git
 </pre></div>
 </div>
 <p>To install Lethe in the <code class="docutils literal notranslate"><span class="pre">$HOME/lethe/inst</span></code> directory (applications will be in <code class="docutils literal notranslate"><span class="pre">inst/bin</span></code>), run in the <code class="docutils literal notranslate"><span class="pre">$HOME/lethe/build</span></code> directory:</p>
@@ -554,7 +554,7 @@ srun $HOME/lethe/inst/bin/$lethe_application_name_wanted $parameter_file_name.pr
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you need to launch multiple simulations, such as with varying parameter, feel free to adapt one of the scripts provided on <a class="reference external" href="https://github.com/lethe-cfd/lethe-utils/tree/master/python/cluster">lethe-utils</a>.</p>
+<p>If you need to launch multiple simulations, such as with varying parameter, feel free to adapt one of the scripts provided on <a class="reference external" href="https://github.com/chaos-polymtl/lethe-utils/tree/master/python/cluster">lethe-utils</a>.</p>
 </div>
 </section>
 <section id="saving-a-ssh-key-linux">

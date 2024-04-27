@@ -429,7 +429,7 @@
 </section>
 <section id="parameter-file">
 <h2>Parameter File<a class="headerlink" href="#parameter-file" title="Link to this heading">#</a></h2>
-<p>First, we import the mesh as in the <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/examples/incompressible-flow/2d-flow-around-cylinder/2d-flow-around-cylinder.html">2D Flow around a cylinder</a>.</p>
+<p>First, we import the mesh as in the <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/examples/incompressible-flow/2d-flow-around-cylinder/2d-flow-around-cylinder.html">2D Flow around a cylinder</a>.</p>
 <section id="mesh">
 <h3>Mesh<a class="headerlink" href="#mesh" title="Link to this heading">#</a></h3>
 <p>Geometry parameters can be adapted in the “Parameters” section of the <code class="docutils literal notranslate"><span class="pre">.geo</span></code> file, as shown below. Namely the step parameter <code class="docutils literal notranslate"><span class="pre">phi</span></code> can be easily adapted.</p>
@@ -454,7 +454,7 @@ xmax = 2500/unit;
 ymax = 1000/unit;
 </pre></div>
 </div>
-<p>The initial <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/mesh.html">Mesh</a> is built with <a class="reference external" href="https://gmsh.info/#Download">Gmsh</a>. It is defined as transfinite at the body boundary layer and between the body and the road, and free for the rest of the domain. The mesh is dynamically refined throughout the simulation. This will be explained later in this example.</p>
+<p>The initial <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/mesh.html">Mesh</a> is built with <a class="reference external" href="https://gmsh.info/#Download">Gmsh</a>. It is defined as transfinite at the body boundary layer and between the body and the road, and free for the rest of the domain. The mesh is dynamically refined throughout the simulation. This will be explained later in this example.</p>
 <p>The input mesh <code class="docutils literal notranslate"><span class="pre">Ahmed-Body-20-2D.msh</span></code> is in the same folder as the <code class="docutils literal notranslate"><span class="pre">.prm</span></code> file. The mesh subsection is set to use this file.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection mesh
   set type      = gmsh
@@ -464,12 +464,12 @@ end
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For further information about <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/mesh.html">Mesh</a> generation, we refer to the reader to the <a class="reference internal" href="../../../tools/gmsh/gmsh.html"><span class="doc">Introduction on How to Use GMSH</span></a> page of this documentation, or the <a class="reference external" href="https://www.dealii.org/current/doxygen/deal.II/namespaceGridGenerator.html">GridGenerator</a> on the deal.ii documentation and the <a class="reference external" href="https://gmsh.info/#Download">Gmsh</a> website.</p>
+<p>For further information about <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/mesh.html">Mesh</a> generation, we refer to the reader to the <a class="reference internal" href="../../../tools/gmsh/gmsh.html"><span class="doc">Introduction on How to Use GMSH</span></a> page of this documentation, or the <a class="reference external" href="https://www.dealii.org/current/doxygen/deal.II/namespaceGridGenerator.html">GridGenerator</a> on the deal.ii documentation and the <a class="reference external" href="https://gmsh.info/#Download">Gmsh</a> website.</p>
 </div>
 </section>
 <section id="initial-and-boundary-conditions">
 <h3>Initial and Boundary Conditions<a class="headerlink" href="#initial-and-boundary-conditions" title="Link to this heading">#</a></h3>
-<p>The <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/initial_conditions.html">Initial Condition</a> and <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/boundary_conditions_cfd.html">Boundary Conditions</a> are defined as in <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/examples/incompressible-flow/2d-flow-around-cylinder/2d-flow-around-cylinder.html">Example 3</a>.</p>
+<p>The <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/initial_conditions.html">Initial Condition</a> and <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/boundary_conditions_cfd.html">Boundary Conditions</a> are defined as in <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/examples/incompressible-flow/2d-flow-around-cylinder/2d-flow-around-cylinder.html">Example 3</a>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection initial conditions
   set type = nodal
   subsection uvwp
@@ -503,7 +503,7 @@ end
 </section>
 <section id="simulation-control">
 <h3>Simulation Control<a class="headerlink" href="#simulation-control" title="Link to this heading">#</a></h3>
-<p>Time integration is defined by a 1st order backward differentiation (<code class="docutils literal notranslate"><span class="pre">bdf1</span></code>), for a 4 seconds simulation (<code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">end</span></code>) with a 0.01 second <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">step</span></code>. The <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">path</span></code> is defined to save obtained results in a sub-directory, as stated in <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/cfd/simulation_control.html">Simulation Control</a>:</p>
+<p>Time integration is defined by a 1st order backward differentiation (<code class="docutils literal notranslate"><span class="pre">bdf1</span></code>), for a 4 seconds simulation (<code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">end</span></code>) with a 0.01 second <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">step</span></code>. The <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">path</span></code> is defined to save obtained results in a sub-directory, as stated in <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/simulation_control.html">Simulation Control</a>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection simulation control
   set method           = bdf1
   set output frequency = 1
@@ -540,7 +540,7 @@ end
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 6 ../build/applications/lethe-fluid/lethe-fluid ahmed.prm
 </pre></div>
 </div>
-<p>Guidelines for parameters other than the previous mentioned are found at the <a class="reference external" href="https://lethe-cfd.github.io/lethe/documentation/parameters/parameters.html">Parameters guide</a>.</p>
+<p>Guidelines for parameters other than the previous mentioned are found at the <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/parameters.html">Parameters guide</a>.</p>
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>

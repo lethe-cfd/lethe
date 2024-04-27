@@ -215,4 +215,4 @@ var menudata={children:[
 {text:"Enumerations",url:"globals_enum.html"},
 {text:"Enumerator",url:"globals_eval.html"},
 {text:"Macros",url:"globals_defs.html"}]}]},
-{text:"Lethe GitHub",url:"https://github.com/lethe-cfd/lethe"}]}
+{text:"Lethe GitHub",url:"https://github.com/chaos-polymtl/lethe"}]}

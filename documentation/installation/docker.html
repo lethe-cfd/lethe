@@ -402,18 +402,18 @@
 </div>
 <section id="no-compilation-required-using-the-provided-lethe-docker-image">
 <h2>No Compilation Required: Using the Provided Lethe Docker Image<a class="headerlink" href="#no-compilation-required-using-the-provided-lethe-docker-image" title="Link to this heading">#</a></h2>
-<p>If you don’t want to build Lethe and its dependencies, you can use the provided <a class="reference external" href="https://github.com/lethe-cfd/lethe/pkgs/container/lethe">Docker image</a>.</p>
+<p>If you don’t want to build Lethe and its dependencies, you can use the provided <a class="reference external" href="https://github.com/chaos-polymtl/lethe/pkgs/container/lethe">Docker image</a>.</p>
 <p>For example, to launch the 2D Lid-Driven Cavity Flow simulation, run the following lines inside the root Lethe folder:</p>
 <div class="copy-button highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/dealii<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>ghcr.io/lethe-cfd/lethe:master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ghcr.io/chaos-polymtl/lethe:master<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>lethe-fluid<span class="w"> </span>examples/incompressible_flow/2d_lid_driven_cavity/cavity.prm
 </pre></div>
 </div>
 <p>In general, to run a lethe simulation you will just need to run the following command:</p>
 <div class="copy-button highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/dealii<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>ghcr.io/lethe-cfd/lethe:master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ghcr.io/chaos-polymtl/lethe:master<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>lethe-executable<span class="w"> </span>parameter-file.prm
 </pre></div>
 </div>

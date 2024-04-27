@@ -396,7 +396,7 @@
         <article role="main">
           <section id="small-scale-rotating-drum-postprocessing">
 <h1>Small Scale Rotating Drum Postprocessing<a class="headerlink" href="#small-scale-rotating-drum-postprocessing" title="Link to this heading">#</a></h1>
-<p>This is an example of how to post-process results obtained in the <a class="reference external" href="../../dem/small-scale-rotating-drum/small-scale-rotating-drum.html">Small scale rotating drum example</a> using <a class="reference external" href="https://github.com/lethe-cfd/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, a Python module based on <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, built to facilitate the reading of Lethe results using <a class="reference external" href="https://www.python.org/">Python</a>.</p>
+<p>This is an example of how to post-process results obtained in the <a class="reference external" href="../../dem/small-scale-rotating-drum/small-scale-rotating-drum.html">Small scale rotating drum example</a> using <a class="reference external" href="https://github.com/chaos-polymtl/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, a Python module based on <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, built to facilitate the reading of Lethe results using <a class="reference external" href="https://www.python.org/">Python</a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This example uses the DEM files of the <a class="reference external" href="../../dem/small-scale-rotating-drum/small-scale-rotating-drum.html">Small scale rotating drum example</a>.</p>
@@ -409,7 +409,7 @@
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>DEM simulation</p></li>
-<li><p>Post-processing using <a class="reference external" href="https://www.python.org/">Python</a>, <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, <a class="reference external" href="https://github.com/lethe-cfd/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, and <a class="reference external" href="https://www.paraview.org/">ParaView</a>.</p></li>
+<li><p>Post-processing using <a class="reference external" href="https://www.python.org/">Python</a>, <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, <a class="reference external" href="https://github.com/chaos-polymtl/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, and <a class="reference external" href="https://www.paraview.org/">ParaView</a>.</p></li>
 </ul>
 </section>
 <section id="files-used-in-this-example">
@@ -423,7 +423,7 @@
 </section>
 <section id="description-of-the-case">
 <h2>Description of the Case<a class="headerlink" href="#description-of-the-case" title="Link to this heading">#</a></h2>
-<p>In this example, we illustrate the mixing inside a rotating drum by coloring the particles according to their radial position right after their full packing. To do so, we post-process Lethe-DEM data using <a class="reference external" href="https://www.python.org/">Python</a>, <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, <a class="reference external" href="https://github.com/lethe-cfd/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, and <a class="reference external" href="https://www.paraview.org/">ParaView</a>.</p>
+<p>In this example, we illustrate the mixing inside a rotating drum by coloring the particles according to their radial position right after their full packing. To do so, we post-process Lethe-DEM data using <a class="reference external" href="https://www.python.org/">Python</a>, <a class="reference external" href="https://docs.pyvista.org/">PyVista</a>, <a class="reference external" href="https://github.com/chaos-polymtl/lethe/tree/master/contrib/postprocessing">lethe_pyvista_tools</a>, and <a class="reference external" href="https://www.paraview.org/">ParaView</a>.</p>
 <p>Additionally, we calculate the mixing index using the Nearest Neighbors Method (NNM) [<a class="reference external" href="https://www.researchgate.net/profile/Niels-Deen/publication/228722534_Characterizing_solids_mixing_in_DEM_simulations/links/00b495289f429c5b39000000/Characterizing-solids-mixing-in-DEM-simulations.pdf">1</a>] and Doucet method [<a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S0263876208002724">2</a>, <a class="reference external" href="https://doi.org/10.1016/j.cherd.2016.12.018">3</a>].</p>
 <p>The DEM files used in this example are obtained following the <a class="reference external" href="../../dem/small-scale-rotating-drum/small-scale-rotating-drum.html">Small scale rotating drum example</a>.</p>
 <div class="admonition note">
