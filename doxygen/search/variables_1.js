@@ -6,7 +6,7 @@ var searchData=
   ['barycenter_5ftable_5119',['barycenter_table',['../classCahnHilliard.html#a22290e925b93fbad53f233929a8c49a8',1,'CahnHilliard']]],
   ['base_5fradius_5120',['base_radius',['../classCone.html#a7f71b74ecd0e8a7f26c65242ebb1cd86',1,'Cone']]],
   ['basis_5ffunctions_5121',['basis_functions',['../classRBFShape.html#a07b1ce75644d570cb5b319c54586b93e',1,'RBFShape']]],
-  ['bc_5ftype_5122',['BC_type',['../structParameters_1_1Lagrangian_1_1BCDEM.html#a800ac3be9841ad65f3dfa89ec49bdbf8',1,'Parameters::Lagrangian::BCDEM']]],
+  ['bc_5ftypes_5122',['bc_types',['../structParameters_1_1Lagrangian_1_1BCDEM.html#a9ae42c9c86d3f6bbb5f01d9812e66860',1,'Parameters::Lagrangian::BCDEM']]],
   ['bcfunctions_5123',['bcFunctions',['../classBoundaryConditions_1_1NSBoundaryConditions.html#a67b323a489e69bed8e64797b075d4542',1,'BoundaryConditions::NSBoundaryConditions::bcFunctions()'],['../classBoundaryConditions_1_1CahnHilliardBoundaryConditions.html#a9256d057213cddfa98a9d7f681c80365',1,'BoundaryConditions::CahnHilliardBoundaryConditions::bcFunctions()']]],
   ['bcpressurefunction_5124',['bcPressureFunction',['../classBoundaryConditions_1_1NSBoundaryConditions.html#a259dac7b8ad04da991df035bd55ecc53',1,'BoundaryConditions::NSBoundaryConditions']]],
   ['bdf_5fcoefs_5125',['bdf_coefs',['../classSimulationControl.html#a1f8fa7913f1e8572720ee37766433926',1,'SimulationControl']]],
