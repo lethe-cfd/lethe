@@ -357,6 +357,8 @@ NavierStokesOperatorBase<dim, number>::vmult_interface_up(
   VectorType       &dst,
   VectorType const &src) const
 {
+  this->timer.enter_subsection("operator::vmult_interface_up");
+
   if (has_edge_constrained_indices == false)
     {
       dst = number(0.);
@@ -380,6 +382,8 @@ NavierStokesOperatorBase<dim, number>::vmult_interface_up(
                               dst,
                               src_cpy,
                               false);
+
+  this->timer.leave_subsection("operator::vmult_interface_up");
 }
 
 
@@ -387,6 +391,8 @@ template <int dim, typename number>
 const TrilinosWrappers::SparseMatrix &
 NavierStokesOperatorBase<dim, number>::get_system_matrix() const
 {
+  this->timer.enter_subsection("operator::get_system_matrix");
+
   if (system_matrix.m() == 0 && system_matrix.n() == 0)
     {
       const auto &dof_handler = this->matrix_free.get_dof_handler();
@@ -444,6 +450,8 @@ NavierStokesOperatorBase<dim, number>::get_system_matrix() const
     &NavierStokesOperatorBase::do_cell_integral_local,
     this);
 
+  this->timer.leave_subsection("operator::get_system_matrix");
+
   return this->system_matrix;
 }
 
@@ -466,6 +474,8 @@ void
 NavierStokesOperatorBase<dim, number>::evaluate_non_linear_term(
   const VectorType &newton_step)
 {
+  this->timer.enter_subsection("operator::evaluate_non_linear_term");
+
   const unsigned int n_cells = matrix_free.n_cell_batches();
   FECellIntegrator   integrator(matrix_free);
 
@@ -518,6 +528,8 @@ NavierStokesOperatorBase<dim, number>::evaluate_non_linear_term(
           table_tau_lsic(cell, q) = std::sqrt(u_mag_squared) * h * 0.5;
         }
     }
+
+  this->timer.leave_subsection("operator::evaluate_non_linear_term");
 }
 
 template <int dim, typename number>
@@ -526,6 +538,9 @@ NavierStokesOperatorBase<dim, number>::
   evaluate_time_derivative_previous_solutions(
     const VectorType &time_derivative_previous_solutions)
 {
+  this->timer.enter_subsection(
+    "operator::evaluate_time_derivative_previous_solutions");
+
   const unsigned int n_cells = matrix_free.n_cell_batches();
   FECellIntegrator   integrator(matrix_free);
 
@@ -539,6 +554,9 @@ NavierStokesOperatorBase<dim, number>::
       for (const auto q : integrator.quadrature_point_indices())
         time_derivatives_previous_solutions(cell, q) += integrator.get_value(q);
     }
+
+  this->timer.leave_subsection(
+    "operator::evaluate_time_derivative_previous_solutions");
 }
 
 template <int dim, typename number>
@@ -558,8 +576,12 @@ void
 NavierStokesOperatorBase<dim, number>::evaluate_residual(VectorType       &dst,
                                                          const VectorType &src)
 {
+  this->timer.enter_subsection("operator::evaluate_residual");
+
   this->matrix_free.cell_loop(
     &NavierStokesOperatorBase::local_evaluate_residual, this, dst, src, true);
+
+  this->timer.leave_subsection("operator::evaluate_residual");
 }
 
 template <int dim, typename number>
@@ -567,6 +589,8 @@ void
 NavierStokesOperatorBase<dim, number>::compute_inverse_diagonal(
   VectorType &diagonal) const
 {
+  this->timer.enter_subsection("operator::compute_inverse_diagonal");
+
   this->matrix_free.initialize_dof_vector(diagonal);
   MatrixFreeTools::compute_diagonal(
     matrix_free,
@@ -579,6 +603,8 @@ NavierStokesOperatorBase<dim, number>::compute_inverse_diagonal(
 
   for (auto &i : diagonal)
     i = (std::abs(i) > 1.0e-10) ? (1.0 / i) : 1.0;
+
+  this->timer.leave_subsection("operator::compute_inverse_diagonal");
 }
 
 template <int dim, typename number>
