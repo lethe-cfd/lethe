@@ -442,6 +442,9 @@ protected:
   Table<2, Tensor<1, dim + 1, VectorizedArray<number>>>
     time_derivatives_previous_solutions;
 
+  mutable Table<2, VectorizedArray<number>> table_tau;
+  mutable Table<2, VectorizedArray<number>> table_tau_lsic;
+
   /**
    * @brief Vector with the constrained indices used for the local smoothing approach.
    *

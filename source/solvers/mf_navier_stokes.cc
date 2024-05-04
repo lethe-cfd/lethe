@@ -56,14 +56,8 @@ MFNavierStokesPreconditionGMG<dim>::MFNavierStokesPreconditionGMG(
   : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
   , simulation_parameters(simulation_parameters)
   , dof_handler(dof_handler)
-  , mg_setup_timer(MPI_COMM_WORLD,
-                   this->pcout,
-                   TimerOutput::never,
-                   TimerOutput::wall_times)
-  , mg_vmult_timer(MPI_COMM_WORLD,
-                   this->pcout,
-                   TimerOutput::never,
-                   TimerOutput::wall_times)
+  , mg_setup_timer(this->pcout, TimerOutput::never, TimerOutput::wall_times)
+  , mg_vmult_timer(this->pcout, TimerOutput::never, TimerOutput::wall_times)
 {
   if (this->simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
         .preconditioner == Parameters::LinearSolver::PreconditionerType::lsmg)
@@ -1943,13 +1937,15 @@ MFNavierStokesSolver<dim>::print_mg_setup_times()
         .mg_verbosity == Parameters::Verbosity::extra_verbose)
     {
       announce_string(this->pcout, "Multigrid setup times");
-      this->gmg_preconditioner->mg_setup_timer.print_summary();
+      this->gmg_preconditioner->mg_setup_timer.print_wall_time_statistics(
+        MPI_COMM_WORLD);
 
       announce_string(this->pcout, "Multigrid vmult times");
-      this->gmg_preconditioner->mg_vmult_timer.print_summary();
+      this->gmg_preconditioner->mg_vmult_timer.print_wall_time_statistics(
+        MPI_COMM_WORLD);
 
       announce_string(this->pcout, "System operator times");
-      this->system_operator->timer.print_summary();
+      this->system_operator->timer.print_wall_time_statistics(MPI_COMM_WORLD);
 
       auto mg_operators = this->gmg_preconditioner->get_mg_operators();
       for (unsigned int level = mg_operators.min_level();
@@ -1958,7 +1954,7 @@ MFNavierStokesSolver<dim>::print_mg_setup_times()
         {
           announce_string(this->pcout,
                           "Operator level " + std::to_string(level) + " times");
-          mg_operators[level]->timer.print_summary();
+          mg_operators[level]->timer.print_wall_time_statistics(MPI_COMM_WORLD);
         }
     }
 

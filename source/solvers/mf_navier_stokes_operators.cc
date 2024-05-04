@@ -70,10 +70,7 @@ evaluate_function(const Function<dim>                       &function,
 template <int dim, typename number>
 NavierStokesOperatorBase<dim, number>::NavierStokesOperatorBase()
   : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
-  , timer(MPI_COMM_WORLD,
-          this->pcout,
-          TimerOutput::never,
-          TimerOutput::wall_times)
+  , timer(this->pcout, TimerOutput::never, TimerOutput::wall_times)
 {}
 
 template <int dim, typename number>
@@ -88,10 +85,7 @@ NavierStokesOperatorBase<dim, number>::NavierStokesOperatorBase(
   const unsigned int                 mg_level,
   std::shared_ptr<SimulationControl> simulation_control)
   : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
-  , timer(MPI_COMM_WORLD,
-          this->pcout,
-          TimerOutput::never,
-          TimerOutput::wall_times)
+  , timer(this->pcout, TimerOutput::never, TimerOutput::wall_times)
 {
   this->reinit(mapping,
                dof_handler,
@@ -478,6 +472,21 @@ NavierStokesOperatorBase<dim, number>::evaluate_non_linear_term(
   nonlinear_previous_values.reinit(n_cells, integrator.n_q_points);
   nonlinear_previous_gradient.reinit(n_cells, integrator.n_q_points);
   nonlinear_previous_hessian_diagonal.reinit(n_cells, integrator.n_q_points);
+  table_tau.reinit(n_cells, integrator.n_q_points);
+  table_tau_lsic.reinit(n_cells, integrator.n_q_points);
+
+  double sdt = 0.0;
+
+  bool transient =
+    (is_bdf(this->simulation_control->get_assembly_method())) ? true : false;
+
+  if (transient)
+    {
+      const auto time_steps_vector =
+        this->simulation_control->get_time_steps_vector();
+      const double dt = time_steps_vector[0];
+      sdt             = 1. / dt;
+    }
 
   for (unsigned int cell = 0; cell < n_cells; ++cell)
     {
@@ -486,12 +495,27 @@ NavierStokesOperatorBase<dim, number>::evaluate_non_linear_term(
       integrator.evaluate(EvaluationFlags::values | EvaluationFlags::gradients |
                           EvaluationFlags::hessians);
 
+      const auto h = integrator.read_cell_data(this->get_element_size());
+
       for (const auto q : integrator.quadrature_point_indices())
         {
           nonlinear_previous_values(cell, q)   = integrator.get_value(q);
           nonlinear_previous_gradient(cell, q) = integrator.get_gradient(q);
           nonlinear_previous_hessian_diagonal(cell, q) =
             integrator.get_hessian_diagonal(q);
+
+          VectorizedArray<number> u_mag_squared = 1e-12;
+          for (unsigned int k = 0; k < dim; ++k)
+            u_mag_squared +=
+              Utilities::fixed_power<2>(integrator.get_value(q)[k]);
+
+          table_tau(cell, q) =
+            1. / std::sqrt(Utilities::fixed_power<2>(sdt) +
+                           4. * u_mag_squared / h / h +
+                           9. * Utilities::fixed_power<2>(
+                                  4. * this->kinematic_viscosity / (h * h)));
+
+          table_tau_lsic(cell, q) = std::sqrt(u_mag_squared) * h * 0.5;
         }
     }
 }
@@ -629,34 +653,25 @@ NavierStokesStabilizedOperator<dim, number>::do_cell_integral_local(
 
   const unsigned int cell = integrator.get_current_cell_index();
 
-  const auto h = integrator.read_cell_data(this->get_element_size());
-
   // To identify whether the problem is transient or steady
   bool transient =
     (is_bdf(this->simulation_control->get_assembly_method())) ? true : false;
 
   // Time step and vector for BDF coefficients
   const Vector<double> *bdf_coefs;
-  double                sdt = 0.0;
 
   if (transient)
-    {
-      bdf_coefs = &this->simulation_control->get_bdf_coefficients();
-      const auto time_steps_vector =
-        this->simulation_control->get_time_steps_vector();
-      const double dt = time_steps_vector[0];
-      sdt             = 1. / dt;
-    }
+    bdf_coefs = &this->simulation_control->get_bdf_coefficients();
 
   for (const auto q : integrator.quadrature_point_indices())
     {
       // Evaluate source term function
       Tensor<1, dim, VectorizedArray<number>> source_value;
-      Point<dim, VectorizedArray<number>>     point_batch =
-        integrator.quadrature_point(q);
-      source_value =
-        evaluate_function<dim, number, dim>(*(this->forcing_function),
-                                            point_batch);
+      // Point<dim, VectorizedArray<number>>     point_batch =
+      //   integrator.quadrature_point(q);
+      // source_value =
+      //   evaluate_function<dim, number, dim>(*(this->forcing_function),
+      //                                       point_batch);
 
       // Add to source term the dynamic flow control force (zero if not enabled)
       source_value += this->beta_force;
@@ -685,18 +700,8 @@ NavierStokesStabilizedOperator<dim, number>::do_cell_integral_local(
           this->time_derivatives_previous_solutions(cell, q);
 
 
-      // Calculate tau
-      VectorizedArray<number> u_mag_squared = 1e-12;
-      for (unsigned int k = 0; k < dim; ++k)
-        u_mag_squared += Utilities::fixed_power<2>(previous_values[k]);
-
-      const auto tau =
-        1. /
-        std::sqrt(Utilities::fixed_power<2>(sdt) + 4. * u_mag_squared / h / h +
-                  9. * Utilities::fixed_power<2>(
-                         4. * this->kinematic_viscosity / (h * h)));
-
-      const auto tau_lsic = std::sqrt(u_mag_squared) * h * 0.5;
+      const auto tau      = this->table_tau[cell][q];
+      const auto tau_lsic = this->table_tau_lsic[cell][q];
 
       // Weak form Jacobian
       for (unsigned int i = 0; i < dim; ++i)
@@ -856,8 +861,6 @@ NavierStokesStabilizedOperator<dim, number>::local_evaluate_residual(
       integrator.evaluate(EvaluationFlags::values | EvaluationFlags::gradients |
                           EvaluationFlags::hessians);
 
-      const auto h = integrator.read_cell_data(this->get_element_size());
-
       // To identify whether the problem is transient or steady
       bool transient =
         (is_bdf(this->simulation_control->get_assembly_method())) ? true :
@@ -865,26 +868,19 @@ NavierStokesStabilizedOperator<dim, number>::local_evaluate_residual(
 
       // Time step and vector for BDF coefficients
       const Vector<double> *bdf_coefs;
-      double                sdt = 0.0;
 
       if (transient)
-        {
-          bdf_coefs = &this->simulation_control->get_bdf_coefficients();
-          const auto time_steps_vector =
-            this->simulation_control->get_time_steps_vector();
-          const double dt = time_steps_vector[0];
-          sdt             = 1. / dt;
-        }
+        bdf_coefs = &this->simulation_control->get_bdf_coefficients();
 
       for (const auto q : integrator.quadrature_point_indices())
         {
           // Evaluate source term function
           Tensor<1, dim, VectorizedArray<number>> source_value;
-          Point<dim, VectorizedArray<number>>     point_batch =
-            integrator.quadrature_point(q);
-          source_value =
-            evaluate_function<dim, number, dim>(*(this->forcing_function),
-                                                point_batch);
+          // Point<dim, VectorizedArray<number>>     point_batch =
+          //   integrator.quadrature_point(q);
+          // source_value =
+          //   evaluate_function<dim, number, dim>(*(this->forcing_function),
+          //                                       point_batch);
 
           // Add to source term the dynamic flow control force (zero if not
           // enabled)
@@ -905,17 +901,8 @@ NavierStokesStabilizedOperator<dim, number>::local_evaluate_residual(
 
 
           // Calculate tau
-          VectorizedArray<number> u_mag_squared = 1e-12;
-          for (unsigned int k = 0; k < dim; ++k)
-            u_mag_squared += Utilities::fixed_power<2>(value[k]);
-
-          const auto tau =
-            1. / std::sqrt(Utilities::fixed_power<2>(sdt) +
-                           4. * u_mag_squared / h / h +
-                           9. * Utilities::fixed_power<2>(
-                                  4. * this->kinematic_viscosity / (h * h)));
-
-          const auto tau_lsic = std::sqrt(u_mag_squared) * h * 0.5;
+          const auto tau      = this->table_tau[cell][q];
+          const auto tau_lsic = this->table_tau_lsic[cell][q];
 
           // Result value/gradient we will use
           typename FECellIntegrator::value_type    value_result;
