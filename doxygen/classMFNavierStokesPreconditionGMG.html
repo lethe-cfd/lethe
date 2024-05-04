@@ -73,6 +73,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classMFNavierStokesPreconditionGMG-members.html">List of all members</a>  </div>
@@ -85,16 +86,23 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a11c9df3134159142eb72bca8eea66ec4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a11c9df3134159142eb72bca8eea66ec4">MFNavierStokesPreconditionGMG</a> (const <a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;<a class="el" href="classMFNavierStokesPreconditionGMG.html#a1f386df60da6c3277e30c272affa1b72">simulation_parameters</a>, const DoFHandler&lt; dim &gt; &amp;<a class="el" href="classMFNavierStokesPreconditionGMG.html#a3dd4d80fbc0ca46231b101ae15400925">dof_handler</a>, const std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; &amp;mapping, const std::shared_ptr&lt; Quadrature&lt; dim &gt;&gt; &amp;cell_quadrature, const std::shared_ptr&lt; Function&lt; dim &gt;&gt; forcing_function, const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; simulation_control, TimerOutput &amp;mg_computing_timer, const std::shared_ptr&lt; FESystem&lt; dim &gt;&gt; fe)</td></tr>
-<tr class="separator:a11c9df3134159142eb72bca8eea66ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a558cb86ba8e923acad74c3743413f75b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a558cb86ba8e923acad74c3743413f75b">initialize</a> (TimerOutput &amp;mg_computing_timer, const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; simulation_control, <a class="el" href="classFlowControl.html">FlowControl</a>&lt; dim &gt; &amp;flow_control, const <a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;present_solution, const <a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;time_derivative_previous_solutions)</td></tr>
-<tr class="separator:a558cb86ba8e923acad74c3743413f75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1b58551c82ace83e9f290d855d76655"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#ae1b58551c82ace83e9f290d855d76655">MFNavierStokesPreconditionGMG</a> (const <a class="el" href="classSimulationParameters.html">SimulationParameters</a>&lt; dim &gt; &amp;<a class="el" href="classMFNavierStokesPreconditionGMG.html#a1f386df60da6c3277e30c272affa1b72">simulation_parameters</a>, const DoFHandler&lt; dim &gt; &amp;<a class="el" href="classMFNavierStokesPreconditionGMG.html#a3dd4d80fbc0ca46231b101ae15400925">dof_handler</a>, const std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; &amp;mapping, const std::shared_ptr&lt; Quadrature&lt; dim &gt;&gt; &amp;cell_quadrature, const std::shared_ptr&lt; Function&lt; dim &gt;&gt; forcing_function, const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; simulation_control, const std::shared_ptr&lt; FESystem&lt; dim &gt;&gt; fe)</td></tr>
+<tr class="separator:ae1b58551c82ace83e9f290d855d76655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a308ee5666a8bfdd6bcccd51291f3be72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a308ee5666a8bfdd6bcccd51291f3be72">initialize</a> (const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt; simulation_control, <a class="el" href="classFlowControl.html">FlowControl</a>&lt; dim &gt; &amp;flow_control, const <a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;present_solution, const <a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;time_derivative_previous_solutions)</td></tr>
+<tr class="separator:a308ee5666a8bfdd6bcccd51291f3be72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61543eb57bdf4f202c72df4c52bc0a2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a61543eb57bdf4f202c72df4c52bc0a2c">vmult</a> (<a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;dst, const <a class="el" href="classMFNavierStokesPreconditionGMG.html#a3703aff160ab715efeeceb0e524b4eed">VectorType</a> &amp;src) const</td></tr>
 <tr class="separator:a61543eb57bdf4f202c72df4c52bc0a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace5cde80ed915aaf32296a4ab1f17f44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#ace5cde80ed915aaf32296a4ab1f17f44">print_relevant_info</a> () const</td></tr>
 <tr class="separator:ace5cde80ed915aaf32296a4ab1f17f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a189748bbfd425e734dd02ac5d53b63c4"><td class="memItemLeft" align="right" valign="top">const MGLevelObject&lt; std::shared_ptr&lt; <a class="el" href="classMFNavierStokesPreconditionGMG.html#a5659868adfdb62532f0ea2c5bc241628">OperatorType</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a189748bbfd425e734dd02ac5d53b63c4">get_mg_operators</a> () const</td></tr>
 <tr class="separator:a189748bbfd425e734dd02ac5d53b63c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1197c661054bb120e972040910dfdcde"><td class="memItemLeft" align="right" valign="top">TimerOutput&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#a1197c661054bb120e972040910dfdcde">mg_setup_timer</a></td></tr>
+<tr class="separator:a1197c661054bb120e972040910dfdcde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab203e3eaa472721bcff72c8cdd4739"><td class="memItemLeft" align="right" valign="top">TimerOutput&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMFNavierStokesPreconditionGMG.html#aeab203e3eaa472721bcff72c8cdd4739">mg_vmult_timer</a></td></tr>
+<tr class="separator:aeab203e3eaa472721bcff72c8cdd4739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -387,8 +395,8 @@ template&lt;int dim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a11c9df3134159142eb72bca8eea66ec4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11c9df3134159142eb72bca8eea66ec4">&#9670;&nbsp;</a></span>MFNavierStokesPreconditionGMG()</h2>
+<a id="ae1b58551c82ace83e9f290d855d76655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1b58551c82ace83e9f290d855d76655">&#9670;&nbsp;</a></span>MFNavierStokesPreconditionGMG()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -434,12 +442,6 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TimerOutput &amp;&#160;</td>
-          <td class="paramname"><em>mg_computing_timer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const std::shared_ptr&lt; FESystem&lt; dim &gt;&gt;&#160;</td>
           <td class="paramname"><em>fe</em>&#160;</td>
         </tr>
@@ -460,7 +462,6 @@ template&lt;int dim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">cell_quadrature</td><td>Required for local operations on cells. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">forcing_function</td><td>Function specified in parameter file as source term. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_control</td><td>Required to get the time stepping method. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mg_computing_timer</td><td>Timer for specific MG components. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fe</td><td>Describes the FE system for the vector-valued problem. </td></tr>
   </table>
   </dd>
@@ -468,7 +469,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00048">48</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="simulation__parameters_8h_source.html#l00057">SimulationParameters&lt; dim &gt;::boundary_conditions</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00134">MFNavierStokesPreconditionGMG&lt; dim &gt;::coarse_grid_triangulations</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00137">MFNavierStokesPreconditionGMG&lt; dim &gt;::dof_handlers</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8add95ffdcea64b1eaaa9244611678ed38">BoundaryConditions::function_weak</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482ae0941be0c6a876b60f0d7f9e6d33d341">Parameters::LinearSolver::gcmg</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00252">PhysicalPropertiesManager::get_kinematic_viscosity_scale()</a>, <a class="el" href="simulation__parameters_8h_source.html#l00042">SimulationParameters&lt; dim &gt;::linear_solver</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00153">MFNavierStokesPreconditionGMG&lt; dim &gt;::ls_mg_interface_in</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00151">MFNavierStokesPreconditionGMG&lt; dim &gt;::ls_mg_operators</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a5d266332fc0c9664dfb1414b629535f6">Parameters::LinearSolver::lsmg</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00130">MFNavierStokesPreconditionGMG&lt; dim &gt;::maxlevel</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00162">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_constrained_dofs</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00143">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_operators</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00168">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_transfer_gc</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00165">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_transfer_ls</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00127">MFNavierStokesPreconditionGMG&lt; dim &gt;::minlevel</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ab0ba1623558e169131cb513037504286">BoundaryConditions::outlet</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ac6bda74f8a2d6e410535eaa3dca28e9d">BoundaryConditions::partial_slip</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00197">MFNavierStokesPreconditionGMG&lt; dim &gt;::pcout</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ae6ffdec5e14fce371eb7ae99edebbbee">BoundaryConditions::periodic</a>, <a class="el" href="simulation__parameters_8h_source.html#l00078">SimulationParameters&lt; dim &gt;::physical_properties_manager</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ad99fad96a5d0a7cb2eb41341ea556093">BoundaryConditions::pressure</a>, <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8a3daec8dea85232fa2baef18aeb2334d8">BoundaryConditions::slip</a>, <a class="el" href="structParameters_1_1Stabilization.html#ae7aa4d80ac010b83de1242172de802ef">Parameters::Stabilization::stabilization</a>, <a class="el" href="simulation__parameters_8h_source.html#l00071">SimulationParameters&lt; dim &gt;::stabilization</a>, and <a class="el" href="mf__navier__stokes_8h_source.html#l00140">MFNavierStokesPreconditionGMG&lt; dim &gt;::transfers</a>.</p>
+<p class="reference">References <a class="el" href="simulation__parameters_8h_source.html#l00057">SimulationParameters&lt; dim &gt;::boundary_conditions</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00130">MFNavierStokesPreconditionGMG&lt; dim &gt;::coarse_grid_triangulations</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00133">MFNavierStokesPreconditionGMG&lt; dim &gt;::dof_handlers</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8add95ffdcea64b1eaaa9244611678ed38">BoundaryConditions::function_weak</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482ae0941be0c6a876b60f0d7f9e6d33d341">Parameters::LinearSolver::gcmg</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00252">PhysicalPropertiesManager::get_kinematic_viscosity_scale()</a>, <a class="el" href="simulation__parameters_8h_source.html#l00042">SimulationParameters&lt; dim &gt;::linear_solver</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00149">MFNavierStokesPreconditionGMG&lt; dim &gt;::ls_mg_interface_in</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00147">MFNavierStokesPreconditionGMG&lt; dim &gt;::ls_mg_operators</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a5d266332fc0c9664dfb1414b629535f6">Parameters::LinearSolver::lsmg</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00126">MFNavierStokesPreconditionGMG&lt; dim &gt;::maxlevel</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00158">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_constrained_dofs</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00139">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_operators</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00206">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_setup_timer</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00164">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_transfer_gc</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00161">MFNavierStokesPreconditionGMG&lt; dim &gt;::mg_transfer_ls</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00123">MFNavierStokesPreconditionGMG&lt; dim &gt;::minlevel</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ab0ba1623558e169131cb513037504286">BoundaryConditions::outlet</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ac6bda74f8a2d6e410535eaa3dca28e9d">BoundaryConditions::partial_slip</a>, <a class="el" href="mf__navier__stokes_8h_source.html#l00193">MFNavierStokesPreconditionGMG&lt; dim &gt;::pcout</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ae6ffdec5e14fce371eb7ae99edebbbee">BoundaryConditions::periodic</a>, <a class="el" href="simulation__parameters_8h_source.html#l00078">SimulationParameters&lt; dim &gt;::physical_properties_manager</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8ad99fad96a5d0a7cb2eb41341ea556093">BoundaryConditions::pressure</a>, <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddad99fad96a5d0a7cb2eb41341ea556093">pressure</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>, <a class="el" href="namespaceBoundaryConditions.html#a07df76d63cde5cb5bcbea0d9c25a54b8a3daec8dea85232fa2baef18aeb2334d8">BoundaryConditions::slip</a>, <a class="el" href="structParameters_1_1Stabilization.html#ae7aa4d80ac010b83de1242172de802ef">Parameters::Stabilization::stabilization</a>, <a class="el" href="simulation__parameters_8h_source.html#l00071">SimulationParameters&lt; dim &gt;::stabilization</a>, and <a class="el" href="mf__navier__stokes_8h_source.html#l00136">MFNavierStokesPreconditionGMG&lt; dim &gt;::transfers</a>.</p>
 
 </div>
 </div>
@@ -490,12 +491,12 @@ template&lt;int dim&gt; </div>
 <p>Getter function for all level operators. </p>
 <dl class="section return"><dt>Returns</dt><dd>Multigrid object that contains all level operators. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01276">1276</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01374">1374</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
 </div>
 </div>
-<a id="a558cb86ba8e923acad74c3743413f75b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a558cb86ba8e923acad74c3743413f75b">&#9670;&nbsp;</a></span>initialize()</h2>
+<a id="a308ee5666a8bfdd6bcccd51291f3be72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a308ee5666a8bfdd6bcccd51291f3be72">&#9670;&nbsp;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -505,12 +506,6 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classMFNavierStokesPreconditionGMG.html">MFNavierStokesPreconditionGMG</a>&lt; dim &gt;::initialize </td>
           <td>(</td>
-          <td class="paramtype">TimerOutput &amp;&#160;</td>
-          <td class="paramname"><em>mg_computing_timer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt;&#160;</td>
           <td class="paramname"><em>simulation_control</em>, </td>
         </tr>
@@ -543,7 +538,6 @@ template&lt;int dim&gt; </div>
 <p>Initialize smoother, coarse grid solver and multigrid object needed for the geometric multigrid preconditioner. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mg_computing_timer</td><td>Timer for specific MG components. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_control</td><td>Required to get the time stepping method. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">flow_control</td><td>Required for dynamic flow control. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">present_solution</td><td>Previous solution needed to evaluate the non linear term. </td></tr>
@@ -552,7 +546,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00605">605</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00612">612</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a0b65af7f2357d3fa0ee8d8972d7e0646">Parameters::LinearSolver::amg</a>, <a class="el" href="mf__navier__stokes__operators_8cc_source.html#l00458">NavierStokesOperatorBase&lt; dim, number &gt;::evaluate_non_linear_term()</a>, <a class="el" href="multiphysics_8h_source.html#l00031">fluid_dynamics</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482ae0941be0c6a876b60f0d7f9e6d33d341">Parameters::LinearSolver::gcmg</a>, <a class="el" href="flow__control_8h_source.html#l00103">FlowControl&lt; dim &gt;::get_beta()</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a95dfbb838164998e04803c1e488b86ab">Parameters::LinearSolver::ilu</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00037">is_bdf()</a>, <a class="el" href="structParameters_1_1LinearSolver.html#a704cb5844fa228c463633aafdc87a482a5d266332fc0c9664dfb1414b629535f6">Parameters::LinearSolver::lsmg</a>, and <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::quiet</a>.</p>
 
@@ -574,7 +568,7 @@ template&lt;int dim&gt; </div>
 
 <p>Prints relevant multigrid information. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01254">1254</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01352">1352</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
 </div>
 </div>
@@ -615,7 +609,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01237">1237</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l01335">1335</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
 
 </div>
 </div>
@@ -644,7 +638,7 @@ template&lt;int dim&gt; </div>
 
 <p>Vector holding number of coarse grid iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00206">206</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00202">202</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -672,7 +666,7 @@ template&lt;int dim&gt; </div>
 
 <p>GMRES as coarse grid solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00180">180</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00176">176</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -700,7 +694,7 @@ template&lt;int dim&gt; </div>
 
 <p>Solver control for the coarse grid solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00177">177</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00173">173</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -728,7 +722,7 @@ template&lt;int dim&gt; </div>
 
 <p>Triangulations for the global coarsening case. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00134">134</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00130">130</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -756,7 +750,7 @@ template&lt;int dim&gt; </div>
 
 <p>DoF Handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00203">203</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00199">199</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -784,7 +778,7 @@ template&lt;int dim&gt; </div>
 
 <p>DoF handlers for each of the levels of the global coarsening algorithm. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00137">137</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00133">133</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -812,7 +806,7 @@ template&lt;int dim&gt; </div>
 
 <p>Global coarsening multigrid preconiditoner object. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00194">194</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00190">190</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -838,7 +832,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00153">153</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00149">149</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -864,7 +858,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00151">151</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00147">147</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -892,7 +886,7 @@ template&lt;int dim&gt; </div>
 
 <p>Local smoothing multigrid preconditioner object. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00190">190</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00186">186</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -920,7 +914,7 @@ template&lt;int dim&gt; </div>
 
 <p>Max level of the multigrid hierarchy. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00130">130</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00126">126</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -948,7 +942,7 @@ template&lt;int dim&gt; </div>
 
 <p>Multigrid method. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00186">186</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00182">182</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -976,7 +970,7 @@ template&lt;int dim&gt; </div>
 
 <p>Multigrid wrapper for the coarse grid solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00183">183</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00179">179</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1003,7 +997,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>Collection of boundary constraints and refinement edge constrations for the different levels in the local smoothing approach. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00162">162</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00158">158</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1031,7 +1025,7 @@ template&lt;int dim&gt; </div>
 
 <p>Interface edge matrix needed only for local smoothing. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00149">149</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00145">145</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1059,7 +1053,7 @@ template&lt;int dim&gt; </div>
 
 <p>Multigrid level object storing all operators. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00146">146</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00142">142</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1087,7 +1081,35 @@ template&lt;int dim&gt; </div>
 
 <p>Level operators for the geometric multigrid. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00143">143</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00139">139</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+
+</div>
+</div>
+<a id="a1197c661054bb120e972040910dfdcde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1197c661054bb120e972040910dfdcde">&#9670;&nbsp;</a></span>mg_setup_timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TimerOutput <a class="el" href="classMFNavierStokesPreconditionGMG.html">MFNavierStokesPreconditionGMG</a>&lt; dim &gt;::mg_setup_timer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Timer for specific geometric multigrid components. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00206">206</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1115,7 +1137,7 @@ template&lt;int dim&gt; </div>
 
 <p>Smoother object. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00158">158</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00154">154</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1143,7 +1165,7 @@ template&lt;int dim&gt; </div>
 
 <p>Transfer operator for global coarsening. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00168">168</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00164">164</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1171,7 +1193,35 @@ template&lt;int dim&gt; </div>
 
 <p>Transfer operator for local smoothing. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00165">165</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00161">161</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+
+</div>
+</div>
+<a id="aeab203e3eaa472721bcff72c8cdd4739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeab203e3eaa472721bcff72c8cdd4739">&#9670;&nbsp;</a></span>mg_vmult_timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TimerOutput <a class="el" href="classMFNavierStokesPreconditionGMG.html">MFNavierStokesPreconditionGMG</a>&lt; dim &gt;::mg_vmult_timer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal timer for vmult timings. </p>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00209">209</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1199,7 +1249,7 @@ template&lt;int dim&gt; </div>
 
 <p>Min level of the multigrid hierarchy. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00127">127</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00123">123</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1227,7 +1277,7 @@ template&lt;int dim&gt; </div>
 
 <p>Conditional Ostream. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00197">197</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00193">193</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1255,7 +1305,7 @@ template&lt;int dim&gt; </div>
 
 <p>Algebraic multigrid as coarse grid solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00171">171</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00167">167</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1283,7 +1333,7 @@ template&lt;int dim&gt; </div>
 
 <p>Incomplete LU as coarse grid solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00174">174</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00170">170</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1361,7 @@ template&lt;int dim&gt; </div>
 
 <p>Simulation parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00200">200</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00196">196</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
@@ -1339,7 +1389,7 @@ template&lt;int dim&gt; </div>
 
 <p>Transfers for each of the levels of the global coarsening algorithm. </p>
 
-<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00140">140</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8h_source.html#l00136">136</a> of file <a class="el" href="mf__navier__stokes_8h_source.html">mf_navier_stokes.h</a>.</p>
 
 </div>
 </div>
