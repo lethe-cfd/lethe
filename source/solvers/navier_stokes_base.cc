@@ -568,8 +568,11 @@ NavierStokesBase<dim, VectorType, DofsType>::iterate()
           simulation_parameters.linear_solver.at(PhysicsID::fluid_dynamics)
               .verbosity != Parameters::Verbosity::quiet)
         announce_string(this->pcout, "Fluid Dynamics");
-      PhysicsSolver<VectorType>::solve_non_linear_system(false);
 
+      this->computing_timer.enter_subsection("Solve non-linear system");
+      PhysicsSolver<VectorType>::solve_non_linear_system(false);
+      this->computing_timer.leave_subsection("Solve non-linear system");
+      
       // Solve and percolate the auxiliary physics that should be treated AFTER
       // the fluid dynamics
       multiphysics->solve(true,
