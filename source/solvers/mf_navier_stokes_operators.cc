@@ -69,6 +69,11 @@ evaluate_function(const Function<dim>                       &function,
 
 template <int dim, typename number>
 NavierStokesOperatorBase<dim, number>::NavierStokesOperatorBase()
+  : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
+  , timer(MPI_COMM_WORLD,
+          this->pcout,
+          TimerOutput::never,
+          TimerOutput::wall_times)
 {}
 
 template <int dim, typename number>
@@ -82,6 +87,11 @@ NavierStokesOperatorBase<dim, number>::NavierStokesOperatorBase(
   const StabilizationType            stabilization,
   const unsigned int                 mg_level,
   std::shared_ptr<SimulationControl> simulation_control)
+  : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
+  , timer(MPI_COMM_WORLD,
+          this->pcout,
+          TimerOutput::never,
+          TimerOutput::wall_times)
 {
   this->reinit(mapping,
                dof_handler,
@@ -291,6 +301,8 @@ void
 NavierStokesOperatorBase<dim, number>::vmult(VectorType       &dst,
                                              const VectorType &src) const
 {
+  this->timer.enter_subsection("operator::vmult");
+
   // save values for edge constrained dofs and set them to 0 in src vector
   for (unsigned int i = 0; i < edge_constrained_indices.size(); ++i)
     {
@@ -318,6 +330,8 @@ NavierStokesOperatorBase<dim, number>::vmult(VectorType       &dst,
       dst.local_element(edge_constrained_indices[i]) =
         edge_constrained_values[i];
     }
+
+  this->timer.leave_subsection("operator::vmult");
 }
 
 template <int dim, typename number>

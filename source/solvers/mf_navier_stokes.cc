@@ -1947,6 +1947,19 @@ MFNavierStokesSolver<dim>::print_mg_setup_times()
 
       announce_string(this->pcout, "Multigrid vmult times");
       this->gmg_preconditioner->mg_vmult_timer.print_summary();
+
+      announce_string(this->pcout, "System operator times");
+      this->system_operator->timer.print_summary();
+
+      auto mg_operators = this->gmg_preconditioner->get_mg_operators();
+      for (unsigned int level = mg_operators.min_level();
+           level <= mg_operators.max_level();
+           level++)
+        {
+          announce_string(this->pcout,
+                          "Operator level " + std::to_string(level) + " times");
+          mg_operators[level]->timer.print_summary();
+        }
     }
 
   this->gmg_preconditioner->mg_setup_timer.reset();

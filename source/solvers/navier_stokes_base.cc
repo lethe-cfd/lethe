@@ -572,7 +572,7 @@ NavierStokesBase<dim, VectorType, DofsType>::iterate()
       this->computing_timer.enter_subsection("Solve non-linear system");
       PhysicsSolver<VectorType>::solve_non_linear_system(false);
       this->computing_timer.leave_subsection("Solve non-linear system");
-      
+
       // Solve and percolate the auxiliary physics that should be treated AFTER
       // the fluid dynamics
       multiphysics->solve(true,
