@@ -1,6 +1,7 @@
 #include <core/grids.h>
 #include <core/solutions_output.h>
 
+#include "fem-dem/cfd_dem_simulation_parameters.h"
 #include <dem/explicit_euler_integrator.h>
 #include <dem/gear3_integrator.h>
 #include <dem/post_processing.h>
@@ -14,30 +15,27 @@
 
 template <int dim>
 bool
-check_contact_detection_method(
+CFDDEMSolver<dim>::check_contact_detection_method(
   unsigned int                          counter,
-  CFDDEMSimulationParameters<dim>      &param,
   std::vector<double>                  &displacement,
   Particles::ParticleHandler<dim, dim> &particle_handler,
   MPI_Comm                              mpi_communicator,
-  std::shared_ptr<SimulationControl>    simulation_control,
   bool                                  contact_detection_step,
   bool                                  checkpoint_step,
   bool                                  load_balance_step,
   double                                smallest_contact_search_criterion)
 {
-  if (param.dem_parameters.model_parameters.contact_detection_method ==
+  if (simulation_parameters.dem_parameters.model_parameters.contact_detection_method ==
       Parameters::Lagrangian::ModelParameters::ContactDetectionMethod::constant)
     {
-      return ((counter % param.dem_parameters.model_parameters
+      return ((counter % simulation_parameters.dem_parameters.model_parameters
                            .contact_detection_frequency) == 0);
     }
-  else if (param.dem_parameters.model_parameters.contact_detection_method ==
+  else if (simulation_parameters.dem_parameters.model_parameters.contact_detection_method ==
            Parameters::Lagrangian::ModelParameters::ContactDetectionMethod::
              dynamic)
     { // The sorting into subdomain step checks whether or not the current time
-      // step
-      // is a step that requires sorting particles into subdomains and cells.
+      // step is a step that requires sorting particles into subdomains and cells.
       // This is applicable if any of the following three conditions apply:if
       // its a load balancing step, a restart simulation step, or a contact
       // detection tsep.
@@ -49,7 +47,7 @@ check_contact_detection_method(
 
       contact_detection_step = find_particle_contact_detection_step<dim>(
         particle_handler,
-        simulation_control->get_time_step() / param.cfd_dem.coupling_frequency,
+        dem_time_step,
         smallest_contact_search_criterion,
         mpi_communicator,
         sorting_in_subdomains_step,
@@ -66,32 +64,30 @@ check_contact_detection_method(
 
 template <int dim>
 bool
-check_load_balance_method(
-  CFDDEMSimulationParameters<dim>      &param,
+CFDDEMSolver<dim>::check_load_balance_method(
   Particles::ParticleHandler<dim, dim> &particle_handler,
   const MPI_Comm                       &mpi_communicator,
-  const unsigned int                    n_mpi_processes,
-  std::shared_ptr<SimulationControl>    simulation_control)
+  const unsigned int                    n_mpi_processes)
 { // Setting load-balance method (single-step, frequent or dynamic)
-  if (param.dem_parameters.model_parameters.load_balance_method ==
+  if (simulation_parameters.dem_parameters.model_parameters.load_balance_method ==
       Parameters::Lagrangian::ModelParameters::LoadBalanceMethod::once)
     {
       return (simulation_control->get_step_number() ==
-              param.dem_parameters.model_parameters.load_balance_step);
+              simulation_parameters.dem_parameters.model_parameters.load_balance_step);
     }
-  else if (param.dem_parameters.model_parameters.load_balance_method ==
+  else if (simulation_parameters.dem_parameters.model_parameters.load_balance_method ==
            Parameters::Lagrangian::ModelParameters::LoadBalanceMethod::frequent)
     {
       return (simulation_control->get_step_number() %
-                param.dem_parameters.model_parameters.load_balance_frequency ==
+                simulation_parameters.dem_parameters.model_parameters.load_balance_frequency ==
               0);
     }
-  else if (param.dem_parameters.model_parameters.load_balance_method ==
+  else if (simulation_parameters.dem_parameters.model_parameters.load_balance_method ==
            Parameters::Lagrangian::ModelParameters::LoadBalanceMethod::dynamic)
     {
       bool load_balance_step = false;
       if (simulation_control->get_step_number() %
-            param.dem_parameters.model_parameters
+            simulation_parameters.dem_parameters.model_parameters
               .dynamic_load_balance_check_frequency ==
           0)
         {
@@ -107,7 +103,7 @@ check_load_balance_method(
 
           if ((maximum_particle_number_on_proc -
                minimum_particle_number_on_proc) >
-              param.dem_parameters.model_parameters.load_balance_threshold *
+              simulation_parameters.dem_parameters.model_parameters.load_balance_threshold *
                 (particle_handler.n_global_particles() / n_mpi_processes))
             {
               load_balance_step = true;
@@ -115,7 +111,7 @@ check_load_balance_method(
         }
       return load_balance_step;
     }
-  else if (param.dem_parameters.model_parameters.load_balance_method ==
+  else if (simulation_parameters.dem_parameters.model_parameters.load_balance_method ==
            Parameters::Lagrangian::ModelParameters::LoadBalanceMethod::none)
     {
       return false;
@@ -129,7 +125,10 @@ check_load_balance_method(
 // Constructor for class CFD-DEM
 template <int dim>
 CFDDEMSolver<dim>::CFDDEMSolver(CFDDEMSimulationParameters<dim> &nsparam)
-  : GLSVANSSolver<dim>(nsparam)
+  : simulation_parameters(nsparam)
+  , simulation_control(simulation_control)
+  , dem_parameters(nsparam.dem_parameters)
+  , GLSVANSSolver<dim>(nsparam)
   , has_periodic_boundaries(false)
   , has_disabled_contacts(false)
   , this_mpi_process(Utilities::MPI::this_mpi_process(this->mpi_communicator))

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------
  *
- * Copyright (C) 2019 - 2019 by the Lethe authors
+ * Copyright (C) 2019 - 2024 by the Lethe authors
  *
  * This file is part of the Lethe library
  *
@@ -18,6 +18,7 @@
 #ifndef lethe_dem_cfd_coupling_h
 #define lethe_dem_cfd_coupling_h
 
+#include "core/simulation_control.h"
 #include <solvers/navier_stokes_scratch_data.h>
 
 #include <dem/data_containers.h>
@@ -40,6 +41,7 @@
 #include <deal.II/grid/grid_in.h>
 
 #include <deal.II/numerics/vector_tools.h>
+#include <memory>
 
 using namespace dealii;
 
@@ -91,31 +93,28 @@ public:
     const CellStatus status) const;
 #endif
 
-
   /**
    * @brief Manages the call to the load balancing. Returns true if
    * load balancing is performed
-   *
    */
   void
   load_balance();
 
-protected:
 private:
   /**
-   * @brief Carries out the DEM calculations in the DEM_CFD solver. Particle-particle and particle-wall contact force calculations, integration and update_ghost
+   * @brief Carry out the DEM calculations in the lethe-fluid-particles solver. Particle-particle and particle-wall contact force calculations, integration and update_ghost
    */
   void
   dem_iterator(unsigned int counter);
 
   /**
-   * @brief Carries out the particle-particle and particle-wall contact searches, sort_particles_into_subdomains_and_cells and exchange_ghost
+   * @brief Carry out the particle-particle and particle-wall contact searches, sort_particles_into_subdomains_and_cells and exchange_ghost
    */
   void
   dem_contact_build(unsigned int counter);
 
   /**
-   * @brief Sets up the various parameters related to the DEM contacts
+   * @brief Set up the various parameters related to the DEM contacts
    */
   void
   dem_setup_contact_parameters();
@@ -127,36 +126,33 @@ private:
   manage_triangulation_connections();
 
   /**
-   * @brief Carries out the initialization of DEM parameters
+   * @brief Carry out the initialization of DEM parameters
    */
   void
   initialize_dem_parameters();
 
   /**
-   * @brief write DEM_output_results
+   * @brief Write DEM_output_results
    * Post-processing as parallel VTU files
    */
   void
   write_DEM_output_results();
 
   /**
-   * @brief Carries out the fine particled-wall contact detection
-   *
+   * @brief Carry out the fine particled-wall contact detection
    */
   void
   particle_wall_fine_search();
 
   /**
-   * @brief Calculates particles-wall contact forces
-   *
+   * @brief Calculate particles-wall contact forces
    */
   void
   particle_wall_contact_force();
 
   /**
-   * @brief Updates moment of inertia container after sorting particles
+   * @brief Update moment of inertia container after sorting particles
    * into subdomains
-   *
    */
   void
   update_moment_of_inertia(
@@ -164,7 +160,7 @@ private:
     std::vector<double>                     &MOI);
 
   /**
-   * Sets the chosen integration method in the parameter handler file
+   * @brief Choose integration method in the parameter handler file
    *
    * @return A pointer to the integration object
    */
@@ -172,21 +168,19 @@ private:
   set_integrator_type();
 
   /**
-   * Adds fluid-particle interaction force to the "force" container
-   *
+   * @brief Add fluid-particle interaction force to the "force" container
    */
   void
   add_fluid_particle_interaction_force();
 
   /**
-   * Adds fluid-particle interaction torque to the "torque" container
-   *
+   * @brief Add fluid-particle interaction torque to the "torque" container
    */
   void
   add_fluid_particle_interaction_torque();
 
   /**
-   * Sets the chosen particle-particle contact force model in the parameter
+   * @brief Set the chosen particle-particle contact force model in the parameter
    * handler file
    *
    * @return A pointer to the particle-particle contact force object
@@ -195,7 +189,7 @@ private:
   set_particle_particle_contact_force();
 
   /**
-   * Sets the chosen particle-wall contact force model in the parameter handler
+   * @brief Set the chosen particle-wall contact force model in the parameter handler
    * file
    *
    * @return A pointer to the particle-wall contact force object
@@ -203,49 +197,76 @@ private:
   std::shared_ptr<ParticleWallContactForce<dim>>
   set_particle_wall_contact_force();
 
+  bool
+  check_contact_detection_method(
+  unsigned int                          counter,
+  std::vector<double>                  &displacement,
+  Particles::ParticleHandler<dim, dim> &particle_handler,
+  MPI_Comm                              mpi_communicator,
+  bool                                  contact_detection_step,
+  bool                                  checkpoint_step,
+  bool                                  load_balance_step,
+  double                                smallest_contact_search_criterion);
+
+  bool
+  check_load_balance_method(
+  Particles::ParticleHandler<dim, dim> &particle_handler,
+  const MPI_Comm                       &mpi_communicator,
+  const unsigned int                    n_mpi_processes);
+  
+
+  /**
+   * @brief Read DEM information within the CFD-DEM code
+   */
   void
   read_dem();
 
+  /**
+   * @brief Write checkpoint files for simulation restarting
+   */
   void
   write_checkpoint() override;
 
+  /**
+   * @brief Read checkpoint files upon restarting of simulations
+   */
   void
   read_checkpoint() override;
 
+  /**
+   * @brief Print particles information at log iteration
+   */
   void
   print_particles_summary();
 
   /**
-   * @brief dem_post_process_results
+   * @brief Call DEM post-processing
    */
   void
   dem_post_process_results();
 
   /**
-   * @brief postprocess
-   * Post-process fluid dynamics after an iteration
+   * @brief Call fluid dynamics post-processing
    */
   void
   postprocess_fd(bool first_iteration) override;
 
   /**
-   * @brief dynamic_flow_control
-   * Dynamic flow control calculation that take into account the void fraction
+   * @brief Calculate dynamic flow control taking into account the void fraction
    * for the average velocity calculation
    */
   void
   dynamic_flow_control() override;
 
   /**
-   * @brief Check if the disabling contacts is enabled and that
-   *
+   * @brief Check if the disabling contacts is enabled
    */
   inline bool
-  contacts_are_disabled(unsigned int counter) const
+  contacts_are_disabled(unsigned int counter)
   {
     return has_disabled_contacts && counter > 1;
   }
-
+  
   unsigned int                               coupling_frequency;
   bool                                       contact_detection_step;
   bool                                       checkpoint_step;
@@ -260,16 +281,18 @@ private:
   double                                     maximum_particle_diameter;
   double                                     smallest_contact_search_criterion;
 
-  DEMContactManager<dim>           contact_manager;
-  ParticlePointLineForce<dim>      particle_point_line_contact_force_object;
-  std::shared_ptr<Integrator<dim>> integrator_object;
-  std::shared_ptr<Insertion<dim>>  insertion_object;
+  DEMContactManager<dim>                     contact_manager;
+  ParticlePointLineForce<dim>                particle_point_line_contact_force_object;
+  std::shared_ptr<Integrator<dim>>           integrator_object;
+  std::shared_ptr<Insertion<dim>>            insertion_object;
   std::shared_ptr<ParticleParticleContactForceBase<dim>>
     particle_particle_contact_force_object;
   std::shared_ptr<ParticleWallContactForce<dim>>
-                                particle_wall_contact_force_object;
-  Visualization<dim>            visualization_object;
-  BoundaryCellsInformation<dim> boundary_cell_object;
+    particle_wall_contact_force_object;
+  Visualization<dim>                         visualization_object;
+  BoundaryCellsInformation<dim>              boundary_cell_object;
+  CFDDEMSimulationParameters<dim>           &simulation_parameters;
+  std::shared_ptr<SimulationControl>        &simulation_control;
 
   // Mesh and boundary information
   typename dem_data_structures<dim>::floating_mesh_information
@@ -302,8 +325,8 @@ private:
   PVDHandler grid_pvdhandler;
   PVDHandler particles_pvdhandler;
 
-  DEMSolverParameters<dim>      dem_parameters;
-  double                        dem_time_step;
+  DEMSolverParameters<dim>      &dem_parameters;
+  const double                  dem_time_step = simulation_control->get_time_step() / simulation_parameters.cfd_dem.coupling_frequency;
   const unsigned int            this_mpi_process;
   const unsigned int            n_mpi_processes;
   LagrangianPostProcessing<dim> dem_post_processing_object;
