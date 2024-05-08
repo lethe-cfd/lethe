@@ -592,7 +592,7 @@ set amg smoother overlap                      = 1
 </section>
 <section id="lsmg-and-gcmg-preconditioners">
 <h2>LSMG and GCMG preconditioners<a class="headerlink" href="#lsmg-and-gcmg-preconditioners" title="Link to this heading">#</a></h2>
-<p>Different parameters for the main components of the two geometric multigrid algorithms can be specified. The parameters can be general or can belong to either the smoother, the coarse-grid solver or the coarse-grid solver preconditioner. For the latter, one can choose between <code class="docutils literal notranslate"><span class="pre">amg</span></code> and <code class="docutils literal notranslate"><span class="pre">ilu</span></code>.</p>
+<p>Different parameters for the main components of the two geometric multigrid algorithms can be specified. The parameters can be general or can belong to either the smoother or the coarse-grid solver. Lethe supports different coarse-grid solvers: <code class="docutils literal notranslate"><span class="pre">gmres</span></code>, <code class="docutils literal notranslate"><span class="pre">amg</span></code>, <code class="docutils literal notranslate"><span class="pre">ilu</span></code> and <code class="docutils literal notranslate"><span class="pre">direct</span></code>. The <code class="docutils literal notranslate"><span class="pre">gmres</span></code> coarse-grid solver supports two preconditioners <code class="docutils literal notranslate"><span class="pre">amg</span></code> and <code class="docutils literal notranslate"><span class="pre">ilu</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># General MG parameters
 set mg verbosity       = quiet
 set mg min level       = -1
@@ -609,13 +609,17 @@ set eig estimation cg n iterations = 10
 set eig estimation verbosity       = quiet
 
 # Coarse-grid solver parameters
-set mg coarse grid max iterations     = 2000
-set mg coarse grid tolerance          = 1e-14
-set mg coarse grid reduce             = 1e-4
-set mg coarse grid max krylov vectors = 30
-set mg coarse grid preconditioner     = amg
+set mg coarse grid solver = gmres
 
-# Coarse-grid AMG preconditioner parameters
+# Parameters for GMRES as coarse grid solver
+set mg gmres max iterations     = 2000
+set mg gmres tolerance          = 1e-14
+set mg gmres reduce             = 1e-4
+set mg gmres max krylov vectors = 30
+set mg gmres preconditioner     = amg
+
+# Parameters for AMG as coarse-grid solver or GMRES preconditioner
+set mg amg use default parameters             = false
 set amg preconditioner ilu fill               = 0
 set amg preconditioner ilu absolute tolerance = 1e-12
 set amg preconditioner ilu relative tolerance = 1.00
@@ -625,7 +629,7 @@ set amg w cycles                              = false
 set amg smoother sweeps                       = 2
 set amg smoother overlap                      = 1
 
-# Coarse-grid ILU preconditioner parameters
+# Parameters for ILU as coarse-grid solver or GMRES preconditioner
 set ilu preconditioner fill               = 1
 set ilu preconditioner absolute tolerance = 1e-12
 set ilu preconditioner relative tolerance = 1
@@ -637,7 +641,11 @@ set ilu preconditioner relative tolerance = 1
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">mg</span> <span class="pre">verbosity</span></code> is set to <code class="docutils literal notranslate"><span class="pre">verbose</span></code>, the information about the levels (cells and degrees of freedom) and the number of iterations of the coarse grid solver are displayed. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">verbose</span></code>, apart from all the previous information, an additional table with the time it took to set up the different components of the multigrid preconditioners is also displayed.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">mg</span> <span class="pre">verbosity</span></code> is set to <code class="docutils literal notranslate"><span class="pre">verbose</span></code>, the information about the levels (cells and degrees of freedom) and the number of iterations of the coarse grid solver are displayed. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">extra</span> <span class="pre">verbose</span></code>, apart from all the previous information, several additional tables with the times related to multigrid are also displayed.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your coarse-grid level is small enough, it might be worth it for some problems to set <code class="docutils literal notranslate"><span class="pre">mg</span> <span class="pre">amg</span> <span class="pre">use</span> <span class="pre">default</span> <span class="pre">parameters</span> <span class="pre">=</span> <span class="pre">true</span></code> to use a direct solver.</p>
 </div>
 </section>
 </section>
