@@ -475,6 +475,9 @@
   # Output time
   set output time                  = 1
 
+  # Output time interval
+  set output time interval         = 1, 1.7e308
+
   # Maximum number of vtu output files
   set group files                  = 1
 
@@ -554,6 +557,7 @@ end
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">time</span></code>: controls the time when the <code class="docutils literal notranslate"><span class="pre">.pvd</span></code> / <code class="docutils literal notranslate"><span class="pre">.vtu</span></code> results are written. This parameter is only used when <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">output</span> <span class="pre">control</span> <span class="pre">=</span> <span class="pre">time</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">time</span> <span class="pre">interval</span></code>: Only writes the <code class="docutils literal notranslate"><span class="pre">.pvd</span></code> / <code class="docutils literal notranslate"><span class="pre">.vtu</span></code> files when the simulation time is within the closed interval defined by the <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">time</span> <span class="pre">interval</span></code>. Default values are 0s and 1.7e308s.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">files</span></code>: number of <code class="docutils literal notranslate"><span class="pre">.vtu</span></code> files generated in a parallel simulation</p></li>
 </ul>
 <div class="admonition tip">
