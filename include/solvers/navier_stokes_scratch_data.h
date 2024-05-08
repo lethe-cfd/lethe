@@ -1043,6 +1043,8 @@ public:
   std::vector<double> kinematic_viscosity_1;
   std::vector<double> thermal_expansion_0;
   std::vector<double> thermal_expansion_1;
+  std::vector<double> grad_kinematic_viscosity_shear_rate_0;
+  std::vector<double> grad_kinematic_viscosity_shear_rate_1;
   std::vector<double> surface_tension;
   std::vector<double> surface_tension_gradient;
 
