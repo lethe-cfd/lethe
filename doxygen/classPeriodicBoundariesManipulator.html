@@ -121,7 +121,7 @@ class PeriodicBoundariesManipulator&lt; dim &gt;</h3>
 <p><a class="el" href="classThis.html">This</a> class corresponds to a manipulator of the particles crossing periodic cells in <a class="el" href="namespaceDEM.html">DEM</a>. It maps cell information of the pairs of periodic cells and manipulate the particles location when they cross periodic boundaries, i.e. when a particle cross a periodic boundary (0 or 1) its location is modified with the offset between faces of periodic cells on periodic boundaries.</p>
 <dl class="section note"><dt>Note</dt><dd>Currently the code only supports one pair of periodic boundaries and those boundaries must be parallel and aligned with an axis of the domain (e.g., x axis). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00049">49</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00051">51</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3af23a12e5a5fde913de8e983fd9398a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3af23a12e5a5fde913de8e983fd9398a">&#9670;&nbsp;</a></span>PeriodicBoundariesManipulator()</h2>
@@ -203,7 +203,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8cc_source.html#l00123">123</a> of file <a class="el" href="periodic__boundaries__manipulator_8cc_source.html">periodic_boundaries_manipulator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00063">periodic_boundaries_cells_info_struct&lt; dim &gt;::normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00072">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00066">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00075">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
+<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00061">periodic_boundaries_cells_info_struct&lt; dim &gt;::normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00070">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00064">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00073">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8cc_source.html#l00022">22</a> of file <a class="el" href="periodic__boundaries__manipulator_8cc_source.html">periodic_boundaries_manipulator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00060">periodic_boundaries_cells_info_struct&lt; dim &gt;::boundary_id</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00057">periodic_boundaries_cells_info_struct&lt; dim &gt;::cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00063">periodic_boundaries_cells_info_struct&lt; dim &gt;::normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00069">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00072">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00066">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00075">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
+<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00058">periodic_boundaries_cells_info_struct&lt; dim &gt;::boundary_id</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00055">periodic_boundaries_cells_info_struct&lt; dim &gt;::cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00061">periodic_boundaries_cells_info_struct&lt; dim &gt;::normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00067">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00070">periodic_boundaries_cells_info_struct&lt; dim &gt;::periodic_normal_vector</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00064">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00073">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
 
 </div>
 </div>
@@ -334,7 +334,7 @@ template&lt;int dim&gt; </div>
 
 <p>Return the periodic offset distance, it is calculated from the first pair of cells on periodic boundaries, all pair of cells are assumed to have the same offset. </p>
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00110">110</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00112">112</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8cc_source.html#l00062">62</a> of file <a class="el" href="periodic__boundaries__manipulator_8cc_source.html">periodic_boundaries_manipulator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00057">periodic_boundaries_cells_info_struct&lt; dim &gt;::cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00066">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00075">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
+<p class="reference">References <a class="el" href="boundary__cells__info__struct_8h_source.html#l00055">periodic_boundaries_cells_info_struct&lt; dim &gt;::cell</a>, <a class="el" href="boundary__cells__info__struct_8h_source.html#l00064">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_face</a>, and <a class="el" href="boundary__cells__info__struct_8h_source.html#l00073">periodic_boundaries_cells_info_struct&lt; dim &gt;::point_on_periodic_face</a>.</p>
 
 </div>
 </div>
@@ -433,7 +433,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00062">62</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00064">64</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>
@@ -460,7 +460,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00155">155</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00157">157</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>
@@ -486,7 +486,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00154">154</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00156">156</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00152">152</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00154">154</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>
@@ -538,7 +538,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00153">153</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="periodic__boundaries__manipulator_8h_source.html#l00155">155</a> of file <a class="el" href="periodic__boundaries__manipulator_8h_source.html">periodic_boundaries_manipulator.h</a>.</p>
 
 </div>
 </div>

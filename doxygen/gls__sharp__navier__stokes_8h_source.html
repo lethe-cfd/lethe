@@ -81,7 +81,7 @@ $(function() {
 <div class="contents">
 <a href="gls__sharp__navier__stokes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Copyright (C) 2019 - 2019 by the Lethe authors</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Copyright (C) 2019 - 2024 by the Lethe authors</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * This file is part of the Lethe library</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
@@ -93,34 +93,34 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * the top level of the Lethe distribution.</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * ---------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#ifndef LETHE_GLSSHARPNS_H</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define LETHE_GLSSHARPNS_H</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__particle_8h.html">core/ib_particle.h</a>&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__stencil_8h.html">core/ib_stencil.h</a>&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="shape_8h.html">core/shape.h</a>&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">core/vector.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__particle_8h.html">core/ib_particle.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__stencil_8h.html">core/ib_stencil.h</a>&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="shape_8h.html">core/shape.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">core/vector.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="gls__navier__stokes_8h.html">solvers/gls_navier_stokes.h</a>&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="gls__navier__stokes_8h.html">solvers/gls_navier_stokes.h</a>&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cfd__dem__simulation__parameters_8h.html">fem-dem/cfd_dem_simulation_parameters.h</a>&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__particles__dem_8h.html">fem-dem/ib_particles_dem.h</a>&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cfd__dem__simulation__parameters_8h.html">fem-dem/cfd_dem_simulation_parameters.h</a>&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="ib__particles__dem_8h.html">fem-dem/ib_particles_dem.h</a>&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;deal.II/dofs/dof_tools.h&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;deal.II/dofs/dof_tools.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * A solver class for the Navier-Stokes equation using GLS stabilization and</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * Sharp-Edge immersed boundaries</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @tparam dim An integer that denotes the dimension of the space in which</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * the flow is solved</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @ingroup solvers</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @author Lucka Barbeau, Bruno Blais, 2020</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#ifndef LETHE_GLSSHARPNS_H</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="gls__sharp__navier__stokes_8h.html#a389f7917a0ceb6054e03c7001bf4ed02">   31</a></span>&#160;<span class="preprocessor">#  define LETHE_GLSSHARPNS_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * A solver class for the Navier-Stokes equation using GLS stabilization and</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * Sharp-Edge immersed boundaries</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * @tparam dim An integer that denotes the dimension of the space in which</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * the flow is solved</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @ingroup solvers</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -731,7 +731,7 @@ $(function() {
 <div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; </div>
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="acfd__dem__simulation__parameters_8h_html"><div class="ttname"><a href="cfd__dem__simulation__parameters_8h.html">cfd_dem_simulation_parameters.h</a></div></div>
-<div class="ttc" id="aclassCFDDEMSimulationParameters_html"><div class="ttname"><a href="classCFDDEMSimulationParameters.html">CFDDEMSimulationParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="cfd__dem__simulation__parameters_8h_source.html#l00034">cfd_dem_simulation_parameters.h:35</a></div></div>
+<div class="ttc" id="aclassCFDDEMSimulationParameters_html"><div class="ttname"><a href="classCFDDEMSimulationParameters.html">CFDDEMSimulationParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="cfd__dem__simulation__parameters_8h_source.html#l00035">cfd_dem_simulation_parameters.h:36</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html"><div class="ttname"><a href="classGLSNavierStokesSolver.html">GLSNavierStokesSolver</a></div><div class="ttdoc">A solver class for the Navier-Stokes equation using GLS stabilization.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8h_source.html#l00044">gls_navier_stokes.h:46</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_a77a043e1f19097afeca90c1abaa1b60a"><div class="ttname"><a href="classGLSNavierStokesSolver.html#a77a043e1f19097afeca90c1abaa1b60a">GLSNavierStokesSolver::assemble_system_rhs</a></div><div class="ttdeci">virtual void assemble_system_rhs() override</div><div class="ttdoc">Assemble the rhs associated with the solver.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00897">gls_navier_stokes.cc:897</a></div></div>
 <div class="ttc" id="aclassGLSNavierStokesSolver_html_ab5be2c153e6a0158ad52cb45b19f4ee8"><div class="ttname"><a href="classGLSNavierStokesSolver.html#ab5be2c153e6a0158ad52cb45b19f4ee8">GLSNavierStokesSolver::assemble_system_matrix</a></div><div class="ttdeci">virtual void assemble_system_matrix() override</div><div class="ttdoc">Assembles the matrix associated with the solver.</div><div class="ttdef"><b>Definition:</b> <a href="gls__navier__stokes_8cc_source.html#l00686">gls_navier_stokes.cc:686</a></div></div>
@@ -765,7 +765,7 @@ $(function() {
 <div class="ttc" id="aclassGLSSharpNavierStokesSolver_html_af073e1a2b51f7d5d78f74a9adbd2f1e0"><div class="ttname"><a href="classGLSSharpNavierStokesSolver.html#af073e1a2b51f7d5d78f74a9adbd2f1e0">GLSSharpNavierStokesSolver::overconstrained_fluid_cell_map</a></div><div class="ttdeci">std::map&lt; typename DoFHandler&lt; dim &gt;::active_cell_iterator, std::tuple&lt; bool, unsigned int, double &gt; &gt; overconstrained_fluid_cell_map</div><div class="ttdef"><b>Definition:</b> <a href="gls__sharp__navier__stokes_8h_source.html#l00605">gls_sharp_navier_stokes.h:605</a></div></div>
 <div class="ttc" id="aclassGLSSharpNavierStokesSolver_html_afded6c61ce4d2fcb323139861a6dbb7a"><div class="ttname"><a href="classGLSSharpNavierStokesSolver.html#afded6c61ce4d2fcb323139861a6dbb7a">GLSSharpNavierStokesSolver::point_inside_cell</a></div><div class="ttdeci">bool point_inside_cell(const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;cell, Point&lt; dim &gt; point)</div><div class="ttdoc">Return a bool that describes if a cell contains a specific point.</div></div>
 <div class="ttc" id="aclassIBParticle_html"><div class="ttname"><a href="classIBParticle.html">IBParticle</a></div><div class="ttdoc">Define the behavior of a specific particle for the sharp interface IB solver.</div><div class="ttdef"><b>Definition:</b> <a href="ib__particle_8h_source.html#l00043">ib_particle.h:44</a></div></div>
-<div class="ttc" id="aclassIBParticlesDEM_html"><div class="ttname"><a href="classIBParticlesDEM.html">IBParticlesDEM</a></div><div class="ttdoc">A solver class for the DEM used in conjunction with IB particles and gls_sharp_navier_stokes....</div><div class="ttdef"><b>Definition:</b> <a href="ib__particles__dem_8h_source.html#l00054">ib_particles_dem.h:55</a></div></div>
+<div class="ttc" id="aclassIBParticlesDEM_html"><div class="ttname"><a href="classIBParticlesDEM.html">IBParticlesDEM</a></div><div class="ttdoc">A solver class for the DEM used in conjunction with IB particles and gls_sharp_navier_stokes....</div><div class="ttdef"><b>Definition:</b> <a href="ib__particles__dem_8h_source.html#l00050">ib_particles_dem.h:51</a></div></div>
 <div class="ttc" id="aclassNavierStokesScratchData_html"><div class="ttname"><a href="classNavierStokesScratchData.html">NavierStokesScratchData</a></div><div class="ttdoc">Class that stores the information required by the assembly procedure for a Navier-Stokes equation....</div><div class="ttdef"><b>Definition:</b> <a href="navier__stokes__scratch__data_8h_source.html#l00072">navier_stokes_scratch_data.h:73</a></div></div>
 <div class="ttc" id="aclassPVDHandler_html"><div class="ttname"><a href="classPVDHandler.html">PVDHandler</a></div><div class="ttdoc">The PVDHandler class manages the storage of the information required to write pvd file....</div><div class="ttdef"><b>Definition:</b> <a href="pvd__handler_8h_source.html#l00032">pvd_handler.h:33</a></div></div>
 <div class="ttc" id="aclassStabilizedMethodsTensorCopyData_html"><div class="ttname"><a href="classStabilizedMethodsTensorCopyData.html">StabilizedMethodsTensorCopyData</a></div><div class="ttdoc">Class responsible for storing the information calculated using the assembly of stabilized Tensor&lt;1,...</div><div class="ttdef"><b>Definition:</b> <a href="copy__data_8h_source.html#l00144">copy_data.h:145</a></div></div>
