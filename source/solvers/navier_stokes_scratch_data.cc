@@ -604,6 +604,9 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
 
                 //kinematic_viscosity_scale = std::max(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
                 //kinematic_viscosity_scale = std::min(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
+                //kinematic_viscosity_scale = 0.5*(this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]);
+                //kinematic_viscosity_scale = 2*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_1[q])/(this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]);
+                //kinematic_viscosity_scale = std::pow(0.5*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]*this->grad_kinematic_viscosity_shear_rate_1[q]),0.5);
               }
                   break;
                 }
