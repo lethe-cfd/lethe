@@ -191,6 +191,8 @@ NavierStokesScratchData<dim>::enable_cahn_hilliard(
   // Allocate CahnHilliard gradients
   phase_order_cahn_hilliard_gradients =
     std::vector<Tensor<1, dim>>(this->n_q_points);
+  chemical_potential_cahn_hilliard_gradients =
+    std::vector<Tensor<1, dim>>(this->n_q_points);
 
   // For STF calculation
   filtered_phase_order_cahn_hilliard_values =
@@ -213,6 +215,7 @@ NavierStokesScratchData<dim>::enable_cahn_hilliard(
   surface_tension_gradient              = std::vector<double>(n_q_points);
   grad_kinematic_viscosity_shear_rate_0 = std::vector<double>(n_q_points);
   grad_kinematic_viscosity_shear_rate_1 = std::vector<double>(n_q_points);
+  cahn_hilliard_mobility                = std::vector<double>(n_q_points);
 
   // Create filter
   cahn_hilliard_filter =
@@ -239,6 +242,8 @@ NavierStokesScratchData<dim>::enable_cahn_hilliard(
   // Allocate CahnHilliard gradients
   phase_order_cahn_hilliard_gradients =
     std::vector<Tensor<1, dim>>(this->n_q_points);
+  chemical_potential_cahn_hilliard_gradients =
+    std::vector<Tensor<1, dim>>(this->n_q_points);
 
   // For STF calculation
   filtered_phase_order_cahn_hilliard_values =
@@ -262,6 +267,7 @@ NavierStokesScratchData<dim>::enable_cahn_hilliard(
   surface_tension_gradient              = std::vector<double>(n_q_points);
   grad_kinematic_viscosity_shear_rate_0 = std::vector<double>(n_q_points);
   grad_kinematic_viscosity_shear_rate_1 = std::vector<double>(n_q_points);
+  cahn_hilliard_mobility                = std::vector<double>(n_q_points);
 
   // Create filter
   this->cahn_hilliard_filter = cahn_hilliard_filter;
@@ -576,46 +582,69 @@ NavierStokesScratchData<dim>::calculate_physical_properties()
           else if (gather_cahn_hilliard && !gather_vof)
             {
               // Blend the physical properties using the CahnHilliard field
-              for (unsigned int q = 0; q < this->n_q_points; ++q) {
+              for (unsigned int q = 0; q < this->n_q_points; ++q)
+                {
                   double phase_order_cahn_hilliard_value =
-                          this->filtered_phase_order_cahn_hilliard_values[q];
+                    this->filtered_phase_order_cahn_hilliard_values[q];
+
+                  this->density_diff =
+                    0.5 * std::abs(density_0[q] - density_1[q]);
+
+                  const auto material_interaction_id =
+                    properties_manager.get_material_interaction_id(
+                      material_interactions_type::fluid_fluid, 0, 1);
+                  // Gather mobility
+                  const auto mobility_cahn_hilliard_model =
+                    properties_manager.get_mobility_cahn_hilliard(
+                      material_interaction_id);
+                  mobility_cahn_hilliard_model->vector_value(
+                    fields, cahn_hilliard_mobility);
 
                   density[q] = calculate_point_property_cahn_hilliard(
-                          phase_order_cahn_hilliard_value,
-                          this->density_0[q],
-                          this->density_1[q]);
+                    phase_order_cahn_hilliard_value,
+                    this->density_0[q],
+                    this->density_1[q]);
 
                   dynamic_viscosity[q] = calculate_point_property_cahn_hilliard(
-                          phase_order_cahn_hilliard_value,
-                          this->dynamic_viscosity_0[q],
-                          this->dynamic_viscosity_1[q]);
+                    phase_order_cahn_hilliard_value,
+                    this->dynamic_viscosity_0[q],
+                    this->dynamic_viscosity_1[q]);
 
                   grad_kinematic_viscosity_shear_rate[q] =
-                          calculate_point_property_cahn_hilliard(
-                                  phase_order_cahn_hilliard_value,
-                                  this->grad_kinematic_viscosity_shear_rate_0[q],
-                                  this->grad_kinematic_viscosity_shear_rate_1[q]);
+                    calculate_point_property_cahn_hilliard(
+                      phase_order_cahn_hilliard_value,
+                      this->grad_kinematic_viscosity_shear_rate_0[q],
+                      this->grad_kinematic_viscosity_shear_rate_1[q]);
 
                   kinematic_viscosity_scale =
-                          calculate_point_property_cahn_hilliard(
-                                  phase_order_cahn_hilliard_value,
-                                  this->kinematic_viscosity_scale_0,
-                                  this->kinematic_viscosity_scale_1);
+                    calculate_point_property_cahn_hilliard(
+                      phase_order_cahn_hilliard_value,
+                      this->kinematic_viscosity_scale_0,
+                      this->kinematic_viscosity_scale_1);
 
-                //kinematic_viscosity_scale = std::max(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
-                //kinematic_viscosity_scale = std::min(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
-                //kinematic_viscosity_scale = 0.5*(this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]);
-                //kinematic_viscosity_scale = 2*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_1[q])/(this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]);
-                //kinematic_viscosity_scale = std::pow(0.5*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_0[q] + this->grad_kinematic_viscosity_shear_rate_1[q]*this->grad_kinematic_viscosity_shear_rate_1[q]),0.5);
-              }
-                  break;
+                  // kinematic_viscosity_scale =
+                  // std::max(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
+                  // kinematic_viscosity_scale =
+                  // std::min(this->grad_kinematic_viscosity_shear_rate_0[q],this->grad_kinematic_viscosity_shear_rate_1[q]);
+                  // kinematic_viscosity_scale =
+                  // 0.5*(this->grad_kinematic_viscosity_shear_rate_0[q] +
+                  // this->grad_kinematic_viscosity_shear_rate_1[q]);
+                  // kinematic_viscosity_scale =
+                  // 2*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_1[q])/(this->grad_kinematic_viscosity_shear_rate_0[q]
+                  // + this->grad_kinematic_viscosity_shear_rate_1[q]);
+                  // kinematic_viscosity_scale =
+                  // std::pow(0.5*(this->grad_kinematic_viscosity_shear_rate_0[q]*this->grad_kinematic_viscosity_shear_rate_0[q]
+                  // +
+                  // this->grad_kinematic_viscosity_shear_rate_1[q]*this->grad_kinematic_viscosity_shear_rate_1[q]),0.5);
                 }
               break;
             }
-          default:
-            throw std::runtime_error("Unsupported number of fluids (>2)");
+          break;
         }
+      default:
+        throw std::runtime_error("Unsupported number of fluids (>2)");
     }
+}
 
-  template class NavierStokesScratchData<2>;
-  template class NavierStokesScratchData<3>;
+template class NavierStokesScratchData<2>;
+template class NavierStokesScratchData<3>;
