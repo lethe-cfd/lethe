@@ -99,9 +99,9 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="dem__properties_8h.html">core/dem_properties.h</a>&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pvd__handler_8h.html">core/pvd_handler.h</a>&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="data__containers_8h.html">dem/data_containers.h</a>&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="dem__solver__parameters_8h.html">dem/dem_solver_parameters.h</a>&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="disable__contacts_8h.html">dem/disable_contacts.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="adaptive__sparse__contacts_8h.html">dem/adaptive_sparse_contacts.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="data__containers_8h.html">dem/data_containers.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="dem__solver__parameters_8h.html">dem/dem_solver_parameters.h</a>&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;deal.II/distributed/tria.h&gt;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span>                                     current_time,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                               step_number,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">const</span> MPI_Comm                                  &amp;mpi_communicator,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classDisableContacts.html">DisableContacts&lt;dim&gt;</a>                            &amp;disable_contacts_object);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts&lt;dim&gt;</a>                     &amp;sparse_contacts_object);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">  /**</span></div>
@@ -207,8 +207,9 @@ $(function() {
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* lagrangian_post_processing_h */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aadaptive__sparse__contacts_8h_html"><div class="ttname"><a href="adaptive__sparse__contacts_8h.html">adaptive_sparse_contacts.h</a></div></div>
+<div class="ttc" id="aclassAdaptiveSparseContacts_html"><div class="ttname"><a href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a></div><div class="ttdoc">Mechanism that disables contacts computation through mobility status of cells based on granular tempe...</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__sparse__contacts_8h_source.html#l00118">adaptive_sparse_contacts.h:119</a></div></div>
 <div class="ttc" id="aclassDEMSolverParameters_html"><div class="ttname"><a href="classDEMSolverParameters.html">DEMSolverParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="dem__solver__parameters_8h_source.html#l00030">dem_solver_parameters.h:31</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html"><div class="ttname"><a href="classDisableContacts.html">DisableContacts</a></div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00087">disable_contacts.h:88</a></div></div>
 <div class="ttc" id="aclassLagrangianPostProcessing_html"><div class="ttname"><a href="classLagrangianPostProcessing.html">LagrangianPostProcessing</a></div><div class="ttdef"><b>Definition:</b> <a href="lagrangian__post__processing_8h_source.html#l00046">lagrangian_post_processing.h:47</a></div></div>
 <div class="ttc" id="aclassLagrangianPostProcessing_html_a188ceceeca14e6684d009f5f92c5a710"><div class="ttname"><a href="classLagrangianPostProcessing.html#a188ceceeca14e6684d009f5f92c5a710">LagrangianPostProcessing::velocity_average_z</a></div><div class="ttdeci">Vector&lt; double &gt; velocity_average_z</div><div class="ttdef"><b>Definition:</b> <a href="lagrangian__post__processing_8h_source.html#l00122">lagrangian_post_processing.h:122</a></div></div>
 <div class="ttc" id="aclassLagrangianPostProcessing_html_a5d22622cd7cc319ee7873fc8fe146711"><div class="ttname"><a href="classLagrangianPostProcessing.html#a5d22622cd7cc319ee7873fc8fe146711">LagrangianPostProcessing::velocity_average_magnitude</a></div><div class="ttdeci">Vector&lt; double &gt; velocity_average_magnitude</div><div class="ttdef"><b>Definition:</b> <a href="lagrangian__post__processing_8h_source.html#l00123">lagrangian_post_processing.h:123</a></div></div>
@@ -219,7 +220,6 @@ $(function() {
 <div class="ttc" id="adata__containers_8h_html"><div class="ttname"><a href="data__containers_8h.html">data_containers.h</a></div></div>
 <div class="ttc" id="adem__properties_8h_html"><div class="ttname"><a href="dem__properties_8h.html">dem_properties.h</a></div></div>
 <div class="ttc" id="adem__solver__parameters_8h_html"><div class="ttname"><a href="dem__solver__parameters_8h.html">dem_solver_parameters.h</a></div></div>
-<div class="ttc" id="adisable__contacts_8h_html"><div class="ttname"><a href="disable__contacts_8h.html">disable_contacts.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="mf__navier__stokes_8cc_source.html#l00047">mf_navier_stokes.cc:48</a></div></div>
 <div class="ttc" id="apvd__handler_8h_html"><div class="ttname"><a href="pvd__handler_8h.html">pvd_handler.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

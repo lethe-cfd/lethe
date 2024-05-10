@@ -277,7 +277,7 @@ $(function() {
 : <a class="el" href="classPhysicalPropertiesManager.html#a33d957f0756893a3657312274a089dc9">PhysicalPropertiesManager</a>
 </li>
 <li>calculate_granular_temperature_and_solid_fraction()
-: <a class="el" href="classDisableContacts.html#a9997435cd13f73e0f3e75d591bff16c1">DisableContacts&lt; dim &gt;</a>
+: <a class="el" href="classAdaptiveSparseContacts.html#aa69cf764a4a30b3aca5bf6bab3cd3ea4">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>calculate_heat_flux
 : <a class="el" href="structParameters_1_1PostProcessing.html#af6508cf9a649ed716315135210bd7df0">Parameters::PostProcessing</a>
@@ -500,7 +500,7 @@ $(function() {
 , <a class="el" href="classStabilizedMethodsTensorCopyData.html#a792b8ffe59def9adf90e3aca7b4b55aa">StabilizedMethodsTensorCopyData&lt; dim &gt;</a>
 </li>
 <li>cell_mobility_status
-: <a class="el" href="classDisableContacts.html#a067034921ded9d88e81a405244324fce">DisableContacts&lt; dim &gt;</a>
+: <a class="el" href="classAdaptiveSparseContacts.html#a245b1ea491277b30318dd231594f276a">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>cell_neighbors_object
 : <a class="el" href="classDEMContactManager.html#aadaee7ff1b89926312da0fdde9c70c88">DEMContactManager&lt; dim &gt;</a>
@@ -527,6 +527,9 @@ $(function() {
 </li>
 <li>cell_vector
 : <a class="el" href="structDEM_1_1dem__data__structures.html#a9a91232aeb98d239ed6e94062f99e831">DEM::dem_data_structures&lt; dim &gt;</a>
+</li>
+<li>cell_velocities_accelerations
+: <a class="el" href="classAdaptiveSparseContacts.html#a263ebf66d3adbe36c56eac064157229a">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>cell_void_fraction
 : <a class="el" href="classNavierStokesScratchData.html#a5470704145930632762c7dee59207de1">NavierStokesScratchData&lt; dim &gt;</a>
@@ -630,7 +633,7 @@ $(function() {
 : <a class="el" href="classNavierStokesBase.html#a1d4f95f61278309cc5a5f7975ed6ade7">NavierStokesBase&lt; dim, VectorType, DofsType &gt;</a>
 </li>
 <li>check_cell_mobility()
-: <a class="el" href="classDisableContacts.html#a4cf8368bfc4c6568c0f88c4ce07b06de">DisableContacts&lt; dim &gt;</a>
+: <a class="el" href="classAdaptiveSparseContacts.html#a92287b3928ce728df9ceab3785e46abd">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>check_contact_search_iteration_constant()
 : <a class="el" href="classDEMSolver.html#a6c0b79c8ca006a3f37dbf7a4bb6bbe74">DEMSolver&lt; dim &gt;</a>
@@ -659,8 +662,8 @@ $(function() {
 <li>check_load_balance_step
 : <a class="el" href="classCFDDEMSolver.html#a6053b1f5ae13f181ad5233cb2970b3d8">CFDDEMSolver&lt; dim &gt;</a>
 </li>
-<li>check_load_balance_with_disabled_contacts()
-: <a class="el" href="classDEMSolver.html#a67a891147dca99548985aa1df0ce9ba8">DEMSolver&lt; dim &gt;</a>
+<li>check_load_balance_with_sparse_contacts()
+: <a class="el" href="classDEMSolver.html#aa201198d3cbfe1654cb51330aff69015">DEMSolver&lt; dim &gt;</a>
 </li>
 <li>check_whether_all_particles_are_sphere()
 : <a class="el" href="classGLSSharpNavierStokesSolver.html#a92713b7b7dd089e7d61e0b6587a44b1c">GLSSharpNavierStokesSolver&lt; dim &gt;</a>
@@ -861,8 +864,7 @@ $(function() {
 , <a class="el" href="classRPTL2Projection.html#a82d64ad0a43f2af2b0050319e1bf872a">RPTL2Projection&lt; dim &gt;</a>
 </li>
 <li>contact_build_number
-: <a class="el" href="classCFDDEMSolver.html#a73fbbf1232ac004736fa024db5a067dd">CFDDEMSolver&lt; dim &gt;</a>
-, <a class="el" href="classDEMSolver.html#a82695324054983cd2277870eadc5543a">DEMSolver&lt; dim &gt;</a>
+: <a class="el" href="classDEMSolver.html#a82695324054983cd2277870eadc5543a">DEMSolver&lt; dim &gt;</a>
 </li>
 <li>contact_detection_frequency
 : <a class="el" href="classDEMSolver.html#a9e100f31534c7cb9ee1c0a49d589ecf9">DEMSolver&lt; dim &gt;</a>
@@ -892,18 +894,23 @@ $(function() {
 <li>contact_point
 : <a class="el" href="structIBParticlesDEM_1_1ContactInfo.html#a970883a09c3d0cec92fb872e29dc163e">IBParticlesDEM&lt; dim &gt;::ContactInfo</a>
 </li>
+<li>contact_search_counter
+: <a class="el" href="classCFDDEMSolver.html#ad8ef40ea0ecf1a55e16e6249c129ac7e">CFDDEMSolver&lt; dim &gt;</a>
+</li>
 <li>contact_search_frequency
 : <a class="el" href="classParameters_1_1IBParticles.html#a20fa1d508e01ca1ef1b8bd0abbfc4498">Parameters::IBParticles&lt; dim &gt;</a>
 </li>
 <li>contact_search_radius_factor
 : <a class="el" href="classParameters_1_1IBParticles.html#af69157336a02a94a7684b9d70ccf795f">Parameters::IBParticles&lt; dim &gt;</a>
 </li>
+<li>contact_search_step()
+: <a class="el" href="classCFDDEMSolver.html#ae1c4ccc1fa441b35d7f60bfbb681edea">CFDDEMSolver&lt; dim &gt;</a>
+</li>
+<li>contact_search_total_number
+: <a class="el" href="classCFDDEMSolver.html#a579c20db3e2f7d61068ddbc321088eb9">CFDDEMSolver&lt; dim &gt;</a>
+</li>
 <li>ContactDetectionMethod
 : <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a6e187d80f1fbd4ca22af7cd03e0df47a">Parameters::Lagrangian::ModelParameters</a>
-</li>
-<li>contacts_are_disabled()
-: <a class="el" href="classCFDDEMSolver.html#ab45ef604de4362160dc89b4cefc9a3c5">CFDDEMSolver&lt; dim &gt;</a>
-, <a class="el" href="classDEMSolver.html#a1ea61a7b00c74f4b5771d97747763dc7">DEMSolver&lt; dim &gt;</a>
 </li>
 <li>ContinuityPostProcessorSmoothing()
 : <a class="el" href="classContinuityPostProcessorSmoothing.html#a8b18c2865a3d53b6e8b6be2c0cc904dc">ContinuityPostProcessorSmoothing&lt; dim, VectorType &gt;</a>

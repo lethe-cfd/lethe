@@ -87,8 +87,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c640dd28a1abaccb55ef150bf1027fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangianPostProcessing.html#a9c640dd28a1abaccb55ef150bf1027fd">LagrangianPostProcessing</a> ()</td></tr>
 <tr class="separator:a9c640dd28a1abaccb55ef150bf1027fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49ca00fd39a56c5e3d9d0bb53c025907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangianPostProcessing.html#a49ca00fd39a56c5e3d9d0bb53c025907">write_post_processing_results</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, <a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;grid_pvdhandler, const DoFHandler&lt; dim &gt; &amp;background_dh, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters, const double current_time, const unsigned int step_number, const MPI_Comm &amp;mpi_communicator, <a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;disable_contacts_object)</td></tr>
-<tr class="separator:a49ca00fd39a56c5e3d9d0bb53c025907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08613045953e5237bf6fc36de5609cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLagrangianPostProcessing.html#ab08613045953e5237bf6fc36de5609cf">write_post_processing_results</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, <a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;grid_pvdhandler, const DoFHandler&lt; dim &gt; &amp;background_dh, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters, const double current_time, const unsigned int step_number, const MPI_Comm &amp;mpi_communicator, <a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt; &amp;sparse_contacts_object)</td></tr>
+<tr class="separator:ab08613045953e5237bf6fc36de5609cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -289,8 +289,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a49ca00fd39a56c5e3d9d0bb53c025907"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49ca00fd39a56c5e3d9d0bb53c025907">&#9670;&nbsp;</a></span>write_post_processing_results()</h2>
+<a id="ab08613045953e5237bf6fc36de5609cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab08613045953e5237bf6fc36de5609cf">&#9670;&nbsp;</a></span>write_post_processing_results()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -348,8 +348,8 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt; &amp;&#160;</td>
-          <td class="paramname"><em>disable_contacts_object</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sparse_contacts_object</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -375,7 +375,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="lagrangian__post__processing_8cc_source.html#l00176">176</a> of file <a class="el" href="lagrangian__post__processing_8cc_source.html">lagrangian_post_processing.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="disable__contacts_8h_source.html#l00246">DisableContacts&lt; dim &gt;::get_mobility_status_vector()</a>, <a class="el" href="parameters_8h_source.html#l00174">Parameters::SimulationControl::group_files</a>, <a class="el" href="parameters_8h_source.html#l00134">Parameters::SimulationControl::output_folder</a>, <a class="el" href="parameters_8h_source.html#l00137">Parameters::SimulationControl::output_name</a>, and <a class="el" href="dem__solver__parameters_8h_source.html#l00037">DEMSolverParameters&lt; dim &gt;::simulation_control</a>.</p>
+<p class="reference">References <a class="el" href="adaptive__sparse__contacts_8h_source.html#l00353">AdaptiveSparseContacts&lt; dim &gt;::get_mobility_status_vector()</a>, <a class="el" href="parameters_8h_source.html#l00174">Parameters::SimulationControl::group_files</a>, <a class="el" href="parameters_8h_source.html#l00134">Parameters::SimulationControl::output_folder</a>, <a class="el" href="parameters_8h_source.html#l00137">Parameters::SimulationControl::output_name</a>, and <a class="el" href="dem__solver__parameters_8h_source.html#l00037">DEMSolverParameters&lt; dim &gt;::simulation_control</a>.</p>
 
 </div>
 </div>

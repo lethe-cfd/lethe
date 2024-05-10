@@ -326,20 +326,20 @@ $(function() {
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classDEMContactManager.html#ae1ea4915f1dff277aa1cece1baeaea0f">  248</a></span>&#160;<a class="code" href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">DEMContactManager&lt;dim&gt;::execute_particle_particle_broad_search</a>(</div>
+<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classDEMContactManager.html#ab26817c6b714f73533c8cecdc665a3e5">  248</a></span>&#160;<a class="code" href="classDEMContactManager.html#a2826508b4e77362e1c47bc3f21ea4b09">DEMContactManager&lt;dim&gt;::execute_particle_particle_broad_search</a>(</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  dealii::Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keyword">const</span> <a class="code" href="classDisableContacts.html">DisableContacts&lt;dim&gt;</a>              &amp;disable_contacts_object,</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keyword">const</span> <a class="code" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts&lt;dim&gt;</a>       &amp;sparse_contacts_object,</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span>                               has_periodic_boundaries)</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  particle_particle_broad_search_object.find_particle_particle_contact_pairs(</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    particle_handler, *<span class="keyword">this</span>, disable_contacts_object);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    particle_handler, *<span class="keyword">this</span>, sparse_contacts_object);</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="keywordflow">if</span> (has_periodic_boundaries)</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    {</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      particle_particle_broad_search_object</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        .find_particle_particle_periodic_contact_pairs(particle_handler,</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                                       *<span class="keyword">this</span>,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                                       disable_contacts_object);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                                       sparse_contacts_object);</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    }</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
@@ -398,14 +398,14 @@ $(function() {
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classDEMContactManager.html#a220f38991c445ac3635630f0af2c20a6">  320</a></span>&#160;<a class="code" href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">DEMContactManager&lt;dim&gt;::execute_particle_wall_broad_search</a>(</div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classDEMContactManager.html#afe92dba6343f59b3c74d70bfd1e61c8a">  320</a></span>&#160;<a class="code" href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">DEMContactManager&lt;dim&gt;::execute_particle_wall_broad_search</a>(</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <span class="keyword">const</span> Particles::ParticleHandler&lt;dim&gt; &amp;particle_handler,</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <a class="code" href="classBoundaryCellsInformation.html">BoundaryCellsInformation&lt;dim&gt;</a>         &amp;boundary_cell_object,</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="structDEM_1_1dem__data__structures.html#aefb7f17e5fdd7999939d1486e05cca37">dem_data_structures&lt;dim&gt;::floating_mesh_information</a></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                                                    floating_mesh_info,</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="keyword">const</span> <a class="code" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls&lt;dim&gt;</a> &amp;floating_walls,</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span>                                      simulation_time,</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keyword">const</span> <a class="code" href="classDisableContacts.html">DisableContacts&lt;dim&gt;</a>                       &amp;disable_contacts_object,</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keyword">const</span> <a class="code" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts&lt;dim&gt;</a>                &amp;sparse_contacts_object,</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span>                                        has_floating_mesh)</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;{</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="comment">// Particle-wall contact candidates</span></div>
@@ -413,7 +413,7 @@ $(function() {
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    boundary_cell_object.<a class="code" href="classBoundaryCellsInformation.html#a8b30fe2b557528c8249802b59ff79934">get_boundary_cells_information</a>(),</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    particle_handler,</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    particle_wall_candidates,</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    disable_contacts_object);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    sparse_contacts_object);</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  <span class="comment">// Particle-floating wall contact pairs</span></div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  <span class="keywordflow">if</span> (floating_walls.<a class="code" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html#af2b77828bd3add153b673e208483ccda">floating_walls_number</a> &gt; 0)</div>
@@ -425,7 +425,7 @@ $(function() {
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;          floating_walls,</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;          simulation_time,</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;          particle_floating_wall_candidates,</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;          disable_contacts_object);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;          sparse_contacts_object);</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    }</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  <span class="comment">// Particle-floating mesh broad search</span></div>
@@ -436,14 +436,14 @@ $(function() {
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        particle_handler,</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        particle_floating_mesh_candidates,</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        total_neighbor_list,</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        disable_contacts_object);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        sparse_contacts_object);</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    }</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  particle_point_candidates =</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    particle_point_line_broad_search_object.find_particle_point_contact_pairs(</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      particle_handler,</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;      boundary_cell_object.<a class="code" href="classBoundaryCellsInformation.html#abcebf6ab4cc59c4cb1b7485280cfb420">get_boundary_cells_with_points</a>(),</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;      disable_contacts_object);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;      sparse_contacts_object);</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <span class="keywordflow">if</span> constexpr (dim == 3)</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
@@ -452,7 +452,7 @@ $(function() {
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;          .find_particle_line_contact_pairs(</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            particle_handler,</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            boundary_cell_object.<a class="code" href="classBoundaryCellsInformation.html#afb48f2d00358ee29b5236fd49ddb922c">get_boundary_cells_with_lines</a>(),</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            disable_contacts_object);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            sparse_contacts_object);</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
@@ -548,6 +548,7 @@ $(function() {
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classDEMContactManager.html">DEMContactManager&lt;2&gt;</a>;</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classDEMContactManager.html">DEMContactManager&lt;3&gt;</a>;</div>
+<div class="ttc" id="aclassAdaptiveSparseContacts_html"><div class="ttname"><a href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a></div><div class="ttdoc">Mechanism that disables contacts computation through mobility status of cells based on granular tempe...</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__sparse__contacts_8h_source.html#l00118">adaptive_sparse_contacts.h:119</a></div></div>
 <div class="ttc" id="aclassBoundaryCellsInformation_html"><div class="ttname"><a href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a></div><div class="ttdef"><b>Definition:</b> <a href="find__boundary__cells__information_8h_source.html#l00051">find_boundary_cells_information.h:52</a></div></div>
 <div class="ttc" id="aclassBoundaryCellsInformation_html_a53e0818eac548a5cf4f849e8d421b461"><div class="ttname"><a href="classBoundaryCellsInformation.html#a53e0818eac548a5cf4f849e8d421b461">BoundaryCellsInformation::get_boundary_cells_with_floating_walls</a></div><div class="ttdeci">std::unordered_map&lt; types::particle_index, std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt; &gt; &amp; get_boundary_cells_with_floating_walls()</div><div class="ttdef"><b>Definition:</b> <a href="find__boundary__cells__information_8h_source.html#l00116">find_boundary_cells_information.h:116</a></div></div>
 <div class="ttc" id="aclassBoundaryCellsInformation_html_a8b30fe2b557528c8249802b59ff79934"><div class="ttname"><a href="classBoundaryCellsInformation.html#a8b30fe2b557528c8249802b59ff79934">BoundaryCellsInformation::get_boundary_cells_information</a></div><div class="ttdeci">std::map&lt; int, boundary_cells_info_struct&lt; dim &gt; &gt; &amp; get_boundary_cells_information()</div><div class="ttdef"><b>Definition:</b> <a href="find__boundary__cells__information_8h_source.html#l00090">find_boundary_cells_information.h:90</a></div></div>
@@ -561,9 +562,8 @@ $(function() {
 <div class="ttc" id="aclassDEMContactManager_html_ab89bc870e9adbde380738c2f9b52ca08"><div class="ttname"><a href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">DEMContactManager::execute_particle_wall_broad_search</a></div><div class="ttdeci">void execute_particle_wall_broad_search(const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, BoundaryCellsInformation&lt; dim &gt; &amp;boundary_cell_object, const typename dem_data_structures&lt; dim &gt;::floating_mesh_information floating_mesh_info, const Parameters::Lagrangian::FloatingWalls&lt; dim &gt; &amp;floating_walls, const double simulation_time, const bool has_floating_mesh=false)</div><div class="ttdoc">Execute the particle-wall broad searches.</div><div class="ttdef"><b>Definition:</b> <a href="dem__contact__manager_8cc_source.html#l00267">dem_contact_manager.cc:267</a></div></div>
 <div class="ttc" id="aclassDEMContactManager_html_acb698d9ff443e1ca02793b449da55fe7"><div class="ttname"><a href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">DEMContactManager::execute_particle_wall_fine_search</a></div><div class="ttdeci">void execute_particle_wall_fine_search(const Parameters::Lagrangian::FloatingWalls&lt; dim &gt; &amp;floating_walls, const double simulation_time, const double neighborhood_threshold, const bool has_floating_mesh=false)</div><div class="ttdoc">Execute the particle-wall fine searches.</div><div class="ttdef"><b>Definition:</b> <a href="dem__contact__manager_8cc_source.html#l00429">dem_contact_manager.cc:429</a></div></div>
 <div class="ttc" id="aclassDEMContactManager_html_afac6797f57fd9c3dca66f650b25d77d0"><div class="ttname"><a href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">DEMContactManager::execute_cell_neighbors_search</a></div><div class="ttdeci">void execute_cell_neighbors_search(const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename DEM::dem_data_structures&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</div><div class="ttdoc">Execute functions to find the lists of cell neighbors of the active cells in the triangulation.</div><div class="ttdef"><b>Definition:</b> <a href="dem__contact__manager_8cc_source.html#l00005">dem_contact_manager.cc:5</a></div></div>
-<div class="ttc" id="aclassDisableContacts_html"><div class="ttname"><a href="classDisableContacts.html">DisableContacts</a></div><div class="ttdef"><b>Definition:</b> <a href="disable__contacts_8h_source.html#l00087">disable_contacts.h:88</a></div></div>
-<div class="ttc" id="aclassParameters_1_1Lagrangian_1_1FloatingWalls_html"><div class="ttname"><a href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a></div><div class="ttdef"><b>Definition:</b> <a href="parameters__lagrangian_8h_source.html#l00335">parameters_lagrangian.h:336</a></div></div>
-<div class="ttc" id="aclassParameters_1_1Lagrangian_1_1FloatingWalls_html_af2b77828bd3add153b673e208483ccda"><div class="ttname"><a href="classParameters_1_1Lagrangian_1_1FloatingWalls.html#af2b77828bd3add153b673e208483ccda">Parameters::Lagrangian::FloatingWalls::floating_walls_number</a></div><div class="ttdeci">unsigned int floating_walls_number</div><div class="ttdef"><b>Definition:</b> <a href="parameters__lagrangian_8h_source.html#l00339">parameters_lagrangian.h:339</a></div></div>
+<div class="ttc" id="aclassParameters_1_1Lagrangian_1_1FloatingWalls_html"><div class="ttname"><a href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a></div><div class="ttdef"><b>Definition:</b> <a href="parameters__lagrangian_8h_source.html#l00337">parameters_lagrangian.h:338</a></div></div>
+<div class="ttc" id="aclassParameters_1_1Lagrangian_1_1FloatingWalls_html_af2b77828bd3add153b673e208483ccda"><div class="ttname"><a href="classParameters_1_1Lagrangian_1_1FloatingWalls.html#af2b77828bd3add153b673e208483ccda">Parameters::Lagrangian::FloatingWalls::floating_walls_number</a></div><div class="ttdeci">unsigned int floating_walls_number</div><div class="ttdef"><b>Definition:</b> <a href="parameters__lagrangian_8h_source.html#l00341">parameters_lagrangian.h:341</a></div></div>
 <div class="ttc" id="acontact__type_8h_html_a280ac7ff91d81eba6f834d2de978f6faa16be8ebed688d98d8e43741d5592f8c8"><div class="ttname"><a href="contact__type_8h.html#a280ac7ff91d81eba6f834d2de978f6faa16be8ebed688d98d8e43741d5592f8c8">ghost_periodic_particle_particle</a></div><div class="ttdeci">@ ghost_periodic_particle_particle</div><div class="ttdef"><b>Definition:</b> <a href="contact__type_8h_source.html#l00031">contact_type.h:31</a></div></div>
 <div class="ttc" id="acontact__type_8h_html_a280ac7ff91d81eba6f834d2de978f6faa68a8a4ba6e02dff9747fee8bbdd6d778"><div class="ttname"><a href="contact__type_8h.html#a280ac7ff91d81eba6f834d2de978f6faa68a8a4ba6e02dff9747fee8bbdd6d778">ghost_particle_particle</a></div><div class="ttdeci">@ ghost_particle_particle</div><div class="ttdef"><b>Definition:</b> <a href="contact__type_8h_source.html#l00029">contact_type.h:29</a></div></div>
 <div class="ttc" id="acontact__type_8h_html_a280ac7ff91d81eba6f834d2de978f6faa6d1039b2a6bfde389eea4dfdf7d1d528"><div class="ttname"><a href="contact__type_8h.html#a280ac7ff91d81eba6f834d2de978f6faa6d1039b2a6bfde389eea4dfdf7d1d528">particle_floating_mesh</a></div><div class="ttdeci">@ particle_floating_mesh</div><div class="ttdef"><b>Definition:</b> <a href="contact__type_8h_source.html#l00035">contact_type.h:35</a></div></div>

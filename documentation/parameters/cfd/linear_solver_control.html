@@ -610,7 +610,8 @@ set eig estimation cg n iterations = 10
 set eig estimation verbosity       = quiet
 
 # Coarse-grid solver parameters
-set mg coarse grid solver = gmres
+set mg coarse grid solver          = gmres
+set mg coarse grid use fe q iso q1 = false
 
 # Parameters for GMRES as coarse grid solver
 set mg gmres max iterations     = 2000
@@ -646,7 +647,7 @@ set ilu preconditioner relative tolerance = 1
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If your coarse-grid level is small enough, it might be worth it for some problems to set <code class="docutils literal notranslate"><span class="pre">mg</span> <span class="pre">amg</span> <span class="pre">use</span> <span class="pre">default</span> <span class="pre">parameters</span> <span class="pre">=</span> <span class="pre">true</span></code> to use a direct solver.</p>
+<p>If your coarse-grid level is small enough, it might be worth it for some problems to set <code class="docutils literal notranslate"><span class="pre">mg</span> <span class="pre">amg</span> <span class="pre">use</span> <span class="pre">default</span> <span class="pre">parameters</span> <span class="pre">=</span> <span class="pre">true</span></code> to use a direct solver. On the other hand, if high order elements are used, it might be useful to set <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">mg</span> <span class="pre">coarse</span> <span class="pre">grid</span> <span class="pre">use</span> <span class="pre">fe</span> <span class="pre">q</span> <span class="pre">iso</span> <span class="pre">q1</span> <span class="pre">=</span> <span class="pre">true</span></code> to solve the coarse grid problem using <a class="reference external" href="https://www.dealii.org/developer/doxygen/deal.II/classFE__Q__iso__Q1.html">FE_Q_iso_Q1 elements</a>.</p>
 </div>
 </section>
 </section>

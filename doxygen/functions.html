@@ -96,9 +96,6 @@ $(function() {
 <li>activate_laser
 : <a class="el" href="classParameters_1_1Laser.html#a4318207e68f24b1b9089c75b5b170260">Parameters::Laser&lt; dim &gt;</a>
 </li>
-<li>active
-: <a class="el" href="classDisableContacts.html#a6a5eede6395adcd9f9b0c06e3905ab81a099fcb56d879cd214833de782687c718">DisableContacts&lt; dim &gt;</a>
-</li>
 <li>active_load_balancing_factor
 : <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a56c112a8008843e3ccd9bfdf102de674">Parameters::Lagrangian::ModelParameters</a>
 </li>
@@ -120,6 +117,9 @@ $(function() {
 <li>adaptative_time_step_scaling
 : <a class="el" href="structParameters_1_1SimulationControl.html#a1c26877cf190cb29f0bf9b126673a045">Parameters::SimulationControl</a>
 , <a class="el" href="classSimulationControlTransient.html#ae5618d27fcd5e0eef634469aa6e42751">SimulationControlTransient</a>
+</li>
+<li>AdaptiveSparseContacts()
+: <a class="el" href="classAdaptiveSparseContacts.html#aea66c3424f12839402b46fb19f4cb01c">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>add_boundary_neighbors_of_boundary_cells()
 : <a class="el" href="classBoundaryCellsInformation.html#a99993d28ff3595c622c3ee328cebbac4">BoundaryCellsInformation&lt; dim &gt;</a>
@@ -144,6 +144,18 @@ $(function() {
 </li>
 <li>adjacent_particle_pairs
 : <a class="el" href="structDEM_1_1dem__data__structures.html#a401f88b28f64a3ca48c19e15ac57efdf">DEM::dem_data_structures&lt; dim &gt;</a>
+</li>
+<li>advect_particles
+: <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a109fc78d783be81905ecf787a4b838b2">Parameters::Lagrangian::ModelParameters</a>
+</li>
+<li>advect_particles_enabled
+: <a class="el" href="classAdaptiveSparseContacts.html#aee7b1de5fd0cfe105a7023ede1ee428f">AdaptiveSparseContacts&lt; dim &gt;</a>
+</li>
+<li>advected
+: <a class="el" href="classAdaptiveSparseContacts.html#a9cf65bd3e1a790313fcf3f6b708ab230a7daa627384bf89a5abd5d18c2bdc72ae">AdaptiveSparseContacts&lt; dim &gt;</a>
+</li>
+<li>advected_active
+: <a class="el" href="classAdaptiveSparseContacts.html#a9cf65bd3e1a790313fcf3f6b708ab230a44cdcc7deb0aff6e606381ca245678ae">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>ALE()
 : <a class="el" href="classParameters_1_1ALE.html#ade026e2db1b08812368525649a02fa60">Parameters::ALE&lt; dim &gt;</a>
@@ -490,10 +502,7 @@ $(function() {
 : <a class="el" href="classSimulationControl.html#afcef58567807100d062bceb13c9540a5">SimulationControl</a>
 </li>
 <li>assign_mobility_status()
-: <a class="el" href="classDisableContacts.html#a8e680605bdba3fb98749b084d9f2440b">DisableContacts&lt; dim &gt;</a>
-</li>
-<li>assign_node_status()
-: <a class="el" href="classDisableContacts.html#ac3b8bcf46271c8e02cb947687b01de05">DisableContacts&lt; dim &gt;</a>
+: <a class="el" href="classAdaptiveSparseContacts.html#a04e34c241b1583be2a809e352858d2df">AdaptiveSparseContacts&lt; dim &gt;</a>
 </li>
 <li>assign_particle_properties()
 : <a class="el" href="classInsertion.html#a8f00edf71c52d94b944fac4a35f32647">Insertion&lt; dim &gt;</a>

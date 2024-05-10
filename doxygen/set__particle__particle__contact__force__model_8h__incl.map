@@ -1,7 +1,7 @@
 <map id="/home/runner/work/lethe/lethe/include/dem/set_particle_particle_contact_force_model.h" name="/home/runner/work/lethe/lethe/include/dem/set_particle_particle_contact_force_model.h">
-<area shape="rect" id="node1" title=" " alt="" coords="982,5,1172,76"/>
-<area shape="rect" id="node2" href="$dem__solver__parameters_8h.html" title=" " alt="" coords="574,474,799,501"/>
-<area shape="rect" id="node25" href="$particle__particle__contact__force_8h.html" title=" " alt="" coords="1486,124,1646,165"/>
+<area shape="rect" id="node1" title=" " alt="" coords="992,5,1181,76"/>
+<area shape="rect" id="node2" href="$dem__solver__parameters_8h.html" title=" " alt="" coords="583,474,808,501"/>
+<area shape="rect" id="node25" href="$particle__particle__contact__force_8h.html" title=" " alt="" coords="1497,124,1657,165"/>
 <area shape="rect" id="node3" href="$parameters_8h.html" title=" " alt="" coords="428,735,569,761"/>
 <area shape="rect" id="node21" href="$parameters__lagrangian_8h.html" title=" " alt="" coords="16,653,234,679"/>
 <area shape="rect" id="node22" href="$simulation__control_8h.html" title=" " alt="" coords="677,563,864,590"/>
@@ -20,33 +20,33 @@
 <area shape="rect" id="node8" title=" " alt="" coords="1378,981,1458,1007"/>
 <area shape="rect" id="node9" title=" " alt="" coords="118,981,177,1007"/>
 <area shape="rect" id="node10" title=" " alt="" coords="1067,981,1122,1007"/>
-<area shape="rect" id="node17" title=" " alt="" coords="3044,973,3198,1015"/>
+<area shape="rect" id="node17" title=" " alt="" coords="3043,973,3196,1015"/>
 <area shape="rect" id="node18" title=" " alt="" coords="830,981,889,1007"/>
-<area shape="rect" id="node15" title=" " alt="" coords="3079,1070,3232,1097"/>
+<area shape="rect" id="node15" title=" " alt="" coords="3078,1070,3231,1097"/>
 <area shape="rect" id="node23" href="$bdf_8h.html" title=" " alt="" coords="787,653,874,679"/>
 <area shape="rect" id="node26" href="$auxiliary__math__functions_8h.html" title=" " alt="" coords="610,645,762,687"/>
-<area shape="rect" id="node27" href="$data__containers_8h.html" title=" " alt="" coords="2570,474,2741,501"/>
-<area shape="rect" id="node30" href="$particle__particle__contact__info_8h.html" title=" " alt="" coords="3436,556,3596,597"/>
-<area shape="rect" id="node36" href="$dem__contact__manager_8h.html" title=" " alt="" coords="2195,213,2410,240"/>
-<area shape="rect" id="node38" title=" " alt="" coords="1590,467,1764,508"/>
-<area shape="rect" id="node50" href="$rolling__resistance__torque__models_8h.html" title=" " alt="" coords="726,377,897,419"/>
-<area shape="rect" id="node28" href="$boundary__cells__info__struct_8h.html" title=" " alt="" coords="3620,556,3774,597"/>
-<area shape="rect" id="node29" title=" " alt="" coords="3076,645,3212,687"/>
-<area shape="rect" id="node31" title=" " alt="" coords="1894,645,2068,687"/>
-<area shape="rect" id="node32" href="$particle__point__line__contact__info__struct_8h.html" title=" " alt="" coords="1720,556,1916,597"/>
-<area shape="rect" id="node33" href="$particle__wall__contact__info_8h.html" title=" " alt="" coords="2559,556,2752,597"/>
-<area shape="rect" id="node34" href="$unordered__dense_8h.html" title=" " alt="" coords="2144,563,2335,590"/>
-<area shape="rect" id="node35" title=" " alt="" coords="2359,563,2483,590"/>
-<area shape="rect" id="node37" href="$serial__solid_8h.html" title=" " alt="" coords="922,385,1062,411"/>
-<area shape="rect" id="node39" href="$disable__contacts_8h.html" title=" " alt="" coords="2177,385,2353,411"/>
-<area shape="rect" id="node40" href="$find__boundary__cells__information_8h.html" title=" " alt="" coords="2580,377,2764,419"/>
-<area shape="rect" id="node41" href="$find__cell__neighbors_8h.html" title=" " alt="" coords="3041,385,3233,411"/>
-<area shape="rect" id="node42" href="$particle__particle__broad__search_8h.html" title=" " alt="" coords="2465,288,2625,329"/>
-<area shape="rect" id="node43" href="$particle__particle__fine__search_8h.html" title=" " alt="" coords="3462,377,3622,419"/>
-<area shape="rect" id="node44" href="$particle__point__line__broad__search_8h.html" title=" " alt="" coords="2282,288,2440,329"/>
-<area shape="rect" id="node45" href="$particle__point__line__fine__search_8h.html" title=" " alt="" coords="1382,377,1529,419"/>
-<area shape="rect" id="node46" href="$particle__wall__broad__search_8h.html" title=" " alt="" coords="1812,288,1995,329"/>
-<area shape="rect" id="node47" href="$particle__wall__fine__search_8h.html" title=" " alt="" coords="1188,377,1358,419"/>
-<area shape="rect" id="node48" href="$update__fine__search__candidates_8h.html" title=" " alt="" coords="3257,377,3438,419"/>
-<area shape="rect" id="node49" href="$update__local__particle__containers_8h.html" title=" " alt="" coords="1908,377,2102,419"/>
+<area shape="rect" id="node27" href="$data__containers_8h.html" title=" " alt="" coords="2569,474,2740,501"/>
+<area shape="rect" id="node30" href="$particle__particle__contact__info_8h.html" title=" " alt="" coords="3434,556,3594,597"/>
+<area shape="rect" id="node36" href="$dem__contact__manager_8h.html" title=" " alt="" coords="2194,213,2408,240"/>
+<area shape="rect" id="node38" title=" " alt="" coords="1592,467,1767,508"/>
+<area shape="rect" id="node50" href="$rolling__resistance__torque__models_8h.html" title=" " alt="" coords="736,377,906,419"/>
+<area shape="rect" id="node28" href="$boundary__cells__info__struct_8h.html" title=" " alt="" coords="3619,556,3772,597"/>
+<area shape="rect" id="node29" title=" " alt="" coords="3074,645,3210,687"/>
+<area shape="rect" id="node31" title=" " alt="" coords="1892,645,2067,687"/>
+<area shape="rect" id="node32" href="$particle__point__line__contact__info__struct_8h.html" title=" " alt="" coords="1719,556,1915,597"/>
+<area shape="rect" id="node33" href="$particle__wall__contact__info_8h.html" title=" " alt="" coords="2558,556,2751,597"/>
+<area shape="rect" id="node34" href="$unordered__dense_8h.html" title=" " alt="" coords="2143,563,2334,590"/>
+<area shape="rect" id="node35" title=" " alt="" coords="2358,563,2482,590"/>
+<area shape="rect" id="node37" href="$serial__solid_8h.html" title=" " alt="" coords="931,385,1071,411"/>
+<area shape="rect" id="node39" href="$adaptive__sparse__contacts_8h.html" title=" " alt="" coords="2189,377,2352,419"/>
+<area shape="rect" id="node40" href="$find__boundary__cells__information_8h.html" title=" " alt="" coords="2578,377,2762,419"/>
+<area shape="rect" id="node41" href="$find__cell__neighbors_8h.html" title=" " alt="" coords="3040,385,3232,411"/>
+<area shape="rect" id="node42" href="$particle__particle__broad__search_8h.html" title=" " alt="" coords="2464,288,2624,329"/>
+<area shape="rect" id="node43" href="$particle__particle__fine__search_8h.html" title=" " alt="" coords="3461,377,3621,419"/>
+<area shape="rect" id="node44" href="$particle__point__line__broad__search_8h.html" title=" " alt="" coords="2280,288,2439,329"/>
+<area shape="rect" id="node45" href="$particle__point__line__fine__search_8h.html" title=" " alt="" coords="1393,377,1540,419"/>
+<area shape="rect" id="node46" href="$particle__wall__broad__search_8h.html" title=" " alt="" coords="1819,288,2002,329"/>
+<area shape="rect" id="node47" href="$particle__wall__fine__search_8h.html" title=" " alt="" coords="1199,377,1368,419"/>
+<area shape="rect" id="node48" href="$update__fine__search__candidates_8h.html" title=" " alt="" coords="3256,377,3437,419"/>
+<area shape="rect" id="node49" href="$update__local__particle__containers_8h.html" title=" " alt="" coords="1920,377,2114,419"/>
 </map>

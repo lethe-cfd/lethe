@@ -1,5 +1,5 @@
-<map id="/home/runner/work/lethe/lethe/include/dem/disable_contacts.h" name="/home/runner/work/lethe/lethe/include/dem/disable_contacts.h">
-<area shape="rect" id="node1" title=" " alt="" coords="1315,5,1509,61"/>
+<map id="/home/runner/work/lethe/lethe/include/dem/adaptive_sparse_contacts.h" name="/home/runner/work/lethe/lethe/include/dem/adaptive_sparse_contacts.h">
+<area shape="rect" id="node1" title=" " alt="" coords="1310,5,1514,61"/>
 <area shape="rect" id="node2" href="$dem_8h.html" title=" " alt="" coords="1257,436,1445,477"/>
 <area shape="rect" id="node4" href="$cfd__dem__coupling_8h.html" title=" " alt="" coords="1374,659,1557,715"/>
 <area shape="rect" id="node8" href="$dem__contact__manager_8h.html" title=" " alt="" coords="1566,213,1749,269"/>
@@ -9,7 +9,7 @@
 <area shape="rect" id="node32" href="$particle__particle__broad__search_8h.html" title=" " alt="" coords="1203,109,1399,165"/>
 <area shape="rect" id="node33" href="$particle__point__line__broad__search_8h.html" title=" " alt="" coords="1423,109,1622,165"/>
 <area shape="rect" id="node35" href="$particle__wall__broad__search_8h.html" title=" " alt="" coords="1697,109,1893,165"/>
-<area shape="rect" id="node37" href="$disable__contacts_8cc.html" title=" " alt="" coords="2489,109,2679,165"/>
+<area shape="rect" id="node37" href="$adaptive__sparse__contacts_8cc.html" title=" " alt="" coords="2488,109,2688,165"/>
 <area shape="rect" id="node3" href="$gls__vans_8h.html" title=" " alt="" coords="1150,547,1333,603"/>
 <area shape="rect" id="node7" href="$dem_8cc.html" title=" " alt="" coords="935,555,1126,596"/>
 <area shape="rect" id="node6" href="$gls__vans_8cc.html" title=" " alt="" coords="1150,659,1333,715"/>

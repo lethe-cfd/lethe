@@ -110,8 +110,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:aa916456f1e7d3ca407a546301c3fcb8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a126aaa9f4c8a7a2b6bcd3be3ef0575"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a6a126aaa9f4c8a7a2b6bcd3be3ef0575">check_load_balance_dynamic</a> ()</td></tr>
 <tr class="separator:a6a126aaa9f4c8a7a2b6bcd3be3ef0575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67a891147dca99548985aa1df0ce9ba8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a67a891147dca99548985aa1df0ce9ba8">check_load_balance_with_disabled_contacts</a> ()</td></tr>
-<tr class="separator:a67a891147dca99548985aa1df0ce9ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa201198d3cbfe1654cb51330aff69015"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#aa201198d3cbfe1654cb51330aff69015">check_load_balance_with_sparse_contacts</a> ()</td></tr>
+<tr class="separator:aa201198d3cbfe1654cb51330aff69015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88b709143c5c7c2bbcda8cc55b054d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#ad88b709143c5c7c2bbcda8cc55b054d9">load_balance</a> ()</td></tr>
 <tr class="separator:ad88b709143c5c7c2bbcda8cc55b054d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6432e29ba0169734e27eb9060dc7ed9c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a6432e29ba0169734e27eb9060dc7ed9c">insert_particles</a> ()</td></tr>
@@ -132,8 +132,6 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ad452023734ba49d802b6405ef7a922be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4335b310ca58002c427b5d912af89e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#ad4335b310ca58002c427b5d912af89e4">setup_background_dofs</a> ()</td></tr>
 <tr class="separator:ad4335b310ca58002c427b5d912af89e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ea61a7b00c74f4b5771d97747763dc7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a1ea61a7b00c74f4b5771d97747763dc7">contacts_are_disabled</a> () const</td></tr>
-<tr class="separator:a1ea61a7b00c74f4b5771d97747763dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c862c6211f0cb8a6510e09ef440ac0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a28c862c6211f0cb8a6510e09ef440ac0">write_output_results</a> ()</td></tr>
 <tr class="separator:a28c862c6211f0cb8a6510e09ef440ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a809fe7e2c0bbe42e97a5a0d0b6225499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a809fe7e2c0bbe42e97a5a0d0b6225499">post_process_results</a> ()</td></tr>
@@ -251,10 +249,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a17a0f3134a959a2da07cb28595ea35c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7faf6136a613b67a8a24529c30de78b3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a7faf6136a613b67a8a24529c30de78b3">distribution_object_container</a></td></tr>
 <tr class="separator:a7faf6136a613b67a8a24529c30de78b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a132878c5836da423545cc819bb85b2a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDisableContacts.html">DisableContacts</a>&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a132878c5836da423545cc819bb85b2a3">disable_contacts_object</a></td></tr>
-<tr class="separator:a132878c5836da423545cc819bb85b2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7100ccd4442a997faf06044d99588b23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a7100ccd4442a997faf06044d99588b23">has_disabled_contacts</a></td></tr>
-<tr class="separator:a7100ccd4442a997faf06044d99588b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87355534bbd1c552d2703c62f389200f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#a87355534bbd1c552d2703c62f389200f">sparse_contacts_object</a></td></tr>
+<tr class="separator:a87355534bbd1c552d2703c62f389200f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af369c54b93b599fc6f04ef9dd8c7c686"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#af369c54b93b599fc6f04ef9dd8c7c686">has_sparse_contacts</a></td></tr>
+<tr class="separator:af369c54b93b599fc6f04ef9dd8c7c686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf871bb77fd3f0d95b2a7946ad312d35"><td class="memItemLeft" align="right" valign="top">AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#abf871bb77fd3f0d95b2a7946ad312d35">background_constraints</a></td></tr>
+<tr class="separator:abf871bb77fd3f0d95b2a7946ad312d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad37ecfbb128358b68d70e0a2a02be7e2"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#ad37ecfbb128358b68d70e0a2a02be7e2">load_balance_iteration_check_function</a></td></tr>
 <tr class="separator:ad37ecfbb128358b68d70e0a2a02be7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda4b84b8c4a1fe8d8c77d7f4a233e21"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMSolver.html#afda4b84b8c4a1fe8d8c77d7f4a233e21">contact_detection_iteration_check_function</a></td></tr>
@@ -288,7 +288,7 @@ template&lt;int dim&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00035">35</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="utilities_8h_source.html#l00418">announce_string()</a>, <a class="el" href="dem_8cc_source.html#l00238">DEMSolver&lt; dim &gt;::cell_weight()</a>, <a class="el" href="dem_8h_source.html#l00346">DEMSolver&lt; dim &gt;::computing_timer</a>, <a class="el" href="dem_8h_source.html#l00364">DEMSolver&lt; dim &gt;::contact_manager</a>, <a class="el" href="utilities_8cc_source.html#l00365">create_output_folder()</a>, <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560a8b9035807842a4e4dbe009f3f1478127">Parameters::Lagrangian::custom</a>, <a class="el" href="dem_8h_source.html#l00417">DEMSolver&lt; dim &gt;::disable_contacts_object</a>, <a class="el" href="dem_8h_source.html#l00414">DEMSolver&lt; dim &gt;::distribution_object_container</a>, <a class="el" href="dem_8h_source.html#l00386">DEMSolver&lt; dim &gt;::floating_mesh_info</a>, <a class="el" href="dem_8h_source.html#l00353">DEMSolver&lt; dim &gt;::g</a>, <a class="el" href="dem_8h_source.html#l00367">DEMSolver&lt; dim &gt;::grid_motion_object</a>, <a class="el" href="dem_8h_source.html#l00418">DEMSolver&lt; dim &gt;::has_disabled_contacts</a>, <a class="el" href="dem_8h_source.html#l00404">DEMSolver&lt; dim &gt;::has_floating_mesh</a>, <a class="el" href="dem_8h_source.html#l00399">DEMSolver&lt; dim &gt;::has_periodic_boundaries</a>, <a class="el" href="input__parameter__inspection_8cc_source.html#l00007">input_parameter_inspection()</a>, <a class="el" href="dem_8h_source.html#l00359">DEMSolver&lt; dim &gt;::maximum_particle_diameter</a>, <a class="el" href="dem_8h_source.html#l00337">DEMSolver&lt; dim &gt;::n_mpi_processes</a>, <a class="el" href="dem_8h_source.html#l00358">DEMSolver&lt; dim &gt;::neighborhood_threshold_squared</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560afea087517c26fadd409bd4b9dc642555">Parameters::Lagrangian::normal</a>, <a class="el" href="dem_8h_source.html#l00340">DEMSolver&lt; dim &gt;::parameters</a>, <a class="el" href="dem_8h_source.html#l00339">DEMSolver&lt; dim &gt;::pcout</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1BCDEM.html#ac65d80d2721f9155291c2622d9261555ae6ffdec5e14fce371eb7ae99edebbbee">Parameters::Lagrangian::BCDEM::periodic</a>, <a class="el" href="dem_8h_source.html#l00365">DEMSolver&lt; dim &gt;::simulation_control</a>, <a class="el" href="dem_8h_source.html#l00411">DEMSolver&lt; dim &gt;::solids</a>, <a class="el" href="dem_8h_source.html#l00338">DEMSolver&lt; dim &gt;::this_mpi_process</a>, <a class="el" href="dem_8h_source.html#l00341">DEMSolver&lt; dim &gt;::triangulation</a>, and <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560aa489ffed938ef1b9e86889bc413501ee">Parameters::Lagrangian::uniform</a>.</p>
+<p class="reference">References <a class="el" href="utilities_8h_source.html#l00418">announce_string()</a>, <a class="el" href="dem_8cc_source.html#l00239">DEMSolver&lt; dim &gt;::cell_weight()</a>, <a class="el" href="dem_8h_source.html#l00332">DEMSolver&lt; dim &gt;::computing_timer</a>, <a class="el" href="dem_8h_source.html#l00350">DEMSolver&lt; dim &gt;::contact_manager</a>, <a class="el" href="utilities_8cc_source.html#l00365">create_output_folder()</a>, <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560a8b9035807842a4e4dbe009f3f1478127">Parameters::Lagrangian::custom</a>, <a class="el" href="dem_8h_source.html#l00400">DEMSolver&lt; dim &gt;::distribution_object_container</a>, <a class="el" href="dem_8h_source.html#l00372">DEMSolver&lt; dim &gt;::floating_mesh_info</a>, <a class="el" href="dem_8h_source.html#l00339">DEMSolver&lt; dim &gt;::g</a>, <a class="el" href="dem_8h_source.html#l00353">DEMSolver&lt; dim &gt;::grid_motion_object</a>, <a class="el" href="dem_8h_source.html#l00390">DEMSolver&lt; dim &gt;::has_floating_mesh</a>, <a class="el" href="dem_8h_source.html#l00385">DEMSolver&lt; dim &gt;::has_periodic_boundaries</a>, <a class="el" href="dem_8h_source.html#l00406">DEMSolver&lt; dim &gt;::has_sparse_contacts</a>, <a class="el" href="input__parameter__inspection_8cc_source.html#l00007">input_parameter_inspection()</a>, <a class="el" href="dem_8h_source.html#l00345">DEMSolver&lt; dim &gt;::maximum_particle_diameter</a>, <a class="el" href="dem_8h_source.html#l00323">DEMSolver&lt; dim &gt;::n_mpi_processes</a>, <a class="el" href="dem_8h_source.html#l00344">DEMSolver&lt; dim &gt;::neighborhood_threshold_squared</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Timer::none</a>, <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560afea087517c26fadd409bd4b9dc642555">Parameters::Lagrangian::normal</a>, <a class="el" href="dem_8h_source.html#l00326">DEMSolver&lt; dim &gt;::parameters</a>, <a class="el" href="dem_8h_source.html#l00325">DEMSolver&lt; dim &gt;::pcout</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1BCDEM.html#ac65d80d2721f9155291c2622d9261555ae6ffdec5e14fce371eb7ae99edebbbee">Parameters::Lagrangian::BCDEM::periodic</a>, <a class="el" href="dem_8h_source.html#l00351">DEMSolver&lt; dim &gt;::simulation_control</a>, <a class="el" href="dem_8h_source.html#l00397">DEMSolver&lt; dim &gt;::solids</a>, <a class="el" href="dem_8h_source.html#l00403">DEMSolver&lt; dim &gt;::sparse_contacts_object</a>, <a class="el" href="dem_8h_source.html#l00324">DEMSolver&lt; dim &gt;::this_mpi_process</a>, <a class="el" href="dem_8h_source.html#l00327">DEMSolver&lt; dim &gt;::triangulation</a>, and <a class="el" href="namespaceParameters_1_1Lagrangian.html#a6f335094e8d436e3c62d28125424f560aa489ffed938ef1b9e86889bc413501ee">Parameters::Lagrangian::uniform</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>The <a class="el" href="classDEMSolver.html#abd498600735e4834d03cdad3ea0fbae7">cell_weight()</a> function indicates to the triangulation how much computational work is expected to happen on this cell, and consequently how the domain needs to be partitioned so that every MPI rank receives a roughly equal amount of work (potentially not an equal number of cells). While the function is called from the outside, it is connected to the corresponding signal from inside this class, therefore it can be private. <a class="el" href="classThis.html">This</a> function is the key component that allow us to dynamically balance the computational load. The function attributes a weight to every cell that represents the computational work on this cell. Here the majority of work is expected to happen on the particles, therefore the return value of this function (representing "work for this cell") is calculated based on the number of particles in the current cell. The function is connected to the <a class="el" href="classDEMSolver.html#abd498600735e4834d03cdad3ea0fbae7">cell_weight()</a> signal inside the triangulation, and will be called once per cell, whenever the triangulation repartitions the domain between ranks (the connection is created inside the particles_generation() function of this class). </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00238">238</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00239">239</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -380,7 +380,7 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00320">320</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00321">321</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ template&lt;int dim&gt; </div>
 <p>Establish if this is a contact detection iteration using the constant contact detection frequency. If the iteration number is a multiple of the frequency, this iteration is considered to be a contact detection iteration. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if the contact search should be carried out in the current iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00755">755</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00791">791</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -438,7 +438,7 @@ template&lt;int dim&gt; </div>
 <p>Establish if this is a contact detection iteration using the maximal displacement of the particles. If this particle displacement surpasses a threshold, this iteration is a contact detection iteration. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if the contact search should be carried out in the current iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00738">738</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00774">774</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -467,7 +467,7 @@ template&lt;int dim&gt; </div>
 <p>Establish if this is a load-balance step using the dynamic method. The dynamic method uses the load imbalance between the core as a load balancing criteria. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if this is a load balance iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00684">684</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00720">720</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -496,7 +496,7 @@ template&lt;int dim&gt; </div>
 <p>Determine whether the present is a load-balance step given a user-defined frequency. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if this is a load balance iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00541">541</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00573">573</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -525,12 +525,12 @@ template&lt;int dim&gt; </div>
 <p>For <code>load balance method = once</code>, determines whether the present is the load balance step. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if this is a load balance iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00527">527</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00559">559</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
-<a id="a67a891147dca99548985aa1df0ce9ba8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67a891147dca99548985aa1df0ce9ba8">&#9670;&nbsp;</a></span>check_load_balance_with_disabled_contacts()</h2>
+<a id="aa201198d3cbfe1654cb51330aff69015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa201198d3cbfe1654cb51330aff69015">&#9670;&nbsp;</a></span>check_load_balance_with_sparse_contacts()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +541,7 @@ template&lt;int dim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::check_load_balance_with_disabled_contacts</td>
+          <td class="memname">bool <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::check_load_balance_with_sparse_contacts</td>
         </tr>
       </table>
   </td>
@@ -551,41 +551,10 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Establish if this is a load-balance step using the dynamic method when the disabled contacts mechanism is enabled. The dynamic method uses the load imbalance between the core as a load balancing criteria. </p>
+<p>Establish if this is a load-balance step using the dynamic method when the sparse contacts mechanism is enabled. The dynamic method uses the load imbalance between the core as a load balancing criteria. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool indicating if this is a load balance iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00555">555</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
-
-</div>
-</div>
-<a id="a1ea61a7b00c74f4b5771d97747763dc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ea61a7b00c74f4b5771d97747763dc7">&#9670;&nbsp;</a></span>contacts_are_disabled()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::contacts_are_disabled </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the contacts are disabled and the contact build number is at least 2. To allow the disabling of contacts in broad search, we need a first full solved iteration to execute the mobility status identification, meaning that the first application of the mobility status in broad search is at after the second contact search. </p>
-
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00309">309</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00587">587</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -613,7 +582,7 @@ template&lt;int dim&gt; </div>
 
 <p>finish_simulation Finishes the simulation by calling all the post-processing elements that are required </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00850">850</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00886">886</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a7f021a1415b86f2d013b2618fb31ae53">Parameters::Timer::end</a>, <a class="el" href="structParameters_1_1Testing.html#afd161c1bdce13e24eaf289c43e7086a7abdfd37e8359d01ed10577a9d0d609c15">Parameters::Testing::mobility_status</a>, <a class="el" href="structParameters_1_1Testing.html#afd161c1bdce13e24eaf289c43e7086a7a7e45214f92b501af4495b82455b39e7c">Parameters::Testing::particles</a>, and <a class="el" href="structParameters_1_1Testing.html#afd161c1bdce13e24eaf289c43e7086a7acd9fb49631e1e52bac55a75bf39c81a8">Parameters::Testing::subdomain</a>.</p>
 
@@ -643,7 +612,7 @@ template&lt;int dim&gt; </div>
 
 <p>Manages the call to the particle insertion. Returns true if particles were inserted. </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00763">763</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00799">799</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -671,7 +640,7 @@ template&lt;int dim&gt; </div>
 
 <p>Manages the call to the load balance by first identifying if load balancing is required and then performing the load balance. </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00416">416</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00447">447</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -699,7 +668,7 @@ template&lt;int dim&gt; </div>
 
 <p>Calculates particles-wall contact forces. </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00793">793</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00829">829</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -727,7 +696,7 @@ template&lt;int dim&gt; </div>
 
 <p>post_process_results Calculates average velocity and other post-processed quantities that need to be outputted to files </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01032">1032</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01068">1068</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -755,7 +724,7 @@ template&lt;int dim&gt; </div>
 
 <p>reports_statistics Calculates statistics on the particles and report them to the terminal. <a class="el" href="classThis.html">This</a> function is notably used to calculate min/max/avg/total values of the linear kinetic energy, angular kinetic energy, linear velocity, angular velocity </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01048">1048</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01084">1084</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00066">add_statistics_to_table_handler()</a>, <a class="el" href="post__processing_8cc_source.html#l00009">DEM::calculate_granular_statistics()</a>, <a class="el" href="structParameters_1_1Timer.html#ae1d96ff22b9dbb46d965a0df44142f42a6f012ea8d7efd87146dd62db83f2ed99">Parameters::Timer::iteration</a>, <a class="el" href="namespaceDEM.html#af85feac59e2a3e30010cccde5bda5b2bac6d6bd7ebf806f43c76acc3681703b81">DEM::omega</a>, <a class="el" href="namespaceDEM.html#af85feac59e2a3e30010cccde5bda5b2ba0c1c97be26e7d13e9c7757f74414040e">DEM::rotational_kinetic_energy</a>, <a class="el" href="namespaceDEM.html#af85feac59e2a3e30010cccde5bda5b2baeb81959bf8f42fe1d4bdaec5fd3fdb41">DEM::translational_kinetic_energy</a>, and <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.</p>
 
@@ -786,7 +755,7 @@ template&lt;int dim&gt; </div>
 <p>Sets the right iteration check function according to the chosen contact detection method. </p>
 <dl class="section return"><dt>Returns</dt><dd>Return a function. <a class="el" href="classThis.html">This</a> function returns a bool indicating if the contact search should be carried out in the current iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00716">716</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00752">752</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a6e187d80f1fbd4ca22af7cd03e0df47aa617ac08757d38a5a7ed91c224f0e90a0">Parameters::Lagrangian::ModelParameters::constant</a>.</p>
 
@@ -826,7 +795,7 @@ template&lt;int dim&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the insertion object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00914">914</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00950">950</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1Lagrangian_1_1InsertionInfo.html#a8935f71b97c7cce069b63a2e28949a4ba8c7dd922ad47494fc02c388e12c00eac">Parameters::Lagrangian::InsertionInfo::file</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1InsertionInfo.html#a17ef6fed5ef69ea579ecc0156ac43943">Parameters::Lagrangian::InsertionInfo::insertion_method</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1InsertionInfo.html#a8935f71b97c7cce069b63a2e28949a4ba10ae9fc7d453b0dd525d0edf2ede7961">Parameters::Lagrangian::InsertionInfo::list</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1InsertionInfo.html#a8935f71b97c7cce069b63a2e28949a4babb302c9b5204d593ba3657055842a5fb">Parameters::Lagrangian::InsertionInfo::plane</a>, and <a class="el" href="structParameters_1_1Lagrangian_1_1InsertionInfo.html#a8935f71b97c7cce069b63a2e28949a4ba210ab9e731c9c36c2c38db15c28a8d1c">Parameters::Lagrangian::InsertionInfo::volume</a>.</p>
 
@@ -866,7 +835,7 @@ template&lt;int dim&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the integration object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00955">955</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00991">991</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a69b38864ad36a204769a29375fda3012afb8f244c8dc991683a95cacbd8172a48">Parameters::Lagrangian::ModelParameters::gear3</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a73b2cc121fcc1c29c3c15347c331b136">Parameters::Lagrangian::ModelParameters::integration_method</a>, and <a class="el" href="dem__solver__parameters_8h_source.html#l00041">DEMSolverParameters&lt; dim &gt;::model_parameters</a>.</p>
 
@@ -897,7 +866,7 @@ template&lt;int dim&gt; </div>
 <p>Sets the right contact iteration check function according to the chosen load balancing method. </p>
 <dl class="section return"><dt>Returns</dt><dd>Return a function. <a class="el" href="classThis.html">This</a> function returns a bool indicating if the current time step is a load balance iteration. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00491">491</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00523">523</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a3e6eb8f5729483f84a436e4222d86e66ab72f3bd391ba731a35708bfd8cd8a68f">Parameters::Lagrangian::ModelParameters::dynamic</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a3e6eb8f5729483f84a436e4222d86e66a030bb043d582f8f5569a8be85ea51911">Parameters::Lagrangian::ModelParameters::frequent</a>, <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a3e6eb8f5729483f84a436e4222d86e66a334c4a4c42fdb79d7ebc3e73b517e6f8">Parameters::Lagrangian::ModelParameters::none</a>, and <a class="el" href="structParameters_1_1Lagrangian_1_1ModelParameters.html#a3e6eb8f5729483f84a436e4222d86e66ae2eff6c2dafd909df8508f891b385d88">Parameters::Lagrangian::ModelParameters::once</a>.</p>
 
@@ -998,7 +967,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>Sets the background degree of freedom used for parallel grid output </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00408">408</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00411">411</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +986,7 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <p>Initialiazes all the required parameters and iterates over the <a class="el" href="namespaceDEM.html">DEM</a> iterator (<a class="el" href="namespaceDEM.html">DEM</a> engine). </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01120">1120</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01156">1156</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="find__contact__detection__step_8cc_source.html#l00082">find_floating_mesh_mapping_step()</a>, <a class="el" href="read__checkpoint_8cc_source.html#l00007">read_checkpoint()</a>, <a class="el" href="read__mesh_8cc_source.html#l00008">read_mesh()</a>, <a class="el" href="set__particle__particle__contact__force__model_8cc_source.html#l00007">set_particle_particle_contact_force_model()</a>, <a class="el" href="set__particle__wall__contact__force__model_8cc_source.html#l00007">set_particle_wall_contact_force_model()</a>, <a class="el" href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::verbose</a>, <a class="el" href="write__checkpoint_8cc_source.html#l00007">write_checkpoint()</a>, and <a class="el" href="output__force__torque__calculation_8cc_source.html#l00004">write_forces_torques_output_locally()</a>.</p>
 
@@ -1061,7 +1030,7 @@ template&lt;int dim&gt; </div>
 
 <p>Updates moment of inertia container after sorting particles into subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00775">775</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00811">811</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00041">DEM::dp</a>, and <a class="el" href="dem__properties_8h_source.html#l00054">DEM::mass</a>.</p>
 
@@ -1091,13 +1060,39 @@ template&lt;int dim&gt; </div>
 
 <p>write_output_results Generates VTU file with particles information for visualization and post-processing Post-processing as parallel VTU files </p>
 
-<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l00983">983</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8cc_source.html#l01019">1019</a> of file <a class="el" href="dem_8cc_source.html">dem.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="visualization_8cc_source.html#l00013">Visualization&lt; dim &gt;::build_patches()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="abf871bb77fd3f0d95b2a7946ad312d35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf871bb77fd3f0d95b2a7946ad312d35">&#9670;&nbsp;</a></span>background_constraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AffineConstraints&lt;double&gt; <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::background_constraints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00409">409</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+
+</div>
+</div>
 <a id="aa6caa41de9fca4cabbd0beb9022e86ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6caa41de9fca4cabbd0beb9022e86ed">&#9670;&nbsp;</a></span>background_dh</h2>
 
@@ -1120,7 +1115,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00402">402</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00388">388</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1146,7 +1141,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00366">366</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00352">352</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1172,7 +1167,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00352">352</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00338">338</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1198,7 +1193,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00346">346</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00332">332</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1219,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00345">345</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00331">331</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1250,7 +1245,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00360">360</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00346">346</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1276,7 +1271,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00424">424</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00415">415</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1302,7 +1297,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00350">350</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00336">336</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1328,7 +1323,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00407">407</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00393">393</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1354,33 +1349,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00364">364</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
-
-</div>
-</div>
-<a id="a132878c5836da423545cc819bb85b2a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a132878c5836da423545cc819bb85b2a3">&#9670;&nbsp;</a></span>disable_contacts_object</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classDisableContacts.html">DisableContacts</a>&lt;dim&gt; <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::disable_contacts_object</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00417">417</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00350">350</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1406,7 +1375,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00381">381</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00367">367</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1432,7 +1401,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00414">414</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00400">400</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1458,7 +1427,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00386">386</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00372">372</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1484,7 +1453,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00380">380</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00366">366</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1510,7 +1479,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00390">390</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00376">376</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1536,7 +1505,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00353">353</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00339">339</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1562,7 +1531,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00367">367</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00353">353</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1588,33 +1557,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00403">403</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
-
-</div>
-</div>
-<a id="a7100ccd4442a997faf06044d99588b23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7100ccd4442a997faf06044d99588b23">&#9670;&nbsp;</a></span>has_disabled_contacts</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::has_disabled_contacts</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00418">418</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00389">389</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1640,7 +1583,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00404">404</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00390">390</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1666,7 +1609,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00399">399</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00385">385</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+
+</div>
+</div>
+<a id="af369c54b93b599fc6f04ef9dd8c7c686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af369c54b93b599fc6f04ef9dd8c7c686">&#9670;&nbsp;</a></span>has_sparse_contacts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::has_sparse_contacts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00406">406</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1692,7 +1661,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00361">361</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00347">347</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1718,7 +1687,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00370">370</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00356">356</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1744,7 +1713,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00369">369</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00355">355</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1770,7 +1739,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00421">421</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00412">412</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1796,7 +1765,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00351">351</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00337">337</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1822,7 +1791,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00343">343</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00329">329</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1848,7 +1817,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00359">359</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00345">345</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1874,7 +1843,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00382">382</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00368">368</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1900,7 +1869,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00336">336</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00322">322</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1926,7 +1895,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00337">337</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00323">323</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1952,7 +1921,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00358">358</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00344">344</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -1978,7 +1947,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00340">340</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00326">326</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2004,7 +1973,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00349">349</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00335">335</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2030,7 +1999,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00372">372</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00358">358</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2056,7 +2025,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00368">368</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00354">354</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2082,7 +2051,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00374">374</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00360">360</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2108,7 +2077,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00344">344</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00330">330</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2134,7 +2103,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00377">377</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00363">363</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2160,7 +2129,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00339">339</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00325">325</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2186,7 +2155,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00394">394</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00380">380</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2212,7 +2181,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00397">397</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00383">383</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2238,7 +2207,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00398">398</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00384">384</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2264,7 +2233,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00376">376</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00362">362</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2291,9 +2260,9 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">    <a class="code" href="classDEMSolver.html#ae7919551462f0e8395ca35218b2bddb1">properties_class</a>.get_properties_name()</div>
-<div class="ttc" id="aclassDEMSolver_html_ae7919551462f0e8395ca35218b2bddb1"><div class="ttname"><a href="classDEMSolver.html#ae7919551462f0e8395ca35218b2bddb1">DEMSolver::properties_class</a></div><div class="ttdeci">DEM::DEMProperties&lt; dim &gt; properties_class</div><div class="ttdef"><b>Definition:</b> <a href="dem_8h_source.html#l00355">dem.h:355</a></div></div>
+<div class="ttc" id="aclassDEMSolver_html_ae7919551462f0e8395ca35218b2bddb1"><div class="ttname"><a href="classDEMSolver.html#ae7919551462f0e8395ca35218b2bddb1">DEMSolver::properties_class</a></div><div class="ttdeci">DEM::DEMProperties&lt; dim &gt; properties_class</div><div class="ttdef"><b>Definition:</b> <a href="dem_8h_source.html#l00341">dem.h:341</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00356">356</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00342">342</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2319,7 +2288,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00355">355</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00341">341</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2345,7 +2314,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00365">365</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00351">351</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2371,7 +2340,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00408">408</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00394">394</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2397,7 +2366,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00347">347</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00333">333</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2423,7 +2392,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00348">348</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00334">334</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2449,7 +2418,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00411">411</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00397">397</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+
+</div>
+</div>
+<a id="a87355534bbd1c552d2703c62f389200f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87355534bbd1c552d2703c62f389200f">&#9670;&nbsp;</a></span>sparse_contacts_object</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt;dim&gt; <a class="el" href="classDEMSolver.html">DEMSolver</a>&lt; dim &gt;::sparse_contacts_object</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00403">403</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2475,7 +2470,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00338">338</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00324">324</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2501,7 +2496,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00379">379</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00365">365</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2527,7 +2522,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00392">392</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00378">378</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2553,7 +2548,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00341">341</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00327">327</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2579,7 +2574,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00388">388</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00374">374</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>
@@ -2605,7 +2600,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00375">375</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dem_8h_source.html#l00361">361</a> of file <a class="el" href="dem_8h_source.html">dem.h</a>.</p>
 
 </div>
 </div>

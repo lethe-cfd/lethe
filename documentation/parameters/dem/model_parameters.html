@@ -397,7 +397,7 @@
         <article role="main">
           <section id="model-parameters">
 <h1>Model Parameters<a class="headerlink" href="#model-parameters" title="Link to this heading">#</a></h1>
-<p>In this subsection, contact detection, force models, time integration, load balancing and dynamic contact disabling parameters are defined.</p>
+<p>In this subsection, contact detection, force models, time integration, load balancing and adaptive sparse contacts parameters are defined.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection model parameters
   subsection contact detection
     # Contact detection method
@@ -412,7 +412,7 @@
   end
 
   subsection load balancing
-    # Choices are none|once|frequent|dynamic|dynamic_with_disabling_contacts
+    # Choices are none|once|frequent|dynamic|dynamic_with_sparse_contacts
     set load balance method     = none
     set particle weight         = 10000  # Every method, except none
     set step                    = 100000 # if method = once
@@ -437,10 +437,11 @@
   # Choices are no_resistance|constant_resistance|viscous_resistance
   set rolling resistance torque method       = constant_resistance
 
-  subsection dynamic disabling contacts
-    set enable dynamic disabling contacts = false
-    set granular temperature threshold    = 1e-4
-    set solid fraction threshold          = 0.4
+  subsection adaptive sparse contacts
+    set enable adaptive sparse contacts = false
+    set enable particle advection       = false
+    set granular temperature threshold  = 1e-4
+    set solid fraction threshold        = 0.4
   end
 end
 </pre></div>
@@ -523,16 +524,24 @@ end
 </ul>
 </section>
 </section>
-<section id="dynamic-disabling-contacts">
-<h2>Dynamic Disabling Contacts<a class="headerlink" href="#dynamic-disabling-contacts" title="Link to this heading">#</a></h2>
-<p>The dynamic disabling controls the disabling contact mechanism for performance enhancement. This feature dynamically searches for cells with low particle motion (granular temperature), disabling the computation of contacts for particles within these cells.</p>
+<section id="adaptive-sparse-contacts-asc">
+<h2>Adaptive Sparse Contacts (ASC)<a class="headerlink" href="#adaptive-sparse-contacts-asc" title="Link to this heading">#</a></h2>
+<p>The ASC controls the disabling contact mechanism for performance enhancement. This feature adaptively searches for cells with low particle motion (granular temperature), disabling the computation of contacts for particles within these cells.
+See how the mechanism works with mobility status in the figure below:</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/mobility_status.png"><img alt="Schematic" src="../../_images/mobility_status.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-text">The 5 steps of the mobility status identification of cells applied to a hopper case.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">dynamic</span> <span class="pre">disabling</span> <span class="pre">contacts</span></code> enables the feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">adaptive</span> <span class="pre">sparse</span> <span class="pre">contacts</span></code> enables the feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">particle</span> <span class="pre">advection</span></code> enabled the advection of particles from an average source term derived from the average velocity of particles in cell. This is highly recommended for CFD-DEM simulations because of the hydrodynamic forces.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">granular</span> <span class="pre">temperature</span> <span class="pre">threshold</span></code> is the threshold of the granular temperature below which the contacts are disabled.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">solid</span> <span class="pre">fraction</span> <span class="pre">threshold</span></code> is the minimum solid fraction of the cell in which the contacts may be disabled.</p></li>
 </ul>
 <p>Some parameters in the load balance section may be used to improve the performance of the dynamic disabling contacts feature using the dynamic load balancing.
-Note: The <code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">balance</span> <span class="pre">method</span></code> may be set to <code class="docutils literal notranslate"><span class="pre">dynamic_with_disabling_contacts</span></code> and factors of the weight of the cells by mobility status may be adjusted using the <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">weight</span> <span class="pre">factor</span></code> and <code class="docutils literal notranslate"><span class="pre">inactive</span> <span class="pre">weight</span> <span class="pre">factor</span></code> parameters. There is factor only for active and inactive status, mobile factor is always 1.</p>
+Note: The <code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">balance</span> <span class="pre">method</span></code> may be set to <code class="docutils literal notranslate"><span class="pre">dynamic_with_sparse_contacts</span></code> and factors of the weight of the cells by mobility status may be adjusted using the <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">weight</span> <span class="pre">factor</span></code> and <code class="docutils literal notranslate"><span class="pre">inactive</span> <span class="pre">weight</span> <span class="pre">factor</span></code> parameters. There is factor only for active and inactive status, mobile factor is always 1.</p>
 </section>
 </section>
 
@@ -604,7 +613,7 @@ Note: The <code class="docutils literal notranslate"><span class="pre">load</spa
 <li><a class="reference internal" href="#load-balance-method-dynamic"><code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">balance</span> <span class="pre">method</span> <span class="pre">=</span> <span class="pre">dynamic</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dynamic-disabling-contacts">Dynamic Disabling Contacts</a></li>
+<li><a class="reference internal" href="#adaptive-sparse-contacts-asc">Adaptive Sparse Contacts (ASC)</a></li>
 </ul>
 </li>
 </ul>
