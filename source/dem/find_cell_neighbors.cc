@@ -53,7 +53,13 @@ FindCellNeighbors<dim>::find_cell_neighbors(
                 {
                   if (neighbor->is_locally_owned())
                     {
+                      // Check if the neighbor cell was already treated as the
+                      // main cell. This makes sure that there is no repetion.
                       auto search_iterator = total_cell_list.find(neighbor);
+
+                      // Check if the neighbor cell is already in the neighbor
+                      // list of the main cell. This can happen when cells share
+                      // more than one vertex.
                       auto local_search_iterator =
                         std::find(local_neighbor_vector.begin(),
                                   local_neighbor_vector.end(),
@@ -64,15 +70,18 @@ FindCellNeighbors<dim>::find_cell_neighbors(
                       // neighbor of the main cell
                       // ("cell") and also to the total_cell_list to avoid
                       // repetition for next cells.
+
+                      // If the neighboring cell has not yet been treated as a
+                      // main cell and is still not in the local search list, it
+                      // will be added.
                       if (search_iterator == total_cell_list.end() &&
                           local_search_iterator == local_neighbor_vector.end())
                         {
                           local_neighbor_vector.push_back(neighbor);
                         }
-
-                      // If the neighbor cell is a ghost, it should be added in
-                      // the ghost_neighbor_vector container
                     }
+                  // If the neighbor cell is a ghost, it should be added in
+                  // the ghost_neighbor_vector container
                   else if (neighbor->is_ghost())
                     {
                       auto ghost_search_iterator =
@@ -81,11 +90,14 @@ FindCellNeighbors<dim>::find_cell_neighbors(
                                   neighbor);
                       if (ghost_search_iterator == ghost_neighbor_vector.end())
                         {
+                          // Even though the main cell is not a ghost cell, the
+                          // first iterator of the ghost_neighbor_vector most be
+                          // the main cell. For this reason, we check is the
+                          // ghost_neighbor_vector is empty.
                           if (ghost_neighbor_vector.empty())
                             {
                               ghost_neighbor_vector.push_back(cell);
                             }
-
                           ghost_neighbor_vector.push_back(neighbor);
                         }
                     }
@@ -117,6 +129,7 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
 {
   typename DEM::dem_data_structures<dim>::cell_vector
     local_periodic_neighbor_vector;
+  // TODO local_periodic_neighbor_vector.reserve(9) this vector?
   typename DEM::dem_data_structures<dim>::cell_vector
     ghost_periodic_neighbor_vector;
   typename DEM::dem_data_structures<dim>::cell_vector
@@ -126,17 +139,20 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
   typename DEM::dem_data_structures<dim>::cell_set total_ghost_cell_list;
 
   // For each cell, the cell vertices are found and used to find adjacent cells.
-  // The reason is to find the cells located on the corners of the main cell.
+  // The reason is to find the cells located on the corners of the main cell
+  // (sharing 1 or 2 vertices).
   auto v_to_c = GridTools::vertex_to_cell_map(triangulation);
+  // TODO v_to_c.reserve(8) this vector?
 
   // A map of coinciding vertices labeled by an arbitrary element from them
   std::map<unsigned int, std::vector<unsigned int>> coinciding_vertex_groups;
 
-  // Map of a vertex to the label of a group of coinciding vertices
+  // A map of vertex to the label of a group of coinciding vertices it is part
+  // of.
   std::map<unsigned int, unsigned int> vertex_to_coinciding_vertex_group;
 
   // Collect for a given triangulation all locally relevant vertices that
-  // coincide due to periodicity.
+  // coincide to periodicity.
   GridTools::collect_coinciding_vertices(triangulation,
                                          coinciding_vertex_groups,
                                          vertex_to_coinciding_vertex_group);
@@ -164,24 +180,29 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
                                      v_to_c,
                                      periodic_neighbor_list);
 
+          // Loop over the periodic neighbor cells of the main cell
           for (const auto &periodic_neighbor : periodic_neighbor_list)
             {
               if (periodic_neighbor->is_locally_owned())
                 {
-                  auto search_iterator =
-                    total_cell_list.find(periodic_neighbor);
+                  // A periodic neighbor cell can't be the main cell, thus we
+                  // don't need to check if it is in the total_cell_list.
+
+                  // auto search_iterator =
+                  // total_cell_list.find(periodic_neighbor);
+
+                  // periodic_neighbor_list may have duplicates iterator. We
+                  // need to check if the neighbor cell is not already in the
+                  // list.
                   auto local_search_iterator =
                     std::find(local_periodic_neighbor_vector.begin(),
                               local_periodic_neighbor_vector.end(),
                               periodic_neighbor);
 
-                  // If the cell neighbor is a local cell and not present
-                  // in the total_cell_list vector, it will be added as the
-                  // neighbor of the main cell and also to the
-                  // total_cell_list to avoid repetition for next cells.
-                  if (search_iterator == total_cell_list.end() &&
-                      local_search_iterator ==
-                        local_periodic_neighbor_vector.end())
+                  // If the cell neighbor is a local cell and is not already in
+                  // the local_search_iterator list, it will be added to it.
+                  if (local_search_iterator ==
+                      local_periodic_neighbor_vector.end())
                     {
                       local_periodic_neighbor_vector.push_back(
                         periodic_neighbor);
@@ -189,15 +210,20 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
                 }
               else if (periodic_neighbor->is_ghost())
                 {
-                  // If the neighbor cell is a ghost, it should be added in
-                  // the ghost_periodic_neighbor_vector container
+                  // periodic_neighbor_list may have duplicates iterator. We
+                  // need to check if the neighbor cell is not already in the
+                  // list.
                   auto ghost_search_iterator =
                     std::find(ghost_periodic_neighbor_vector.begin(),
                               ghost_periodic_neighbor_vector.end(),
                               periodic_neighbor);
+
+                  // If the cell neighbor is a ghost cell and is not already in
+                  // the ghost_search_iterator list, it will be added to it.
                   if (ghost_search_iterator ==
                       ghost_periodic_neighbor_vector.end())
                     {
+                      // The first element of each vector is the cell itself.
                       if (ghost_periodic_neighbor_vector.empty())
                         {
                           ghost_periodic_neighbor_vector.push_back(cell);
@@ -208,6 +234,10 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
                     }
                 }
             }
+
+          // local_periodic_neighbor_vector will never be empty in this if
+          // (minimum size of 1). See line 167 to 170. Either remove this "if"
+          // or : if(local_periodic_neighbor_vector.size() > 1)
           if (!local_periodic_neighbor_vector.empty())
             cells_local_periodic_neighbor_list.push_back(
               local_periodic_neighbor_vector);
@@ -239,27 +269,35 @@ FindCellNeighbors<dim>::find_cell_periodic_neighbors(
                                      v_to_c,
                                      periodic_neighbor_list);
 
+          // Loop over the periodic neighbor cells of the main cell
           for (const auto &periodic_neighbor : periodic_neighbor_list)
             {
+              // We only check if the neighbor cell is locally owned, since
+              // ghost-ghost is not a thing.
               if (periodic_neighbor->is_locally_owned())
                 {
-                  auto search_iterator =
-                    total_ghost_cell_list.find(periodic_neighbor);
+                  // A periodic neighbor cell can't be the main cell, thus we
+                  // don't need to check if it is in the total_cell_list.
 
+                  // periodic_neighbor_list may have duplicates iterator. We
+                  // need to check if the neighbor cell is not already in the
+                  // list.
                   auto local_search_iterator =
                     std::find(ghost_local_periodic_neighbor_vector.begin(),
                               ghost_local_periodic_neighbor_vector.end(),
                               periodic_neighbor);
 
-                  if (search_iterator == total_ghost_cell_list.end() &&
-                      local_search_iterator ==
-                        ghost_local_periodic_neighbor_vector.end())
+                  if (local_search_iterator ==
+                      ghost_local_periodic_neighbor_vector.end())
                     {
                       ghost_local_periodic_neighbor_vector.push_back(
                         periodic_neighbor);
                     }
                 }
             }
+          // ghost_local_periodic_neighbor_vector will never be empty in this if
+          // (minimum size of 1). See line 257 to 260. Either remove this "if"
+          // or : if(ghost_local_periodic_neighbor_vector.size() > 1)
           if (!ghost_local_periodic_neighbor_vector.empty())
             cells_ghost_local_periodic_neighbor_list.push_back(
               ghost_local_periodic_neighbor_vector);

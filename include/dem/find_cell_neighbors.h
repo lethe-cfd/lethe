@@ -156,7 +156,7 @@ private:
    * group of coinciding vertices
    * @param v_to_c A vector of set with adjacent cells of all the vertices
    * @param periodic_neighbor_list A vector which is the list of periodic cell
-   * neighbors
+   * neighbors. This list may contain duplicates
    */
 
   void
