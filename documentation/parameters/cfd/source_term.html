@@ -399,7 +399,7 @@
 <h1>Source Term<a class="headerlink" href="#source-term" title="Link to this heading">#</a></h1>
 <p>If the problem being simulated has a source, it can be added in this section. The default parameters are:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection source term
-  subsection xyz
+  subsection fluid dynamics
     set Function expression = 0; 0; 0 #In 2D
     set Function expression = 0; 0; 0; 0 #In 3D
     set enable              = true
@@ -431,14 +431,14 @@ end
 <p>Check the <a class="reference internal" href="#ex-function"><span class="std std-ref">Examples of Function Expression</span></a> for further help.</p>
 </div>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">xyz</span></code>: defines the parameters for a Navier-Stokes source term. This source term is defined by a <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">expression</span></code> and can depend on both space and time.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">fluid</span> <span class="pre">dynamics</span></code>: defines the parameters for a Navier-Stokes source term. This source term is defined by a <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">expression</span></code> and can depend on both space and time.</p>
 <ul class="simple">
 <li><p>In 2D, the first two terms are the source terms for  the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> component of the momentum equation. The third term is the mass source term.</p></li>
 <li><p>In 3D, the first three terms are for the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> component of the momentum equation and the fourth term is for the mass source term.</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>For <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">xyz</span></code>, each term can depend on both space (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and, if 3D, <code class="docutils literal notranslate"><span class="pre">z</span></code>) and time (<code class="docutils literal notranslate"><span class="pre">t</span></code>). See <a class="reference internal" href="#ex-function"><span class="std std-ref">Examples of Function Expression</span></a>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">fluid</span> <span class="pre">dynamics</span></code>, each term can depend on both space (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and, if 3D, <code class="docutils literal notranslate"><span class="pre">z</span></code>) and time (<code class="docutils literal notranslate"><span class="pre">t</span></code>). See <a class="reference internal" href="#ex-function"><span class="std std-ref">Examples of Function Expression</span></a>.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -452,14 +452,14 @@ end
 <section id="examples-of-function-expression">
 <span id="ex-function"></span><h2>Examples of Function Expression<a class="headerlink" href="#examples-of-function-expression" title="Link to this heading">#</a></h2>
 <p>CFD source term with <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">constants</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection xyz
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection fluid dynamics
   set Function constants = A=2.0
   set Function expression = A*y; -A*x; 0
 end
 </pre></div>
 </div>
 <p>CFD source term varying in time:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection xyz
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection fluid dynamics
     set Function expression = 0; -10*cos(2*pi*t); 0
 end
 </pre></div>
@@ -483,7 +483,7 @@ end
 <p>In this example, the heat source term will vary within the calculation domain.</p>
 </div>
 <p>CFD source term with <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">constants</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection xyz
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection fluid dynamics
   set Function constants = A=2.0, B=1.0
   set Function expression = A*y; -B*x; 0
 end
