@@ -115,17 +115,17 @@ Functions</h2></td></tr>
 <tr class="memitem:ad1a5f7fd1dd45aa5ac72f5e7a9b9df37"><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
 <tr class="memitem:ad1a5f7fd1dd45aa5ac72f5e7a9b9df37"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="update__local__particle__containers_8cc.html#ad1a5f7fd1dd45aa5ac72f5e7a9b9df37">update_particle_container</a> (typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_index_iterator_map &amp;particle_container, const Particles::ParticleHandler&lt; dim &gt; *particle_handler)</td></tr>
 <tr class="separator:ad1a5f7fd1dd45aa5ac72f5e7a9b9df37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61bd65e11f1cfe367f8e43a23555b4ba"><td class="memTemplParams" colspan="2">template&lt;int dim, typename pairs_structure , ContactType contact_type&gt; </td></tr>
-<tr class="memitem:a61bd65e11f1cfe367f8e43a23555b4ba"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="update__local__particle__containers_8cc.html#a61bd65e11f1cfe367f8e43a23555b4ba">update_contact_container_iterators</a> (pairs_structure &amp;pairs_in_contact, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_index_iterator_map &amp;particle_container, const bool clear_contact_structures)</td></tr>
-<tr class="separator:a61bd65e11f1cfe367f8e43a23555b4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad21b60c4adc7792759152c7ca225d30b"><td class="memTemplParams" colspan="2">template&lt;int dim, typename pairs_structure , ContactType contact_type&gt; </td></tr>
+<tr class="memitem:ad21b60c4adc7792759152c7ca225d30b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="update__local__particle__containers_8cc.html#ad21b60c4adc7792759152c7ca225d30b">update_contact_container_iterators</a> (pairs_structure &amp;pairs_in_contact, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_index_iterator_map &amp;particle_container, const bool clear_contact_structures)</td></tr>
+<tr class="separator:ad21b60c4adc7792759152c7ca225d30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98fbdef2e4b367a5be113e0428701dc0"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="update__local__particle__containers_8cc.html#a98fbdef2e4b367a5be113e0428701dc0">update_particle_container</a> (typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; 2 &gt;::particle_index_iterator_map &amp;particle_container, const Particles::ParticleHandler&lt; 2 &gt; *particle_handler)</td></tr>
 <tr class="separator:a98fbdef2e4b367a5be113e0428701dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3420bee8513a0e22b20015516bd5438a"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="update__local__particle__containers_8cc.html#a3420bee8513a0e22b20015516bd5438a">update_particle_container</a> (typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; 3 &gt;::particle_index_iterator_map &amp;particle_container, const Particles::ParticleHandler&lt; 3 &gt; *particle_handler)</td></tr>
 <tr class="separator:a3420bee8513a0e22b20015516bd5438a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a61bd65e11f1cfe367f8e43a23555b4ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61bd65e11f1cfe367f8e43a23555b4ba">&#9670;&nbsp;</a></span>update_contact_container_iterators()</h2>
+<a id="ad21b60c4adc7792759152c7ca225d30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad21b60c4adc7792759152c7ca225d30b">&#9670;&nbsp;</a></span>update_contact_container_iterators()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +141,7 @@ template&lt;int dim, typename pairs_structure , ContactType contact_type&gt; </d
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_index_iterator_map &amp;&#160;</td>
+          <td class="paramtype">const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_index_iterator_map &amp;&#160;</td>
           <td class="paramname"><em>particle_container</em>, </td>
         </tr>
         <tr>
@@ -175,7 +175,7 @@ template&lt;int dim, typename pairs_structure , ContactType contact_type&gt; </d
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="update__local__particle__containers_8cc_source.html#l00034">34</a> of file <a class="el" href="update__local__particle__containers_8cc_source.html">update_local_particle_containers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="update__local__particle__containers_8cc_source.html#l00036">36</a> of file <a class="el" href="update__local__particle__containers_8cc_source.html">update_local_particle_containers.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="contact__type_8h_source.html#l00032">ghost_local_periodic_particle_particle</a>, <a class="el" href="contact__type_8h_source.html#l00029">ghost_particle_particle</a>, <a class="el" href="contact__type_8h_source.html#l00031">ghost_periodic_particle_particle</a>, <a class="el" href="contact__type_8h_source.html#l00028">local_particle_particle</a>, <a class="el" href="contact__type_8h_source.html#l00030">local_periodic_particle_particle</a>, <a class="el" href="contact__type_8h_source.html#l00035">particle_floating_mesh</a>, <a class="el" href="contact__type_8h_source.html#l00034">particle_floating_wall</a>, <a class="el" href="contact__type_8h_source.html#l00037">particle_line</a>, <a class="el" href="contact__type_8h_source.html#l00036">particle_point</a>, and <a class="el" href="contact__type_8h_source.html#l00033">particle_wall</a>.</p>
 

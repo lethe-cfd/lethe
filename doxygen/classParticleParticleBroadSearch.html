@@ -97,8 +97,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a7c478182a57b725dfa9ca95757d68b6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleParticleBroadSearch.html#a7c478182a57b725dfa9ca95757d68b6e">store_candidates</a> (const typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range::iterator &amp;particle_begin, const typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range &amp;particles_to_evaluate, std::vector&lt; types::particle_index &gt; &amp;contact_pair_candidates_container)</td></tr>
-<tr class="separator:a7c478182a57b725dfa9ca95757d68b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344c2c3221f5406b75f47840cfbe96ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleParticleBroadSearch.html#a344c2c3221f5406b75f47840cfbe96ba">store_candidates</a> (const types::particle_index &amp;main_particle_id, const typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range::iterator &amp;particle_begin, const typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range &amp;particles_to_evaluate, typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_particle_candidates &amp;contact_pair_candidates)</td></tr>
+<tr class="separator:a344c2c3221f5406b75f47840cfbe96ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
@@ -309,14 +309,14 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particle__particle__broad__search_8cc_source.html#l00489">489</a> of file <a class="el" href="particle__particle__broad__search_8cc_source.html">particle_particle_broad_search.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particle__particle__broad__search_8cc_source.html#l00490">490</a> of file <a class="el" href="particle__particle__broad__search_8cc_source.html">particle_particle_broad_search.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="dem__contact__manager_8h_source.html#l00304">DEMContactManager&lt; dim &gt;::cells_ghost_local_periodic_neighbor_list</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00302">DEMContactManager&lt; dim &gt;::cells_ghost_periodic_neighbor_list</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00300">DEMContactManager&lt; dim &gt;::cells_local_periodic_neighbor_list</a>, <a class="el" href="adaptive__sparse__contacts_8h_source.html#l00337">AdaptiveSparseContacts&lt; dim &gt;::check_cell_mobility()</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00316">DEMContactManager&lt; dim &gt;::ghost_contact_pair_periodic_candidates</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00318">DEMContactManager&lt; dim &gt;::ghost_local_contact_pair_periodic_candidates</a>, and <a class="el" href="dem__contact__manager_8h_source.html#l00314">DEMContactManager&lt; dim &gt;::local_contact_pair_periodic_candidates</a>.</p>
 
 </div>
 </div>
-<a id="a7c478182a57b725dfa9ca95757d68b6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c478182a57b725dfa9ca95757d68b6e">&#9670;&nbsp;</a></span>store_candidates()</h2>
+<a id="a344c2c3221f5406b75f47840cfbe96ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344c2c3221f5406b75f47840cfbe96ba">&#9670;&nbsp;</a></span>store_candidates()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,6 +329,12 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classParticleParticleBroadSearch.html">ParticleParticleBroadSearch</a>&lt; dim &gt;::store_candidates </td>
           <td>(</td>
+          <td class="paramtype">const types::particle_index &amp;&#160;</td>
+          <td class="paramname"><em>main_particle_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const typename Particles::ParticleHandler&lt; dim &gt;::particle_iterator_range::iterator &amp;&#160;</td>
           <td class="paramname"><em>particle_begin</em>, </td>
         </tr>
@@ -341,8 +347,8 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; types::particle_index &gt; &amp;&#160;</td>
-          <td class="paramname"><em>contact_pair_candidates_container</em>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::particle_particle_candidates &amp;&#160;</td>
+          <td class="paramname"><em>contact_pair_candidates</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -357,12 +363,12 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Stores the candidate particle-particle collision pairs with a given particle iterator. particle_begin iterator is useful to skip storage of the first particle in main cell (particle_begin will be the iterator after the particles_to_evaluate.begin() in that case). When particle_begin is particles_to_evaluate.begin(), it stores all the particle id in contact_pair_candidates_container. </p>
+<p>Stores the candidate particle-particle collision pairs with a given particle iterator. particle_begin iterator is useful to skip storage of the first particle in main cell (particle_begin will be the iterator after the particles_to_evaluate.begin() in that case). When particle_begin is particles_to_evaluate.begin(), it stores all the particle id in contact_pair_candidates. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particle_begin</td><td>The particle iterator to start storing particle id </td></tr>
-    <tr><td class="paramname">particles_to_evaluate</td><td>The particle range to evaluate with the particle iterator prior storing ids </td></tr>
-    <tr><td class="paramname">contact_pair_candidates_container</td><td>A vector which will contain all the particle pairs which are collision candidates </td></tr>
+    <tr><td class="paramname">particle_begin</td><td>The particle iterator to start storing particle ids. </td></tr>
+    <tr><td class="paramname">particles_to_evaluate</td><td>The particle range to evaluate with the particle iterator prior storing ids. </td></tr>
+    <tr><td class="paramname">contact_pair_candidates</td><td>A map which will contain all the particle pairs candidate. </td></tr>
   </table>
   </dd>
 </dl>
