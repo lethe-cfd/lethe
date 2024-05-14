@@ -458,10 +458,6 @@ end
 \[\frac{ \partial T}{\partial \mathbf{n}} = h (T - T_{inf}) + \epsilon \sigma (T^4 - T_{inf}^4) + q_0\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{\sigma}\)</span> is the Stefan-Boltzmann constant.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Note that the expressions for <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">Tinf</span></code>, <code class="docutils literal notranslate"><span class="pre">emissivity</span></code>, and <code class="docutils literal notranslate"><span class="pre">heat_flux</span></code> can be time-dependent, but the current implementation does not allow for space dependence (the expressions are evaluated at the origin).</p>
-</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The flux represented by the <code class="docutils literal notranslate"><span class="pre">convection-radiation-flux</span></code> BC follow the direction of the normal vector to the boundary, i.e., pointing outwards the boundary. As consequence, a positive value for <code class="docutils literal notranslate"><span class="pre">heat_flux</span></code>, for example, will result on heat being extracted from the boundary.</p>
