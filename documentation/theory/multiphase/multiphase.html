@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Origin of the Finite Element Formulation" href="fem_formulation.html" /><link rel="prev" title="Fluid Dynamics" href="fluid_dynamics.html" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="One-Fluid Models" href="cfd/cfd.html" /><link rel="prev" title="Magnetohydrodynamics Equations" href="../multiphysics/electromagnetism/magnetohydrodynamics.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>The Incompressible Navier-Stokes Equations - Lethe documentation</title>
+        <title>Multiphase - Lethe documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -333,23 +333,47 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../theory.html">Theory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of Theory</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="fluid_dynamics.html">Fluid Dynamics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Fluid Dynamics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">The Incompressible Navier-Stokes Equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="fem_formulation.html">Origin of the Finite Element Formulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="stabilization.html">On the Need for Stabilization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="linear_solvers.html">Linear Solvers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rheology.html">Rheology and Non-Newtonian Fluids</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Multiphysics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../multiphysics/fluid_dynamics/fluid_dynamics.html">Fluid Dynamics</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle navigation of Fluid Dynamics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/fluid_dynamics/navier-stokes.html">The Incompressible Navier-Stokes Equations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/fluid_dynamics/fem_formulation.html">Origin of the Finite Element Formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/fluid_dynamics/stabilization.html">On the Need for Stabilization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/fluid_dynamics/linear_solvers.html">Linear Solvers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/fluid_dynamics/rheology.html">Rheology and Non-Newtonian Fluids</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../multiphysics/multiphysics.html">Multiphysics</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle navigation of Multiphysics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../multiphysics/vof.html">The Volume of Fluid (VOF) Method</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../multiphysics/heat_transfer/heat_transfer.html">Heat Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle navigation of Heat Transfer</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/heat_transfer/heat_equation.html">Heat Transfer Equations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../dem/dem.html">Discrete Element Method (DEM)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../unresolved_cfd-dem/unresolved_cfd-dem.html">Unresolved CFD-DEM Coupling</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../multiphysics/passive_tracer/passive_tracer.html">Passive Tracer</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle navigation of Passive Tracer</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/passive_tracer/passive_tracer_equations.html">Passive Tracer Equations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools/tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../multiphysics/electromagnetism/electromagnetism.html">Electromagnetism</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle navigation of Electromagnetism</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/electromagnetism/time_harmonic.html">Time Harmonic Maxwell’s Equations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../multiphysics/electromagnetism/magnetohydrodynamics.html">Magnetohydrodynamics Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">Multiphase</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle navigation of Multiphase</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="cfd/cfd.html">One-Fluid Models</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle navigation of One-Fluid Models</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="cfd/vof.html">The Volume of Fluid (VOF) Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cfd/cahn-hilliard.html">Cahn-Hilliard Method</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="cfd_dem/cfd_dem.html">CFD-DEM</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of CFD-DEM</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="cfd_dem/dem.html">Discrete Element Method (DEM)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cfd_dem/resolved_cfd-dem.html">Resolved CFD-DEM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cfd_dem/unresolved_cfd-dem.html">Unresolved CFD-DEM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools/tools.html">Tools</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle navigation of Tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/updating-test-results.html">Updating Test Results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/gmsh/gmsh.html">Introduction on How to Use GMSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tools/pointwise/pointwise.html">Introduction on How to Use Pointwise</a></li>
@@ -395,34 +419,23 @@
           </label>
         </div>
         <article role="main">
-          <section id="the-incompressible-navier-stokes-equations">
-<h1>The Incompressible Navier-Stokes Equations<a class="headerlink" href="#the-incompressible-navier-stokes-equations" title="Link to this heading">#</a></h1>
-<p>Lethe was designed to solve the incompressible Navier-Stokes equations. For the physics in Lethe, we generally try to follow the convention of the <a class="reference external" href="https://en.wikipedia.org/wiki/Transport_Phenomena_(book)">BSL</a>. Assuming a constant density <span class="math notranslate nohighlight">\(\rho\)</span> and kinematic viscosity <span class="math notranslate nohighlight">\(\nu\)</span>, these equations take the following form:</p>
-<div class="math-wrapper docutils container">
-<div class="math notranslate nohighlight">
-\[\begin{split}\nabla \cdot \mathbf{u} &amp;= 0   \\
-\frac{\partial \mathbf{u}}{\partial t}  + \mathbf{u} \cdot \nabla \mathbf{u} &amp;= -\frac{1}{\rho} \nabla p^*  + \nu \nabla^2 \mathbf{u} +\mathbf{f}\end{split}\]</div>
-</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{u}\)</span> is the velocity of the fluid. <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> is a vector such that <span class="math notranslate nohighlight">\(\mathbf{u}=[u,v]^T\)</span> in 2D and <span class="math notranslate nohighlight">\(\mathbf{u}=[u,v,w]^T\)</span> in 3D;</p></li>
-<li><p><span class="math notranslate nohighlight">\(p^*\)</span> is the pressure;</p></li>
-<li><p><span class="math notranslate nohighlight">\(\nabla\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Del">del operator</a>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is the density of the fluid;</p></li>
-<li><p><span class="math notranslate nohighlight">\(\nu\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Viscosity">kinematic viscosity</a> of the fluid;</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{f}\)</span> is a momentum source term.</p></li>
+          <section id="multiphase">
+<h1>Multiphase<a class="headerlink" href="#multiphase" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cfd/cfd.html">One-Fluid Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cfd/vof.html">The Volume of Fluid (VOF) Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfd/cahn-hilliard.html">Cahn-Hilliard Method</a></li>
 </ul>
-<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a>, they can be written:</p>
-<div class="math-wrapper docutils container">
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\partial_l u_l &amp;= 0\\\partial_t u_k + u_l \partial_l u_k &amp;= -\frac{1}{\rho} \partial_k p^* + \nu \partial_l \partial_l u_k + f_k\end{aligned}\end{align} \]</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cfd_dem/cfd_dem.html">CFD-DEM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cfd_dem/dem.html">Discrete Element Method (DEM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfd_dem/resolved_cfd-dem.html">Resolved CFD-DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfd_dem/unresolved_cfd-dem.html">Unresolved CFD-DEM</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<p>In Lethe, instead of solving for pressure directly, we solve for a kinematic pressure <span class="math notranslate nohighlight">\(p=\frac{p^*}{\rho}\)</span>. This has two advantages, first the scaling of the pressure is more adequate with respect to that of the velocity and, secondly, for single phase simulations, this means that we require a single physical property: the kinematic viscosity. Consequently, unless specified otherwise, you should assume that pressure actually refers to the kinematic pressure <span class="math notranslate nohighlight">\(p\)</span>. Although it may seem confusing at first, this is standard in incompressible fluid dynamics.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The choice to use <span class="math notranslate nohighlight">\(p^*\)</span> for the pressure and <span class="math notranslate nohighlight">\(p\)</span> for the kinematic pressure was made to lighten the writing throughout the documentation.</p>
-</div>
-<p>By default, Lethe does not use any units for Length (<span class="math notranslate nohighlight">\(L\)</span>), Time (<span class="math notranslate nohighlight">\(T\)</span>), Mass (<span class="math notranslate nohighlight">\(M\)</span>) and Temperature (<span class="math notranslate nohighlight">\(\Theta\)</span>). Although this may seem confusing at first, this is relatively easy to work with. By default, most cases can be formulated using SI units (meters, seconds, kilograms and Celsius or Kelvin). However, in some cases, this may lead to a large imbalance in the scaling of different variables (e.g. the numerical value of pressure being 1000x that of the velocity). In these cases, the user must manually rescale the problem to a better balanced set of units (i.e. by using centimeter units instead of meters).</p>
 </section>
 
         </article>
@@ -430,23 +443,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="fem_formulation.html">
+          <a class="next-page" href="cfd/cfd.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Origin of the Finite Element Formulation</div>
+                <div class="title">One-Fluid Models</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="fluid_dynamics.html">
+          <a class="prev-page" href="../multiphysics/electromagnetism/magnetohydrodynamics.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Fluid Dynamics</div>
+                <div class="title">Magnetohydrodynamics Equations</div>
                 
               </div>
             </a>
@@ -480,6 +493,5 @@
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=7cec7674"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
