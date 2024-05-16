@@ -53,6 +53,7 @@ Contents
    tools/tools
    publications
    referencing
+   dev_start_guide
    contributing
 
 Installation
