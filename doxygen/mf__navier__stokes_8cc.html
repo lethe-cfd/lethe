@@ -182,10 +182,61 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab7074f258602a91ee3f283fa98a07cdf"><td class="memTemplParams" colspan="2">template&lt;typename number &gt; </td></tr>
+<tr class="memitem:ab7074f258602a91ee3f283fa98a07cdf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="mf__navier__stokes_8cc.html#ab7074f258602a91ee3f283fa98a07cdf">convert_vector_dealii_to_trilinos</a> (TrilinosWrappers::MPI::Vector &amp;out, const LinearAlgebra::distributed::Vector&lt; number &gt; &amp;in)</td></tr>
+<tr class="separator:ab7074f258602a91ee3f283fa98a07cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e018053872a10cc20f642cc067b7b66"><td class="memTemplParams" colspan="2">template&lt;class VectorType , class PreconditionerType , typename std::enable_if&lt; std::is_same&lt; typename VectorType::value_type, double &gt;::value, VectorType &gt;::type *  = nullptr&gt; </td></tr>
 <tr class="memitem:a7e018053872a10cc20f642cc067b7b66"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacedealii_1_1internal_1_1MGCoarseGridApplyPreconditioner.html#a7e018053872a10cc20f642cc067b7b66">dealii::internal::MGCoarseGridApplyPreconditioner::solve</a> (const PreconditionerType preconditioner, VectorType &amp;dst, const VectorType &amp;src)</td></tr>
 <tr class="separator:a7e018053872a10cc20f642cc067b7b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ab7074f258602a91ee3f283fa98a07cdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7074f258602a91ee3f283fa98a07cdf">&#9670;&nbsp;</a></span>convert_vector_dealii_to_trilinos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename number &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void convert_vector_dealii_to_trilinos </td>
+          <td>(</td>
+          <td class="paramtype">TrilinosWrappers::MPI::Vector &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const LinearAlgebra::distributed::Vector&lt; number &gt; &amp;&#160;</td>
+          <td class="paramname"><em>in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that allows to convert deal.II vectors to Trilinos vectors. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">number</td><td>Abstract type for number across the class (i.e., double). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Destination TrilinosWrappers::MPI::Vector vector. </td></tr>
+    <tr><td class="paramname">in</td><td>Source LinearAlgebra::distributed::Vector&lt;number&gt; vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="mf__navier__stokes_8cc_source.html#l00056">56</a> of file <a class="el" href="mf__navier__stokes_8cc_source.html">mf_navier_stokes.cc</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
