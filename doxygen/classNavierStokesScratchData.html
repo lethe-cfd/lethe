@@ -117,9 +117,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a59cf6c71f993b535281774fb63838cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a661e62ccc078b9798322641b2c56655c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesScratchData.html#a661e62ccc078b9798322641b2c56655c">enable_particle_fluid_interactions</a> (const unsigned int n_global_max_particles_per_cell, const bool enable_void_fraction_interpolation)</td></tr>
 <tr class="separator:a661e62ccc078b9798322641b2c56655c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29867e8e85602a1d438f743c8e8a0245"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
-<tr class="memitem:a29867e8e85602a1d438f743c8e8a0245"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classNavierStokesScratchData.html#a29867e8e85602a1d438f743c8e8a0245">reinit_particle_fluid_interactions</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;, const VectorType, const VectorType previous_solution, const VectorType void_fraction_solution, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, DoFHandler&lt; dim &gt; &amp;dof_handler, DoFHandler&lt; dim &gt; &amp;void_fraction_dof_handler)</td></tr>
-<tr class="separator:a29867e8e85602a1d438f743c8e8a0245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d12428b2f0cf243a442f4e4a2138f6"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
+<tr class="memitem:a71d12428b2f0cf243a442f4e4a2138f6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classNavierStokesScratchData.html#a71d12428b2f0cf243a442f4e4a2138f6">reinit_particle_fluid_interactions</a> (const typename DoFHandler&lt; dim &gt;::active_cell_iterator &amp;, const VectorType &amp;, const VectorType &amp;previous_solution, const VectorType &amp;void_fraction_solution, const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, DoFHandler&lt; dim &gt; &amp;dof_handler, DoFHandler&lt; dim &gt; &amp;void_fraction_dof_handler)</td></tr>
+<tr class="separator:a71d12428b2f0cf243a442f4e4a2138f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59bab3e52c8e29cf84473965f49baefe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesScratchData.html#a59bab3e52c8e29cf84473965f49baefe">enable_heat_transfer</a> (const FiniteElement&lt; dim &gt; &amp;fe, const Quadrature&lt; dim &gt; &amp;quadrature, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
 <tr class="separator:a59bab3e52c8e29cf84473965f49baefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c148603b147b2f0e746395d8756ab52"><td class="memTemplParams" colspan="2">template&lt;typename VectorType &gt; </td></tr>
@@ -1282,8 +1282,8 @@ template&lt;typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a29867e8e85602a1d438f743c8e8a0245"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29867e8e85602a1d438f743c8e8a0245">&#9670;&nbsp;</a></span>reinit_particle_fluid_interactions()</h2>
+<a id="a71d12428b2f0cf243a442f4e4a2138f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71d12428b2f0cf243a442f4e4a2138f6">&#9670;&nbsp;</a></span>reinit_particle_fluid_interactions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1304,19 +1304,19 @@ template&lt;typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const&#160;</td>
-          <td class="paramname"><em>VectorType</em>, </td>
+          <td class="paramtype">const VectorType &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramtype">const VectorType &amp;&#160;</td>
           <td class="paramname"><em>previous_solution</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const VectorType&#160;</td>
+          <td class="paramtype">const VectorType &amp;&#160;</td>
           <td class="paramname"><em>void_fraction_solution</em>, </td>
         </tr>
         <tr>
