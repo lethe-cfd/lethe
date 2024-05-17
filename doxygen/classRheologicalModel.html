@@ -116,8 +116,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0d82866accbc7d9af6b65ada628adb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5434fa06902647e8a62838e8f2e52802"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a5434fa06902647e8a62838e8f2e52802">get_dynamic_viscosity_vector</a> (const double &amp;p_density_ref, const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;property_vector)=0</td></tr>
 <tr class="separator:a5434fa06902647e8a62838e8f2e52802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ebe1cf82822cdc9e9ebe3c44de007d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a62ebe1cf82822cdc9e9ebe3c44de007d">get_kinematic_viscosity_for_stabilization</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values)</td></tr>
+<tr class="separator:a62ebe1cf82822cdc9e9ebe3c44de007d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0125dcc9fb6a3eb2e4ce25366194f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a9f0125dcc9fb6a3eb2e4ce25366194f9">get_kinematic_viscosity_for_stabilization_vector</a> (const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;property_vector)</td></tr>
+<tr class="separator:a9f0125dcc9fb6a3eb2e4ce25366194f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3be0eb1226c935e591ae09a37825b3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a1d3be0eb1226c935e591ae09a37825b3">get_dynamic_viscosity_for_stabilization</a> (const double &amp;p_density_ref, const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;field_values)</td></tr>
+<tr class="separator:a1d3be0eb1226c935e591ae09a37825b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537316233a1036c8cc8ea55ab7cbde01"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a537316233a1036c8cc8ea55ab7cbde01">get_dynamic_viscosity_for_stabilization_vector</a> (const double &amp;p_density_ref, const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;field_vectors, std::vector&lt; double &gt; &amp;property_vector)</td></tr>
+<tr class="separator:a537316233a1036c8cc8ea55ab7cbde01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a9f7f56f2c0437d4a6360040dc17f38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a8a9f7f56f2c0437d4a6360040dc17f38">is_non_newtonian_rheological_model</a> () const</td></tr>
 <tr class="separator:a8a9f7f56f2c0437d4a6360040dc17f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26fb2b35a4e972c3400adb684a242590"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a26fb2b35a4e972c3400adb684a242590">is_phase_change_rheological_model</a> () const</td></tr>
+<tr class="separator:a26fb2b35a4e972c3400adb684a242590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classPhysicalPropertyModel"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPhysicalPropertyModel')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPhysicalPropertyModel.html">PhysicalPropertyModel</a></td></tr>
 <tr class="memitem:a790b73800189af9ff8d80f1e6f8c9306 inherit pub_methods_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#a790b73800189af9ff8d80f1e6f8c9306">PhysicalPropertyModel</a> ()</td></tr>
 <tr class="separator:a790b73800189af9ff8d80f1e6f8c9306 inherit pub_methods_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +157,8 @@ Static Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5ce1d5923b687879e0fbc8a7c95d71c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a5ce1d5923b687879e0fbc8a7c95d71c0">non_newtonian_rheological_model</a> = false</td></tr>
 <tr class="separator:a5ce1d5923b687879e0fbc8a7c95d71c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4018525e6143a8ed311e638336af7d47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRheologicalModel.html#a4018525e6143a8ed311e638336af7d47">phase_change_rheological_model</a> = false</td></tr>
+<tr class="separator:a4018525e6143a8ed311e638336af7d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classPhysicalPropertyModel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classPhysicalPropertyModel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classPhysicalPropertyModel.html">PhysicalPropertyModel</a></td></tr>
 <tr class="memitem:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicalPropertyModel.html#ad805b20920189b0c308b0a4730217b81">model_depends_on</a></td></tr>
 <tr class="separator:ad805b20920189b0c308b0a4730217b81 inherit pro_attribs_classPhysicalPropertyModel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +251,111 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a1d3be0eb1226c935e591ae09a37825b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3be0eb1226c935e591ae09a37825b3">&#9670;&nbsp;</a></span>get_dynamic_viscosity_for_stabilization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double RheologicalModel::get_dynamic_viscosity_for_stabilization </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>p_density_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>field_values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the dynamic viscosity used in PSPG and SUPG stabilization terms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_density_ref</td><td>The density of the fluid at the reference state </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Value of the various fields on which the property may depend. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classPhaseChangeRheology.html#ad3181092950cbdbc5c5768aa2237eff5">PhaseChangeRheology</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00160">160</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a537316233a1036c8cc8ea55ab7cbde01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a537316233a1036c8cc8ea55ab7cbde01">&#9670;&nbsp;</a></span>get_dynamic_viscosity_for_stabilization_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RheologicalModel::get_dynamic_viscosity_for_stabilization_vector </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>p_density_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>field_vectors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>property_vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the vector values of the dynamic viscosity used in PSPG and SUPG stabilization terms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p_density_ref</td><td>The density of the fluid at the reference state </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Value of the fields on which the property may depend on. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">property_vector</td><td>Vector of computed viscosities. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classPhaseChangeRheology.html#aebd120e10fb01c1dceac3061c202ad61">PhaseChangeRheology</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00175">175</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
 <a id="a5434fa06902647e8a62838e8f2e52802"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5434fa06902647e8a62838e8f2e52802">&#9670;&nbsp;</a></span>get_dynamic_viscosity_vector()</h2>
 
@@ -323,6 +440,93 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a62ebe1cf82822cdc9e9ebe3c44de007d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ebe1cf82822cdc9e9ebe3c44de007d">&#9670;&nbsp;</a></span>get_kinematic_viscosity_for_stabilization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double RheologicalModel::get_kinematic_viscosity_for_stabilization </td>
+          <td>(</td>
+          <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>field_values</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the kinematic viscosity used in PSPG and SUPG stabilization terms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_values</td><td>Value of the various fields on which the property may depend. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classPhaseChangeRheology.html#ae8870daf8e5f943ae1522a80dbb5e50d">PhaseChangeRheology</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00133">133</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a9f0125dcc9fb6a3eb2e4ce25366194f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f0125dcc9fb6a3eb2e4ce25366194f9">&#9670;&nbsp;</a></span>get_kinematic_viscosity_for_stabilization_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RheologicalModel::get_kinematic_viscosity_for_stabilization_vector </td>
+          <td>(</td>
+          <td class="paramtype">const std::map&lt; <a class="el" href="physical__property__model_8h.html#a0b2c854385812ebfac83689a5c3ead58">field</a>, std::vector&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>field_vectors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>property_vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the vector values of the kinematic viscosity used in PSPG and SUPG stabilization terms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">field_vectors</td><td>Value of the fields on which the property may depend on. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">property_vector</td><td>Vector of computed viscosities. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classPhaseChangeRheology.html#a974c3af23b80fc6e18b3d29e2c04e475">PhaseChangeRheology</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00146">146</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
 <a id="ab43002838045831b3ecade35a92b9dea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab43002838045831b3ecade35a92b9dea">&#9670;&nbsp;</a></span>get_kinematic_viscosity_scale()</h2>
 
@@ -348,7 +552,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Returns the kinematic viscosity scale. <a class="el" href="classThis.html">This</a> is used to get the kinematic viscosity scale in the problem when it's not constant. <a class="el" href="classThis.html">This</a> is useful for weak boundary conditions. </p>
 
-<p>Reimplemented in <a class="el" href="classCarreau.html#a9b8aa58c403f50a8670ea84ad5a25939">Carreau</a>, <a class="el" href="classPowerLaw.html#a57468f68215be9476d784569f672f01b">PowerLaw</a>, and <a class="el" href="classNewtonian.html#a7fc57c5cf04d94d62b21704e43e6be09">Newtonian</a>.</p>
+<p>Reimplemented in <a class="el" href="classPhaseChangeRheology.html#a66d630c8cda80a19d35b15b7ef67b700">PhaseChangeRheology</a>, <a class="el" href="classCarreau.html#a9b8aa58c403f50a8670ea84ad5a25939">Carreau</a>, <a class="el" href="classPowerLaw.html#a57468f68215be9476d784569f672f01b">PowerLaw</a>, and <a class="el" href="classNewtonian.html#a7fc57c5cf04d94d62b21704e43e6be09">Newtonian</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00082">82</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
@@ -408,10 +612,40 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>is_non_newtonian_rheological_model Returns a boolean indicating if the model is a non newtonian rheological model. </p>
+<p>is_non_newtonian_rheological_model Returns a boolean indicating if the model is a non-Newtonian rheological model. </p>
 <dl class="section return"><dt>Returns</dt><dd>Boolean value of if the model corresponds to a non newtonian rheological model. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00134">134</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00190">190</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a26fb2b35a4e972c3400adb684a242590"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26fb2b35a4e972c3400adb684a242590">&#9670;&nbsp;</a></span>is_phase_change_rheological_model()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RheologicalModel::is_phase_change_rheological_model </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a boolean indicating if the model is a phase change rheological model. </p>
+<dl class="section return"><dt>Returns</dt><dd>Boolean value of if the model corresponds to a phase change rheological model. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00202">202</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
 </div>
 </div>
@@ -582,7 +816,35 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00140">140</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+<p>Boolean to indicate if the rheological model is a non-Newtonian model. </p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00209">209</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
+
+</div>
+</div>
+<a id="a4018525e6143a8ed311e638336af7d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4018525e6143a8ed311e638336af7d47">&#9670;&nbsp;</a></span>phase_change_rheological_model</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RheologicalModel::phase_change_rheological_model = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate if the rheological model is a phase change model. </p>
+
+<p class="definition">Definition at line <a class="el" href="rheological__model_8h_source.html#l00212">212</a> of file <a class="el" href="rheological__model_8h_source.html">rheological_model.h</a>.</p>
 
 </div>
 </div>
