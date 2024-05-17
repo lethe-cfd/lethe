@@ -446,9 +446,9 @@
 <li><p>Finally, Lethe also supports not imposing a boundary condition on an ID. Not imposing a boundary condition is equivalent to the <em>do nothing</em> boundary condition (<code class="docutils literal notranslate"><span class="pre">none</span></code>), which results in a zero net traction on a boundary. This, in fact, imposes <span class="math notranslate nohighlight">\(\int_{\Gamma}(-p\mathcal{I} + \mathbf{\tau}) \cdot \mathbf{n}=0\)</span> where <span class="math notranslate nohighlight">\(p\)</span> is the pressure, <span class="math notranslate nohighlight">\(\mathcal{I}\)</span> is the identity tensor, <span class="math notranslate nohighlight">\(\mathbf{\tau}\)</span> is the deviatoric stress tensor  and <span class="math notranslate nohighlight">\(\Gamma\)</span> is the boundary.</p></li>
 </ul>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection boundary conditions
-  set number         = 2
-  set time dependent = false
-  set fix pressure constant = false;
+  set number                = 2
+  set time dependent        = false
+  set fix pressure constant = false
   subsection bc 0
     set id                 = 0
     set type               = function
