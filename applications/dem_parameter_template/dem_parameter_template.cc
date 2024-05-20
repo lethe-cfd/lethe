@@ -1,5 +1,7 @@
 // check the read and write of simulationcontrol
 
+#include "core/utilities.h"
+
 #include "dem/dem_solver_parameters.h"
 
 #include <fstream>
@@ -32,27 +34,10 @@ main()
     }
   catch (std::exception &exc)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Exception on processing: " << std::endl
-                << exc.what() << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_exception(exc);
     }
   catch (...)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Unknown exception!" << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_unknown_exception();
     }
 }

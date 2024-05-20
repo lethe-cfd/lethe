@@ -424,6 +424,50 @@ announce_string(const ConditionalOStream &pcout,
   pcout << std::string(expression.size() + 1, delimiter) << std::endl;
 }
 
+inline int
+announce_exception(const std::exception &exc)
+{
+  std::cerr << std::endl
+            << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+  std::cerr << "Exception on processing: " << std::endl
+            << exc.what() << std::endl
+            << "Aborting!" << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+  return 1;
+}
+
+inline void
+announce_string_exception(const std::string &exception)
+{
+  std::cerr << std::endl
+            << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+  std::cerr << "Exception on processing: " << std::endl
+            << exception << std::endl
+            << "Aborting!" << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+}
+
+inline int
+announce_unknown_exception()
+{
+  std::cerr << std::endl
+            << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+  std::cerr << "Exception on processing: " << std::endl
+            << "Unknown exception" << std::endl
+            << "Aborting!" << std::endl
+            << "----------------------------------------------------"
+            << std::endl;
+  return 1;
+}
+
 /**
  * @brief Serializes a table using boost serialization feature
  * the filename should contain the desired extension

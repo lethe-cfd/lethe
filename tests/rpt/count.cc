@@ -21,6 +21,8 @@
  * number for random number generator and iteration number.
  */
 
+#include "core/utilities.h"
+
 #include <deal.II/base/point.h>
 
 #include <../tests/tests.h>
@@ -96,28 +98,11 @@ main(int argc, char **argv)
     }
   catch (std::exception &exc)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Exception on processing: " << std::endl
-                << exc.what() << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_exception(exc);
     }
   catch (...)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Unknown exception!" << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_unknown_exception();
     }
 
   return 0;

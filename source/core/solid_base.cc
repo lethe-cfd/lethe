@@ -18,6 +18,7 @@
  */
 
 
+#include "core/utilities.h"
 #include <core/solid_base.h>
 
 #include <deal.II/base/bounding_box.h>
@@ -561,17 +562,7 @@ SolidBase<dim, spacedim>::integrate_velocity(double time_step,
           // particles subiteration if particles have been lost
           if (param->stop_particles_lost)
             {
-              std::cerr
-                << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-              std::cerr
-                << "Exception on processing: " << std::endl
-                << "Nitsche Particles have been lost" << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
+              announce_string_exception("Nitsche Particles have been lost");
               std::exit(1);
             }
         }
