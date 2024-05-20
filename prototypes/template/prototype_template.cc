@@ -21,6 +21,7 @@
 // This is a template folder for prototype executables to be created when
 // developing totally new Lethe functionnalities
 
+#include "core/utilities.h"
 #include <deal.II/base/logstream.h>
 #include <deal.II/base/tensor.h>
 
@@ -41,28 +42,11 @@ main()
     }
   catch (std::exception &exc)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Exception on processing: " << std::endl
-                << exc.what() << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_exception(exc);
     }
   catch (...)
     {
-      std::cerr << std::endl
-                << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      std::cerr << "Unknown exception!" << std::endl
-                << "Aborting!" << std::endl
-                << "----------------------------------------------------"
-                << std::endl;
-      return 1;
+      announce_unknown_exception();
     }
   return 0;
 }
