@@ -13,7 +13,7 @@ var searchData=
   ['effective_5fyoungs_5fmodulus_818',['effective_youngs_modulus',['../classParticleWallContactForce.html#ac8d4670101ac0891e3bc81489094b2c2',1,'ParticleWallContactForce::effective_youngs_modulus()'],['../classParticleParticleContactForce.html#a4686c7bf2774215e333f291d2574cfe4',1,'ParticleParticleContactForce::effective_youngs_modulus()']]],
   ['efficiency_819',['efficiency',['../classParticleDetectorInteractions.html#a82d51d276312d903b4cd1ffb6feb0bfa',1,'ParticleDetectorInteractions']]],
   ['eig_5festimation_5fcg_5fn_5fiterations_820',['eig_estimation_cg_n_iterations',['../structParameters_1_1LinearSolver.html#a503f3f5d96b73b407b5293a949b3dfb7',1,'Parameters::LinearSolver']]],
-  ['eig_5festimation_5fsmoothing_5frange_821',['eig_estimation_smoothing_range',['../structParameters_1_1LinearSolver.html#a6a6cf3548cb2937c29c04c4d58fe021b',1,'Parameters::LinearSolver']]],
+  ['eig_5festimation_5fsmoothing_5frange_821',['eig_estimation_smoothing_range',['../structParameters_1_1LinearSolver.html#aa1ed3b0c9a4cc04968728391591c8243',1,'Parameters::LinearSolver']]],
   ['eig_5festimation_5fverbose_822',['eig_estimation_verbose',['../structParameters_1_1LinearSolver.html#af0e28141f596fde7667b800aaae50058',1,'Parameters::LinearSolver']]],
   ['el_823',['el',['../classNavierStokesOperatorBase.html#a162a5ebc0742593e2b2d10daf38418a2',1,'NavierStokesOperatorBase']]],
   ['element_5fsize_824',['element_size',['../classNavierStokesOperatorBase.html#a8eaefbeb15982fab2dfbf8ceb540baf4',1,'NavierStokesOperatorBase']]],

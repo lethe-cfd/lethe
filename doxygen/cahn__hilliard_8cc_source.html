@@ -1186,7 +1186,7 @@ $(function() {
 <div class="line"><a name="l01105"></a><span class="lineno"> 1105</span>&#160;  zero_constraints.close();</div>
 <div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160; </div>
 <div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160;  <span class="comment">// Sparse matrices initialization</span></div>
-<div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;  DynamicSparsityPattern dsp(this-&gt;dof_handler.n_dofs());</div>
+<div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;  DynamicSparsityPattern dsp(locally_relevant_dofs);</div>
 <div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160;  DoFTools::make_sparsity_pattern(this-&gt;dof_handler,</div>
 <div class="line"><a name="l01110"></a><span class="lineno"> 1110</span>&#160;                                  dsp,</div>
 <div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;                                  nonzero_constraints,</div>
