@@ -102,8 +102,6 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac34b8b595b2bc528c3edb506970558c4"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracerAssemblerCore.html#ac34b8b595b2bc528c3edb506970558c4">DCDD</a> = true</td></tr>
-<tr class="separator:ac34b8b595b2bc528c3edb506970558c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf4e97d9a85dfe4e85561a60863902db"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSimulationControl.html">SimulationControl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTracerAssemblerCore.html#abf4e97d9a85dfe4e85561a60863902db">simulation_control</a></td></tr>
 <tr class="separator:abf4e97d9a85dfe4e85561a60863902db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -252,31 +250,13 @@ template&lt;int dim&gt; </div>
 
 <p>Implements <a class="el" href="classTracerAssemblerBase.html#a3887acc3eada0197563f686e36c74fbf">TracerAssemblerBase&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tracer__assemblers_8cc_source.html#l00130">130</a> of file <a class="el" href="tracer__assemblers_8cc_source.html">tracer_assemblers.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer__assemblers_8cc_source.html#l00124">124</a> of file <a class="el" href="tracer__assemblers_8cc_source.html">tracer_assemblers.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="tracer__scratch__data_8h_source.html#l00284">TracerScratchData&lt; dim &gt;::cell_size</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00281">TracerScratchData&lt; dim &gt;::fe_values_tracer</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00303">TracerScratchData&lt; dim &gt;::grad_phi</a>, <a class="el" href="time__integration__utilities_8h_source.html#l00013">is_steady()</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00287">TracerScratchData&lt; dim &gt;::JxW</a>, <a class="el" href="copy__data_8h_source.html#l00120">StabilizedMethodsCopyData::local_rhs</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00282">TracerScratchData&lt; dim &gt;::n_dofs</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00283">TracerScratchData&lt; dim &gt;::n_q_points</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00300">TracerScratchData&lt; dim &gt;::phi</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00297">TracerScratchData&lt; dim &gt;::source</a>, <a class="el" href="copy__data_8h_source.html#l00122">StabilizedMethodsCopyData::strong_residual</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00274">TracerScratchData&lt; dim &gt;::tracer_diffusivity</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00292">TracerScratchData&lt; dim &gt;::tracer_gradients</a>, <a class="el" href="tracer__scratch__data_8h_source.html#l00293">TracerScratchData&lt; dim &gt;::tracer_laplacians</a>, <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>, and <a class="el" href="tracer__scratch__data_8h_source.html#l00312">TracerScratchData&lt; dim &gt;::velocity_values</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ac34b8b595b2bc528c3edb506970558c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac34b8b595b2bc528c3edb506970558c4">&#9670;&nbsp;</a></span>DCDD</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const bool <a class="el" href="classTracerAssemblerCore.html">TracerAssemblerCore</a>&lt; dim &gt;::DCDD = true</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="tracer__assemblers_8h_source.html#l00104">104</a> of file <a class="el" href="tracer__assemblers_8h_source.html">tracer_assemblers.h</a>.</p>
-
-</div>
-</div>
 <a id="abf4e97d9a85dfe4e85561a60863902db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf4e97d9a85dfe4e85561a60863902db">&#9670;&nbsp;</a></span>simulation_control</h2>
 
@@ -291,7 +271,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tracer__assemblers_8h_source.html#l00106">106</a> of file <a class="el" href="tracer__assemblers_8h_source.html">tracer_assemblers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tracer__assemblers_8h_source.html#l00104">104</a> of file <a class="el" href="tracer__assemblers_8h_source.html">tracer_assemblers.h</a>.</p>
 
 </div>
 </div>
