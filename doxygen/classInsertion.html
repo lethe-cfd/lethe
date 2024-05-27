@@ -99,8 +99,8 @@ Inheritance diagram for Insertion&lt; dim &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6720a7d2e690697207ae122d69f7320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa6720a7d2e690697207ae122d69f7320">Insertion</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt;&gt; &amp;distribution_object_container)</td></tr>
-<tr class="separator:aa6720a7d2e690697207ae122d69f7320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aad2604d3e0edbc5600115af1c8d846"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a2aad2604d3e0edbc5600115af1c8d846">Insertion</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt;&gt; &amp;size_distribution_object_container, const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters)</td></tr>
+<tr class="separator:a2aad2604d3e0edbc5600115af1c8d846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#ab7b6cf7393246d7d5b3ffeec6d721a14">insert</a> (Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters)=0</td></tr>
 <tr class="separator:ab7b6cf7393246d7d5b3ffeec6d721a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad090ee85ee022ca32b837150ff4fa728"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#ad090ee85ee022ca32b837150ff4fa728">serialize</a> (boost::archive::text_oarchive &amp;ar, const unsigned int)=0</td></tr>
@@ -116,6 +116,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a8f00edf71c52d94b944fac4a35f32647"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef020b59a1b122f8245badc093efdc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a4ef020b59a1b122f8245badc093efdc2">calculate_insertion_domain_maximum_particle_number</a> (const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters, const ConditionalOStream &amp;pcout)</td></tr>
 <tr class="separator:a4ef020b59a1b122f8245badc093efdc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eeb88ad7f23bc50e0587fee37258bb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a1eeb88ad7f23bc50e0587fee37258bb3">find_cells_in_removing_box</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation)</td></tr>
+<tr class="separator:a1eeb88ad7f23bc50e0587fee37258bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8843f788eeac3ede326d7ee3138e031c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a8843f788eeac3ede326d7ee3138e031c">remove_particles_in_box</a> (Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler)</td></tr>
+<tr class="separator:a8843f788eeac3ede326d7ee3138e031c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -133,6 +137,20 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad0a52bf0b712bcf669b0948737e13cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa37df9385edf189426ce85ac0bde61f8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa37df9385edf189426ce85ac0bde61f8">distributions_objects</a></td></tr>
 <tr class="separator:aa37df9385edf189426ce85ac0bde61f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d94c28fb4cb51ef799012c27ca4a86"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a63d94c28fb4cb51ef799012c27ca4a86">removing_particles_in_region</a></td></tr>
+<tr class="separator:a63d94c28fb4cb51ef799012c27ca4a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2db21c82ba18453416fcdeca8bc894c7"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a2db21c82ba18453416fcdeca8bc894c7">p_min</a></td></tr>
+<tr class="separator:a2db21c82ba18453416fcdeca8bc894c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa897d221b919ec64ecc522792ce4083a"><td class="memItemLeft" align="right" valign="top">Point&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa897d221b919ec64ecc522792ce4083a">p_max</a></td></tr>
+<tr class="separator:aa897d221b919ec64ecc522792ce4083a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4626c5651bad04e81f79f573e7190ea"><td class="memItemLeft" align="right" valign="top">std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#aa4626c5651bad04e81f79f573e7190ea">in_removal_box</a></td></tr>
+<tr class="separator:aa4626c5651bad04e81f79f573e7190ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c8de12aef711e1cb2cc95c8f1fd3e8"><td class="memItemLeft" align="right" valign="top">std::set&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a36c8de12aef711e1cb2cc95c8f1fd3e8">edge_of_removal_box</a></td></tr>
+<tr class="separator:a36c8de12aef711e1cb2cc95c8f1fd3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a9fc9ad41c10f94f38120424bad454"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a33a9fc9ad41c10f94f38120424bad454">mark_for_update</a></td></tr>
+<tr class="separator:a33a9fc9ad41c10f94f38120424bad454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7458657c2cbf3c5351812e1109646f51"><td class="memItemLeft" align="right" valign="top">boost::signals2::connection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInsertion.html#a7458657c2cbf3c5351812e1109646f51">change_to_triangulation</a></td></tr>
+<tr class="separator:a7458657c2cbf3c5351812e1109646f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -147,8 +165,8 @@ class Insertion&lt; dim &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00059">59</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa6720a7d2e690697207ae122d69f7320"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6720a7d2e690697207ae122d69f7320">&#9670;&nbsp;</a></span>Insertion()</h2>
+<a id="a2aad2604d3e0edbc5600115af1c8d846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aad2604d3e0edbc5600115af1c8d846">&#9670;&nbsp;</a></span>Insertion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,8 +177,24 @@ template&lt;int dim&gt; </div>
           <td class="memname"><a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::<a class="el" href="classInsertion.html">Insertion</a> </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>distribution_object_container</em></td><td>)</td>
+          <td class="paramname"><em>size_distribution_object_container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const parallel::distributed::Triangulation&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>triangulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dem_parameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -168,12 +202,16 @@ template&lt;int dim&gt; </div>
 <p>Carries out the insertion of particles. <a class="el" href="classThis.html">This</a> is the base class of volume_insertion, plane_insertion, list_insertion and file_insertion classes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">distribution_object_container</td><td>Contains all distribution for each type of particle </td></tr>
+    <tr><td class="paramname">size_distribution_object_container</td><td>Contains all distribution for each particle type </td></tr>
+    <tr><td class="paramname">triangulation</td><td>Triangulation to access the cells in which the particles are inserted </td></tr>
+    <tr><td class="paramname">dem_parameters</td><td><a class="el" href="namespaceDEM.html">DEM</a> parameters declared in the .prm file </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00007">7</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="insertion_8h_source.html#l00225">Insertion&lt; dim &gt;::change_to_triangulation</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00185">Parameters::Lagrangian::InsertionInfo::clear_box_point_1</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00185">Parameters::Lagrangian::InsertionInfo::clear_box_point_2</a>, <a class="el" href="insertion_8h_source.html#l00210">Insertion&lt; dim &gt;::distributions_objects</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>, <a class="el" href="insertion_8h_source.html#l00224">Insertion&lt; dim &gt;::mark_for_update</a>, <a class="el" href="insertion_8h_source.html#l00216">Insertion&lt; dim &gt;::p_max</a>, and <a class="el" href="insertion_8h_source.html#l00216">Insertion&lt; dim &gt;::p_min</a>.</p>
 
 </div>
 </div>
@@ -237,9 +275,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00034">34</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00059">59</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00048">DEM::fem_force_x</a>, <a class="el" href="dem__properties_8h_source.html#l00049">DEM::fem_force_y</a>, <a class="el" href="dem__properties_8h_source.html#l00050">DEM::fem_force_z</a>, <a class="el" href="dem__properties_8h_source.html#l00051">DEM::fem_torque_x</a>, <a class="el" href="dem__properties_8h_source.html#l00052">DEM::fem_torque_y</a>, <a class="el" href="dem__properties_8h_source.html#l00053">DEM::fem_torque_z</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00188">Parameters::Lagrangian::InsertionInfo::initial_omega</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00188">Parameters::Lagrangian::InsertionInfo::initial_vel</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00039">DEMSolverParameters&lt; dim &gt;::lagrangian_physical_properties</a>, <a class="el" href="dem__properties_8h_source.html#l00054">DEM::mass</a>, <a class="el" href="dem__properties_8h_source.html#l00045">DEM::omega_x</a>, <a class="el" href="dem__properties_8h_source.html#l00046">DEM::omega_y</a>, <a class="el" href="dem__properties_8h_source.html#l00047">DEM::omega_z</a>, <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>, and <a class="el" href="dem__properties_8h_source.html#l00055">DEM::volumetric_contribution</a>.</p>
+<p class="reference">References <a class="el" href="dem__properties_8h_source.html#l00048">DEM::fem_force_x</a>, <a class="el" href="dem__properties_8h_source.html#l00049">DEM::fem_force_y</a>, <a class="el" href="dem__properties_8h_source.html#l00050">DEM::fem_force_z</a>, <a class="el" href="dem__properties_8h_source.html#l00051">DEM::fem_torque_x</a>, <a class="el" href="dem__properties_8h_source.html#l00052">DEM::fem_torque_y</a>, <a class="el" href="dem__properties_8h_source.html#l00053">DEM::fem_torque_z</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00207">Parameters::Lagrangian::InsertionInfo::initial_omega</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00207">Parameters::Lagrangian::InsertionInfo::initial_vel</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00039">DEMSolverParameters&lt; dim &gt;::lagrangian_physical_properties</a>, <a class="el" href="dem__properties_8h_source.html#l00054">DEM::mass</a>, <a class="el" href="dem__properties_8h_source.html#l00045">DEM::omega_x</a>, <a class="el" href="dem__properties_8h_source.html#l00046">DEM::omega_y</a>, <a class="el" href="dem__properties_8h_source.html#l00047">DEM::omega_z</a>, <a class="el" href="dem__properties_8h_source.html#l00040">DEM::type</a>, and <a class="el" href="dem__properties_8h_source.html#l00055">DEM::volumetric_contribution</a>.</p>
 
 </div>
 </div>
@@ -288,9 +326,9 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00103">103</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00128">128</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="parameters__lagrangian_8h_source.html#l00182">Parameters::Lagrangian::InsertionInfo::direction_sequence</a>, and <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>.</p>
+<p class="reference">References <a class="el" href="parameters__lagrangian_8h_source.html#l00203">Parameters::Lagrangian::InsertionInfo::direction_sequence</a>, and <a class="el" href="dem__solver__parameters_8h_source.html#l00040">DEMSolverParameters&lt; dim &gt;::insertion_info</a>.</p>
 
 </div>
 </div>
@@ -339,6 +377,46 @@ template&lt;int dim&gt; </div>
 </dl>
 
 <p>Implemented in <a class="el" href="classInsertionVolume.html#afa6a770cf17680ff6a3153a1aca4222b">InsertionVolume&lt; dim &gt;</a>, <a class="el" href="classInsertionPlane.html#a260105505b4a6f37e39587ebad5dac1a">InsertionPlane&lt; dim &gt;</a>, <a class="el" href="classInsertionList.html#a824d61f3f71adce52b4a55e9901e0d92">InsertionList&lt; dim &gt;</a>, and <a class="el" href="classInsertionFile.html#a5cce4465bc2a7af7d176c80e76f4b57c">InsertionFile&lt; dim &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a1eeb88ad7f23bc50e0587fee37258bb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eeb88ad7f23bc50e0587fee37258bb3">&#9670;&nbsp;</a></span>find_cells_in_removing_box()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::find_cells_in_removing_box </td>
+          <td>(</td>
+          <td class="paramtype">const parallel::distributed::Triangulation&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>triangulation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find every cell that are completely and partially inside de the clearing box. For the cell completely inside the box, all the particles will be deleted. For those partially inside, a fine verification is required. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">triangulation</td><td>Triangulation to access the cells in which the particles deleted. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00229">229</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensors__and__points__dimension__manipulation_8h_source.html#l00085">point_nd_to_3d()</a>.</p>
 
 </div>
 </div>
@@ -457,9 +535,49 @@ template&lt;int dim&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00016">16</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00041">41</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="utilities_8h_source.html#l00418">announce_string()</a>.</p>
+
+</div>
+</div>
+<a id="a8843f788eeac3ede326d7ee3138e031c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8843f788eeac3ede326d7ee3138e031c">&#9670;&nbsp;</a></span>remove_particles_in_box()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::remove_particles_in_box </td>
+          <td>(</td>
+          <td class="paramtype">Particles::ParticleHandler&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>particle_handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove every particle located inside a predefined zone. Currently, the zone is defined by a box. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">particle_handler</td><td>The particle handler of particles which are being removed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="insertion_8cc_source.html#l00281">281</a> of file <a class="el" href="insertion_8cc_source.html">insertion.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensors__and__points__dimension__manipulation_8h_source.html#l00085">point_nd_to_3d()</a>.</p>
 
 </div>
 </div>
@@ -534,7 +652,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00172">172</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00200">200</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -560,7 +678,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00172">172</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00200">200</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="a7458657c2cbf3c5351812e1109646f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7458657c2cbf3c5351812e1109646f51">&#9670;&nbsp;</a></span>change_to_triangulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::signals2::connection <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::change_to_triangulation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00225">225</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -586,7 +730,59 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00182">182</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00210">210</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="a36c8de12aef711e1cb2cc95c8f1fd3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36c8de12aef711e1cb2cc95c8f1fd3e8">&#9670;&nbsp;</a></span>edge_of_removal_box</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator&gt; <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::edge_of_removal_box</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00221">221</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="aa4626c5651bad04e81f79f573e7190ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4626c5651bad04e81f79f573e7190ea">&#9670;&nbsp;</a></span>in_removal_box</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator&gt; <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::in_removal_box</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00219">219</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -612,7 +808,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00164">164</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00192">192</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -638,7 +834,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00178">178</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00206">206</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="a33a9fc9ad41c10f94f38120424bad454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33a9fc9ad41c10f94f38120424bad454">&#9670;&nbsp;</a></span>mark_for_update</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::mark_for_update</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00224">224</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -664,7 +886,7 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00175">175</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00203">203</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -690,7 +912,59 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00167">167</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00195">195</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="aa897d221b919ec64ecc522792ce4083a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa897d221b919ec64ecc522792ce4083a">&#9670;&nbsp;</a></span>p_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Point&lt;dim&gt; <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::p_max</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00216">216</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="a2db21c82ba18453416fcdeca8bc894c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2db21c82ba18453416fcdeca8bc894c7">&#9670;&nbsp;</a></span>p_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Point&lt;dim&gt; <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::p_min</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00216">216</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>
@@ -716,7 +990,33 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00186">186</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00229">229</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
+
+</div>
+</div>
+<a id="a63d94c28fb4cb51ef799012c27ca4a86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63d94c28fb4cb51ef799012c27ca4a86">&#9670;&nbsp;</a></span>removing_particles_in_region</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool <a class="el" href="classInsertion.html">Insertion</a>&lt; dim &gt;::removing_particles_in_region</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="insertion_8h_source.html#l00213">213</a> of file <a class="el" href="insertion_8h_source.html">insertion.h</a>.</p>
 
 </div>
 </div>

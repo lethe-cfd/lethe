@@ -212,8 +212,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a5f2c26c5643bb184967f1e31f99c8943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0461b1618f2bd768e5d5e4ff33213de"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#ae0461b1618f2bd768e5d5e4ff33213de">neighborhood_threshold_squared</a></td></tr>
 <tr class="separator:ae0461b1618f2bd768e5d5e4ff33213de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fbe69ff34e2be88a7e816940f59c12"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a14fbe69ff34e2be88a7e816940f59c12">distribution_object_container</a></td></tr>
-<tr class="separator:a14fbe69ff34e2be88a7e816940f59c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5567f394c74c9ef7b431624b4dba50"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classDistribution.html">Distribution</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a1c5567f394c74c9ef7b431624b4dba50">size_distribution_object_container</a></td></tr>
+<tr class="separator:a1c5567f394c74c9ef7b431624b4dba50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbc6f5c2b682a4ff8f78496c942d7455"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#afbc6f5c2b682a4ff8f78496c942d7455">maximum_particle_diameter</a></td></tr>
 <tr class="separator:afbc6f5c2b682a4ff8f78496c942d7455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae65d7a65752793150ba2f3a33e7e3cf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#ae65d7a65752793150ba2f3a33e7e3cf8">smallest_contact_search_criterion</a></td></tr>
@@ -1828,32 +1828,6 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a14fbe69ff34e2be88a7e816940f59c12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14fbe69ff34e2be88a7e816940f59c12">&#9670;&nbsp;</a></span>distribution_object_container</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classDistribution.html">Distribution</a>&gt; &gt; <a class="el" href="classCFDDEMSolver.html">CFDDEMSolver</a>&lt; dim &gt;::distribution_object_container</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00301">301</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
-
-</div>
-</div>
 <a id="a23462293a329b3d3bf84f193439f5f51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23462293a329b3d3bf84f193439f5f51">&#9670;&nbsp;</a></span>floating_mesh_info</h2>
 
@@ -2475,6 +2449,32 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00348">348</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
+
+</div>
+</div>
+<a id="a1c5567f394c74c9ef7b431624b4dba50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c5567f394c74c9ef7b431624b4dba50">&#9670;&nbsp;</a></span>size_distribution_object_container</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classDistribution.html">Distribution</a>&gt; &gt; <a class="el" href="classCFDDEMSolver.html">CFDDEMSolver</a>&lt; dim &gt;::size_distribution_object_container</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00301">301</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
 
 </div>
 </div>

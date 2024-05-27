@@ -432,6 +432,8 @@
 
   # Every method
   set insertion frequency                            = 20000
+  set remove particles                             = false
+  set removal box points coordinates                = 0., 0., 0.: 1., 1., 1.
 
   # If method = volume
   set inserted number of particles at each time step = 100
@@ -467,7 +469,7 @@
   set list diameters                                 = 0.
 
   # If method = file
-  set insertion file name                            = particles.input
+  set list of input files                            = particles.input
 end
 </pre></div>
 </div>
@@ -475,6 +477,7 @@ end
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">frequency</span></code> parameter defines the frequency of insertion. For example, if the <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">frequency</span></code> is set equal to 10000, the iterations 1, 10001, 20001, … will be defined as insertion steps.  The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">frequency</span></code> should be selected adequately depending on the insertion method. For <code class="docutils literal notranslate"><span class="pre">volume</span></code> it should be large, so that the inserted particles at the previous insertion step have enough time to leave the insertion box for the next insertion step, otherwise large overlap may occur which leads to a large velocity of particles. For the <code class="docutils literal notranslate"><span class="pre">plane</span></code> method, it should be small so that particles are being inserted as soon as a cell is empty.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">maximum</span> <span class="pre">offset</span></code> and <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">prn</span> <span class="pre">seed</span></code> parameters defines the random offset values to the initial positions of particles during a <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">plane</span></code> insertion. The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">maximum</span> <span class="pre">offset</span></code> parameter defines the maximum value for an offset. The <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">prn</span> <span class="pre">seed</span></code> parameter defines the pseudo-random number (PRN) with which offset values are getting generated.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">removal</span> <span class="pre">box</span> <span class="pre">points</span> <span class="pre">coordinates</span></code> parameter defines a removal box where particles will be removed from the triangulation just before the insertion of new particles. This assures that there is no excessive overlap between new and previously inserted particles. If the <code class="docutils literal notranslate"><span class="pre">remove</span> <span class="pre">particles</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> particle removal will not be performed.</p></li>
 </ul>
 <section id="volume">
 <h2>Volume<a class="headerlink" href="#volume" title="Link to this heading">#</a></h2>
@@ -535,7 +538,7 @@ set list z = 0., 3.
 </section>
 <section id="file">
 <h2>File<a class="headerlink" href="#file" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">file</span></code> insertion method insert particles in a similar way to the <code class="docutils literal notranslate"><span class="pre">list</span></code> insertion method. The main difference between these two methods is the option to use an external file provided by the <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">file</span> <span class="pre">name</span></code> parameter. This parameter is set at <code class="docutils literal notranslate"><span class="pre">particles.input</span></code> by default. This file has to follow this structure:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">file</span></code> insertion method inserts particles in a similar way to the <code class="docutils literal notranslate"><span class="pre">list</span></code> insertion method. The main difference between these two methods is the option to use external files provided by the <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">of</span> <span class="pre">input</span> <span class="pre">files</span></code> parameter. This parameter is set at <code class="docutils literal notranslate"><span class="pre">particles.input</span></code> by default, but a file list can be specified. At each insertion time step, a different file will be used. If the end of the list is reached and there are still particles to be inserted, the list returns to the first file. An insertion file must follow this structure:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p_x; p_y; p_z; v_x; v_y; v_z; w_x; w_y; w_z; diameters; fem_force_x; fem_force_y; fem_force_z; fem_torque_x; fem_torque_y; fem_torque_z;
 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0;       0.2;           0;           0;           0;            0;            0;            0;
 1.0; 2.0; 3.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0;       0.2;           0;           0;           0;            0;            0;            0;

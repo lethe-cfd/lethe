@@ -1725,10 +1725,14 @@ $(function() {
 <div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;        std::vector&lt;T&gt; vector = Utilities::string_to_double(vector_of_string);</div>
 <div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;        <span class="keywordflow">return</span> vector;</div>
 <div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;      }</div>
-<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;  }</div>
-<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160; </div>
-<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;} <span class="comment">// namespace Parameters</span></div>
-<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same&lt;T, std::string&gt;::value)</div>
+<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;      {</div>
+<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;        <span class="keywordflow">return</span> vector_of_string;</div>
+<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;      }</div>
+<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;  }</div>
+<div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160; </div>
+<div class="line"><a name="l01653"></a><span class="lineno"> 1653</span>&#160;} <span class="comment">// namespace Parameters</span></div>
+<div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassDensityModel_html"><div class="ttname"><a href="classDensityModel.html">DensityModel</a></div><div class="ttdoc">Abstract class for calculating the density of materials.</div><div class="ttdef"><b>Definition:</b> <a href="density__model_8h_source.html#l00025">density_model.h:26</a></div></div>
 <div class="ttc" id="aclassMobilityCahnHilliardModel_html"><div class="ttname"><a href="classMobilityCahnHilliardModel.html">MobilityCahnHilliardModel</a></div><div class="ttdoc">Implementation of the computation of the mobility for Cahn-Hilliard equations.</div><div class="ttdef"><b>Definition:</b> <a href="mobility__cahn__hilliard__model_8h_source.html#l00026">mobility_cahn_hilliard_model.h:27</a></div></div>
 <div class="ttc" id="aclassParameters_1_1Dimensionality_html"><div class="ttname"><a href="classParameters_1_1Dimensionality.html">Parameters::Dimensionality</a></div><div class="ttdoc">Class used to rescale physical properties for cases where the main dimensions of the problems (Length...</div><div class="ttdef"><b>Definition:</b> <a href="dimensionality_8h_source.html#l00036">dimensionality.h:37</a></div></div>

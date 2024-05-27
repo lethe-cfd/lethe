@@ -438,7 +438,7 @@
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#install-deal-ii-apt"><span class="std std-ref">Installing deal.II using apt</span></a> (recommended for users)</p></li>
 <li><p><a class="reference internal" href="#install-deal-ii-candi"><span class="std std-ref">Installing deal.II using Candi</span></a> (recommended for developers)</p></li>
-<li><p><a class="reference internal" href="#install-deal-ii-manually"><span class="std std-ref">Installing deal.II manually</span></a> (recommended for exerimented developers)</p></li>
+<li><p><a class="reference internal" href="#install-deal-ii-manually"><span class="std std-ref">Installing deal.II manually</span></a> (recommended for experienced developers)</p></li>
 </ol>
 <section id="installing-deal-ii-using-apt">
 <span id="install-deal-ii-apt"></span><h2>Installing deal.II using apt<a class="headerlink" href="#installing-deal-ii-using-apt" title="Link to this heading">#</a></h2>
@@ -446,6 +446,10 @@
 <p>In case you are using Ubuntu, you will need to <a class="reference external" href="https://launchpad.net/~ginggs/+archive/ubuntu/deal.ii-9.5.1-backports">update the backports</a>:</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository ppa:ginggs/deal.ii-9.5.1-backports
 sudo apt update
+</pre></div>
+</div>
+<p>A dependency required by Lethe, and that deal.II needs to be compiled with, is muParser:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libmuparser-dev
 </pre></div>
 </div>
 <p>To install deal.II, run:</p>
@@ -478,6 +482,10 @@ PACKAGES=&quot;${PACKAGES} dealii&quot;
 </pre></div>
 </div>
 </div></blockquote>
+<p>A dependency required by Lethe, and that deal.II needs to be compiled with, is muParser:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libmuparser-dev
+</pre></div>
+</div>
 <p>Other packages can be disabled by simply commenting out the lines (adding an <code class="docutils literal notranslate"><span class="pre">#</span></code> at the beggining of the lines)</p>
 <p>To ensure that the the Lethe test suite works, deal.II must be configured with p4est version 2.2.1. In the subfolder <code class="docutils literal notranslate"><span class="pre">deal.II-toolchain/packages/</span></code>, open the <code class="docutils literal notranslate"><span class="pre">p4est.package</span></code> file with a text editor and change the following lines:</p>
 <blockquote>
@@ -581,7 +589,7 @@ cd build
 cd build
 </pre></div>
 </div>
-<p>Depending on how you have installed p4est, Trilinos and METIS, you may need to specify the installation folder of the three libraries</p>
+<p>Depending on how you have installed p4est, Trilinos and METIS, you may need to specify the installation folder of the three libraries. You also need to ensure that muParser is installed.</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>cmake ../dealii -DDEAL_II_WITH_MPI=ON -DDEAL_II_WITH_TRILINOS=ON -DTRILINOS_DIR=path/to/your/trilinos/installation -DDEAL_II_WITH_P4EST=ON -DP4EST_DIR=path/to/your/p4est/installation  -DDEAL_II_WITH_METIS=ON -DMETIS_DIR=path/to/your/metis/installation -DCMAKE_INSTALL_PREFIX=/path/to/desired/installation`
 </pre></div>
 </div>
