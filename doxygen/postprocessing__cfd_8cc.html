@@ -160,21 +160,21 @@ Include dependency graph for postprocessing_cfd.cc:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9f21676d8d00e49763d1c0ea39550d9c"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
-<tr class="memitem:a9f21676d8d00e49763d1c0ea39550d9c"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; dim &gt;&gt; mapping, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;cell_quadrature_formula, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a9f21676d8d00e49763d1c0ea39550d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ad5236036c20b6b24794ba9900f06fc"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a6ad5236036c20b6b24794ba9900f06fc">calculate_pressure_drop&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt; mapping, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a6ad5236036c20b6b24794ba9900f06fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ba76cc9b52aa9fb098ab62823148cf"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a86ba76cc9b52aa9fb098ab62823148cf">calculate_pressure_drop&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt; mapping, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a86ba76cc9b52aa9fb098ab62823148cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2923b3ec8c8ce1dfd6ef849608b51d94"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a2923b3ec8c8ce1dfd6ef849608b51d94">calculate_pressure_drop&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt; mapping, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a2923b3ec8c8ce1dfd6ef849608b51d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a2ff1eee8094a2734181574843553f9"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a9a2ff1eee8094a2734181574843553f9">calculate_pressure_drop&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt; mapping, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a9a2ff1eee8094a2734181574843553f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a036e8824481b493821543da020bd2388"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a036e8824481b493821543da020bd2388">calculate_pressure_drop&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt; mapping, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:a036e8824481b493821543da020bd2388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae72e3a5ba53297770279bfc1a5f9c78a"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ae72e3a5ba53297770279bfc1a5f9c78a">calculate_pressure_drop&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt; mapping, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
-<tr class="separator:ae72e3a5ba53297770279bfc1a5f9c78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1a6fe6ace2b66d05ad7f7461dff8c46"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:ad1a6fe6ace2b66d05ad7f7461dff8c46"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const Mapping&lt; dim &gt; &amp;mapping, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;cell_quadrature_formula, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:ad1a6fe6ace2b66d05ad7f7461dff8c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440ce773cd558059d58108e11a205125"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a440ce773cd558059d58108e11a205125">calculate_pressure_drop&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:a440ce773cd558059d58108e11a205125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a285e7138a2c7ecddd6f3216c1abe7002"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a285e7138a2c7ecddd6f3216c1abe7002">calculate_pressure_drop&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:a285e7138a2c7ecddd6f3216c1abe7002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22018621664f9057fdc0384be1647ae6"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a22018621664f9057fdc0384be1647ae6">calculate_pressure_drop&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:a22018621664f9057fdc0384be1647ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6656a4faefd1123edb62182ec808471d"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a6656a4faefd1123edb62182ec808471d">calculate_pressure_drop&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:a6656a4faefd1123edb62182ec808471d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc44f60c111ffa093075f20d4046329e"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#acc44f60c111ffa093075f20d4046329e">calculate_pressure_drop&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const Mapping&lt; 2 &gt; &amp;mapping, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:acc44f60c111ffa093075f20d4046329e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2946f09ba4a716d1f83fceff85b009f"><td class="memItemLeft" align="right" valign="top">template std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ac2946f09ba4a716d1f83fceff85b009f">calculate_pressure_drop&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const Mapping&lt; 3 &gt; &amp;mapping, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;cell_quadrature_formula, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const unsigned int inlet_boundary_id, const unsigned int outlet_boundary_id)</td></tr>
+<tr class="separator:ac2946f09ba4a716d1f83fceff85b009f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79160fa3703aadaf40fb29841456e49b"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
 <tr class="memitem:a79160fa3703aadaf40fb29841456e49b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a79160fa3703aadaf40fb29841456e49b">calculate_CFL</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const double time_step, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
 <tr class="separator:a79160fa3703aadaf40fb29841456e49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +205,36 @@ Functions</h2></td></tr>
 <tr class="separator:abada41f8d363b21b31172053f971f69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab294da8cc29c77d68f22455720f5eafa"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ab294da8cc29c77d68f22455720f5eafa">calculate_enstrophy&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
 <tr class="separator:ab294da8cc29c77d68f22455720f5eafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1f61ed52d8cbc4dbf70848099af8f9"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:a0b1f61ed52d8cbc4dbf70848099af8f9"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
+<tr class="separator:a0b1f61ed52d8cbc4dbf70848099af8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32289d6b4baeb2686b169655e69234be"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a32289d6b4baeb2686b169655e69234be">calculate_pressure_power&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a32289d6b4baeb2686b169655e69234be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c3eb97065cffcd4b476003ae279ff7"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a47c3eb97065cffcd4b476003ae279ff7">calculate_pressure_power&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a47c3eb97065cffcd4b476003ae279ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fdeb734c095381e3f76817c62f7245"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ac3fdeb734c095381e3f76817c62f7245">calculate_pressure_power&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:ac3fdeb734c095381e3f76817c62f7245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a843304275f4bd72f7c485b221c79e3"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a1a843304275f4bd72f7c485b221c79e3">calculate_pressure_power&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a1a843304275f4bd72f7c485b221c79e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37d5de664d0cda07c21f669d440fe7b7"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a37d5de664d0cda07c21f669d440fe7b7">calculate_pressure_power&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a37d5de664d0cda07c21f669d440fe7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79907f63c50bebdccac411942e57b0c"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ab79907f63c50bebdccac411942e57b0c">calculate_pressure_power&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:ab79907f63c50bebdccac411942e57b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2970566392bf1cf6d22557893a9f6a"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:aeb2970566392bf1cf6d22557893a9f6a"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:aeb2970566392bf1cf6d22557893a9f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb3dcb6dcbea59408d152d4b24b708b"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a7fb3dcb6dcbea59408d152d4b24b708b">calculate_viscous_dissipation&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a7fb3dcb6dcbea59408d152d4b24b708b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc678ed4acdac6403de73bfec946b231"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#abc678ed4acdac6403de73bfec946b231">calculate_viscous_dissipation&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:abc678ed4acdac6403de73bfec946b231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a8d6feb239d427fe271abc39833d919"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a2a8d6feb239d427fe271abc39833d919">calculate_viscous_dissipation&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a2a8d6feb239d427fe271abc39833d919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a088c51ec3b78fbae245fb0a7ddf26663"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a088c51ec3b78fbae245fb0a7ddf26663">calculate_viscous_dissipation&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a088c51ec3b78fbae245fb0a7ddf26663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2832480fe6f894a8dc6ace8f38942fb"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ae2832480fe6f894a8dc6ace8f38942fb">calculate_viscous_dissipation&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:ae2832480fe6f894a8dc6ace8f38942fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7689ff20e5c3fc08a4103574dc6ab5f"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#aa7689ff20e5c3fc08a4103574dc6ab5f">calculate_viscous_dissipation&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:aa7689ff20e5c3fc08a4103574dc6ab5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e07b611c2791d19a53166c71c24e6cc"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
 <tr class="memitem:a6e07b611c2791d19a53166c71c24e6cc"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a6e07b611c2791d19a53166c71c24e6cc">calculate_kinetic_energy</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
 <tr class="separator:a6e07b611c2791d19a53166c71c24e6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,51 +250,51 @@ Functions</h2></td></tr>
 <tr class="separator:ac68df5223356846a1538897ab43f0d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae34fc735809da3269e7b5abc1535765a"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ae34fc735809da3269e7b5abc1535765a">calculate_kinetic_energy&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
 <tr class="separator:ae34fc735809da3269e7b5abc1535765a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab737a9d3042e8a6d5552a5c4ca7587e"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
-<tr class="memitem:aab737a9d3042e8a6d5552a5c4ca7587e"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:aab737a9d3042e8a6d5552a5c4ca7587e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae580cc1253cc3fbe93b1917232d24034"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ae580cc1253cc3fbe93b1917232d24034">calculate_apparent_viscosity&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:ae580cc1253cc3fbe93b1917232d24034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e7109a0c69e3f82e3caa87ff13d3186"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a1e7109a0c69e3f82e3caa87ff13d3186">calculate_apparent_viscosity&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:a1e7109a0c69e3f82e3caa87ff13d3186"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b1deba6fc09b6ce68961c0851ad7910"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a9b1deba6fc09b6ce68961c0851ad7910">calculate_apparent_viscosity&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:a9b1deba6fc09b6ce68961c0851ad7910"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d1658864d355b95cf9041dc90803720"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a4d1658864d355b95cf9041dc90803720">calculate_apparent_viscosity&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:a4d1658864d355b95cf9041dc90803720"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac86d37e9fa83f91d464457cd566d3cbc"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ac86d37e9fa83f91d464457cd566d3cbc">calculate_apparent_viscosity&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:ac86d37e9fa83f91d464457cd566d3cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01ba16fb37d5002a46897da6661986d3"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a01ba16fb37d5002a46897da6661986d3">calculate_apparent_viscosity&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
-<tr class="separator:a01ba16fb37d5002a46897da6661986d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4176bbc905ba1767b7a71b41fa792f91"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
-<tr class="memitem:a4176bbc905ba1767b7a71b41fa792f91"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; Tensor&lt; 1, dim &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; dim &gt; &amp;boundary_conditions, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
-<tr class="separator:a4176bbc905ba1767b7a71b41fa792f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abab9129fddc96321e2664cf291c6ac9f"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#abab9129fddc96321e2664cf291c6ac9f">calculate_forces&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:abab9129fddc96321e2664cf291c6ac9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65a628be702f24c2a388c0b1e59bda95"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a65a628be702f24c2a388c0b1e59bda95">calculate_forces&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a65a628be702f24c2a388c0b1e59bda95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a397dd581413a1ad101921bff89e03d83"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a397dd581413a1ad101921bff89e03d83">calculate_forces&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a397dd581413a1ad101921bff89e03d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94874f7de9bc318953dfd6b1fdfc4f88"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a94874f7de9bc318953dfd6b1fdfc4f88">calculate_forces&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a94874f7de9bc318953dfd6b1fdfc4f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73c357995713a9408de3da1065acc6e5"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a73c357995713a9408de3da1065acc6e5">calculate_forces&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a73c357995713a9408de3da1065acc6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9638e053c62077e73af2938c4c130601"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a9638e053c62077e73af2938c4c130601">calculate_forces&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a9638e053c62077e73af2938c4c130601"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2a9eb8fd27cb6ade3a8e928b5270367"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
-<tr class="memitem:aa2a9eb8fd27cb6ade3a8e928b5270367"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; dim &gt; &amp;boundary_conditions, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
-<tr class="separator:aa2a9eb8fd27cb6ade3a8e928b5270367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a734b9d1737ed3372ca6501e3a6119057"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a734b9d1737ed3372ca6501e3a6119057">calculate_torques&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a734b9d1737ed3372ca6501e3a6119057"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7159c9b3e6b30467ff03701616f8fcd"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ac7159c9b3e6b30467ff03701616f8fcd">calculate_torques&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:ac7159c9b3e6b30467ff03701616f8fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4084b1957710d2afce4ac3cd4c83ef9c"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a4084b1957710d2afce4ac3cd4c83ef9c">calculate_torques&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a4084b1957710d2afce4ac3cd4c83ef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8adc61adbb28b7a15fdbd881547b89a9"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a8adc61adbb28b7a15fdbd881547b89a9">calculate_torques&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a8adc61adbb28b7a15fdbd881547b89a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3355a3b22f34142e341bcf466abb6bb1"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a3355a3b22f34142e341bcf466abb6bb1">calculate_torques&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
-<tr class="separator:a3355a3b22f34142e341bcf466abb6bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba91c362bfe45a44f0c95e7f822a3c52"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#aba91c362bfe45a44f0c95e7f822a3c52">calculate_torques&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
-<tr class="separator:aba91c362bfe45a44f0c95e7f822a3c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a435a5183c6ea1ba3055d9d24b1a699da"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:a435a5183c6ea1ba3055d9d24b1a699da"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a435a5183c6ea1ba3055d9d24b1a699da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8b143e22e5ba771ff4f7af229ed8773"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ab8b143e22e5ba771ff4f7af229ed8773">calculate_apparent_viscosity&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:ab8b143e22e5ba771ff4f7af229ed8773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a065e3a4d44c033b07c21416f22bb2b5d"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a065e3a4d44c033b07c21416f22bb2b5d">calculate_apparent_viscosity&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a065e3a4d44c033b07c21416f22bb2b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52fe2754f01e0707c30f16981c941a8"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ab52fe2754f01e0707c30f16981c941a8">calculate_apparent_viscosity&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:ab52fe2754f01e0707c30f16981c941a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227b48f437b76db5cd8b840e3043cee3"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a227b48f437b76db5cd8b840e3043cee3">calculate_apparent_viscosity&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a227b48f437b76db5cd8b840e3043cee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d9206a1407abc8efd5258903b0cc9c"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#ae4d9206a1407abc8efd5258903b0cc9c">calculate_apparent_viscosity&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 2 &gt; &amp;quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:ae4d9206a1407abc8efd5258903b0cc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f192b5b1d3fe1339c90c7bc442979e7"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a2f192b5b1d3fe1339c90c7bc442979e7">calculate_apparent_viscosity&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const Quadrature&lt; 3 &gt; &amp;quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager)</td></tr>
+<tr class="separator:a2f192b5b1d3fe1339c90c7bc442979e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfdc02addc37b6d8043c1c2d5a17fd36"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:abfdc02addc37b6d8043c1c2d5a17fd36"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; Tensor&lt; 1, dim &gt; &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; dim &gt; &amp;boundary_conditions, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
+<tr class="separator:abfdc02addc37b6d8043c1c2d5a17fd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46807ae4ab715926f58a5cc6cbaebd4e"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a46807ae4ab715926f58a5cc6cbaebd4e">calculate_forces&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a46807ae4ab715926f58a5cc6cbaebd4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a448d7c71b927846371ca5914982f03b5"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a448d7c71b927846371ca5914982f03b5">calculate_forces&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a448d7c71b927846371ca5914982f03b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72aa7290a5b26d633e3b0f828f6858e2"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a72aa7290a5b26d633e3b0f828f6858e2">calculate_forces&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a72aa7290a5b26d633e3b0f828f6858e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7e9cfa4537ea6f999eb37e2ddc56cc"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#acb7e9cfa4537ea6f999eb37e2ddc56cc">calculate_forces&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:acb7e9cfa4537ea6f999eb37e2ddc56cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af433602fa0a96199453eac06c270b058"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 2 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#af433602fa0a96199453eac06c270b058">calculate_forces&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:af433602fa0a96199453eac06c270b058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcff32518a7fe9bd1590a94b624c6632"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; Tensor&lt; 1, 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#afcff32518a7fe9bd1590a94b624c6632">calculate_forces&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:afcff32518a7fe9bd1590a94b624c6632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474051d783a95c2eb98bd6ca4b8ba17b"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
+<tr class="memitem:a474051d783a95c2eb98bd6ca4b8ba17b"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; dim &gt; &amp;boundary_conditions, const Quadrature&lt; dim - 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
+<tr class="separator:a474051d783a95c2eb98bd6ca4b8ba17b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6145169499fe0879c5947a844cdb9d"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#abe6145169499fe0879c5947a844cdb9d">calculate_torques&lt; 2, GlobalVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:abe6145169499fe0879c5947a844cdb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b4e85af5b7314f67a47936286df7968"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a6b4e85af5b7314f67a47936286df7968">calculate_torques&lt; 3, GlobalVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a6b4e85af5b7314f67a47936286df7968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08d176015da9afc5dc700b94d21e3902"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a08d176015da9afc5dc700b94d21e3902">calculate_torques&lt; 2, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a08d176015da9afc5dc700b94d21e3902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986ef923cd52eba4369258139d55110c"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a986ef923cd52eba4369258139d55110c">calculate_torques&lt; 3, GlobalBlockVectorType &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a986ef923cd52eba4369258139d55110c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2afe04ff09384ca11aad88c0b1693b76"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a2afe04ff09384ca11aad88c0b1693b76">calculate_torques&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 2 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 2 &gt; &amp;boundary_conditions, const Quadrature&lt; 1 &gt; &amp;face_quadrature_formula, const Mapping&lt; 2 &gt; &amp;mapping)</td></tr>
+<tr class="separator:a2afe04ff09384ca11aad88c0b1693b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe5bbf4a2fbf4cb178c5425477fd842"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; Tensor&lt; 1, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#adbe5bbf4a2fbf4cb178c5425477fd842">calculate_torques&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;</a> (const DoFHandler&lt; 3 &gt; &amp;dof_handler, const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;evaluation_point, const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;properties_manager, const <a class="el" href="classBoundaryConditions_1_1NSBoundaryConditions.html">BoundaryConditions::NSBoundaryConditions</a>&lt; 3 &gt; &amp;boundary_conditions, const Quadrature&lt; 2 &gt; &amp;face_quadrature_formula, const Mapping&lt; 3 &gt; &amp;mapping)</td></tr>
+<tr class="separator:adbe5bbf4a2fbf4cb178c5425477fd842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e5072b6f6abdda7c5ef07e0b866f19"><td class="memTemplParams" colspan="2">template&lt;int dim, typename VectorType &gt; </td></tr>
 <tr class="memitem:a02e5072b6f6abdda7c5ef07e0b866f19"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="postprocessing__cfd_8cc.html#a02e5072b6f6abdda7c5ef07e0b866f19">calculate_L2_error</a> (const DoFHandler&lt; dim &gt; &amp;dof_handler, const VectorType &amp;evaluation_point, const Function&lt; dim &gt; *exact_solution, const Quadrature&lt; dim &gt; &amp;quadrature_formula, const Mapping&lt; dim &gt; &amp;mapping)</td></tr>
 <tr class="separator:a02e5072b6f6abdda7c5ef07e0b866f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,8 +349,8 @@ Functions</h2></td></tr>
 <tr class="separator:aba0447e7cad79c9fd0c45cd1e75fe10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aab737a9d3042e8a6d5552a5c4ca7587e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab737a9d3042e8a6d5552a5c4ca7587e">&#9670;&nbsp;</a></span>calculate_apparent_viscosity()</h2>
+<a id="a435a5183c6ea1ba3055d9d24b1a699da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435a5183c6ea1ba3055d9d24b1a699da">&#9670;&nbsp;</a></span>calculate_apparent_viscosity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -354,7 +384,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -378,20 +408,20 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00540">540</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00752">752</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00695">calculate_shear_rate_magnitude()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00151">PhysicalPropertiesManager::get_rheology()</a>, and <a class="el" href="physical__property__model_8h_source.html#l00052">shear_rate</a>.</p>
+<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00695">calculate_shear_rate_magnitude()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00151">PhysicalPropertiesManager::get_rheology()</a>, <a class="el" href="physical__property__model_8h_source.html#l00052">shear_rate</a>, and <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.</p>
 
 </div>
 </div>
-<a id="a9b1deba6fc09b6ce68961c0851ad7910"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b1deba6fc09b6ce68961c0851ad7910">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, GlobalBlockVectorType &gt;()</h2>
+<a id="ab52fe2754f01e0707c30f16981c941a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52fe2754f01e0707c30f16981c941a8">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -417,7 +447,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -430,14 +460,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="ae580cc1253cc3fbe93b1917232d24034"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae580cc1253cc3fbe93b1917232d24034">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, GlobalVectorType &gt;()</h2>
+<a id="ab8b143e22e5ba771ff4f7af229ed8773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b143e22e5ba771ff4f7af229ed8773">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -463,7 +493,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -476,14 +506,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="ac86d37e9fa83f91d464457cd566d3cbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac86d37e9fa83f91d464457cd566d3cbc">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="ae4d9206a1407abc8efd5258903b0cc9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d9206a1407abc8efd5258903b0cc9c">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -509,7 +539,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -522,14 +552,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a4d1658864d355b95cf9041dc90803720"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d1658864d355b95cf9041dc90803720">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, GlobalBlockVectorType &gt;()</h2>
+<a id="a227b48f437b76db5cd8b840e3043cee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227b48f437b76db5cd8b840e3043cee3">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -555,7 +585,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -568,14 +598,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a1e7109a0c69e3f82e3caa87ff13d3186"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e7109a0c69e3f82e3caa87ff13d3186">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, GlobalVectorType &gt;()</h2>
+<a id="a065e3a4d44c033b07c21416f22bb2b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a065e3a4d44c033b07c21416f22bb2b5d">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -601,7 +631,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -614,14 +644,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a01ba16fb37d5002a46897da6661986d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01ba16fb37d5002a46897da6661986d3">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="a2f192b5b1d3fe1339c90c7bc442979e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f192b5b1d3fe1339c90c7bc442979e7">&#9670;&nbsp;</a></span>calculate_apparent_viscosity&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aab737a9d3042e8a6d5552a5c4ca7587e">calculate_apparent_viscosity</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a435a5183c6ea1ba3055d9d24b1a699da">calculate_apparent_viscosity</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -647,7 +677,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
@@ -1125,7 +1155,7 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01347">1347</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01559">1559</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 </div>
 </div>
@@ -1187,9 +1217,9 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01280">1280</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01492">1492</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="postprocessing__cfd_8cc_source.html#l01175">calculate_flow_rate()</a>.</p>
+<p class="reference">References <a class="el" href="postprocessing__cfd_8cc_source.html#l01387">calculate_flow_rate()</a>.</p>
 
 </div>
 </div>
@@ -2161,12 +2191,12 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01175">1175</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01387">1387</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 </div>
 </div>
-<a id="a4176bbc905ba1767b7a71b41fa792f91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4176bbc905ba1767b7a71b41fa792f91">&#9670;&nbsp;</a></span>calculate_forces()</h2>
+<a id="abfdc02addc37b6d8043c1c2d5a17fd36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfdc02addc37b6d8043c1c2d5a17fd36">&#9670;&nbsp;</a></span>calculate_forces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2188,7 +2218,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2231,20 +2261,20 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00665">665</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00877">877</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00695">calculate_shear_rate_magnitude()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00151">PhysicalPropertiesManager::get_rheology()</a>, <a class="el" href="boundary__conditions_8h_source.html#l00079">BoundaryConditions::BoundaryConditions&lt; dim &gt;::id</a>, <a class="el" href="physical__property__model_8h_source.html#l00056">pressure</a>, <a class="el" href="physical__property__model_8h_source.html#l00052">shear_rate</a>, and <a class="el" href="boundary__conditions_8h_source.html#l00092">BoundaryConditions::BoundaryConditions&lt; dim &gt;::size</a>.</p>
 
 </div>
 </div>
-<a id="a397dd581413a1ad101921bff89e03d83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a397dd581413a1ad101921bff89e03d83">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, GlobalBlockVectorType &gt;()</h2>
+<a id="a72aa7290a5b26d633e3b0f828f6858e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72aa7290a5b26d633e3b0f828f6858e2">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2258,7 +2288,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2289,14 +2319,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="abab9129fddc96321e2664cf291c6ac9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abab9129fddc96321e2664cf291c6ac9f">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, GlobalVectorType &gt;()</h2>
+<a id="a46807ae4ab715926f58a5cc6cbaebd4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46807ae4ab715926f58a5cc6cbaebd4e">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2310,7 +2340,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2341,14 +2371,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a73c357995713a9408de3da1065acc6e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73c357995713a9408de3da1065acc6e5">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="af433602fa0a96199453eac06c270b058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af433602fa0a96199453eac06c270b058">&#9670;&nbsp;</a></span>calculate_forces&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 2&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2362,7 +2392,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2393,14 +2423,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a94874f7de9bc318953dfd6b1fdfc4f88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94874f7de9bc318953dfd6b1fdfc4f88">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, GlobalBlockVectorType &gt;()</h2>
+<a id="acb7e9cfa4537ea6f999eb37e2ddc56cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb7e9cfa4537ea6f999eb37e2ddc56cc">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2414,7 +2444,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2445,14 +2475,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a65a628be702f24c2a388c0b1e59bda95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65a628be702f24c2a388c0b1e59bda95">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, GlobalVectorType &gt;()</h2>
+<a id="a448d7c71b927846371ca5914982f03b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a448d7c71b927846371ca5914982f03b5">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2466,7 +2496,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2497,14 +2527,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a9638e053c62077e73af2938c4c130601"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9638e053c62077e73af2938c4c130601">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="afcff32518a7fe9bd1590a94b624c6632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcff32518a7fe9bd1590a94b624c6632">&#9670;&nbsp;</a></span>calculate_forces&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a4176bbc905ba1767b7a71b41fa792f91">calculate_forces</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::vector&lt;std::vector&lt;Tensor&lt;1, 3&gt; &gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#abfdc02addc37b6d8043c1c2d5a17fd36">calculate_forces</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -2518,7 +2548,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -2593,15 +2623,15 @@ template&lt;int dim, typename VectorType &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>average kinetic energy in the domain Post-processing function <a class="el" href="classThis.html">This</a> function calculates the average kinetic energy in the simulation domain</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dof_handler</td><td>The dof_handler used for the calculation</td></tr>
-    <tr><td class="paramname">evaluation_point</td><td>The solution at which the force is calculated</td></tr>
-    <tr><td class="paramname">quadrature_formula</td><td>The quadrature formula for the calculation</td></tr>
-    <tr><td class="paramname">mapping</td><td>The mapping of the simulation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dof_handler</td><td>The dof_handler used for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluation_point</td><td>The solution for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_formula</td><td>The quadrature formula for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping of the simulation </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00443">443</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00655">655</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 </div>
 </div>
@@ -3180,14 +3210,14 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01016">1016</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01228">1228</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00056">pressure</a>.</p>
 
 </div>
 </div>
-<a id="a9f21676d8d00e49763d1c0ea39550d9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f21676d8d00e49763d1c0ea39550d9c">&#9670;&nbsp;</a></span>calculate_pressure_drop()</h2>
+<a id="ad1a6fe6ace2b66d05ad7f7461dff8c46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1a6fe6ace2b66d05ad7f7461dff8c46">&#9670;&nbsp;</a></span>calculate_pressure_drop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3203,7 +3233,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; dim &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; dim &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3265,14 +3295,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a2923b3ec8c8ce1dfd6ef849608b51d94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2923b3ec8c8ce1dfd6ef849608b51d94">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, GlobalBlockVectorType &gt;()</h2>
+<a id="a22018621664f9057fdc0384be1647ae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22018621664f9057fdc0384be1647ae6">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3280,7 +3310,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3323,14 +3353,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a6ad5236036c20b6b24794ba9900f06fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ad5236036c20b6b24794ba9900f06fc">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, GlobalVectorType &gt;()</h2>
+<a id="a440ce773cd558059d58108e11a205125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a440ce773cd558059d58108e11a205125">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3338,7 +3368,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3381,14 +3411,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a036e8824481b493821543da020bd2388"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a036e8824481b493821543da020bd2388">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="acc44f60c111ffa093075f20d4046329e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc44f60c111ffa093075f20d4046329e">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3396,7 +3426,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 2 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3439,14 +3469,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a9a2ff1eee8094a2734181574843553f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a2ff1eee8094a2734181574843553f9">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, GlobalBlockVectorType &gt;()</h2>
+<a id="a6656a4faefd1123edb62182ec808471d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6656a4faefd1123edb62182ec808471d">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3454,7 +3484,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3497,14 +3527,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a86ba76cc9b52aa9fb098ab62823148cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86ba76cc9b52aa9fb098ab62823148cf">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, GlobalVectorType &gt;()</h2>
+<a id="a285e7138a2c7ecddd6f3216c1abe7002"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a285e7138a2c7ecddd6f3216c1abe7002">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3512,7 +3542,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3555,14 +3585,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="ae72e3a5ba53297770279bfc1a5f9c78a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae72e3a5ba53297770279bfc1a5f9c78a">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="ac2946f09ba4a716d1f83fceff85b009f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2946f09ba4a716d1f83fceff85b009f">&#9670;&nbsp;</a></span>calculate_pressure_drop&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#a9f21676d8d00e49763d1c0ea39550d9c">calculate_pressure_drop</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::pair&lt;double, double&gt; <a class="el" href="postprocessing__cfd_8cc.html#ad1a6fe6ace2b66d05ad7f7461dff8c46">calculate_pressure_drop</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3570,7 +3600,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; Mapping&lt; 3 &gt;&gt;&#160;</td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>, </td>
         </tr>
         <tr>
@@ -3613,8 +3643,306 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="aa2a9eb8fd27cb6ade3a8e928b5270367"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2a9eb8fd27cb6ade3a8e928b5270367">&#9670;&nbsp;</a></span>calculate_torques()</h2>
+<a id="a0b1f61ed52d8cbc4dbf70848099af8f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b1f61ed52d8cbc4dbf70848099af8f9">&#9670;&nbsp;</a></span>calculate_pressure_power()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim, typename VectorType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double calculate_pressure_power </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the average power done by pressure in the simulation domain. The average power is defined as ∫u.∇pdΩ/∫1dΩ </p>
+<dl class="section return"><dt>Returns</dt><dd>Average power done by pressure in the simulation domain Post-processing function</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dof_handler</td><td>The dof_handler used for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluation_point</td><td>The solution for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_formula</td><td>The quadrature formula for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping of the simulation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00443">443</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="physical__property__model_8h_source.html#l00056">pressure</a>, and <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.</p>
+
+</div>
+</div>
+<a id="ac3fdeb734c095381e3f76817c62f7245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3fdeb734c095381e3f76817c62f7245">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 2, GlobalBlockVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32289d6b4baeb2686b169655e69234be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32289d6b4baeb2686b169655e69234be">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 2, GlobalVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37d5de664d0cda07c21f669d440fe7b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37d5de664d0cda07c21f669d440fe7b7">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a843304275f4bd72f7c485b221c79e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a843304275f4bd72f7c485b221c79e3">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 3, GlobalBlockVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47c3eb97065cffcd4b476003ae279ff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47c3eb97065cffcd4b476003ae279ff7">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 3, GlobalVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab79907f63c50bebdccac411942e57b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79907f63c50bebdccac411942e57b0c">&#9670;&nbsp;</a></span>calculate_pressure_power&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#a0b1f61ed52d8cbc4dbf70848099af8f9">calculate_pressure_power</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a474051d783a95c2eb98bd6ca4b8ba17b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474051d783a95c2eb98bd6ca4b8ba17b">&#9670;&nbsp;</a></span>calculate_torques()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3636,7 +3964,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3679,20 +4007,20 @@ template&lt;int dim, typename VectorType &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00845">845</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l01057">1057</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
 
 <p class="reference">References <a class="el" href="boundary__conditions_8h_source.html#l00162">BoundaryConditions::NSBoundaryConditions&lt; dim &gt;::bcFunctions</a>, <a class="el" href="rheological__model_8h_source.html#l00695">calculate_shear_rate_magnitude()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00151">PhysicalPropertiesManager::get_rheology()</a>, <a class="el" href="boundary__conditions_8h_source.html#l00079">BoundaryConditions::BoundaryConditions&lt; dim &gt;::id</a>, <a class="el" href="physical__property__model_8h_source.html#l00056">pressure</a>, <a class="el" href="physical__property__model_8h_source.html#l00052">shear_rate</a>, and <a class="el" href="boundary__conditions_8h_source.html#l00092">BoundaryConditions::BoundaryConditions&lt; dim &gt;::size</a>.</p>
 
 </div>
 </div>
-<a id="a4084b1957710d2afce4ac3cd4c83ef9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4084b1957710d2afce4ac3cd4c83ef9c">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, GlobalBlockVectorType &gt;()</h2>
+<a id="a08d176015da9afc5dc700b94d21e3902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d176015da9afc5dc700b94d21e3902">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3706,7 +4034,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3737,14 +4065,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a734b9d1737ed3372ca6501e3a6119057"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a734b9d1737ed3372ca6501e3a6119057">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, GlobalVectorType &gt;()</h2>
+<a id="abe6145169499fe0879c5947a844cdb9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6145169499fe0879c5947a844cdb9d">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3758,7 +4086,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3789,14 +4117,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a3355a3b22f34142e341bcf466abb6bb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3355a3b22f34142e341bcf466abb6bb1">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="a2afe04ff09384ca11aad88c0b1693b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2afe04ff09384ca11aad88c0b1693b76">&#9670;&nbsp;</a></span>calculate_torques&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3810,7 +4138,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3841,14 +4169,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="a8adc61adbb28b7a15fdbd881547b89a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8adc61adbb28b7a15fdbd881547b89a9">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, GlobalBlockVectorType &gt;()</h2>
+<a id="a986ef923cd52eba4369258139d55110c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a986ef923cd52eba4369258139d55110c">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, GlobalBlockVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3862,7 +4190,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3893,14 +4221,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="ac7159c9b3e6b30467ff03701616f8fcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7159c9b3e6b30467ff03701616f8fcd">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, GlobalVectorType &gt;()</h2>
+<a id="a6b4e85af5b7314f67a47936286df7968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4e85af5b7314f67a47936286df7968">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, GlobalVectorType &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3914,7 +4242,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3945,14 +4273,14 @@ template&lt;int dim, typename VectorType &gt; </div>
 
 </div>
 </div>
-<a id="aba91c362bfe45a44f0c95e7f822a3c52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba91c362bfe45a44f0c95e7f822a3c52">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+<a id="adbe5bbf4a2fbf4cb178c5425477fd842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe5bbf4a2fbf4cb178c5425477fd842">&#9670;&nbsp;</a></span>calculate_torques&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#aa2a9eb8fd27cb6ade3a8e928b5270367">calculate_torques</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td class="memname">template std::vector&lt;Tensor&lt;1, 3&gt; &gt; <a class="el" href="postprocessing__cfd_8cc.html#a474051d783a95c2eb98bd6ca4b8ba17b">calculate_torques</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
           <td>(</td>
           <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>dof_handler</em>, </td>
@@ -3966,7 +4294,7 @@ template&lt;int dim, typename VectorType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
           <td class="paramname"><em>properties_manager</em>, </td>
         </tr>
         <tr>
@@ -3986,6 +4314,347 @@ template&lt;int dim, typename VectorType &gt; </div>
           <td></td>
           <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
           <td class="paramname"><em>mapping</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb2970566392bf1cf6d22557893a9f6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2970566392bf1cf6d22557893a9f6a">&#9670;&nbsp;</a></span>calculate_viscous_dissipation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim, typename VectorType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double calculate_viscous_dissipation </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VectorType &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the viscous dissipation of kinetic energy which is defined as ∫∇u.τdΩ/∫1dΩ </p>
+<dl class="section return"><dt>Returns</dt><dd>Viscous dissipation of kinetic energy Post-processing function</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dof_handler</td><td>The dof_handler used for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">evaluation_point</td><td>The solution for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_formula</td><td>The quadrature formula for the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping</td><td>The mapping of the simulation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">properties_manager</td><td>Manager for the physical properties used to calculate the kinematic viscosity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="postprocessing__cfd_8cc_source.html#l00538">538</a> of file <a class="el" href="postprocessing__cfd_8cc_source.html">postprocessing_cfd.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rheological__model_8h_source.html#l00695">calculate_shear_rate_magnitude()</a>, <a class="el" href="physical__properties__manager_8h_source.html#l00151">PhysicalPropertiesManager::get_rheology()</a>, <a class="el" href="physical__property__model_8h_source.html#l00052">shear_rate</a>, and <a class="el" href="multiphysics_8h.html#a2cbb04ef215561a69b48772159577fddaac1a453d0cdc1f19d9479ccfaa8b082c">velocity</a>.</p>
+
+</div>
+</div>
+<a id="a2a8d6feb239d427fe271abc39833d919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a8d6feb239d427fe271abc39833d919">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 2, GlobalBlockVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 2, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fb3dcb6dcbea59408d152d4b24b708b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb3dcb6dcbea59408d152d4b24b708b">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 2, GlobalVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 2, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2832480fe6f894a8dc6ace8f38942fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2832480fe6f894a8dc6ace8f38942fb">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 2, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a088c51ec3b78fbae245fb0a7ddf26663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a088c51ec3b78fbae245fb0a7ddf26663">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 3, GlobalBlockVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 3, <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#ac71ba75c5119edae876800f9e80b59e7">GlobalBlockVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc678ed4acdac6403de73bfec946b231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc678ed4acdac6403de73bfec946b231">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 3, GlobalVectorType &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 3, <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="vector_8h.html#a4ea4005d75c88e60bee47d4e79a13a39">GlobalVectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7689ff20e5c3fc08a4103574dc6ab5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7689ff20e5c3fc08a4103574dc6ab5f">&#9670;&nbsp;</a></span>calculate_viscous_dissipation&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template double <a class="el" href="postprocessing__cfd_8cc.html#aeb2970566392bf1cf6d22557893a9f6a">calculate_viscous_dissipation</a>&lt; 3, LinearAlgebra::distributed::Vector&lt; double &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const DoFHandler&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const LinearAlgebra::distributed::Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>evaluation_point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Quadrature&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>quadrature_formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Mapping&lt; 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classPhysicalPropertiesManager.html">PhysicalPropertiesManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties_manager</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

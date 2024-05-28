@@ -451,6 +451,14 @@
   set calculate enstrophy              = false
   set enstrophy name                   = enstrophy
 
+  # Viscous dissipation
+  set calculate viscous dissipation    = false
+  set viscous dissipation name         = viscous_dissipation
+
+  # Pressure power
+  set calculate pressure power         = false
+  set pressure power name              = pressure_power
+
   # Others
   set smoothed output fields           = false
 
@@ -516,17 +524,17 @@ end
 <dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">pressure</span> <span class="pre">drop</span></code>: controls if calculation of the pressure drop from the inlet boundary to the outlet boundary is enabled.</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">inlet</span> <span class="pre">boundary</span> <span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">outlet</span> <span class="pre">boundary</span> <span class="pre">id</span></code>: define the IDs for inlet and outlet boundaries, respectively.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">drop</span> <span class="pre">name</span></code>: output filename for pressure drop calculations.</p></li>
-<li><p>The pressure drop <span class="math notranslate nohighlight">\(\Delta P\)</span> and total pressure drop <span class="math notranslate nohighlight">\(\Delta P_\text{total}\)</span> are calculated as:</p></li>
+<li><p>The pressure drop <span class="math notranslate nohighlight">\(\Delta p\)</span> and total pressure drop <span class="math notranslate nohighlight">\(\Delta p_\text{total}\)</span> are calculated as:</p></li>
 </ul>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\Delta P =  \frac{ \int_{\Gamma_\text{inlet}} P \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} 1 \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} P \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} 1 \mathrm{d} \Gamma}\]</div>
+\[\Delta p =  \frac{ \int_{\Gamma_\text{inlet}} p \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} 1 \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} p \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} 1 \mathrm{d} \Gamma}\]</div>
 </div>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\Delta P_\text{total} =  \frac{ \int_{\Gamma_\text{inlet}} (P + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} (P + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} \mathrm{d} \Gamma}\]</div>
+\[\Delta p_\text{total} =  \frac{ \int_{\Gamma_\text{inlet}} (p + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{inlet}} \mathrm{d} \Gamma} - \frac{ \int_{\Gamma_\text{outlet}} (p + \frac{1}{2} \mathbf{u} \cdot \mathbf{u}) \mathrm{d} \Gamma}{\int_{\Gamma_\text{outlet}} \mathrm{d} \Gamma}\]</div>
 </div>
-<p>with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity  and <span class="math notranslate nohighlight">\(P\)</span> the pressure.</p>
+<p>with <span class="math notranslate nohighlight">\(\Gamma\)</span> representing the boundary, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity  and <span class="math notranslate nohighlight">\(p\)</span> the pressure.</p>
 </dd>
 </dl>
 </li>
@@ -554,6 +562,32 @@ end
 \[\mathcal{E} =  \frac{1}{2 \Omega} \int_{\Omega} \mathbf{\omega} \cdot \mathbf{\omega} \mathrm{d} \Omega\]</div>
 </div>
 <p>with <span class="math notranslate nohighlight">\(\Omega\)</span> representing the volume of the domain and <span class="math notranslate nohighlight">\(\mathbf{\omega}\)</span> the vorticity.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">viscous</span> <span class="pre">dissipation</span></code>: controls if the viscous dissipation is calculated.</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">viscous</span> <span class="pre">dissipation</span> <span class="pre">name</span></code>: output filename for the viscous dissipation calculations.</p></li>
+<li><p>The viscous dissipation is calculated as</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{1}{\Omega} \int_{\Omega} \mathbf{\tau} : \nabla\mathbf{u} \mathrm{d} \Omega\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\Omega\)</span> representing the volume of the domain and <span class="math notranslate nohighlight">\(\mathbf{\tau}\)</span> the deviatoric stress tensor.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate</span> <span class="pre">pressure</span> <span class="pre">power</span></code>: controls if the pressure power is calculated.</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">power</span> <span class="pre">name</span></code>: output filename for the pressure power calculations.</p></li>
+<li><p>The pressure power is calculated as</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{1}{\Omega} \int_{\Omega}  \nabla p \cdot \mathbf{u} \mathrm{d} \Omega\]</div>
+</div>
+<p>with <span class="math notranslate nohighlight">\(\Omega\)</span> representing the volume of the domain, <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> the velocity  and <span class="math notranslate nohighlight">\(p\)</span> the pressure.</p>
 </dd>
 </dl>
 </li>
