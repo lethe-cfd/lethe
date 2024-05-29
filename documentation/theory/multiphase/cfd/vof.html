@@ -441,7 +441,7 @@
 <p>or using <a class="reference external" href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a>:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\partial_t \phi + \partial_i \phi u_i = 0 \quad \forall (x_i,t)\in \Omega\times[0,T]\]</div>
+\[\partial_t \phi + \partial_i (\phi u_i) = 0 \quad \forall (x_i,t)\in \Omega\times[0,T]\]</div>
 </div>
 <p>Developing the second term gives:</p>
 <div class="math-wrapper docutils container">
@@ -452,7 +452,7 @@
 <p>To complete the strong formulation of the problem, let’s impose a no flux boundary condition on <span class="math notranslate nohighlight">\(\partial \Omega\)</span>:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\partial_i \phi n_i= 0 \quad \forall (x_i,t)\in \partial \Omega\times[0,T]\]</div>
+\[(\partial_i \phi) n_i= 0 \quad \forall (x_i,t)\in \partial \Omega\times[0,T]\]</div>
 </div>
 <p>where <span class="math notranslate nohighlight">\(n_i\)</span> represent the outward pointing unit normal vector of <span class="math notranslate nohighlight">\(\partial \Omega\)</span>, i.e., <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>.</p>
 <section id="finite-element-formulation">
@@ -496,19 +496,19 @@
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\begin{split}&amp;\int_\Omega v^h \left( \partial_t \phi^h + \phi^h\partial_i u_i + u_i\partial_i\phi^h\right) d \Omega \\
-&amp;\quad + \sum_k \int_{\Omega_k}\tau_\mathrm{SUPG} u_i\partial_i v^h\left(\partial_t \phi^h + \phi^h\partial_i u_i + u_i\partial_i\phi^h \right) d \Omega_k \\
-&amp;\qquad + \sum_k \int_{\Omega_k}v_\mathrm{DCDD}f_\mathrm{DCDD} \partial_i v^h \partial_i \phi^h  d \Omega_k  = 0\end{split}\]</div>
+&amp;\quad + \sum_k \int_{\Omega_k}\tau_\mathrm{SUPG} (u_i\partial_i v^h)\left(\partial_t \phi^h + \phi^h\partial_i u_i + u_i\partial_i\phi^h \right) d \Omega_k \\
+&amp;\qquad + \sum_k \int_{\Omega_k}v_\mathrm{DCDD} (\partial_i v^h)( f_{\mathrm{DCDD}_ij}\partial_i \phi^h)  d \Omega_k  = 0\end{split}\]</div>
 </div>
 <p>where the first element-wise summation represents the SUPG stabilization term and the second is the shock capturing scheme. The same SUPG stabilization as in the Navier-Stokes finite element formulation is used (see <a class="reference internal" href="../../multiphysics/fluid_dynamics/stabilization.html"><span class="doc">On the Need for Stabilization</span></a>). The terms of the DCDD scheme are:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\begin{split}&amp;v_\mathrm{DCDD} = \frac{1}{2} h^2 \|\mathbf{u}\| \| \nabla \phi^h_\mathrm{old} \| \\
-&amp;f_\mathrm{DCDD} =
-  \frac{\mathbf{u}}{\|\mathbf{u}\| } \frac{\mathbf{u}}{\|\mathbf{u}\|}
+&amp;\mathbf{f}_\mathrm{DCDD} =
+  \frac{\mathbf{u}}{\|\mathbf{u}\| } \otimes \frac{\mathbf{u}}{\|\mathbf{u}\|}
   - \left(\frac{\nabla \phi^h_\mathrm{old}}{\| \nabla \phi^h_\mathrm{old} \|} \cdot \frac{\mathbf{u}}{\|\mathbf{u}\| } \right)^2
-  \frac{\nabla \phi^h_\mathrm{old}}{\| \nabla \phi^h_\mathrm{old} \|} \frac{\nabla \phi^h_\mathrm{old}}{\| \nabla \phi^h_\mathrm{old} \|}\end{split}\]</div>
+  \frac{\nabla \phi^h_\mathrm{old}}{\| \nabla \phi^h_\mathrm{old} \|} \otimes \frac{\nabla \phi^h_\mathrm{old}}{\| \nabla \phi^h_\mathrm{old} \|}\end{split}\]</div>
 </div>
-<p>The term <span class="math notranslate nohighlight">\(v_\mathrm{DCDD}\)</span> ensures that diffusivity is added only where there is a large phase gradient and a non-zero velocity, i.e., where the interface <span class="math notranslate nohighlight">\(\Gamma\)</span> is in motion. The term <span class="math notranslate nohighlight">\(f_\mathrm{DCDD}\)</span> adds diffusivity only in the crosswind direction, since streamline diffusion is already added by the SUPG stabilization.</p>
+<p>The term <span class="math notranslate nohighlight">\(v_\mathrm{DCDD}\)</span> ensures that diffusivity is added only where there is a large phase gradient and a non-zero velocity, i.e., where the interface <span class="math notranslate nohighlight">\(\Gamma\)</span> is in motion. The term <span class="math notranslate nohighlight">\(\mathbf{f}_\mathrm{DCDD}\)</span> adds diffusivity only in the crosswind direction, since streamline diffusion is already added by the SUPG stabilization.</p>
 <p>To avoid a non-linear finite element formulation, the phase gradient of the previous time step <span class="math notranslate nohighlight">\((\phi^h_\mathrm{old})\)</span> is used.</p>
 </section>
 <section id="interface-diffusion-and-sharpening">
