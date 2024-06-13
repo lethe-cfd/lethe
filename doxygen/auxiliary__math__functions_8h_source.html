@@ -94,12 +94,12 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * ---------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="parameters_8h.html">core/parameters.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;cfloat&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef LETHE_AUXILIARY_MATH_FUNCTIONS_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="auxiliary__math__functions_8h.html#a4b6cf8d1e6b800371925dd6233de9532">   21</a></span>&#160;<span class="preprocessor">#  define LETHE_AUXILIARY_MATH_FUNCTIONS_H</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef lethe_auxiliary_math_functions_h</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define lethe_auxiliary_math_functions_h</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * Carries out the calculation of the harmonic mean of two values.</span></div>
@@ -112,12 +112,12 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="auxiliary__math__functions_8h.html#a8ff6bf628f52424c1bf0cfa6530779fe">   32</a></span>&#160;<a class="code" href="auxiliary__math__functions_8h.html#a8ff6bf628f52424c1bf0cfa6530779fe">harmonic_mean</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;value_one, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;value_two)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">return</span> (2 * value_one * value_two / (value_one + value_two + DBL_MIN));</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LETHE_AUXILIARY_MATH_FUNCTIONS_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">return</span> (2 * value_one * value_two /</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;          (value_one + value_two + std::numeric_limits&lt;double&gt;::min()));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aauxiliary__math__functions_8h_html_a8ff6bf628f52424c1bf0cfa6530779fe"><div class="ttname"><a href="auxiliary__math__functions_8h.html#a8ff6bf628f52424c1bf0cfa6530779fe">harmonic_mean</a></div><div class="ttdeci">double harmonic_mean(const double &amp;value_one, const double &amp;value_two)</div><div class="ttdef"><b>Definition:</b> <a href="auxiliary__math__functions_8h_source.html#l00032">auxiliary_math_functions.h:32</a></div></div>
-<div class="ttc" id="aparameters_8h_html"><div class="ttname"><a href="parameters_8h.html">parameters.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
