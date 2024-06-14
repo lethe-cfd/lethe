@@ -428,14 +428,8 @@
 <h1>Lagrangian Physical Properties<a class="headerlink" href="#lagrangian-physical-properties" title="Link to this heading">#</a></h1>
 <p>In this subsection, gravitational acceleration, and the physical properties of the particles and walls are defined. These properties include <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">particle</span> <span class="pre">types</span></code>, and for each type, particle <code class="docutils literal notranslate"><span class="pre">diameter</span></code>, particle <code class="docutils literal notranslate"><span class="pre">density</span></code>, <code class="docutils literal notranslate"><span class="pre">Young's</span> <span class="pre">modulus</span></code> of particle and wall, <code class="docutils literal notranslate"><span class="pre">Poisson</span> <span class="pre">ratio</span></code> of particle and wall, <code class="docutils literal notranslate"><span class="pre">restitution</span> <span class="pre">coefficient</span></code> of particle and wall, <code class="docutils literal notranslate"><span class="pre">friction</span> <span class="pre">coefficient</span></code> of particle and wall and <code class="docutils literal notranslate"><span class="pre">rolling</span> <span class="pre">friction</span> <span class="pre">coefficient</span></code> of particle and wall.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection lagrangian physical properties
-  # Gravitational acceleration in x direction
-  set gx                       = 0.0
-
-  # Gravitational acceleration in y direction
-  set gy                       = 0.0
-
-  # Gravitational acceleration in z direction
-  set gz                       = -9.81
+  # Gravitational acceleration vector
+  set g                       = 0.0, 0.0, 0.0
 
   # Number of particle types
   set number of particle types = 1
@@ -481,7 +475,7 @@ end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">gx</span></code>, <code class="docutils literal notranslate"><span class="pre">gy</span></code>, and <code class="docutils literal notranslate"><span class="pre">gz</span></code> parameters define the gravitational acceleration in <cite>x</cite>, <cite>y</cite>, and <cite>z</cite> directions.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">g</span></code> parameter defines the gravitational acceleration in <cite>x</cite>, <cite>y</cite>, and <cite>z</cite> directions. The deprecated version of this parameter is the 3 parameters <code class="docutils literal notranslate"><span class="pre">gx</span></code>, <code class="docutils literal notranslate"><span class="pre">gy</span></code>, and <code class="docutils literal notranslate"><span class="pre">gz</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">particle</span> <span class="pre">types</span></code> parameter specifies the number of particle types in a simulation. Particles with different sizes, size distributions, and physical properties have to be defined as separate particle types.</p></li>
 <li><p>For each particle type, we have to define a separate subsection (for instance, <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">particle</span> <span class="pre">type</span> <span class="pre">0</span></code>) to specify its physical properties.</p></li>
 </ul>

@@ -483,9 +483,7 @@ end
 <h3>Lagrangian Physical Properties<a class="headerlink" href="#lagrangian-physical-properties" title="Link to this heading">#</a></h3>
 <p>The total number of particles in this simulation is 8000. All particles have a diameter of 10 mm. The particles are relatively stiff, with a Young Modulus of <span class="math notranslate nohighlight">\(E=10^7\)</span> to ensure that the overlap between the bunny drill and the particles does not become sufficiently large to allow particles to <em>jump through</em> the bunny.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection lagrangian physical properties
-  set gx                       = -9.81
-  set gy                       = 0
-  set gz                       = 0
+  set g                        = -9.81, 0, 0
   set number of particle types = 1
   subsection particle type 0
     set size distribution type            = uniform

@@ -477,9 +477,7 @@ end
 <h3>Lagrangian Physical Properties<a class="headerlink" href="#lagrangian-physical-properties" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">number</span></code> of particles (4000) is equal to the specified <code class="docutils literal notranslate"><span class="pre">inserted</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">particles</span> <span class="pre">at</span> <span class="pre">each</span> <span class="pre">time</span> <span class="pre">step</span></code>. This means that all the particles are inserted during the first insertion iteration (if the inserted number of particles fits inside the specified insertion box).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection lagrangian physical properties
-  set gx                       = 0.0
-  set gy                       = 0.0
-  set gz                       = -9.81
+  set g                        = 0.0, 0.0, -9.81
   set number of particle types = 1
   subsection particle type 0
     set size distribution type            = uniform

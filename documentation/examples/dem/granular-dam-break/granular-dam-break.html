@@ -468,9 +468,7 @@ end
 <h3>Lagrangian Physical Properties<a class="headerlink" href="#lagrangian-physical-properties" title="Link to this heading">#</a></h3>
 <p>The particles are mono dispersed with a radius of 0.005 m and a density of 2560 <span class="math notranslate nohighlight">\(kg/m^3\)</span>, respectively. We insert 60k particles to ensure an initial height of 0.2m in order to match the B1 experiment of Evangelista et al.. The friction coefficient and the rolling coefficient are the most important parameters in this simulation, since they control the final repose angle of the particles as well as the speed of the progression of the dam-break flow. Since sand is generally non-spherical, we choose relatively high values for the friction and the rolling friction coefficients.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection lagrangian physical properties
-  set gx                       = 0
-  set gy                       = -9.81
-  set gz                       = 0.0
+  set g                        = 0, -9.81, 0.0
   set number of particle types = 1
   subsection particle type 0
     set size distribution type            = uniform

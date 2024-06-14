@@ -480,9 +480,7 @@ end
 <p>The <code class="docutils literal notranslate"><span class="pre">poisson</span> <span class="pre">ratio</span></code> of both the wall and the particle are being set to 0.3 arbitrarily. The Young’s modulus of the wall is also being set arbitrarily to the high value of 1E12 Pa.</p>
 <p>The following properties are defined in the <code class="docutils literal notranslate"><span class="pre">bouncing_particle_original.tpl</span></code>  according to MFIX DEM02 verification test.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection lagrangian physical properties
-  set gx                       = 0.0
-  set gy                       = 0.0
-  set gz                       = -9.81
+  set g                        = 0.0, 0.0, -9.81
   set number of particle types = 1
   subsection particle type 0
     set size distribution type            = uniform

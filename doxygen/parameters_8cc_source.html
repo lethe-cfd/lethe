@@ -3840,32 +3840,66 @@ $(function() {
 <div class="line"><a name="l03759"></a><span class="lineno"> 3759</span>&#160;  }</div>
 <div class="line"><a name="l03760"></a><span class="lineno"> 3760</span>&#160; </div>
 <div class="line"><a name="l03761"></a><span class="lineno"> 3761</span>&#160;  Tensor&lt;1, 3&gt;</div>
-<div class="line"><a name="l03762"></a><span class="lineno"><a class="line" href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447"> 3762</a></span>&#160;  <a class="code" href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447">entry_string_to_tensor3</a>(ParameterHandler  &amp;prm,</div>
-<div class="line"><a name="l03763"></a><span class="lineno"> 3763</span>&#160;                          <span class="keyword">const</span> std::string &amp;entry_string)</div>
-<div class="line"><a name="l03764"></a><span class="lineno"> 3764</span>&#160;  {</div>
-<div class="line"><a name="l03765"></a><span class="lineno"> 3765</span>&#160;    std::string              full_str = prm.get(entry_string);</div>
-<div class="line"><a name="l03766"></a><span class="lineno"> 3766</span>&#160;    std::vector&lt;std::string&gt; vector_of_string(</div>
-<div class="line"><a name="l03767"></a><span class="lineno"> 3767</span>&#160;      Utilities::split_string_list(full_str));</div>
-<div class="line"><a name="l03768"></a><span class="lineno"> 3768</span>&#160;    std::vector&lt;double&gt; vector_of_double =</div>
-<div class="line"><a name="l03769"></a><span class="lineno"> 3769</span>&#160;      Utilities::string_to_double(vector_of_string);</div>
-<div class="line"><a name="l03770"></a><span class="lineno"> 3770</span>&#160; </div>
-<div class="line"><a name="l03771"></a><span class="lineno"> 3771</span>&#160;    AssertThrow(vector_of_double.size() == 3,</div>
-<div class="line"><a name="l03772"></a><span class="lineno"> 3772</span>&#160;                ExcMessage(</div>
-<div class="line"><a name="l03773"></a><span class="lineno"> 3773</span>&#160;                  <span class="stringliteral">&quot;Invalid &quot;</span> + entry_string +</div>
-<div class="line"><a name="l03774"></a><span class="lineno"> 3774</span>&#160;                  <span class="stringliteral">&quot;. This should be a three dimensional vector or point.&quot;</span>));</div>
-<div class="line"><a name="l03775"></a><span class="lineno"> 3775</span>&#160; </div>
-<div class="line"><a name="l03776"></a><span class="lineno"> 3776</span>&#160;    Tensor&lt;1, 3&gt; output_tensor;</div>
-<div class="line"><a name="l03777"></a><span class="lineno"> 3777</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; 3; ++i)</div>
-<div class="line"><a name="l03778"></a><span class="lineno"> 3778</span>&#160;      output_tensor[i] = vector_of_double[i];</div>
-<div class="line"><a name="l03779"></a><span class="lineno"> 3779</span>&#160; </div>
-<div class="line"><a name="l03780"></a><span class="lineno"> 3780</span>&#160;    <span class="keywordflow">return</span> output_tensor;</div>
-<div class="line"><a name="l03781"></a><span class="lineno"> 3781</span>&#160;  }</div>
-<div class="line"><a name="l03782"></a><span class="lineno"> 3782</span>&#160; </div>
-<div class="line"><a name="l03783"></a><span class="lineno"> 3783</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>Laser&lt;2&gt;;</div>
-<div class="line"><a name="l03784"></a><span class="lineno"> 3784</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>Laser&lt;3&gt;;</div>
-<div class="line"><a name="l03785"></a><span class="lineno"> 3785</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>IBParticles&lt;2&gt;;</div>
-<div class="line"><a name="l03786"></a><span class="lineno"> 3786</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>IBParticles&lt;3&gt;;</div>
-<div class="line"><a name="l03787"></a><span class="lineno"> 3787</span>&#160;} <span class="comment">// namespace Parameters</span></div>
+<div class="line"><a name="l03762"></a><span class="lineno"><a class="line" href="namespaceParameters.html#a0c49c08eb477cb540f57b45db269d0fb"> 3762</a></span>&#160;  <a class="code" href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447">entry_string_to_tensor3</a>(ParameterHandler  &amp;prm,</div>
+<div class="line"><a name="l03763"></a><span class="lineno"> 3763</span>&#160;                          <span class="keyword">const</span> std::string &amp;entry_string,</div>
+<div class="line"><a name="l03764"></a><span class="lineno"> 3764</span>&#160;                          <span class="keyword">const</span> std::string &amp;entry_string_1,</div>
+<div class="line"><a name="l03765"></a><span class="lineno"> 3765</span>&#160;                          <span class="keyword">const</span> std::string &amp;entry_string_2)</div>
+<div class="line"><a name="l03766"></a><span class="lineno"> 3766</span>&#160;  {</div>
+<div class="line"><a name="l03767"></a><span class="lineno"> 3767</span>&#160;    std::string              full_str = prm.get(entry_string);</div>
+<div class="line"><a name="l03768"></a><span class="lineno"> 3768</span>&#160;    std::vector&lt;std::string&gt; vector_of_string(</div>
+<div class="line"><a name="l03769"></a><span class="lineno"> 3769</span>&#160;      Utilities::split_string_list(full_str));</div>
+<div class="line"><a name="l03770"></a><span class="lineno"> 3770</span>&#160;    Tensor&lt;1, 3&gt; output_tensor;</div>
+<div class="line"><a name="l03771"></a><span class="lineno"> 3771</span>&#160; </div>
+<div class="line"><a name="l03772"></a><span class="lineno"> 3772</span>&#160;    <span class="comment">// The used parameter is a list of values</span></div>
+<div class="line"><a name="l03773"></a><span class="lineno"> 3773</span>&#160;    <span class="keywordflow">if</span> (vector_of_string.size() &gt; 1)</div>
+<div class="line"><a name="l03774"></a><span class="lineno"> 3774</span>&#160;      {</div>
+<div class="line"><a name="l03775"></a><span class="lineno"> 3775</span>&#160;        std::vector&lt;double&gt; vector_of_double =</div>
+<div class="line"><a name="l03776"></a><span class="lineno"> 3776</span>&#160;          Utilities::string_to_double(vector_of_string);</div>
+<div class="line"><a name="l03777"></a><span class="lineno"> 3777</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vector_of_double.size(); ++i)</div>
+<div class="line"><a name="l03778"></a><span class="lineno"> 3778</span>&#160;          output_tensor[i] = vector_of_double[i];</div>
+<div class="line"><a name="l03779"></a><span class="lineno"> 3779</span>&#160;      }</div>
+<div class="line"><a name="l03780"></a><span class="lineno"> 3780</span>&#160;    <span class="keywordflow">else</span> <span class="comment">// Depreciated individual entries</span></div>
+<div class="line"><a name="l03781"></a><span class="lineno"> 3781</span>&#160;      {</div>
+<div class="line"><a name="l03782"></a><span class="lineno"> 3782</span>&#160;        <span class="comment">// Since the first parameter is the alias of the new parameter,</span></div>
+<div class="line"><a name="l03783"></a><span class="lineno"> 3783</span>&#160;        <span class="comment">// the value of the first parameter is obtained for its entry</span></div>
+<div class="line"><a name="l03784"></a><span class="lineno"> 3784</span>&#160;        output_tensor[0] = prm.get_double(entry_string);</div>
+<div class="line"><a name="l03785"></a><span class="lineno"> 3785</span>&#160;        output_tensor[1] = prm.get_double(entry_string_1);</div>
+<div class="line"><a name="l03786"></a><span class="lineno"> 3786</span>&#160;        output_tensor[2] = prm.get_double(entry_string_2);</div>
+<div class="line"><a name="l03787"></a><span class="lineno"> 3787</span>&#160;      }</div>
+<div class="line"><a name="l03788"></a><span class="lineno"> 3788</span>&#160; </div>
+<div class="line"><a name="l03789"></a><span class="lineno"> 3789</span>&#160;    <span class="keywordflow">return</span> output_tensor;</div>
+<div class="line"><a name="l03790"></a><span class="lineno"> 3790</span>&#160;  }</div>
+<div class="line"><a name="l03791"></a><span class="lineno"> 3791</span>&#160; </div>
+<div class="line"><a name="l03792"></a><span class="lineno"> 3792</span>&#160;  Tensor&lt;1, 3&gt;</div>
+<div class="line"><a name="l03793"></a><span class="lineno"><a class="line" href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447"> 3793</a></span>&#160;  <a class="code" href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447">entry_string_to_tensor3</a>(ParameterHandler  &amp;prm,</div>
+<div class="line"><a name="l03794"></a><span class="lineno"> 3794</span>&#160;                          <span class="keyword">const</span> std::string &amp;entry_string)</div>
+<div class="line"><a name="l03795"></a><span class="lineno"> 3795</span>&#160;  {</div>
+<div class="line"><a name="l03796"></a><span class="lineno"> 3796</span>&#160;    std::string              full_str = prm.get(entry_string);</div>
+<div class="line"><a name="l03797"></a><span class="lineno"> 3797</span>&#160;    std::vector&lt;std::string&gt; vector_of_string(</div>
+<div class="line"><a name="l03798"></a><span class="lineno"> 3798</span>&#160;      Utilities::split_string_list(full_str));</div>
+<div class="line"><a name="l03799"></a><span class="lineno"> 3799</span>&#160;    std::vector&lt;double&gt; vector_of_double =</div>
+<div class="line"><a name="l03800"></a><span class="lineno"> 3800</span>&#160;      Utilities::string_to_double(vector_of_string);</div>
+<div class="line"><a name="l03801"></a><span class="lineno"> 3801</span>&#160;    Tensor&lt;1, 3&gt; output_tensor;</div>
+<div class="line"><a name="l03802"></a><span class="lineno"> 3802</span>&#160; </div>
+<div class="line"><a name="l03803"></a><span class="lineno"> 3803</span>&#160;    AssertThrow(</div>
+<div class="line"><a name="l03804"></a><span class="lineno"> 3804</span>&#160;      vector_of_double.size() == 3 || vector_of_double.size() == 2,</div>
+<div class="line"><a name="l03805"></a><span class="lineno"> 3805</span>&#160;      ExcMessage(</div>
+<div class="line"><a name="l03806"></a><span class="lineno"> 3806</span>&#160;        <span class="stringliteral">&quot;Invalid &quot;</span> + entry_string +</div>
+<div class="line"><a name="l03807"></a><span class="lineno"> 3807</span>&#160;        <span class="stringliteral">&quot;. This should be a two or three dimensional vector or point.&quot;</span>));</div>
+<div class="line"><a name="l03808"></a><span class="lineno"> 3808</span>&#160; </div>
+<div class="line"><a name="l03809"></a><span class="lineno"> 3809</span>&#160;    <span class="comment">// Assign the values to the tensor, if the vector is dim 2, the third</span></div>
+<div class="line"><a name="l03810"></a><span class="lineno"> 3810</span>&#160;    <span class="comment">// component is 0. by default</span></div>
+<div class="line"><a name="l03811"></a><span class="lineno"> 3811</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vector_of_double.size(); ++i)</div>
+<div class="line"><a name="l03812"></a><span class="lineno"> 3812</span>&#160;      output_tensor[i] = vector_of_double[i];</div>
+<div class="line"><a name="l03813"></a><span class="lineno"> 3813</span>&#160; </div>
+<div class="line"><a name="l03814"></a><span class="lineno"> 3814</span>&#160;    <span class="keywordflow">return</span> output_tensor;</div>
+<div class="line"><a name="l03815"></a><span class="lineno"> 3815</span>&#160;  }</div>
+<div class="line"><a name="l03816"></a><span class="lineno"> 3816</span>&#160; </div>
+<div class="line"><a name="l03817"></a><span class="lineno"> 3817</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>Laser&lt;2&gt;;</div>
+<div class="line"><a name="l03818"></a><span class="lineno"> 3818</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>Laser&lt;3&gt;;</div>
+<div class="line"><a name="l03819"></a><span class="lineno"> 3819</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>IBParticles&lt;2&gt;;</div>
+<div class="line"><a name="l03820"></a><span class="lineno"> 3820</span>&#160;  <span class="keyword">template</span> <span class="keyword">class </span>IBParticles&lt;3&gt;;</div>
+<div class="line"><a name="l03821"></a><span class="lineno"> 3821</span>&#160;} <span class="comment">// namespace Parameters</span></div>
 <div class="ttc" id="aclassParameters_1_1Dimensionality_html"><div class="ttname"><a href="classParameters_1_1Dimensionality.html">Parameters::Dimensionality</a></div><div class="ttdoc">Class used to rescale physical properties for cases where the main dimensions of the problems (Length...</div><div class="ttdef"><b>Definition:</b> <a href="dimensionality_8h_source.html#l00036">dimensionality.h:37</a></div></div>
 <div class="ttc" id="aclassParameters_1_1Dimensionality_html_a1240b4f88b9058e5b5fc3ae8cf28cbb7"><div class="ttname"><a href="classParameters_1_1Dimensionality.html#a1240b4f88b9058e5b5fc3ae8cf28cbb7">Parameters::Dimensionality::specific_heat_scaling</a></div><div class="ttdeci">double specific_heat_scaling</div><div class="ttdef"><b>Definition:</b> <a href="dimensionality_8h_source.html#l00100">dimensionality.h:100</a></div></div>
 <div class="ttc" id="aclassParameters_1_1Dimensionality_html_a320039afb290a0d41880ed9de5dd506b"><div class="ttname"><a href="classParameters_1_1Dimensionality.html#a320039afb290a0d41880ed9de5dd506b">Parameters::Dimensionality::viscosity_scaling</a></div><div class="ttdeci">double viscosity_scaling</div><div class="ttdef"><b>Definition:</b> <a href="dimensionality_8h_source.html#l00099">dimensionality.h:99</a></div></div>
@@ -3958,7 +3992,7 @@ $(function() {
 <div class="ttc" id="anamespaceParameters_html_ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0"><div class="ttname"><a href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a2c7aea4237e25b4f8ee3b0bf77d6fed0">Parameters::Verbosity::verbose</a></div><div class="ttdeci">@ verbose</div></div>
 <div class="ttc" id="anamespaceParameters_html_ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d"><div class="ttname"><a href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26a556966c7830465dc4623d62e32cec31d">Parameters::Verbosity::quiet</a></div><div class="ttdeci">@ quiet</div></div>
 <div class="ttc" id="anamespaceParameters_html_ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52"><div class="ttname"><a href="namespaceParameters.html#ad408350a21239600add83c5e91fcfa26ae5cbb8171b496f26a4488b9e15a0fe52">Parameters::Verbosity::extra_verbose</a></div><div class="ttdeci">@ extra_verbose</div></div>
-<div class="ttc" id="anamespaceParameters_html_ae131fa9ac73a7013e3b40ec3cae4f447"><div class="ttname"><a href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447">Parameters::entry_string_to_tensor3</a></div><div class="ttdeci">Tensor&lt; 1, 3 &gt; entry_string_to_tensor3(ParameterHandler &amp;prm, const std::string &amp;entry_string)</div><div class="ttdoc">Return the tensor of entry entry_string. If the entry is specified in the parameter file,...</div><div class="ttdef"><b>Definition:</b> <a href="parameters_8cc_source.html#l03762">parameters.cc:3762</a></div></div>
+<div class="ttc" id="anamespaceParameters_html_ae131fa9ac73a7013e3b40ec3cae4f447"><div class="ttname"><a href="namespaceParameters.html#ae131fa9ac73a7013e3b40ec3cae4f447">Parameters::entry_string_to_tensor3</a></div><div class="ttdeci">Tensor&lt; 1, 3 &gt; entry_string_to_tensor3(ParameterHandler &amp;prm, const std::string &amp;entry_string)</div><div class="ttdoc">Return the tensor of entry entry_string. If the entry is specified in the parameter file,...</div><div class="ttdef"><b>Definition:</b> <a href="parameters_8cc_source.html#l03793">parameters.cc:3793</a></div></div>
 <div class="ttc" id="aparameters_8cc_html_a3250d5b7d1bdf7a325e45a23e913c9c9"><div class="ttname"><a href="parameters_8cc.html#a3250d5b7d1bdf7a325e45a23e913c9c9">DeclException1</a></div><div class="ttdeci">DeclException1(NumberOfFluidsError, int,&lt;&lt; &quot;Number of fluids: &quot;&lt;&lt; arg1&lt;&lt; &quot; is not 1 (single phase simulation) or 2 (VOF simulation). This is currently not supported.&quot;)</div></div>
 <div class="ttc" id="aparameters_8cc_html_a35e0eb6a0863e27072be64e262145808"><div class="ttname"><a href="parameters_8cc.html#a35e0eb6a0863e27072be64e262145808">DeclException3</a></div><div class="ttdeci">DeclException3(MultipleAdaptationSizeError, std::string, unsigned int, unsigned int,&lt;&lt; &quot;Error in 'mesh adaptation' : number of '&quot;&lt;&lt; arg1&lt;&lt; &quot;' (&quot;&lt;&lt; arg2&lt;&lt; &quot;) does not correspond to the number of 'variables' (&quot;&lt;&lt; arg3&lt;&lt; &quot;)&quot;)</div></div>
 <div class="ttc" id="aparameters_8cc_html_a3628047132d1c3409d531ae12fb8285f"><div class="ttname"><a href="parameters_8cc.html#a3628047132d1c3409d531ae12fb8285f">DeclException2</a></div><div class="ttdeci">DeclException2(PhaseChangeIntervalError, double, double,&lt;&lt; &quot;Liquidus temperature : &quot;&lt;&lt; arg1&lt;&lt; &quot; is not strictly superior to Solidus temperature: &quot;&lt;&lt; arg2&lt;&lt; &quot; The liquidus temperature specific is below or equal to the solidus temperature.&quot;&lt;&lt; &quot; The phase change specific heat model requires that T_liquidus&gt;T_solidus.&quot;)</div></div>
