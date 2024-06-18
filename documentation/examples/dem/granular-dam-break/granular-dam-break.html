@@ -204,7 +204,6 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_mesh.html">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_wall.html">Floating Wall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/insertion_info.html">Insertion Info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/lagrangian_physical_properties.html">Lagrangian Physical Properties</a></li>
@@ -212,6 +211,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/model_parameters.html">Model Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/post-processing.html">Post-processing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/simulation_control.html">Simulation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/solid_objects.html">Solid Objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/test.html">Test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/timer.html">Timer</a></li>
 </ul>
@@ -529,20 +529,22 @@ end
 <h4>Moving Solid Object<a class="headerlink" href="#moving-solid-object" title="Link to this heading">#</a></h4>
 <p>The sluice gate which prevents the particle from floating is made of a 3D surface mesh of a flat wall. This is handled using the solid objects parameters. We insert one solid object which is generated using GMSH. To parametrize the motion of the sluice gate, we set its translational velocity to <span class="math notranslate nohighlight">\(\mathbf{v}=[0,1,0]^T \forall t \in [0.5,0.7]s\)</span> and we keep it static otherwise. This ensures that the sluice gate moves upward between 0.5 and 0.7s and stops moving afterwards. To ensure maximal computational efficiency, it is important to minimize the number of triangles used in the surface meshes that represent moving objects.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection solid objects
-set number of solids = 1
-  subsection solid object 0
-    subsection mesh
-      set type               = gmsh
-      set file name          = square.msh
-      set simplex            = true
-      set initial refinement = 0
-    end
+  subsection solid surfaces
+    set number of solids = 1
+    subsection solid object 0
+      subsection mesh
+        set type               = gmsh
+        set file name          = square.msh
+        set simplex            = true
+        set initial refinement = 0
+      end
 
-    subsection translational velocity
-      set Function expression = 0 ; if(t&gt;0.5,if(t&lt;0.7,1,0),0) ; 0
-    end
-    subsection angular velocity
-      set Function expression = 0 ; 0  ; 0
+      subsection translational velocity
+        set Function expression = 0 ; if(t&gt;0.5,if(t&lt;0.7,1,0),0) ; 0
+      end
+      subsection angular velocity
+        set Function expression = 0 ; 0 ; 0
+      end
     end
   end
 end

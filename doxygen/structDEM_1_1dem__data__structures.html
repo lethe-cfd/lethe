@@ -115,8 +115,10 @@ Public Types</h2></td></tr>
 <tr class="separator:a719904c6b3202732c1ba0d40b949b7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadf0ac9e3930878734ec7aa6996e7a14"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::vector&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#aadf0ac9e3930878734ec7aa6996e7a14">cells_neighbor_list</a></td></tr>
 <tr class="separator:aadf0ac9e3930878734ec7aa6996e7a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefb7f17e5fdd7999939d1486e05cca37"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::vector&lt; std::pair&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator, typename Triangulation&lt; dim - 1, dim &gt;::active_cell_iterator &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#aefb7f17e5fdd7999939d1486e05cca37">floating_mesh_information</a></td></tr>
-<tr class="separator:aefb7f17e5fdd7999939d1486e05cca37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0e5f4a3e12f7e96a0cf8d36824a89c8"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::vector&lt; std::pair&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator, typename Triangulation&lt; dim - 1, dim &gt;::active_cell_iterator &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#ac0e5f4a3e12f7e96a0cf8d36824a89c8">solid_surfaces_mesh_information</a></td></tr>
+<tr class="separator:ac0e5f4a3e12f7e96a0cf8d36824a89c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3b7a91352a2ee5ba5281193647a245"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::vector&lt; std::pair&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator, typename Triangulation&lt; dim, dim &gt;::active_cell_iterator &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#ace3b7a91352a2ee5ba5281193647a245">solid_volumes_mesh_info</a></td></tr>
+<tr class="separator:ace3b7a91352a2ee5ba5281193647a245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca31764301c3fb1880d0a3d90840804"><td class="memItemLeft" align="right" valign="top">typedef ankerl::unordered_dense::map&lt; types::global_cell_index, std::vector&lt; typename Triangulation&lt; dim &gt;::active_cell_iterator &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#a1ca31764301c3fb1880d0a3d90840804">cells_total_neighbor_list</a></td></tr>
 <tr class="separator:a1ca31764301c3fb1880d0a3d90840804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a192fca7d4e3b2efa39a7e32600d2f0e6"><td class="memItemLeft" align="right" valign="top">typedef ankerl::unordered_dense::map&lt; <a class="el" href="namespaceDEM.html#aef67e3518b42018c6fb5db80f6a9c4f7">global_face_id</a>, std::pair&lt; Tensor&lt; 1, 3 &gt;, Point&lt; 3 &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDEM_1_1dem__data__structures.html#a192fca7d4e3b2efa39a7e32600d2f0e6">boundary_points_and_normal_vectors</a></td></tr>
@@ -171,7 +173,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00219">219</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00225">225</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -189,7 +191,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00241">241</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00247">247</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -207,7 +209,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00232">232</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00238">238</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -225,7 +227,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00228">228</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00234">234</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -261,25 +263,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00214">214</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
-
-</div>
-</div>
-<a id="aefb7f17e5fdd7999939d1486e05cca37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefb7f17e5fdd7999939d1486e05cca37">&#9670;&nbsp;</a></span>floating_mesh_information</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef std::vector&lt;std::vector&lt; std::pair&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator, typename Triangulation&lt;dim - 1, dim&gt;::active_cell_iterator&gt; &gt; &gt; <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::<a class="el" href="structDEM_1_1dem__data__structures.html#aefb7f17e5fdd7999939d1486e05cca37">floating_mesh_information</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00208">208</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00220">220</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -513,7 +497,43 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00237">237</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00243">243</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+
+</div>
+</div>
+<a id="ac0e5f4a3e12f7e96a0cf8d36824a89c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0e5f4a3e12f7e96a0cf8d36824a89c8">&#9670;&nbsp;</a></span>solid_surfaces_mesh_information</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;std::vector&lt; std::pair&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator, typename Triangulation&lt;dim - 1, dim&gt;::active_cell_iterator&gt; &gt; &gt; <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::<a class="el" href="structDEM_1_1dem__data__structures.html#ac0e5f4a3e12f7e96a0cf8d36824a89c8">solid_surfaces_mesh_information</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00208">208</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+
+</div>
+</div>
+<a id="ace3b7a91352a2ee5ba5281193647a245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3b7a91352a2ee5ba5281193647a245">&#9670;&nbsp;</a></span>solid_volumes_mesh_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;std::vector&lt; std::pair&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator, typename Triangulation&lt;dim, dim&gt;::active_cell_iterator&gt; &gt; &gt; <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::<a class="el" href="structDEM_1_1dem__data__structures.html#ace3b7a91352a2ee5ba5281193647a245">solid_volumes_mesh_info</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00214">214</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>
@@ -531,7 +551,7 @@ template&lt;int dim&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00224">224</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__containers_8h_source.html#l00230">230</a> of file <a class="el" href="data__containers_8h_source.html">data_containers.h</a>.</p>
 
 </div>
 </div>

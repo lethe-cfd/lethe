@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Floating Wall" href="floating_wall.html" /><link rel="prev" title="Boundary Conditions" href="boundary_conditions.html" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Test" href="test.html" /><link rel="prev" title="Simulation Control" href="simulation_control.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Floating Mesh (Solid Objects) - Lethe documentation</title>
+        <title>Solid Objects - Lethe documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -204,7 +204,6 @@
 </li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="dem.html">Discrete Element Method (DEM)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="floating_wall.html">Floating Wall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="insertion_info.html">Insertion Info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lagrangian_physical_properties.html">Lagrangian Physical Properties</a></li>
@@ -212,6 +211,7 @@
 <li class="toctree-l3"><a class="reference internal" href="model_parameters.html">Model Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="post-processing.html">Post-processing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="simulation_control.html">Simulation Control</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Solid Objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
 </ul>
@@ -424,61 +424,53 @@
           </label>
         </div>
         <article role="main">
-          <section id="floating-mesh-solid-objects">
-<h1>Floating Mesh (Solid Objects)<a class="headerlink" href="#floating-mesh-solid-objects" title="Link to this heading">#</a></h1>
-<p>Floating meshes (solid objects) are finite (limited) auxiliary objects that can be stationary or moving. Rotating impellers, sliding surfaces, and finite stoppers are examples of floating meshes. The main differences between floating meshes and floating walls are:
-1. floating wall is a surface, while a floating mesh can be a volume or a plane
-2. floating wall is infinite, while floating mesh is finite
-3. floating wall is stationary while floating mesh may be stationary or moving.</p>
+          <section id="solid-objects">
+<h1>Solid Objects<a class="headerlink" href="#solid-objects" title="Link to this heading">#</a></h1>
+<p>Solid objects are finite auxiliary objects that can be stationary or in motion. Rotating impellers, sliding surfaces, and finite stoppers are examples of solid objects. The main differences between them and floating walls are:
+1. floating wall is a plane, while a solid object can be either a volume or a surface
+2. floating wall is infinite, while solid object is finite
+3. floating wall is stationary while solid object may be stationary or moving.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>At the moment, solid objects (floating meshes) in Lethe have to be defined using triangular (simplex) meshes. Only triangular 2D meshes of 3D surfaces in 3D DEM simulations are presently supported. Quadrilateral 2D meshes of 3D surfaces and 1D mesh of 2D surfaces are not supported at the moment.</p>
+<p>At the moment, solid objects in Lethe have to be defined using triangular (simplex) meshes. Only triangular 2D meshes of 3D surfaces in simulations are currently supported, meaning that any other meshes will not work.</p>
 </div>
-<p>This subsection explains the solid objects (floating meshes) information. First of all, the <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">solids</span></code> is specified. Then, for each solid object, we need a <code class="docutils literal notranslate"><span class="pre">mesh</span></code> subsection. In these subsections, the <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">refinement</span></code>, and other properties of the objects are defined. Note that <code class="docutils literal notranslate"><span class="pre">simplex</span></code> must be <code class="docutils literal notranslate"><span class="pre">true</span></code> for all the objects since the solid objects are defined using simplex meshes. For more information on mesh subsection, visit <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/mesh.html">CFD mesh</a></p>
+<p>This subsection explains the solid objects information. First of all, the <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">solids</span></code> is specified. Then, for each solid object, we need a <code class="docutils literal notranslate"><span class="pre">mesh</span></code> subsection. In these subsections, the <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">refinement</span></code>, and other properties of the objects are defined. Note that currently, only <code class="docutils literal notranslate"><span class="pre">solid</span> <span class="pre">surfaces</span></code>, meaning <code class="docutils literal notranslate"><span class="pre">dim=2,</span> <span class="pre">spacedim=3</span></code> meshes, are usable. The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> parameter must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> for all <code class="docutils literal notranslate"><span class="pre">solid</span> <span class="pre">surfaces</span></code>. For more information on mesh subsection, visit <a class="reference external" href="https://chaos-polymtl.github.io/lethe/documentation/parameters/cfd/mesh.html">CFD mesh</a></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection solid objects
- # Total number of floating walls
-   set number of solids  = 1
-     subsection solid object 0
-       subsection mesh
-           set type                   = gmsh
-           set file name              = none
-           set simplex                = true
-           set initial refinement     = 0
-           set initial rotation axis  = 1, 0, 0
-           set initial rotation angle = 0
-           set initial translation    = 0, 0, 0
+  subsection solid surfaces
+    # Total number of solid surfaces
+    set number of solids  = 1
+    subsection solid object 0
+      subsection mesh
+        set type                   = gmsh
+        set file name              = none
+        set simplex                = true
+        set initial refinement     = 0
+        set initial rotation axis  = 1, 0, 0
+        set initial rotation angle = 0
+        set initial translation    = 0, 0, 0
+      end
 
-       end
+      subsection translational velocity
+        set Function expression = 0 ; 0 ; 0
+      end
 
-       subsection translational velocity
-           set Function expression = 0 ; 0 ; 0
-       end
+      subsection angular velocity
+        set Function expression = 0 ; 0 ; 0
+      end
 
-       subsection angular velocity
-           set Function expression = 0 ; 0 ; 0
-       end
-
-       subsection center of rotation
-           # X COR
-           set x = 0
-           # Y COR
-           set y = 0
-           # Z COR
-           set z = 0
-       end
-
-       set output solid object = true
-
-   end
+      set center of rotation    = 0., 0., 0.
+      set output solid object = true
+    end
+  end
 end
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">solids</span></code> parameter defines the total number of floating meshes we wish to use during the simulation.</p></li>
-<li><p>For each floating mesh, we need a separate subsection (for instance   <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">solid</span> <span class="pre">object</span> <span class="pre">0</span></code>) in which the information of the floating mesh (<code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">refinement</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">translation</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">axis</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">angle</span></code>  ) is defined. Each component of the <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">translation</span></code> and of the <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">axis</span></code> parameters represent the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> axis. The rotation is apply before the translation.</p></li>
-<li><p>In the subsection <code class="docutils literal notranslate"><span class="pre">translational</span> <span class="pre">velocity</span></code>, we define the translational velocity of the floating mesh.</p></li>
-<li><p>In the subsection <code class="docutils literal notranslate"><span class="pre">angular</span> <span class="pre">velocity</span></code>, we define the angular velocity of the floating mesh.</p></li>
-<li><p>In the subsection <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">of</span> <span class="pre">rotation</span></code>, we define the center of rotation of the solid object (in the case of rotational motion).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">solids</span></code> parameter defines the total number of solid surfaces used during the simulation.</p></li>
+<li><p>For each solid object, we need a separate subsections (for instance   <code class="docutils literal notranslate"><span class="pre">subsection</span> <span class="pre">solid</span> <span class="pre">object</span> <span class="pre">0</span></code>) in which the information of the solid surface 0 (<code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">refinement</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">translation</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">axis</span></code>, <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">angle</span></code>) is defined. Each component of the <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">translation</span></code> and of the <code class="docutils literal notranslate"><span class="pre">initial</span> <span class="pre">rotation</span> <span class="pre">axis</span></code> parameters represent the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> axes. The rotation is applied before the translation.</p></li>
+<li><p>In the subsection <code class="docutils literal notranslate"><span class="pre">translational</span> <span class="pre">velocity</span></code>, we define the translational velocity function of the solid object.</p></li>
+<li><p>In the subsection <code class="docutils literal notranslate"><span class="pre">angular</span> <span class="pre">velocity</span></code>, we define the angular velocity function of the solid object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">of</span> <span class="pre">rotation</span></code> defines the center of rotation of the solid object (in the case of rotational motion) in the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> directions. This center of rotation will move according to the <code class="docutils literal notranslate"><span class="pre">translational</span> <span class="pre">velocity</span></code> parameter.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">solid</span> <span class="pre">object</span></code> defines if we want an output file to be generated for the solid object at every output time step.</p></li>
 </ul>
 </section>
@@ -488,23 +480,23 @@ end
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="floating_wall.html">
+          <a class="next-page" href="test.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Floating Wall</div>
+                <div class="title">Test</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="boundary_conditions.html">
+          <a class="prev-page" href="simulation_control.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Boundary Conditions</div>
+                <div class="title">Simulation Control</div>
                 
               </div>
             </a>

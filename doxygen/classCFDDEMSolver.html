@@ -236,8 +236,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:afb27dd575a8d95f65e23ce0cb3b140d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedf8168ad937f17c24bd4ef7d93cecc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#aedf8168ad937f17c24bd4ef7d93cecc6">boundary_cell_object</a></td></tr>
 <tr class="separator:aedf8168ad937f17c24bd4ef7d93cecc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23462293a329b3d3bf84f193439f5f51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a23462293a329b3d3bf84f193439f5f51">floating_mesh_info</a></td></tr>
-<tr class="separator:a23462293a329b3d3bf84f193439f5f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a35768b5999586ba479fcf7091cf311"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::solid_surfaces_mesh_information&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a3a35768b5999586ba479fcf7091cf311">solid_surfaces_mesh_info</a></td></tr>
+<tr class="separator:a3a35768b5999586ba479fcf7091cf311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82367828c9533cd806958d0716171f86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::boundary_points_and_normal_vectors&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a82367828c9533cd806958d0716171f86">updated_boundary_points_and_normal_vectors</a></td></tr>
 <tr class="separator:a82367828c9533cd806958d0716171f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a2a8243fcdafaa06bd7a4ff877a2e30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::vector_on_boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCFDDEMSolver.html#a3a2a8243fcdafaa06bd7a4ff877a2e30">forces_boundary_information</a></td></tr>
@@ -1866,32 +1866,6 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a23462293a329b3d3bf84f193439f5f51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23462293a329b3d3bf84f193439f5f51">&#9670;&nbsp;</a></span>floating_mesh_info</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;int dim&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt;dim&gt;::floating_mesh_information <a class="el" href="classCFDDEMSolver.html">CFDDEMSolver</a>&lt; dim &gt;::floating_mesh_info</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00326">326</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
-
-</div>
-</div>
 <a id="a4bb632afc28f00ed3539ee2cfa8146a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bb632afc28f00ed3539ee2cfa8146a7">&#9670;&nbsp;</a></span>force</h2>
 
@@ -2539,6 +2513,32 @@ template&lt;int dim&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00311">311</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
+
+</div>
+</div>
+<a id="a3a35768b5999586ba479fcf7091cf311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a35768b5999586ba479fcf7091cf311">&#9670;&nbsp;</a></span>solid_surfaces_mesh_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt;dim&gt;::solid_surfaces_mesh_information <a class="el" href="classCFDDEMSolver.html">CFDDEMSolver</a>&lt; dim &gt;::solid_surfaces_mesh_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cfd__dem__coupling_8h_source.html#l00326">326</a> of file <a class="el" href="cfd__dem__coupling_8h_source.html">cfd_dem_coupling.h</a>.</p>
 
 </div>
 </div>

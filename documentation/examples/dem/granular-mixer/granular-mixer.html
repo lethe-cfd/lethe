@@ -204,7 +204,6 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../parameters/dem/dem.html">Discrete Element Method (DEM)</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_mesh.html">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/floating_wall.html">Floating Wall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/insertion_info.html">Insertion Info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/lagrangian_physical_properties.html">Lagrangian Physical Properties</a></li>
@@ -212,6 +211,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/model_parameters.html">Model Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/post-processing.html">Post-processing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/simulation_control.html">Simulation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/solid_objects.html">Solid Objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/test.html">Test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../parameters/dem/timer.html">Timer</a></li>
 </ul>
@@ -498,29 +498,23 @@ end
 <h3>Solid Objects<a class="headerlink" href="#solid-objects" title="Link to this heading">#</a></h3>
 <p>In this subsection, the floating meshes are defined. We can use dealii or gmsh to create the floating meshes. At the moment, solid objects (floating meshes) in Lethe have to be defined using triangular (simplex) meshes. Only triangular 2D meshes of 3D surfaces in the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> solver are presently supported. Quadrilateral 2D meshes of 3D surfaces and 1D mesh of 2D surfaces are not supported at the moment. For each floating mesh, we need to specify a <code class="docutils literal notranslate"><span class="pre">translational</span> <span class="pre">velocity</span></code>, an <code class="docutils literal notranslate"><span class="pre">angular</span> <span class="pre">velocity</span></code>, and a <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">of</span> <span class="pre">rotation</span></code>. In this example, we only need an angular motion of the impeller. Note that the <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">of</span> <span class="pre">rotation</span></code> of the impeller is at 0, 0, 0.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection solid objects
-  set number of solids = 1
-  subsection solid object 0
-    subsection mesh
-      set type               = gmsh
-      set file name          = pitched-blade-impeller.msh
-      set simplex            = true
-      set initial refinement = 0
-    end
+  subsection solid surfaces
+    set number of solids = 1
+    subsection solid object 0
+      subsection mesh
+        set type               = gmsh
+        set file name          = pitched-blade-impeller.msh
+        set simplex            = true
+        set initial refinement = 0
+      end
 
-    subsection translational velocity
-      set Function expression = 0 ; 0 ; 0
-    end
-    subsection angular velocity
-      set Function expression = if(t&gt;0.5,6,0) ; 0 ; 0
-    end
-
-    subsection center of rotation
-      # X COR
-      set x = 0
-      # Y COR
-      set y = 0
-      # Z COR
-      set z = 0
+      subsection translational velocity
+        set Function expression = 0 ; 0 ; 0
+      end
+      subsection angular velocity
+        set Function expression = if(t&gt;0.5,6,0) ; 0 ; 0
+      end
+      set center of rotation = 0, 0, 0
     end
   end
 end

@@ -85,10 +85,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afac6797f57fd9c3dca66f650b25d77d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#afac6797f57fd9c3dca66f650b25d77d0">execute_cell_neighbors_search</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
-<tr class="separator:afac6797f57fd9c3dca66f650b25d77d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a1aeddb251441a9e3c88afd4fbfe2d080">update_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_floating_mesh=false)</td></tr>
-<tr class="separator:a1aeddb251441a9e3c88afd4fbfe2d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db9d421264610a57a0ee9b53d90b8dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a8db9d421264610a57a0ee9b53d90b8dd">execute_cell_neighbors_search</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_solid_objects=false)</td></tr>
+<tr class="separator:a8db9d421264610a57a0ee9b53d90b8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87fb1b734568886ce4ee1ee3c8d2114"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab87fb1b734568886ce4ee1ee3c8d2114">update_cell_neighbors</a> (const parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">DEM::dem_data_structures</a>&lt; dim &gt;::periodic_boundaries_cells_info periodic_boundaries_cells_information, const bool has_periodic_boundaries=false, const bool has_solid_objects=false)</td></tr>
+<tr class="separator:ab87fb1b734568886ce4ee1ee3c8d2114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5046aa427efefdbd11ed784ecfa45476"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a5046aa427efefdbd11ed784ecfa45476">update_contacts</a> (const bool has_periodic_boundaries=false)</td></tr>
 <tr class="separator:a5046aa427efefdbd11ed784ecfa45476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca1028317167181db0ebce3715fb002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a9ca1028317167181db0ebce3715fb002">update_local_particles_in_cells</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const bool clear_contact_structures, const bool has_periodic_boundaries=false)</td></tr>
@@ -97,14 +97,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2826508b4e77362e1c47bc3f21ea4b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab26817c6b714f73533c8cecdc665a3e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab26817c6b714f73533c8cecdc665a3e5">execute_particle_particle_broad_search</a> (dealii::Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, const <a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt; &amp;sparse_particle_contact_object, const bool has_periodic_boundaries=false)</td></tr>
 <tr class="separator:ab26817c6b714f73533c8cecdc665a3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab89bc870e9adbde380738c2f9b52ca08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab89bc870e9adbde380738c2f9b52ca08">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const bool has_floating_mesh=false)</td></tr>
-<tr class="separator:ab89bc870e9adbde380738c2f9b52ca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe92dba6343f59b3c74d70bfd1e61c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#afe92dba6343f59b3c74d70bfd1e61c8a">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information floating_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const <a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt; &amp;sparse_particle_contact_object, const bool has_floating_mesh=false)</td></tr>
-<tr class="separator:afe92dba6343f59b3c74d70bfd1e61c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3202f28182a836d283523cbc08f2ce42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a3202f28182a836d283523cbc08f2ce42">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::solid_surfaces_mesh_information solid_surfaces_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const bool has_solid_objects=false)</td></tr>
+<tr class="separator:a3202f28182a836d283523cbc08f2ce42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd940c8ecb3593541ad341b56528bc1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#acd940c8ecb3593541ad341b56528bc1d">execute_particle_wall_broad_search</a> (const Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, <a class="el" href="classBoundaryCellsInformation.html">BoundaryCellsInformation</a>&lt; dim &gt; &amp;boundary_cell_object, const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::solid_surfaces_mesh_information solid_surfaces_mesh_info, const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const <a class="el" href="classAdaptiveSparseContacts.html">AdaptiveSparseContacts</a>&lt; dim &gt; &amp;sparse_particle_contact_object, const bool has_solid_objects=false)</td></tr>
+<tr class="separator:acd940c8ecb3593541ad341b56528bc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#ab16dee556cdd33cd8307ee63cd9bb82f">execute_particle_particle_fine_search</a> (const double neighborhood_threshold, const bool has_periodic_boundaries=false, const Tensor&lt; 1, dim &gt; periodic_offset=Tensor&lt; 1, dim &gt;())</td></tr>
 <tr class="separator:ab16dee556cdd33cd8307ee63cd9bb82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb698d9ff443e1ca02793b449da55fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#acb698d9ff443e1ca02793b449da55fe7">execute_particle_wall_fine_search</a> (const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const double neighborhood_threshold, const bool has_floating_mesh=false)</td></tr>
-<tr class="separator:acb698d9ff443e1ca02793b449da55fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2e9d2eb0ca37dc5f0fa6221232872e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDEMContactManager.html#a4b2e9d2eb0ca37dc5f0fa6221232872e">execute_particle_wall_fine_search</a> (const <a class="el" href="classParameters_1_1Lagrangian_1_1FloatingWalls.html">Parameters::Lagrangian::FloatingWalls</a>&lt; dim &gt; &amp;floating_walls, const double simulation_time, const double neighborhood_threshold, const bool has_solid_objects=false)</td></tr>
+<tr class="separator:a4b2e9d2eb0ca37dc5f0fa6221232872e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -193,8 +193,8 @@ class DEMContactManager&lt; dim &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="dem__contact__manager_8h_source.html#l00048">48</a> of file <a class="el" href="dem__contact__manager_8h_source.html">dem_contact_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="afac6797f57fd9c3dca66f650b25d77d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afac6797f57fd9c3dca66f650b25d77d0">&#9670;&nbsp;</a></span>execute_cell_neighbors_search()</h2>
+<a id="a8db9d421264610a57a0ee9b53d90b8dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db9d421264610a57a0ee9b53d90b8dd">&#9670;&nbsp;</a></span>execute_cell_neighbors_search()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,7 +223,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>has_floating_mesh</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>has_solid_objects</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -240,7 +240,7 @@ template&lt;int dim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are enabled (next parameter). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_solid_objects</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
   </table>
   </dd>
 </dl>
@@ -389,8 +389,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="afe92dba6343f59b3c74d70bfd1e61c8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe92dba6343f59b3c74d70bfd1e61c8a">&#9670;&nbsp;</a></span>execute_particle_wall_broad_search() <span class="overload">[1/2]</span></h2>
+<a id="acd940c8ecb3593541ad341b56528bc1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd940c8ecb3593541ad341b56528bc1d">&#9670;&nbsp;</a></span>execute_particle_wall_broad_search() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -412,8 +412,8 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information&#160;</td>
-          <td class="paramname"><em>floating_mesh_info</em>, </td>
+          <td class="paramtype">const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::solid_surfaces_mesh_information&#160;</td>
+          <td class="paramname"><em>solid_surfaces_mesh_info</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -437,7 +437,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>has_floating_mesh</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>has_solid_objects</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -453,11 +453,11 @@ template&lt;int dim&gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">boundary_cells_object</td><td>Information of the boundary cells and faces. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">floating_mesh_info</td><td>Mapping of floating meshes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">solid_surfaces_mesh_info</td><td>Mapping of solid surfaces meshes. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">sparse_particle_contact_object</td><td>Allow to check the mobility status of cells </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow dealing with floating mesh neighbors. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_solid_objects</td><td>Allow dealing with floating mesh neighbors. </td></tr>
   </table>
   </dd>
 </dl>
@@ -468,8 +468,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="ab89bc870e9adbde380738c2f9b52ca08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab89bc870e9adbde380738c2f9b52ca08">&#9670;&nbsp;</a></span>execute_particle_wall_broad_search() <span class="overload">[2/2]</span></h2>
+<a id="a3202f28182a836d283523cbc08f2ce42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3202f28182a836d283523cbc08f2ce42">&#9670;&nbsp;</a></span>execute_particle_wall_broad_search() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,8 +491,8 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::floating_mesh_information&#160;</td>
-          <td class="paramname"><em>floating_mesh_info</em>, </td>
+          <td class="paramtype">const typename <a class="el" href="structDEM_1_1dem__data__structures.html">dem_data_structures</a>&lt; dim &gt;::solid_surfaces_mesh_information&#160;</td>
+          <td class="paramname"><em>solid_surfaces_mesh_info</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -510,7 +510,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>has_floating_mesh</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>has_solid_objects</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -526,10 +526,10 @@ template&lt;int dim&gt; </div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">particle_handler</td><td>Storage of particles and their accessor functions. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">boundary_cells_object</td><td>Information of the boundary cells and faces. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">floating_mesh_info</td><td>Mapping of floating meshes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">solid_surfaces_mesh_info</td><td>Mapping of solid surfaces meshes. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow dealing with floating mesh neighbors. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_solid_objects</td><td>Allow dealing with floating mesh neighbors. </td></tr>
   </table>
   </dd>
 </dl>
@@ -540,8 +540,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="acb698d9ff443e1ca02793b449da55fe7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb698d9ff443e1ca02793b449da55fe7">&#9670;&nbsp;</a></span>execute_particle_wall_fine_search()</h2>
+<a id="a4b2e9d2eb0ca37dc5f0fa6221232872e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b2e9d2eb0ca37dc5f0fa6221232872e">&#9670;&nbsp;</a></span>execute_particle_wall_fine_search()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -570,7 +570,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>has_floating_mesh</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>has_solid_objects</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -587,7 +587,7 @@ template&lt;int dim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">floating_wall</td><td>Properties of the floating walls. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">simulation_time</td><td>Current simulation time. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">neighborhood_threshold</td><td>Threshold value of contact detection. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the fine search with floating meshes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_solid_objects</td><td>Allow the fine search with floating meshes. </td></tr>
   </table>
   </dd>
 </dl>
@@ -598,8 +598,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a1aeddb251441a9e3c88afd4fbfe2d080"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aeddb251441a9e3c88afd4fbfe2d080">&#9670;&nbsp;</a></span>update_cell_neighbors()</h2>
+<a id="ab87fb1b734568886ce4ee1ee3c8d2114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87fb1b734568886ce4ee1ee3c8d2114">&#9670;&nbsp;</a></span>update_cell_neighbors()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -631,7 +631,7 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>has_floating_mesh</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>has_solid_objects</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -652,7 +652,7 @@ template&lt;int dim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">triangulation</td><td>The triangulation to access the information of the cells. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">periodic_boundaries_cells_information</td><td>Information of periodic cells used if periodic boundaries are enabled (next parameter). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">has_periodic_boundaries</td><td>Allow manipulations of periodic containers if required. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">has_floating_mesh</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">has_solid_objects</td><td>Allow the computation of full neighbor lists of active cells computation if required. </td></tr>
   </table>
   </dd>
 </dl>

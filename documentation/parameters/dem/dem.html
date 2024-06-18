@@ -204,7 +204,6 @@
 </li>
 <li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">Discrete Element Method (DEM)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Discrete Element Method (DEM)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="floating_mesh.html">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="floating_wall.html">Floating Wall</a></li>
 <li class="toctree-l3"><a class="reference internal" href="insertion_info.html">Insertion Info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lagrangian_physical_properties.html">Lagrangian Physical Properties</a></li>
@@ -212,6 +211,7 @@
 <li class="toctree-l3"><a class="reference internal" href="model_parameters.html">Model Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="post-processing.html">Post-processing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="simulation_control.html">Simulation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solid_objects.html">Solid Objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">Test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
 </ul>
@@ -426,11 +426,16 @@
         <article role="main">
           <section id="discrete-element-method-dem">
 <h1>Discrete Element Method (DEM)<a class="headerlink" href="#discrete-element-method-dem" title="Link to this heading">#</a></h1>
-<p>The discrete element method (DEM) solver in Lethe is called <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> and supports two-dimensional and three-dimensional simulations. In <code class="docutils literal notranslate"><span class="pre">simulation_control</span></code>, the general simulation parameters (for example, time-step, end time, etc.) are defined. <code class="docutils literal notranslate"><span class="pre">timer</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections are used for timing the classes and functions, and testing the reproducibility of the results. In <code class="docutils literal notranslate"><span class="pre">model_parameters</span></code>, we define the simulation models, including particle-particle and particle-wall contact models. <code class="docutils literal notranslate"><span class="pre">lagrangian_physical_properties</span></code> defines the physical properties of the particles and walls. Insertion information including the dimensions of the insertion box and insertion frequency is defined in the <code class="docutils literal notranslate"><span class="pre">insertion_info</span></code> section. In the <code class="docutils literal notranslate"><span class="pre">floating_walls</span></code> section, we can add flat walls to the simulation domain. <code class="docutils literal notranslate"><span class="pre">mesh</span></code> section defines the simulation triangulation and refinements. In the <code class="docutils literal notranslate"><span class="pre">boundary_conditions</span></code> section, we can define boundaries as outlets, or rotate or slide them.</p>
+<p>The discrete element method (DEM) solver in Lethe is called <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> and supports two-dimensional and three-dimensional simulations. In <code class="docutils literal notranslate"><span class="pre">simulation_control</span></code>, the general simulation parameters (for example, time-step, end time, etc.) are defined. <code class="docutils literal notranslate"><span class="pre">timer</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> sections are used for timing the classes and functions, and testing the reproducibility of the results.
+In <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">parameters</span></code>, we define the simulation models, including particle-particle and particle-wall contact models. <code class="docutils literal notranslate"><span class="pre">lagrangian</span> <span class="pre">physical</span> <span class="pre">properties</span></code> defines the physical properties of the particles and walls.
+Insertion information including the dimensions of the insertion box, insertion frequency, etc. are defined in the <code class="docutils literal notranslate"><span class="pre">insertion</span> <span class="pre">info</span></code> section.
+The``mesh`` section defines the simulation triangulation and refinements.
+In the <code class="docutils literal notranslate"><span class="pre">DEM</span> <span class="pre">boundary</span> <span class="pre">conditions</span></code> section, boundaries can be defined as outlets or they can get periodicity, rotation or translation.
+In the <code class="docutils literal notranslate"><span class="pre">floating</span> <span class="pre">walls</span></code> section, hyperplanes can be added to the simulation domain.
+In the <code class="docutils literal notranslate"><span class="pre">solid</span> <span class="pre">objects</span></code> section, surface meshes can defined and their motion can be controlled.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="floating_mesh.html">Floating Mesh (Solid Objects)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="floating_wall.html">Floating Wall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="insertion_info.html">Insertion Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lagrangian_physical_properties.html">Lagrangian Physical Properties</a></li>
@@ -438,6 +443,7 @@
 <li class="toctree-l1"><a class="reference internal" href="model_parameters.html">Model Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="post-processing.html">Post-processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation_control.html">Simulation Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solid_objects.html">Solid Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test.html">Test</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timer.html">Timer</a></li>
 </ul>

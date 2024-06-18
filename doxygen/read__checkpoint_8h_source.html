@@ -130,11 +130,11 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @param triangulation Triangulation</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @param particle_handler Particle handler</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * @param insertion_object Shared pointer of Insertion type.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * @param solid_objects Vector of solids objects used in DEM simulations</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * @param solid_surfaces Vector of solids surfaces used in DEM simulations</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="read__checkpoint_8h.html#aa461d4204d9702e5fb4799f4c2992bf8">read_checkpoint</a>(</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="read__checkpoint_8h.html#a9054e133f1e31c5036f6e6aa3daeb23f">read_checkpoint</a>(</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  TimerOutput                                             &amp;computing_timer,</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">const</span> <a class="code" href="classDEMSolverParameters.html">DEMSolverParameters&lt;dim&gt;</a>                          &amp;parameters,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  std::shared_ptr&lt;SimulationControl&gt;                      &amp;simulation_control,</div>
@@ -143,7 +143,7 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  parallel::distributed::Triangulation&lt;dim&gt;               &amp;triangulation,</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  Particles::ParticleHandler&lt;dim&gt;                         &amp;particle_handler,</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  std::shared_ptr&lt;<a class="code" href="classInsertion.html">Insertion&lt;dim&gt;</a>&gt;                         &amp;insertion_object,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  std::vector&lt;std::shared_ptr&lt;<a class="code" href="classSerialSolid.html">SerialSolid&lt;dim - 1, dim&gt;</a>&gt;&gt; &amp;solid_objects);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  std::vector&lt;std::shared_ptr&lt;<a class="code" href="classSerialSolid.html">SerialSolid&lt;dim - 1, dim&gt;</a>&gt;&gt; &amp;solid_surfaces);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* read_checkpoint_h */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclassDEMSolverParameters_html"><div class="ttname"><a href="classDEMSolverParameters.html">DEMSolverParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="dem__solver__parameters_8h_source.html#l00030">dem_solver_parameters.h:31</a></div></div>
@@ -153,7 +153,7 @@ $(function() {
 <div class="ttc" id="adem__solver__parameters_8h_html"><div class="ttname"><a href="dem__solver__parameters_8h.html">dem_solver_parameters.h</a></div></div>
 <div class="ttc" id="ainsertion_8h_html"><div class="ttname"><a href="insertion_8h.html">insertion.h</a></div></div>
 <div class="ttc" id="apvd__handler_8h_html"><div class="ttname"><a href="pvd__handler_8h.html">pvd_handler.h</a></div></div>
-<div class="ttc" id="aread__checkpoint_8h_html_aa461d4204d9702e5fb4799f4c2992bf8"><div class="ttname"><a href="read__checkpoint_8h.html#aa461d4204d9702e5fb4799f4c2992bf8">read_checkpoint</a></div><div class="ttdeci">void read_checkpoint(TimerOutput &amp;computing_timer, const DEMSolverParameters&lt; dim &gt; &amp;parameters, std::shared_ptr&lt; SimulationControl &gt; &amp;simulation_control, PVDHandler &amp;particles_pvdhandler, PVDHandler &amp;grid_pvdhandler, parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, std::shared_ptr&lt; Insertion&lt; dim &gt;&gt; &amp;insertion_object, std::vector&lt; std::shared_ptr&lt; SerialSolid&lt; dim - 1, dim &gt;&gt;&gt; &amp;solid_objects)</div><div class="ttdef"><b>Definition:</b> <a href="read__checkpoint_8cc_source.html#l00007">read_checkpoint.cc:7</a></div></div>
+<div class="ttc" id="aread__checkpoint_8h_html_a9054e133f1e31c5036f6e6aa3daeb23f"><div class="ttname"><a href="read__checkpoint_8h.html#a9054e133f1e31c5036f6e6aa3daeb23f">read_checkpoint</a></div><div class="ttdeci">void read_checkpoint(TimerOutput &amp;computing_timer, const DEMSolverParameters&lt; dim &gt; &amp;parameters, std::shared_ptr&lt; SimulationControl &gt; &amp;simulation_control, PVDHandler &amp;particles_pvdhandler, PVDHandler &amp;grid_pvdhandler, parallel::distributed::Triangulation&lt; dim &gt; &amp;triangulation, Particles::ParticleHandler&lt; dim &gt; &amp;particle_handler, std::shared_ptr&lt; Insertion&lt; dim &gt;&gt; &amp;insertion_object, std::vector&lt; std::shared_ptr&lt; SerialSolid&lt; dim - 1, dim &gt;&gt;&gt; &amp;solid_surfaces)</div><div class="ttdef"><b>Definition:</b> <a href="read__checkpoint_8cc_source.html#l00007">read_checkpoint.cc:7</a></div></div>
 <div class="ttc" id="aserial__solid_8h_html"><div class="ttname"><a href="serial__solid_8h.html">serial_solid.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
