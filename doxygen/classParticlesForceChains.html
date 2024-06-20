@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a349d303fe2e101b9cf0073c5987e18b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30cfe45c5addf0d32681e797a4bfce20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChains.html#a30cfe45c5addf0d32681e797a4bfce20">calculate_force_chains</a> (<a class="el" href="classDEMContactManager.html">DEMContactManager</a>&lt; dim &gt; &amp;container_manager) override</td></tr>
 <tr class="separator:a30cfe45c5addf0d32681e797a4bfce20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac271e8dc0f485635644cf59d2acf29dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChains.html#ac271e8dc0f485635644cf59d2acf29dc">write_force_chains</a> (const MPI_Comm mpi_communicator, const std::string folder, const unsigned int iter) override</td></tr>
-<tr class="separator:ac271e8dc0f485635644cf59d2acf29dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2be0d10775607b8f739fa47ff6b1047"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChains.html#af2be0d10775607b8f739fa47ff6b1047">write_force_chains</a> (const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters, <a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;pvd_handler, const MPI_Comm mpi_communicator, const std::string folder, const unsigned int iter, const double time) override</td></tr>
+<tr class="separator:af2be0d10775607b8f739fa47ff6b1047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classParticleParticleContactForce"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classParticleParticleContactForce')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classParticleParticleContactForce.html">ParticleParticleContactForce&lt; dim, force_model, rolling_friction_model &gt;</a></td></tr>
 <tr class="memitem:ad1de51919196f079a4c1647f3eaffe4e inherit pub_methods_classParticleParticleContactForce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleParticleContactForce.html#ad1de51919196f079a4c1647f3eaffe4e">ParticleParticleContactForce</a> (const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters)</td></tr>
 <tr class="separator:ad1de51919196f079a4c1647f3eaffe4e inherit pub_methods_classParticleParticleContactForce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +148,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel force_model, Parameters::Lagrangian::RollingResistanceMethod rolling_friction_model&gt;<br />
 class ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;</h3>
 
-<p>Class that carries out the calculation of particle-particle contact force and the visualization of force chains by writing vtu files. Instead of using a inheritance hiearchy to distinguish between the contact model, the class is templated with the type of force model and rolling friction model. Consequently, the code for each combination of force model is generated at compile time. </p>
+<p>Class that carries out the calculation of particle-particle contact force and the visualization of force chains by writing vtu files, pvtu files and a pvd file. Instead of using a inheritance hiearchy to distinguish between the contact model, the class is templated with the type of force model and rolling friction model. Consequently, the code for each combination of force model is generated at compile time. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">dim</td><td>The dimension of the problem </td></tr>
@@ -158,7 +158,7 @@ class ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;</h3
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00075">75</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00083">83</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a71b41463a5cde1d02fc6928db811dedc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71b41463a5cde1d02fc6928db811dedc">&#9670;&nbsp;</a></span>ParticlesForceChains()</h2>
@@ -180,7 +180,7 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
 
 <p class="definition">Definition at line <a class="el" href="force__chains__visualization_8cc_source.html#l00040">40</a> of file <a class="el" href="force__chains__visualization_8cc_source.html">force_chains_visualization.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="force__chains__visualization_8h_source.html#l00123">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;::force_normal</a>, and <a class="el" href="force__chains__visualization_8h_source.html#l00125">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;::vertices</a>.</p>
+<p class="reference">References <a class="el" href="force__chains__visualization_8h_source.html#l00137">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;::force_normal</a>, and <a class="el" href="force__chains__visualization_8h_source.html#l00139">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;::vertices</a>.</p>
 
 </div>
 </div>
@@ -209,7 +209,7 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel f
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00084">84</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00092">92</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,6 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">container_manager</td><td>The container manager object that contains containers to modify of contact pair periodic candidates with other containers with periodic neighbors lists </td></tr>
-    <tr><td class="paramname">dt</td><td><a class="el" href="namespaceDEM.html">DEM</a> time step </td></tr>
   </table>
   </dd>
 </dl>
@@ -253,7 +252,7 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
 
 <p class="definition">Definition at line <a class="el" href="force__chains__visualization_8cc_source.html#l00077">77</a> of file <a class="el" href="force__chains__visualization_8cc_source.html">force_chains_visualization.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="parameters__lagrangian_8h_source.html#l00039">Parameters::Lagrangian::DMT</a>, <a class="el" href="dem__properties_8h_source.html#l00038">DEM::dp</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00037">Parameters::Lagrangian::hertz</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00038">Parameters::Lagrangian::hertz_JKR</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00035">Parameters::Lagrangian::hertz_mindlin_limit_force</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00036">Parameters::Lagrangian::hertz_mindlin_limit_overlap</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00034">Parameters::Lagrangian::linear</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00346">DEMContactManager&lt; dim &gt;::local_adjacent_particles</a>, and <a class="el" href="tensors__and__points__dimension__manipulation_8h_source.html#l00082">point_nd_to_3d()</a>.</p>
+<p class="reference">References <a class="el" href="parameters__lagrangian_8h_source.html#l00039">Parameters::Lagrangian::DMT</a>, <a class="el" href="dem__properties_8h_source.html#l00038">DEM::dp</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00348">DEMContactManager&lt; dim &gt;::ghost_adjacent_particles</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00037">Parameters::Lagrangian::hertz</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00038">Parameters::Lagrangian::hertz_JKR</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00035">Parameters::Lagrangian::hertz_mindlin_limit_force</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00036">Parameters::Lagrangian::hertz_mindlin_limit_overlap</a>, <a class="el" href="parameters__lagrangian_8h_source.html#l00034">Parameters::Lagrangian::linear</a>, <a class="el" href="dem__contact__manager_8h_source.html#l00346">DEMContactManager&lt; dim &gt;::local_adjacent_particles</a>, and <a class="el" href="tensors__and__points__dimension__manipulation_8h_source.html#l00082">point_nd_to_3d()</a>.</p>
 
 </div>
 </div>
@@ -298,8 +297,8 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
 
 </div>
 </div>
-<a id="ac271e8dc0f485635644cf59d2acf29dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac271e8dc0f485635644cf59d2acf29dc">&#9670;&nbsp;</a></span>write_force_chains()</h2>
+<a id="af2be0d10775607b8f739fa47ff6b1047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2be0d10775607b8f739fa47ff6b1047">&#9670;&nbsp;</a></span>write_force_chains()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -312,6 +311,18 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
         <tr>
           <td class="memname">void <a class="el" href="classParticlesForceChains.html">ParticlesForceChains</a>&lt; dim, contact_model, rolling_friction_model &gt;::write_force_chains </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dem_parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>pvd_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const MPI_Comm&#160;</td>
           <td class="paramname"><em>mpi_communicator</em>, </td>
         </tr>
@@ -325,7 +336,13 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>iter</em>&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -340,19 +357,25 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel c
 </table>
 </div><div class="memdoc">
 
-<p>Output the force chains in a single vtu file for each iteration. </p>
+<p>Output the force chains in VTU and PVTU files for each iteration and a PVD file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">dem_parameters</td><td><a class="el" href="namespaceDEM.html">DEM</a> parameters declared in the .prm file </td></tr>
+    <tr><td class="paramname">pvd_handler</td><td>a <a class="el" href="classPVDHandler.html" title="The PVDHandler class manages the storage of the information required to write pvd file....">PVDHandler</a> to store the information about the file name and time associated with it </td></tr>
     <tr><td class="paramname">mpi_communicator</td><td>The mpi communicator </td></tr>
     <tr><td class="paramname">folder</td><td>a string that contains the path where the results are to be saved </td></tr>
+    <tr><td class="paramname">group_files</td><td>the number of vtu files that will be generated. </td></tr>
     <tr><td class="paramname">iter</td><td>the iteration number associated with the file </td></tr>
+    <tr><td class="paramname">time</td><td>the time associated with the file </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classParticlesForceChainsBase.html#a5f0e6b6953dbf6f56396846797a4fae2">ParticlesForceChainsBase&lt; dim &gt;</a>.</p>
+<p>Implements <a class="el" href="classParticlesForceChainsBase.html#a8318981c0dadb97256317a3bf4273ddd">ParticlesForceChainsBase&lt; dim &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8cc_source.html#l00304">304</a> of file <a class="el" href="force__chains__visualization_8cc_source.html">force_chains_visualization.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8cc_source.html#l00493">493</a> of file <a class="el" href="force__chains__visualization_8cc_source.html">force_chains_visualization.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="pvd__handler_8h_source.html#l00052">PVDHandler::append()</a>, <a class="el" href="parameters_8h_source.html#l00137">Parameters::SimulationControl::output_name</a>, <a class="el" href="dem__solver__parameters_8h_source.html#l00037">DEMSolverParameters&lt; dim &gt;::simulation_control</a>, and <a class="el" href="pvd__handler_8h_source.html#l00060">PVDHandler::times_and_names</a>.</p>
 
 </div>
 </div>
@@ -381,7 +404,7 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel f
 
 <p>vector of normal forces between each touching particles. </p>
 
-<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00123">123</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00137">137</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
 
 </div>
 </div>
@@ -409,7 +432,7 @@ template&lt;int dim, Parameters::Lagrangian::ParticleParticleContactForceModel f
 
 <p>vector of positions of touching particles. </p>
 
-<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00125">125</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="force__chains__visualization_8h_source.html#l00139">139</a> of file <a class="el" href="force__chains__visualization_8h_source.html">force_chains_visualization.h</a>.</p>
 
 </div>
 </div>

@@ -94,8 +94,8 @@ Inheritance diagram for ParticlesForceChainsBase&lt; dim &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aebf3fb5b04b85389fa5b8a38a21b711d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChainsBase.html#aebf3fb5b04b85389fa5b8a38a21b711d">calculate_force_chains</a> (<a class="el" href="classDEMContactManager.html">DEMContactManager</a>&lt; dim &gt; &amp;container_manager)=0</td></tr>
 <tr class="separator:aebf3fb5b04b85389fa5b8a38a21b711d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f0e6b6953dbf6f56396846797a4fae2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChainsBase.html#a5f0e6b6953dbf6f56396846797a4fae2">write_force_chains</a> (const MPI_Comm mpi_communicator, const std::string folder, const unsigned int iter)=0</td></tr>
-<tr class="separator:a5f0e6b6953dbf6f56396846797a4fae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8318981c0dadb97256317a3bf4273ddd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticlesForceChainsBase.html#a8318981c0dadb97256317a3bf4273ddd">write_force_chains</a> (const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;dem_parameters, <a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;pvd_handler, const MPI_Comm mpi_communicator, const std::string folder, const unsigned int iter, const double time)=0</td></tr>
+<tr class="separator:a8318981c0dadb97256317a3bf4273ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int dim&gt;<br />
@@ -143,8 +143,8 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a id="a5f0e6b6953dbf6f56396846797a4fae2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f0e6b6953dbf6f56396846797a4fae2">&#9670;&nbsp;</a></span>write_force_chains()</h2>
+<a id="a8318981c0dadb97256317a3bf4273ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8318981c0dadb97256317a3bf4273ddd">&#9670;&nbsp;</a></span>write_force_chains()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,6 +157,18 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="memname">virtual void <a class="el" href="classParticlesForceChainsBase.html">ParticlesForceChainsBase</a>&lt; dim &gt;::write_force_chains </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classDEMSolverParameters.html">DEMSolverParameters</a>&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dem_parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classPVDHandler.html">PVDHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>pvd_handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const MPI_Comm&#160;</td>
           <td class="paramname"><em>mpi_communicator</em>, </td>
         </tr>
@@ -170,7 +182,13 @@ template&lt;int dim&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>iter</em>&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -185,17 +203,21 @@ template&lt;int dim&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Output the force chains in a single vtu file for each iteration. </p>
+<p>Output the force chains in VTU and PVTU files for each iteration and a PVD file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">dem_parameters</td><td><a class="el" href="namespaceDEM.html">DEM</a> parameters declared in the .prm file </td></tr>
+    <tr><td class="paramname">pvd_handler</td><td>a <a class="el" href="classPVDHandler.html" title="The PVDHandler class manages the storage of the information required to write pvd file....">PVDHandler</a> to store the information about the file name and time associated with it </td></tr>
     <tr><td class="paramname">mpi_communicator</td><td>The mpi communicator </td></tr>
     <tr><td class="paramname">folder</td><td>a string that contains the path where the results are to be saved </td></tr>
+    <tr><td class="paramname">group_files</td><td>the number of vtu files that will be generated. </td></tr>
     <tr><td class="paramname">iter</td><td>the iteration number associated with the file </td></tr>
+    <tr><td class="paramname">time</td><td>the time associated with the file </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classParticlesForceChains.html#ac271e8dc0f485635644cf59d2acf29dc">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classParticlesForceChains.html#af2be0d10775607b8f739fa47ff6b1047">ParticlesForceChains&lt; dim, force_model, rolling_friction_model &gt;</a>.</p>
 
 </div>
 </div>
