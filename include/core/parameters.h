@@ -1651,7 +1651,7 @@ namespace Parameters
    */
   template <int dim>
   Tensor<1, dim>
-  entry_string_to_tensor_dim(ParameterHandler  &prm,
+  entry_string_to_tensor(ParameterHandler  &prm,
                              const std::string &entry_string);
 
   /**

@@ -601,9 +601,9 @@ namespace Parameters
       this->enable_domain_restriction_with_plane =
         prm.get_bool("enable domain restriction with plane");
       this->restriction_plane_point =
-        entry_string_to_tensor_dim<dim>(prm, "restriction plane point");
+        entry_string_to_tensor<dim>(prm, "restriction plane point");
       this->restriction_plane_normal_vector =
-        entry_string_to_tensor_dim<dim>(prm, "restriction plane normal vector");
+        entry_string_to_tensor<dim>(prm, "restriction plane normal vector");
 
       this->number_of_constraints = prm.get_integer("number of constraints");
 
@@ -2279,11 +2279,11 @@ namespace Parameters
       target_size = prm.get_double("target size");
 
       // Initial translation
-      translation = entry_string_to_tensor_dim<3>(prm, "initial translation");
+      translation = entry_string_to_tensor<3>(prm, "initial translation");
 
       // Initial rotation axis and angle
       rotation_axis =
-        entry_string_to_tensor_dim<3>(prm, "initial rotation axis");
+        entry_string_to_tensor<3>(prm, "initial rotation axis");
       rotation_angle = prm.get_double("initial rotation angle");
     }
     prm.leave_subsection();
@@ -3825,7 +3825,7 @@ namespace Parameters
 
   template <int dim>
   Tensor<1, dim>
-  entry_string_to_tensor_dim(ParameterHandler  &prm,
+  entry_string_to_tensor(ParameterHandler  &prm,
                              const std::string &entry_string)
   {
     std::string              full_str = prm.get(entry_string);
