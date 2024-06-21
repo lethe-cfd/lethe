@@ -473,11 +473,11 @@ namespace Parameters
         // Plane:
         // Insertion plane normal vector
         insertion_plane_normal_vector =
-          entry_string_to_tensor_dim<3>(prm, "insertion plane normal vector");
+          entry_string_to_tensor<3>(prm, "insertion plane normal vector");
 
         // Insertion plane point
         insertion_plane_point =
-          entry_string_to_tensor_dim<3>(prm, "insertion plane point");
+          entry_string_to_tensor<3>(prm, "insertion plane point");
 
         // List:
         // Read x, y and z lists
@@ -558,9 +558,9 @@ namespace Parameters
         insertion_maximum_offset = prm.get_double("insertion maximum offset");
         seed_for_insertion       = prm.get_integer("insertion prn seed");
 
-        initial_vel = entry_string_to_tensor_dim<3>(prm, "initial velocity");
+        initial_vel = entry_string_to_tensor<3>(prm, "initial velocity");
         initial_omega =
-          entry_string_to_tensor_dim<3>(prm, "initial angular velocity");
+          entry_string_to_tensor<3>(prm, "initial angular velocity");
       }
       prm.leave_subsection();
     }
@@ -1208,7 +1208,7 @@ namespace Parameters
 
           // Read the rotational vector from a list of doubles
           Tensor<1, 3> rotational_vector =
-            entry_string_to_tensor_dim<3>(prm, "rotational vector");
+            entry_string_to_tensor<3>(prm, "rotational vector");
           if (rotational_vector.norm() == 0.)
             {
               throw(std::runtime_error(
@@ -1216,7 +1216,7 @@ namespace Parameters
             }
           // Read the point from a list of doubles
           Tensor<1, 3> point_on_rotation_axis_tensor =
-            entry_string_to_tensor_dim<3>(prm, "point on rotational vector");
+            entry_string_to_tensor<3>(prm, "point on rotational vector");
 
           this->boundary_rotational_speed.at(boundary_id) = rotational_speed;
           this->boundary_rotational_vector.at(boundary_id) =
