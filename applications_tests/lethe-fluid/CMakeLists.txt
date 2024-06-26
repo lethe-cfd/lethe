@@ -62,6 +62,12 @@ file(COPY poiseuille_restart_files/poiseuille_restart-output.0005.0000.vtu DESTI
 file(COPY poiseuille_restart_files/poiseuille_restart-output.0010.0000.vtu DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/poiseuille_restart.${_build_type}/mpirun=1/")
 file(COPY poiseuille_restart_files/poiseuille_restart-output.0015.0000.vtu DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/poiseuille_restart.${_build_type}/mpirun=1/")
 
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.pvdhandler DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.simulationcontrol DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation.info DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation_fixed.data DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/mass_conservation_information.checkpoint DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
 deal_ii_pickup_tests()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
