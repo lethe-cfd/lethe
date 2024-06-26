@@ -68,6 +68,8 @@ file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation D
 file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation.info DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
 file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/restart.triangulation_fixed.data DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
 file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/mass_conservation_information.checkpoint DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+file(COPY heat_transfer_vof_lpbf_benchmark_restart_files/temperature_statistics.checkpoint DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/heat_transfer_vof_lpbf_benchmark.${_build_type}/mpirun=1/")
+
 deal_ii_pickup_tests()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
