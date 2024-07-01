@@ -303,6 +303,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../examples/unresolved-cfd-dem/liquid-solid-fluidized-bed/liquid-solid-fluidized-bed.html">Liquid-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../examples/unresolved-cfd-dem/boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../examples/unresolved-cfd-dem/gas-solid-spouted-cylinder-bed/gas-solid-spouted-cylinder-bed.html">Gas-Solid Spouted Cylinder Bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/unresolved-cfd-dem/dense-pneumatic-conveying/dense-pneumatic-conveying.html">Dense Pneumatic Conveying</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -440,7 +441,44 @@
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libmuparser-dev
 </pre></div>
 </div>
-<p>Clone the candi git repository in a folder of your choice  (e.g. <code class="docutils literal notranslate"><span class="pre">$HOME/sofware/</span></code>). You can edit the <code class="docutils literal notranslate"><span class="pre">candi.cfg</span></code> file if you want to force the installation of the deal.II master version instead of the current stable version by setting the <code class="docutils literal notranslate"><span class="pre">STABLE_BUILD=false</span></code>. Under Apple ARM, we only recommend the installation of the required libraries, namely parmetis, trilinos and p4est.</p>
+<p>Clone the candi git repository in a folder of your choice  (e.g. <code class="docutils literal notranslate"><span class="pre">$HOME/software/</span></code>). You can edit the <code class="docutils literal notranslate"><span class="pre">candi.cfg</span></code> file if you want to force the installation of the deal.II master version instead of the current stable version by setting <code class="docutils literal notranslate"><span class="pre">DEAL_II_VERSION=master</span></code> on line 97. Under Apple ARM, we only recommend the installation of the required libraries, namely parmetis, trilinos and p4est.</p>
+<p>To ensure that the Lethe test suite works, deal.II must be configured with p4est version 2.3.6. In the subfolder <code class="docutils literal notranslate"><span class="pre">deal.II-toolchain/packages/</span></code>, open the <code class="docutils literal notranslate"><span class="pre">p4est.package</span></code> file with a text editor and change the following lines:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>line #</p></th>
+<th class="head"><p>initial line</p></th>
+<th class="head"><p>changed line</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VERSION=2.3.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#VERSION=2.3.2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHECKSUM=076df9e...</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#CHECKSUM=076df9e...</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHECKSUM=&quot;${CHECKSUM}</span> <span class="pre">b41c8ef29ca...</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#CHECKSUM=&quot;${CHECKSUM}</span> <span class="pre">b41c8ef29ca...</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHECKSUM=&quot;${CHECKSUM}</span> <span class="pre">0ea6e4806b6...</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#CHECKSUM=&quot;${CHECKSUM}</span> <span class="pre">0ea6e4806b6...</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td></td>
+<td><div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>VERSION=2.3.6
+CHECKSUM=4b35d9cc374e3b05cd29c552070940124f04af8f8e5e01ff046e39833de5e153
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>From the candi folder, the installation of candi can be launched using:</p>
 <div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>./candi.sh -j $num_proc --prefix=$path --packages=&quot;parmetis p4est trilinos dealii&quot;
 </pre></div>
@@ -452,14 +490,14 @@
 </div>
 <section id="setting-the-library-and-include-paths">
 <h3>Setting the Library and Include Paths<a class="headerlink" href="#setting-the-library-and-include-paths" title="Link to this heading">#</a></h3>
-<p>The deal.II installation procedure might not set the correct path for the libraries agaisnt which it needs to link. These include parmetis, p4est and trilinos. To fix this issue, the include and library path must be manually added by appending the following lines to the <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code> file.</p>
+<p>The deal.II installation procedure might not set the correct path for the libraries towards which it needs to link. These include parmetis, p4est and trilinos. To fix this issue, the include and library path must be manually added by appending the following lines to the <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code> file.</p>
 <div class="copy-button highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=/opt/homebrew/bin:$PATH
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install/trilinos-release-12-18-1/lib/
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install/p4est-2.3.2/FAST/lib
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install/p4est-2.3.2/DEBUG/lib
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install/p4est-2.3.6/FAST/lib
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install/p4est-2.3.6/DEBUG/lib
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:path/to/candi/install//parmetis-4.0.3/lib
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:path/to/candi/install/trilinos-release-12-18-1/include/
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:path/to/candi/install/p4est-2.3.2/FAST/include/
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:path/to/candi/install/p4est-2.3.6/FAST/include/
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:path/to/candi/install/parmetis-4.0.3/lib/
 </pre></div>
 </div>

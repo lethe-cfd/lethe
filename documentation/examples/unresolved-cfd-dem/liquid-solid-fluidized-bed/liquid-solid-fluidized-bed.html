@@ -303,6 +303,7 @@
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Liquid-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../gas-solid-spouted-cylinder-bed/gas-solid-spouted-cylinder-bed.html">Gas-Solid Spouted Cylinder Bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dense-pneumatic-conveying/dense-pneumatic-conveying.html">Dense Pneumatic Conveying</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -441,8 +442,8 @@
 <h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Link to this heading">#</a></h2>
 <p>All files mentioned below are located in the example’s folder (<code class="docutils literal notranslate"><span class="pre">examples/unresolved-cfd-dem/liquid-solid-fluidized-bed</span></code>).</p>
 <ul class="simple">
+<li><p>Parameter file of particles generation and packing: <code class="docutils literal notranslate"><span class="pre">packing-particles.prm</span></code></p></li>
 <li><p>Parameter file for CFD-DEM simulation of the liquid-solid fluidized bed: <code class="docutils literal notranslate"><span class="pre">liquid-solid-fluidized-bed.prm</span></code></p></li>
-<li><p>Parameter file of particles generation and packing: <code class="docutils literal notranslate"><span class="pre">dem-packing-in-lsfb.prm</span></code></p></li>
 <li><p>Postprocessing Python script: <code class="docutils literal notranslate"><span class="pre">lsfb_postprocessing.py</span></code></p></li>
 </ul>
 </section>
@@ -463,7 +464,7 @@
 <p>As in the other examples of this documentation, we use Lethe-DEM to fill the bed with particles. We enable check-pointing in order to write the DEM checkpoint files which will be used as the starting point of the CFD-DEM simulation. Then, we use the <code class="docutils literal notranslate"><span class="pre">lethe-fluid-particles</span></code> solver within Lethe to simulate the fluidization of the particles by initially reading the checkpoint files from the DEM simulation.</p>
 <p>All parameter subsections are described in the <a class="reference external" href="../../../parameters/parameters.html">Parameters section</a> of the documentation.</p>
 <p>To set-up the cylinder fluidized bed case, we first fill the bed with particles.</p>
-<p>We first introduce the different sections of the parameter file <code class="docutils literal notranslate"><span class="pre">dem-packing-in-lsfb.prm</span></code> needed to run this simulation.</p>
+<p>We first introduce the different sections of the parameter file <code class="docutils literal notranslate"><span class="pre">packing-particles.prm</span></code> needed to run this simulation.</p>
 <section id="mesh">
 <h3>Mesh<a class="headerlink" href="#mesh" title="Link to this heading">#</a></h3>
 <p>In this example, we are simulating a cylindrical fluidized bed that has a half length of <span class="math notranslate nohighlight">\(0.55 \: \text{m}\)</span> (<span class="math notranslate nohighlight">\(10 \: \text{cm}\)</span> higher than the fluidization region in the experimental setup), and a diameter of <span class="math notranslate nohighlight">\(10 \: \text{cm}\)</span>. We use the <a class="reference external" href="https://www.dealii.org/current/doxygen/deal.II/namespaceGridGenerator.html#a95f6e6a7ae2fe3a862df035dd2cb4467:~:text=%E2%97%86-,subdivided_cylinder,-()">subdivided_cylinder GridGenerator</a>  in order to generate the mesh. The cylindrical bed is divided  <span class="math notranslate nohighlight">\(132 \: \text{times}\)</span> in the <span class="math notranslate nohighlight">\(x\)</span> direction (height) and <span class="math notranslate nohighlight">\(12 \: \text{times}\)</span> in <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> directions (<span class="math notranslate nohighlight">\(6 \: \text{times}\)</span> along the radius). The following portion of the DEM parameter file shows the function called:</p>
@@ -613,12 +614,8 @@ end
 </section>
 <section id="running-the-dem-simulation">
 <h2>Running the DEM Simulation<a class="headerlink" href="#running-the-dem-simulation" title="Link to this heading">#</a></h2>
-<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched on a single processor by typing:</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>lethe-particles dem-packing-in-fluidized-bed.prm
-</pre></div>
-</div>
-<p>or in parallel (where <span class="math notranslate nohighlight">\(8\)</span> represents the number of processors)</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles dem-packing-in-fluidized-bed.prm
+<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched in parallel as follows:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles packing-particles.prm
 </pre></div>
 </div>
 <p>Lethe will generate a number of files. The most important one bears the extension <code class="docutils literal notranslate"><span class="pre">.pvd</span></code>. It can be read by popular visualization programs such as <a class="reference external" href="https://www.paraview.org/">Paraview</a>.</p>

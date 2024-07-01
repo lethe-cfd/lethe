@@ -303,6 +303,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../liquid-solid-fluidized-bed/liquid-solid-fluidized-bed.html">Liquid-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../gas-solid-spouted-cylinder-bed/gas-solid-spouted-cylinder-bed.html">Gas-Solid Spouted Cylinder Bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dense-pneumatic-conveying/dense-pneumatic-conveying.html">Dense Pneumatic Conveying</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -440,8 +441,8 @@
 <h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Link to this heading">#</a></h2>
 <p>Both files mentioned below are located in the example’s folder (<code class="docutils literal notranslate"><span class="pre">examples/unresolved-cfd-dem/gas-solid-spouted-bed</span></code>).</p>
 <ul class="simple">
+<li><p>Parameter file for particle generation and packing: <code class="docutils literal notranslate"><span class="pre">packing-particles.prm</span></code></p></li>
 <li><p>Parameter file for CFD-DEM simulation of the spouted bed: <code class="docutils literal notranslate"><span class="pre">gas-solid-spouted-bed.prm</span></code></p></li>
-<li><p>Parameter file for particle generation and packing: <code class="docutils literal notranslate"><span class="pre">dem-packing-in-spouted-bed.prm</span></code></p></li>
 </ul>
 </section>
 <section id="description-of-the-case">
@@ -452,7 +453,7 @@
 <h2>DEM Parameter File<a class="headerlink" href="#dem-parameter-file" title="Link to this heading">#</a></h2>
 <p>All parameter subsections are described in the <a class="reference external" href="../../../parameters/parameters.html">parameter section</a> of the documentation.</p>
 <p>To set-up the rectangular spouted bed case, we first fill the bed with particles.</p>
-<p>We introduce the different sections of the parameter file <code class="docutils literal notranslate"><span class="pre">dem-packing-in-fluidized-bed.prm</span></code> needed to run this simulation.</p>
+<p>We introduce the different sections of the parameter file <code class="docutils literal notranslate"><span class="pre">packing-particles.prm</span></code> needed to run this simulation.</p>
 <section id="mesh">
 <h3>Mesh<a class="headerlink" href="#mesh" title="Link to this heading">#</a></h3>
 <p>In this example, we are simulating a rectangular spouted bed. In order to ensure that the flow is developed at the inlet of the bed and that the void fraction does not interfere with the Dirichlet condition of the inlet velocity imposed at the inlet of the spout, we introduce the flow through a channel that is connected to the inlet of the bed. The geometry of the bed was created using <a class="reference external" href="https://gmsh.info/">GMSH</a>.  The following portion of the DEM parameter file shows the function called:</p>
@@ -584,12 +585,8 @@ end
 </section>
 <section id="running-the-dem-simulation">
 <h2>Running the DEM Simulation<a class="headerlink" href="#running-the-dem-simulation" title="Link to this heading">#</a></h2>
-<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched on a single processor by typing:</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>lethe-particles dem-packing-in-spouted-bed.prm
-</pre></div>
-</div>
-<p>or in parallel (where 8 represents the number of processors)</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles dem-packing-in-spouted-bed.prm
+<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched in parallel as follows:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles packing-particles.prm
 </pre></div>
 </div>
 <div class="admonition note">

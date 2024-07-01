@@ -303,6 +303,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../examples/unresolved-cfd-dem/liquid-solid-fluidized-bed/liquid-solid-fluidized-bed.html">Liquid-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../examples/unresolved-cfd-dem/boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../examples/unresolved-cfd-dem/gas-solid-spouted-cylinder-bed/gas-solid-spouted-cylinder-bed.html">Gas-Solid Spouted Cylinder Bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/unresolved-cfd-dem/dense-pneumatic-conveying/dense-pneumatic-conveying.html">Dense Pneumatic Conveying</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../examples/sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -432,7 +433,7 @@ calculates a <span class="math notranslate nohighlight">\(\beta\)</span> coeffic
 <p>The main controller of the average velocity is the following equation and is based on approach of Wang <a class="reference external" href="https://www.proquest.com/docview/304905306">[1]</a>:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\beta^{n+1} = \beta^n + \frac{\alpha}{\Delta t} \left[ (\bar{U})^{0} - 2(\bar{U})^{n} + (\bar{U})^{n-1} \right]\]</div>
+\[\beta^{n+1} = \beta^n + \frac{\alpha}{\Delta t} \left[ \bar{U}^{0} - 2\bar{U}^{n} + \bar{U}^{n-1} \right]\]</div>
 </div>
 <p>The default parameters are:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subsection flow control
@@ -450,7 +451,13 @@ end
 </div>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">enable</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable an imposed average velocity.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">beta</span> <span class="pre">particle</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to apply a proportional beta force on particles.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">beta</span> <span class="pre">particle</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to apply a proportional beta force on particles:</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\beta^{n+1}_{p} = \frac{\rho}{\rho_{p}}\beta^{n+1}\]</div>
+</div>
+<ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">average</span> <span class="pre">velocity</span></code> parameter specifies the targeted average velocity (<span class="math notranslate nohighlight">\(m/s\)</span>). The value is compared to the calculated value at a boundary (for CFD solvers) or the whole domain (for CFD-DEM solver).</p></li>
 </ul>
 <div class="admonition note">

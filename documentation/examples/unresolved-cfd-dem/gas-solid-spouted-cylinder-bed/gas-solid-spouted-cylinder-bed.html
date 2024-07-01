@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Sharp Immersed Boundary Solver" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html" /><link rel="prev" title="Boycott Effect" href="../boycott-effect/boycott-effect.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Dense Pneumatic Conveying" href="../dense-pneumatic-conveying/dense-pneumatic-conveying.html" /><link rel="prev" title="Boycott Effect" href="../boycott-effect/boycott-effect.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>Gas-Solid Spouted Cylinder Bed - Lethe documentation</title>
@@ -303,6 +303,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../liquid-solid-fluidized-bed/liquid-solid-fluidized-bed.html">Liquid-Solid Fluidized Bed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../boycott-effect/boycott-effect.html">Boycott Effect</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Gas-Solid Spouted Cylinder Bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dense-pneumatic-conveying/dense-pneumatic-conveying.html">Dense Pneumatic Conveying</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">Sharp Immersed Boundary Solver</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Sharp Immersed Boundary Solver</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -439,8 +440,8 @@
 <h2>Files Used in This Example<a class="headerlink" href="#files-used-in-this-example" title="Link to this heading">#</a></h2>
 <p>Both files mentioned below are located in the example’s folder (<code class="docutils literal notranslate"><span class="pre">examples/unresolved-cfd-dem/gas-solid-spouted-cylinder-bed</span></code>).</p>
 <ul class="simple">
+<li><p>Parameter file for particle generation and packing: <code class="docutils literal notranslate"><span class="pre">packing-particles.prm</span></code></p></li>
 <li><p>Parameter file for CFD-DEM simulation of the spouted bed: <code class="docutils literal notranslate"><span class="pre">gas-solid-spouted-cylinder-bed.prm</span></code></p></li>
-<li><p>Parameter file for particle generation and packing: <code class="docutils literal notranslate"><span class="pre">dem-packing-in-spouted-cylinder-bed.prm</span></code></p></li>
 </ul>
 </section>
 <section id="description-of-the-case">
@@ -532,12 +533,8 @@ end
 </section>
 <section id="running-the-dem-simulation">
 <h2>Running the DEM Simulation<a class="headerlink" href="#running-the-dem-simulation" title="Link to this heading">#</a></h2>
-<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched on a single processor by typing:</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>lethe-particles dem-packing-in-spouted-cylinder-bed.prm
-</pre></div>
-</div>
-<p>or in parallel (where 8 represents the number of processors)</p>
-<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles dem-packing-in-spouted-cylinder-bed.prm
+<p>Launching the simulation is as simple as specifying the executable name and the parameter file. Assuming that the <code class="docutils literal notranslate"><span class="pre">lethe-particles</span></code> executable is within your path, the simulation can be launched in parallel as follows:</p>
+<div class="copy-button highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun -np 8 lethe-particles packing-particles.prm
 </pre></div>
 </div>
 <div class="admonition note">
@@ -678,12 +675,12 @@ end
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../../sharp-immersed-boundary/sharp-immersed-boundary.html">
+          <a class="next-page" href="../dense-pneumatic-conveying/dense-pneumatic-conveying.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Sharp Immersed Boundary Solver</div>
+                <div class="title">Dense Pneumatic Conveying</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
